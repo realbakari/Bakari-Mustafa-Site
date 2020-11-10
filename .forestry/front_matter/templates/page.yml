@@ -19,3 +19,4 @@ fields:
   label: comments
 pages:
 - book-repository.md
+- reading/seed-to-harvest.md
