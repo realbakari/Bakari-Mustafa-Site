@@ -10,7 +10,7 @@ comments: false
 
 07/17/20 Kindred by Octavia E. Butler
 
-07/17/20 Dark Matter Summary
+07/17/20 [Dark Matter Summary](/book-summaries/dark-matter-summary "Dark Matter")
 
 04/03/20 The 4 Disciplines Of Execution
 
