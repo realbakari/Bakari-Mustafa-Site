@@ -14,3 +14,5 @@ fields:
 - type: textarea
   name: description
   label: description
+pages:
+- Book Summaries/dark-matter-summary.md
