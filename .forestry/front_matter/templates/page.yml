@@ -32,6 +32,7 @@ fields:
   name: comments
   label: comments
 pages:
+- Book-Summaries/atomic-habits-by-james-clear.md
 - Book-Summaries/book-summaries.md
 - Book-Summaries/business/prosumer-power-by-dr-bill-quain-book.md
 - Book-Summaries/business/start-with-why.md
