@@ -1,5 +1,5 @@
 ---
-title: Start with Why
+title: Start with Why by Simon Sinek
 layout: page
 excerpt: This is a book summary of Start with Why by Simon Sinek. Read this Start
   with why summary to review key takeaways and lessons from the book.
