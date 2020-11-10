@@ -4,6 +4,7 @@ layout: page
 excerpt: 'Book Summary: Atomic Habits - An Easy & Proven Way to Build Good Habits
   & Break Bad Ones'
 comments: false
+image: "/uploads/atomic-habits_gallery_hi-res_04.jpg"
 
 ---
 ![](/uploads/atomic-habits_gallery_hi-res_04.jpg)
