@@ -4,6 +4,7 @@ layout: page
 excerpt: The complete Patternist series-the acclaimed science fiction epic of a world
   transformed by a secret race of telepaths and their devastating rise to power.
 comments: false
+image: "/uploads/nurture-growth.jpg"
 
 ---
 ![](/uploads/9780446698900.jpg)
