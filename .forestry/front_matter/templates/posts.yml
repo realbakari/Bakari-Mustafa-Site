@@ -19,3 +19,5 @@ fields:
   config:
     maxSize: 64
   label: image
+pages:
+- _posts/2019-12-12-5-books-recommendation-that-will-make-your-life-better.md

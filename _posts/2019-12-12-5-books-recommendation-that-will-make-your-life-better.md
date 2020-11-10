@@ -1,12 +1,13 @@
 ---
 title: 5 Books Recommendation That Will Make Your Life Better
-date: 2019-12-12 14:00:00 +0000
+date: 2019-12-12T14:00:00.000+00:00
 tags:
 - Books
 description: I write because I read. This is a list of book that covers a broad range
   of insight and ideas. some of these have a big impact on how I think, but there
   are some other valuable reads that I have left out. it’s fun to look back at what
   you’ve accomplished this year.
+image: "/uploads/photo-1512045482940-f37f5216f639.jpeg"
 
 ---
 ![](/uploads/photo-1512045482940-f37f5216f639.jpeg)
