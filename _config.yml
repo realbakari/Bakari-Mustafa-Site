@@ -5,7 +5,7 @@ description: >- # site description
   Interested in working together? Reach me via <a href="mailto:bakari.mustafa@griffithuni.edu.au" title="Email" rel="noopener">Email</a>.
 lang: en-US # default lang
 timezone: Asia/Jakarta # set your timezone
-image: assets/img/ogp.png # This image used for Open Graph more info https://ogp.me/
+image: uploads/bakari_mustafa.jpg # This image used for Open Graph more info https://ogp.me/
 repo: https://github.com/piharpi/jekyll-klise # site repo [optional]
 mode: light # default theme "dark" | "light"
 
@@ -20,7 +20,7 @@ author:
   twitter: realbakari # twitter username
   facebook: therealbakari # facebook username
   email: your-email@email.com # email adress
-  avatar: /assets/img/avatar.jpg # change with your own avatar
+  avatar: /uploads/bakari_mustafa.jpg # change with your own avatar
 
 # URL settings
 url: "https://heuristic-shockley-7186f5.netlify.app/" #
