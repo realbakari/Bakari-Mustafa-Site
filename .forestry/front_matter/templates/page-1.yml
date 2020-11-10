@@ -21,5 +21,6 @@ fields:
   name: image
   label: image
 pages:
+- Book-Summaries/dark-matter-summary.md
 - Book-Summaries/the-4-disciplines-of-execution.md
 - Book-Summaries/the-richest-man-in-babylon.md
