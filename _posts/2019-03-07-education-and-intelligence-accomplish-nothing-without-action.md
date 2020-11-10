@@ -2,7 +2,7 @@
 title: Education and intelligence accomplish nothing without action.
 date: 2019-03-07 14:00:00 +0000
 tags:
-- intelligence
+- Intelligence
 - Education
 description: It doesn’t matter if you have a genius IQ and a PhD in Whatever major
   you did or maybe doing, you can’t change anything.
