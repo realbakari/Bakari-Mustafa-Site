@@ -1,11 +1,12 @@
 ---
 title: Contact
 layout: page
-excerpt: |+
-  For all inquiries please use the form below. I may not able to respond to every message, but for relevant inquiries, I try to respond within a few business days.
-
-
+excerpt: "\n\n"
 comments: false
+description: For all inquiries please use the form below. I may not able to respond
+  to every message, but for relevant inquiries, I try to respond within a few business
+  days.
+image: "/uploads/volodymyr-hryshchenko-v5vqwc9gyeu-unsplash.jpg"
 
 ---
 Have a question, or want to work together on a project?
