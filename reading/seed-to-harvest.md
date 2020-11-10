@@ -1,10 +1,12 @@
 ---
 title: Seed to Harvest
 layout: page
-excerpt: The complete Patternist series-the acclaimed science fiction epic of a world
-  transformed by a secret race of telepaths and their devastating rise to power.
+excerpt: ''
 comments: false
 image: "/uploads/nurture-growth.jpg"
+description: The complete Patternist series-the acclaimed science fiction epic of
+  a world transformed by a secret race of telepaths and their devastating rise to
+  power.
 
 ---
 ![](/uploads/9780446698900.jpg)
