@@ -14,6 +14,15 @@ fields:
 - type: textarea
   name: excerpt
   label: excerpt
+- name: description
+  type: textarea
+  default: ''
+  config:
+    required: false
+    wysiwyg: false
+    schema:
+      format: markdown
+  label: description
 - name: image
   type: file
   config:
