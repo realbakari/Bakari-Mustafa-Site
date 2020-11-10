@@ -1,14 +1,19 @@
 ---
 title: Dark Matter Summary
 layout: page
-excerpt: ''
+excerpt: 'Dark Matter the latest novel from Wayward Pines; trilogy author BlakeCrouch,
+  poses a big question: Are you the best version of yourself?  Jason Dessen leaves
+  his wife Daniela and son Charlie one night, promising he will return shortly with
+  mint chocolate chip ice cream, but he never makes it back to his modest Chicago
+  home. He''''s abducted, given new clothes and knocked unconscious before waking
+  up surrounded by hazmat suits.'
 comments: false
 image: "/uploads/091216_darkmatter_carroll-2e16d0ba-fill-1200x630-c0.jpg"
 description: 'Dark Matter the latest novel from Wayward Pines; trilogy author BlakeCrouch,
   poses a big question: Are you the best version of yourself?  Jason Dessen leaves
   his wife Daniela and son Charlie one night, promising he will return shortly with
   mint chocolate chip ice cream, but he never makes it back to his modest Chicago
-  home. He''''s abducted, given new clothes and knocked unconscious before waking
+  home. He''''s abducted, given new clothes, and knocked unconscious before waking
   up surrounded by hazmat suits.'
 
 ---
