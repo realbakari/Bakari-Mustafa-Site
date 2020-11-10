@@ -6,6 +6,8 @@ excerpt: Bakari Mustafa is an author, entrepreneur, former refugee and technolog
 comments: false
 ---
 
+<img src="https://bakarimustafa.com/images/1_v-uXvOS8ck61INHHsoq6Rw.jpeg" alt="Bakari Mustaf Headshot">
+
 Bakari Mustafa is an African-born Australian Entrepreneur, Technologist, and Former Refugee.
 
 He grow up in Malawi, a small country located in the South-eastern Africa but was born in Burundi. Settling in a UNHCR refugee camp in Malawi. He migrated to Australia in 2015 after being granted asylum by the Australian government.
