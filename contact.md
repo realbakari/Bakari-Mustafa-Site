@@ -1,7 +1,9 @@
 ---
 title: Contact
 layout: page
-excerpt: "\n\n"
+excerpt: For all inquiries please use the form below. I may not able to respond to
+  every message, but for relevant inquiries, I try to respond within a few business
+  days.
 comments: false
 description: For all inquiries please use the form below. I may not able to respond
   to every message, but for relevant inquiries, I try to respond within a few business
