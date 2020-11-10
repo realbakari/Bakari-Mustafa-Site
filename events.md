@@ -2,9 +2,11 @@
 title: Events
 layout: page
 excerpt: Event listings and tickets for all Bakari Mustafa; upcoming live podcasts,
-  conferences and public Speaking - Buy Tickets Now!
+  conferences, and public Speaking - Buy Tickets Now!
 comments: false
 image: "/uploads/noiseporn-jnukykxlh8u-unsplash.jpg"
+description: Event listings and tickets for all Bakari Mustafa; upcoming live podcasts,
+  conferences, and public Speaking - Buy Tickets Now!
 
 ---
 <section class="l--mar-top-m l--grid-wide l--flex l--space-compact">
