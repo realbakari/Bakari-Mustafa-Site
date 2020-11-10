@@ -4,6 +4,7 @@ layout: page
 excerpt: his is a book summary of Prosumer power by Dr. Bill Quain. Read Prosumer
   power summary to review key takeaways and lessons from the book.
 comments: false
+image: "/uploads/s-l400.jpg"
 
 ---
 ![](/uploads/s-l400.jpg)
