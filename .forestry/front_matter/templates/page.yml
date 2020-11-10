@@ -33,6 +33,7 @@ fields:
   label: comments
 pages:
 - Book-Summaries/book-summaries.md
+- Book-Summaries/the-4-disciplines-of-execution.md
 - Book-Summaries/the-richest-man-in-babylon.md
 - about.md
 - book-repository.md
