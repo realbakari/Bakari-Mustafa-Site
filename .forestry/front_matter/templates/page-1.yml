@@ -1,0 +1,25 @@
+---
+label: Page 1
+hide_body: false
+fields:
+- type: text
+  name: title
+  label: title
+- type: text
+  name: permalink
+  label: permalink
+- type: text
+  name: layout
+  label: layout
+- type: textarea
+  name: excerpt
+  label: excerpt
+- type: boolean
+  name: comments
+  label: comments
+- type: file
+  name: image
+  label: image
+- type: textarea
+  name: description
+  label: description
