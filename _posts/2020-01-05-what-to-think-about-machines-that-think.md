@@ -1,6 +1,6 @@
 ---
 title: What to Think About Machines That Think
-date: 2020-01-05 14:00:00 +0000
+date: 2020-01-05T14:00:00.000+00:00
 tags:
 - Artificial Intelligence
 - Machine Intelligence
@@ -8,6 +8,7 @@ description: This book explores the burgeoning field of artificial intelligence,
   known as AI. It is a compilation of several hundred short essays by some of the
   planet’s top experts on the subject and quite a few non-affiliated rather smart
   people who have taken the time to think about the subject.
+image: "/uploads/2019_50_ai.jpg"
 
 ---
 ![](/uploads/2019_50_ai.jpg)
