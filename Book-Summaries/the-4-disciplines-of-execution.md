@@ -1,13 +1,16 @@
 ---
 title: The 4 Disciplines Of Execution
 layout: page
-excerpt: ''
+excerpt: 'Book Notes: An insightful new book from the multimillion-copy bestselling
+  author Sean Covey and the FranklinCovey organization based on their work with hundreds
+  of thousands of employees and large companies to unveil the essential disciplines
+  proven to help businesses and individuals realize their most important goals.'
 image: "/uploads/43117_lrg.jpg"
 comments: false
 description: 'Book Notes: An insightful new book from the multimillion-copy bestselling
-  author Sean Covey and the FranklinCovey organisation based on their work with hundreds
+  author Sean Covey and the FranklinCovey organization based on their work with hundreds
   of thousands of employees and large companies to unveil the essential disciplines
-  proven to help businesses and individuals realise their most important goals.'
+  proven to help businesses and individuals realize their most important goals.'
 
 ---
 ![](/uploads/43117_lrg.jpg)
