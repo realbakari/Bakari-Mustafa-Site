@@ -1,10 +1,12 @@
 ---
 title: 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones'
 layout: page
-excerpt: 'Book Summary: Atomic Habits - An Easy & Proven Way to Build Good Habits
-  & Break Bad Ones'
+excerpt: ''
 comments: false
 image: "/uploads/atomic-habits_gallery_hi-res_04.jpg"
+description: Everyone has bad habits that they want to get rid of, this book teaches
+  you the four laws needed to replace bad habits with better ones. This summary includes
+  key lessons and important passages from the book.
 
 ---
 ![](/uploads/atomic-habits_gallery_hi-res_04.jpg)
