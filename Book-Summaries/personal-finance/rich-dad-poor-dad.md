@@ -1,10 +1,11 @@
 ---
 title: Rich Dad Poor Dad
 layout: page
-excerpt: This is a book summary of Rich Dad Poor Dad by Robert Kiyosaki. Read this
-  Rich Dad Poor Dad summary to review key takeaways and lessons from the book.
+excerpt: ''
 comments: false
 image: "/uploads/robert-kiyosaki-rich-dad-poor-dad-book-poster-text-robert-kiyosaki-png-clip-art.png"
+description: This is a book summary of Rich Dad Poor Dad by Robert Kiyosaki. Read
+  this Rich Dad Poor Dad summary to review key takeaways and lessons from the book.
 
 ---
 ![](/uploads/robert-kiyosaki-rich-dad-poor-dad-book-poster-text-robert-kiyosaki-png-clip-art.png)
