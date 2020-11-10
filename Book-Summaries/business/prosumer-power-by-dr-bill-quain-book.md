@@ -1,10 +1,11 @@
 ---
 title: Pro-Sumer Power! How to Create Wealth by Buying Smarter, Not Cheaper!
 layout: page
-excerpt: ''
+excerpt: his is a book summary of Prosumer power by Dr. Bill Quain. Read the Prosumer
+  power summary to review key takeaways and lessons from the book.
 comments: false
 image: "/uploads/s-l400.jpg"
-description: his is a book summary of Prosumer power by Dr. Bill Quain. Read Prosumer
+description: his is a book summary of Prosumer power by Dr. Bill Quain. Read the Prosumer
   power summary to review key takeaways and lessons from the book.
 
 ---
