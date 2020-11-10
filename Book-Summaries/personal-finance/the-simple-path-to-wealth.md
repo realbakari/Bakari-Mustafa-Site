@@ -1,10 +1,11 @@
 ---
 title: The Simple Path to Wealth
 layout: page
-excerpt: A simple, engaging, and practical guide to mastering your finances and achieving
-  financial freedom with minimal time and effort.
+excerpt: ''
 image: "/uploads/the-simple-path-to-wealth-book.png"
 comments: false
+description: A simple, engaging, and practical guide to mastering your finances and
+  achieving financial freedom with minimal time and effort.
 
 ---
 ![](/uploads/the-simple-path-to-wealth-book.png)
