@@ -3,7 +3,7 @@
   external: false
 
 - title: Writing
-  url: /post/
+  url: /posts/
   external: false
   
 - title: Book Summaries
@@ -20,5 +20,5 @@
 
 # Example:
 # - title: github
-#   url: https://github.com/piharpi/jekyll-klise
+#   url: https://github.com/realbakari
 #   external: true
