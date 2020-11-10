@@ -5,6 +5,7 @@ layout: page
 excerpt: Bakari Mustafa is an author, entrepreneur, former refugee and technologist.
   Creator of Mentors Outreach, and Founder & CEO, Hungry Innovators.
 comments: false
+image: "/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg"
 
 ---
 ![](/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg)
