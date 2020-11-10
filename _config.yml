@@ -43,7 +43,7 @@ kramdown:
 # Default front matter
 defaults:
   - scope:
-      path: posts
+      path: ""
     values:
       layout: post
       comments: false
