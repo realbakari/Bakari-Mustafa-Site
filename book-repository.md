@@ -1,5 +1,5 @@
 ---
-title: book Repository
+title: Book Depository
 permalink: "/reading/"
 layout: page
 excerpt: A list of the books I’ve read or re-read in the last few years, arranged
