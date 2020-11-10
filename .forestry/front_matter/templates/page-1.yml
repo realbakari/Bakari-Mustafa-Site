@@ -20,3 +20,5 @@ fields:
 - type: file
   name: image
   label: image
+pages:
+- Book-Summaries/the-richest-man-in-babylon.md
