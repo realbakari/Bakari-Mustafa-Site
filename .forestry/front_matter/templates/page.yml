@@ -18,5 +18,6 @@ fields:
   name: comments
   label: comments
 pages:
+- Book-Summaries/dark-matter-summary-1.md
 - book-repository.md
 - reading/seed-to-harvest.md
