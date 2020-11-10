@@ -1,11 +1,12 @@
 ---
 title: Halilu Makintami’s dream of harnessing the untapped African talent and building
   Mckintami – An interview
-date: 2019-04-01 14:00:00 +0000
+date: 2019-04-01T14:00:00.000+00:00
 tags:
 - entrepreneur
 description: Empowering generations to strive and make a positive contribution to
   our world – one story at a time.
+image: "/uploads/mckintami.jpg"
 
 ---
 ![](/uploads/mckintami.jpg)
