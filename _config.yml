@@ -1,7 +1,7 @@
 # Site settings
 title: Bakari Mustafa # site title
 description: >- # site description
-  👋 I write, create, collaborate, and solve problems. I love learning new things, and I’m particularly interested in building the future of Africa.
+  I write, create, collaborate, and solve problems. I love learning new things, and I’m particularly interested in building the future of Africa.
   Interested in working together? Reach me via <a href="mailto:bakari.mustafa@griffithuni.edu.au" target="_blank" rel="noopener">Email</a>.
 lang: en-US # default lang
 timezone: Asia/Jakarta # set your timezone
@@ -13,7 +13,7 @@ mode: light # default theme "dark" | "light"
 author:
   name: Bakari Mustafa # author name
   bio: >- # tell to the world
-    👋 I write, create, collaborate, and solve problems. I love learning new things, and I’m particularly interested in building the future of Africa.
+  I write, create, collaborate, and solve problems. I love learning new things, and I’m particularly interested in building the future of Africa.
   Interested in working together? Reach me via <a href="mailto:bakari.mustafa@griffithuni.edu.au" target="_blank" rel="noopener">Email</a>.
   username: realbakari # general username
   github: realbakari # github username
@@ -23,7 +23,7 @@ author:
   avatar: /assets/img/avatar.jpg # change with your own avatar
 
 # URL settings
-url: "https://klise.now.sh" #
+url: "https://5faa026658e469694d729a2a--heuristic-shockley-7186f5.netlify.app/" #
 baseurl:
 permalink: /:title/
 google_analytics: # leave it blank if not wish
