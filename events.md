@@ -10,7 +10,6 @@ comments: false
 <section class="l--mar-top-m l--grid-wide l--flex l--space-compact">
 <div class="container">
 
-<h2>Events</h2>
     <p class="lead">
     </p>
     
