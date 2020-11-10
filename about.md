@@ -11,7 +11,7 @@ comments: false
 
 Bakari Mustafa is an African-born Australian Entrepreneur, Technologist, and Former Refugee.
 
-He grow up in Malawi, a small country located in South-eastern Africa but was born in Burundi. Settling in a UNHCR refugee camp in Malawi. He migrated to Australia in 2015 after being granted asylum by the Australian government.
+He grew up in Malawi, a small country located in South-eastern Africa but was born in Burundi. Settling in a UNHCR refugee camp in Malawi. He migrated to Australia in 2015 after being granted asylum by the Australian government.
 
 Notes
 I feel very fortunate to get to connect with so many remarkable individuals. Whenever I have the chance, I set aside a few minutes to share what I’m learning here on my website.
