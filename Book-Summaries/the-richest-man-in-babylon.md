@@ -1,7 +1,8 @@
 ---
 title: The Richest Man in Babylon
 layout: page
-excerpt: ''
+excerpt: This is a book summary of The Richest Man in Babylon by Clason. Read this
+  Richest Man in Babylon summary to review key ideas and lessons from the book.
 image: "/uploads/richest-man-in-babylon.jpg"
 comments: false
 description: This is a book summary of The Richest Man in Babylon by Clason. Read
