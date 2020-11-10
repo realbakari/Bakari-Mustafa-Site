@@ -3,7 +3,7 @@ title: 'Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad One
 layout: page
 excerpt: 'Book Summary: Atomic Habits - An Easy & Proven Way to Build Good Habits
   & Break Bad Ones'
-comments: true
+comments: false
 
 ---
 ![](/uploads/atomic-habits_gallery_hi-res_04.jpg)
