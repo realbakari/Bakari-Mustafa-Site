@@ -10,8 +10,6 @@ comments: false
 ---
 For all inquiries please use the form below. I may not able to respond to every message, but for relevant inquiries, I try to respond within a few business days.
 
-<link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.1.3/css/bootstrap.min.css" integrity="sha384-MCw98/SFnGE8fJT3GXwEOngsV7Zt27NXFoaoApmYm81iuXoPkFOJwJ8ERdknLPMO" crossorigin="anonymous">
-
 <section class="l--mar-top-m l--grid-wide l--flex l--space-compact">
   <div class="l--space-compact l--flex-auto">
     <h1>Contact</h1>
