@@ -8,6 +8,7 @@ excerpt: 'Dark Matter the latest novel from Wayward Pines; trilogy author BlakeC
   home. He''''s abducted, given new clothes and knocked unconscious before waking
   up surrounded by hazmat suits.'
 comments: false
+image: "/uploads/091216_darkmatter_carroll-2e16d0ba-fill-1200x630-c0.jpg"
 
 ---
 ![](/uploads/091216_darkmatter_carroll-2e16d0ba-fill-1200x630-c0.jpg)
