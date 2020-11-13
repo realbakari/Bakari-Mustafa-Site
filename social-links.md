@@ -12,4 +12,4 @@ comments: false
 3. Follow me on [Instagram](http://www.instagram.com/realbakari)
 4. Follow me on [Facebook](http://www.facebook.com/therealbakari)
 5. Follow me on [Snapchat](http://www.snapchat.com/add/bakarimustafa)
-6. Follow me on [YouTube](http://www.youtube.com/c/realbakari)
+6. Subscribe to my [YouTube](http://www.youtube.com/c/realbakari) Channel
