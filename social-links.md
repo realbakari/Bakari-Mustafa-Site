@@ -1,6 +1,6 @@
 ---
 title: Social Links
-layout: ''
+layout: page
 excerpt: ''
 description: ''
 image: ''
