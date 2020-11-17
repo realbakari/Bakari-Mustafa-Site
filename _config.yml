@@ -24,7 +24,7 @@ author:
 url: "https://bakarimustafa.com/" #
 baseurl:
 permalink: /:title/
-google_analytics: UA-69813719-2 # leave it blank if not wish
+google_analytics: "UA-69813719-2" # leave it blank if not wish
 fb_appid:
 
 # Collection setting
