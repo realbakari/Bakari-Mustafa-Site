@@ -15,7 +15,7 @@ This step-by-step guide shows you how to start creating custom filters for Insta
 
 [Spark AR Studio](https://sparkar.facebook.com/ar-studio/) is the easy-to-use platform you need to create custom filters and effects. Currently, it’s available for Mac and Windows.
 
-![](https://blog-assets.hootsuite.com/wp-content/uploads/2020/01/SparkARStudio-DownloadPage-Example-620x302.png =620x302)
+![](/uploads/sparkarstudio-downloadpage-example.png)
 
 ### **Step 2: Decide on your effect**
 
@@ -27,7 +27,7 @@ Download your **free pack of 20 customizable Instagram Stories templates now**. 
 
 [**Download the templates now!**](https://blog.hootsuite.com/instagram-ar-filters/#)
 
-![](https://blog-assets.hootsuite.com/wp-content/uploads/2020/01/SparkARStudio-TemplateOptions-Example-620x419.png =620x419)
+![](/uploads/sparkarstudio-templateoptions-example-620x419.png)
 
 ### **Step 3: Getting started**
 
@@ -37,13 +37,13 @@ The iPhone 8 in the corner is the Simulator. This is where you’ll preview your
 
 To the left is the Scene panel. You’ll use the options here to edit your Instagram Stories AR filters.
 
-![](https://blog-assets.hootsuite.com/wp-content/uploads/2020/01/SparkARStudio-ViewscapeScenePanel-Example-620x334.png =620x334)
+![](/uploads/sparkarstudio-viewscapescenepanel-example-620x334.png)
 
 ### **Step 4: Upload a 3D asset**
 
 Choose a 3D asset for your filter from the AR Library or import your own. For this guide, we are importing a free asset from the AR Library.
 
-![](https://blog-assets.hootsuite.com/wp-content/uploads/2020/01/SparkARStudio-ARLibrary-DownloadExample-620x405.png =620x405)
+![](/uploads/sparkarstudio-arlibrary-downloadexample-620x405.png)
 
 The AR Library also allows you to choose from free audio files, animations, and more.
 
@@ -53,9 +53,9 @@ Now, you’ll see your uploaded asset—in our case, a rotating pizza—in the V
 
 For example, you can change the color and intensity of [ambient light](https://sparkar.facebook.com/ar-studio/learn/documentation/docs/lighting/). The below images show the 3D asset without ambient lighting (top) and with ambient lighting (below).
 
-![](https://blog-assets.hootsuite.com/wp-content/uploads/2020/01/SparkARStudio-AmbientLight-DarkExample-620x325.png =620x325)
+![](/uploads/sparkarstudio-ambientlight-darkexample-620x325.png)
 
-![](https://blog-assets.hootsuite.com/wp-content/uploads/2020/01/SparkARStudio-EditingPanelExample-620x322.png =620x322)
+![](/uploads/sparkarstudio-editingpanelexample-620x322.png)
 
 As you explore the Scene panel on the left, you’ll see that you can also:
 
@@ -66,7 +66,7 @@ As you explore the Scene panel on the left, you’ll see that you can also:
 
 ### **Step 6: Test your effect**
 
-![](https://blog-assets.hootsuite.com/wp-content/uploads/2020/01/SparkARStudio-TestEffect-Example-620x689.png =450x500)
+![](/uploads/sparkarstudio-testeffect-example-620x689.png)
 
 You can send your test file to [Instagram or Facebook](https://sparkar.facebook.com/ar-studio/learn/documentation/tutorials/ar-studio-player/#previewing-your-effect-in-the-facebook-app) to see how it works in Instagram Stories or Facebook Stories. Or you can download the [Spark AR Player app](https://sparkar.facebook.com/ar-studio/learn/documentation/tutorials/ar-studio-player/#using-the-spark-ar-player-app).
 
