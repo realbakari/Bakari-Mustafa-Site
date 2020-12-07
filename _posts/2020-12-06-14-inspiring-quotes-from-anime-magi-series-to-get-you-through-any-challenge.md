@@ -12,7 +12,7 @@ description: 'Here is a collection of inspiring quotes from the series adventure
 image: "/uploads/adventures-of-sinbadjpg-1.jpeg"
 
 ---
-![](/uploads/adventures-of-sinbadjpg-1.jpeg)
+![](/uploads/aaaabym7ezqlmrnndatm94uvrrquydigqyrmpjogp-0e-amqlceeidfgppbj6wajq4jb5vo6hntxid4pufg61s0jguotln1z.jpg)
 
 Here is a collection of inspiring quotes from the series adventures of Magi.
 
