@@ -13,3 +13,4 @@ comments: false
 4. Like my [Facebook](http://www.facebook.com/therealbakari) Page
 5. Add me on [Snapchat](http://www.snapchat.com/add/bakarimustafa)
 6. Subscribe to my [YouTube](http://www.youtube.com/c/realbakari) Channel
+7. Telegram [Channel](Bakari Mustafa https://t.me/realbakari)
