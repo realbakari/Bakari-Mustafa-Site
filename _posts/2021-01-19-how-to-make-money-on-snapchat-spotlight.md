@@ -17,9 +17,8 @@ To attract more creators, Snapchat is promising users a cut of $1 million for cr
 
 A post on the [**Snap Newsroom**](https://www.snap.com/en-US/news/) unveiled Spotlight, Snapchat's attempt at one-upping TikTok. The Spotlight tab is a place where Snapchat can "shine a light on the most entertaining Snaps created by the Snapchat community."
 
-<iframe width="560" height="315" src="[https://www.youtube.com/embed/aDfzNGg_byU](https://www.youtube.com/embed/aDfzNGg_byU "https://www.youtube.com/embed/aDfzNGg_byU")" frameborder="0" allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+\[!\[\](![](http://img.youtube.com/vi/aDfzNGg_byU/0.jpg))\]([http://www.youtube.com/watch?v=aDfzNGg_byU](http://www.youtube.com/watch?v=aDfzNGg_byU "http://www.youtube.com/watch?v=aDfzNGg_byU") "")
 
-  
 You’ll see a dedicated tab called the Snapchat spotlight in the app itself. As a user, you have the opportunity to submit your best video Snaps to earn a share of 1 million dollars. Snapchat said in a public statement that it’ll be paying a share of this amount on a daily basis for best performing video Snaps.
 
 ### How does Spotlight work?
