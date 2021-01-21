@@ -28,7 +28,7 @@ Mentors Outreach is a space to get inspired. We’re building a dynamic communit
 
 #### [Diverse Connections](http://diverseconnect.com.au/ "Diverse Connections")
 
-One of my favorite projects to work on while I was on break. I worked on the front-end of things as well as doing some work on the WordPress CMS.
+One of my favorite projects I worked on while I was on break. I worked on the front-end of things as well as doing some work on the WordPress CMS.
 
 #### [Ipswich Hospital Foundation](https://www.ihfoundation.org.au/)
 
