@@ -18,7 +18,7 @@ Doing it as a hobby. Transition Phase is a show hosted by entrepreneurs and crea
 
 This podcast is for the go-getters that don’t mind going against the odds in order to achieve their goals.
 
-Listen
+Listen on 👇
 
 * [Apple Podcast](https://podcasts.apple.com/au/podcast/transition-phase/id1439775063)
-* [Podcast on Spotify](https://open.spotify.com/show/1U9BA5fdTG4GVKqpC2xOrZ "Spotify")
+* [Spotify](https://open.spotify.com/show/1U9BA5fdTG4GVKqpC2xOrZ "Spotify")
