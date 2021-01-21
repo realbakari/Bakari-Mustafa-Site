@@ -8,7 +8,7 @@ image: ''
 ---
 ### Personal Projects
 
-#### COVID19 Tracker
+#### [COVID19 Tracker](https://bakarimustafa.com/projects/covid19-tracker/ "COVID-19 Tracker")
 
 COVID19 Tracker acts as a portal for the public to keep track of the latest news development about the COVID-19.
 
@@ -16,7 +16,7 @@ COVID19 Tracker acts as a portal for the public to keep track of the latest news
 
 Doing it as a hobby. Transition Phase is a show hosted by entrepreneurs and creatives. We interview some top minds in Brisbane, highlighting their stories, accomplishment & Helping Entrepreneurs & business owners take control of their life. Exploring different ideas, thought, and insights.
 
-#### Experiments with P5.JS
+#### [Experiments with P5.JS](https://bakarimustafa.com/projects/experiments-with-p5-js/ "P5.js")
 
 An ongoing attempt to learn P5.js through simple, playful, and interactive sketches.
 
