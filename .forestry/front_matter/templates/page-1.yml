@@ -21,5 +21,6 @@ fields:
   name: image
   label: image
 pages:
+- organizations.md
 - projects.md
 - spark-ar-creator.md
