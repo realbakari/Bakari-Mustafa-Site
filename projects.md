@@ -6,6 +6,8 @@ comments: false
 image: ''
 
 ---
+> A mind that is stretched by a new experience can never go back to its old dimensions. - Oliver Wendell Holmes, Jr.
+
 ### Personal Projects
 
 #### [COVID19 Tracker](https://bakarimustafa.com/projects/covid19-tracker/ "COVID-19 Tracker")
