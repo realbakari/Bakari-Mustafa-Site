@@ -20,6 +20,7 @@ fields:
     maxSize: 64
   label: image
 pages:
+- Book-Summaries/business/choose-yourself-by-james-altucher.md
 - Book-Summaries/the-leader-s-guide-to-unconscious-bias.md
 - _posts/2019-04-01-halilu-makintami-s-dream-of-harnessing-the-untapped-african-talent-and-building-mckintami-an-interview.md
 - _posts/2019-12-12-5-books-recommendation-that-will-make-your-life-better.md
