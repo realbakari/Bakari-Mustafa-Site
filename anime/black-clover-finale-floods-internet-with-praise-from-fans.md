@@ -16,8 +16,8 @@ The whole thing began this morning when [_Black Clover_](https://comicbook.com/c
 
 ![](/uploads/black-clover-1262419.jpeg)(Photo: Pierrot)
 
-{% twitter [https://twitter.com/omaryown/status/1376859061778403328](https://twitter.com/omaryown/status/1376859061778403328?ref_src=twsrc%5Etfw "https://twitter.com/omaryown/status/1376859061778403328?ref_src=twsrc%5Etfw") %}
+{% twitter [https://twitter.com/omaryown/status/1376859061778403328](https://twitter.com/omaryown/status/1376859061778403328 "https://twitter.com/omaryown/status/1376859061778403328?ref_src=twsrc%5Etfw") %}
 
-{% twitter [https://twitter.com/lightofthedeep/status/1376912397156315137](https://twitter.com/lightofthedeep/status/1376912397156315137?ref_src=twsrc%5Etfw "https://twitter.com/lightofthedeep/status/1376912397156315137?ref_src=twsrc%5Etfw") %}
+{% twitter [https://twitter.com/lightofthedeep/status/1376912397156315137](https://twitter.com/lightofthedeep/status/1376912397156315137 "https://twitter.com/lightofthedeep/status/1376912397156315137?ref_src=twsrc%5Etfw") %}
 
 {% twitter [https://twitter.com/Matt_shoots2/status/1376883599006392320](https://twitter.com/Matt_shoots2/status/1376883599006392320 "https://twitter.com/Matt_shoots2/status/1376883599006392320") %}
