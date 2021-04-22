@@ -8,7 +8,7 @@ description: If you’ve set a goal for yourself to read more, these books shoul
 image: ''
 
 ---
-The page is a reading list sharing the best books to read in various categories based on many hours of reading and research. Looking for your next read? 
+The page is a reading list sharing the best books to read in various categories based on many hours of reading and research. Looking for your next read?
 
 > 📌 **This page will be updated regularly. Check back often!**
 
@@ -51,35 +51,35 @@ The page is a reading list sharing the best books to read in various categories 
 37. Why We Sleep: Unlocking the Power of Sleep and Dreams by Matthew Walker
 38. The Four Agreements: A Practical Guide to Personal Freedom by Don Miguel Ruiz
 39. Give and Take: Why Helping Others Drives Our Success by Adam Grant
-40. [_The Selfish Gene_](https://amzn.to/2N47aQV) by Richard Dawkins
-41. [_The Blank Slate_](https://amzn.to/2u6gm06) by Steven Pinker
-42. [_The Evolving Self_](https://amzn.to/2NHqp3x) by Robert Kegan
-43. [_The True Believer_](https://amzn.to/2N06ITB) by Eric Hoffer
-44. [_Stumbling on Happiness_](https://amzn.to/2unmLD8) by Daniel Gilbert
-45. [_Influence_](https://amzn.to/2N47Sxz) by Robert Cialdini
-46. [_Thinking, Fast and Slow_](https://amzn.to/2znEQqI) by Daniel Kahneman
-47. [_Mindset_](https://amzn.to/2uS0Ggt) by Carol Dweck
-48. [_Talking to Strangers_](https://amzn.to/2CFRuzQ) by Malcolm Gladwell
-49. [_Guns, Germs and Steel_](https://amzn.to/2N2Lkgp) by Jared Diamond
-50. [_Cows, Pigs, Wars and Witches_](https://amzn.to/2u6P89g) by Marvin Harris
-51. [_Behind the Beautiful Forevers_](https://amzn.to/2H88jGn) by Katherine Boo
-52. [_Three Women_](https://amzn.to/35gdq0w) by Lisa Taddeo
-53. [_Debt: The First 5000 Years_](https://amzn.to/2u7ENdo) by David Graeber
-54. [_On the Genealogy of Morals_](https://amzn.to/2JctAgj) by Friedrich Nietzsche
-55. [_Civilization and Its Discontents_](https://amzn.to/2L4jxeY) by Sigmund Freud
-56. [_Marriage: A History_](https://amzn.to/2u8TzRj) by Stephanie Coontz
-57. [_The Swerve_](https://amzn.to/2N4QZTo) by Stephen Greenblatt
-58. [_The Better Angels of Our Nature_](https://amzn.to/2ulHS8P) by Steven Pinker
-59. [_The Dictator’s Handbook_](https://amzn.to/2L1xEVM) by Bruce Bueno de Mesquita and Alastair Smith
-60. [_Democracy for Realists_](https://amzn.to/2N4R0GC) by Christopher Achen and Larry Bartels
-61. [_War and Peace_](https://amzn.to/2N02QSz) by Leo Tolstoy
-62. [_The Old Man and the Sea_](https://amzn.to/2N3mQUo) by Ernest Hemingway
-63. [_The Republic_](https://amzn.to/2N42sT7) by Plato
-64. [_Meditations_](https://amzn.to/2NGXKfl) by Marcus Aurelius
-65. [_This Life: Secular Faith and Spiritual Freedom_](https://amzn.to/31Hq8Ef) by Martin Hagglund
-66. [_Fundamental Principles of the Metaphysics of Morals_](https://amzn.to/2uk3dzO) by Immanuel Kant
-67. [_The Denial of Death_](https://amzn.to/2N7icF4) and [_Escape from Evil_](https://amzn.to/2NF4Fpd) by Ernest Becker
-68. [_Man’s Search for Meaning_](https://amzn.to/2u9kvjD) by Viktor Frankl
-69. [_Thinking in Bets_](https://amzn.to/2ZOBruo) by Annie Duke
+40. [The Selfish Gene](https://amzn.to/2N47aQV) by Richard Dawkins
+41. [The Blank Slate](https://amzn.to/2u6gm06) by Steven Pinker
+42. [The Evolving Self](https://amzn.to/2NHqp3x) by Robert Kegan
+43. [The True Believer](https://amzn.to/2N06ITB) by Eric Hoffer
+44. [Stumbling on Happiness](https://amzn.to/2unmLD8) by Daniel Gilbert
+45. [Influence](https://amzn.to/2N47Sxz) by Robert Cialdini
+46. [Thinking, Fast and Slow](https://amzn.to/2znEQqI) by Daniel Kahneman
+47. [Mindset](https://amzn.to/2uS0Ggt) by Carol Dweck
+48. [Talking to Strangers](https://amzn.to/2CFRuzQ) by Malcolm Gladwell
+49. [Guns, Germs and Steel](https://amzn.to/2N2Lkgp) by Jared Diamond
+50. [Cows, Pigs, Wars and Witches](https://amzn.to/2u6P89g) by Marvin Harris
+51. [Behind the Beautiful Forevers](https://amzn.to/2H88jGn) by Katherine Boo
+52. [Three Women](https://amzn.to/35gdq0w) by Lisa Taddeo
+53. [Debt: The First 5000 Years](https://amzn.to/2u7ENdo) by David Graeber
+54. [On the Genealogy of Morals](https://amzn.to/2JctAgj) by Friedrich Nietzsche
+55. [Civilization and Its Discontents](https://amzn.to/2L4jxeY) by Sigmund Freud
+56. [Marriage: A History](https://amzn.to/2u8TzRj) by Stephanie Coontz
+57. [The Swerve](https://amzn.to/2N4QZTo) by Stephen Greenblatt
+58. [The Better Angels of Our Nature](https://amzn.to/2ulHS8P) by Steven Pinker
+59. [The Dictator’s Handbook](https://amzn.to/2L1xEVM) by Bruce Bueno de Mesquita and Alastair Smith
+60. [Democracy for Realists](https://amzn.to/2N4R0GC) by Christopher Achen and Larry Bartels
+61. [War and Peace](https://amzn.to/2N02QSz) by Leo Tolstoy
+62. [The Old Man and the Sea](https://amzn.to/2N3mQUo) by Ernest Hemingway
+63. [The Republic](https://amzn.to/2N42sT7) by Plato
+64. [Meditations](https://amzn.to/2NGXKfl) by Marcus Aurelius
+65. [This Life: Secular Faith and Spiritual Freedom](https://amzn.to/31Hq8Ef) by Martin Hagglund
+66. [Fundamental Principles of the Metaphysics of Morals](https://amzn.to/2uk3dzO) by Immanuel Kant
+67. [The Denial of Death](https://amzn.to/2N7icF4) and [Escape from Evil](https://amzn.to/2NF4Fpd) by Ernest Becker
+68. [Man’s Search for Meaning](https://amzn.to/2u9kvjD) by Viktor Frankl
+69. [Thinking in Bets](https://amzn.to/2ZOBruo) by Annie Duke
 
 ###### **Last Updated: April 22, 2021**
