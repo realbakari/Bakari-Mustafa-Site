@@ -10,7 +10,7 @@ image: ''
 ---
 The page is a reading list sharing the best books to read in various categories based on many hours of reading and research. Looking for your next read? 
 
-> **This page will be updated regularly. Check back often!**
+> 📌 **This page will be updated regularly. Check back often!**
 
  1. When Breath Becomes Air by Paul Kalanithi
  2. Sapiens: A Brief History of Humankind by Yuval Noah Harari
