@@ -3,8 +3,8 @@ title: 'The Best Books: Recommended Reading List'
 date: 2021-04-21 14:00:00 +0000
 tags:
 - Book Recommendation
-description: 'The page is a reading list sharing the best books to read in various
-  categories based on many hours of reading and research. Looking for your next read? '
+description: If you’ve set a goal for yourself to read more, these books should be
+  first on your list. Here are the top most recommended books of all-time!
 image: ''
 
 ---
