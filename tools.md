@@ -43,7 +43,6 @@ These are general purpose community and/or chat platforms.
 * [CountablePro](https://www.countable.com/) — Brand, audiences, data
 * [Zyper](https://zyper.com/) — Build brand communities
 * [Upstream](https://upstreamapp.com/) — Professional networks
-* FB Groups — It works.
 * [Zapnito](https://zapnito.com/) — Community platform for expertise
 * [Aluminati](https://www.aluminati.net/) — Student, Alumni community
 * [Union.vc](https://union.vc/) — Networking, mentor platform
