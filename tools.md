@@ -4,9 +4,8 @@ layout: page
 excerpt: ''
 description: A curated list of best-in-class resources & tools to help you build,
   grow, and operate your community!
-image: ''
+image: "/uploads/priscilla-du-preez-nf8xhlmmg0c-unsplash.jpeg"
 comments: false
-published: false
 
 ---
 A curated list of `best-in-class` resources & tools to help you build, grow, and operate your community!
