@@ -1,5 +1,5 @@
 ---
-title: tools
+title: tools & software
 layout: page
 excerpt: ''
 description: A curated list of best-in-class resources & tools to help you build,
