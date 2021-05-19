@@ -7,7 +7,7 @@ description: Creator J. Michael Straczynski's ambitious and complex futuristic s
   opera charts five years in the lives of those aboard the titular five-mile-long
   space station, where personal drama plays out against a tense political backdrop
   of looming war between bitter enemies the Centauri and the Narn.
-image: ''
+image: "/uploads/babylon_5_station.jpg"
 
 ---
 "I was there, at the dawn of the Third Age of Mankind. It began in the Earth year 2257 with the founding of the last of the Babylon stations, located deep in neutral space. It was a port of call for refugees, smugglers, businessmen, diplomats, and travelers from a hundred worlds. It could be a dangerous place, but we accepted the risk because Babylon 5 was our last, best hope for peace. Under the leadership of its final commander, Babylon 5 was a dream given form, a dream of a galaxy without war, when species from different worlds could live side-by-side in mutual respect, a dream that was endangered as never before by the arrival of one man on a mission of destruction. Babylon 5 was the last of the Babylon stations. This is its story."
