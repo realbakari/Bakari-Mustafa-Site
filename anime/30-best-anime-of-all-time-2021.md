@@ -1,11 +1,12 @@
 ---
 title: 30 Best Anime of All Time (2021)
 date: 2021-08-06 14:00:00 +0000
-tags: []
+tags:
+- Anime
+- Cultural Tips
 description: Check the 30 greatest anime series including the latest recommendations
   and the top classics!
-image: ''
-published: false
+image: "/uploads/kimetsu-no-yaibademon-slayer.jpeg"
 
 ---
 ## 30. Fate
