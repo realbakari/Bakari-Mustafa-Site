@@ -1,7 +1,7 @@
 # Site settings
 title: Bakari Mustafa | Offical Website # site title
 description: >- # site description
-  Bakari Mustafa is an African-born Australian Entrepreneur.
+  Bakari Mustafa is an African-born Australian Entrepreneur. He is the chief executive officer of Mentors Outreach, a social platform that helps develop the entrepreneurial skills of students and young entrepreneurs.
 lang: en-US # default lang
 timezone: Asia/Jakarta # set your timezone
 image: uploads/bakari_mustafa.jpg # This image used for Open Graph more info https://ogp.me/
@@ -12,7 +12,7 @@ mode: light # default theme "dark" | "light"
 author:
   name: Bakari Mustafa # author name
   bio: >- # tell to the world
-    Entreprenuer, Technologist, and Former Refugee.
+    Founder of Mentors Outreach & Hungry Innovators
   username: realbakari # general username
   github: realbakari # github username
   twitter: realbakari # twitter username
