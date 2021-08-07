@@ -1,6 +1,6 @@
 ---
 title: 10 Japanese Books You Need to Read
-date: 2021-08-02 14:00:00 +0000
+date: 2021-08-02T14:00:00.000+00:00
 tags:
 - Japanese Books
 description: 'Japanese literature has a long and illustrious history, with its most
@@ -8,7 +8,7 @@ description: 'Japanese literature has a long and illustrious history, with its m
 image: "/uploads/the-tale-of-genji.jpeg"
 
 ---
-Japanese literature has a long and illustrious history, with its most famous classic, _The Tale of Genji_, dating back to the 11th century. Often dark but full of humor, Japanese literature showcases the idiosyncrasies of such a culturally driven nation. We take a look at 10 Japanese books you need to read, from the words of Haruki Murakami to those of Yasunari Kawabata.
+Japanese literature has a long and illustrious history, with its most famous classic, _The Tale of Genji_, dating back to the 11th century. Often dark but full of humor, Japanese literature showcases the idiosyncrasies of such a culturally driven nation. Take a look at 10 Japanese books you need to read, from the words of Haruki Murakami to those of Yasunari Kawabata.
 
 ## Almost Transparent Blue (1976) by Ryu Murakami
 
