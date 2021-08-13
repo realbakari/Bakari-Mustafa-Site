@@ -8,8 +8,6 @@ description: The truth is that nothing is promised and today might be your last 
 image: "/uploads/6027a0c20f124c32a7c63411_two-minutes-from-the-abyss.jpeg"
 
 ---
-![Two Minutes from the Abyss by Vijay Eswaran](https://uploads-ssl.webflow.com/6027a0c20f124c04b4c62dfe/6027a0c20f124c4052c63412_Two%20Minutes%20from%20the%20Abyss%20Review.jpg =140x)
-
 The truth is that nothing is promised and today might be your last day on Earth. Vijay Eswaran uses stories, personal experience and insights to explain 11 pillars of life management.
 
 Today I want to share my notes of _Two Minutes from the Abyss_ with an intention to inspire you to live in the now.
