@@ -14,6 +14,12 @@ This page shares a full list of book summaries I have compiled during my reading
 
 ## 2021
 
+Think and Grow Rich – Napoleon Hill
+
+[A Mind For Numbers Summary – Barbara Oakley](https://bakarimustafa.com/book-summaries/a-mind-for-numbers-summary-barbara-oakley)
+
+[Two Minutes from the Abyss by Vijay Eswaran](https://bakarimustafa.com/book-summaries/two-minutes-from-the-abyss-by-vijay-eswaran/)
+
 [Free Will by Sam Harris](https://bakarimustafa.com/book-summaries/free-will-by-sam-harris/)
 
 [The Art of War by Sun Tzu](https://bakarimustafa.com/book-summaries/the-art-of-war-by-sun-tzu/)
