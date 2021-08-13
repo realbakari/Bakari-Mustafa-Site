@@ -10,7 +10,70 @@ description: A list of the books I’ve read or re-read in the last few years, a
   in basically the order I read them, topmost recent.
 
 ---
+# Recommended Reading List
+
+_Last updated Fri, 13 August 2021_
+
 A list of the books I’ve read or re-read in the last few years, arranged in basically the order I read them, topmost recent. If I don’t enjoy a book, I don’t finish it, so each book on this list is recommended to some extent.
+
+I'm constantly updating this list of books to help you discover the best books to read.
+
+### Best Entrepreneurship Books
+
+1. The E-Myth Revisited: Why Most Small Businesses Don't Work and What to Do About It by Michael Gerber
+2. The 4-Hour Workweek: Escape 9-5, Live Anywhere, and Join the New Rich by Timothy Ferriss
+3. The Lean Startup: How Today's Entrepreneurs Use Continuous Innovation to Create Radically Successful Businesses by Eric Ries
+4. The Millionaire Fastlane: Crack the Code to Wealth and Live Rich for a Lifetime. by MJ DeMarco
+5. Ignore Everybody: And 39 Other Keys to Creativity by Hugh MacLeod
+6. Before the Exit: Thought Experiments For Entrepreneurs by Dan Andrews
+
+### Best Finance Books
+
+1. The Most Important Thing Illuminated: Uncommon Sense for the Thoughtful Investor by Howard Marks
+2. Margin of Safety: Risk-Averse Value Investing Strategies for the Thoughtful Investor by Seth Klarman
+3. The Art of Profitability by Adrian Slywotzky
+4. Simple Numbers, Straight Talk, Big Profits!: 4 Keys to Unlock Your Business Potential by Greg Crabtree
+
+### Best Leadership Books
+
+1. Dream Teams by Shane Snow
+2. What Got You Here Won't Get You There by Marshall Goldsmith
+3. Switch: How to Change Things When Change Is Hard by Chip Heath and Dan Heath
+4. Wooden on Leadership: How to Create a Winning Organization by John Wooden
+5. Start with Why: How Great Leaders Inspire Everyone to Take Action by Simon Sinek
+6. Tribes: We Need You to Lead Us by Seth Godin
+7. How to Win Friends & Influence People by Dale Carnegie
+8. The Five Dysfunctions of a Team: A Leadership Fable by Patrick Lencioni
+
+### Best Management Books
+
+1. First, Break All the Rules: What the World's Greatest Managers Do Differently by Marcus Buckingham and Curt Coffman
+2. The Essential Drucker: The Best of Sixty Years of Peter Drucker's Essential Writings on Management by Peter Drucker
+3. The Goal: A Process of Ongoing Improvement by Eliyahu Goldratt
+
+### The Top Art and Creativity Books
+
+1. Impro: Improvisation and the Theatre by Keith Johnstone
+2. Ignore Everybody by Hugh MacLeod
+3. The War of Art: Break Through Your Blocks and Win Your Inner Creative Battles by Steven Pressfield
+4. The Creative Habit: Learn It and Use It For Life by Twyla Tharp
+
+### Best Artist Biographies
+
+1. Born Standing Up by Steve Martin
+2. Just Kids by Patti Smith
+
+### Best Photography Books
+
+1. Intimations of Paradise by Christopher Burkett
+2. Resplendent Light by Christopher Burkett
+
+### More Art and Creativity Book Recommendations
+
+1. Bird by Bird by Anne Lamott
+2. The Practicing Mind by Thomas M. Sterner
+3. Marcel Duchamp: The Afternoon Interviews by Calvin Tomkins  
+   Daily Rituals: How Artists Work by Mason Currey
 
 ## 2020
 
