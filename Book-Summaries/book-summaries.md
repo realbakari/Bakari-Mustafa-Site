@@ -14,7 +14,7 @@ This page shares a full list of book summaries I have compiled during my reading
 
 ## 2021
 
-Think and Grow Rich – Napoleon Hill
+[Think and Grow Rich – Napoleon Hill](https://bakarimustafa.com/book-summaries/think-and-grow-rich-napoleon-hill)
 
 [A Mind For Numbers Summary – Barbara Oakley](https://bakarimustafa.com/book-summaries/a-mind-for-numbers-summary-barbara-oakley)
 
