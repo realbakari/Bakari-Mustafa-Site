@@ -8,25 +8,11 @@ description: The truth is that nothing is promised and today might be your last 
 image: "/uploads/6027a0c20f124c32a7c63411_two-minutes-from-the-abyss.jpeg"
 
 ---
-Author
+| Author | Published | Category |My Rating| Buy the Book|
 
-Vijay Eswaran |
+|-----------|--------------|--------------|--------------|------------------|
 
-###### Published
-
-2017 |
-
-###### Category
-
-[**Self Improvement**](https://tomaslau.com/book-categories/self-improvement) **|**
-
-###### My Rating
-
-⭐⭐️⭐️⭐️️ |
-
-###### Buy the Book
-
-[**Kindle**](https://amzn.to/3ipSaxF) **|**
+|Vijay Eswaran |2017 |[**Self Improvement**](https://tomaslau.com/book-categories/self-improvement) **|**⭐⭐️⭐️⭐️️ |[**Kindle**](https://amzn.to/3ipSaxF) **|**
 
 The truth is that nothing is promised and today might be your last day on Earth. Vijay Eswaran uses stories, personal experience and insights to explain 11 pillars of life management.
 
