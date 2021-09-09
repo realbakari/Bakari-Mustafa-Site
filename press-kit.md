@@ -4,7 +4,7 @@ layout: page
 excerpt: ''
 description: 'Bakari Mustafa, a Burundi-born – and as of 2015, Australian – entrepreneur,
   technologist, and former refugee. '
-image: ''
+image: "/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg"
 comments: false
 
 ---
