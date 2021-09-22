@@ -20,6 +20,7 @@ fields:
     maxSize: 64
   label: image
 pages:
+- Book-Summaries/1984-by-george-orwell.md
 - Book-Summaries/a-mind-for-numbers-summary-barbara-oakley.md
 - Book-Summaries/business/choose-yourself-by-james-altucher.md
 - Book-Summaries/business/mastermind-dinners-by-jayson-gaignard.md
