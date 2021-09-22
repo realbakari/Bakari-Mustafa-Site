@@ -8,7 +8,6 @@ image: "/uploads/alfons-morales-ylswjsy7stw-unsplash.jpg"
 description: This page shares a full list of book summaries I have compiled during
   my reading and research. If a particular book sounds interesting to you, click on
   the full book summary and you can browse all of my notes on it.
-published: false
 
 ---
 This page shares a full list of book summaries I have compiled during my reading and research. If a particular book sounds interesting to you, click on the full book summary and you can browse all of my notes on it.
