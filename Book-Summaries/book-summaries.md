@@ -8,11 +8,15 @@ image: "/uploads/alfons-morales-ylswjsy7stw-unsplash.jpg"
 description: This page shares a full list of book summaries I have compiled during
   my reading and research. If a particular book sounds interesting to you, click on
   the full book summary and you can browse all of my notes on it.
+published: false
 
 ---
 This page shares a full list of book summaries I have compiled during my reading and research. If a particular book sounds interesting to you, click on the full book summary and you can browse all of my notes on it.
 
 ## 2021
+
+[1984 by George Orwell  
+](https://bakarimustafa.com/book-summaries/1984-by-george-orwell/)[A Short History of Nearly Everything Summary By Bill Bryson](https://bakarimustafa.com/book-summaries/a-short-history-of-nearly-everything-summary-by-bill-bryson/)
 
 [Think and Grow Rich – Napoleon Hill](https://bakarimustafa.com/book-summaries/think-and-grow-rich-napoleon-hill)
 
