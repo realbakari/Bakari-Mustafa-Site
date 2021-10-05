@@ -2,20 +2,24 @@
   url: /
   external: false
 
-- title: Writing
+- title: About
+  url: /about/
+  external: false
+  
+- title: CV
+  url: /#/
+  external: false
+  
+- title: Writing 
   url: /posts/
   external: false
   
-- title: Book Summaries
+- title: Book Summaries 
   url: /book-summaries/
   external: false
   
 - title: Reading
   url: /reading/
-  external: false
-  
-- title: About
-  url: /about/
   external: false # set true if you using external link, see below
 
 # Example:
