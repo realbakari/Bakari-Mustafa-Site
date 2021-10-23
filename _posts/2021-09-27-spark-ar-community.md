@@ -12,7 +12,7 @@ As every tool/software has its own community, Spark AR has a huge and active com
 
 1. [**Spark AR Creators**](https://www.facebook.com/SparkARcreators/) **—** This Facebook group is for global filter creators. Users can discuss and ask questions related to the filter creation process.
 2. [**Spark AR Tutorials**](https://sparkar.facebook.com/ar-studio/learn/tutorials) — Several tutorials with examples are on this website for the Spark AR users. It's really helpful for a new developer.
-3. [**Spark AR Community **](https://www.facebook.com/groups/SparkARcommunity/)**_—_** This Facebook group is to share created filters and ask for other creators' feedback.
+3. [**Spark AR Community**](https://www.facebook.com/groups/SparkARcommunity/) **_—_** This Facebook group is to share created filters and ask for other creators' feedback.
 
 **Spark AR**
 
