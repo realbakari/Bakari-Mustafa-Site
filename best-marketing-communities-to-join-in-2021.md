@@ -19,7 +19,7 @@ image: ''
  9. [Demand Curve](https://www.demandcurve.com/slack) - a world-class marketing course combined with expert advice.
 10. [CRO Growth Hacks](https://www.ometrics.com/cro-growth-hacks/) - a Slack group to discuss conversion rate optimization hacks that improve growth using techniques such as CRO, SEM, SEO, eMail, business strategy and more.
 11. [Indiehackers](https://www.indiehackers.com/) - Indie Hackers has a vibrant SaaS marketing community. Its members include SaaS founders, CEOs, and growth marketers who share hacks, tips, and insights on everything SaaS marketing.
-12. [GrowthMentor](https://www.growthmentor.com/) - _GrowthMentor is the only community in this list that gives it’s members the ability to book 1-on-1 calls with vetted growth marketing mentors._
+12. [GrowthMentor](https://www.growthmentor.com/) - _Growth Mentor is the only community in this list that gives its members the ability to book 1-on-1 calls with vetted growth marketing mentors._
 
     But beyond being able to book calls with some of the brightest minds in growth, [**GrowthMentor community**](https://www.growthmentor.com/community/) is a place where you can network with other people just like you.
 13. [SaaS Growth Hacks](https://www.facebook.com/groups/SaaSgrowthhacking/) - Founded by Aaron Krall, SaaS Growth Hacks is a Facebook group focused on SaaS growth hacking techniques that can help founders and entrepreneurs start, run, and scale their businesses. SaaS founders and CEOs can get specific feedback or advice on issues they have previously dealt with. You also get the opportunity to learn from some of the top SaaS industry leaders, founders, and executives.
