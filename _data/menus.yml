@@ -7,8 +7,8 @@
   external: false
   
 - title: CV
-  url: /#/
-  external: false
+  url: http://www.linkedin.com/in/realbakari
+  external: true
   
 - title: Writing 
   url: /posts/
