@@ -1,5 +1,5 @@
 ---
-title: The Richest Man in Babylon
+title: The Richest Man in Babylon by George S. Clason
 layout: page
 excerpt: This is a book summary of The Richest Man in Babylon by Clason. Read this
   Richest Man in Babylon summary to review key ideas and lessons from the book.
@@ -50,6 +50,8 @@ If you are in debt, live on 70% of what you make. Save 10% for yourself. Use the
 # Buy the Book: The Richest Man in Babylon
 
 The Richest Man In Babylon is a must-read for anyone wanting to truly master the concept of money. The book delivers financial tips in a very strong way: by wrapping them into amazing stories.
+
+![](/uploads/therichestmaninbabylon-by-georgeclason.jpg "The Richest Man in Babylon by George S. Clason")
 
 * [Audible](https://www.audible.com.au/pd/The-Richest-Man-in-Babylon-Audiobook/B01M0GUNC0?source_code=M2MORSH051016002X&ipRedirectOverride=true&ipRedirectOverride=true&gclid=CjwKEAjw__fnBRCNpvH8iqy4xl4SJAC4XERPosbzzDYA5QuHp1cbX1Zexu1Ky5Z8YqTDHiJTRNe_fBoCSYPw_wcB&gclsrc=aw.ds)
 * [Amazon](https://www.amazon.com/Richest-Man-Babylon-Ancients-Inspiring-ebook/dp/B07BB5N17S)
