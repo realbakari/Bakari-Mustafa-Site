@@ -19,37 +19,37 @@ image: "/uploads/the_art_of_possibility_1516808316_1bb711bc.jpg"
 
 The stories we tell ourselves about ourselves and the world are invented. So instead of continuing to live a disempowering narrative about how the world is against you, invent an empowering story that provides you meaning and enhances the quality of your life.
 
-### **Create a new frame for your problem**
+### Create a new frame for your problem
 
 > “Every problem, every dilemma, every dead end we find ourselves facing in life, only appears unsolvable inside a particular frame or point of view. Enlarge the box, or create another frame around the data, and problems vanish, while new opportunities appear.”
 
 If you’re stuck with a seemingly unsolvable problem, flip the script. Try to see the problem through a new lens. More often than not, the problem will vanish and new opportunities will shine through.
 
-### **How to reinvent your story**
+### How to reinvent your story
 
 > _“A simple way to practice it’s all invented is to ask yourself this question: What assumption am I making, That I’m not aware I’m making, That gives me what I see? And when you have an answer to that question, ask yourself this one: What might I now invent, That I haven’t yet invented, That would give me other choices?“_
 
 When you’re in a bad place, go through the above series of questions. Start moving your mind through a pattern that will help you get to a new set of beliefs and choices.
 
-### **Emotions in a world of possibility**
+### Emotions in a world of possibility
 
 > “Emotions that are often relegated to the special category of spirituality are abundant here: joy, grace, awe, wholeness, passion, and compassion.”
 
 When you start seeing the world as a place of abundance, instead of a place of scarcity, you can begin to experience the emotions that make being a human so amazing – joy, awe, passion, and compassion.
 
-### **Be generous and inclusive**
+### Be generous and inclusive
 
 > “On the whole, resources are likely to come to you in greater abundance when you are generous and inclusive and engage people in your passion for life. There aren’t any guarantees, of course. When you are oriented to abundance, you care less about being in control, and you take more risks. You may give away short-term profits in pursuit of a bigger dream; you may take a long view without being able to predict the outcome. In the measurement world, you set a goal and strive for it. In the universe of possibility, you set the context and let life unfold.“
 
 Resources and opportunities flourish when you generously include people in your passion for life. In orienting yourself towards abundance, you open up a new world of possibility in which you take bigger risks, pursue your dreams, and accept that you cannot always predict the outcome.
 
-### **Give people an A**
+### Give people an A
 
 > “For after all, it is only to a person to whom you have granted an A that you will really listen, and it is in that rare instance when you have ears for another person that you can truly appreciate a fresh point of view.”
 
 Imagine that you graded all of the people in your life. Think about the way the grade you give influences your willingness to listen and appreciate that person. You’ll notice that giving people an “A,” instead of a lower grade, will provide you with a greater capacity to listen, understand, and appreciate that person. So instead of judging quickly and jumping to potentially false conclusions, give everyone you meet an A to start.
 
-### **Success and fear**
+### Success and fear
 
 > “The drive to be successful and the fear of failure are, like the head and tail of a coin, inseparably linked.”
 
