@@ -1,5 +1,5 @@
 ---
-title: Snapchat Lenses
+title: Snapchat Lens Creator
 layout: page
 excerpt: ''
 description: Creating and publish magical augmented reality experiences with Snapchat
