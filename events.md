@@ -16,13 +16,13 @@ description: Event listings and tickets for all Bakari Mustafa; upcoming live po
     </p>
     
     <div class="alert alert-warning">
-        <h4>NO SCHEDULED EVENTS</h4>
-        <p>There are currently no scheduled events, sign up for our newsletter to ensure you are notified when new events are added.
-</p>
-    </div>
+        <!-- <h4>NO SCHEDULED EVENTS</h4>
+       <p>There are currently no scheduled events, sign up for our newsletter to ensure you are notified when new events are added.
+
+</p> **-->** </div>
 
     <hr />
-
+    
     <div class="agenda">
         <div class="table-responsive">
             <table class="table table-condensed table-bordered">
@@ -37,17 +37,17 @@ description: Event listings and tickets for all Bakari Mustafa; upcoming live po
                     <!-- Event Start -->
                     <tr>
                         <td class="agenda-date" class="active" rowspan="1">
-                            <div class="dayofmonth">18</div>
+                            <div class="dayofmonth">1</div>
                             <div class="dayofweek">Saturday</div>
-                            <div class="shortdate text-muted">July, 2020</div>
+                            <div class="shortdate text-muted">Oct, 2022</div>
                         </td>
                         <td class="agenda-time">
-                            Null
+                            6:00 PM - 11:30 PM
                         </td>
                         <td class="agenda-events">
                             <div class="agenda-event">
                                 <i class="glyphicon glyphicon-repeat text-muted" title="Repeating event"></i> 
-                                No Events
+                                Rich Dreams 'A Red Carpet  Night'
                             </div>
                         </td>
                     </tr>
@@ -58,6 +58,7 @@ description: Event listings and tickets for all Bakari Mustafa; upcoming live po
             </table>
         </div>
     </div>
+
 </div>
 
 </section>
