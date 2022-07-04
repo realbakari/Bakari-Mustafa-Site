@@ -9,16 +9,16 @@ description: Event listings and tickets for all Bakari Mustafa; upcoming live po
   conferences, and public Speaking - Buy Tickets Now!
 
 ---
-<!-- <section class="l--mar-top-m l--grid-wide l--flex l--space-compact"> <div class="container">
+<section class="l--mar-top-m l--grid-wide l--flex l--space-compact"> <div class="container">
 
     <p class="lead">
     </p>
     
     <div class="alert alert-warning">
-         <h4>NO SCHEDULED EVENTS</h4>
+        <!--  <h4>NO SCHEDULED EVENTS</h4>
        <p>There are currently no scheduled events, sign up for our newsletter to ensure you are notified when new events are added.
 
-</p>  </div> **-->**
+</p> **-->**  </div> 
 
     <hr />
     
