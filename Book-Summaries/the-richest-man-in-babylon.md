@@ -31,7 +31,7 @@ You cannot arrive at the fullest measure of success until you crush the spirit o
 
 ## Lesson 2: Learn how to be lucky.
 
-The more we know, the more we may earn. The person who seeks to know more of their craft is capable of earning more.
+The more we know, the more we may earn. The person who seeks to know more about their craft is capable of earning more.
 
 “Where the determination is, a way can be found.”
 
@@ -46,6 +46,14 @@ Protect yourself with insurance. You cannot afford to be unprotected.
 No man respects himself if he does not repay his debts.
 
 If you are in debt, live on 70% of what you make. Save 10% for yourself. Use the remaining 20% to repay your debts.
+
+One of the key principles of the book is the importance of saving and investing. Arkad teaches that it is important to save at least 10% of your income and to invest that money wisely in order to grow your wealth. He also emphasizes the importance of budgeting and managing your expenses, and avoiding debt.
+
+Another key principle of the book is the importance of seeking knowledge and education. Arkad encourages readers to learn as much as they can about money and investing and to seek advice from those who are more knowledgeable and experienced than they are. He also stresses the importance of taking calculated risks and of not being afraid to fail.
+
+Throughout the book, Arkad shares many other pieces of wisdom and advice, such as the importance of hard work, the power of compounding interest, and the value of setting goals and making plans. The book is written in a simple and easy-to-understand style, and its message is both timeless and practical.
+
+In conclusion, The Richest Man in Babylon is a classic book that offers valuable advice on how to achieve financial success. Whether you are just starting out on your financial journey or you are looking to improve your financial situation, this book is sure to provide valuable insights and inspiration.
 
 # Buy the Book: The Richest Man in Babylon
 
