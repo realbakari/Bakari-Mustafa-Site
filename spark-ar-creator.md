@@ -7,12 +7,9 @@ comments: false
 image: "/uploads/sparkar_80a8dd8555.png"
 
 ---
-If you use Instagram or Facebook for your business and you want to keep up to date with platform updates, you are in the right place.
+If you use Instagram or Facebook for your business and want to stay up to date with the latest platform updates, you have come to the right place. I have been creating and sharing augmented reality experiences using the Spark AR Creator, which allows me to reach thousands of people on both Facebook and Instagram. This tool is an excellent way for businesses to engage with their audience and provide them with unique, immersive experiences that can help to promote their brand and products. By staying up to date with the latest platform updates, businesses can ensure that their augmented reality experiences remain relevant and effective.
 
-I started creating and sharing augmented reality experience that reaches thousands of people using Facebook & Instagram from the Spark AR Creator.
-
-* Spark AR Creator Since October 2020
-* Interested in my many project files of popular effects, reach out I'm always happy to help new AR creators get started.
+If you are interested in accessing many of my project files for popular effects, please reach out to me. I am always happy to help new augmented reality creators get started and provide them with the resources they need to create engaging and immersive experiences. My project files include a wide range of effects, from branded selfie filters to AR games and more. I can provide you with the files and guidance you need to create your own augmented reality experiences using Spark AR Creator or other tools. Please don't hesitate to contact me if you have any questions or need help getting started. I am always happy to share my knowledge and experience with others in the AR community.
 
 [Spark AR Portfolio](https://www.facebook.com/sparkarhub/portfolios/446398036518642/ "Spark AR Portfolio") | [Instagram ](https://www.instagram.com/realbakari?fbclid=IwAR25C-0pu0udQgZ990dFllHlSMvwm-ywhZVj47RQYqRfNF93Qbpo3LcZe2g "Instagram")| [Facebook](https://www.fb.com/484171672065516)
 
