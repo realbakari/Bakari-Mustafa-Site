@@ -2,12 +2,12 @@
 title: Biography
 permalink: "/about/"
 layout: page
-excerpt: Bakari Mustafa is an author, entrepreneur, former refugee, and technologist.
-  Founder of Mentors Outreach & Hungry Innovators.
+excerpt: Bakari Mustafa is an African-born Australian entrepreneur, technologist,
+  and former refugee.
 comments: false
 image: "/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg"
-description: Bakari Mustafa is an author, entrepreneur, former refugee, and technologist.
-  Founder of Mentors Outreach & Hungry Innovators.
+description: Bakari Mustafa is an African-born Australian entrepreneur, technologist,
+  and former refugee.
 
 ---
 ![](/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg)
