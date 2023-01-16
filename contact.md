@@ -11,8 +11,6 @@ description: For all inquiries please use the form below. I may not able to resp
 image: "/uploads/volodymyr-hryshchenko-v5vqwc9gyeu-unsplash.jpg"
 
 ---
-#### Contact Us
-
 Thank you for visiting my official website. I would love to hear from you!
 
 If you have any questions or comments about the website, please feel free to reach out to me using the contact information below.
