@@ -1,9 +1,11 @@
 ---
 title: Privacy
 layout: page
-excerpt: ''
+excerpt: This privacy policy outlines the types of personal information we collect,
+  how it is used, and how we protect it.
 comments: false
-description: ''
+description: This privacy policy outlines the types of personal information we collect,
+  how it is used, and how we protect it.
 image: ''
 
 ---
