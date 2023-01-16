@@ -3,35 +3,46 @@ title: Privacy
 layout: page
 excerpt: ''
 comments: false
+description: ''
+image: ''
 
 ---
-I respect the EU’s General Data Protection Regulations (GDPR) and this policy document explains how I collect and handle any information you provide me.  
-This website, at bakarimustafa.com, is the personal website of Bakari Mustafa. Entries to this website represent my personal opinion. This site is not owned, operated, or affiliated with any organization.  
-Entries are copyright (c), Bakari Mustafa, as of the date of posting. Contents licensed under a Creative Commons License - some rights reserved.
+This website, bakarimustafa.com, is the personal website of Bakari Mustafa. Entries to this website represent my personal opinion. This site is not owned, operated, or affiliated with any organization. Entries are copyright (c), Bakari Mustafa, as of the date of posting. 
+
+This privacy policy outlines the types of personal information we collect, how it is used, and how we protect it.
 
 ### What background data is collected?
 
 This website does not collect or store any personally identifiable data behind the scenes.
 
-### How do I use the data you provide?
+### Information Collection: 
 
-If you sign up for my newsletter, I only collect your name and email address. If you use the contact form I will use the data you provide to correspond with you. This website does not collect any more information.
+We collect information from you when you fill out a form or enter information on our website. This information may include your name, email address, phone number, and any other information you choose to provide. We also collect information about your browsing behavior on our website through the use of cookies.
 
-### Where do I store your data?
+### Use of Information: 
 
-If you sign up for my newsletter, I store your name and email address in Mailchimp. When you contact me directly by email the contents are stored in the email system, I'm using Gmail & Office 365  
-If you use the contact form the data will be stored within the form submission section on Netlify, which only I have access to.
+We use the information we collect to provide you with a better user experience and to communicate with you about our services. We may also use your information to send you promotional materials and to improve our website and services.
 
-### How secure is this website?
+### Protection of Information: 
 
-This website transmits itself using HTTPS, encrypting all data between the browser and the server. Your network provider may still be able to see that you are loading files from this site, but not their content. This also protects you from third parties intercepting data e.g. while browsing on public WiFi, or network providers injecting ads into this site.
+We take appropriate security measures to protect against unauthorized access to or unauthorized alteration, disclosure, or destruction of data. These include internal reviews of our data collection, storage, and processing practices and security measures, as well as physical security measures to guard against unauthorized access to systems where we store personal data.
 
-### Analytics
+### Sharing of Information: 
 
-In common with almost most websites, I use a web analytics service (Google Analytics) to help me understand how people use my website. These cookies are served by Google - a third party. I have enabled the ‘Anonymize IP’ option so that the analytics data does not contain any information that identifies you personally.
+We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information. This does not include website hosting partners and other parties who assist us in operating our website, conducting our business, or servicing you, so long as those parties agree to keep this information confidential.
+
+### Third-Party Links: 
+
+We may include or offer third-party products or services on our website. These third-party sites have separate and independent privacy policies. We, therefore, have no responsibility or liability for the content and activities of these linked sites.
+
+### Changes to Privacy Policy: 
+
+We reserve the right to make changes to this privacy policy at any time. We will notify you of any changes by posting the new privacy policy on our website.
 
 ### Complaints
 
 If you’ve any reason to complain about the ways I handle your privacy, please contact me (Bakari Mustafa) by email at contact@bakarimustafa.com.
+
+Thank you for visiting my official website. We take your privacy seriously and will do our best to protect your personal information.
 
 Last updated: 01 April 2020
