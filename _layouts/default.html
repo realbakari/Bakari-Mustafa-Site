@@ -10,20 +10,65 @@ layout: compress
 <meta name="google-site-verification" content="YRqPHQ67DnaYZOvHhcooEDr8f101W5doY-5U70lgcnc" />  
   
 <script type="application/ld+json">
-    {
-      "@context": "https://schema.org",
-      "@type": "WebSite",
-      "url": "https://www.bakarimustafa.com/",
-      "potentialAction": {
-        "@type": "SearchAction",
-        "target": {
-          "@type": "EntryPoint",
-          "urlTemplate": "https://bakarimustafa.com/posts/?q={search_term_string}"
+{
+    "@context": "https://schema.org",
+    "@graph": [
+        {
+            "@type": "WebPage",
+            "@id": "https://bakarimustafa.com/",
+            "url": "https://bakarimustafa.com/",
+            "name": "Bakari Mustafa",
+            "isPartOf": {
+                "@id": "https://bakarimustafa.com/#website"
+            },
+            "datePublished": "2022-12-29T22:24:36+00:00",
+            "dateModified": "2022-12-29T22:24:36+00:00",
+            "description": "Bakari Mustafa is a personal blog that covers a wide range of topics, from personal development to technology and culture.",
+            "breadcrumb": {
+                "@id": "https://bakarimustafa.com/#breadcrumb"
+            },
+            "inLanguage": "en-US",
+            "potentialAction": [
+                {
+                    "@type": "ReadAction",
+                    "target": [
+                        "https://bakarimustafa.com/"
+                    ]
+                }
+            ]
         },
-        "query-input": "required name=search_term_string"
-      }
-    }
-    </script>
+        {
+            "@type": "BreadcrumbList",
+            "@id": "https://bakarimustafa.com/#breadcrumb",
+            "itemListElement": [
+                {
+                    "@type": "ListItem",
+                    "position": 1,
+                    "name": "Home"
+                }
+            ]
+        },
+        {
+            "@type": "WebSite",
+            "@id": "https://bakarimustafa.com/#website",
+            "url": "https://bakarimustafa.com/",
+            "name": "Bakari Mustafa",
+            "description": "Personal blog that covers a wide range of topics and provides insights and ideas.",
+            "potentialAction": [
+                {
+                    "@type": "SearchAction",
+                    "target": {
+                        "@type": "EntryPoint",
+                        "urlTemplate": "https://bakarimustafa.com/posts/?q={search_term_string}"
+                    },
+                    "query-input": "required name=search_term_string"
+                }
+            ],
+            "inLanguage": "en-US"
+        }
+    ]
+}
+</script>
   
 <body data-theme="{{ site.mode }}" class="notransition">
 
