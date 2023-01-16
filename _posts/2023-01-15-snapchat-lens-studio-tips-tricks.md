@@ -54,44 +54,25 @@ For users who are new to Lens Studio, there are a variety of mini-tutorials avai
 
 #### **Mini-tutorials**
 
-[Make Things Change on Tap](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020451643-Make-Things-Change-on-Tap)
+* [Make Things Change on Tap](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020451643-Make-Things-Change-on-Tap)
+* [First Person Attached Object (smooth follow)](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360000015666-First-Person-Attached-Object)
+* [Simulating World Particles](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360018308143/comments/360000808123)
+* [Procedural Mesh Drawing](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020420083-Creating-a-Procedural-Mesh-Using-Mesh-Builder)
+* [Animating Blendshape using Facial movements](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042675692-BlendShape-Example)
+* [Reveal under touches](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042741091-How-can-I-make-an-object-appears-only-in-swiped-area-?page=1#community_comment_360005279411)
+* [Animated UV Scrolling](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020392043-Animated-UV-Scrolling)
+* ["From Camera" Reflections](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115011858426--From-Camera-Reflections)
+* [Slider Selector](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360050394251/comments/360008654031)
+* [Optimizing 2D Textures Best Practices](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020415343-Optimizing-2D-Textures-Best-Practices)
+* [Daz3D Export Guide](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042188791-Daz3D-Export-Guide)
+* [Chroma Key Shader / Material](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360000014683-Chroma-Key-Shader-Material)
+* [Change the Sky with Sky Segmentation](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360018325303-Change-the-Sky-with-Sky-Segmentation-)
 
-[First Person Attached Object (smooth follow)](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360000015666-First-Person-Attached-Object)
-
-[Simulating World Particles](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360018308143/comments/360000808123)
-
-[Procedural Mesh Drawing](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020420083-Creating-a-Procedural-Mesh-Using-Mesh-Builder)
-
-[Animating Blendshape using Facial movements](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042675692-BlendShape-Example)
-
-[Reveal under touches](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042741091-How-can-I-make-an-object-appears-only-in-swiped-area-?page=1#community_comment_360005279411)
-
-[Animated UV Scrolling](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020392043-Animated-UV-Scrolling)
-
-["From Camera" Reflections](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115011858426--From-Camera-Reflections)
-
-[Slider Selector](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360050394251/comments/360008654031)
-
-[Optimizing 2D Textures Best Practices](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/115020415343-Optimizing-2D-Textures-Best-Practices)
-
-[Daz3D Export Guide](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042188791-Daz3D-Export-Guide)
-
-[Chroma Key Shader / Material](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360000014683-Chroma-Key-Shader-Material)
-
-[Change the Sky with Sky Segmentation](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360018325303-Change-the-Sky-with-Sky-Segmentation-)
-
-  
 Additionally, the [Lens Studio community](https://community.snap.com/snapar/categories/general) is a great resource for users. The community features a variety of tips and tutorials shared by other users, as well as access to additional resources such as video tutorials. This community feature is a great way to connect with other designers and get inspiration for your own lenses.
 
-  
-[Basics with Ben](https://www.youtube.com/playlist?list=PL0rDQ-c-_kxeOydIzcYAez1nFs0v7zBoa)
-
-[Show UI only while Snapping](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360060029351--Tutorial-How-to-Create-Different-Capture-and-Live-Target)
-
-[Animate using a drawn path](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360057819851-Animation-Tutorial)
-
-[How to Create Different Capture and Live Target](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360060029351--Tutorial-How-to-Create-Different-Capture-and-Live-Target)
-
-[Intro to Material Editor](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360060397011--Example-Project-Intro-to-Material-Editor)
-
-[Several different video tutorials](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042584931-Lens-Studio-Tutorials-)
+* [Basics with Ben](https://www.youtube.com/playlist?list=PL0rDQ-c-_kxeOydIzcYAez1nFs0v7zBoa)
+* [Show UI only while Snapping](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360060029351--Tutorial-How-to-Create-Different-Capture-and-Live-Target)
+* [Animate using a drawn path](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360057819851-Animation-Tutorial)
+* [How to Create Different Capture and Live Target](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360060029351--Tutorial-How-to-Create-Different-Capture-and-Live-Target)
+* [Intro to Material Editor](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360060397011--Example-Project-Intro-to-Material-Editor)
+* [Several different video tutorials](https://support.lensstudio.snapchat.com/hc/en-us/community/posts/360042584931-Lens-Studio-Tutorials-)
