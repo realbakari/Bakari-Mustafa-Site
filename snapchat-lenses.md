@@ -8,15 +8,23 @@ image: "/uploads/snapar-800x439.png"
 comments: false
 
 ---
-I have been using Lens Studio, an augmented reality development software, to create content for Snapchat. My work with Augmented Reality using Lens Studio includes Lightroom Classic presets, facial tracking, facial expressions & More.
+As a Snapchat lens creator, I have been utilizing Lens Studio, an augmented reality development software, to create engaging and interactive content for the platform. My experience with the software includes utilizing Lightroom Classic presets, implementing facial tracking and facial expressions, and more.
 
-**😄  FACE LENS:** Face Lenses can turn you and your friends into something new. Some can change your voice, and even feature games you can play!
+My portfolio showcases a diverse range of lenses that I have created, spanning a variety of styles and themes. From fun and playful lenses that are perfect for capturing the attention of a younger audience, to more sophisticated and interactive lenses that are designed to engage users in new and exciting ways.
 
-**🌿  WORLD LENS**: World Lenses let you reimagine the world around you, and even bring different characters to life!
+Some of the lenses I have created include:
 
-**📱 STICKER PACK:** Stickers or animated GIFS that you and your friends can apply to your photos, videos, and stories.
+😄 FACE LENS: These lenses can turn you and your friends into something new, with the ability to change your voice and even feature games you can play. I have experience in creating face lenses that can turn you into an animal, a cartoon character, or even a celebrity.
+
+🌿 WORLD LENS: These lenses allow you to reimagine the world around you by bringing different characters and elements to life. I have experience in creating world lenses that can add virtual elements to the real world like adding a virtual pet to your room, virtual fireworks in the sky, and more.
+
+📱 STICKER PACK: Animated GIFS and stickers that can be applied to photos, videos, and stories for added fun and creativity. I have experience in creating stickers that can be used for different occasions like birthdays, festivals, and more.
+
+I am always looking for new ways to push the boundaries of augmented reality and Snapchat lenses, and I am confident that my skills and experience make me a valuable asset to any project. I am open to new opportunities and ready to take on new challenges to create the best lenses for Snapchat.
 
 * [**View Snapchat Creator Profile**](https://lensstudio.snapchat.com/creator/hRA20nRLvMFgIhhbvR0gmA "Snapchat Creator Profile")
+
+
 * [**Add Me On Snapchat**](https://snapchat.com/add/bakarimustafa "Add Me on Snap")
 
 ![Megamind Snapcode](https://snapcodes.storage.googleapis.com/png/c5f6e340-9885-3147-adc5-264af61fc127_320_229d105f-74b1-4d43-aff6-a8c3ce2a9ee7.png)
