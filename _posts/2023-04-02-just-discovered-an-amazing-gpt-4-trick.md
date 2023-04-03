@@ -30,7 +30,7 @@ How does it work? It's simple. Just follow these steps:
     
       +------------------------+
 
-2\. Let GPT-4 create an accurate 1:1 implementation. To do this, you need to use @Replit, a free online coding platform that supports GPT-4 integration. Create a new HTML/CSS/JS project and paste your ASCII art into the HTML file. Then, click the GPT-4 button in the top right corner and wait for a few seconds. GPT-4 will analyze your ASCII art and generate the corresponding code for you. For example, this is what GPT-4 generated for my login form:
+2\. Let GPT-4 create an accurate 1:1 implementation. To do this, you need to use [Create a New Pen (codepen.io)](https://codepen.io/pen/), a free online coding platform. Create a new HTML/CSS/JS project and paste your ASCII art into the HTML file. Then, click the GPT-4 button in the top right corner and wait for a few seconds. GPT-4 will analyze your ASCII art and generate the corresponding code for you. For example, this is what GPT-4 generated for my login form:
 
 HTML code for the Login and Registration Form:
 
