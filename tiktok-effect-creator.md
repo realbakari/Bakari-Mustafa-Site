@@ -11,12 +11,21 @@ comments: false
 ---
 ![](/uploads/effect-house-tiktok-01.jpeg)
 
-As a professional augmented reality developer, I specialize in creating stunning and engaging experiences using [Effect House](https://effecthouse.tiktok.com/), a powerful AR development software. My expertise includes creating branded selfie effects, interactive AR game effects, and even the latest randomizer AR effects that are sure to amplify engagement for your next social media marketing campaign.
+I'm a top Effect House creator and top 1% of effect creators, with over 3+ billion views. I can help you reach a younger audience with Effect House Branded Effects. My AR effects have been featured on the TikTok For You page, and I'm confident that I can create the perfect AR experience for your brand.
 
-TikTok, with over 600 million monthly active users, is one of the most popular social networks in the world, and it is the most downloaded app globally. With a significant user base of individuals between the ages of 16 and 24, TikTok is a powerful platform for brands to reach and engage with a younger audience.
+I'm passionate about creating engaging and immersive AR experiences that people can enjoy. I'm always looking for new ways to push the boundaries of what's possible with AR, and I'm excited to see what the future holds for this technology.
 
-The aim of the TikTok app is to create short videos, and the platform encourages creators to think outside the box, providing a unique opportunity for brands to create content that reflects their image and resonates with their target audience.
+Here are some of my skills:
+- 2D graphics and design
+- Audio production
+- AR development
+- Camera and tracking
+- Face effects
+- Generative effects
+- Post-processing
+- Texture and material
+- Tracking and detection
 
-I am well-versed in the latest trends and techniques for creating augmented reality effects on TikTok, and I am ready to help you take your brand's presence on the platform to the next level. If you're interested in learning more about TikTok effects or have a project for your brand, please don't hesitate to [get in touch](https://bakarimustafa.com/contact).
+If you're interested in learning more about TikTok effects or have a project for your brand, please don't hesitate to [get in touch](https://bakarimustafa.com/contact). I'd be happy to discuss your needs and create a custom AR experience that meets your goals.
 
 [View TikTok Creator Profile](https://www.tiktok.com/@realbakari)
