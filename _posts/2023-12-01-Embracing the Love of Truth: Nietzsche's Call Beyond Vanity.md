@@ -1,6 +1,6 @@
 ---
 title: "Embracing the Love of Truth: Nietzsche's Call Beyond Vanity"
-date: 2023-12-01T11:53:00+07:00
+date: 2023-12-01 12:00:00 +0000
 tags:
 - Philosophy
 - Truth
