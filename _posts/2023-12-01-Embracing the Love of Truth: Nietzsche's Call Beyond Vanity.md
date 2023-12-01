@@ -5,7 +5,7 @@ tags:
 - Philosophy
 - Truth
 - Nietzsche
-description: Exploring Nietzsche's aphorism on the love of truth and the challenge to transcend personal vanity in the pursuit of knowledge.
+description: "Exploring Nietzsche's aphorism on the love of truth and the challenge to transcend personal vanity in the pursuit of knowledge."
 image: "https://voegelinview.com/wp-content/uploads/2020/10/2018_39_nietzsche-e1603820368956.jpg"
 ---
 
