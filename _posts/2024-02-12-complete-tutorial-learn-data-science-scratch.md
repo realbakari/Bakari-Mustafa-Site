@@ -1,6 +1,16 @@
+---
+title: "Tutorial to learn Data Science in R from Scratch"
+date: 2024-02-12 12:00:00 +0000
+tags:
+- R programming
+- Data Science
+description: "List of useful bookmarks when learning to code with data or coding for research."
+image: "https://www.analyticsvidhya.com/wp-content/uploads/2016/02/rstudio.jpg"
+---
+
 ## Tutorial to learn Data Science in R from Scratch
 
-Here’s a list of useful bookmarks when learning to code with data, or coding for research. You can either check out links individually, or if you want the whole list imported as a bookmark folder in your internet browser, you can download The bookmark file here by rightclick ‘save link as’.
+Here’s a list of useful bookmarks when learning to code with data or coding for research. You can either check out links individually or if you want the whole list imported as a bookmark folder in your internet browser, you can download The bookmark file here by right click ‘save link as’.
 
 	
 	
