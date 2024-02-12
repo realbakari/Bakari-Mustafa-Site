@@ -1,9 +1,9 @@
 ---
 title: "Tutorial to learn Data Science in R from Scratch"
-date: 2024-02-12 12:00:00 +0000
+date: '2024-02-12 12:00:00 +0000'
 tags:
-- R programming
-- Data Science
+  - R programming
+  - Data Science
 description: >-
 	List of useful bookmarks when learning to code with data or coding for research.
 image: >-
