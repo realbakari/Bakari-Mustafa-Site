@@ -6,4 +6,3 @@ _drafts
 klise-*.gem
 .env
 .env.local
-assets/js/supabase-config.js
