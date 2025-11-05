@@ -129,7 +129,7 @@ I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit
 
 ## 📍 Where I'm Based
 
-Currently based in **Melbourne, Victoria, Australia**, working both in-person and remotely to support African-Australian communities across the state.
+Currently based in **Brisbane, Queensland, Australia**, working remotely and traveling to support African-Australian communities, particularly through my work with Networking African-Australians in Victoria.
 
 ---
 
