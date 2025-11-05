@@ -6,9 +6,12 @@
   position: relative;
   margin-right: auto;
   margin-left: auto;
-  border-bottom: 1px solid $light;
-  padding: $spacing-full - 15px $spacing-full;
+  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+  padding: 1.25rem $spacing-full;
   @extend %clearfix;
+  backdrop-filter: blur(10px);
+  background-color: rgba(255, 255, 255, 0.8);
+  transition: all 0.3s ease;
 }
 
 // Navigation
@@ -76,22 +79,28 @@
     color: $black;
     line-height: $base-line-height + 0.4;
     text-decoration: none;
-    padding: 5px 8px;
-    opacity: 0.7;
+    padding: 0.5rem 0.75rem;
+    opacity: 0.75;
     letter-spacing: 0.3px;
+    border-radius: 6px;
+    transition: all 0.3s ease;
+    font-weight: 500;
 
     &:hover {
       opacity: 1;
+      background-color: rgba(0, 63, 255, 0.08);
+      color: $text-link-blue;
     }
 
     &:not(:last-child) {
-      margin-right: 5px;
+      margin-right: 0.25rem;
     }
 
     &.rss {
       position: relative;
       bottom: -3px;
       outline: none;
+      padding: 0.5rem;
     }
 
     @include media-query($on-mobile) {
@@ -102,6 +111,8 @@
   .menu-link.active {
     opacity: 1;
     font-weight: 600;
+    background-color: rgba(0, 63, 255, 0.1);
+    color: $text-link-blue;
   }
 
   @include media-query($on-mobile) {
@@ -181,17 +192,18 @@
 
 // Author
 .author {
-  margin-top: 6.3rem;
-  margin-bottom: 7.2rem;
+  margin-top: 5rem;
+  margin-bottom: 4rem;
   text-align: center;
 
   @include media-query($on-mobile) {
     margin-bottom: 3em;
+    margin-top: 4rem;
   }
 
   .author-avatar {
-    width: 70px;
-    height: 70px;
+    width: 90px;
+    height: 90px;
     border-radius: 100%;
     user-select: none;
     background-color: $black;
@@ -200,30 +212,240 @@
     -webkit-animation: 0.5s ease-in forwards fadein;
     animation: 0.5s ease-in forwards fadein;
     opacity: 1;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    transition: transform 0.3s ease, box-shadow 0.3s ease;
+
+    &:hover {
+      transform: scale(1.05);
+      box-shadow: 0 6px 12px rgba(0, 0, 0, 0.15);
+    }
+
+    @include media-query($on-mobile) {
+      width: 80px;
+      height: 80px;
+    }
   }
 
   .author-name {
-    font-size: 1.7em;
-    margin-bottom: 2px;
+    font-size: 2em;
+    margin-bottom: 0.5rem;
+    margin-top: 1.5rem;
+    font-weight: 700;
+    letter-spacing: -0.02em;
+
+    @include media-query($on-mobile) {
+      font-size: 1.8em;
+    }
   }
 
   .author-bio {
     margin: 0 auto;
-    opacity: 0.9;
-    max-width: 393px;
-    line-height: 1.688;
+    opacity: 0.85;
+    max-width: 480px;
+    line-height: 1.7;
+    font-size: 1.1em;
+    margin-bottom: 1.5rem;
+
+    @include media-query($on-mobile) {
+      font-size: 1em;
+    }
+  }
+
+  .author-social {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    margin-top: 1.5rem;
+
+    .social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 40px;
+      height: 40px;
+      border-radius: 50%;
+      background-color: rgba(128, 128, 128, 0.1);
+      color: $black;
+      transition: all 0.3s ease;
+      text-decoration: none;
+
+      svg {
+        transition: transform 0.3s ease;
+      }
+
+      &:hover {
+        background-color: $text-link-blue;
+        color: $white;
+        transform: translateY(-2px);
+        box-shadow: 0 4px 8px rgba(0, 63, 255, 0.2);
+
+        svg {
+          transform: scale(1.1);
+        }
+      }
+
+      &:active {
+        transform: translateY(0);
+      }
+    }
   }
 }
 
 // Content
 .posts-item-note {
-  font-size: $base-font-size;
+  font-size: 1.5em;
   font-weight: 700;
-  margin-bottom: 5px;
+  margin-bottom: 2rem;
   color: $black;
+  letter-spacing: -0.02em;
+
+  @include media-query($on-mobile) {
+    font-size: 1.3em;
+    margin-bottom: 1.5rem;
+  }
 }
 
-// List of posts
+// Posts list container
+.posts-list {
+  display: grid;
+  gap: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+// Post cards
+.post-card {
+  background: $white;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+  border-radius: 8px;
+  padding: 1.5rem;
+  transition: all 0.3s ease;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.05);
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+    border-color: rgba(0, 63, 255, 0.3);
+  }
+
+  @include media-query($on-mobile) {
+    padding: 1.25rem;
+  }
+
+  .post-card-content {
+    display: flex;
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+
+  .post-card-meta {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    flex-wrap: wrap;
+    gap: 0.5rem;
+    margin-bottom: 0.25rem;
+  }
+
+  .post-item-date {
+    font-size: 0.875rem;
+    color: $gray;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .post-card-tags {
+    display: flex;
+    gap: 0.5rem;
+    flex-wrap: wrap;
+  }
+
+  .post-tag {
+    font-size: 0.75rem;
+    padding: 0.25rem 0.625rem;
+    background-color: rgba(0, 63, 255, 0.08);
+    color: $text-link-blue;
+    border-radius: 4px;
+    font-weight: 600;
+    letter-spacing: 0.02em;
+  }
+
+  .post-item-title {
+    margin: 0;
+    font-size: 1.25rem;
+    font-weight: 700;
+    line-height: 1.4;
+    letter-spacing: -0.01em;
+
+    a {
+      color: $black;
+      text-decoration: none;
+      transition: color 0.3s ease;
+
+      &:hover {
+        color: $text-link-blue;
+      }
+    }
+
+    @include media-query($on-mobile) {
+      font-size: 1.125rem;
+    }
+  }
+
+  .post-card-description {
+    margin: 0;
+    color: $text-base-color;
+    line-height: 1.6;
+    font-size: 0.95rem;
+    opacity: 0.9;
+  }
+
+  .read-more {
+    color: $text-link-blue;
+    font-weight: 600;
+    font-size: 0.9rem;
+    text-decoration: none;
+    display: inline-flex;
+    align-items: center;
+    transition: all 0.3s ease;
+
+    &:hover {
+      color: $text-link-blue-active;
+      transform: translateX(4px);
+    }
+  }
+}
+
+// View all link
+.view-all {
+  text-align: center;
+  margin-top: 2.5rem;
+  margin-bottom: 2rem;
+
+  .view-all-link {
+    display: inline-block;
+    padding: 0.75rem 1.5rem;
+    background-color: $text-link-blue;
+    color: $white;
+    text-decoration: none;
+    border-radius: 6px;
+    font-weight: 600;
+    transition: all 0.3s ease;
+    box-shadow: 0 2px 4px rgba(0, 63, 255, 0.2);
+
+    &:hover {
+      background-color: $text-link-blue-active;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 8px rgba(0, 63, 255, 0.3);
+    }
+
+    &:active {
+      transform: translateY(0);
+    }
+  }
+}
+
+// Legacy post item styles (for archive page)
 .post-item {
   display: flex;
   padding-top: 5px;
@@ -266,38 +488,51 @@
 
 // Footer
 .footer {
-  margin-top: 8em;
+  margin-top: 6em;
   margin-bottom: 2em;
+  padding-top: 2.5rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.15);
   text-align: center;
 
   @include media-query($on-mobile) {
-    margin-top: 3em;
+    margin-top: 4em;
+    padding-top: 2rem;
   }
+
   span.footer_item {
     color: $black;
-    opacity: 0.8;
-    font-weight: $bold-weight;
+    opacity: 0.75;
+    font-weight: 500;
     font-size: $small-font-size;
   }
+
   a.footer_item {
     color: $black;
-    opacity: 0.8;
+    opacity: 0.7;
     text-decoration: none;
+    transition: all 0.3s ease;
+    padding: 0.25rem 0.5rem;
+    border-radius: 4px;
+    display: inline-block;
 
     &:not(:last-child) {
-      margin-right: 10px;
-      &:hover {
-        opacity: 1;
-      }
+      margin-right: 0.5rem;
+    }
+
+    &:hover {
+      opacity: 1;
+      color: $text-link-blue;
+      background-color: rgba(0, 63, 255, 0.05);
     }
   }
 
   .footer_copyright {
-    font-size: $small-font-size - 1;
-    margin-top: 3px;
+    font-size: $small-font-size;
+    margin-top: 1.5rem;
+    padding-top: 1rem;
     display: block;
     color: $gray;
-    opacity: 0.8;
+    opacity: 0.7;
   }
 }
 

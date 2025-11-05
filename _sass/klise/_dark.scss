@@ -122,7 +122,9 @@ body[data-theme="dark"] {
 
   // Navbar
   .navbar {
-    border-color: $dark-light;
+    border-color: rgba(255, 255, 255, 0.1);
+    background-color: rgba(19, 20, 24, 0.8);
+
     .menu {
       a#mode {
         .mode-sunny {
@@ -135,7 +137,18 @@ body[data-theme="dark"] {
 
       .menu-link {
         color: $dark-white;
+
+        &:hover {
+          background-color: rgba(255, 82, 119, 0.15);
+          color: $dark-text-link-blue;
+        }
       }
+
+      .menu-link.active {
+        background-color: rgba(255, 82, 119, 0.2);
+        color: $dark-text-link-blue;
+      }
+
       @include media-query($on-mobile) {
         background-color: $dark-black;
         border-color: $dark-light;
@@ -153,7 +166,73 @@ body[data-theme="dark"] {
     }
   }
 
-  // Post Item
+  // Author Social
+  .author-social {
+    .social-link {
+      background-color: rgba(128, 128, 128, 0.15);
+      color: $dark-white;
+
+      &:hover {
+        background-color: $dark-text-link-blue;
+        color: $dark-white;
+        box-shadow: 0 4px 8px rgba(255, 82, 119, 0.3);
+      }
+    }
+  }
+
+  // Post Cards
+  .post-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(255, 82, 119, 0.4);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+
+    .post-item-date {
+      color: $dark-gray;
+    }
+
+    .post-tag {
+      background-color: rgba(255, 82, 119, 0.15);
+      color: $dark-text-link-blue;
+    }
+
+    .post-item-title a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+
+    .post-card-description {
+      color: $dark-text-base-color;
+    }
+
+    .read-more {
+      color: $dark-text-link-blue;
+
+      &:hover {
+        color: $dark-text-link-blue-active;
+      }
+    }
+  }
+
+  // View all link
+  .view-all-link {
+    background-color: $dark-text-link-blue;
+    color: $dark-white;
+    box-shadow: 0 2px 4px rgba(255, 82, 119, 0.3);
+
+    &:hover {
+      background-color: $dark-text-link-blue-active;
+      box-shadow: 0 4px 8px rgba(255, 82, 119, 0.4);
+    }
+  }
+
+  // Post Item (Legacy - for archive page)
   .post-item {
     &:not(:first-child) {
       border-color: $dark-light;
@@ -172,6 +251,11 @@ body[data-theme="dark"] {
         }
       }
     }
+  }
+
+  // Posts item note
+  .posts-item-note {
+    color: $dark-white;
   }
 
   // Post Navigation
@@ -207,15 +291,24 @@ body[data-theme="dark"] {
 
   // Footer
   .footer {
+    border-color: rgba(255, 255, 255, 0.1);
+
     span.footer_item {
       color: $dark-white;
     }
-    a.footer_item:not(:last-child) {
+
+    a.footer_item {
       color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+        background-color: rgba(255, 82, 119, 0.1);
+      }
     }
+
     .footer_copyright {
       color: $dark-gray;
-      opacity: 1;
+      opacity: 0.8;
     }
   }
 
