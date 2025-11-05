@@ -1023,7 +1023,7 @@
 }
 
 .footer-container {
-  max-width: $wide-size;
+  max-width: 1200px;
   margin: 0 auto;
   padding: 0 2rem;
 
@@ -1034,9 +1034,13 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
-  gap: 3rem;
+  grid-template-columns: 1.5fr 1fr 1fr 1fr;
+  gap: 2.5rem;
   padding-bottom: 2rem;
+
+  @include media-query($on-desktop) {
+    gap: 2rem;
+  }
 
   @include media-query($on-tablet) {
     grid-template-columns: repeat(2, 1fr);
@@ -1055,6 +1059,10 @@
     font-weight: 600;
     margin-bottom: 1rem;
     color: $black;
+  }
+
+  &:first-child {
+    max-width: 350px;
   }
 }
 
@@ -1076,9 +1084,10 @@
 
 .footer-description {
   color: rgba(0, 0, 0, 0.7);
-  line-height: 1.6;
+  line-height: 1.7;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
+  max-width: 320px;
 }
 
 .footer-social {
