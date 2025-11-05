@@ -16,7 +16,6 @@
     const filterBtns = document.querySelectorAll('.search-filter-btn');
     const hintBtns = document.querySelectorAll('.search-hint-btn');
 
-    let allResults = [];
     let currentFilter = 'all';
 
     // Initialize SimpleJekyllSearch
@@ -41,12 +40,7 @@
 
         return value;
       },
-      noResultsText: '',
-      success: function(data) {
-        // Store all searchable content
-        allResults = data;
-        console.log('Search initialized with ' + data.length + ' items');
-      }
+      noResultsText: ''
     });
 
     // Clear search button
