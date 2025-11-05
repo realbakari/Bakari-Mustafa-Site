@@ -1084,7 +1084,7 @@ body[data-theme="dark"] {
 
   // Enhanced Posts Page Dark Mode
   .posts-page-header {
-    border-bottom-color: rgba(0, 63, 255, 0.2);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
 
   .posts-header-content {
@@ -1098,16 +1098,16 @@ body[data-theme="dark"] {
 
     .posts-stats {
       .stat-item {
-        background: rgba(0, 63, 255, 0.1);
-        border-color: rgba(0, 63, 255, 0.25);
-        color: $dark-white;
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
 
         svg {
-          color: $dark-text-link-blue;
+          color: rgba(255, 255, 255, 0.4);
         }
 
         .stat-value {
-          color: $dark-text-link-blue;
+          color: $dark-white;
         }
       }
     }
