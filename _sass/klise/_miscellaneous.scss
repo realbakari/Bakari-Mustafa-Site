@@ -482,3 +482,324 @@
     max-width: 200px;
   }
 }
+
+// Modern Card Layouts
+.card-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+  gap: 2rem;
+  margin: 3rem 0;
+
+  @include media-query($on-mobile) {
+    grid-template-columns: 1fr;
+    gap: 1.5rem;
+    margin: 2rem 0;
+  }
+}
+
+.book-card,
+.project-card {
+  background: $white;
+  border: 2px solid rgba(128, 128, 128, 0.15);
+  border-radius: 12px;
+  overflow: hidden;
+  transition: all 0.3s ease;
+  height: 100%;
+  display: flex;
+  flex-direction: column;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 63, 255, 0.15);
+    border-color: rgba(0, 63, 255, 0.3);
+  }
+
+  .card-header {
+    padding: 1.5rem;
+    border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+
+    h3 {
+      margin: 0 0 0.5rem 0;
+      font-size: 1.25rem;
+      color: $black;
+      line-height: 1.4;
+
+      a {
+        color: $black;
+        text-decoration: none;
+        transition: color 0.2s ease;
+
+        &:hover {
+          color: #003FFF;
+        }
+      }
+    }
+
+    .card-meta {
+      display: flex;
+      align-items: center;
+      gap: 0.75rem;
+      font-size: 0.85rem;
+      color: rgba(0, 0, 0, 0.6);
+      flex-wrap: wrap;
+
+      .badge {
+        display: inline-block;
+        padding: 0.25rem 0.75rem;
+        background: rgba(0, 63, 255, 0.1);
+        color: #003FFF;
+        border-radius: 4px;
+        font-weight: 500;
+        font-size: 0.8rem;
+      }
+    }
+  }
+
+  .card-body {
+    padding: 1.5rem;
+    flex-grow: 1;
+
+    p {
+      margin: 0 0 1rem 0;
+      color: rgba(0, 0, 0, 0.7);
+      line-height: 1.6;
+      font-size: 0.95rem;
+    }
+
+    ul {
+      margin: 0;
+      padding-left: 1.25rem;
+
+      li {
+        margin-bottom: 0.5rem;
+        color: rgba(0, 0, 0, 0.7);
+        line-height: 1.5;
+      }
+    }
+  }
+
+  .card-footer {
+    padding: 1.25rem 1.5rem;
+    border-top: 1px solid rgba(128, 128, 128, 0.1);
+    background: rgba(128, 128, 128, 0.03);
+
+    a {
+      color: #003FFF;
+      text-decoration: none;
+      font-weight: 500;
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      transition: gap 0.2s ease;
+
+      &:hover {
+        gap: 0.75rem;
+      }
+
+      &::after {
+        content: '→';
+        font-size: 1.2em;
+      }
+    }
+  }
+}
+
+// Book Summary Specific Styles
+.book-summary-list {
+  .year-section {
+    margin-bottom: 3rem;
+
+    h2 {
+      font-size: 2rem;
+      margin-bottom: 2rem;
+      color: $black;
+      border-bottom: 3px solid #003FFF;
+      padding-bottom: 0.75rem;
+    }
+  }
+}
+
+.book-list {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  gap: 1.5rem;
+  list-style: none;
+  padding: 0;
+  margin: 2rem 0;
+
+  @include media-query($on-mobile) {
+    grid-template-columns: 1fr;
+  }
+
+  li {
+    background: $white;
+    border: 2px solid rgba(128, 128, 128, 0.15);
+    border-radius: 8px;
+    padding: 1.5rem;
+    transition: all 0.3s ease;
+
+    &:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.12);
+      border-color: rgba(0, 63, 255, 0.3);
+    }
+
+    a {
+      color: $black;
+      text-decoration: none;
+      font-weight: 500;
+      display: block;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #003FFF;
+      }
+    }
+  }
+}
+
+// Category Section Styles
+.category-section {
+  margin-bottom: 3rem;
+
+  h3 {
+    font-size: 1.5rem;
+    color: $black;
+    margin-bottom: 1.5rem;
+    display: flex;
+    align-items: center;
+    gap: 0.5rem;
+    border-left: 4px solid #003FFF;
+    padding-left: 1rem;
+  }
+
+  .book-links {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+    gap: 1rem;
+
+    @include media-query($on-mobile) {
+      grid-template-columns: 1fr;
+    }
+
+    a {
+      display: block;
+      padding: 1.25rem;
+      background: rgba(0, 63, 255, 0.03);
+      border: 2px solid rgba(0, 63, 255, 0.15);
+      border-radius: 8px;
+      color: $black;
+      text-decoration: none;
+      transition: all 0.3s ease;
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.08);
+        border-color: rgba(0, 63, 255, 0.3);
+        transform: translateX(4px);
+        box-shadow: -4px 0 0 0 #003FFF;
+      }
+
+      strong {
+        display: block;
+        color: $black;
+        margin-bottom: 0.25rem;
+        font-size: 1.05rem;
+      }
+
+      span {
+        display: block;
+        color: rgba(0, 0, 0, 0.6);
+        font-size: 0.9rem;
+      }
+    }
+  }
+}
+
+// Projects Grid
+.projects-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(320px, 1fr));
+  gap: 2rem;
+  margin: 2rem 0;
+
+  @include media-query($on-mobile) {
+    grid-template-columns: 1fr;
+  }
+}
+
+.project-item {
+  background: $white;
+  border: 2px solid rgba(128, 128, 128, 0.15);
+  border-radius: 12px;
+  padding: 2rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    transform: translateY(-4px);
+    box-shadow: 0 8px 24px rgba(0, 63, 255, 0.15);
+    border-color: rgba(0, 63, 255, 0.3);
+  }
+
+  .project-icon {
+    font-size: 2.5rem;
+    margin-bottom: 1rem;
+    display: block;
+  }
+
+  h4 {
+    margin: 0 0 1rem 0;
+    font-size: 1.4rem;
+
+    a {
+      color: $black;
+      text-decoration: none;
+      transition: color 0.2s ease;
+
+      &:hover {
+        color: #003FFF;
+      }
+    }
+  }
+
+  .project-meta {
+    font-size: 0.85rem;
+    color: rgba(0, 0, 0, 0.5);
+    margin-bottom: 1rem;
+    font-style: italic;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.7);
+    line-height: 1.6;
+  }
+}
+
+// Page Header Enhancement
+.page-header {
+  text-align: center;
+  margin-bottom: 3rem;
+  padding: 2rem 0;
+  border-bottom: 2px solid rgba(128, 128, 128, 0.1);
+
+  h1 {
+    margin-bottom: 1rem;
+  }
+
+  .page-subtitle {
+    font-size: 1.2rem;
+    color: rgba(0, 0, 0, 0.6);
+    max-width: 700px;
+    margin: 0 auto;
+    line-height: 1.6;
+  }
+
+  blockquote {
+    border-left: 4px solid #003FFF;
+    padding-left: 1.5rem;
+    margin: 1.5rem auto;
+    max-width: 600px;
+    font-style: italic;
+    color: rgba(0, 0, 0, 0.7);
+  }
+}
