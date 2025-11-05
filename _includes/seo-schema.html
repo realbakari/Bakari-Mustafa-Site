@@ -1,0 +1,137 @@
+{% if page.layout == "post" %}
+<script type="application/ld+json">
+{
+  "@context": "https://schema.org",
+  "@graph": [
+    {
+      "@type": "Article",
+      "@id": "{{ page.url | absolute_url }}#article",
+      "isPartOf": {
+        "@id": "{{ page.url | absolute_url }}"
+      },
+      "author": {
+        "@id": "{{ site.url }}/#/schema/person/{{ site.author.username }}"
+      },
+      "headline": "{{ page.title | escape }}",
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.modified | default: page.date | date_to_xmlschema }}",
+      {% if page.image %}
+      "image": {
+        "@type": "ImageObject",
+        "@id": "{{ page.url | absolute_url }}#primaryimage",
+        "url": "{{ page.image | absolute_url }}",
+        "contentUrl": "{{ page.image | absolute_url }}"
+      },
+      {% else %}
+      "image": {
+        "@type": "ImageObject",
+        "@id": "{{ page.url | absolute_url }}#primaryimage",
+        "url": "{{ site.image | absolute_url }}",
+        "contentUrl": "{{ site.image | absolute_url }}"
+      },
+      {% endif %}
+      "mainEntityOfPage": {
+        "@type": "WebPage",
+        "@id": "{{ page.url | absolute_url }}"
+      },
+      "wordCount": {{ content | number_of_words }},
+      {% assign words = content | number_of_words %}
+      {% if words < 360 %}
+      "timeRequired": "PT1M",
+      {% else %}
+      "timeRequired": "PT{{ words | divided_by:180 }}M",
+      {% endif %}
+      "description": "{{ page.description | default: page.excerpt | strip_html | normalize_whitespace | truncate: 200 | escape }}",
+      "keywords": "{% if page.tags %}{% for tag in page.tags %}{{ tag }}{% unless forloop.last %}, {% endunless %}{% endfor %}{% endif %}",
+      "articleSection": "{% if page.tags %}{{ page.tags | first }}{% else %}Blog{% endif %}",
+      "inLanguage": "{{ site.lang | default: 'en-US' }}",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": ["{{ page.url | absolute_url }}"]
+        }
+      ]
+    },
+    {
+      "@type": "WebPage",
+      "@id": "{{ page.url | absolute_url }}",
+      "url": "{{ page.url | absolute_url }}",
+      "name": "{{ page.title | escape }}",
+      "isPartOf": {
+        "@id": "{{ site.url }}/#website"
+      },
+      "datePublished": "{{ page.date | date_to_xmlschema }}",
+      "dateModified": "{{ page.modified | default: page.date | date_to_xmlschema }}",
+      "breadcrumb": {
+        "@id": "{{ page.url | absolute_url }}#breadcrumb"
+      },
+      "inLanguage": "{{ site.lang | default: 'en-US' }}",
+      "potentialAction": [
+        {
+          "@type": "ReadAction",
+          "target": ["{{ page.url | absolute_url }}"]
+        }
+      ]
+    },
+    {
+      "@type": "BreadcrumbList",
+      "@id": "{{ page.url | absolute_url }}#breadcrumb",
+      "itemListElement": [
+        {
+          "@type": "ListItem",
+          "position": 1,
+          "name": "Home",
+          "item": "{{ site.url }}/"
+        },
+        {
+          "@type": "ListItem",
+          "position": 2,
+          "name": "{{ page.title | escape }}"
+        }
+      ]
+    },
+    {
+      "@type": "WebSite",
+      "@id": "{{ site.url }}/#website",
+      "url": "{{ site.url }}/",
+      "name": "{{ site.title }}",
+      "description": "{{ site.description | strip_html | normalize_whitespace | escape }}",
+      "publisher": {
+        "@id": "{{ site.url }}/#/schema/person/{{ site.author.username }}"
+      },
+      "potentialAction": [
+        {
+          "@type": "SearchAction",
+          "target": {
+            "@type": "EntryPoint",
+            "urlTemplate": "{{ site.url }}/posts/?q={search_term_string}"
+          },
+          "query-input": "required name=search_term_string"
+        }
+      ],
+      "inLanguage": "{{ site.lang | default: 'en-US' }}"
+    },
+    {
+      "@type": ["Person", "Organization"],
+      "@id": "{{ site.url }}/#/schema/person/{{ site.author.username }}",
+      "name": "{{ site.author.name }}",
+      "image": {
+        "@type": "ImageObject",
+        "@id": "{{ site.url }}/#/schema/person/image/",
+        "url": "{{ site.author.avatar | absolute_url }}",
+        "contentUrl": "{{ site.author.avatar | absolute_url }}",
+        "caption": "{{ site.author.name }}"
+      },
+      "description": "{{ site.author.bio | strip_html | normalize_whitespace | escape }}",
+      "sameAs": [
+        "{{ site.url }}/",
+        "https://twitter.com/{{ site.author.twitter }}",
+        "https://github.com/{{ site.author.github }}",
+        "https://facebook.com/{{ site.author.facebook }}"
+      ],
+      "url": "{{ site.url }}/about/"
+    }
+  ]
+}
+</script>
+{% endif %}
