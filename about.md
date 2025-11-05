@@ -26,9 +26,9 @@ I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a dynamic co
 
 I've also created community-focused initiatives including:
 
-- **Dzaleka Connect** - An online portal connecting Dzaleka refugees and the diaspora, empowering current and former residents to drive social change in their community
-- **Hungry Innovators** - A holding company fostering innovation and digital creativity through brands like Push Byte and Dzaleka Online
-- **Transition Phase Podcast** - Interviewing entrepreneurs and creatives in Brisbane, sharing stories and insights to help others take control of their lives
+- **Dzaleka Connect** - An online portal and directory connecting current and former Dzaleka refugee camp residents and supporters, empowering them to drive social change and showcasing the talents of artists, entrepreneurs, and creators in the camp
+- **Hungry Innovators** - A non-profit STEM education organization founded in 2016, building a thriving network of peers and innovators dedicated to inspiring the next generation
+- **Transition Phase Podcast** - Interviewed entrepreneurs and creatives in Brisbane from 2018 to September 2019, sharing stories and insights to help others take control of their lives
 
 ---
 

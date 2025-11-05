@@ -26,14 +26,14 @@ Today, Bakari serves on the leadership team at [Networking African-Australians](
 
 He is the founder of [Mentors Outreach](https://mentorsoutreach.org), a dynamic community platform connecting young professionals and students with mentors, investors, and founders. Through this platform, Bakari has helped build a thriving network of peers and innovators dedicated to inspiring the next generation.
 
-Bakari has also created community-focused initiatives including **Dzaleka Connect** (an online portal connecting Dzaleka refugees and the diaspora), **Hungry Innovators** (a holding company fostering innovation through brands like Push Byte and Dzaleka Online), and the **Transition Phase Podcast** (interviewing entrepreneurs and creatives in Brisbane).
+Bakari has also created community-focused initiatives including **Dzaleka Connect** (an online portal and directory connecting current and former Dzaleka refugee camp residents and supporters to bring about social change), **Hungry Innovators** (a non-profit STEM education organization founded in 2016, building a thriving network of peers and innovators dedicated to inspiring the next generation), and the **Transition Phase Podcast** (interviewed entrepreneurs and creatives in Brisbane from 2018-2019).
 
 ---
 
 ## Biography Variations
 
 ### 100-Word Bio
-Bakari Mustafa is an African-born Australian entrepreneur, technologist, and former refugee. Born in Burundi and raised in Malawi, he migrated to Australia in 2015. Bakari serves on the leadership team at Networking African-Australians in Melbourne, empowering African-Australian youth through education and leadership programs. He founded Mentors Outreach, a platform connecting young professionals with mentors and investors. His initiatives include Dzaleka Connect (supporting refugee communities), Hungry Innovators (fostering digital innovation), and the Transition Phase Podcast. Bakari is passionate about using technology and entrepreneurship to create positive social impact.
+Bakari Mustafa is an African-born Australian entrepreneur, technologist, and former refugee. Born in Burundi and raised in Malawi, he migrated to Australia in 2015. Bakari serves on the leadership team at Networking African-Australians in Melbourne, empowering African-Australian youth through education and leadership programs. He founded Mentors Outreach, a platform connecting young professionals with mentors and investors. His initiatives include Dzaleka Connect (an online portal supporting Dzaleka refugee camp residents and diaspora), Hungry Innovators (a non-profit STEM education organization), and the Transition Phase Podcast (2018-2019). Bakari is passionate about using technology and entrepreneurship to create positive social impact.
 
 ### 50-Word Bio
 Bakari Mustafa is an African-born Australian entrepreneur and former refugee. He serves on the leadership team at Networking African-Australians and founded Mentors Outreach, a platform connecting young professionals with mentors. Passionate about technology and social impact, Bakari empowers youth through education, leadership development, and community engagement.
