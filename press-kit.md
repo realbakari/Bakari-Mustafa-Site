@@ -14,7 +14,7 @@ Welcome to the official press kit for Bakari Mustafa. This page provides media r
 
 ## Quick Bio
 
-**Bakari Mustafa** is an African-born Australian entrepreneur, technologist, and former refugee based in Melbourne, Victoria. Currently serving on the leadership team at Networking African-Australians, he is dedicated to empowering African-Australian youth through education, leadership development, and community engagement.
+**Bakari Mustafa** is an African-born Australian entrepreneur, technologist, and former refugee based in Brisbane, Queensland. Currently serving on the leadership team at Networking African-Australians, he is dedicated to empowering African-Australian youth through education, leadership development, and community engagement.
 
 ---
 

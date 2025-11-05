@@ -9,56 +9,151 @@ comments: false
 
 ---
 
-> "A reader lives a thousand lives before he dies. The man who never reads lives only one." - George R.R. Martin
+<div class="page-header">
+  <h1>📚 Reading List</h1>
+  <blockquote>"A reader lives a thousand lives before he dies. The man who never reads lives only one." - George R.R. Martin</blockquote>
+  <p class="page-subtitle">I'm passionate about continuous learning and personal growth through reading. Here you'll find books I've read, summaries I've written, and recommendations across various genres.</p>
+</div>
 
-Welcome to my reading list! I'm passionate about continuous learning and personal growth through reading. Here you'll find books I've read, summaries I've written, and recommendations across various genres.
-
-## 📚 Book Summaries
+## Book Summaries
 
 I write detailed summaries of books that have impacted my thinking. These summaries help me retain key insights and share valuable lessons with others.
 
-### Business & Entrepreneurship
+<div class="category-section">
+  <h3>💼 Business & Entrepreneurship</h3>
+  <div class="book-links">
+    <a href="/Book-Summaries/business/start-with-why">
+      <strong>Start with Why</strong>
+      <span>Simon Sinek's powerful framework for inspirational leadership</span>
+    </a>
+    <a href="/Book-Summaries/business/choose-yourself-by-james-altucher">
+      <strong>Choose Yourself</strong>
+      <span>James Altucher - Taking control of your own success</span>
+    </a>
+    <a href="/Book-Summaries/business/the-obstacle-is-the-way-by-ryan-holiday">
+      <strong>The Obstacle is the Way</strong>
+      <span>Ryan Holiday - Turning trials into triumph</span>
+    </a>
+    <a href="/Book-Summaries/business/positioning-by-al-ries-and-jack-trout">
+      <strong>Positioning</strong>
+      <span>Al Ries & Jack Trout - The battle for your mind</span>
+    </a>
+    <a href="/Book-Summaries/business/mastermind-dinners-by-jayson-gaignard">
+      <strong>Mastermind Dinners</strong>
+      <span>Jayson Gaignard - Building meaningful relationships</span>
+    </a>
+  </div>
+</div>
 
-- [Start with Why](/Book-Summaries/business/start-with-why) - Simon Sinek's powerful framework for inspirational leadership
-- [Choose Yourself by James Altucher](/Book-Summaries/business/choose-yourself-by-james-altucher) - Taking control of your own success
-- [The Obstacle is the Way by Ryan Holiday](/Book-Summaries/business/the-obstacle-is-the-way-by-ryan-holiday) - Turning trials into triumph
-- [Positioning by Al Ries and Jack Trout](/Book-Summaries/business/positioning-by-al-ries-and-jack-trout) - The battle for your mind
-- [Mastermind Dinners by Jayson Gaignard](/Book-Summaries/business/mastermind-dinners-by-jayson-gaignard) - Building meaningful relationships
+<div class="category-section">
+  <h3>💰 Personal Finance</h3>
+  <div class="book-links">
+    <a href="/Book-Summaries/personal-finance/the-simple-path-to-wealth">
+      <strong>The Simple Path to Wealth</strong>
+      <span>Financial independence made simple</span>
+    </a>
+    <a href="/Book-Summaries/personal-finance/rich-dad-poor-dad">
+      <strong>Rich Dad Poor Dad</strong>
+      <span>Robert Kiyosaki's lessons on money</span>
+    </a>
+    <a href="/Book-Summaries/the-richest-man-in-babylon">
+      <strong>The Richest Man in Babylon</strong>
+      <span>Timeless principles of wealth</span>
+    </a>
+  </div>
+</div>
 
-### Personal Finance
+<div class="category-section">
+  <h3>🎯 Personal Development</h3>
+  <div class="book-links">
+    <a href="/Book-Summaries/atomic-habits-by-james-clear">
+      <strong>Atomic Habits</strong>
+      <span>James Clear - Tiny changes, remarkable results</span>
+    </a>
+    <a href="/Book-Summaries/think-and-grow-rich-napoleon-hill">
+      <strong>Think and Grow Rich</strong>
+      <span>Napoleon Hill - The philosophy of achievement</span>
+    </a>
+    <a href="/Book-Summaries/self-help/how-to-win-friends-and-influence-people">
+      <strong>How to Win Friends and Influence People</strong>
+      <span>Dale Carnegie's timeless classic</span>
+    </a>
+    <a href="/Book-Summaries/superhuman-by-habit-by-tynan">
+      <strong>Superhuman by Habit</strong>
+      <span>Tynan - Becoming superhuman through habits</span>
+    </a>
+    <a href="/Book-Summaries/superhuman-social-skills-by-tynan">
+      <strong>Superhuman Social Skills</strong>
+      <span>Tynan - Mastering social interactions</span>
+    </a>
+    <a href="/Book-Summaries/the-art-of-possibility">
+      <strong>The Art of Possibility</strong>
+      <span>Transforming professional and personal life</span>
+    </a>
+  </div>
+</div>
 
-- [The Simple Path to Wealth](/Book-Summaries/personal-finance/the-simple-path-to-wealth) - Financial independence made simple
-- [Rich Dad Poor Dad](/Book-Summaries/personal-finance/rich-dad-poor-dad) - Robert Kiyosaki's lessons on money
-- [The Richest Man in Babylon](/Book-Summaries/the-richest-man-in-babylon) - Timeless principles of wealth
+<div class="category-section">
+  <h3>🔬 Science & Philosophy</h3>
+  <div class="book-links">
+    <a href="/Book-Summaries/1984-by-george-orwell">
+      <strong>1984</strong>
+      <span>George Orwell - A dystopian masterpiece</span>
+    </a>
+    <a href="/Book-Summaries/free-will-by-sam-harris">
+      <strong>Free Will</strong>
+      <span>Sam Harris - Exploring the illusion of free will</span>
+    </a>
+    <a href="/Book-Summaries/a-short-history-of-nearly-everything-summary-by-bill-bryson">
+      <strong>A Short History of Nearly Everything</strong>
+      <span>Bill Bryson - Understanding our universe</span>
+    </a>
+    <a href="/Book-Summaries/a-mind-for-numbers-summary-barbara-oakley">
+      <strong>A Mind for Numbers</strong>
+      <span>Barbara Oakley - Learning mathematics and science effectively</span>
+    </a>
+  </div>
+</div>
 
-### Personal Development
+<div class="category-section">
+  <h3>🧠 Psychology & Strategy</h3>
+  <div class="book-links">
+    <a href="/Book-Summaries/the-art-of-war-by-sun-tzu">
+      <strong>The Art of War</strong>
+      <span>Sun Tzu - Ancient wisdom for modern strategy</span>
+    </a>
+    <a href="/Book-Summaries/59-seconds-by-richard-wiseman">
+      <strong>59 Seconds</strong>
+      <span>Richard Wiseman - Quick psychology-based life improvements</span>
+    </a>
+    <a href="/Book-Summaries/the-4-disciplines-of-execution">
+      <strong>The 4 Disciplines of Execution</strong>
+      <span>Achieving your most important goals</span>
+    </a>
+    <a href="/Book-Summaries/the-leader-s-guide-to-unconscious-bias">
+      <strong>The Leader's Guide to Unconscious Bias</strong>
+      <span>Leading with awareness</span>
+    </a>
+  </div>
+</div>
 
-- [Atomic Habits by James Clear](/Book-Summaries/atomic-habits-by-james-clear) - Tiny changes, remarkable results
-- [Think and Grow Rich - Napoleon Hill](/Book-Summaries/think-and-grow-rich-napoleon-hill) - The philosophy of achievement
-- [How to Win Friends and Influence People](/Book-Summaries/self-help/how-to-win-friends-and-influence-people) - Dale Carnegie's timeless classic
-- [Superhuman by Habit by Tynan](/Book-Summaries/superhuman-by-habit-by-tynan) - Becoming superhuman through habits
-- [Superhuman Social Skills by Tynan](/Book-Summaries/superhuman-social-skills-by-tynan) - Mastering social interactions
-- [The Art of Possibility](/Book-Summaries/the-art-of-possibility) - Transforming professional and personal life
-
-### Science & Philosophy
-
-- [1984 by George Orwell](/Book-Summaries/1984-by-george-orwell) - A dystopian masterpiece
-- [Free Will by Sam Harris](/Book-Summaries/free-will-by-sam-harris) - Exploring the illusion of free will
-- [A Short History of Nearly Everything by Bill Bryson](/Book-Summaries/a-short-history-of-nearly-everything-summary-by-bill-bryson) - Understanding our universe
-- [A Mind for Numbers - Barbara Oakley](/Book-Summaries/a-mind-for-numbers-summary-barbara-oakley) - Learning mathematics and science effectively
-
-### Psychology & Strategy
-
-- [The Art of War by Sun Tzu](/Book-Summaries/the-art-of-war-by-sun-tzu) - Ancient wisdom for modern strategy
-- [59 Seconds by Richard Wiseman](/Book-Summaries/59-seconds-by-richard-wiseman) - Quick psychology-based life improvements
-- [The 4 Disciplines of Execution](/Book-Summaries/the-4-disciplines-of-execution) - Achieving your most important goals
-- [The Leader's Guide to Unconscious Bias](/Book-Summaries/the-leader-s-guide-to-unconscious-bias) - Leading with awareness
-
-### Fiction & Literature
-
-- [Dark Matter Summary](/Book-Summaries/dark-matter-summary) - Blake Crouch's mind-bending thriller
-- [Two Minutes from the Abyss by Vijay Eswaran](/Book-Summaries/two-minutes-from-the-abyss-by-vijay-eswaran) - Philosophy and wisdom
-- [Become an Idea Machine by Claudia Azula Altucher](/Book-Summaries/become-an-idea-machine-by-claudia-azula-altucher) - Exercising your creativity
+<div class="category-section">
+  <h3>📖 Fiction & Literature</h3>
+  <div class="book-links">
+    <a href="/Book-Summaries/dark-matter-summary">
+      <strong>Dark Matter</strong>
+      <span>Blake Crouch - Mind-bending thriller</span>
+    </a>
+    <a href="/Book-Summaries/two-minutes-from-the-abyss-by-vijay-eswaran">
+      <strong>Two Minutes from the Abyss</strong>
+      <span>Vijay Eswaran - Philosophy and wisdom</span>
+    </a>
+    <a href="/Book-Summaries/become-an-idea-machine-by-claudia-azula-altucher">
+      <strong>Become an Idea Machine</strong>
+      <span>Claudia Azula Altucher - Exercising your creativity</span>
+    </a>
+  </div>
+</div>
 
 ## 📖 Book Library
 

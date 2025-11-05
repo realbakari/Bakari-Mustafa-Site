@@ -535,4 +535,247 @@ body[data-theme="dark"] {
   .breadcrumb-separator {
     color: rgba(255, 255, 255, 0.3);
   }
+
+  // Modern Card Layouts Dark Mode
+  .book-card,
+  .project-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    .card-header {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+
+      h3 {
+        a {
+          color: $dark-white;
+
+          &:hover {
+            color: $dark-text-link-blue;
+          }
+        }
+      }
+
+      .card-meta {
+        color: rgba(255, 255, 255, 0.6);
+
+        .badge {
+          background: rgba(0, 63, 255, 0.2);
+          color: $dark-text-link-blue;
+        }
+      }
+    }
+
+    .card-body {
+      p,
+      ul li {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .card-footer {
+      border-top-color: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+
+      a {
+        color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  // Book Summary List Dark Mode
+  .book-summary-list {
+    .year-section h2 {
+      color: $dark-white;
+      border-bottom-color: $dark-text-link-blue;
+    }
+  }
+
+  .book-list li {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.15);
+    }
+
+    a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  // Category Section Dark Mode
+  .category-section {
+    h3 {
+      color: $dark-white;
+      border-left-color: $dark-text-link-blue;
+    }
+
+    .book-links a {
+      background: rgba(0, 63, 255, 0.1);
+      border-color: rgba(0, 63, 255, 0.2);
+      color: $dark-white;
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.15);
+        border-color: $dark-text-link-blue;
+        box-shadow: -4px 0 0 0 $dark-text-link-blue;
+      }
+
+      strong {
+        color: $dark-white;
+      }
+
+      span {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Projects Grid Dark Mode
+  .project-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    h4 a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+
+    .project-meta {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Page Header Dark Mode
+  .page-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    .page-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    blockquote {
+      border-left-color: $dark-text-link-blue;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Book Summary Individual Page Dark Mode
+  .book-summary-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    img {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .book-excerpt {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .key-lessons {
+    background: rgba(0, 63, 255, 0.1);
+    border-left-color: $dark-text-link-blue;
+
+    h3 {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  .book-content {
+    blockquote {
+      background: rgba(255, 255, 255, 0.05);
+      border-left-color: $dark-text-link-blue;
+    }
+
+    img {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Linktree-style Social Links Dark Mode
+  .linktree-header {
+    .profile-image {
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.3);
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .bio {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .social-link-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(0, 63, 255, 0.1);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 6px 20px rgba(0, 63, 255, 0.25);
+    }
+
+    .social-icon {
+      background: rgba(0, 63, 255, 0.15);
+    }
+
+    &:hover .social-icon {
+      background: $dark-text-link-blue;
+    }
+
+    .social-content {
+      .social-title {
+        color: $dark-white;
+      }
+
+      .social-description {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .social-arrow {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:hover .social-arrow {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  .social-footer {
+    border-top-color: rgba(255, 255, 255, 0.2);
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
 }
