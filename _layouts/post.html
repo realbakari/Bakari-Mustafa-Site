@@ -35,8 +35,6 @@ layout: compress
   {% include navbar.html %}
   <div class="wrapper post">
     <main class="page-content" aria-label="Content">
-      {% include breadcrumbs.html %}
-
       <article itemscope itemtype="https://schema.org/BlogPosting">
 
         <header class="header">
@@ -81,13 +79,15 @@ layout: compress
         <div class="page-content" itemprop="articleBody">
           {% include anchor_headings.html html=content anchorClass="anchor-head" beforeHeading=true h_min=1 h_max=4 %}
           {% if page.tweet %}
-          <p>Comments this article on 
+          <p>Comments this article on
             <a href="https://twitter.com/{{site.twitter}}/status/{{page.tweet}}">Twitter</a>.
           </p>
           {% endif %}
         </div>
       </article>
-    
+
+      {% include social-share.html %}
+
       {% if page.comments %}
         {% include comments.html %}
       {% endif %}

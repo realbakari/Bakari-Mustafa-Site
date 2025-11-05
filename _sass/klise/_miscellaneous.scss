@@ -1013,3 +1013,308 @@
     font-size: 0.95rem;
   }
 }
+
+// Modern Footer Design
+.modern-footer {
+  background: rgba(0, 63, 255, 0.02);
+  border-top: 2px solid rgba(0, 63, 255, 0.1);
+  margin-top: 4rem;
+  padding: 3rem 0 1rem;
+}
+
+.footer-container {
+  max-width: $wide-size;
+  margin: 0 auto;
+  padding: 0 2rem;
+
+  @include media-query($on-mobile) {
+    padding: 0 1rem;
+  }
+}
+
+.footer-grid {
+  display: grid;
+  grid-template-columns: 2fr 1fr 1fr 1fr;
+  gap: 3rem;
+  padding-bottom: 2rem;
+
+  @include media-query($on-tablet) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 2rem;
+  }
+
+  @include media-query($on-mobile) {
+    grid-template-columns: 1fr;
+    gap: 2rem;
+  }
+}
+
+.footer-column {
+  h4 {
+    font-size: 1.1rem;
+    font-weight: 600;
+    margin-bottom: 1rem;
+    color: $black;
+  }
+}
+
+.footer-heading {
+  position: relative;
+  padding-bottom: 0.5rem;
+
+  &::after {
+    content: '';
+    position: absolute;
+    left: 0;
+    bottom: 0;
+    width: 40px;
+    height: 3px;
+    background: #003FFF;
+    border-radius: 2px;
+  }
+}
+
+.footer-description {
+  color: rgba(0, 0, 0, 0.7);
+  line-height: 1.6;
+  margin-bottom: 1.5rem;
+  font-size: 0.95rem;
+}
+
+.footer-social {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.social-icon-link {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  width: 40px;
+  height: 40px;
+  background: rgba(0, 63, 255, 0.1);
+  border-radius: 8px;
+  color: #003FFF;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #003FFF;
+    color: white;
+    transform: translateY(-3px);
+    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+  }
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}
+
+.footer-links {
+  list-style: none;
+  padding: 0;
+  margin: 0;
+
+  li {
+    margin-bottom: 0.75rem;
+
+    a {
+      color: rgba(0, 0, 0, 0.7);
+      text-decoration: none;
+      font-size: 0.95rem;
+      transition: all 0.2s ease;
+      display: inline-block;
+
+      &:hover {
+        color: #003FFF;
+        transform: translateX(4px);
+      }
+    }
+  }
+}
+
+.footer-cta {
+  margin-top: 1.5rem;
+}
+
+.footer-cta-button {
+  display: inline-block;
+  padding: 0.75rem 1.5rem;
+  background: #003FFF;
+  color: white;
+  text-decoration: none;
+  border-radius: 8px;
+  font-weight: 500;
+  font-size: 0.95rem;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #0035db;
+    transform: translateY(-2px);
+    box-shadow: 0 6px 16px rgba(0, 63, 255, 0.3);
+  }
+}
+
+.footer-bottom {
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+  padding-top: 1.5rem;
+  margin-top: 2rem;
+}
+
+.footer-bottom-content {
+  text-align: center;
+
+  p {
+    margin: 0.5rem 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.9rem;
+  }
+}
+
+.footer-copyright {
+  font-weight: 500;
+}
+
+.footer-tagline {
+  a {
+    color: #003FFF;
+    text-decoration: none;
+    font-weight: 500;
+    transition: color 0.2s ease;
+
+    &:hover {
+      color: #0035db;
+      text-decoration: underline;
+    }
+  }
+}
+
+// Social Share Component
+.social-share {
+  margin: 3rem 0;
+  padding: 2rem;
+  background: rgba(0, 63, 255, 0.03);
+  border: 1px solid rgba(0, 63, 255, 0.1);
+  border-radius: 12px;
+
+  @include media-query($on-mobile) {
+    padding: 1.5rem 1rem;
+    margin: 2rem 0;
+  }
+}
+
+.social-share-header {
+  text-align: center;
+  margin-bottom: 1.5rem;
+
+  h3 {
+    margin: 0 0 0.5rem 0;
+    font-size: 1.5rem;
+    color: $black;
+    font-weight: $bold-weight;
+  }
+
+  p {
+    margin: 0;
+    color: rgba(0, 0, 0, 0.6);
+    font-size: 0.95rem;
+  }
+}
+
+.social-share-buttons {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  max-width: 800px;
+  margin: 0 auto;
+
+  @include media-query($on-mobile) {
+    grid-template-columns: repeat(2, 1fr);
+    gap: 0.75rem;
+  }
+}
+
+.share-button {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1rem;
+  background: white;
+  border: 2px solid rgba(0, 63, 255, 0.2);
+  border-radius: 8px;
+  color: #003FFF;
+  font-weight: 500;
+  font-size: 0.9rem;
+  text-decoration: none;
+  transition: all 0.3s ease;
+  cursor: pointer;
+
+  svg {
+    width: 20px;
+    height: 20px;
+    transition: transform 0.3s ease;
+  }
+
+  span {
+    @include media-query($on-mobile) {
+      font-size: 0.85rem;
+    }
+  }
+
+  &:hover {
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.2);
+  }
+
+  // Platform-specific colors
+  &.share-twitter:hover {
+    background: #1DA1F2;
+    border-color: #1DA1F2;
+    color: white;
+  }
+
+  &.share-linkedin:hover {
+    background: #0077B5;
+    border-color: #0077B5;
+    color: white;
+  }
+
+  &.share-facebook:hover {
+    background: #1877F2;
+    border-color: #1877F2;
+    color: white;
+  }
+
+  &.share-whatsapp:hover {
+    background: #25D366;
+    border-color: #25D366;
+    color: white;
+  }
+
+  &.share-reddit:hover {
+    background: #FF4500;
+    border-color: #FF4500;
+    color: white;
+  }
+
+  &.share-copy:hover {
+    background: #003FFF;
+    border-color: #003FFF;
+    color: white;
+  }
+
+  &.share-copy.copied {
+    background: #10B981;
+    border-color: #10B981;
+    color: white;
+  }
+
+  &:hover svg {
+    transform: scale(1.1);
+  }
+}
