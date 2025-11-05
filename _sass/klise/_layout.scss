@@ -324,6 +324,28 @@
   margin-bottom: 2rem;
 }
 
+// Year headers in archive/article pages
+.posts-year-header {
+  font-size: 1.8em;
+  font-weight: 700;
+  color: $black;
+  margin-top: 2.5rem;
+  margin-bottom: 1.5rem;
+  padding-bottom: 0.5rem;
+  border-bottom: 2px solid rgba(0, 63, 255, 0.2);
+  letter-spacing: -0.02em;
+
+  &:first-of-type {
+    margin-top: 0;
+  }
+
+  @include media-query($on-mobile) {
+    font-size: 1.5em;
+    margin-top: 2rem;
+    margin-bottom: 1rem;
+  }
+}
+
 // Post cards
 .post-card {
   background: $white;

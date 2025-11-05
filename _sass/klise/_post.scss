@@ -75,23 +75,6 @@
   }
 }
 
-// Post stats (view counter)
-.post-stats {
-  margin-top: 1rem;
-  display: flex;
-  align-items: center;
-  gap: 0.75rem;
-
-  .post-views-badge {
-    height: 20px;
-    border-radius: 3px;
-  }
-
-  @include media-query($on-mobile) {
-    margin-top: 0.75rem;
-  }
-}
-
 // Post content
 .page-content {
   padding-top: 8px;

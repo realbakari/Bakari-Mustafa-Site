@@ -15,13 +15,32 @@ excerpt: Sorted article by tags.
 
 {%- for tag in site.tags -%}
   {%- capture name -%}{{ tag | first }}{%- endcapture -%}
-  <h2 id="{{ name }}">{{ name | upcase }}</h2>
+  <h2 class="posts-year-header" id="{{ name }}">{{ name | upcase }}</h2>
+  <div class="posts-list">
   {%- for post in site.tags[name] -%}
-    <article class="post-item" id="results-container">
-      <span class="post-item-date">{{ post.date | date: "%b %d, %Y" }}</span>
-      <h3 class="post-item-title">
-        <a href="{{ post.url }}">{{ post.title | escape }}</a>
-      </h3> 
+    <article class="post-card" id="results-container">
+      <div class="post-card-content">
+        <div class="post-card-meta">
+          <span class="post-item-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          {% if post.tags and post.tags != empty %}
+          <span class="post-card-tags">
+            {% for tag in post.tags limit:2 %}
+            <span class="post-tag">{{ tag }}</span>
+            {% endfor %}
+          </span>
+          {% endif %}
+        </div>
+        <h3 class="post-item-title">
+          <a href="{{ post.url }}">{{ post.title | escape }}</a>
+        </h3>
+        {% if post.description %}
+        <p class="post-card-description">{{ post.description | strip_html | truncate: 150 }}</p>
+        {% elsif post.excerpt %}
+        <p class="post-card-description">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+        {% endif %}
+        <a href="{{ post.url }}" class="read-more">Read more →</a>
+      </div>
     </article>
   {%- endfor -%}
+  </div>
 {%- endfor -%}
