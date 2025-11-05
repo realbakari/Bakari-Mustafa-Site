@@ -850,4 +850,73 @@ body[data-theme="dark"] {
       }
     }
   }
+
+  // Social Share Dark Mode
+  .social-share {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+  }
+
+  .social-share-header {
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .share-button {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 63, 255, 0.3);
+    color: $dark-text-link-blue;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+    }
+
+    // Platform-specific colors remain the same on hover
+    &.share-twitter:hover {
+      background: #1DA1F2;
+      border-color: #1DA1F2;
+      color: white;
+    }
+
+    &.share-linkedin:hover {
+      background: #0077B5;
+      border-color: #0077B5;
+      color: white;
+    }
+
+    &.share-facebook:hover {
+      background: #1877F2;
+      border-color: #1877F2;
+      color: white;
+    }
+
+    &.share-whatsapp:hover {
+      background: #25D366;
+      border-color: #25D366;
+      color: white;
+    }
+
+    &.share-reddit:hover {
+      background: #FF4500;
+      border-color: #FF4500;
+      color: white;
+    }
+
+    &.share-copy:hover {
+      background: $dark-text-link-blue;
+      border-color: $dark-text-link-blue;
+      color: white;
+    }
+
+    &.share-copy.copied {
+      background: #10B981;
+      border-color: #10B981;
+      color: white;
+    }
+  }
 }
