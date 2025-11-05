@@ -66,6 +66,14 @@ layout: compress
             {% else %}
               <span class="post-reading-time">{{ words | divided_by:180 }} min read</span>
             {% endif %}
+            <span class="post-meta-separator">•</span>
+            <span class="page-view-counter loading" data-view-counter="total">
+              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                <circle cx="12" cy="12" r="3"></circle>
+              </svg>
+              <span class="view-count-number">0</span> views
+            </span>
             <time hidden datetime="{{ page.modified | date_to_xmlschema }}" itemprop="dateModified">
               {{ page.date | date: "%b %d, %Y" }}
             </time>

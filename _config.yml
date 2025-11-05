@@ -60,6 +60,13 @@ jekyll_compose:
 # Homepage limit posts
 number_of_posts: 5
 
+# Supabase settings (for page view counter)
+# Add your actual credentials in Netlify environment variables
+# or uncomment and add them here (NOT recommended for public repos)
+supabase:
+  url: "" # Add your Supabase project URL or use environment variable
+  anon_key: "" # Add your Supabase anon key or use environment variable
+
 # Build settings
 # theme: klise
 sass:
