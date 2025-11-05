@@ -418,18 +418,22 @@ body[data-theme="dark"] {
   .form-group {
     label {
       color: $dark-white;
+
+      .required {
+        color: rgba(255, 255, 255, 0.5);
+      }
     }
 
     input[type="text"],
     input[type="email"],
     textarea {
       background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.15);
       color: $dark-white;
 
       &:focus {
-        border-color: rgba(255, 82, 119, 0.4);
-        box-shadow: 0 0 0 3px rgba(255, 82, 119, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
       }
 
       &::placeholder {
@@ -439,11 +443,18 @@ body[data-theme="dark"] {
   }
 
   .form-submit {
-    background: $dark-text-link-blue;
+    background: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
 
     &:hover {
-      background: $dark-text-link-blue-active;
-      box-shadow: 0 4px 16px rgba(255, 82, 119, 0.4);
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.95);
     }
   }
 
