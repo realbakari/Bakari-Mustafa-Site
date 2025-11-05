@@ -13,7 +13,7 @@ description: Discover Bakari Mustafa's portfolio of projects including Mentors O
 
 #### [Transition Phase Podcast](https://bakarimustafa.com/projects/transition-phase-podcast/)
 
-A podcast hosted by entrepreneurs and creatives, featuring interviews with top minds in Brisbane. We highlight their stories, accomplishments, and insights to help entrepreneurs and business owners take control of their lives while exploring different ideas and perspectives.
+A podcast hosted by entrepreneurs and creatives from 2018 to September 2019, featuring interviews with top minds in Brisbane. We highlighted their stories, accomplishments, and insights to help entrepreneurs and business owners take control of their lives while exploring different ideas and perspectives.
 
 #### [Experiments with P5.JS](https://bakarimustafa.com/projects/experiments-with-p5.js/ "P5.js")
 

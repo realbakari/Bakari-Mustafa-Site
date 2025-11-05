@@ -4,9 +4,9 @@ date: 2018-10-21 14:00:00 +0000
 tags:
 - Transition Phase
 - Podcast
-description: Doing it as a hobby. Transition Phase is a show hosted by entrepreneurs
-  and creatives. We interview some top minds in Brisbane, highlighting their stories,
-  accomplishment.
+description: A hobby podcast from 2018 to September 2019. Transition Phase was a show hosted by entrepreneurs
+  and creatives. We interviewed some top minds in Brisbane, highlighting their stories
+  and accomplishments.
 image: "/uploads/1200x630wp.png"
 
 ---
@@ -14,9 +14,9 @@ image: "/uploads/1200x630wp.png"
 
 With Jean Minani 🎙️
 
-Doing it as a hobby. Transition Phase is a show hosted by entrepreneurs and creatives. We interview some top minds in Brisbane, highlighting their stories, accomplishment & Helping Entrepreneurs & business owners take control of their life. Exploring different ideas, thought, and insights.
+A hobby podcast that ran from 2018 to September 2019. Transition Phase was a show hosted by entrepreneurs and creatives. We interviewed some top minds in Brisbane, highlighting their stories, accomplishments, and insights to help entrepreneurs and business owners take control of their lives while exploring different ideas and perspectives.
 
-This podcast is for the go-getters that don’t mind going against the odds in order to achieve their goals.
+This podcast was for the go-getters who don't mind going against the odds in order to achieve their goals.
 
 Listen on 👇
 
