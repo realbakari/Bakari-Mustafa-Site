@@ -353,4 +353,113 @@ body[data-theme="dark"] {
       }
     }
   }
+
+  // Enhanced 404 Page Dark Mode
+  .phrase-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .solution-link {
+    background: rgba(255, 82, 119, 0.1);
+    border-color: rgba(255, 82, 119, 0.3);
+    color: $dark-text-link-blue;
+
+    &:hover {
+      background: rgba(255, 82, 119, 0.15);
+      border-color: rgba(255, 82, 119, 0.5);
+      box-shadow: 0 4px 12px rgba(255, 82, 119, 0.2);
+    }
+  }
+
+  .not-found-search {
+    border-top-color: rgba(255, 255, 255, 0.1);
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .search-input-404 {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $dark-white;
+
+    &:focus {
+      border-color: rgba(255, 82, 119, 0.4);
+      box-shadow: 0 0 0 3px rgba(255, 82, 119, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  .search-button-404 {
+    background: $dark-text-link-blue;
+
+    &:hover {
+      background: $dark-text-link-blue-active;
+      box-shadow: 0 4px 12px rgba(255, 82, 119, 0.4);
+    }
+  }
+
+  // Contact Form Dark Mode
+  .contact-form {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .form-group {
+    label {
+      color: $dark-white;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: $dark-white;
+
+      &:focus {
+        border-color: rgba(255, 82, 119, 0.4);
+        box-shadow: 0 0 0 3px rgba(255, 82, 119, 0.1);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+
+  .form-submit {
+    background: $dark-text-link-blue;
+
+    &:hover {
+      background: $dark-text-link-blue-active;
+      box-shadow: 0 4px 16px rgba(255, 82, 119, 0.4);
+    }
+  }
+
+  // Table of Contents Dark Mode
+  .table-of-contents {
+    background: rgba(255, 82, 119, 0.08);
+    border-color: rgba(255, 82, 119, 0.25);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .toc-grid a {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 82, 119, 0.15);
+      border-color: rgba(255, 82, 119, 0.4);
+      box-shadow: 0 2px 8px rgba(255, 82, 119, 0.2);
+    }
+  }
 }

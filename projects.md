@@ -1,37 +1,38 @@
 ---
 title: Projects
 layout: page
-excerpt: ''
+excerpt: Explore my personal and professional projects, from community platforms to creative experiments and professional work.
 comments: false
-image: ''
+image: '/uploads/bakari_mustafa.jpg'
+description: Discover Bakari Mustafa's portfolio of projects including Mentors Outreach, community platforms, and creative coding experiments with P5.js.
 
 ---
 > A mind that is stretched by a new experience can never go back to its old dimensions. - Oliver Wendell Holmes, Jr.
 
 ### Personal Projects
 
-#### [COVID19 Tracker](https://bakarimustafa.com/projects/covid19-tracker/ "COVID-19 Tracker")
+#### [Transition Phase Podcast](https://bakarimustafa.com/projects/transition-phase-podcast/)
 
-COVID19 Tracker acts as a portal for the public to keep track of the latest news development about the COVID-19.
-
-#### [Transition Phase](https://bakarimustafa.com/projects/transition-phase-podcast/)
-
-Doing it as a hobby. Transition Phase is a show hosted by entrepreneurs and creatives. We interview some top minds in Brisbane, highlighting their stories, accomplishment & Helping Entrepreneurs & business owners take control of their life. Exploring different ideas, thought, and insights.
+A podcast hosted by entrepreneurs and creatives, featuring interviews with top minds in Brisbane. We highlight their stories, accomplishments, and insights to help entrepreneurs and business owners take control of their lives while exploring different ideas and perspectives.
 
 #### [Experiments with P5.JS](https://bakarimustafa.com/projects/experiments-with-p5.js/ "P5.js")
 
-An ongoing attempt to learn P5.js through simple, playful, and interactive sketches.
+An ongoing creative coding journey learning P5.js through simple, playful, and interactive sketches. Exploring generative art, data visualization, and interactive web experiences.
 
-## Work Project
+## Work Projects
+
+#### [Networking African-Australians](https://networkingafricanaustralians.com.au/)
+
+A community organization based in Melbourne, Victoria, inspiring and supporting every African-Australian. We provide students with professional and personal skills, experiences to enhance their education, mental health, job opportunities, leadership skills, and confidence. Our programs include homework clubs, leadership camps, and mentorship initiatives.
 
 #### [Mentors Outreach](https://mentorsoutreach.org "Mentors Outreach")
 
-Mentors Outreach is a space to get inspired. We’re building a dynamic community of young professionals and support them with our network of mentors, investors, and Founders.
+A dynamic community platform for young professionals, connecting them with mentors, investors, and founders. Mentors Outreach provides a space for inspiration, growth, and professional development.
 
 #### [Diverse Connections](http://diverseconnect.com.au/ "Diverse Connections")
 
-One of my favorite projects I worked on while I was on break. I worked on the front-end of things as well as doing some work on the WordPress CMS.
+Front-end development and WordPress CMS work for a community connection platform focused on bringing diverse communities together.
 
 #### [Ipswich Hospital Foundation](https://www.ihfoundation.org.au/)
 
-Web Developer, _2019–2020_
+Web Developer, _2019–2020_. Contributed to the digital presence of the foundation supporting healthcare in the Ipswich region.

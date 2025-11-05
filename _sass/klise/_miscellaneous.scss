@@ -39,3 +39,229 @@
     position: absolute;
   }
 }
+
+// Enhanced 404 Page Styles
+.phrase-subtitle {
+  font-size: 1.1rem;
+  color: rgba(128, 128, 128, 0.8);
+  margin-top: 1rem;
+  margin-bottom: 2rem;
+}
+
+.not-found-links {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(140px, 1fr));
+  gap: 1rem;
+  margin: 2rem 0;
+  max-width: 600px;
+  margin-left: auto;
+  margin-right: auto;
+}
+
+.solution-link {
+  display: flex;
+  flex-direction: column;
+  align-items: center;
+  justify-content: center;
+  gap: 0.5rem;
+  padding: 1.5rem 1rem;
+  background: rgba(0, 63, 255, 0.05);
+  border: 2px solid rgba(0, 63, 255, 0.2);
+  border-radius: 8px;
+  color: #003FFF;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover {
+    background: rgba(0, 63, 255, 0.1);
+    border-color: rgba(0, 63, 255, 0.4);
+    transform: translateY(-2px);
+    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.15);
+
+    svg {
+      transform: scale(1.1);
+    }
+  }
+}
+
+.not-found-search {
+  margin-top: 3rem;
+  padding-top: 2rem;
+  border-top: 1px solid rgba(128, 128, 128, 0.2);
+
+  p {
+    margin-bottom: 1rem;
+    color: rgba(128, 128, 128, 0.8);
+  }
+}
+
+.search-form-404 {
+  display: flex;
+  gap: 0.5rem;
+  max-width: 500px;
+  margin: 0 auto;
+}
+
+.search-input-404 {
+  flex: 1;
+  padding: 0.75rem 1rem;
+  border: 2px solid rgba(128, 128, 128, 0.2);
+  border-radius: 6px;
+  font-size: 1rem;
+  transition: all 0.3s ease;
+
+  &:focus {
+    outline: none;
+    border-color: rgba(0, 63, 255, 0.4);
+    box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.1);
+  }
+}
+
+.search-button-404 {
+  padding: 0.75rem 1.5rem;
+  background: #003FFF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #0035db;
+    transform: translateY(-1px);
+    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Contact Form Styles
+.contact-form {
+  max-width: 600px;
+  margin: 2rem auto;
+  padding: 2rem;
+  background: rgba(128, 128, 128, 0.05);
+  border-radius: 8px;
+  border: 1px solid rgba(128, 128, 128, 0.15);
+}
+
+.form-group {
+  margin-bottom: 1.5rem;
+
+  label {
+    display: block;
+    margin-bottom: 0.5rem;
+    font-weight: 500;
+    color: $black;
+
+    .required {
+      color: #e74c3c;
+    }
+  }
+
+  input[type="text"],
+  input[type="email"],
+  textarea {
+    width: 100%;
+    padding: 0.75rem;
+    border: 2px solid rgba(128, 128, 128, 0.2);
+    border-radius: 6px;
+    font-size: 1rem;
+    font-family: inherit;
+    transition: all 0.3s ease;
+    background: $white;
+    color: $black;
+
+    &:focus {
+      outline: none;
+      border-color: rgba(0, 63, 255, 0.4);
+      box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.1);
+    }
+
+    &::placeholder {
+      color: rgba(128, 128, 128, 0.5);
+    }
+  }
+
+  textarea {
+    resize: vertical;
+    min-height: 120px;
+  }
+}
+
+.form-submit {
+  width: 100%;
+  padding: 1rem 2rem;
+  background: #003FFF;
+  color: white;
+  border: none;
+  border-radius: 6px;
+  font-size: 1.1rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.3s ease;
+
+  &:hover {
+    background: #0035db;
+    transform: translateY(-2px);
+    box-shadow: 0 4px 16px rgba(0, 63, 255, 0.3);
+  }
+
+  &:active {
+    transform: translateY(0);
+  }
+}
+
+// Table of Contents for long pages
+.table-of-contents {
+  background: rgba(0, 63, 255, 0.05);
+  border: 2px solid rgba(0, 63, 255, 0.15);
+  border-radius: 8px;
+  padding: 2rem;
+  margin: 2rem 0 3rem;
+
+  h3 {
+    margin-top: 0;
+    margin-bottom: 1.5rem;
+    color: $black;
+    border: none;
+  }
+}
+
+.toc-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fill, minmax(200px, 1fr));
+  gap: 0.75rem;
+
+  a {
+    display: block;
+    padding: 0.75rem 1rem;
+    background: $white;
+    border: 1px solid rgba(128, 128, 128, 0.2);
+    border-radius: 6px;
+    text-decoration: none;
+    color: $black;
+    font-weight: 500;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: rgba(0, 63, 255, 0.08);
+      border-color: rgba(0, 63, 255, 0.3);
+      transform: translateY(-1px);
+      box-shadow: 0 2px 8px rgba(0, 63, 255, 0.15);
+    }
+  }
+
+  @include media-query($on-mobile) {
+    grid-template-columns: 1fr;
+  }
+}

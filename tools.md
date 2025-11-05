@@ -1,16 +1,35 @@
 ---
 title: tools & software
 layout: page
-excerpt: ''
-description: A curated list of best-in-class resources & tools to help you build,
-  grow, and operate your community!
+excerpt: A comprehensive directory of community-building tools, platforms, and resources for creators, entrepreneurs, and community managers.
+description: A curated list of best-in-class resources & tools to help you build, grow, and operate your community! Includes chat platforms, membership tools, event management, forums, and more.
 image: "/uploads/priscilla-du-preez-nf8xhlmmg0c-unsplash.jpeg"
 comments: false
 
 ---
 A curated list of `best-in-class` resources & tools to help you build, grow, and operate your community!
 
-## 💬 — Community, Chat
+<div class="table-of-contents">
+  <h3>Quick Navigation</h3>
+  <div class="toc-grid">
+    <a href="#community-chat">💬 Community & Chat</a>
+    <a href="#membership-tools">⛔ Membership Tools</a>
+    <a href="#event-management">📆 Event Management</a>
+    <a href="#forums">🗣 Forums</a>
+    <a href="#video-voice">📹 Video / Voice</a>
+    <a href="#images">📷 Images</a>
+    <a href="#books">📚 Books</a>
+    <a href="#podcasts">🎤 Podcasts</a>
+    <a href="#newsletters">✉️ Newsletters</a>
+    <a href="#social-media">📈 Social Media</a>
+    <a href="#creator-ops">⚙️ Creator Ops</a>
+    <a href="#creator-communities">💸 Creator Communities</a>
+    <a href="#venture-capital">💰 Venture Capital</a>
+    <a href="#workflows">📙 Workflows & Playbooks</a>
+  </div>
+</div>
+
+## 💬 — Community, Chat {#community-chat}
 
 These are general purpose community and/or chat platforms.
 
@@ -67,7 +86,7 @@ These are general purpose community and/or chat platforms.
 * [Laylo](https://laylo.com/) — Messaging tool from creator to fan
 * [Echofin](https://www.echofin.com/) – All-in-one community management platform.
 
-## ⛔ — Membership Tools
+## ⛔ — Membership Tools {#membership-tools}
 
 Here are a list of tools and platforms to sell subscriptions and manage recurring membership for communities.
 
@@ -91,7 +110,7 @@ Here are a list of tools and platforms to sell subscriptions and manage recurrin
 * [Memberful](https://memberful.com/) — Memberships to audience
 * [Letterdrop](https://letterdrop.co/) — Free & subscription newsletter platform
 
-## 📆 — Event Management
+## 📆 — Event Management {#event-management}
 
 A list of experience and event management tools that can help you curate, manage, engage, and operate online events & experiences.
 
@@ -147,7 +166,7 @@ A list of experience and event management tools that can help you curate, manage
 * [Chapter](https://github.com/freeCodeCamp/chapter) — Self-hosted for non-profits
 * [Reach](https://reach.live/) — Host virtual community events
 
-## 🗣 — Forums
+## 🗣 — Forums {#forums}
 
 Forum-centric software still very much powers the internet! Here are some tools to get you started.
 
@@ -191,7 +210,7 @@ Forum-centric software still very much powers the internet! Here are some tools 
 * [Demio](https://demio.com/) — Effective webinars
 * [Grip](https://grip.events/) — Smart event matchmaking
 
-## 📹 — Video / Voice
+## 📹 — Video / Voice {#video-voice}
 
 Video and voice tools to help your community feel closer.
 
@@ -221,7 +240,7 @@ Video and voice tools to help your community feel closer.
 * [Squadcast.fm](https://squadcast.fm/) — Saas remote recording for podcasters
 * [Kapwing](https://www.kapwing.com/) — Online image, video editing platform
 
-## 📷 — Images
+## 📷 — Images {#images}
 
 Photo and graphic resources to create, edit and publish images for your community platforms.
 
@@ -233,9 +252,9 @@ Photo and graphic resources to create, edit and publish images for your communit
 * [Easelly ](https://easel.ly/)– Design infographics with templates
 * [Logogarden ](https://www.logogarden.com/)– Logo maker – DIY & affordable custom
 
-## 📚 — Books
+## 📚 — Books {#books}
 
-Books that will inspire, encourage, and help you build communities that you’re super-proud of.
+Books that will inspire, encourage, and help you build communities that you're super-proud of.
 
 * [Tribe](https://amzn.to/3pG8cX8): On Homecoming and Belonging
 * [How to Handle a Crowd](https://www.amazon.com/How-Handle-Crowd-Creating-Communities/dp/1982132310/): The Art of Creating Healthy and Dynamic Online Communities
@@ -263,7 +282,7 @@ Books that will inspire, encourage, and help you build communities that you’re
 * [Blueprint for Revolution](https://www.amazon.com/Blueprint-Revolution-Nonviolent-Techniques-Communities/dp/0812995309): How to Use Rice Pudding, Lego Men, and Other Nonviolent Techniques to Galvanize Communities, Overthrow Dictators, or Simply Change the World
 * [Give and Take](https://www.amazon.com/Give-Take-Helping-Others-Success/dp/0143124986): Why Helping Others Drives Our Success
 
-## 🎤 — Podcasts
+## 🎤 — Podcasts {#podcasts}
 
 Trusted community voices over the digital airwaves.
 
@@ -275,13 +294,13 @@ Trusted community voices over the digital airwaves.
 * [In Before The Lock](https://ib4tl.fm/): Hosted by Brian Oblinger and Erica Kuhl
 * [Community Pulse](https://www.communitypulse.io/)
 
-## ✉️ — Newsletters
+## ✉️ — Newsletters {#newsletters}
 
 Time-tested newsletters from Community Thought Leaders.
 
 * [Noelle Flowers](https://www.noeleflowers.com/)
 
-## 📈 — Social Media
+## 📈 — Social Media {#social-media}
 
 Tools to manage the social media flood.
 
@@ -289,14 +308,14 @@ Tools to manage the social media flood.
 * [SproutSocial](https://sproutsocial.com/) — Strong relationships on social
 * [Brand24](https://brand24.com/) — Media monitoring
 
-# ⚙️ — Creator Ops
+# ⚙️ — Creator Ops {#creator-ops}
 
 Tools to manage your world / biz as a creator:
 
 * [Stir](https://www.usestir.com/) — Where creators run their biz
 * [Continuum](https://www.continuum.works/) — Creator OS
 
-## 💸 — Creator Communities
+## 💸 — Creator Communities {#creator-communities}
 
 Communities (free and paid) specifically geared towards helping creators build, grow, and manage communities:
 
@@ -308,7 +327,7 @@ Communities (free and paid) specifically geared towards helping creators build, 
 * [@startupschool](https://twitter.com/startupschool)
 * [@beondeck](https://twitter.com/beondeck)
 
-## 💰 — Venture Capital
+## 💰 — Venture Capital {#venture-capital}
 
 VC firms that invest in community-first / PLC startups.
 
@@ -326,7 +345,7 @@ VC firms that invest in community-first / PLC startups.
 * [Earnest Capital](https://earnestcapital.com/) — Earnest money for…
 * [Stride ](http://stride.vc/)– “easy to approach but tough to get money from”
 
-# 📙 — Workflows, Playbooks
+# 📙 — Workflows, Playbooks {#workflows}
 
 Playbooks for building and managing communities.
 

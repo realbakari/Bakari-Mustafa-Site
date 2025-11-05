@@ -1,9 +1,9 @@
 ---
 title: Social Links
 layout: page
-excerpt: ''
-description: ''
-image: ''
+excerpt: Connect with me across social media platforms - LinkedIn, Twitter, Instagram, Facebook, TikTok, Snapchat, YouTube, and Telegram.
+description: Follow Bakari Mustafa on social media. Connect on LinkedIn, Twitter, Instagram, Facebook, TikTok, Snapchat, YouTube, and Telegram for updates, insights, and community engagement.
+image: '/uploads/bakari_mustafa.jpg'
 comments: false
 
 ---
