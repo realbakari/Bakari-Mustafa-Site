@@ -11,7 +11,40 @@ description: For all inquiries please use the form below. I may not be able to r
 image: "/uploads/volodymyr-hryshchenko-v5vqwc9gyeu-unsplash.jpg"
 
 ---
-I would love to hear from you. If you have any questions or comments about the website, please feel free to reach out to me using the contact information below.
+I would love to hear from you. If you have any questions or comments about the website, please feel free to reach out using the form below or through the contact information provided.
+
+## Get in Touch
+
+<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+  <p style="display:none;">
+    <label>Don't fill this out if you're human: <input name="bot-field" /></label>
+  </p>
+  <input type="hidden" name="form-name" value="contact" />
+
+  <div class="form-group">
+    <label for="name">Name <span class="required">*</span></label>
+    <input type="text" name="name" id="name" required placeholder="Your name">
+  </div>
+
+  <div class="form-group">
+    <label for="email">Email <span class="required">*</span></label>
+    <input type="email" name="email" id="email" required placeholder="your@email.com">
+  </div>
+
+  <div class="form-group">
+    <label for="subject">Subject <span class="required">*</span></label>
+    <input type="text" name="subject" id="subject" required placeholder="What's this about?">
+  </div>
+
+  <div class="form-group">
+    <label for="message">Message <span class="required">*</span></label>
+    <textarea name="message" id="message" rows="6" required placeholder="Your message here..."></textarea>
+  </div>
+
+  <button type="submit" class="form-submit">Send Message</button>
+</form>
+
+## Other Ways to Reach Me
 
 Feel free to send me a direct message on [LinkedIn](https://www.linkedin.com/in/realbakari/ "LinkedIn") or [Instagram](https://instagram.com/realbakari "Instagram"). Alternatively, you can email me directly at [contact@bakarimustafa.com](mailto:contact@bakarimustafa.com "Email"). I may not be able to respond to every message, but for relevant inquiries, I try to respond within a few business days.
 
