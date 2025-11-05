@@ -980,4 +980,105 @@ body[data-theme="dark"] {
       }
     }
   }
+
+  // Wattpad Collections Dark Mode
+  .wattpad-header {
+    background: linear-gradient(135deg, rgba(0, 63, 255, 0.08) 0%, rgba(0, 63, 255, 0.04) 100%);
+    border-color: rgba(0, 63, 255, 0.2);
+  }
+
+  .wattpad-profile-info {
+    h2 {
+      color: $dark-white;
+    }
+  }
+
+  .wattpad-bio {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .wattpad-follow-button {
+    background: #FF500A;
+    color: $dark-white;
+
+    &:hover {
+      background: #E64A09;
+      box-shadow: 0 6px 16px rgba(255, 80, 10, 0.4);
+    }
+  }
+
+  .wattpad-story-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.25);
+      border-color: rgba(0, 63, 255, 0.4);
+    }
+  }
+
+  .wattpad-story-title {
+    a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  .wattpad-story-description {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .wattpad-story-meta {
+    border-top-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    .meta-item {
+      color: rgba(255, 255, 255, 0.6);
+
+      svg {
+        color: $dark-text-link-blue;
+      }
+
+      .meta-value {
+        color: $dark-white;
+      }
+    }
+  }
+
+  .wattpad-story-tags {
+    .tag {
+      background: rgba(0, 63, 255, 0.15);
+      color: $dark-text-link-blue;
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.25);
+      }
+    }
+  }
+
+  .wattpad-cta {
+    background: linear-gradient(135deg, rgba(0, 63, 255, 0.08) 0%, rgba(255, 80, 10, 0.08) 100%);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .wattpad-cta-button {
+    background: #FF500A;
+    color: $dark-white;
+
+    &:hover {
+      background: #E64A09;
+      box-shadow: 0 6px 16px rgba(255, 80, 10, 0.5);
+    }
+  }
 }
