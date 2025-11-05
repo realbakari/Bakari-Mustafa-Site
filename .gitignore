@@ -4,3 +4,6 @@ _site/
 .jekyll-metadata
 _drafts
 klise-*.gem
+.env
+.env.local
+assets/js/supabase-config.js

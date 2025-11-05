@@ -1616,4 +1616,64 @@ body[data-theme="dark"] {
       color: rgba(255, 255, 255, 0.7);
     }
   }
+
+  // Page View Counter Dark Mode
+  .page-view-counter {
+    color: rgba(255, 255, 255, 0.6);
+
+    svg {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .view-count-number {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-icon {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .stat-value {
+      color: $dark-white;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .popular-post-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .popular-post-title {
+      color: $dark-white;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .post-rank {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .popular-post-views {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
 }

@@ -1,0 +1,13 @@
+# Netlify Configuration
+# https://docs.netlify.com/configure-builds/file-based-configuration/
+
+[build]
+  # Generate Supabase config from env vars, then build Jekyll
+  command = "./generate-config.sh && jekyll build"
+  publish = "_site"
+
+[build.environment]
+  JEKYLL_ENV = "production"
+
+# Set SUPABASE_URL and SUPABASE_ANON_KEY in:
+# Netlify UI > Site settings > Environment variables
