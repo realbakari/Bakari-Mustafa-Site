@@ -5,10 +5,27 @@ layout: none
 [
   {% for post in site.posts %}
     {
-      "title"    : "{{ post.title | escape }}",
-      "tags"     : "{{ post.tags | join: ', ' }}",
-      "url"      : "{{ site.baseurl }}{{ post.url }}",
-      "date"     : "{{ post.date }}"
-    } {% unless forloop.last %},{% endunless %}
+      "title"       : "{{ post.title | escape }}",
+      "tags"        : "{{ post.tags | join: ', ' }}",
+      "category"    : "{{ post.category | default: 'Uncategorized' }}",
+      "url"         : "{{ site.baseurl }}{{ post.url }}",
+      "date"        : "{{ post.date | date: '%B %d, %Y' }}",
+      "description" : "{{ post.description | default: post.excerpt | strip_html | strip_newlines | escape | truncate: 200 }}",
+      "type"        : "post"
+    }{% unless forloop.last %},{% endunless %}
+  {% endfor %}
+  {% assign pages_to_exclude = '/404.html,/search/,/posts/,/thank-you/' | split: ',' %}
+  {% for page in site.pages %}
+    {% unless pages_to_exclude contains page.url or page.url contains '/assets/' or page.layout == nil %}
+    ,{
+      "title"       : "{{ page.title | escape }}",
+      "tags"        : "{{ page.tags | join: ', ' }}",
+      "category"    : "{{ page.category | default: 'Page' }}",
+      "url"         : "{{ site.baseurl }}{{ page.url }}",
+      "date"        : "",
+      "description" : "{{ page.excerpt | default: page.description | strip_html | strip_newlines | escape | truncate: 200 }}",
+      "type"        : "page"
+    }
+    {% endunless %}
   {% endfor %}
 ]
