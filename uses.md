@@ -150,7 +150,7 @@ People often ask me what tools and technology I use for my work in community bui
 ### Communication & Email
 
 **Email Providers:**
-- **Gmail** - contact@bakarimustafa.com (primary)
+- **Gmail** - bakari@bakarimustafa.com (primary)
 - **Outlook** - Organizational work
 
 **Business Tools:**
@@ -293,7 +293,7 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 
 **Want to know more about any of these tools?**
 - Reach out on [Twitter](https://twitter.com/realbakari) or [LinkedIn](https://www.linkedin.com/in/realbakari/)
-- Email me at [contact@bakarimustafa.com](mailto:contact@bakarimustafa.com)
+- Email me at [bakari@bakarimustafa.com](mailto:bakari@bakarimustafa.com)
 
 **Building a community and need advice?**
 - Happy to share what's worked (and what hasn't!)

@@ -39,10 +39,11 @@ I'm actively serving on the leadership team at [Networking African-Australians](
 
 ### Mentors Outreach
 
-Continuing to scale our mentorship platform, connecting young professionals with experienced mentors in their fields of interest. Currently working on:
-- Expanding mentor network in tech and entrepreneurship
-- Improving matching algorithms for better mentor-mentee connections
-- Developing new resources for effective mentorship
+I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit organization I founded in August 2019 in Brisbane, Queensland. Our mission is to advance education, professional development, and community empowerment through mentorship programs and collaborative initiatives. Currently working on:
+- Expanding our mentor network in tech, entrepreneurship, and creative industries
+- Building our community platform for knowledge sharing and networking
+- Developing learning resources including webinars, online courses, and workshops
+- Creating more career-boosting mentorship opportunities for young professionals
 
 ---
 
@@ -91,7 +92,7 @@ Continuing to scale our mentorship platform, connecting young professionals with
 5. **Build Partnerships** - Establish 5 new partnerships with organizations supporting African-Australian youth
 
 **Personal Development:**
-6. **Fitness & Wellbeing** - Maintain consistent exercise routine (3x/week) and meditation practice
+6. **Technology & Business Analysis** - Learning about Large Language Models (LLMs), Enterprise Architecture, and completing the IIBA ECBA (Entry Certificate in Business Analysis) exam
 7. **Reading** - Complete 12 books by end of year (currently at 8)
 8. **Network Growth** - Attend 4 community events to expand partnerships and collaborations
 
@@ -135,7 +136,7 @@ Currently based in **Melbourne, Victoria, Australia**, working both in-person an
 ## 📬 Get In Touch
 
 If any of this resonates with you:
-- Want to collaborate on community programs? [Email me](mailto:contact@bakarimustafa.com)
+- Want to collaborate on community programs? [Email me](mailto:bakari@bakarimustafa.com)
 - Need a speaker on youth empowerment or refugee experience? Check my [press kit](/press-kit)
 - Looking for mentorship? Reach out through [Mentors Outreach](https://mentorsoutreach.org)
 - Just want to say hi? I'm most active on [LinkedIn](https://www.linkedin.com/in/realbakari/) and [Twitter](https://twitter.com/realbakari)

@@ -83,11 +83,11 @@ Under GDPR and other privacy regulations, you have the right to:
 - Request transfer of your personal data
 - Withdraw consent at any time
 
-To exercise any of these rights, please contact me at contact@bakarimustafa.com.
+To exercise any of these rights, please contact me at bakari@bakarimustafa.com.
 
 ### Complaints
 
-If you've any reason to complain about the ways I handle your privacy, please contact me (Bakari Mustafa) by email at contact@bakarimustafa.com.
+If you've any reason to complain about the ways I handle your privacy, please contact me (Bakari Mustafa) by email at bakari@bakarimustafa.com.
 
 Thank you for visiting my official website. We take your privacy seriously and will do our best to protect your personal information.
 

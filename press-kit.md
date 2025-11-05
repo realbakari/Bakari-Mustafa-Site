@@ -90,7 +90,7 @@ Bakari is available for speaking engagements on topics including:
 
 **For Media Inquiries:**
 - Email: [media@bakarimustafa.com](mailto:media@bakarimustafa.com)
-- General Contact: [contact@bakarimustafa.com](mailto:contact@bakarimustafa.com)
+- General Contact: [bakari@bakarimustafa.com](mailto:bakari@bakarimustafa.com)
 
 **For Speaking Engagement Requests:**
 Please include:
