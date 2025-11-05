@@ -89,13 +89,6 @@ body[data-theme="dark"] {
     }
   }
 
-  // Post Stats
-  .post-stats {
-    .post-views-badge {
-      opacity: 0.9;
-    }
-  }
-
   // Link
   a {
     color: inherit;
@@ -273,6 +266,12 @@ body[data-theme="dark"] {
   // Posts item note
   .posts-item-note {
     color: $dark-white;
+  }
+
+  // Year headers
+  .posts-year-header {
+    color: $dark-white;
+    border-bottom-color: rgba(255, 82, 119, 0.3);
   }
 
   // Post Navigation

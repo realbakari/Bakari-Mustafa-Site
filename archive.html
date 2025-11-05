@@ -15,15 +15,35 @@ comments: false
 
 <ul id="search-results"></ul>
 
+<div class="posts-list">
 {%- for post in site.posts -%}
   {%- capture current_year -%}{{ post.date | date: "%Y" }}{%- endcapture -%}
   {%- unless current_year == previous_year -%}
-    <h2>{{ current_year }}</h2>
+    <h2 class="posts-year-header">{{ current_year }}</h2>
     {%- assign previous_year = current_year -%}
   {%- endunless -%}
-  <article class="post-item">
-    <h3 class="post-item-title">
-      <a href="{{ post.url }}">{{ post.title | escape }}</a>
-    </h3> 
+  <article class="post-card">
+    <div class="post-card-content">
+      <div class="post-card-meta">
+        <span class="post-item-date">{{ post.date | date: "%b %d, %Y" }}</span>
+        {% if post.tags and post.tags != empty %}
+        <span class="post-card-tags">
+          {% for tag in post.tags limit:2 %}
+          <span class="post-tag">{{ tag }}</span>
+          {% endfor %}
+        </span>
+        {% endif %}
+      </div>
+      <h3 class="post-item-title">
+        <a href="{{ post.url }}">{{ post.title | escape }}</a>
+      </h3>
+      {% if post.description %}
+      <p class="post-card-description">{{ post.description | strip_html | truncate: 150 }}</p>
+      {% elsif post.excerpt %}
+      <p class="post-card-description">{{ post.excerpt | strip_html | truncate: 150 }}</p>
+      {% endif %}
+      <a href="{{ post.url }}" class="read-more">Read more →</a>
+    </div>
   </article>
 {%- endfor -%}
+</div>
