@@ -14,4 +14,4 @@ By visiting and using bakarimustafa.com, you agree to be bound by the following 
 3. **Changes to the Terms and Conditions**: We reserve the right to make changes to these terms and conditions at any time. We will notify you of any changes by posting the new terms and conditions on the website.
 4. **Governing Law**: These terms and conditions shall be governed by and construed in accordance with the laws of Australia, without giving effect to any principles of conflicts of law.
 
-Thank you for visiting my official website. We hope you find the information provided on our website useful and informative. If you have any questions about these terms and conditions, please contact us at contact@bakarimustafa.com.
+Thank you for visiting my official website. We hope you find the information provided on our website useful and informative. If you have any questions about these terms and conditions, please contact us at bakari@bakarimustafa.com.

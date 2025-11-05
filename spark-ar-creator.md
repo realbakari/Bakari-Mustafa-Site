@@ -25,4 +25,4 @@ If you are interested in accessing many of my project files for popular effects,
 
 Please email for business, collaboration, or speaking requests.
 
-[Email ](mailto:contact@bakarimustafa.com "Email Address")| [Contact](https://bakarimustafa.com/contact/ "Contact")
+[Email ](mailto:bakari@bakarimustafa.com "Email Address")| [Contact](https://bakarimustafa.com/contact/ "Contact")

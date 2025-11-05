@@ -90,7 +90,7 @@ Reading has transformed my life in countless ways. It's helped me:
 
 ## 📬 Book Recommendations
 
-Have a book recommendation for me? I'd love to hear it! Feel free to [reach out on Twitter](https://twitter.com/realbakari) or [send me an email](mailto:contact@bakarimustafa.com).
+Have a book recommendation for me? I'd love to hear it! Feel free to [reach out on Twitter](https://twitter.com/realbakari) or [send me an email](mailto:bakari@bakarimustafa.com).
 
 ---
 

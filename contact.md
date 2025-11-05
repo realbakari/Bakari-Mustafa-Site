@@ -46,7 +46,7 @@ I would love to hear from you. If you have any questions or comments about the w
 
 ## Other Ways to Reach Me
 
-Feel free to send me a direct message on [LinkedIn](https://www.linkedin.com/in/realbakari/ "LinkedIn") or [Instagram](https://instagram.com/realbakari "Instagram"). Alternatively, you can email me directly at [contact@bakarimustafa.com](mailto:contact@bakarimustafa.com "Email"). I may not be able to respond to every message, but for relevant inquiries, I try to respond within a few business days.
+Feel free to send me a direct message on [LinkedIn](https://www.linkedin.com/in/realbakari/ "LinkedIn") or [Instagram](https://instagram.com/realbakari "Instagram"). Alternatively, you can email me directly at [bakari@bakarimustafa.com](mailto:bakari@bakarimustafa.com "Email"). I may not be able to respond to every message, but for relevant inquiries, I try to respond within a few business days.
 
 **Mailing Address**
 
