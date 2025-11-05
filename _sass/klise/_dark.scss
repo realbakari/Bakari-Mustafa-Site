@@ -196,49 +196,55 @@ body[data-theme="dark"] {
     border-color: rgba(255, 255, 255, 0.1);
 
     &:hover {
-      border-color: rgba(255, 82, 119, 0.4);
-      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
 
     .post-item-date {
-      color: $dark-gray;
+      color: rgba(255, 255, 255, 0.6);
     }
 
     .post-tag {
-      background-color: rgba(255, 82, 119, 0.15);
-      color: $dark-text-link-blue;
+      background-color: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
     }
 
     .post-item-title a {
       color: $dark-white;
 
       &:hover {
-        color: $dark-text-link-blue;
+        color: rgba(255, 255, 255, 0.7);
       }
     }
 
     .post-card-description {
-      color: $dark-text-base-color;
+      color: rgba(255, 255, 255, 0.7);
     }
 
     .read-more {
-      color: $dark-text-link-blue;
+      color: $dark-white;
 
       &:hover {
-        color: $dark-text-link-blue-active;
+        color: rgba(255, 255, 255, 0.7);
       }
     }
   }
 
   // View all link
   .view-all-link {
-    background-color: $dark-text-link-blue;
-    color: $dark-white;
-    box-shadow: 0 2px 4px rgba(255, 82, 119, 0.3);
+    background-color: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
+    box-shadow: none;
 
     &:hover {
-      background-color: $dark-text-link-blue-active;
-      box-shadow: 0 4px 8px rgba(255, 82, 119, 0.4);
+      background-color: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.95);
     }
   }
 
@@ -360,14 +366,14 @@ body[data-theme="dark"] {
   }
 
   .solution-link {
-    background: rgba(255, 82, 119, 0.1);
-    border-color: rgba(255, 82, 119, 0.3);
-    color: $dark-text-link-blue;
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: $dark-white;
 
     &:hover {
-      background: rgba(255, 82, 119, 0.15);
-      border-color: rgba(255, 82, 119, 0.5);
-      box-shadow: 0 4px 12px rgba(255, 82, 119, 0.2);
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
     }
   }
 
@@ -381,12 +387,12 @@ body[data-theme="dark"] {
 
   .search-input-404 {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.2);
+    border-color: rgba(255, 255, 255, 0.15);
     color: $dark-white;
 
     &:focus {
-      border-color: rgba(255, 82, 119, 0.4);
-      box-shadow: 0 0 0 3px rgba(255, 82, 119, 0.1);
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
     }
 
     &::placeholder {
@@ -395,11 +401,18 @@ body[data-theme="dark"] {
   }
 
   .search-button-404 {
-    background: $dark-text-link-blue;
+    background: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
 
     &:hover {
-      background: $dark-text-link-blue-active;
-      box-shadow: 0 4px 12px rgba(255, 82, 119, 0.4);
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.95);
     }
   }
 
@@ -412,18 +425,22 @@ body[data-theme="dark"] {
   .form-group {
     label {
       color: $dark-white;
+
+      .required {
+        color: rgba(255, 255, 255, 0.5);
+      }
     }
 
     input[type="text"],
     input[type="email"],
     textarea {
       background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(255, 255, 255, 0.2);
+      border-color: rgba(255, 255, 255, 0.15);
       color: $dark-white;
 
       &:focus {
-        border-color: rgba(255, 82, 119, 0.4);
-        box-shadow: 0 0 0 3px rgba(255, 82, 119, 0.1);
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
       }
 
       &::placeholder {
@@ -433,11 +450,18 @@ body[data-theme="dark"] {
   }
 
   .form-submit {
-    background: $dark-text-link-blue;
+    background: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
 
     &:hover {
-      background: $dark-text-link-blue-active;
-      box-shadow: 0 4px 16px rgba(255, 82, 119, 0.4);
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.95);
     }
   }
 
