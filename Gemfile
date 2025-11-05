@@ -13,6 +13,10 @@ gem "jekyll", "~> 4.3.0"
 # Required for Ruby 3.0+
 gem "webrick", "~> 1.8"
 
+# Required for Ruby 3.4+ (removed from standard library)
+gem "csv", "~> 3.2"
+gem "logger", "~> 1.6"
+
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
