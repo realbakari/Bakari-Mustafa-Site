@@ -9,9 +9,17 @@
   border-bottom: 1px solid rgba(128, 128, 128, 0.15);
   padding: 1.25rem $spacing-full;
   @extend %clearfix;
-  backdrop-filter: blur(10px);
-  background-color: rgba(255, 255, 255, 0.8);
-  transition: all 0.3s ease;
+
+  @include media-query($on-mobile) {
+    backdrop-filter: none;
+    background-color: $white;
+  }
+
+  @media (min-width: 769px) {
+    backdrop-filter: blur(10px);
+    background-color: rgba(255, 255, 255, 0.8);
+    transition: all 0.3s ease;
+  }
 }
 
 // Navigation
@@ -129,6 +137,7 @@
     a#mode {
       left: 10px;
       top: 12px;
+      z-index: 1001;
     }
 
     .menu-icon {
@@ -142,7 +151,7 @@
       padding-bottom: 15px;
       cursor: pointer;
       text-align: center;
-      z-index: 1;
+      z-index: 1001;
       > svg {
         fill: $black;
         opacity: 0.7;
@@ -175,6 +184,8 @@
       height: 100vh;
       width: 100%;
       top: 0;
+      left: 0;
+      z-index: 1000;
     }
 
     .menu-link {
