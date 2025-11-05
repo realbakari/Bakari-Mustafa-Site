@@ -8,7 +8,10 @@ source "https://rubygems.org"
 #
 # This will help ensure the proper Jekyll version is running.
 # Happy Jekylling!
-gem "jekyll", "~> 4.1.0"
+gem "jekyll", "~> 4.3.0"
+
+# Required for Ruby 3.0+
+gem "webrick", "~> 1.8"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 
