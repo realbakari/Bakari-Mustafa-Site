@@ -1038,7 +1038,7 @@
   gap: 3rem;
   padding-bottom: 2rem;
 
-  @include media-query($on-laptop) {
+  @include media-query($on-tablet) {
     grid-template-columns: repeat(2, 1fr);
     gap: 2rem;
   }
