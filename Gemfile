@@ -17,6 +17,8 @@ gem "webrick", "~> 1.8"
 gem "csv", "~> 3.2"
 gem "logger", "~> 1.6"
 gem "base64", "~> 0.2.0"
+gem "bigdecimal", "~> 3.1"
+gem "mutex_m", "~> 0.2.0"
 
 # This is the default theme for new Jekyll sites. You may change this to anything you like.
 
