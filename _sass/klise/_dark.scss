@@ -1081,4 +1081,274 @@ body[data-theme="dark"] {
       box-shadow: 0 6px 16px rgba(255, 80, 10, 0.5);
     }
   }
+
+  // Enhanced Posts Page Dark Mode
+  .posts-page-header {
+    border-bottom-color: rgba(0, 63, 255, 0.2);
+  }
+
+  .posts-header-content {
+    .posts-main-title {
+      color: $dark-white;
+    }
+
+    .posts-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .posts-stats {
+      .stat-item {
+        background: rgba(0, 63, 255, 0.1);
+        border-color: rgba(0, 63, 255, 0.25);
+        color: $dark-white;
+
+        svg {
+          color: $dark-text-link-blue;
+        }
+
+        .stat-value {
+          color: $dark-text-link-blue;
+        }
+      }
+    }
+  }
+
+  // Enhanced Search Container Dark Mode
+  .enhanced-search-container {
+    @include media-query($on-mobile) {
+      background: $dark-black;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .search-article-enhanced {
+    input[type="search"] {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 63, 255, 0.3);
+      color: $dark-white;
+
+      &:focus {
+        border-color: $dark-text-link-blue;
+        box-shadow: 0 0 0 4px rgba(0, 63, 255, 0.15);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .clear-search-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: $dark-white;
+      }
+    }
+  }
+
+  .search-status {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  // Filter Controls Dark Mode
+  .posts-filters {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+  }
+
+  .filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 63, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+
+    &:hover {
+      background: rgba(0, 63, 255, 0.15);
+      border-color: rgba(0, 63, 255, 0.5);
+      color: $dark-white;
+    }
+
+    &.active {
+      background: $dark-text-link-blue;
+      border-color: $dark-text-link-blue;
+      color: $dark-white;
+      box-shadow: 0 2px 8px rgba(0, 63, 255, 0.4);
+    }
+  }
+
+  .sort-label {
+    color: $dark-white;
+  }
+
+  .sort-select {
+    background: rgba(255, 255, 255, 0.05) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23FF5277" d="M6 9L1 4h10z"/></svg>') no-repeat right 0.75rem center;
+    border-color: rgba(0, 63, 255, 0.3);
+    color: $dark-white;
+
+    &:hover {
+      border-color: rgba(0, 63, 255, 0.5);
+      background-color: rgba(0, 63, 255, 0.08);
+    }
+
+    &:focus {
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.15);
+    }
+  }
+
+  // Popular Tags Section Dark Mode
+  .popular-tags-section {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .tags-section-title {
+      color: $dark-white;
+
+      &::before {
+        background: $dark-text-link-blue;
+      }
+    }
+
+    .tag-filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.7);
+
+      .tag-count {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.15);
+        border-color: rgba(0, 63, 255, 0.4);
+        color: $dark-text-link-blue;
+
+        .tag-count {
+          color: $dark-text-link-blue;
+        }
+      }
+
+      &.active {
+        background: rgba(0, 63, 255, 0.2);
+        border-color: $dark-text-link-blue;
+        color: $dark-text-link-blue;
+
+        .tag-count {
+          color: $dark-text-link-blue;
+        }
+      }
+    }
+  }
+
+  // Search Results Container Dark Mode
+  .search-results-container {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.25);
+
+    .search-results-header {
+      h3 {
+        color: $dark-white;
+      }
+
+      .clear-results-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(0, 63, 255, 0.3);
+        color: $dark-text-link-blue;
+
+        &:hover {
+          background: $dark-text-link-blue;
+          border-color: $dark-text-link-blue;
+          color: $dark-white;
+        }
+      }
+    }
+
+    .no-results-message {
+      svg {
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      h4 {
+        color: $dark-white;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Enhanced Post Cards Dark Mode
+  .posts-list {
+    .posts-year-header {
+      color: $dark-white;
+      border-bottom-color: $dark-text-link-blue;
+
+      .year-post-count {
+        background: rgba(0, 63, 255, 0.2);
+        color: $dark-text-link-blue;
+      }
+    }
+
+    .post-card.enhanced {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        border-color: rgba(0, 63, 255, 0.4);
+        box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+      }
+
+      .post-card-meta {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+
+        .post-item-date,
+        .post-reading-time {
+          color: rgba(255, 255, 255, 0.6);
+
+          svg {
+            color: $dark-text-link-blue;
+          }
+        }
+      }
+
+      .post-item-title {
+        a {
+          color: $dark-white;
+
+          &:hover {
+            color: $dark-text-link-blue;
+          }
+        }
+      }
+
+      .post-card-description {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .post-card-footer {
+        border-top-color: rgba(255, 255, 255, 0.1);
+
+        .post-card-tags {
+          .post-tag {
+            background: rgba(0, 63, 255, 0.15);
+            color: $dark-text-link-blue;
+
+            &:hover {
+              background: rgba(0, 63, 255, 0.25);
+            }
+          }
+        }
+
+        .read-more {
+          color: $dark-text-link-blue;
+
+          &:hover {
+            color: $dark-text-link-blue-active;
+          }
+        }
+      }
+    }
+  }
 }

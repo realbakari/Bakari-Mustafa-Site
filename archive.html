@@ -6,33 +6,138 @@ excerpt: All post.
 comments: false
 
 ---
-<div class="search-article">
-  <label for="search-input" aria-hidden="true">
-    <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(128,128,128,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
-  </label>
-  <input type="search" id="search-input" placeholder="Find some articles here" aria-label="Search">
+<!-- Page Header with Stats -->
+<div class="posts-page-header">
+  <div class="posts-header-content">
+    <h1 class="posts-main-title">Writing</h1>
+    <p class="posts-subtitle">Thoughts, insights, and stories on technology, leadership, and community building.</p>
+    <div class="posts-stats">
+      <span class="stat-item">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
+        <span class="stat-value">{{ site.posts | size }}</span> articles
+      </span>
+    </div>
+  </div>
 </div>
 
-<ul id="search-results"></ul>
+<!-- Enhanced Search -->
+<div class="enhanced-search-container">
+  <div class="search-article-enhanced">
+    <label for="search-input" aria-hidden="true">
+      <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="rgba(128,128,128,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="feather feather-search"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    </label>
+    <input type="search" id="search-input" placeholder="Search articles by title, tags, or content..." aria-label="Search">
+    <button type="button" id="clear-search" class="clear-search-btn" aria-label="Clear search" style="display: none;">
+      <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+    </button>
+  </div>
+  <div id="search-status" class="search-status"></div>
+</div>
 
-<div class="posts-list">
+<!-- Filter Controls -->
+<div class="posts-filters">
+  <div class="filter-section year-filters">
+    <button class="filter-btn year-filter-btn active" data-year="all">All Years</button>
+    {%- assign years = "" | split: "" -%}
+    {%- for post in site.posts -%}
+      {%- assign year = post.date | date: "%Y" -%}
+      {%- unless years contains year -%}
+        {%- assign years = years | push: year -%}
+      {%- endunless -%}
+    {%- endfor -%}
+    {%- assign sorted_years = years | sort | reverse -%}
+    {%- for year in sorted_years -%}
+    <button class="filter-btn year-filter-btn" data-year="{{ year }}">{{ year }}</button>
+    {%- endfor -%}
+  </div>
+
+  <div class="filter-section sort-filters">
+    <label for="sort-select" class="sort-label">Sort by:</label>
+    <select id="sort-select" class="sort-select">
+      <option value="newest">Newest First</option>
+      <option value="oldest">Oldest First</option>
+      <option value="title">Title (A-Z)</option>
+    </select>
+  </div>
+</div>
+
+<!-- Popular Tags -->
+<div class="popular-tags-section">
+  <h3 class="tags-section-title">Popular Topics</h3>
+  <div class="tags-cloud">
+    {%- assign all_tags = "" | split: "" -%}
+    {%- for post in site.posts -%}
+      {%- for tag in post.tags -%}
+        {%- assign all_tags = all_tags | push: tag -%}
+      {%- endfor -%}
+    {%- endfor -%}
+    {%- assign unique_tags = all_tags | uniq | sort -%}
+    {%- for tag in unique_tags limit:15 -%}
+      {%- assign tag_count = 0 -%}
+      {%- for post in site.posts -%}
+        {%- if post.tags contains tag -%}
+          {%- assign tag_count = tag_count | plus: 1 -%}
+        {%- endif -%}
+      {%- endfor -%}
+    <button class="tag-filter-btn" data-tag="{{ tag }}">
+      {{ tag }} <span class="tag-count">({{ tag_count }})</span>
+    </button>
+    {%- endfor -%}
+  </div>
+</div>
+
+<!-- Search Results Container -->
+<div id="search-results-container" class="search-results-container" style="display: none;">
+  <div class="search-results-header">
+    <h3 id="search-results-title"></h3>
+    <button id="clear-results" class="clear-results-btn">Show All Posts</button>
+  </div>
+  <ul id="search-results" class="search-results-list"></ul>
+  <div id="no-results" class="no-results-message" style="display: none;">
+    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round"><circle cx="11" cy="11" r="8"></circle><line x1="21" y1="21" x2="16.65" y2="16.65"></line></svg>
+    <h4>No articles found</h4>
+    <p>Try adjusting your search terms or filters</p>
+  </div>
+</div>
+
+<!-- Posts List -->
+<div class="posts-list" id="posts-list">
+{%- assign post_count_by_year = "" -%}
 {%- for post in site.posts -%}
   {%- capture current_year -%}{{ post.date | date: "%Y" }}{%- endcapture -%}
   {%- unless current_year == previous_year -%}
-    <h2 class="posts-year-header">{{ current_year }}</h2>
+    {%- assign year_count = 0 -%}
+    {%- for p in site.posts -%}
+      {%- assign p_year = p.date | date: "%Y" -%}
+      {%- if p_year == current_year -%}
+        {%- assign year_count = year_count | plus: 1 -%}
+      {%- endif -%}
+    {%- endfor -%}
+    <div class="year-section" data-year="{{ current_year }}" id="year-{{ current_year }}">
+      <h2 class="posts-year-header">
+        {{ current_year }}
+        <span class="year-post-count">{{ year_count }} article{% if year_count != 1 %}s{% endif %}</span>
+      </h2>
     {%- assign previous_year = current_year -%}
+  {%- else -%}
+    {%- unless forloop.first -%}
   {%- endunless -%}
-  <article class="post-card">
+  {%- endunless -%}
+  <article class="post-card enhanced" data-year="{{ post.date | date: '%Y' }}" data-date="{{ post.date | date: '%Y%m%d' }}" data-title="{{ post.title | escape }}">
     <div class="post-card-content">
       <div class="post-card-meta">
-        <span class="post-item-date">{{ post.date | date: "%b %d, %Y" }}</span>
-        {% if post.tags and post.tags != empty %}
-        <span class="post-card-tags">
-          {% for tag in post.tags limit:2 %}
-          <span class="post-tag">{{ tag }}</span>
-          {% endfor %}
+        <span class="post-item-date">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+          {{ post.date | date: "%b %d, %Y" }}
         </span>
-        {% endif %}
+        {%- if post.content -%}
+          {%- assign words = post.content | number_of_words -%}
+          {%- assign reading_time = words | divided_by: 200 | at_least: 1 -%}
+        <span class="post-reading-time">
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+          {{ reading_time }} min read
+        </span>
+        {%- endif -%}
       </div>
       <h3 class="post-item-title">
         <a href="{{ post.url }}">{{ post.title | escape }}</a>
@@ -42,8 +147,32 @@ comments: false
       {% elsif post.excerpt %}
       <p class="post-card-description">{{ post.excerpt | strip_html | truncate: 150 }}</p>
       {% endif %}
-      <a href="{{ post.url }}" class="read-more">Read more →</a>
+      <div class="post-card-footer">
+        {% if post.tags and post.tags != empty %}
+        <div class="post-card-tags">
+          {% for tag in post.tags limit:3 %}
+          <span class="post-tag">{{ tag }}</span>
+          {% endfor %}
+        </div>
+        {% endif %}
+        <a href="{{ post.url }}" class="read-more">
+          Read more
+          <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg>
+        </a>
+      </div>
     </div>
   </article>
+  {%- if forloop.last -%}
+    </div>
+  {%- else -%}
+    {%- assign next_year = forloop.index0 | plus: 1 -%}
+    {%- assign next_post = site.posts[next_year] -%}
+    {%- if next_post -%}
+      {%- assign next_post_year = next_post.date | date: "%Y" -%}
+      {%- if next_post_year != current_year -%}
+    </div>
+      {%- endif -%}
+    {%- endif -%}
+  {%- endif -%}
 {%- endfor -%}
 </div>
