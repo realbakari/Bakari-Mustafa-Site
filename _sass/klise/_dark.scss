@@ -1351,4 +1351,245 @@ body[data-theme="dark"] {
       }
     }
   }
+
+  // Dedicated Search Page Dark Mode
+  .search-page-header-content {
+    .search-page-icon {
+      color: $dark-text-link-blue;
+    }
+
+    .search-page-title {
+      color: $dark-white;
+    }
+
+    .search-page-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Main Search Container Dark Mode
+  .main-search-wrapper {
+    input[type="search"] {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 63, 255, 0.3);
+      color: $dark-white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      &:focus {
+        border-color: $dark-text-link-blue;
+        box-shadow: 0 4px 16px rgba(0, 63, 255, 0.25);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .clear-main-search-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: $dark-white;
+      }
+    }
+  }
+
+  // Search Hints Dark Mode
+  .search-hints {
+    .hint-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .search-hint-btn {
+      background: rgba(0, 63, 255, 0.15);
+      border-color: rgba(0, 63, 255, 0.3);
+      color: $dark-text-link-blue;
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.25);
+        border-color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  // Search Filters Dark Mode
+  .search-filters {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    .filter-section {
+      .filter-label {
+        color: $dark-white;
+      }
+
+      .search-filter-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(0, 63, 255, 0.3);
+        color: rgba(255, 255, 255, 0.7);
+
+        &:hover {
+          background: rgba(0, 63, 255, 0.15);
+          border-color: rgba(0, 63, 255, 0.5);
+          color: $dark-white;
+        }
+
+        &.active {
+          background: $dark-text-link-blue;
+          border-color: $dark-text-link-blue;
+          color: $dark-white;
+          box-shadow: 0 2px 8px rgba(0, 63, 255, 0.4);
+        }
+      }
+    }
+  }
+
+  // Search Stats Dark Mode
+  .search-stats {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  // Search Result Item Dark Mode
+  .search-result-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(0, 63, 255, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    .result-header {
+      .result-type-badge {
+        &.type-post {
+          background: rgba(0, 63, 255, 0.2);
+          color: $dark-text-link-blue;
+        }
+
+        &.type-page {
+          background: rgba(16, 185, 129, 0.2);
+          color: #10B981;
+        }
+      }
+
+      .result-date {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .result-tags {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    .result-title {
+      color: $dark-white;
+    }
+
+    &:hover .result-title {
+      color: $dark-text-link-blue;
+    }
+
+    .result-description {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .result-footer {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  // No Search Results Dark Mode
+  .no-search-results {
+    svg {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    h3 {
+      color: $dark-white;
+    }
+
+    > p {
+      color: rgba(255, 255, 255, 0.6);
+
+      #search-query-display {
+        color: $dark-white;
+      }
+    }
+
+    .no-results-suggestions {
+      background: rgba(0, 63, 255, 0.08);
+      border-color: rgba(0, 63, 255, 0.2);
+
+      p {
+        color: $dark-white;
+      }
+
+      ul li {
+        color: rgba(255, 255, 255, 0.7);
+
+        a {
+          color: $dark-text-link-blue;
+        }
+      }
+    }
+  }
+
+  // Search Welcome Dark Mode
+  .search-welcome-content {
+    h2 {
+      color: $dark-white;
+    }
+
+    > p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Search Category Cards Dark Mode
+  .search-category-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(0, 63, 255, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    svg {
+      color: $dark-text-link-blue;
+    }
+
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .category-link {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  // Search Tips Dark Mode
+  .search-tips {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .tip-item {
+    svg {
+      color: #10B981;
+    }
+
+    span {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
 }
