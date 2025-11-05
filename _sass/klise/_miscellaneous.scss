@@ -1329,3 +1329,173 @@
     transform: scale(1.1);
   }
 }
+
+// Thank You Page Styles
+.thank-you-container {
+  text-align: center;
+  max-width: 700px;
+  margin: 3rem auto;
+  padding: 3rem 2rem;
+
+  @include media-query($on-mobile) {
+    padding: 2rem 1rem;
+    margin: 2rem auto;
+  }
+}
+
+.thank-you-icon {
+  margin-bottom: 2rem;
+
+  svg {
+    animation: checkmark 0.8s ease-in-out;
+  }
+}
+
+@keyframes checkmark {
+  0% {
+    transform: scale(0) rotate(-45deg);
+    opacity: 0;
+  }
+  50% {
+    transform: scale(1.2) rotate(5deg);
+  }
+  100% {
+    transform: scale(1) rotate(0deg);
+    opacity: 1;
+  }
+}
+
+.thank-you-container h1 {
+  font-size: 2.5rem;
+  margin-bottom: 1.5rem;
+  color: $black;
+
+  @include media-query($on-mobile) {
+    font-size: 2rem;
+  }
+}
+
+.thank-you-message {
+  font-size: 1.1rem;
+  line-height: 1.7;
+  color: rgba(0, 0, 0, 0.7);
+  margin-bottom: 2.5rem;
+}
+
+.thank-you-actions {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+  margin-bottom: 3rem;
+
+  @include media-query($on-mobile) {
+    flex-direction: column;
+    gap: 0.75rem;
+  }
+}
+
+.thank-you-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.875rem 1.75rem;
+  border-radius: 8px;
+  font-weight: 500;
+  text-decoration: none;
+  transition: all 0.3s ease;
+
+  svg {
+    transition: transform 0.3s ease;
+  }
+
+  &:hover svg {
+    transform: translateX(3px);
+  }
+
+  &.primary {
+    background: #003FFF;
+    color: white;
+    border: 2px solid #003FFF;
+
+    &:hover {
+      background: #0035db;
+      border-color: #0035db;
+      transform: translateY(-2px);
+      box-shadow: 0 6px 16px rgba(0, 63, 255, 0.3);
+    }
+  }
+
+  &.secondary {
+    background: white;
+    color: #003FFF;
+    border: 2px solid rgba(0, 63, 255, 0.3);
+
+    &:hover {
+      background: rgba(0, 63, 255, 0.05);
+      border-color: #003FFF;
+      transform: translateY(-2px);
+      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.15);
+    }
+  }
+
+  @include media-query($on-mobile) {
+    justify-content: center;
+    width: 100%;
+  }
+}
+
+.thank-you-info {
+  background: rgba(0, 63, 255, 0.03);
+  border: 1px solid rgba(0, 63, 255, 0.1);
+  border-radius: 12px;
+  padding: 2rem;
+  margin-top: 3rem;
+
+  h3 {
+    font-size: 1.3rem;
+    margin-bottom: 0.75rem;
+    color: $black;
+  }
+
+  p {
+    color: rgba(0, 0, 0, 0.7);
+    margin-bottom: 1.5rem;
+  }
+
+  @include media-query($on-mobile) {
+    padding: 1.5rem;
+  }
+}
+
+.thank-you-social {
+  display: flex;
+  gap: 1rem;
+  justify-content: center;
+
+  a {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    width: 48px;
+    height: 48px;
+    background: rgba(0, 63, 255, 0.1);
+    border-radius: 10px;
+    color: #003FFF;
+    transition: all 0.3s ease;
+
+    &:hover {
+      background: #003FFF;
+      color: white;
+      transform: translateY(-3px);
+      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+    }
+
+    svg {
+      transition: transform 0.3s ease;
+    }
+
+    &:hover svg {
+      transform: scale(1.1);
+    }
+  }
+}
