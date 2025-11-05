@@ -76,14 +76,23 @@ body[data-theme="dark"] {
   .post-meta {
     color: $dark-gray;
 
-    time {
-      &::after {
-        background-color: $dark-light;
-      }
+    .post-meta-separator {
+      color: $dark-gray;
     }
 
     span[itemprop="author"] {
       border-color: $dark-light;
+    }
+
+    .post-reading-time {
+      color: $dark-gray;
+    }
+  }
+
+  // Post Stats
+  .post-stats {
+    .post-views-badge {
+      opacity: 0.9;
     }
   }
 
@@ -123,7 +132,15 @@ body[data-theme="dark"] {
   // Navbar
   .navbar {
     border-color: rgba(255, 255, 255, 0.1);
-    background-color: rgba(19, 20, 24, 0.8);
+
+    @include media-query($on-mobile) {
+      background-color: $dark-black;
+      backdrop-filter: none;
+    }
+
+    @media (min-width: 769px) {
+      background-color: rgba(19, 20, 24, 0.8);
+    }
 
     .menu {
       a#mode {

@@ -54,15 +54,26 @@ layout: compress
             <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
               {{ page.date | date: "%b %d, %Y" }}
             </time>
+            <span class="post-meta-separator">•</span>
             <span itemprop="author" itemscope itemtype="https://schema.org/Person">
               <span itemprop="name">{{ site.author.name }}</span>
             </span>
+            <span class="post-meta-separator">•</span>
+            {% assign words = content | number_of_words %}
+            {% if words < 360 %}
+              <span class="post-reading-time">1 min read</span>
+            {% else %}
+              <span class="post-reading-time">{{ words | divided_by:180 }} min read</span>
+            {% endif %}
             <time hidden datetime="{{ page.modified | date_to_xmlschema }}" itemprop="dateModified">
               {{ page.date | date: "%b %d, %Y" }}
             </time>
             <span hidden itemprop="publisher" itemtype="Person">{{ site.author.name }}</span>
             <span hidden itemprop="image">{{ page.image }}</span>
             <span hidden itemprop="mainEntityOfPage">{{ page.excerpt }}</span>
+          </div>
+          <div class="post-stats">
+            <img src="https://hits.seeyoufarm.com/api/count/incr/badge.svg?url=https%3A%2F%2Fbakarimustafa.com{{ page.url | url_encode }}&count_bg=%230063FF&title_bg=%23555555&icon=&icon_color=%23E7E7E7&title=views&edge_flat=false" alt="Post views" class="post-views-badge"/>
           </div>
           {% endif %}
         </header>
