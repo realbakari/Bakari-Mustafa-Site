@@ -919,4 +919,65 @@ body[data-theme="dark"] {
       color: white;
     }
   }
+
+  // Thank You Page Dark Mode
+  .thank-you-container {
+    h1 {
+      color: $dark-white;
+    }
+  }
+
+  .thank-you-message {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .thank-you-button {
+    &.primary {
+      background: $dark-text-link-blue;
+      border-color: $dark-text-link-blue;
+
+      &:hover {
+        background: $dark-text-link-blue-active;
+        border-color: $dark-text-link-blue-active;
+        box-shadow: 0 6px 16px rgba(0, 63, 255, 0.4);
+      }
+    }
+
+    &.secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: $dark-text-link-blue;
+      border-color: rgba(0, 63, 255, 0.3);
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.15);
+        border-color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  .thank-you-info {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .thank-you-social {
+    a {
+      background: rgba(0, 63, 255, 0.15);
+      color: $dark-text-link-blue;
+
+      &:hover {
+        background: $dark-text-link-blue;
+        color: $dark-white;
+        box-shadow: 0 4px 12px rgba(0, 63, 255, 0.4);
+      }
+    }
+  }
 }

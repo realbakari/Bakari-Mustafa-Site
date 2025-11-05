@@ -15,7 +15,7 @@ I would love to hear from you. If you have any questions or comments about the w
 
 ## Get in Touch
 
-<form name="contact" method="POST" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
+<form name="contact" method="POST" action="/thank-you/" data-netlify="true" netlify-honeypot="bot-field" class="contact-form">
   <p style="display:none;">
     <label>Don't fill this out if you're human: <input name="bot-field" /></label>
   </p>
