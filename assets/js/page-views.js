@@ -6,12 +6,12 @@
 (function() {
   'use strict';
 
-  // Configuration - these will be replaced with your actual values
-  const SUPABASE_URL = '{{ site.supabase.url }}' || window.SUPABASE_URL;
-  const SUPABASE_ANON_KEY = '{{ site.supabase.anon_key }}' || window.SUPABASE_ANON_KEY;
+  // Configuration - loaded from window variables set in footer
+  const SUPABASE_URL = window.SUPABASE_URL || '';
+  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || '';
 
   // Check if Supabase is configured
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY || SUPABASE_URL.includes('{{')) {
+  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
     console.warn('Supabase not configured. Page view counter disabled.');
     return;
   }
