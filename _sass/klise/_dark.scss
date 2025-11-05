@@ -1676,4 +1676,171 @@ body[data-theme="dark"] {
       color: rgba(255, 255, 255, 0.6);
     }
   }
+
+  // Analytics Dashboard Dark Mode
+  .analytics-dashboard {
+    .analytics-header {
+      h1 {
+        color: $dark-white;
+      }
+
+      .analytics-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .refresh-button {
+        background: rgba(255, 255, 255, 0.05);
+        color: $dark-white;
+        border-color: rgba(255, 255, 255, 0.1);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+
+    .section-header {
+      h2 {
+        color: $dark-white;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .loading-skeleton {
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // Analytics Table Dark Mode
+  .analytics-table {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    thead {
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom-color: rgba(255, 255, 255, 0.15);
+
+      th {
+        color: $dark-white;
+        border-bottom-color: rgba(255, 255, 255, 0.15);
+
+        &.sortable {
+          &:hover {
+            background: rgba(255, 255, 255, 0.08);
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.03);
+        }
+
+        td {
+          color: rgba(255, 255, 255, 0.8);
+          border-bottom-color: rgba(255, 255, 255, 0.08);
+
+          a {
+            color: $dark-white;
+
+            &:hover {
+              color: rgba(255, 255, 255, 0.7);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .pages-table {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  // Recent Activity Dark Mode
+  .recent-activity-list {
+    .activity-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.08);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .activity-time {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .activity-page {
+        color: $dark-white;
+      }
+
+      .activity-views {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Form Controls Dark Mode
+  .table-controls {
+    .search-input {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: $dark-white;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    .sort-select {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: $dark-white;
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  // Traffic Chart Dark Mode
+  .traffic-chart {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  // Error and Empty States Dark Mode
+  .analytics-error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+  }
+
+  .empty-state {
+    color: rgba(255, 255, 255, 0.6);
+
+    svg {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
 }
