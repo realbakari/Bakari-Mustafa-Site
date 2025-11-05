@@ -61,11 +61,10 @@ jekyll_compose:
 number_of_posts: 5
 
 # Supabase settings (for page view counter)
-# Add your actual credentials in Netlify environment variables
-# or uncomment and add them here (NOT recommended for public repos)
+# For production, set these in Netlify environment variables for better security
 supabase:
-  url: "" # Add your Supabase project URL or use environment variable
-  anon_key: "" # Add your Supabase anon key or use environment variable
+  url: "https://fmyukpxfweibodnuaifr.supabase.co"
+  anon_key: "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTg5NjQsImV4cCI6MjA3NzkzNDk2NH0.Pil32HEZaf4eZwTGbdgJfcZedgdRXuE4zUNA7Z_RPCg"
 
 # Build settings
 # theme: klise
