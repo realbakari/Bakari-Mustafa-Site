@@ -1,0 +1,19 @@
+# robots.txt for https://bakarimustafa.com/
+# Allow all search engines to crawl the site
+
+User-agent: *
+Allow: /
+
+# Disallow admin and private areas (if any)
+Disallow: /admin/
+Disallow: /private/
+
+# Allow crawling of CSS and JS for better rendering
+Allow: /assets/css/
+Allow: /assets/js/
+
+# Sitemap location
+Sitemap: https://bakarimustafa.com/sitemap.xml
+
+# Crawl-delay (optional, be nice to smaller bots)
+Crawl-delay: 1
