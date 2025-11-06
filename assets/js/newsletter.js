@@ -3,11 +3,13 @@
  * Handles email subscriptions with double opt-in
  */
 
-// Initialize Supabase client
-const supabase = window.supabase.createClient(
-  window.SUPABASE_URL,
-  window.SUPABASE_ANON_KEY
-);
+// Initialize Supabase client (reuse if already exists)
+if (typeof supabase === 'undefined') {
+  var supabase = window.supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
+}
 
 /**
  * Generate a random token for confirmation/unsubscribe

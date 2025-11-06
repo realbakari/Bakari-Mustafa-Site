@@ -247,6 +247,8 @@ ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
 DROP POLICY IF EXISTS "Allow public read newsletter" ON newsletter_subscribers;
 DROP POLICY IF EXISTS "Allow public insert newsletter" ON newsletter_subscribers;
 DROP POLICY IF EXISTS "Allow public update newsletter" ON newsletter_subscribers;
+DROP POLICY IF EXISTS "Allow authenticated read newsletter" ON newsletter_subscribers;
+DROP POLICY IF EXISTS "Allow authenticated delete newsletter" ON newsletter_subscribers;
 
 -- Policies for newsletter_subscribers
 -- Allow anyone to subscribe (insert)
@@ -255,16 +257,28 @@ ON newsletter_subscribers FOR INSERT
 TO public
 WITH CHECK (true);
 
--- Allow anyone to read their own subscription by token
+-- Allow anyone to read (for public confirmation pages)
 CREATE POLICY "Allow public read newsletter"
 ON newsletter_subscribers FOR SELECT
 TO public
+USING (true);
+
+-- Allow authenticated users (admins) to read all subscribers
+CREATE POLICY "Allow authenticated read newsletter"
+ON newsletter_subscribers FOR SELECT
+TO authenticated
 USING (true);
 
 -- Allow anyone to update their subscription (confirm or unsubscribe)
 CREATE POLICY "Allow public update newsletter"
 ON newsletter_subscribers FOR UPDATE
 TO public
+USING (true);
+
+-- Allow authenticated users (admins) to delete subscribers
+CREATE POLICY "Allow authenticated delete newsletter"
+ON newsletter_subscribers FOR DELETE
+TO authenticated
 USING (true);
 
 -- Function to generate random token
