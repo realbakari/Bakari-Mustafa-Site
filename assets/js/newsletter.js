@@ -3,8 +3,11 @@
  * Handles email subscriptions with double opt-in
  */
 
-// Supabase client reference (will be set when ready)
-var supabase = null;
+(function() {
+  'use strict';
+
+  // Supabase client reference (will be set when ready)
+  var supabase = null;
 
 /**
  * Generate a random token for confirmation/unsubscribe
@@ -328,3 +331,5 @@ function initNewsletterForm() {
     initNewsletterForm();
   }
 })();
+
+})(); // End of newsletter.js IIFE
