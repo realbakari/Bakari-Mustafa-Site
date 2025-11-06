@@ -1,9 +1,14 @@
+# Use Git Gateway for Netlify-hosted sites with Netlify Identity
 backend:
-  name: github
-  repo: realbakari/Bakari-Mustafa-Site
+  name: git-gateway
   branch: claude/review-update-website-ui-011CUp4t7z6nnGPt4pLiYa9j # Change to main after merging
-  base_url: https://api.netlify.com
-  auth_endpoint: auth
+
+# Alternative: Direct GitHub backend (requires separate OAuth setup)
+# Uncomment below and comment out git-gateway if you prefer GitHub OAuth:
+# backend:
+#   name: github
+#   repo: realbakari/Bakari-Mustafa-Site
+#   branch: claude/review-update-website-ui-011CUp4t7z6nnGPt4pLiYa9j
 
 # Media files will be stored in the uploads folder
 media_folder: "uploads"
