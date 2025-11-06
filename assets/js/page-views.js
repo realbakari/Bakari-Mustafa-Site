@@ -514,16 +514,23 @@
 
   // Since this script is loaded dynamically AFTER Supabase initializes,
   // we can directly initialize without event listeners
-  console.log('[PageViews] Script loaded, checking for Supabase client...');
+  console.log('[PageViews] Script loaded, checking for Supabase library...');
 
-  if (window.supabaseClient) {
-    console.log('[PageViews] Supabase client found, initializing...');
-    supabase = window.supabaseClient;
+  if (typeof window.supabase !== 'undefined') {
+    console.log('[PageViews] Supabase library found, creating client...');
+
+    // Create our own Supabase client
+    supabase = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    );
+
+    console.log('[PageViews] Client created, initializing tracking...');
 
     // DOM is definitely ready at this point (script is in footer)
     init();
   } else {
-    console.error('[PageViews] ERROR: Supabase client not found! This should not happen.');
+    console.error('[PageViews] ERROR: Supabase library not loaded yet!');
   }
 
 })();

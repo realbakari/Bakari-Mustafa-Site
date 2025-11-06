@@ -126,15 +126,6 @@
   // Row Level Security policies in Supabase control actual permissions
   window.SUPABASE_URL = "https://fmyukpxfweibodnuaifr.supabase.co";
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
-
-  // Initialize Supabase client for global use
-  if (typeof window.supabase !== 'undefined') {
-    window.supabaseClient = window.supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
-    );
-    console.log('Supabase client initialized successfully');
-  }
 </script>
 <script src="/assets/js/page-views.js"></script>
 <script src="/assets/js/newsletter.js"></script>
