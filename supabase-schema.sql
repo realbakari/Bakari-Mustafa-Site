@@ -217,6 +217,64 @@ BEGIN
 END;
 $$ LANGUAGE plpgsql;
 
+-- Newsletter subscription system
+CREATE TABLE IF NOT EXISTS newsletter_subscribers (
+  id BIGSERIAL PRIMARY KEY,
+  email TEXT NOT NULL UNIQUE,
+  status TEXT NOT NULL DEFAULT 'pending', -- 'pending', 'confirmed', 'unsubscribed'
+  confirmation_token TEXT UNIQUE,
+  unsubscribe_token TEXT UNIQUE,
+  subscribed_at TIMESTAMPTZ DEFAULT NOW(),
+  confirmed_at TIMESTAMPTZ,
+  unsubscribed_at TIMESTAMPTZ,
+  ip_address TEXT, -- Optional: for tracking signup location
+  user_agent TEXT, -- Optional: for tracking device
+  source TEXT, -- Where they signed up: 'footer', 'sidebar', 'popup', 'post'
+  referrer TEXT -- What page they were on when subscribing
+);
+
+-- Create indexes for newsletter subscribers
+CREATE INDEX IF NOT EXISTS idx_newsletter_email ON newsletter_subscribers(email);
+CREATE INDEX IF NOT EXISTS idx_newsletter_status ON newsletter_subscribers(status);
+CREATE INDEX IF NOT EXISTS idx_newsletter_confirmation_token ON newsletter_subscribers(confirmation_token);
+CREATE INDEX IF NOT EXISTS idx_newsletter_unsubscribe_token ON newsletter_subscribers(unsubscribe_token);
+CREATE INDEX IF NOT EXISTS idx_newsletter_subscribed_date ON newsletter_subscribers(subscribed_at);
+
+-- Enable RLS for newsletter_subscribers
+ALTER TABLE newsletter_subscribers ENABLE ROW LEVEL SECURITY;
+
+-- Drop existing policies if they exist
+DROP POLICY IF EXISTS "Allow public read newsletter" ON newsletter_subscribers;
+DROP POLICY IF EXISTS "Allow public insert newsletter" ON newsletter_subscribers;
+DROP POLICY IF EXISTS "Allow public update newsletter" ON newsletter_subscribers;
+
+-- Policies for newsletter_subscribers
+-- Allow anyone to subscribe (insert)
+CREATE POLICY "Allow public insert newsletter"
+ON newsletter_subscribers FOR INSERT
+TO public
+WITH CHECK (true);
+
+-- Allow anyone to read their own subscription by token
+CREATE POLICY "Allow public read newsletter"
+ON newsletter_subscribers FOR SELECT
+TO public
+USING (true);
+
+-- Allow anyone to update their subscription (confirm or unsubscribe)
+CREATE POLICY "Allow public update newsletter"
+ON newsletter_subscribers FOR UPDATE
+TO public
+USING (true);
+
+-- Function to generate random token
+CREATE OR REPLACE FUNCTION generate_random_token()
+RETURNS TEXT AS $$
+BEGIN
+  RETURN encode(gen_random_bytes(32), 'hex');
+END;
+$$ LANGUAGE plpgsql;
+
 -- Verify setup
 SELECT
   'Setup complete! All tables created.' as status,
@@ -224,4 +282,5 @@ SELECT
   (SELECT COUNT(*) FROM page_view_logs) as detailed_logs,
   (SELECT COUNT(*) FROM search_queries) as search_queries,
   (SELECT COUNT(*) FROM error_404_logs) as error_404_logs,
-  (SELECT COUNT(*) FROM active_sessions) as active_sessions;
+  (SELECT COUNT(*) FROM active_sessions) as active_sessions,
+  (SELECT COUNT(*) FROM newsletter_subscribers) as newsletter_subscribers;
