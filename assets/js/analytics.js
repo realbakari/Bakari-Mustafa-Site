@@ -320,6 +320,282 @@
   }
 
   /**
+   * Get referrer statistics
+   */
+  async function getReferrerStats() {
+    try {
+      const { data, error } = await supabase
+        .from('page_view_logs')
+        .select('referrer_domain, referrer_type');
+
+      if (error) throw error;
+
+      // Count by domain
+      const byDomain = {};
+      const byType = { direct: 0, search: 0, social: 0, internal: 0, external: 0 };
+
+      data.forEach(row => {
+        // Count by type
+        if (row.referrer_type) {
+          byType[row.referrer_type] = (byType[row.referrer_type] || 0) + 1;
+        }
+
+        // Count by domain (exclude internal and direct)
+        if (row.referrer_domain && row.referrer_type !== 'internal' && row.referrer_type !== 'direct') {
+          byDomain[row.referrer_domain] = (byDomain[row.referrer_domain] || 0) + 1;
+        }
+      });
+
+      // Convert to array and sort
+      const topReferrers = Object.entries(byDomain)
+        .map(([domain, count]) => ({ domain, count }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 10);
+
+      return { byType, topReferrers };
+    } catch (error) {
+      console.error('Error fetching referrer stats:', error);
+      return { byType: {}, topReferrers: [] };
+    }
+  }
+
+  /**
+   * Get device/browser statistics
+   */
+  async function getDeviceBrowserStats() {
+    try {
+      const { data, error } = await supabase
+        .from('page_view_logs')
+        .select('device_type, browser_name, os_name');
+
+      if (error) throw error;
+
+      const byDevice = {};
+      const byBrowser = {};
+      const byOS = {};
+
+      data.forEach(row => {
+        if (row.device_type) {
+          byDevice[row.device_type] = (byDevice[row.device_type] || 0) + 1;
+        }
+        if (row.browser_name) {
+          byBrowser[row.browser_name] = (byBrowser[row.browser_name] || 0) + 1;
+        }
+        if (row.os_name) {
+          byOS[row.os_name] = (byOS[row.os_name] || 0) + 1;
+        }
+      });
+
+      return { byDevice, byBrowser, byOS };
+    } catch (error) {
+      console.error('Error fetching device/browser stats:', error);
+      return { byDevice: {}, byBrowser: {}, byOS: {} };
+    }
+  }
+
+  /**
+   * Get views by date for trends
+   */
+  async function getViewsByDate(days = 30) {
+    try {
+      const startDate = new Date();
+      startDate.setDate(startDate.getDate() - days);
+      const startDateStr = startDate.toISOString().split('T')[0];
+
+      const { data, error } = await supabase
+        .from('page_view_logs')
+        .select('viewed_date')
+        .gte('viewed_date', startDateStr)
+        .order('viewed_date', { ascending: true });
+
+      if (error) throw error;
+
+      // Count views per date
+      const viewsByDate = {};
+      data.forEach(row => {
+        if (row.viewed_date) {
+          viewsByDate[row.viewed_date] = (viewsByDate[row.viewed_date] || 0) + 1;
+        }
+      });
+
+      // Fill in missing dates with 0
+      const result = [];
+      for (let i = days - 1; i >= 0; i--) {
+        const date = new Date();
+        date.setDate(date.getDate() - i);
+        const dateStr = date.toISOString().split('T')[0];
+        result.push({
+          date: dateStr,
+          count: viewsByDate[dateStr] || 0
+        });
+      }
+
+      return result;
+    } catch (error) {
+      console.error('Error fetching views by date:', error);
+      return [];
+    }
+  }
+
+  /**
+   * Render referrer stats
+   */
+  async function renderReferrerStats() {
+    const container = document.getElementById('referrer-stats');
+    if (!container) return;
+
+    const { byType, topReferrers } = await getReferrerStats();
+
+    const total = Object.values(byType).reduce((sum, count) => sum + count, 0);
+
+    if (total === 0) {
+      container.innerHTML = '<p class="no-data">No referrer data yet</p>';
+      return;
+    }
+
+    const typeLabels = {
+      direct: 'Direct',
+      search: 'Search Engines',
+      social: 'Social Media',
+      internal: 'Internal',
+      external: 'External'
+    };
+
+    container.innerHTML = `
+      <div class="referrer-types">
+        ${Object.entries(byType).filter(([_, count]) => count > 0).map(([type, count]) => {
+          const percentage = ((count / total) * 100).toFixed(1);
+          return `
+            <div class="stat-bar">
+              <div class="stat-bar-label">
+                <span>${typeLabels[type] || type}</span>
+                <span>${formatNumber(count)} (${percentage}%)</span>
+              </div>
+              <div class="stat-bar-track">
+                <div class="stat-bar-fill" style="width: ${percentage}%"></div>
+              </div>
+            </div>
+          `;
+        }).join('')}
+      </div>
+      ${topReferrers.length > 0 ? `
+        <div class="top-referrers">
+          <h4>Top External Referrers</h4>
+          <div class="referrer-list">
+            ${topReferrers.map(ref => `
+              <div class="referrer-item">
+                <span class="referrer-domain">${ref.domain}</span>
+                <span class="referrer-count">${formatNumber(ref.count)} visits</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  /**
+   * Render device/browser stats
+   */
+  async function renderDeviceBrowserStats() {
+    const deviceContainer = document.getElementById('device-stats');
+    const browserContainer = document.getElementById('browser-stats');
+
+    if (!deviceContainer || !browserContainer) return;
+
+    const { byDevice, byBrowser, byOS } = await getDeviceBrowserStats();
+
+    // Render device stats
+    const deviceTotal = Object.values(byDevice).reduce((sum, count) => sum + count, 0);
+    if (deviceTotal === 0) {
+      deviceContainer.innerHTML = '<p class="no-data">No device data yet</p>';
+    } else {
+      deviceContainer.innerHTML = Object.entries(byDevice).map(([device, count]) => {
+        const percentage = ((count / deviceTotal) * 100).toFixed(1);
+        const icon = device === 'mobile' ? '📱' : device === 'tablet' ? '📲' : '💻';
+        return `
+          <div class="device-stat">
+            <span class="device-icon">${icon}</span>
+            <span class="device-name">${device.charAt(0).toUpperCase() + device.slice(1)}</span>
+            <span class="device-percentage">${percentage}%</span>
+            <span class="device-count">${formatNumber(count)}</span>
+          </div>
+        `;
+      }).join('');
+    }
+
+    // Render browser stats
+    const browserTotal = Object.values(byBrowser).reduce((sum, count) => sum + count, 0);
+    if (browserTotal === 0) {
+      browserContainer.innerHTML = '<p class="no-data">No browser data yet</p>';
+    } else {
+      const sortedBrowsers = Object.entries(byBrowser)
+        .sort((a, b) => b[1] - a[1])
+        .slice(0, 5); // Top 5 browsers
+
+      browserContainer.innerHTML = sortedBrowsers.map(([browser, count]) => {
+        const percentage = ((count / browserTotal) * 100).toFixed(1);
+        return `
+          <div class="browser-stat">
+            <span class="browser-name">${browser}</span>
+            <div class="browser-bar">
+              <div class="browser-bar-fill" style="width: ${percentage}%"></div>
+            </div>
+            <span class="browser-percentage">${percentage}%</span>
+          </div>
+        `;
+      }).join('');
+    }
+  }
+
+  /**
+   * Render traffic chart
+   */
+  async function renderTrafficChart() {
+    const canvas = document.getElementById('traffic-chart');
+    if (!canvas || typeof Chart === 'undefined') return;
+
+    const viewsData = await getViewsByDate(30);
+
+    const ctx = canvas.getContext('2d');
+    new Chart(ctx, {
+      type: 'line',
+      data: {
+        labels: viewsData.map(d => {
+          const date = new Date(d.date);
+          return date.toLocaleDateString('en-US', { month: 'short', day: 'numeric' });
+        }),
+        datasets: [{
+          label: 'Page Views',
+          data: viewsData.map(d => d.count),
+          borderColor: '#000',
+          backgroundColor: 'rgba(0, 0, 0, 0.1)',
+          borderWidth: 2,
+          fill: true,
+          tension: 0.3
+        }]
+      },
+      options: {
+        responsive: true,
+        maintainAspectRatio: false,
+        plugins: {
+          legend: {
+            display: false
+          }
+        },
+        scales: {
+          y: {
+            beginAtZero: true,
+            ticks: {
+              precision: 0
+            }
+          }
+        }
+      }
+    });
+  }
+
+  /**
    * Refresh all data
    */
   async function refreshAllData() {
@@ -331,7 +607,10 @@
       updateStatsOverview(),
       renderPopularPosts(),
       renderRecentActivity(),
-      getAllPages().then(() => renderAllPagesTable())
+      getAllPages().then(() => renderAllPagesTable()),
+      renderReferrerStats(),
+      renderDeviceBrowserStats(),
+      renderTrafficChart()
     ]);
 
     btn.classList.remove('refreshing');

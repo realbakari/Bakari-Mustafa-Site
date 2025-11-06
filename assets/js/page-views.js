@@ -56,8 +56,153 @@
   }
 
   /**
+   * Get or create a session ID
+   * Privacy-friendly: stored in sessionStorage, cleared when browser closes
+   */
+  function getSessionId() {
+    let sessionId = sessionStorage.getItem('analytics_session_id');
+    if (!sessionId) {
+      sessionId = 'sess_' + Date.now() + '_' + Math.random().toString(36).substr(2, 9);
+      sessionStorage.setItem('analytics_session_id', sessionId);
+    }
+    return sessionId;
+  }
+
+  /**
+   * Detect device type from user agent
+   */
+  function getDeviceType() {
+    const ua = navigator.userAgent;
+    if (/(tablet|ipad|playbook|silk)|(android(?!.*mobi))/i.test(ua)) {
+      return 'tablet';
+    }
+    if (/Mobile|Android|iP(hone|od)|IEMobile|BlackBerry|Kindle|Silk-Accelerated|(hpw|web)OS|Opera M(obi|ini)/.test(ua)) {
+      return 'mobile';
+    }
+    return 'desktop';
+  }
+
+  /**
+   * Detect browser name and version
+   */
+  function getBrowserInfo() {
+    const ua = navigator.userAgent;
+    let browser = 'Unknown';
+    let version = '';
+
+    // Edge (Chromium)
+    if (ua.indexOf('Edg') > -1) {
+      browser = 'Edge';
+      version = ua.match(/Edg\/(\d+)/)?.[1] || '';
+    }
+    // Chrome
+    else if (ua.indexOf('Chrome') > -1 && ua.indexOf('Edg') === -1) {
+      browser = 'Chrome';
+      version = ua.match(/Chrome\/(\d+)/)?.[1] || '';
+    }
+    // Safari
+    else if (ua.indexOf('Safari') > -1 && ua.indexOf('Chrome') === -1) {
+      browser = 'Safari';
+      version = ua.match(/Version\/(\d+)/)?.[1] || '';
+    }
+    // Firefox
+    else if (ua.indexOf('Firefox') > -1) {
+      browser = 'Firefox';
+      version = ua.match(/Firefox\/(\d+)/)?.[1] || '';
+    }
+    // Opera
+    else if (ua.indexOf('OPR') > -1 || ua.indexOf('Opera') > -1) {
+      browser = 'Opera';
+      version = ua.match(/OPR\/(\d+)/)?.[1] || ua.match(/Opera\/(\d+)/)?.[1] || '';
+    }
+    // IE
+    else if (ua.indexOf('MSIE') > -1 || ua.indexOf('Trident') > -1) {
+      browser = 'Internet Explorer';
+      version = ua.match(/(?:MSIE |rv:)(\d+)/)?.[1] || '';
+    }
+
+    return { name: browser, version: version };
+  }
+
+  /**
+   * Detect operating system
+   */
+  function getOSInfo() {
+    const ua = navigator.userAgent;
+    let os = 'Unknown';
+    let version = '';
+
+    if (ua.indexOf('Win') > -1) {
+      os = 'Windows';
+      if (ua.indexOf('Windows NT 10') > -1) version = '10';
+      else if (ua.indexOf('Windows NT 6.3') > -1) version = '8.1';
+      else if (ua.indexOf('Windows NT 6.2') > -1) version = '8';
+      else if (ua.indexOf('Windows NT 6.1') > -1) version = '7';
+    } else if (ua.indexOf('Mac') > -1) {
+      os = 'macOS';
+      version = ua.match(/Mac OS X (\d+[._]\d+)/)?.[1]?.replace('_', '.') || '';
+    } else if (ua.indexOf('Linux') > -1) {
+      os = 'Linux';
+    } else if (ua.indexOf('Android') > -1) {
+      os = 'Android';
+      version = ua.match(/Android (\d+\.\d+)/)?.[1] || '';
+    } else if (ua.indexOf('iOS') > -1 || ua.indexOf('iPhone') > -1 || ua.indexOf('iPad') > -1) {
+      os = 'iOS';
+      version = ua.match(/OS (\d+[._]\d+)/)?.[1]?.replace('_', '.') || '';
+    }
+
+    return { name: os, version: version };
+  }
+
+  /**
+   * Get referrer information
+   */
+  function getReferrerInfo() {
+    const referrer = document.referrer || '';
+
+    if (!referrer) {
+      return {
+        referrer: '',
+        domain: '',
+        type: 'direct'
+      };
+    }
+
+    let domain = '';
+    let type = 'external';
+
+    try {
+      const url = new URL(referrer);
+      domain = url.hostname;
+
+      // Check if it's internal (same domain)
+      if (domain === window.location.hostname) {
+        type = 'internal';
+      }
+      // Check if it's a search engine
+      else if (/google|bing|yahoo|duckduckgo|baidu|yandex/.test(domain)) {
+        type = 'search';
+      }
+      // Check if it's social media
+      else if (/facebook|twitter|linkedin|instagram|pinterest|reddit|youtube|tiktok/.test(domain)) {
+        type = 'social';
+      }
+    } catch (e) {
+      // Invalid URL
+      domain = 'unknown';
+    }
+
+    return {
+      referrer: referrer,
+      domain: domain,
+      type: type
+    };
+  }
+
+  /**
    * Track a page view
    * Increments view_count always, unique_views only once per session
+   * Also logs detailed analytics to page_view_logs
    */
   async function trackPageView() {
     const pageUrl = getPageUrl();
@@ -65,7 +210,17 @@
     const isUniqueView = !hasViewedThisSession(pageUrl);
 
     try {
-      // First, try to get existing record
+      // Gather analytics data
+      const sessionId = getSessionId();
+      const deviceType = getDeviceType();
+      const browserInfo = getBrowserInfo();
+      const osInfo = getOSInfo();
+      const referrerInfo = getReferrerInfo();
+      const now = new Date();
+      const viewedDate = now.toISOString().split('T')[0]; // YYYY-MM-DD
+      const viewedHour = now.getHours();
+
+      // Update aggregated page_views table
       const { data: existingData, error: fetchError } = await supabase
         .from('page_views')
         .select('id, view_count, unique_views')
@@ -84,7 +239,7 @@
           .update({
             view_count: existingData.view_count + 1,
             unique_views: isUniqueView ? existingData.unique_views + 1 : existingData.unique_views,
-            last_viewed_at: new Date().toISOString(),
+            last_viewed_at: now.toISOString(),
             page_title: pageTitle // Update title in case it changed
           })
           .eq('id', existingData.id);
@@ -102,6 +257,32 @@
           });
 
         if (insertError) throw insertError;
+      }
+
+      // Log detailed view to page_view_logs table
+      const { error: logError } = await supabase
+        .from('page_view_logs')
+        .insert({
+          page_url: pageUrl,
+          page_title: pageTitle,
+          referrer: referrerInfo.referrer,
+          referrer_domain: referrerInfo.domain,
+          referrer_type: referrerInfo.type,
+          device_type: deviceType,
+          browser_name: browserInfo.name,
+          browser_version: browserInfo.version,
+          os_name: osInfo.name,
+          os_version: osInfo.version,
+          user_agent: navigator.userAgent,
+          session_id: sessionId,
+          is_unique_view: isUniqueView,
+          viewed_date: viewedDate,
+          viewed_hour: viewedHour
+        });
+
+      if (logError) {
+        console.warn('Error logging detailed analytics:', logError);
+        // Don't throw - aggregated tracking still worked
       }
 
       // Mark as viewed in this session

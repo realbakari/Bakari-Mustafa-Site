@@ -99,6 +99,39 @@ comments: false
     </div>
   </div>
 
+  <!-- Referrer Sources -->
+  <div class="analytics-section">
+    <div class="section-header">
+      <h2>🔗 Traffic Sources</h2>
+      <p>Where your visitors are coming from</p>
+    </div>
+    <div id="referrer-stats" class="referrer-stats">
+      <div class="loading-skeleton">Loading referrer data...</div>
+    </div>
+  </div>
+
+  <!-- Device & Browser Analytics -->
+  <div class="analytics-section">
+    <div class="section-header">
+      <h2>📊 Visitor Technology</h2>
+      <p>Devices and browsers used by your audience</p>
+    </div>
+    <div class="device-browser-grid">
+      <div class="analytics-card">
+        <h3>Devices</h3>
+        <div id="device-stats" class="device-stats">
+          <div class="loading-skeleton">Loading device data...</div>
+        </div>
+      </div>
+      <div class="analytics-card">
+        <h3>Browsers</h3>
+        <div id="browser-stats" class="browser-stats">
+          <div class="loading-skeleton">Loading browser data...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
   <!-- Recent Activity -->
   <div class="analytics-section">
     <div class="section-header">
@@ -137,4 +170,6 @@ comments: false
   window.SUPABASE_URL = "https://fmyukpxfweibodnuaifr.supabase.co";
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTg5NjQsImV4cCI6MjA3NzkzNDk2NH0.Pil32HEZaf4eZwTGbdgJfcZedgdRXuE4zUNA7Z_RPCg";
 </script>
+<!-- Load Chart.js for trend visualizations -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script src="/assets/js/analytics.js"></script>
