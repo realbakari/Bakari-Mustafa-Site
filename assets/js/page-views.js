@@ -14,18 +14,14 @@
     return; // Don't track admin pages
   }
 
-  // Configuration - loaded from window variables set in footer
-  const SUPABASE_URL = window.SUPABASE_URL;
-  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY;
-
-  // Check if Supabase is configured
-  if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
-    console.warn('Supabase not configured. Page view counter disabled.');
+  // Wait for Supabase client to be available
+  if (!window.supabaseClient) {
+    console.warn('Supabase client not initialized. Page view tracking disabled.');
     return;
   }
 
-  // Use existing global Supabase client
-  const supabase = window.supabaseClient || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // Use the global Supabase client
+  const supabase = window.supabaseClient;
 
   /**
    * Get the current page identifier

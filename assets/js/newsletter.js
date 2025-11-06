@@ -4,10 +4,14 @@
  */
 
 // Use global Supabase client (initialized in footer)
-var supabase = window.supabaseClient || window.supabase.createClient(
-  window.SUPABASE_URL,
-  window.SUPABASE_ANON_KEY
-);
+var supabase = window.supabaseClient || (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY
+  ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
+  : null);
+
+// Exit if Supabase client not available
+if (!supabase) {
+  console.warn('Newsletter: Supabase client not initialized.');
+}
 
 /**
  * Generate a random token for confirmation/unsubscribe
