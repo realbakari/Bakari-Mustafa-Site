@@ -1843,4 +1843,103 @@ body[data-theme="dark"] {
       color: rgba(255, 255, 255, 0.5);
     }
   }
+
+  // Referrer Stats Dark Mode
+  .referrer-stats {
+    .stat-bar-label {
+      span:first-child {
+        color: $dark-white;
+      }
+
+      span:last-child {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .stat-bar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-bar-fill {
+      background: $dark-white;
+    }
+
+    .top-referrers h4 {
+      color: $dark-white;
+    }
+
+    .referrer-list {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .referrer-item {
+      border-bottom-color: rgba(255, 255, 255, 0.05);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .referrer-domain {
+        color: $dark-white;
+      }
+
+      .referrer-count {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Device & Browser Analytics Dark Mode
+  .analytics-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .device-stat {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .device-name,
+    .device-percentage {
+      color: $dark-white;
+    }
+
+    .device-count {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .browser-stat {
+    .browser-name {
+      color: $dark-white;
+    }
+
+    .browser-bar {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .browser-bar-fill {
+      background: $dark-white;
+    }
+
+    .browser-percentage {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Chart.js Dark Mode - use filter for inverted colors
+  .traffic-chart {
+    canvas {
+      filter: invert(0.9) hue-rotate(180deg);
+    }
+  }
 }
