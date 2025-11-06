@@ -259,8 +259,18 @@
         if (insertError) throw insertError;
       }
 
+      // Check if this is an entry page (first page in session)
+      const viewedPages = JSON.parse(sessionStorage.getItem('viewed_pages') || '[]');
+      const isEntryPage = viewedPages.length === 0;
+
+      // Mark previous page as exit page if exists
+      const lastLogId = sessionStorage.getItem('last_log_id');
+      if (lastLogId && !isEntryPage) {
+        await markAsExitPage(lastLogId);
+      }
+
       // Log detailed view to page_view_logs table
-      const { error: logError } = await supabase
+      const { data: logData, error: logError } = await supabase
         .from('page_view_logs')
         .insert({
           page_url: pageUrl,
@@ -276,14 +286,23 @@
           user_agent: navigator.userAgent,
           session_id: sessionId,
           is_unique_view: isUniqueView,
+          is_entry_page: isEntryPage,
+          is_exit_page: false,
           viewed_date: viewedDate,
           viewed_hour: viewedHour
-        });
+        })
+        .select('id')
+        .single();
 
       if (logError) {
         console.warn('Error logging detailed analytics:', logError);
-        // Don't throw - aggregated tracking still worked
+      } else if (logData) {
+        // Store this log ID for potential exit marking
+        sessionStorage.setItem('last_log_id', logData.id);
       }
+
+      // Update active session
+      await updateActiveSession(sessionId, pageUrl, pageTitle, deviceType, browserInfo.name);
 
       // Mark as viewed in this session
       markAsViewedThisSession(pageUrl);
@@ -379,6 +398,78 @@
   }
 
   /**
+   * Mark a page view log as an exit page
+   */
+  async function markAsExitPage(logId) {
+    try {
+      const { error } = await supabase
+        .from('page_view_logs')
+        .update({ is_exit_page: true })
+        .eq('id', logId);
+
+      if (error) {
+        console.warn('Error marking exit page:', error);
+      }
+    } catch (error) {
+      console.warn('Error marking exit page:', error);
+    }
+  }
+
+  /**
+   * Update active session for real-time analytics
+   */
+  async function updateActiveSession(sessionId, pageUrl, pageTitle, deviceType, browserName) {
+    try {
+      // Use upsert to insert or update
+      const { error } = await supabase
+        .from('active_sessions')
+        .upsert({
+          session_id: sessionId,
+          current_page_url: pageUrl,
+          current_page_title: pageTitle,
+          last_seen_at: new Date().toISOString(),
+          device_type: deviceType,
+          browser_name: browserName
+        }, {
+          onConflict: 'session_id'
+        });
+
+      if (error) {
+        console.warn('Error updating active session:', error);
+      }
+    } catch (error) {
+      console.warn('Error updating active session:', error);
+    }
+  }
+
+  /**
+   * Mark current page as exit when leaving
+   */
+  function markExitOnUnload() {
+    const lastLogId = sessionStorage.getItem('last_log_id');
+    if (lastLogId) {
+      // Use sendBeacon for reliable async request on unload
+      const data = new FormData();
+      data.append('log_id', lastLogId);
+
+      // Alternative: Use fetch with keepalive
+      fetch(SUPABASE_URL + '/rest/v1/page_view_logs?id=eq.' + lastLogId, {
+        method: 'PATCH',
+        headers: {
+          'apikey': SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'Content-Type': 'application/json',
+          'Prefer': 'return=minimal'
+        },
+        body: JSON.stringify({ is_exit_page: true }),
+        keepalive: true
+      }).catch(() => {
+        // Silently fail - not critical
+      });
+    }
+  }
+
+  /**
    * Get popular pages (optional - for stats page)
    */
   async function getPopularPages(limit = 10) {
@@ -409,6 +500,10 @@
 
     // Update any existing view count displays
     updateViewCountDisplay();
+
+    // Mark exit page when leaving site
+    window.addEventListener('beforeunload', markExitOnUnload);
+    window.addEventListener('pagehide', markExitOnUnload);
   }
 
   // Expose public API
