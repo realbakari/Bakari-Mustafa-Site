@@ -152,9 +152,11 @@ Currently, confirmation and unsubscribe URLs are logged to the browser console. 
 
 ### Database Security:
 - ✅ Row Level Security (RLS) is enabled
-- ✅ Public can only insert subscriptions (not modify others)
-- ✅ Public can read their own subscription by token
-- ✅ Public can update their own subscription status
+- ✅ Public can insert subscriptions (newsletter signups)
+- ✅ Public can read and update subscriptions (for confirmation/unsubscribe)
+- ✅ Authenticated users (admins) can read all subscribers
+- ✅ Authenticated users (admins) can delete subscribers
+- ✅ All other operations are denied by default
 
 ### Token Security:
 - ✅ Confirmation and unsubscribe tokens are 64-character random strings
@@ -196,6 +198,42 @@ Currently, confirmation and unsubscribe URLs are logged to the browser console. 
 2. Verify Supabase credentials in footer.html
 3. Make sure newsletter_subscribers table exists
 4. Check that RLS policies allow public inserts
+
+### Problem: "401 Unauthorized" errors in console
+**Solution:**
+1. **Run the complete SQL schema** - The newsletter_subscribers table may not exist
+2. **Check RLS policies** - Run the updated SQL schema which includes policies for authenticated users
+3. **Verify Supabase credentials** - Make sure SUPABASE_URL and SUPABASE_ANON_KEY are correct
+4. **Check authentication** - 401 on newsletter_subscribers means you need to log in to the dashboard
+5. In Supabase dashboard, go to **Database** → **Tables** → **newsletter_subscribers** and verify:
+   - Table exists
+   - RLS is enabled
+   - Policies include "Allow authenticated read newsletter"
+
+**To fix permanently:**
+```sql
+-- Run this in Supabase SQL Editor if you get 401 errors
+DROP POLICY IF EXISTS "Allow authenticated read newsletter" ON newsletter_subscribers;
+DROP POLICY IF EXISTS "Allow authenticated delete newsletter" ON newsletter_subscribers;
+
+CREATE POLICY "Allow authenticated read newsletter"
+ON newsletter_subscribers FOR SELECT
+TO authenticated
+USING (true);
+
+CREATE POLICY "Allow authenticated delete newsletter"
+ON newsletter_subscribers FOR DELETE
+TO authenticated
+USING (true);
+```
+
+### Problem: "Identifier 'supabase' has already been declared" error
+**Solution:**
+This error has been fixed in the latest version. If you still see it:
+1. Hard refresh the page (Ctrl+Shift+R or Cmd+Shift+R)
+2. Clear browser cache
+3. Make sure you pulled the latest changes from the repository
+4. The fix ensures supabase is only declared once across all scripts
 
 ## Next Steps
 
