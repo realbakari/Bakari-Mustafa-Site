@@ -127,7 +127,7 @@
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
 
   // Function to initialize Supabase client once library is loaded
-  function initSupabaseClient() {
+  window.initSupabaseClient = function() {
     if (typeof window.supabase !== 'undefined' && typeof window.supabaseClient === 'undefined') {
       window.supabaseClient = window.supabase.createClient(
         window.SUPABASE_URL,
@@ -143,18 +143,20 @@
       // Dispatch custom event to notify other scripts
       window.dispatchEvent(new CustomEvent('supabaseReady', { detail: { client: window.supabaseClient } }));
     }
-  }
+  };
 
   // Try to initialize immediately if library is already loaded
   if (typeof window.supabase !== 'undefined') {
-    initSupabaseClient();
+    window.initSupabaseClient();
   }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" id="supabase-lib"></script>
 <script>
   // Initialize Supabase when the library loads
   document.getElementById('supabase-lib').addEventListener('load', function() {
-    initSupabaseClient();
+    if (window.initSupabaseClient) {
+      window.initSupabaseClient();
+    }
   });
 </script>
 <script src="/assets/js/page-views.js" defer></script>
