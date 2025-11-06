@@ -1943,3 +1943,287 @@ body[data-theme="dark"] {
     }
   }
 }
+
+  // Analytics Header Dark Mode
+  .analytics-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    .header-left {
+      h1 {
+        color: $dark-white;
+      }
+
+      .analytics-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Active Visitors Badge Dark Mode
+  .active-visitors-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .visitor-count {
+      color: $dark-white;
+
+      &.has-visitors {
+        color: #10B981;
+      }
+    }
+
+    .visitor-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Analytics Controls Dark Mode
+  .analytics-controls {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .control-group {
+      label {
+        color: $dark-white;
+      }
+
+      .date-range-select {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: $dark-white;
+
+        &:focus {
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+  }
+
+  // Export Button Dark Mode
+  .export-btn {
+    background: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .section-header {
+    div {
+      h2 {
+        color: $dark-white;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Entry/Exit Pages Dark Mode
+  .entry-exit-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .entry-exit-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .rank {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .page-info {
+      .page-title {
+        color: $dark-white;
+
+        &:hover {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+
+      .page-url {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    .count {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Search Analytics Dark Mode
+  .search-analytics {
+    .search-stat {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+
+      .stat-value {
+        color: $dark-white;
+      }
+
+      .stat-label {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  .search-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .search-rank {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .search-query {
+      .query-text {
+        color: $dark-white;
+      }
+
+      .query-stats {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .zero-results-badge {
+      background: rgba(239, 68, 68, 0.2);
+      color: #FCA5A5;
+    }
+  }
+
+  // 404 Errors Dark Mode
+  .error-404-analytics {
+    .error-stat {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+
+      .stat-value {
+        color: #FCA5A5;
+      }
+
+      .stat-label {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .broken-links-section h4,
+    .error-referrers-section h4 {
+      color: $dark-white;
+    }
+  }
+
+  .broken-link-item,
+  .error-referrer-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    .link-rank {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .link-info {
+      .broken-url {
+        color: #FCA5A5;
+        background: rgba(239, 68, 68, 0.15);
+      }
+
+      .error-count {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  .error-referrer-item {
+    .referrer-url {
+      color: $dark-white;
+    }
+
+    .referrer-count {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Active Visitors Dark Mode
+  .active-visitor-item {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+
+    .visitor-info {
+      .visitor-page {
+        color: $dark-white;
+      }
+
+      .visitor-meta {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Modal Dark Mode
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-content {
+    background: $dark-black;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .date-input-group {
+    label {
+      color: $dark-white;
+    }
+
+    .date-input {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: $dark-white;
+
+      &:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+
+  .modal-actions {
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: $dark-white;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    .btn-primary {
+      background: $dark-white;
+      color: $dark-black;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
+    }
+  }
+}

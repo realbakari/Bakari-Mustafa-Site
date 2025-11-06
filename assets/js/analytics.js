@@ -659,12 +659,203 @@
   }
 
   /**
+   * Get entry/exit page statistics
+   */
+  async function getEntryExitPages() {
+    try {
+      const dateFilter = getDateFilter();
+
+      // Get top entry pages
+      const { data: entryData, error: entryError } = await supabase
+        .from('page_view_logs')
+        .select('page_url, page_title')
+        .eq('is_entry_page', true)
+        .gte('viewed_date', dateFilter.start)
+        .lte('viewed_date', dateFilter.end);
+
+      if (entryError) throw entryError;
+
+      // Get top exit pages
+      const { data: exitData, error: exitError } = await supabase
+        .from('page_view_logs')
+        .select('page_url, page_title')
+        .eq('is_exit_page', true)
+        .gte('viewed_date', dateFilter.start)
+        .lte('viewed_date', dateFilter.end);
+
+      if (exitError) throw exitError;
+
+      // Count entries
+      const entryCounts = {};
+      entryData.forEach(row => {
+        const key = row.page_url;
+        entryCounts[key] = entryCounts[key] || { url: row.page_url, title: row.page_title, count: 0 };
+        entryCounts[key].count++;
+      });
+
+      // Count exits
+      const exitCounts = {};
+      exitData.forEach(row => {
+        const key = row.page_url;
+        exitCounts[key] = exitCounts[key] || { url: row.page_url, title: row.page_title, count: 0 };
+        exitCounts[key].count++;
+      });
+
+      const topEntries = Object.values(entryCounts)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 10);
+
+      const topExits = Object.values(exitCounts)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 10);
+
+      return { topEntries, topExits };
+    } catch (error) {
+      console.error('Error fetching entry/exit pages:', error);
+      return { topEntries: [], topExits: [] };
+    }
+  }
+
+  /**
+   * Get search query analytics
+   */
+  async function getSearchAnalytics() {
+    try {
+      const dateFilter = getDateFilter();
+
+      const { data, error } = await supabase
+        .from('search_queries')
+        .select('*')
+        .gte('searched_date', dateFilter.start)
+        .lte('searched_date', dateFilter.end);
+
+      if (error) throw error;
+
+      // Count by query
+      const queryCounts = {};
+      let totalSearches = 0;
+      let zeroResultSearches = 0;
+
+      data.forEach(row => {
+        totalSearches++;
+        if (row.results_count === 0) zeroResultSearches++;
+
+        const query = row.query.toLowerCase();
+        queryCounts[query] = queryCounts[query] || { query: row.query, count: 0, avgResults: [] };
+        queryCounts[query].count++;
+        queryCounts[query].avgResults.push(row.results_count || 0);
+      });
+
+      // Calculate averages and sort
+      const popularSearches = Object.values(queryCounts)
+        .map(item => ({
+          query: item.query,
+          count: item.count,
+          avgResults: Math.round(item.avgResults.reduce((a, b) => a + b, 0) / item.avgResults.length)
+        }))
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 20);
+
+      return {
+        popularSearches,
+        totalSearches,
+        zeroResultSearches,
+        zeroResultRate: totalSearches > 0 ? ((zeroResultSearches / totalSearches) * 100).toFixed(1) : 0
+      };
+    } catch (error) {
+      console.error('Error fetching search analytics:', error);
+      return { popularSearches: [], totalSearches: 0, zeroResultSearches: 0, zeroResultRate: 0 };
+    }
+  }
+
+  /**
+   * Get 404 error analytics
+   */
+  async function get404Errors() {
+    try {
+      const dateFilter = getDateFilter();
+
+      const { data, error } = await supabase
+        .from('error_404_logs')
+        .select('*')
+        .gte('occurred_date', dateFilter.start)
+        .lte('occurred_date', dateFilter.end);
+
+      if (error) throw error;
+
+      // Count by URL
+      const urlCounts = {};
+      const referrerCounts = {};
+
+      data.forEach(row => {
+        // Count URLs
+        urlCounts[row.requested_url] = urlCounts[row.requested_url] || { url: row.requested_url, count: 0 };
+        urlCounts[row.requested_url].count++;
+
+        // Count referrers (where broken links come from)
+        if (row.referrer) {
+          const ref = row.referrer;
+          referrerCounts[ref] = referrerCounts[ref] || { referrer: ref, count: 0 };
+          referrerCounts[ref].count++;
+        }
+      });
+
+      const topBrokenLinks = Object.values(urlCounts)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 15);
+
+      const topReferrers = Object.values(referrerCounts)
+        .sort((a, b) => b.count - a.count)
+        .slice(0, 10);
+
+      return {
+        topBrokenLinks,
+        topReferrers,
+        total404s: data.length
+      };
+    } catch (error) {
+      console.error('Error fetching 404 errors:', error);
+      return { topBrokenLinks: [], topReferrers: [], total404s: 0 };
+    }
+  }
+
+  /**
+   * Get active visitors (real-time)
+   */
+  async function getActiveVisitors() {
+    try {
+      // Clean up old sessions first
+      await supabase.rpc('cleanup_old_sessions');
+
+      // Get active sessions (last 5 minutes)
+      const fiveMinutesAgo = new Date(Date.now() - 5 * 60 * 1000).toISOString();
+
+      const { data, error } = await supabase
+        .from('active_sessions')
+        .select('*')
+        .gte('last_seen_at', fiveMinutesAgo);
+
+      if (error) throw error;
+
+      return {
+        count: data.length,
+        sessions: data
+      };
+    } catch (error) {
+      console.error('Error fetching active visitors:', error);
+      return { count: 0, sessions: [] };
+    }
+  }
+
+  /**
    * Refresh all data
    */
   async function refreshAllData() {
     const btn = document.getElementById('refresh-btn');
-    btn.classList.add('refreshing');
-    btn.disabled = true;
+    if (btn) {
+      btn.classList.add('refreshing');
+      btn.disabled = true;
+    }
 
     await Promise.all([
       updateStatsOverview(),
@@ -673,11 +864,230 @@
       getAllPages().then(() => renderAllPagesTable()),
       renderReferrerStats(),
       renderDeviceBrowserStats(),
-      renderTrafficChart()
+      renderTrafficChart(),
+      renderEntryExitPages(),
+      renderSearchAnalytics(),
+      render404Errors(),
+      renderActiveVisitors()
     ]);
 
-    btn.classList.remove('refreshing');
-    btn.disabled = false;
+    if (btn) {
+      btn.classList.remove('refreshing');
+      btn.disabled = false;
+    }
+  }
+
+  /**
+   * Render entry/exit page analytics
+   */
+  async function renderEntryExitPages() {
+    const entryContainer = document.getElementById('entry-pages');
+    const exitContainer = document.getElementById('exit-pages');
+
+    if (!entryContainer || !exitContainer) return;
+
+    const { topEntries, topExits } = await getEntryExitPages();
+
+    // Render entry pages
+    if (topEntries.length === 0) {
+      entryContainer.innerHTML = '<p class="no-data">No entry page data yet</p>';
+    } else {
+      entryContainer.innerHTML = topEntries.map((page, index) => `
+        <div class="entry-exit-item">
+          <span class="rank">#${index + 1}</span>
+          <div class="page-info">
+            <a href="${page.url}" class="page-title">${page.title || page.url}</a>
+            <span class="page-url">${page.url}</span>
+          </div>
+          <span class="count">${formatNumber(page.count)} entries</span>
+        </div>
+      `).join('');
+    }
+
+    // Render exit pages
+    if (topExits.length === 0) {
+      exitContainer.innerHTML = '<p class="no-data">No exit page data yet</p>';
+    } else {
+      exitContainer.innerHTML = topExits.map((page, index) => `
+        <div class="entry-exit-item">
+          <span class="rank">#${index + 1}</span>
+          <div class="page-info">
+            <a href="${page.url}" class="page-title">${page.title || page.url}</a>
+            <span class="page-url">${page.url}</span>
+          </div>
+          <span class="count">${formatNumber(page.count)} exits</span>
+        </div>
+      `).join('');
+    }
+  }
+
+  /**
+   * Render search analytics
+   */
+  async function renderSearchAnalytics() {
+    const container = document.getElementById('search-analytics');
+    if (!container) return;
+
+    const { popularSearches, totalSearches, zeroResultSearches, zeroResultRate } = await getSearchAnalytics();
+
+    if (totalSearches === 0) {
+      container.innerHTML = '<p class="no-data">No search data yet</p>';
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="search-stats-summary">
+        <div class="search-stat">
+          <span class="stat-value">${formatNumber(totalSearches)}</span>
+          <span class="stat-label">Total Searches</span>
+        </div>
+        <div class="search-stat">
+          <span class="stat-value">${formatNumber(zeroResultSearches)}</span>
+          <span class="stat-label">Zero Results</span>
+        </div>
+        <div class="search-stat">
+          <span class="stat-value">${zeroResultRate}%</span>
+          <span class="stat-label">Zero Result Rate</span>
+        </div>
+      </div>
+      <div class="popular-searches-list">
+        ${popularSearches.map((search, index) => `
+          <div class="search-item">
+            <span class="search-rank">#${index + 1}</span>
+            <div class="search-query">
+              <span class="query-text">"${search.query}"</span>
+              <span class="query-stats">${search.count} searches • ${search.avgResults} avg results</span>
+            </div>
+            ${search.avgResults === 0 ? '<span class="zero-results-badge">No Results</span>' : ''}
+          </div>
+        `).join('')}
+      </div>
+    `;
+  }
+
+  /**
+   * Render 404 error analytics
+   */
+  async function render404Errors() {
+    const container = document.getElementById('error-404-analytics');
+    if (!container) return;
+
+    const { topBrokenLinks, topReferrers, total404s } = await get404Errors();
+
+    if (total404s === 0) {
+      container.innerHTML = '<p class="no-data">No 404 errors yet (that\'s good!)</p>';
+      return;
+    }
+
+    container.innerHTML = `
+      <div class="error-summary">
+        <div class="error-stat">
+          <span class="stat-value">${formatNumber(total404s)}</span>
+          <span class="stat-label">Total 404 Errors</span>
+        </div>
+        <div class="error-stat">
+          <span class="stat-value">${topBrokenLinks.length}</span>
+          <span class="stat-label">Unique Broken URLs</span>
+        </div>
+      </div>
+      <div class="broken-links-section">
+        <h4>Most Common Broken Links</h4>
+        <div class="broken-links-list">
+          ${topBrokenLinks.map((link, index) => `
+            <div class="broken-link-item">
+              <span class="link-rank">#${index + 1}</span>
+              <div class="link-info">
+                <code class="broken-url">${link.url}</code>
+                <span class="error-count">${formatNumber(link.count)} errors</span>
+              </div>
+            </div>
+          `).join('')}
+        </div>
+      </div>
+      ${topReferrers.length > 0 ? `
+        <div class="error-referrers-section">
+          <h4>Where Broken Links Come From</h4>
+          <div class="error-referrers-list">
+            ${topReferrers.map(ref => `
+              <div class="error-referrer-item">
+                <span class="referrer-url">${ref.referrer}</span>
+                <span class="referrer-count">${formatNumber(ref.count)} links</span>
+              </div>
+            `).join('')}
+          </div>
+        </div>
+      ` : ''}
+    `;
+  }
+
+  /**
+   * Render active visitors (real-time)
+   */
+  async function renderActiveVisitors() {
+    const container = document.getElementById('active-visitors');
+    const countElement = document.getElementById('active-visitors-count');
+
+    if (!container && !countElement) return;
+
+    const { count, sessions } = await getActiveVisitors();
+
+    // Update count badge
+    if (countElement) {
+      countElement.textContent = count;
+      countElement.classList.toggle('has-visitors', count > 0);
+    }
+
+    // Update detailed list
+    if (container) {
+      if (count === 0) {
+        container.innerHTML = '<p class="no-data">No active visitors right now</p>';
+      } else {
+        container.innerHTML = sessions.map(session => {
+          const lastSeen = new Date(session.last_seen_at);
+          const secondsAgo = Math.floor((Date.now() - lastSeen.getTime()) / 1000);
+          const timeAgo = secondsAgo < 60 ? 'Just now' : `${Math.floor(secondsAgo / 60)}m ago`;
+
+          return `
+            <div class="active-visitor-item">
+              <div class="visitor-device">
+                ${session.device_type === 'mobile' ? '📱' : session.device_type === 'tablet' ? '📲' : '💻'}
+              </div>
+              <div class="visitor-info">
+                <span class="visitor-page">${session.current_page_title || session.current_page_url}</span>
+                <span class="visitor-meta">${session.browser_name} • ${timeAgo}</span>
+              </div>
+            </div>
+          `;
+        }).join('');
+      }
+    }
+  }
+
+  /**
+   * Handle date range change
+   */
+  function handleDateRangeChange(range) {
+    customStartDate = null;
+    customEndDate = null;
+
+    if (range === 'custom') {
+      // Show custom date picker (will be handled by UI)
+      const modal = document.getElementById('custom-date-modal');
+      if (modal) modal.style.display = 'flex';
+      return;
+    }
+
+    currentDateRange = parseInt(range);
+    refreshAllData();
+  }
+
+  /**
+   * Apply custom date range
+   */
+  function applyCustomDateRange(startDate, endDate) {
+    customStartDate = startDate;
+    customEndDate = endDate;
+    refreshAllData();
   }
 
   /**
@@ -697,6 +1107,50 @@
     document.getElementById('sort-pages')?.addEventListener('change', (e) => {
       handleSort(e.target.value);
     });
+
+    // Date range filter
+    document.getElementById('date-range-select')?.addEventListener('change', (e) => {
+      handleDateRangeChange(e.target.value);
+    });
+
+    // Custom date range
+    document.getElementById('apply-custom-date')?.addEventListener('click', () => {
+      const startDate = document.getElementById('start-date')?.value;
+      const endDate = document.getElementById('end-date')?.value;
+      if (startDate && endDate) {
+        applyCustomDateRange(startDate, endDate);
+        document.getElementById('custom-date-modal').style.display = 'none';
+      }
+    });
+
+    document.getElementById('cancel-custom-date')?.addEventListener('click', () => {
+      document.getElementById('custom-date-modal').style.display = 'none';
+    });
+
+    // Export buttons
+    document.getElementById('export-all-pages')?.addEventListener('click', () => {
+      exportToCSV(allPagesData, `analytics-all-pages-${new Date().toISOString().split('T')[0]}.csv`);
+    });
+
+    document.getElementById('export-popular')?.addEventListener('click', async () => {
+      const data = await getPopularPosts(50);
+      exportToCSV(data, `analytics-popular-posts-${new Date().toISOString().split('T')[0]}.csv`);
+    });
+
+    document.getElementById('export-searches')?.addEventListener('click', async () => {
+      const { popularSearches } = await getSearchAnalytics();
+      exportToCSV(popularSearches, `analytics-searches-${new Date().toISOString().split('T')[0]}.csv`);
+    });
+
+    document.getElementById('export-404s')?.addEventListener('click', async () => {
+      const { topBrokenLinks } = await get404Errors();
+      exportToCSV(topBrokenLinks, `analytics-404-errors-${new Date().toISOString().split('T')[0]}.csv`);
+    });
+
+    // Real-time auto-refresh (every 30 seconds for active visitors)
+    setInterval(() => {
+      renderActiveVisitors();
+    }, 30000); // 30 seconds
   }
 
   // Initialize when DOM is ready

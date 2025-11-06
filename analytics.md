@@ -8,17 +8,39 @@ comments: false
 ---
 
 <div class="analytics-dashboard">
-  <!-- Header -->
+  <!-- Header with Controls -->
   <div class="analytics-header">
-    <h1>📊 Site Analytics</h1>
-    <p class="analytics-subtitle">Real-time insights from your blog</p>
-    <button id="refresh-btn" class="refresh-button">
-      <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-        <polyline points="23 4 23 10 17 10"></polyline>
-        <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
-      </svg>
-      Refresh Data
-    </button>
+    <div class="header-left">
+      <h1>📊 Site Analytics</h1>
+      <p class="analytics-subtitle">Real-time insights from your blog</p>
+    </div>
+    <div class="header-right">
+      <div class="active-visitors-badge">
+        <span class="pulse-dot"></span>
+        <span id="active-visitors-count" class="visitor-count">0</span>
+        <span class="visitor-label">online</span>
+      </div>
+      <button id="refresh-btn" class="refresh-button">
+        <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <polyline points="23 4 23 10 17 10"></polyline>
+          <path d="M20.49 15a9 9 0 1 1-2.12-9.36L23 10"></path>
+        </svg>
+        Refresh
+      </button>
+    </div>
+  </div>
+
+  <!-- Date Range Filter -->
+  <div class="analytics-controls">
+    <div class="control-group">
+      <label for="date-range-select">Date Range:</label>
+      <select id="date-range-select" class="date-range-select">
+        <option value="7">Last 7 days</option>
+        <option value="30" selected>Last 30 days</option>
+        <option value="90">Last 90 days</option>
+        <option value="custom">Custom range...</option>
+      </select>
+    </div>
   </div>
 
   <!-- Stats Overview -->
@@ -77,29 +99,54 @@ comments: false
     </div>
   </div>
 
-  <!-- Popular Posts -->
-  <div class="analytics-section">
-    <div class="section-header">
-      <h2>🔥 Most Popular Posts</h2>
-      <p>Top performing content by total views</p>
-    </div>
-    <div id="popular-posts" class="popular-posts-list">
-      <div class="loading-skeleton">Loading popular posts...</div>
-    </div>
-  </div>
-
-  <!-- Traffic Over Time -->
+  <!-- Traffic Trends Chart -->
   <div class="analytics-section">
     <div class="section-header">
       <h2>📈 Traffic Trends</h2>
-      <p>Page views over the last 30 days</p>
+      <p>Page views over time</p>
     </div>
     <div class="traffic-chart">
       <canvas id="traffic-chart" width="800" height="300"></canvas>
     </div>
   </div>
 
-  <!-- Referrer Sources -->
+  <!-- Popular Posts -->
+  <div class="analytics-section">
+    <div class="section-header">
+      <div>
+        <h2>🔥 Most Popular Posts</h2>
+        <p>Top performing content by total views</p>
+      </div>
+      <button id="export-popular" class="export-btn">Export CSV</button>
+    </div>
+    <div id="popular-posts" class="popular-posts-list">
+      <div class="loading-skeleton">Loading popular posts...</div>
+    </div>
+  </div>
+
+  <!-- Entry/Exit Pages -->
+  <div class="analytics-section">
+    <div class="section-header">
+      <h2>🚪 Entry & Exit Pages</h2>
+      <p>Where visitors arrive and leave</p>
+    </div>
+    <div class="entry-exit-grid">
+      <div class="entry-exit-card">
+        <h3>Top Entry Pages</h3>
+        <div id="entry-pages" class="entry-exit-list">
+          <div class="loading-skeleton">Loading...</div>
+        </div>
+      </div>
+      <div class="entry-exit-card">
+        <h3>Top Exit Pages</h3>
+        <div id="exit-pages" class="entry-exit-list">
+          <div class="loading-skeleton">Loading...</div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- Traffic Sources -->
   <div class="analytics-section">
     <div class="section-header">
       <h2>🔗 Traffic Sources</h2>
@@ -132,6 +179,45 @@ comments: false
     </div>
   </div>
 
+  <!-- Search Analytics -->
+  <div class="analytics-section">
+    <div class="section-header">
+      <div>
+        <h2>🔍 Search Queries</h2>
+        <p>What visitors are searching for</p>
+      </div>
+      <button id="export-searches" class="export-btn">Export CSV</button>
+    </div>
+    <div id="search-analytics" class="search-analytics">
+      <div class="loading-skeleton">Loading search data...</div>
+    </div>
+  </div>
+
+  <!-- 404 Errors -->
+  <div class="analytics-section">
+    <div class="section-header">
+      <div>
+        <h2>⚠️ 404 Errors</h2>
+        <p>Broken links and missing pages</p>
+      </div>
+      <button id="export-404s" class="export-btn">Export CSV</button>
+    </div>
+    <div id="error-404-analytics" class="error-404-analytics">
+      <div class="loading-skeleton">Loading error data...</div>
+    </div>
+  </div>
+
+  <!-- Active Visitors (Real-time) -->
+  <div class="analytics-section">
+    <div class="section-header">
+      <h2>👥 Active Visitors (Real-Time)</h2>
+      <p>Currently browsing your site</p>
+    </div>
+    <div id="active-visitors" class="active-visitors-list">
+      <div class="loading-skeleton">Loading active visitors...</div>
+    </div>
+  </div>
+
   <!-- Recent Activity -->
   <div class="analytics-section">
     <div class="section-header">
@@ -146,20 +232,45 @@ comments: false
   <!-- All Pages Table -->
   <div class="analytics-section">
     <div class="section-header">
-      <h2>📄 All Pages</h2>
-      <div class="table-controls">
-        <input type="search" id="search-pages" placeholder="Search pages..." class="search-input">
-        <select id="sort-pages" class="sort-select">
-          <option value="views-desc">Most Views</option>
-          <option value="views-asc">Least Views</option>
-          <option value="unique-desc">Most Unique</option>
-          <option value="date-desc">Recently Updated</option>
-          <option value="title-asc">Title A-Z</option>
-        </select>
+      <div>
+        <h2>📄 All Pages</h2>
+        <p>Complete overview of all tracked pages</p>
       </div>
+      <button id="export-all-pages" class="export-btn">Export CSV</button>
+    </div>
+    <div class="table-controls">
+      <input type="search" id="search-pages" placeholder="Search pages..." class="search-input">
+      <select id="sort-pages" class="sort-select">
+        <option value="views-desc">Most Views</option>
+        <option value="views-asc">Least Views</option>
+        <option value="unique-desc">Most Unique</option>
+        <option value="date-desc">Recently Updated</option>
+        <option value="title-asc">Title A-Z</option>
+      </select>
     </div>
     <div id="all-pages-table" class="pages-table">
       <div class="loading-skeleton">Loading all pages...</div>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Date Range Modal -->
+<div id="custom-date-modal" class="modal-overlay" style="display: none;">
+  <div class="modal-content">
+    <h3>Custom Date Range</h3>
+    <div class="date-inputs">
+      <div class="date-input-group">
+        <label for="start-date">Start Date:</label>
+        <input type="date" id="start-date" class="date-input">
+      </div>
+      <div class="date-input-group">
+        <label for="end-date">End Date:</label>
+        <input type="date" id="end-date" class="date-input">
+      </div>
+    </div>
+    <div class="modal-actions">
+      <button id="cancel-custom-date" class="btn-secondary">Cancel</button>
+      <button id="apply-custom-date" class="btn-primary">Apply</button>
     </div>
   </div>
 </div>
