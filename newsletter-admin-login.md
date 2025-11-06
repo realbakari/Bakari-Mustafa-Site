@@ -31,29 +31,24 @@ permalink: /newsletter-admin-login
 </div>
 
 <script>
-  // Wait for Supabase to be initialized
+  // Initialize Supabase client
   let supabase = null;
 
-  function waitForSupabase() {
-    return new Promise((resolve) => {
-      if (window.supabaseClient) {
-        supabase = window.supabaseClient;
-        resolve();
-      } else {
-        window.addEventListener('supabaseReady', function(event) {
-          supabase = event.detail.client;
-          resolve();
-        });
-      }
-    });
-  }
-</script>
-
-<script>
   // Check if already logged in
   document.addEventListener('DOMContentLoaded', async function() {
-    // Wait for Supabase to be ready
-    await waitForSupabase();
+    // Create Supabase client
+    try {
+      supabase = window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+      );
+      console.log('[Admin Login] Supabase client created successfully');
+    } catch (error) {
+      console.error('[Admin Login] Failed to create Supabase client:', error);
+      document.getElementById('login-message').textContent = 'Failed to initialize. Please refresh the page.';
+      document.getElementById('login-message').className = 'login-message error';
+      return;
+    }
 
     try {
       const { data: { session }, error } = await supabase.auth.getSession();

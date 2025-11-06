@@ -332,4 +332,8 @@ function initNewsletterForm() {
   }
 })();
 
+  // Expose public API for newsletter pages
+  window.confirmSubscription = confirmSubscription;
+  window.unsubscribeFromNewsletter = unsubscribeFromNewsletter;
+
 })(); // End of newsletter.js IIFE
