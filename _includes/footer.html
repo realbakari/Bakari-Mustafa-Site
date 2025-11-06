@@ -128,7 +128,7 @@
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
 
   // Initialize global Supabase client (only once)
-  if (typeof window.supabaseClient === 'undefined') {
+  if (typeof window.supabaseClient === 'undefined' && typeof window.supabase !== 'undefined') {
     window.supabaseClient = window.supabase.createClient(
       window.SUPABASE_URL,
       window.SUPABASE_ANON_KEY
@@ -136,7 +136,7 @@
   }
 
   // Create global alias for backwards compatibility
-  if (typeof supabase === 'undefined') {
+  if (typeof supabase === 'undefined' && window.supabaseClient) {
     var supabase = window.supabaseClient;
   }
 </script>

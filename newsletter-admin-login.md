@@ -48,11 +48,21 @@ permalink: /newsletter-admin-login
 
   // Check if already logged in
   document.addEventListener('DOMContentLoaded', async function() {
-    const { data: { session } } = await supabase.auth.getSession();
+    try {
+      const { data: { session }, error } = await supabase.auth.getSession();
 
-    if (session) {
-      // Already logged in, redirect to dashboard
-      window.location.href = '/newsletter-dashboard';
+      if (error) {
+        console.error('Session check error:', error);
+        return;
+      }
+
+      if (session) {
+        // Already logged in, redirect to dashboard
+        console.log('Already logged in, redirecting...');
+        window.location.href = '/newsletter-dashboard';
+      }
+    } catch (err) {
+      console.error('Failed to check session:', err);
     }
   });
 
@@ -64,8 +74,15 @@ permalink: /newsletter-admin-login
   loginForm.addEventListener('submit', async function(e) {
     e.preventDefault();
 
-    const email = document.getElementById('email').value;
+    const email = document.getElementById('email').value.trim();
     const password = document.getElementById('password').value;
+
+    // Validate inputs
+    if (!email || !password) {
+      messageDiv.textContent = 'Please enter both email and password.';
+      messageDiv.className = 'login-message error';
+      return;
+    }
 
     // Clear previous messages
     messageDiv.textContent = '';
@@ -76,12 +93,19 @@ permalink: /newsletter-admin-login
     loginBtn.textContent = 'Signing in...';
 
     try {
+      console.log('Attempting login for:', email);
+
       const { data, error } = await supabase.auth.signInWithPassword({
         email: email,
         password: password
       });
 
-      if (error) throw error;
+      if (error) {
+        console.error('Login error:', error);
+        throw error;
+      }
+
+      console.log('Login successful:', data);
 
       // Success - redirect to dashboard
       messageDiv.textContent = 'Login successful! Redirecting...';
@@ -89,12 +113,24 @@ permalink: /newsletter-admin-login
 
       setTimeout(() => {
         window.location.href = '/newsletter-dashboard';
-      }, 1000);
+      }, 800);
 
     } catch (error) {
-      console.error('Login error:', error);
+      console.error('Login failed:', error);
 
-      messageDiv.textContent = error.message || 'Login failed. Please check your credentials.';
+      let errorMessage = 'Login failed. Please check your credentials.';
+
+      if (error.message) {
+        if (error.message.includes('Invalid login credentials')) {
+          errorMessage = 'Invalid email or password. Please try again.';
+        } else if (error.message.includes('Email not confirmed')) {
+          errorMessage = 'Please confirm your email address first.';
+        } else {
+          errorMessage = error.message;
+        }
+      }
+
+      messageDiv.textContent = errorMessage;
       messageDiv.className = 'login-message error';
 
       // Re-enable form
