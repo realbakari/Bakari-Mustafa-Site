@@ -306,49 +306,16 @@ function initNewsletterForm() {
   });
 }
 
-// Wait for both DOM and Supabase to be ready
-let domReady = false;
-let supabaseReady = false;
+// Since this script is loaded dynamically AFTER Supabase initializes and DOM is ready,
+// we can directly initialize without event listeners
+console.log('[Newsletter] Script loaded, checking for Supabase client...');
 
-function tryInit() {
-  console.log('[Newsletter] tryInit called - domReady:', domReady, 'supabaseReady:', supabaseReady);
-  if (domReady && supabaseReady) {
-    console.log('[Newsletter] Initializing newsletter form');
-    initNewsletterForm();
-  }
-}
-
-// Listen for DOM ready
-document.addEventListener('DOMContentLoaded', function() {
-  domReady = true;
-  tryInit();
-});
-
-// Listen for Supabase ready event
-window.addEventListener('supabaseReady', function(event) {
-  console.log('[Newsletter] Received supabaseReady event');
-  supabase = event.detail.client;
-  supabaseReady = true;
-  tryInit();
-});
-
-// Check if Supabase is already initialized
 if (window.supabaseClient) {
-  console.log('[Newsletter] Supabase client already initialized');
+  console.log('[Newsletter] Supabase client found, initializing...');
   supabase = window.supabaseClient;
-  supabaseReady = true;
-} else {
-  console.log('[Newsletter] Waiting for Supabase client');
-}
 
-// Check if DOM is already ready
-if (document.readyState !== 'loading') {
-  domReady = true;
-  console.log('[Newsletter] DOM already ready');
+  // DOM is definitely ready at this point (script is in footer, loaded dynamically)
+  initNewsletterForm();
 } else {
-  console.log('[Newsletter] Waiting for DOM ready');
+  console.error('[Newsletter] ERROR: Supabase client not found! This should not happen.');
 }
-
-// Try to initialize if both are already ready
-console.log('[Newsletter] Initial state - domReady:', domReady, 'supabaseReady:', supabaseReady);
-tryInit();
