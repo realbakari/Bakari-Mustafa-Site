@@ -137,23 +137,30 @@ permalink: /newsletter-dashboard
 </div>
 <!-- End of dashboard-content -->
 
-<!-- Supabase Client -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
-<script>
-  window.SUPABASE_URL = "https://fmyukpxfweibodnuaifr.supabase.co";
-  window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
-</script>
-
 <!-- Authentication Check -->
 <script>
-  // Use global Supabase client (initialized in footer)
-  var supabase = window.supabaseClient || window.supabase.createClient(
-    window.SUPABASE_URL,
-    window.SUPABASE_ANON_KEY
-  );
+  // Wait for Supabase to be initialized
+  let supabase = null;
+
+  function waitForSupabase() {
+    return new Promise((resolve) => {
+      if (window.supabaseClient) {
+        supabase = window.supabaseClient;
+        resolve();
+      } else {
+        window.addEventListener('supabaseReady', function(event) {
+          supabase = event.detail.client;
+          resolve();
+        });
+      }
+    });
+  }
 
   // Check authentication on page load
   (async function() {
+    // Wait for Supabase to be ready
+    await waitForSupabase();
+
     const authLoading = document.getElementById('auth-loading');
     const authRequired = document.getElementById('auth-required');
     const dashboardContent = document.getElementById('dashboard-content');
