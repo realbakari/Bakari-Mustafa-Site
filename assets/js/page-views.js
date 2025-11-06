@@ -512,37 +512,18 @@
     formatNumber
   };
 
-  // Initialize page tracking once Supabase client is ready
-  function startTracking() {
-    console.log('[PageViews] startTracking called, supabaseClient:', !!window.supabaseClient);
-    // Set the supabase client reference
-    if (window.supabaseClient) {
-      supabase = window.supabaseClient;
+  // Since this script is loaded dynamically AFTER Supabase initializes,
+  // we can directly initialize without event listeners
+  console.log('[PageViews] Script loaded, checking for Supabase client...');
 
-      // Initialize when DOM is ready
-      if (document.readyState === 'loading') {
-        document.addEventListener('DOMContentLoaded', init);
-      } else {
-        init();
-      }
-    } else {
-      console.warn('Supabase client not initialized. Page view tracking disabled.');
-    }
-  }
-
-  // Listen for Supabase ready event
-  window.addEventListener('supabaseReady', function(event) {
-    console.log('[PageViews] Received supabaseReady event');
-    supabase = event.detail.client;
-    startTracking();
-  });
-
-  // Check if Supabase is already initialized
   if (window.supabaseClient) {
-    console.log('[PageViews] Supabase client already initialized, starting tracking');
-    startTracking();
+    console.log('[PageViews] Supabase client found, initializing...');
+    supabase = window.supabaseClient;
+
+    // DOM is definitely ready at this point (script is in footer)
+    init();
   } else {
-    console.log('[PageViews] Waiting for Supabase client to initialize');
+    console.error('[PageViews] ERROR: Supabase client not found! This should not happen.');
   }
 
 })();
