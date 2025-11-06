@@ -45,14 +45,16 @@ permalink: /newsletter-admin-login
 <script>
   window.SUPABASE_URL = "https://fmyukpxfweibodnuaifr.supabase.co";
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
-</script>
 
-<script>
-  // Initialize Supabase client
-  const supabase = window.supabase.createClient(
+  // Initialize global Supabase client
+  window.supabaseClient = window.supabase.createClient(
     window.SUPABASE_URL,
     window.SUPABASE_ANON_KEY
   );
+  var supabase = window.supabaseClient;
+</script>
+
+<script>
 
   // Check if already logged in
   document.addEventListener('DOMContentLoaded', async function() {
