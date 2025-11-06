@@ -127,7 +127,8 @@
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
 
   // Load dependent scripts only after Supabase library is ready
-  function loadSupabaseDependentScripts() {
+  // MUST be global for onload handler to access it
+  window.loadSupabaseDependentScripts = function() {
     console.log('Supabase library loaded, loading dependent scripts...');
 
     // Create and load page-views.js
@@ -139,7 +140,7 @@
     var script2 = document.createElement('script');
     script2.src = '/assets/js/newsletter.js';
     document.body.appendChild(script2);
-  }
+  };
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="loadSupabaseDependentScripts()"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window.loadSupabaseDependentScripts()"></script>
 
