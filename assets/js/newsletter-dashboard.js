@@ -3,11 +3,8 @@
  * Manage and export subscribers
  */
 
-// Use global Supabase client (initialized in footer or inline)
-var supabase = window.supabaseClient || window.supabase.createClient(
-  window.SUPABASE_URL,
-  window.SUPABASE_ANON_KEY
-);
+// Supabase client reference (will be set when ready)
+let supabase = null;
 
 // State
 let allSubscribers = [];
@@ -224,7 +221,13 @@ function exportToCSV(subscribers, filename) {
 /**
  * Initialize dashboard
  */
-document.addEventListener('DOMContentLoaded', async function() {
+async function initializeDashboard() {
+  // Wait for Supabase client to be ready
+  if (!supabase) {
+    console.warn('Supabase client not ready yet, waiting...');
+    return;
+  }
+
   // Load subscribers
   await fetchSubscribers();
 
@@ -270,4 +273,27 @@ document.addEventListener('DOMContentLoaded', async function() {
       renderSubscribers();
     }
   });
+}
+
+// Wait for Supabase client to be ready
+window.addEventListener('supabaseReady', function(event) {
+  supabase = event.detail.client;
+
+  // Initialize when both DOM and Supabase are ready
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeDashboard);
+  } else {
+    initializeDashboard();
+  }
 });
+
+// Check if Supabase is already initialized
+if (window.supabaseClient) {
+  supabase = window.supabaseClient;
+
+  if (document.readyState === 'loading') {
+    document.addEventListener('DOMContentLoaded', initializeDashboard);
+  } else {
+    initializeDashboard();
+  }
+}
