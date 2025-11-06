@@ -14,14 +14,8 @@
     return; // Don't track admin pages
   }
 
-  // Wait for Supabase client to be available
-  if (!window.supabaseClient) {
-    console.warn('Supabase client not initialized. Page view tracking disabled.');
-    return;
-  }
-
-  // Use the global Supabase client
-  const supabase = window.supabaseClient;
+  // Supabase client reference (will be set when ready)
+  let supabase = null;
 
   /**
    * Get the current page identifier
@@ -517,11 +511,32 @@
     formatNumber
   };
 
-  // Initialize when DOM is ready
-  if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', init);
-  } else {
-    init();
+  // Initialize page tracking once Supabase client is ready
+  function startTracking() {
+    // Set the supabase client reference
+    if (window.supabaseClient) {
+      supabase = window.supabaseClient;
+
+      // Initialize when DOM is ready
+      if (document.readyState === 'loading') {
+        document.addEventListener('DOMContentLoaded', init);
+      } else {
+        init();
+      }
+    } else {
+      console.warn('Supabase client not initialized. Page view tracking disabled.');
+    }
+  }
+
+  // Listen for Supabase ready event
+  window.addEventListener('supabaseReady', function(event) {
+    supabase = event.detail.client;
+    startTracking();
+  });
+
+  // Check if Supabase is already initialized
+  if (window.supabaseClient) {
+    startTracking();
   }
 
 })();
