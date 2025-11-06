@@ -31,115 +31,124 @@ permalink: /newsletter-admin-login
 </div>
 
 <script>
-  // Initialize Supabase client
-  let supabase = null;
+  // Initialize Supabase client and handle login
+  (function() {
+    let supabase = null;
 
-  // Check if already logged in
-  document.addEventListener('DOMContentLoaded', async function() {
-    // Create Supabase client
-    try {
-      supabase = window.supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_ANON_KEY
-      );
-      console.log('[Admin Login] Supabase client created successfully');
-    } catch (error) {
-      console.error('[Admin Login] Failed to create Supabase client:', error);
-      document.getElementById('login-message').textContent = 'Failed to initialize. Please refresh the page.';
-      document.getElementById('login-message').className = 'login-message error';
-      return;
-    }
-
-    try {
-      const { data: { session }, error } = await supabase.auth.getSession();
-
-      if (error) {
-        console.error('Session check error:', error);
+    // Wait for DOM to be ready
+    document.addEventListener('DOMContentLoaded', async function() {
+      // Create Supabase client
+      try {
+        supabase = window.supabase.createClient(
+          window.SUPABASE_URL,
+          window.SUPABASE_ANON_KEY
+        );
+        console.log('[Admin Login] Supabase client created successfully');
+      } catch (error) {
+        console.error('[Admin Login] Failed to create Supabase client:', error);
+        document.getElementById('login-message').textContent = 'Failed to initialize. Please refresh the page.';
+        document.getElementById('login-message').className = 'login-message error';
         return;
       }
 
-      if (session) {
-        // Already logged in, redirect to dashboard
-        console.log('Already logged in, redirecting...');
-        window.location.href = '/newsletter-dashboard';
-      }
-    } catch (err) {
-      console.error('Failed to check session:', err);
-    }
-  });
+      // Check if already logged in
+      try {
+        const { data: { session }, error } = await supabase.auth.getSession();
 
-  // Handle login
-  const loginForm = document.getElementById('login-form');
-  const loginBtn = document.getElementById('login-btn');
-  const messageDiv = document.getElementById('login-message');
-
-  loginForm.addEventListener('submit', async function(e) {
-    e.preventDefault();
-
-    const email = document.getElementById('email').value.trim();
-    const password = document.getElementById('password').value;
-
-    // Validate inputs
-    if (!email || !password) {
-      messageDiv.textContent = 'Please enter both email and password.';
-      messageDiv.className = 'login-message error';
-      return;
-    }
-
-    // Clear previous messages
-    messageDiv.textContent = '';
-    messageDiv.className = 'login-message';
-
-    // Disable form
-    loginBtn.disabled = true;
-    loginBtn.textContent = 'Signing in...';
-
-    try {
-      console.log('Attempting login for:', email);
-
-      const { data, error } = await supabase.auth.signInWithPassword({
-        email: email,
-        password: password
-      });
-
-      if (error) {
-        console.error('Login error:', error);
-        throw error;
-      }
-
-      console.log('Login successful:', data);
-
-      // Success - redirect to dashboard
-      messageDiv.textContent = 'Login successful! Redirecting...';
-      messageDiv.className = 'login-message success';
-
-      setTimeout(() => {
-        window.location.href = '/newsletter-dashboard';
-      }, 800);
-
-    } catch (error) {
-      console.error('Login failed:', error);
-
-      let errorMessage = 'Login failed. Please check your credentials.';
-
-      if (error.message) {
-        if (error.message.includes('Invalid login credentials')) {
-          errorMessage = 'Invalid email or password. Please try again.';
-        } else if (error.message.includes('Email not confirmed')) {
-          errorMessage = 'Please confirm your email address first.';
-        } else {
-          errorMessage = error.message;
+        if (error) {
+          console.error('Session check error:', error);
         }
+
+        if (session) {
+          // Already logged in, redirect to dashboard
+          console.log('Already logged in, redirecting...');
+          window.location.href = '/newsletter-dashboard';
+          return;
+        }
+      } catch (err) {
+        console.error('Failed to check session:', err);
       }
 
-      messageDiv.textContent = errorMessage;
-      messageDiv.className = 'login-message error';
+      // Setup login form handler
+      const loginForm = document.getElementById('login-form');
+      const loginBtn = document.getElementById('login-btn');
+      const messageDiv = document.getElementById('login-message');
 
-      // Re-enable form
-      loginBtn.disabled = false;
-      loginBtn.textContent = 'Sign In';
-    }
-  });
+      if (!loginForm) {
+        console.error('[Admin Login] Login form not found');
+        return;
+      }
+
+      loginForm.addEventListener('submit', async function(e) {
+        e.preventDefault();
+        e.stopPropagation();
+
+        const email = document.getElementById('email').value.trim();
+        const password = document.getElementById('password').value;
+
+        // Validate inputs
+        if (!email || !password) {
+          messageDiv.textContent = 'Please enter both email and password.';
+          messageDiv.className = 'login-message error';
+          return;
+        }
+
+        // Clear previous messages
+        messageDiv.textContent = '';
+        messageDiv.className = 'login-message';
+
+        // Disable form
+        loginBtn.disabled = true;
+        loginBtn.textContent = 'Signing in...';
+
+        try {
+          console.log('Attempting login for:', email);
+
+          const { data, error } = await supabase.auth.signInWithPassword({
+            email: email,
+            password: password
+          });
+
+          if (error) {
+            console.error('Login error:', error);
+            throw error;
+          }
+
+          console.log('Login successful:', data);
+
+          // Success - redirect to dashboard
+          messageDiv.textContent = 'Login successful! Redirecting...';
+          messageDiv.className = 'login-message success';
+
+          setTimeout(() => {
+            window.location.href = '/newsletter-dashboard';
+          }, 800);
+
+        } catch (error) {
+          console.error('Login failed:', error);
+
+          let errorMessage = 'Login failed. Please check your credentials.';
+
+          if (error.message) {
+            if (error.message.includes('Invalid login credentials')) {
+              errorMessage = 'Invalid email or password. Please try again.';
+            } else if (error.message.includes('Email not confirmed')) {
+              errorMessage = 'Please confirm your email address first.';
+            } else {
+              errorMessage = error.message;
+            }
+          }
+
+          messageDiv.textContent = errorMessage;
+          messageDiv.className = 'login-message error';
+
+          // Re-enable form
+          loginBtn.disabled = false;
+          loginBtn.textContent = 'Sign In';
+        }
+      });
+    });
+  })();
 </script>
 
 <style>
