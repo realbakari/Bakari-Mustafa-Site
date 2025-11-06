@@ -146,13 +146,11 @@ permalink: /newsletter-dashboard
 
 <!-- Authentication Check -->
 <script>
-  // Initialize Supabase client (reuse if already exists)
-  if (typeof supabase === 'undefined') {
-    var supabase = window.supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
-    );
-  }
+  // Use global Supabase client (initialized in footer)
+  var supabase = window.supabaseClient || window.supabase.createClient(
+    window.SUPABASE_URL,
+    window.SUPABASE_ANON_KEY
+  );
 
   // Check authentication on page load
   (async function() {
