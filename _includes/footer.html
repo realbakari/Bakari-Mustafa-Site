@@ -119,6 +119,7 @@
 {%- endif -%}
 
 <!-- Supabase Page View Counter -->
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
 <script>
   // Supabase configuration
   // Note: The anon key is safe to expose publicly - it's meant for client-side use
@@ -126,46 +127,15 @@
   window.SUPABASE_URL = "https://fmyukpxfweibodnuaifr.supabase.co";
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
 
-  // Function to initialize Supabase client once library is loaded
-  window.initSupabaseClient = function() {
-    if (typeof window.supabase !== 'undefined' && typeof window.supabaseClient === 'undefined') {
-      window.supabaseClient = window.supabase.createClient(
-        window.SUPABASE_URL,
-        window.SUPABASE_ANON_KEY
-      );
-      console.log('Supabase client initialized successfully');
-
-      // Create global alias for backwards compatibility
-      if (typeof window.supabase === 'undefined') {
-        window.supabase = window.supabaseClient;
-      }
-
-      // Dispatch custom event to notify other scripts
-      window.dispatchEvent(new CustomEvent('supabaseReady', { detail: { client: window.supabaseClient } }));
-
-      // Load dependent scripts after Supabase is ready
-      loadDependentScripts();
-    }
-  };
-
-  // Function to load scripts that depend on Supabase
-  function loadDependentScripts() {
-    console.log('Loading dependent scripts...');
-
-    // Load page-views.js
-    const pageViewsScript = document.createElement('script');
-    pageViewsScript.src = '/assets/js/page-views.js';
-    document.body.appendChild(pageViewsScript);
-
-    // Load newsletter.js
-    const newsletterScript = document.createElement('script');
-    newsletterScript.src = '/assets/js/newsletter.js';
-    document.body.appendChild(newsletterScript);
-  }
-
-  // Try to initialize immediately if library is already loaded
+  // Initialize Supabase client for global use
   if (typeof window.supabase !== 'undefined') {
-    window.initSupabaseClient();
+    window.supabaseClient = window.supabase.createClient(
+      window.SUPABASE_URL,
+      window.SUPABASE_ANON_KEY
+    );
+    console.log('Supabase client initialized successfully');
   }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window.initSupabaseClient && window.initSupabaseClient()"></script>
+<script src="/assets/js/page-views.js"></script>
+<script src="/assets/js/newsletter.js"></script>
+
