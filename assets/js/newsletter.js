@@ -3,15 +3,8 @@
  * Handles email subscriptions with double opt-in
  */
 
-// Use global Supabase client (initialized in footer)
-var supabase = window.supabaseClient || (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY
-  ? window.supabase.createClient(window.SUPABASE_URL, window.SUPABASE_ANON_KEY)
-  : null);
-
-// Exit if Supabase client not available
-if (!supabase) {
-  console.warn('Newsletter: Supabase client not initialized.');
-}
+// Supabase client reference (will be set when ready)
+var supabase = null;
 
 /**
  * Generate a random token for confirmation/unsubscribe
@@ -35,6 +28,14 @@ function isValidEmail(email) {
  */
 async function subscribeToNewsletter(email, source = 'footer') {
   try {
+    // Check if Supabase is initialized
+    if (!supabase) {
+      return {
+        success: false,
+        message: 'Newsletter subscription is temporarily unavailable. Please try again later.'
+      };
+    }
+
     // Validate email
     if (!email || !isValidEmail(email)) {
       return {
@@ -125,6 +126,14 @@ async function subscribeToNewsletter(email, source = 'footer') {
  */
 async function confirmSubscription(token) {
   try {
+    // Check if Supabase is initialized
+    if (!supabase) {
+      return {
+        success: false,
+        message: 'Service temporarily unavailable. Please try again later.'
+      };
+    }
+
     // Find subscriber by confirmation token
     const { data: subscriber, error: findError } = await supabase
       .from('newsletter_subscribers')
@@ -178,6 +187,14 @@ async function confirmSubscription(token) {
  */
 async function unsubscribeFromNewsletter(token) {
   try {
+    // Check if Supabase is initialized
+    if (!supabase) {
+      return {
+        success: false,
+        message: 'Service temporarily unavailable. Please try again later.'
+      };
+    }
+
     // Find subscriber by unsubscribe token
     const { data: subscriber, error: findError } = await supabase
       .from('newsletter_subscribers')
@@ -229,7 +246,7 @@ async function unsubscribeFromNewsletter(token) {
 /**
  * Initialize newsletter form on page load
  */
-document.addEventListener('DOMContentLoaded', function() {
+function initNewsletterForm() {
   const newsletterForm = document.getElementById('newsletter-form');
   if (!newsletterForm) return;
 
@@ -282,4 +299,41 @@ document.addEventListener('DOMContentLoaded', function() {
     submitButton.disabled = false;
     submitButton.textContent = 'Subscribe';
   });
+}
+
+// Wait for both DOM and Supabase to be ready
+let domReady = false;
+let supabaseReady = false;
+
+function tryInit() {
+  if (domReady && supabaseReady) {
+    initNewsletterForm();
+  }
+}
+
+// Listen for DOM ready
+document.addEventListener('DOMContentLoaded', function() {
+  domReady = true;
+  tryInit();
 });
+
+// Listen for Supabase ready event
+window.addEventListener('supabaseReady', function(event) {
+  supabase = event.detail.client;
+  supabaseReady = true;
+  tryInit();
+});
+
+// Check if Supabase is already initialized
+if (window.supabaseClient) {
+  supabase = window.supabaseClient;
+  supabaseReady = true;
+}
+
+// Check if DOM is already ready
+if (document.readyState !== 'loading') {
+  domReady = true;
+}
+
+// Try to initialize if both are already ready
+tryInit();
