@@ -30,6 +30,9 @@
 
   // Cache for data
   let allPagesData = [];
+  let currentDateRange = 30; // Default 30 days
+  let customStartDate = null;
+  let customEndDate = null;
 
   /**
    * Format number with commas
@@ -37,6 +40,66 @@
   function formatNumber(num) {
     if (num === 0) return '0';
     return num.toString().replace(/\B(?=(\d{3})+(?!\d))/g, ',');
+  }
+
+  /**
+   * Get date range filter for queries
+   */
+  function getDateFilter() {
+    if (customStartDate && customEndDate) {
+      return {
+        start: customStartDate,
+        end: customEndDate
+      };
+    }
+
+    const end = new Date();
+    const start = new Date();
+    start.setDate(start.getDate() - currentDateRange);
+
+    return {
+      start: start.toISOString().split('T')[0],
+      end: end.toISOString().split('T')[0]
+    };
+  }
+
+  /**
+   * Export data to CSV
+   */
+  function exportToCSV(data, filename) {
+    if (!data || data.length === 0) {
+      alert('No data to export');
+      return;
+    }
+
+    // Get headers from first object
+    const headers = Object.keys(data[0]);
+
+    // Create CSV content
+    let csv = headers.join(',') + '\n';
+
+    data.forEach(row => {
+      const values = headers.map(header => {
+        const value = row[header] || '';
+        // Escape commas and quotes
+        if (typeof value === 'string' && (value.includes(',') || value.includes('"'))) {
+          return '"' + value.replace(/"/g, '""') + '"';
+        }
+        return value;
+      });
+      csv += values.join(',') + '\n';
+    });
+
+    // Create download link
+    const blob = new Blob([csv], { type: 'text/csv' });
+    const url = window.URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    document.body.appendChild(a);
+    a.click();
+    document.body.removeChild(a);
+    window.URL.revokeObjectURL(url);
   }
 
   /**
