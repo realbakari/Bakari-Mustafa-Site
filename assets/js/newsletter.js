@@ -318,11 +318,15 @@ if (typeof window.supabase !== 'undefined') {
     window.SUPABASE_URL,
     window.SUPABASE_ANON_KEY
   );
+  console.log('[Newsletter] Supabase client created successfully');
+} catch (error) {
+  console.error('[Newsletter] Failed to create Supabase client:', error);
+}
 
-  console.log('[Newsletter] Client created, initializing form...');
-
-  // DOM is definitely ready at this point (script is in footer, loaded dynamically)
-  initNewsletterForm();
+// Initialize newsletter form
+// DOM is ready at this point (script is in footer after body content)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initNewsletterForm);
 } else {
-  console.error('[Newsletter] ERROR: Supabase library not loaded yet!');
+  initNewsletterForm();
 }
