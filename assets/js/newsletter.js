@@ -247,8 +247,13 @@ async function unsubscribeFromNewsletter(token) {
  * Initialize newsletter form on page load
  */
 function initNewsletterForm() {
+  console.log('[Newsletter] initNewsletterForm called');
   const newsletterForm = document.getElementById('newsletter-form');
-  if (!newsletterForm) return;
+  if (!newsletterForm) {
+    console.log('[Newsletter] No newsletter form found on this page');
+    return;
+  }
+  console.log('[Newsletter] Newsletter form found, attaching handlers');
 
   const emailInput = newsletterForm.querySelector('input[type="email"]');
   const submitButton = newsletterForm.querySelector('button[type="submit"]');
@@ -306,7 +311,9 @@ let domReady = false;
 let supabaseReady = false;
 
 function tryInit() {
+  console.log('[Newsletter] tryInit called - domReady:', domReady, 'supabaseReady:', supabaseReady);
   if (domReady && supabaseReady) {
+    console.log('[Newsletter] Initializing newsletter form');
     initNewsletterForm();
   }
 }
@@ -319,6 +326,7 @@ document.addEventListener('DOMContentLoaded', function() {
 
 // Listen for Supabase ready event
 window.addEventListener('supabaseReady', function(event) {
+  console.log('[Newsletter] Received supabaseReady event');
   supabase = event.detail.client;
   supabaseReady = true;
   tryInit();
@@ -326,14 +334,21 @@ window.addEventListener('supabaseReady', function(event) {
 
 // Check if Supabase is already initialized
 if (window.supabaseClient) {
+  console.log('[Newsletter] Supabase client already initialized');
   supabase = window.supabaseClient;
   supabaseReady = true;
+} else {
+  console.log('[Newsletter] Waiting for Supabase client');
 }
 
 // Check if DOM is already ready
 if (document.readyState !== 'loading') {
   domReady = true;
+  console.log('[Newsletter] DOM already ready');
+} else {
+  console.log('[Newsletter] Waiting for DOM ready');
 }
 
 // Try to initialize if both are already ready
+console.log('[Newsletter] Initial state - domReady:', domReady, 'supabaseReady:', supabaseReady);
 tryInit();
