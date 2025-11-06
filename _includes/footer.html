@@ -136,8 +136,8 @@
       console.log('Supabase client initialized successfully');
 
       // Create global alias for backwards compatibility
-      if (typeof supabase === 'undefined') {
-        var supabase = window.supabaseClient;
+      if (typeof window.supabase === 'undefined') {
+        window.supabase = window.supabaseClient;
       }
 
       // Dispatch custom event to notify other scripts
