@@ -101,6 +101,119 @@ collections:
       - { label: "Status", name: "status", widget: "select", options: ["Ongoing", "Completed"], required: false }
       - { label: "Body", name: "body", widget: "markdown", required: false }
 
+  # Book Summaries Collection
+  - name: "book-summaries"
+    label: "Book Summaries"
+    folder: "Book-Summaries"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: true }
+      - { label: "Featured Image", name: "image", widget: "image", required: false, hint: "Book cover or related image" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false, hint: "Short summary for SEO" }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
+  # Book Library Collection
+  - name: "book-library"
+    label: "Book Library"
+    folder: "Book-library"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: true }
+      - { label: "Featured Image", name: "image", widget: "image", required: false, hint: "Book cover" }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
+  # Anime Collection
+  - name: "anime"
+    label: "Anime Articles"
+    folder: "anime"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: true }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
+  # Articles Collection
+  - name: "article"
+    label: "Articles"
+    folder: "article"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: true }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
+  # Reading Collection
+  - name: "reading"
+    label: "Reading List"
+    folder: "reading"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Comments", name: "comments", widget: "boolean", default: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
+  # Projects Collection
+  - name: "projects"
+    label: "Projects"
+    folder: "projects"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: true }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
+  # Resources Collection
+  - name: "resources"
+    label: "Resources"
+    folder: "resources"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: true }
+      - { label: "Featured Image", name: "image", widget: "image", required: false }
+      - { label: "Tags", name: "tags", widget: "list", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
   # Site Settings
   - name: "settings"
     label: "Site Settings"
