@@ -35,17 +35,12 @@ permalink: /newsletter-unsubscribe
 <script>
   let userEmail = '';
 
-  // Wait for Supabase and newsletter.js to be ready
+  // Wait for newsletter.js to be ready
   function waitForNewsletterJS() {
     return new Promise((resolve) => {
       // Check if unsubscribeFromNewsletter function is available
-      if (typeof unsubscribeFromNewsletter === 'function') {
-        // Also wait for Supabase
-        if (window.supabaseClient) {
-          resolve();
-        } else {
-          window.addEventListener('supabaseReady', () => resolve(), { once: true });
-        }
+      if (typeof window.unsubscribeFromNewsletter === 'function') {
+        resolve();
       } else {
         // Wait a bit and try again
         setTimeout(() => waitForNewsletterJS().then(resolve), 100);
@@ -55,7 +50,7 @@ permalink: /newsletter-unsubscribe
 
   // Auto-unsubscribe on page load
   document.addEventListener('DOMContentLoaded', async function() {
-    // Wait for dependencies to load
+    // Wait for newsletter.js to load
     await waitForNewsletterJS();
     // Get token from URL
     const urlParams = new URLSearchParams(window.location.search);
