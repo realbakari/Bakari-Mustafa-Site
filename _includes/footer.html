@@ -134,11 +134,23 @@
     // Create and load page-views.js
     var script1 = document.createElement('script');
     script1.src = '/assets/js/page-views.js';
+    script1.onerror = function() {
+      console.error('Failed to load page-views.js - check if file exists at:', script1.src);
+    };
+    script1.onload = function() {
+      console.log('page-views.js loaded successfully');
+    };
     document.body.appendChild(script1);
 
     // Create and load newsletter.js
     var script2 = document.createElement('script');
     script2.src = '/assets/js/newsletter.js';
+    script2.onerror = function() {
+      console.error('Failed to load newsletter.js - check if file exists at:', script2.src);
+    };
+    script2.onload = function() {
+      console.log('newsletter.js loaded successfully');
+    };
     document.body.appendChild(script2);
   };
 </script>
