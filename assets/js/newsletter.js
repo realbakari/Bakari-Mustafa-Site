@@ -310,7 +310,7 @@ function initNewsletterForm() {
 // we can directly initialize without event listeners
 console.log('[Newsletter] Script loaded, checking for Supabase library...');
 
-if (typeof window.supabase !== 'undefined') {
+if (window.supabase && typeof window.supabase.createClient === 'function') {
   console.log('[Newsletter] Supabase library found, creating client...');
 
   // Create our own Supabase client
