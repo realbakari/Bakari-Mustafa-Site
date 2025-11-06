@@ -306,23 +306,21 @@ function initNewsletterForm() {
   });
 }
 
-// Since this script is loaded dynamically AFTER Supabase initializes and DOM is ready,
-// we can directly initialize without event listeners
-console.log('[Newsletter] Script loaded, checking for Supabase library...');
-
-if (window.supabase && typeof window.supabase.createClient === 'function') {
-  console.log('[Newsletter] Supabase library found, creating client...');
-
-  // Create our own Supabase client
+// Initialize Supabase client (library loaded synchronously before this script)
+try {
   supabase = window.supabase.createClient(
     window.SUPABASE_URL,
     window.SUPABASE_ANON_KEY
   );
+  console.log('[Newsletter] Supabase client created successfully');
+} catch (error) {
+  console.error('[Newsletter] Failed to create Supabase client:', error);
+}
 
-  console.log('[Newsletter] Client created, initializing form...');
-
-  // DOM is definitely ready at this point (script is in footer, loaded dynamically)
-  initNewsletterForm();
+// Initialize newsletter form
+// DOM is ready at this point (script is in footer after body content)
+if (document.readyState === 'loading') {
+  document.addEventListener('DOMContentLoaded', initNewsletterForm);
 } else {
-  console.error('[Newsletter] ERROR: Supabase library not loaded yet!');
+  initNewsletterForm();
 }
