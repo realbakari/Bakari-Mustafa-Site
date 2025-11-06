@@ -136,8 +136,8 @@
       console.log('Supabase client initialized successfully');
 
       // Create global alias for backwards compatibility
-      if (typeof supabase === 'undefined') {
-        var supabase = window.supabaseClient;
+      if (typeof window.supabase === 'undefined') {
+        window.supabase = window.supabaseClient;
       }
 
       // Dispatch custom event to notify other scripts
@@ -150,14 +150,6 @@
     window.initSupabaseClient();
   }
 </script>
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" id="supabase-lib"></script>
-<script>
-  // Initialize Supabase when the library loads
-  document.getElementById('supabase-lib').addEventListener('load', function() {
-    if (window.initSupabaseClient) {
-      window.initSupabaseClient();
-    }
-  });
-</script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window.initSupabaseClient && window.initSupabaseClient()"></script>
 <script src="/assets/js/page-views.js" defer></script>
 <script src="/assets/js/newsletter.js" defer></script>

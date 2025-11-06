@@ -450,11 +450,11 @@
       data.append('log_id', lastLogId);
 
       // Alternative: Use fetch with keepalive
-      fetch(SUPABASE_URL + '/rest/v1/page_view_logs?id=eq.' + lastLogId, {
+      fetch(window.SUPABASE_URL + '/rest/v1/page_view_logs?id=eq.' + lastLogId, {
         method: 'PATCH',
         headers: {
-          'apikey': SUPABASE_ANON_KEY,
-          'Authorization': 'Bearer ' + SUPABASE_ANON_KEY,
+          'apikey': window.SUPABASE_ANON_KEY,
+          'Authorization': 'Bearer ' + window.SUPABASE_ANON_KEY,
           'Content-Type': 'application/json',
           'Prefer': 'return=minimal'
         },
