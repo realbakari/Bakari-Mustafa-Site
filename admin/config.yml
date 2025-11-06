@@ -1,0 +1,120 @@
+backend:
+  name: github
+  repo: realbakari/Bakari-Mustafa-Site
+  branch: claude/review-update-website-ui-011CUp4t7z6nnGPt4pLiYa9j # Change to main after merging
+  base_url: https://api.netlify.com
+  auth_endpoint: auth
+
+# Media files will be stored in the uploads folder
+media_folder: "uploads"
+public_folder: "/uploads"
+
+# Publish mode - editorial_workflow enables draft/review/publish flow
+publish_mode: editorial_workflow
+
+# Site URL for preview
+site_url: https://bakarimustafa.com
+
+# Collections define the structure for different content types
+collections:
+  # Blog Posts Collection
+  - name: "posts"
+    label: "Blog Posts"
+    folder: "_posts"
+    create: true
+    slug: "{{year}}-{{month}}-{{day}}-{{slug}}"
+    editor:
+      preview: true
+    fields:
+      - { label: "Layout", name: "layout", widget: "hidden", default: "post" }
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Publish Date", name: "date", widget: "datetime", required: true }
+      - { label: "Featured Image", name: "image", widget: "image", required: false, hint: "Main image for the post" }
+      - { label: "Tags", name: "tags", widget: "list", required: false, hint: "Add tags separated by commas" }
+      - { label: "Description", name: "description", widget: "text", required: false, hint: "Short description for SEO (155 characters max)" }
+      - { label: "Excerpt", name: "excerpt", widget: "text", required: false, hint: "Short summary shown on post listing" }
+      - { label: "Comments", name: "comments", widget: "boolean", default: true, required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: true }
+
+  # Pages Collection
+  - name: "pages"
+    label: "Pages"
+    files:
+      - label: "About Page"
+        name: "about"
+        file: "about.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Permalink", name: "permalink", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Featured Image", name: "image", widget: "image", required: false }
+          - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+          - { label: "Description", name: "description", widget: "text", required: false }
+          - { label: "Comments", name: "comments", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Contact Page"
+        name: "contact"
+        file: "contact.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Permalink", name: "permalink", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Featured Image", name: "image", widget: "image", required: false }
+          - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+          - { label: "Description", name: "description", widget: "text", required: false }
+          - { label: "Comments", name: "comments", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+      - label: "Posts Page"
+        name: "posts-page"
+        file: "posts.md"
+        fields:
+          - { label: "Title", name: "title", widget: "string" }
+          - { label: "Permalink", name: "permalink", widget: "string" }
+          - { label: "Layout", name: "layout", widget: "hidden", default: "page" }
+          - { label: "Featured Image", name: "image", widget: "image", required: false }
+          - { label: "Excerpt", name: "excerpt", widget: "text", required: false }
+          - { label: "Description", name: "description", widget: "text", required: false }
+          - { label: "Comments", name: "comments", widget: "boolean", default: false }
+          - { label: "Body", name: "body", widget: "markdown" }
+
+  # Wattpad Collections
+  - name: "wattpad"
+    label: "Wattpad Stories"
+    folder: "_wattpad"
+    create: true
+    slug: "{{slug}}"
+    editor:
+      preview: false
+    fields:
+      - { label: "Title", name: "title", widget: "string", required: true }
+      - { label: "Story Link", name: "link", widget: "string", required: true, hint: "Full Wattpad story URL" }
+      - { label: "Cover Image", name: "image", widget: "image", required: false }
+      - { label: "Description", name: "description", widget: "text", required: false }
+      - { label: "Genre", name: "genre", widget: "string", required: false }
+      - { label: "Status", name: "status", widget: "select", options: ["Ongoing", "Completed"], required: false }
+      - { label: "Body", name: "body", widget: "markdown", required: false }
+
+  # Site Settings
+  - name: "settings"
+    label: "Site Settings"
+    files:
+      - label: "Site Configuration"
+        name: "config"
+        file: "_config.yml"
+        fields:
+          - { label: "Site Title", name: "title", widget: "string" }
+          - { label: "Tagline", name: "tagline", widget: "string" }
+          - { label: "Description", name: "description", widget: "text" }
+          - { label: "Site URL", name: "url", widget: "string" }
+          - { label: "Base URL", name: "baseurl", widget: "string", required: false }
+          - { label: "Author Name", name: "author", widget: "object", fields: [
+              { label: "Name", name: "name", widget: "string" },
+              { label: "Bio", name: "bio", widget: "text", required: false },
+              { label: "Username", name: "username", widget: "string", required: false },
+              { label: "Email", name: "email", widget: "string", required: false }
+            ]}
+          - { label: "Permalink Structure", name: "permalink", widget: "string" }
+          - { label: "Paginate", name: "paginate", widget: "number", value_type: "int", default: 9 }
+          - { label: "Timezone", name: "timezone", widget: "string", default: "UTC" }
