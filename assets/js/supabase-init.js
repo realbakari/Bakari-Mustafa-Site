@@ -11,27 +11,46 @@ window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXB
 
 // Load dependent scripts only after Supabase library is ready
 window.loadSupabaseDependentScripts = function() {
-  console.log('Supabase library loaded, loading dependent scripts...');
+  console.log('Supabase library loaded, checking if window.supabase is available...');
 
-  // Create and load page-views.js
-  var script1 = document.createElement('script');
-  script1.src = '/assets/js/page-views.js';
-  script1.onerror = function() {
-    console.error('Failed to load page-views.js - check if file exists at:', script1.src);
-  };
-  script1.onload = function() {
-    console.log('page-views.js loaded successfully');
-  };
-  document.body.appendChild(script1);
+  // Wait for window.supabase to be available
+  var checkSupabase = function(attempt) {
+    attempt = attempt || 0;
 
-  // Create and load newsletter.js
-  var script2 = document.createElement('script');
-  script2.src = '/assets/js/newsletter.js';
-  script2.onerror = function() {
-    console.error('Failed to load newsletter.js - check if file exists at:', script2.src);
+    if (window.supabase && typeof window.supabase.createClient === 'function') {
+      console.log('window.supabase is ready, loading dependent scripts...');
+
+      // Create and load page-views.js
+      var script1 = document.createElement('script');
+      script1.src = '/assets/js/page-views.js';
+      script1.onerror = function() {
+        console.error('Failed to load page-views.js - check if file exists at:', script1.src);
+      };
+      script1.onload = function() {
+        console.log('page-views.js loaded successfully');
+      };
+      document.body.appendChild(script1);
+
+      // Create and load newsletter.js
+      var script2 = document.createElement('script');
+      script2.src = '/assets/js/newsletter.js';
+      script2.onerror = function() {
+        console.error('Failed to load newsletter.js - check if file exists at:', script2.src);
+      };
+      script2.onload = function() {
+        console.log('newsletter.js loaded successfully');
+      };
+      document.body.appendChild(script2);
+    } else if (attempt < 50) {
+      // Retry after 50ms (max 50 attempts = 2.5 seconds)
+      console.log('window.supabase not ready yet, retrying... (attempt ' + (attempt + 1) + ')');
+      setTimeout(function() {
+        checkSupabase(attempt + 1);
+      }, 50);
+    } else {
+      console.error('ERROR: window.supabase not available after 2.5 seconds');
+    }
   };
-  script2.onload = function() {
-    console.log('newsletter.js loaded successfully');
-  };
-  document.body.appendChild(script2);
+
+  checkSupabase();
 };

@@ -516,7 +516,7 @@
   // we can directly initialize without event listeners
   console.log('[PageViews] Script loaded, checking for Supabase library...');
 
-  if (typeof window.supabase !== 'undefined') {
+  if (window.supabase && typeof window.supabase.createClient === 'function') {
     console.log('[PageViews] Supabase library found, creating client...');
 
     // Create our own Supabase client
