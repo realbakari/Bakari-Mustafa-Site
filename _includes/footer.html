@@ -142,8 +142,26 @@
 
       // Dispatch custom event to notify other scripts
       window.dispatchEvent(new CustomEvent('supabaseReady', { detail: { client: window.supabaseClient } }));
+
+      // Load dependent scripts after Supabase is ready
+      loadDependentScripts();
     }
   };
+
+  // Function to load scripts that depend on Supabase
+  function loadDependentScripts() {
+    console.log('Loading dependent scripts...');
+
+    // Load page-views.js
+    const pageViewsScript = document.createElement('script');
+    pageViewsScript.src = '/assets/js/page-views.js';
+    document.body.appendChild(pageViewsScript);
+
+    // Load newsletter.js
+    const newsletterScript = document.createElement('script');
+    newsletterScript.src = '/assets/js/newsletter.js';
+    document.body.appendChild(newsletterScript);
+  }
 
   // Try to initialize immediately if library is already loaded
   if (typeof window.supabase !== 'undefined') {
@@ -151,5 +169,3 @@
   }
 </script>
 <script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" onload="window.initSupabaseClient && window.initSupabaseClient()"></script>
-<script src="/assets/js/page-views.js"></script>
-<script src="/assets/js/newsletter.js"></script>
