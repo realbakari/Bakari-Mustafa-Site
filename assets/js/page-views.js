@@ -489,6 +489,7 @@
    * Initialize page view tracking
    */
   function init() {
+    console.log('[PageViews] init called, supabase:', !!supabase);
     // Wait a bit to avoid tracking bots and quick bounces
     setTimeout(() => {
       // Track the page view
@@ -513,6 +514,7 @@
 
   // Initialize page tracking once Supabase client is ready
   function startTracking() {
+    console.log('[PageViews] startTracking called, supabaseClient:', !!window.supabaseClient);
     // Set the supabase client reference
     if (window.supabaseClient) {
       supabase = window.supabaseClient;
@@ -530,13 +532,17 @@
 
   // Listen for Supabase ready event
   window.addEventListener('supabaseReady', function(event) {
+    console.log('[PageViews] Received supabaseReady event');
     supabase = event.detail.client;
     startTracking();
   });
 
   // Check if Supabase is already initialized
   if (window.supabaseClient) {
+    console.log('[PageViews] Supabase client already initialized, starting tracking');
     startTracking();
+  } else {
+    console.log('[PageViews] Waiting for Supabase client to initialize');
   }
 
 })();
