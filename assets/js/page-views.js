@@ -6,10 +6,17 @@
 (function() {
   'use strict';
 
+  // Skip tracking on admin/newsletter pages
+  const currentPath = window.location.pathname;
+  const skipPaths = ['/newsletter-admin-login', '/newsletter-dashboard', '/analytics'];
+
+  if (skipPaths.some(path => currentPath.startsWith(path))) {
+    return; // Don't track admin pages
+  }
+
   // Configuration - loaded from window variables set in footer
-  // Fallback to hardcoded values if window variables aren't set
-  const SUPABASE_URL = window.SUPABASE_URL || 'https://fmyukpxfweibodnuaifr.supabase.co';
-  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY || 'eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3NjIzNTg5NjQsImV4cCI6MjA3NzkzNDk2NH0.Pil32HEZaf4eZwTGbdgJfcZedgdRXuE4zUNA7Z_RPCg';
+  const SUPABASE_URL = window.SUPABASE_URL;
+  const SUPABASE_ANON_KEY = window.SUPABASE_ANON_KEY;
 
   // Check if Supabase is configured
   if (!SUPABASE_URL || !SUPABASE_ANON_KEY) {
@@ -17,8 +24,8 @@
     return;
   }
 
-  // Initialize Supabase client
-  const supabase = window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
+  // Use existing global Supabase client
+  const supabase = window.supabaseClient || window.supabase.createClient(SUPABASE_URL, SUPABASE_ANON_KEY);
 
   /**
    * Get the current page identifier
