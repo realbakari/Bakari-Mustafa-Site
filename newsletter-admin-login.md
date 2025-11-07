@@ -31,12 +31,12 @@ permalink: /newsletter-admin-login
 </div>
 
 <script>
-  // Initialize Supabase client and handle login
+  /* Initialize Supabase client and handle login */
   (function() {
     let supabase = null;
 
-    // Immediately prevent form submission until we're ready
-    // This is a defensive measure in case user submits before Supabase loads
+    /* Immediately prevent form submission until we're ready */
+    /* This is a defensive measure in case user submits before Supabase loads */
     const tempFormHandler = function(e) {
       e.preventDefault();
       e.stopPropagation();
@@ -49,20 +49,24 @@ permalink: /newsletter-admin-login
       return false;
     };
 
-    // Attach temporary handler immediately
+    /* Attach temporary handler immediately */
     const attachTempHandler = function() {
       const form = document.getElementById('login-form');
       if (form) {
         form.addEventListener('submit', tempFormHandler);
         console.log('[Admin Login] Temporary form handler attached');
+        /* Also set a flag we can check */
+        window._loginInitialized = true;
+      } else {
+        console.error('[Admin Login] ERROR: Form not found when attaching temp handler!');
       }
     };
 
-    // Attach immediately since script comes AFTER the form in HTML
-    // Form element is guaranteed to exist when this inline script runs
+    /* Attach immediately since script comes AFTER the form in HTML */
+    /* Form element is guaranteed to exist when this inline script runs */
     attachTempHandler();
 
-    // Function to wait for Supabase library to load
+    /* Function to wait for Supabase library to load */
     function waitForSupabase() {
       return new Promise((resolve) => {
         if (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
@@ -78,12 +82,12 @@ permalink: /newsletter-admin-login
       });
     }
 
-    // Initialize everything when both DOM and Supabase are ready
+    /* Initialize everything when both DOM and Supabase are ready */
     async function initialize() {
-      // Wait for Supabase library to be available
+      /* Wait for Supabase library to be available */
       await waitForSupabase();
 
-      // Create Supabase client
+      /* Create Supabase client */
       try {
         supabase = window.supabase.createClient(
           window.SUPABASE_URL,
@@ -97,7 +101,7 @@ permalink: /newsletter-admin-login
         return;
       }
 
-      // Check if already logged in
+      /* Check if already logged in */
       try {
         const { data: { session }, error } = await supabase.auth.getSession();
 
@@ -106,7 +110,7 @@ permalink: /newsletter-admin-login
         }
 
         if (session) {
-          // Already logged in, redirect to dashboard
+          /* Already logged in, redirect to dashboard */
           console.log('Already logged in, redirecting...');
           window.location.href = '/newsletter-dashboard';
           return;
@@ -115,7 +119,7 @@ permalink: /newsletter-admin-login
         console.error('Failed to check session:', err);
       }
 
-      // Setup login form handler
+      /* Setup login form handler */
       const loginForm = document.getElementById('login-form');
       const loginBtn = document.getElementById('login-btn');
       const messageDiv = document.getElementById('login-message');
@@ -125,7 +129,7 @@ permalink: /newsletter-admin-login
         return;
       }
 
-      // Remove temporary handler if it exists
+      /* Remove temporary handler if it exists */
       loginForm.removeEventListener('submit', tempFormHandler);
       console.log('[Admin Login] Temporary handler removed, attaching real handler');
 
@@ -136,18 +140,18 @@ permalink: /newsletter-admin-login
         const email = document.getElementById('email').value.trim();
         const password = document.getElementById('password').value;
 
-        // Validate inputs
+        /* Validate inputs */
         if (!email || !password) {
           messageDiv.textContent = 'Please enter both email and password.';
           messageDiv.className = 'login-message error';
           return;
         }
 
-        // Clear previous messages
+        /* Clear previous messages */
         messageDiv.textContent = '';
         messageDiv.className = 'login-message';
 
-        // Disable form
+        /* Disable form */
         loginBtn.disabled = true;
         loginBtn.textContent = 'Signing in...';
 
@@ -166,7 +170,7 @@ permalink: /newsletter-admin-login
 
           console.log('Login successful:', data);
 
-          // Success - redirect to dashboard
+          /* Success - redirect to dashboard */
           messageDiv.textContent = 'Login successful! Redirecting...';
           messageDiv.className = 'login-message success';
 
@@ -192,15 +196,17 @@ permalink: /newsletter-admin-login
           messageDiv.textContent = errorMessage;
           messageDiv.className = 'login-message error';
 
-          // Re-enable form
+          /* Re-enable form */
           loginBtn.disabled = false;
           loginBtn.textContent = 'Sign In';
         }
       });
     }
 
-    // Start initialization immediately
-    // Temporary handler is already attached, safe to start polling
+    /* Start initialization immediately */
+    /* Temporary handler is already attached, safe to start polling */
+    console.log('[Admin Login] Starting initialize()...');
+    window._loginInitStarted = true;
     initialize();
   })();
 </script>
