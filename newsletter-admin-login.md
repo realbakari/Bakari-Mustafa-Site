@@ -8,7 +8,7 @@ permalink: /newsletter-admin-login
   <div class="login-container">
     <h2>Admin Login</h2>
 
-    <form id="login-form" class="login-form">
+    <form id="login-form" class="login-form" onsubmit="return false;">
       <div class="form-group">
         <label for="email">Email</label>
         <input type="email" id="email" placeholder="admin@example.com" required>
@@ -58,12 +58,9 @@ permalink: /newsletter-admin-login
       }
     };
 
-    // Try to attach immediately if DOM is ready, otherwise wait
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', attachTempHandler);
-    } else {
-      attachTempHandler();
-    }
+    // Attach immediately since script comes AFTER the form in HTML
+    // Form element is guaranteed to exist when this inline script runs
+    attachTempHandler();
 
     // Function to wait for Supabase library to load
     function waitForSupabase() {
@@ -202,13 +199,9 @@ permalink: /newsletter-admin-login
       });
     }
 
-    // Start initialization when DOM is ready
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initialize);
-    } else {
-      // DOM is already loaded
-      initialize();
-    }
+    // Start initialization immediately
+    // Temporary handler is already attached, safe to start polling
+    initialize();
   })();
 </script>
 
