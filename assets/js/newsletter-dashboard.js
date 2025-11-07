@@ -688,26 +688,65 @@ async function sendBroadcastEmail() {
   sendBtn.disabled = true;
 
   try {
-    /* TODO: Implement actual email sending via Netlify Function */
-    console.log('[Dashboard] Would send email:', {
-      subject,
-      body,
-      recipients: recipients.map(r => r.email),
-      previewMode
+    /* Get current user's email for preview mode */
+    const { data: { session } } = await supabase.auth.getSession();
+    const previewEmail = session?.user?.email;
+
+    if (previewMode && !previewEmail) {
+      alert('Unable to determine your email for preview mode');
+      return;
+    }
+
+    /* Prepare recipients data */
+    const recipientsData = recipients.map(r => ({
+      email: r.email,
+      unsubscribe_token: r.unsubscribe_token
+    }));
+
+    console.log(`[Dashboard] Sending ${previewMode ? 'test' : 'broadcast'} email to ${recipients.length} recipient(s)`);
+
+    /* Call Netlify Function */
+    const response = await fetch('/.netlify/functions/send-broadcast-email', {
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json'
+      },
+      body: JSON.stringify({
+        subject: subject,
+        body: body,
+        recipients: recipientsData,
+        previewMode: previewMode,
+        previewEmail: previewEmail
+      })
     });
 
-    /* Simulate API call */
-    await new Promise(resolve => setTimeout(resolve, 2000));
+    const result = await response.json();
 
-    alert(previewMode
-      ? 'Test email sent to your account!'
-      : `Email sent to ${recipients.length} recipient(s)!`
-    );
+    if (!response.ok) {
+      throw new Error(result.error || 'Failed to send email');
+    }
+
+    console.log('[Dashboard] Email sent successfully:', result);
+
+    /* Show success message */
+    if (previewMode) {
+      alert('✅ Test email sent to your account! Check your inbox.');
+    } else {
+      const message = result.failed > 0
+        ? `Email sent to ${result.successful} recipient(s).\n${result.failed} failed to send.`
+        : `✅ Email sent successfully to ${result.successful} recipient(s)!`;
+      alert(message);
+
+      /* Log any errors */
+      if (result.errors && result.errors.length > 0) {
+        console.error('[Dashboard] Some emails failed:', result.errors);
+      }
+    }
 
     hideEmailComposer();
   } catch (error) {
     console.error('[Dashboard] Error sending email:', error);
-    alert('Failed to send email. Please try again.');
+    alert(`Failed to send email: ${error.message}\n\nPlease check the console for details.`);
   } finally {
     btnText.style.display = 'inline';
     btnLoading.style.display = 'none';
