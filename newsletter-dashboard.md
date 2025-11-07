@@ -140,13 +140,32 @@ permalink: /newsletter-dashboard
 <!-- Authentication Check -->
 <script>
   /* Initialize Supabase client */
-  let supabase = null;
+  let dashboardSupabase = null;
+
+  /* Function to wait for Supabase library to load */
+  function waitForSupabase() {
+    return new Promise((resolve) => {
+      if (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+        resolve();
+      } else {
+        const checkInterval = setInterval(() => {
+          if (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+            clearInterval(checkInterval);
+            resolve();
+          }
+        }, 50);
+      }
+    });
+  }
 
   /* Check authentication on page load */
   (async function() {
+    /* Wait for Supabase library to be available */
+    await waitForSupabase();
+
     /* Create Supabase client */
     try {
-      supabase = window.supabase.createClient(
+      dashboardSupabase = window.supabase.createClient(
         window.SUPABASE_URL,
         window.SUPABASE_ANON_KEY
       );
@@ -166,7 +185,7 @@ permalink: /newsletter-dashboard
 
     try {
       /* Get current session */
-      const { data: { session }, error } = await supabase.auth.getSession();
+      const { data: { session }, error } = await dashboardSupabase.auth.getSession();
 
       if (error) throw error;
 
@@ -190,7 +209,7 @@ permalink: /newsletter-dashboard
       /* Handle logout */
       logoutBtn.addEventListener('click', async function() {
         if (confirm('Are you sure you want to logout?')) {
-          await supabase.auth.signOut();
+          await dashboardSupabase.auth.signOut();
           window.location.href = '/newsletter-admin-login';
         }
       });
