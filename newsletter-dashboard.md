@@ -40,49 +40,97 @@ permalink: /newsletter-dashboard
 
   <!-- Stats Overview -->
   <div class="dashboard-stats">
-    <div class="stat-card">
-      <div class="stat-icon">👥</div>
+    <div class="stat-card stat-card-primary">
+      <div class="stat-icon-wrapper">
+        <div class="stat-icon">👥</div>
+      </div>
       <div class="stat-info">
         <div class="stat-value" id="total-subscribers">0</div>
         <div class="stat-label">Total Subscribers</div>
+        <div class="stat-change" id="total-change">+0 this week</div>
       </div>
     </div>
 
-    <div class="stat-card">
-      <div class="stat-icon">✅</div>
+    <div class="stat-card stat-card-success">
+      <div class="stat-icon-wrapper">
+        <div class="stat-icon">✅</div>
+      </div>
       <div class="stat-info">
         <div class="stat-value" id="confirmed-subscribers">0</div>
         <div class="stat-label">Confirmed</div>
+        <div class="stat-change" id="confirmed-percentage">0%</div>
       </div>
     </div>
 
-    <div class="stat-card">
-      <div class="stat-icon">⏳</div>
+    <div class="stat-card stat-card-warning">
+      <div class="stat-icon-wrapper">
+        <div class="stat-icon">⏳</div>
+      </div>
       <div class="stat-info">
         <div class="stat-value" id="pending-subscribers">0</div>
         <div class="stat-label">Pending</div>
+        <div class="stat-change" id="pending-percentage">0%</div>
       </div>
     </div>
 
-    <div class="stat-card">
-      <div class="stat-icon">📈</div>
+    <div class="stat-card stat-card-info">
+      <div class="stat-icon-wrapper">
+        <div class="stat-icon">📈</div>
+      </div>
       <div class="stat-info">
         <div class="stat-value" id="growth-rate">0%</div>
         <div class="stat-label">Monthly Growth</div>
+        <div class="stat-change" id="growth-trend">Trend: ↗️</div>
       </div>
+    </div>
+  </div>
+
+  <!-- Growth Chart -->
+  <div class="chart-section">
+    <div class="section-header">
+      <h2>📊 Growth Over Time</h2>
+      <div class="chart-controls">
+        <button class="chart-btn active" data-period="7">7 Days</button>
+        <button class="chart-btn" data-period="30">30 Days</button>
+        <button class="chart-btn" data-period="90">90 Days</button>
+      </div>
+    </div>
+    <canvas id="growth-chart" style="max-height: 250px;"></canvas>
+  </div>
+
+  <!-- Action Bar -->
+  <div class="action-bar">
+    <div class="action-bar-left">
+      <button id="send-email-btn" class="btn-primary">
+        📧 Compose Email
+      </button>
+      <button id="bulk-delete-btn" class="btn-danger" style="display: none;">
+        🗑️ Delete Selected (<span id="selected-count">0</span>)
+      </button>
+    </div>
+    <div class="action-bar-right">
+      <button id="refresh-btn" class="btn-refresh">
+        🔄 Refresh
+      </button>
     </div>
   </div>
 
   <!-- Controls -->
   <div class="dashboard-controls">
-    <div class="control-group">
-      <input type="text" id="search-subscribers" placeholder="Search by email..." class="search-input">
+    <div class="control-group control-group-filters">
+      <div class="search-wrapper">
+        <svg xmlns="http://www.w3.org/2000/svg" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+          <circle cx="11" cy="11" r="8"></circle>
+          <path d="m21 21-4.35-4.35"></path>
+        </svg>
+        <input type="text" id="search-subscribers" placeholder="Search by email..." class="search-input">
+      </div>
 
       <select id="filter-status" class="filter-select">
         <option value="all">All Statuses</option>
-        <option value="confirmed">Confirmed</option>
-        <option value="pending">Pending</option>
-        <option value="unsubscribed">Unsubscribed</option>
+        <option value="confirmed">✅ Confirmed</option>
+        <option value="pending">⏳ Pending</option>
+        <option value="unsubscribed">❌ Unsubscribed</option>
       </select>
 
       <select id="filter-source" class="filter-select">
@@ -92,37 +140,68 @@ permalink: /newsletter-dashboard
         <option value="popup">Popup</option>
         <option value="post">Post</option>
       </select>
+
+      <select id="filter-date-range" class="filter-select">
+        <option value="all">All Time</option>
+        <option value="today">Today</option>
+        <option value="week">This Week</option>
+        <option value="month">This Month</option>
+        <option value="custom">Custom Range...</option>
+      </select>
     </div>
 
-    <div class="control-group">
+    <div class="control-group control-group-actions">
       <button id="export-all-btn" class="btn-export">
         📥 Export All
       </button>
-      <button id="export-confirmed-btn" class="btn-export">
-        📥 Export Confirmed Only
+      <button id="export-selected-btn" class="btn-export" style="display: none;">
+        📥 Export Selected
       </button>
-      <button id="refresh-btn" class="btn-refresh">
-        🔄 Refresh
+      <button id="export-confirmed-btn" class="btn-export">
+        📥 Confirmed Only
       </button>
     </div>
   </div>
 
   <!-- Subscribers Table -->
   <div class="subscribers-table-container">
+    <div class="table-header-info">
+      <div class="table-count">
+        Showing <span id="showing-count">0</span> of <span id="total-count">0</span> subscribers
+      </div>
+      <div class="table-sort-info">
+        <span id="sort-info">Sort by clicking column headers</span>
+      </div>
+    </div>
     <table class="subscribers-table" id="subscribers-table">
       <thead>
         <tr>
-          <th>Email</th>
-          <th>Status</th>
-          <th>Subscribed</th>
-          <th>Confirmed</th>
+          <th class="th-checkbox">
+            <input type="checkbox" id="select-all-checkbox" title="Select all">
+          </th>
+          <th class="sortable" data-sort="email">
+            Email
+            <span class="sort-icon">⇅</span>
+          </th>
+          <th class="sortable" data-sort="status">
+            Status
+            <span class="sort-icon">⇅</span>
+          </th>
+          <th class="sortable" data-sort="subscribed_at">
+            Subscribed
+            <span class="sort-icon">⇅</span>
+          </th>
+          <th class="sortable" data-sort="confirmed_at">
+            Confirmed
+            <span class="sort-icon">⇅</span>
+          </th>
           <th>Source</th>
           <th>Actions</th>
         </tr>
       </thead>
       <tbody id="subscribers-list">
         <tr>
-          <td colspan="6" class="loading">Loading subscribers...</td>
+          <td colspan="7" class="loading">Loading subscribers...</td>
         </tr>
       </tbody>
     </table>
@@ -136,6 +215,82 @@ permalink: /newsletter-dashboard
   </div>
 </div>
 <!-- End of dashboard-content -->
+
+<!-- Email Composer Modal -->
+<div id="email-composer-modal" class="modal" style="display: none;">
+  <div class="modal-backdrop"></div>
+  <div class="modal-content modal-large">
+    <div class="modal-header">
+      <h2>📧 Compose Broadcast Email</h2>
+      <button class="modal-close" id="close-email-modal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="email-recipients">Recipients</label>
+        <select id="email-recipients" class="form-control">
+          <option value="all">All Confirmed Subscribers</option>
+          <option value="selected">Selected Subscribers Only</option>
+          <option value="confirmed">All Confirmed</option>
+          <option value="pending">Pending Confirmations</option>
+        </select>
+        <small class="form-hint">
+          <span id="recipient-count">0</span> recipients will receive this email
+        </small>
+      </div>
+
+      <div class="form-group">
+        <label for="email-subject">Subject Line *</label>
+        <input type="text" id="email-subject" class="form-control" placeholder="Enter email subject..." required>
+      </div>
+
+      <div class="form-group">
+        <label for="email-body">Message *</label>
+        <textarea id="email-body" class="form-control" rows="12" placeholder="Write your message here...&#10;&#10;You can use basic HTML:&#10;- <strong>Bold text</strong>&#10;- <em>Italic text</em>&#10;- <a href='url'>Links</a>&#10;- <p>Paragraphs</p>" required></textarea>
+      </div>
+
+      <div class="form-group">
+        <label>
+          <input type="checkbox" id="email-preview-mode">
+          Send test email to yourself first
+        </label>
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancel-email-btn">Cancel</button>
+      <button class="btn-primary" id="send-email-broadcast-btn">
+        <span class="btn-text">📤 Send Email</span>
+        <span class="btn-loading" style="display: none;">
+          <span class="spinner"></span> Sending...
+        </span>
+      </button>
+    </div>
+  </div>
+</div>
+
+<!-- Custom Date Range Modal -->
+<div id="date-range-modal" class="modal" style="display: none;">
+  <div class="modal-backdrop"></div>
+  <div class="modal-content">
+    <div class="modal-header">
+      <h2>📅 Custom Date Range</h2>
+      <button class="modal-close" id="close-date-modal">×</button>
+    </div>
+    <div class="modal-body">
+      <div class="form-group">
+        <label for="date-from">From Date</label>
+        <input type="date" id="date-from" class="form-control">
+      </div>
+      <div class="form-group">
+        <label for="date-to">To Date</label>
+        <input type="date" id="date-to" class="form-control">
+      </div>
+    </div>
+    <div class="modal-footer">
+      <button class="btn-secondary" id="cancel-date-btn">Cancel</button>
+      <button class="btn-primary" id="apply-date-btn">Apply Filter</button>
+    </div>
+  </div>
+</div>
 
 <!-- Authentication Check -->
 <script>
@@ -229,6 +384,8 @@ permalink: /newsletter-dashboard
   })();
 </script>
 
+<!-- Load Chart.js for growth chart -->
+<script src="https://cdn.jsdelivr.net/npm/chart.js@4"></script>
 <script src="/assets/js/newsletter-dashboard.js"></script>
 
 <style>
@@ -712,6 +869,526 @@ body[data-theme="dark"] .user-email span {
 
   .btn-logout {
     width: 100%;
+  }
+}
+
+/* ========== NEW ENHANCED STYLES ========== */
+
+/* Enhanced Stat Cards */
+.stat-card {
+  position: relative;
+  overflow: hidden;
+  border-left: 4px solid transparent;
+  transition: all 0.3s ease;
+}
+
+.stat-card-primary { border-left-color: #3B82F6; }
+.stat-card-success { border-left-color: #10B981; }
+.stat-card-warning { border-left-color: #F59E0B; }
+.stat-card-info { border-left-color: #8B5CF6; }
+
+.stat-card:hover {
+  transform: translateY(-2px);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.1);
+}
+
+.stat-icon-wrapper {
+  width: 60px;
+  height: 60px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 12px;
+  background: rgba(59, 130, 246, 0.1);
+}
+
+.stat-card-success .stat-icon-wrapper { background: rgba(16, 185, 129, 0.1); }
+.stat-card-warning .stat-icon-wrapper { background: rgba(245, 158, 11, 0.1); }
+.stat-card-info .stat-icon-wrapper { background: rgba(139, 92, 246, 0.1); }
+
+.stat-change {
+  font-size: 0.75rem;
+  color: #10B981;
+  margin-top: 0.25rem;
+}
+
+body[data-theme="dark"] .stat-change {
+  color: #34D399;
+}
+
+/* Growth Chart */
+.chart-section {
+  background: #fff;
+  padding: 1.5rem;
+  border-radius: 8px;
+  box-shadow: 0 2px 4px rgba(0, 0, 0, 0.05);
+  margin-bottom: 1.5rem;
+}
+
+body[data-theme="dark"] .chart-section {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.section-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+
+.section-header h2 {
+  font-size: 1.25rem;
+  font-weight: 600;
+  color: #1F2937;
+  margin: 0;
+}
+
+body[data-theme="dark"] .section-header h2 {
+  color: #F9FAFB;
+}
+
+.chart-controls {
+  display: flex;
+  gap: 0.5rem;
+}
+
+.chart-btn {
+  padding: 0.375rem 0.75rem;
+  border: 1px solid #D1D5DB;
+  background: #fff;
+  border-radius: 6px;
+  font-size: 0.75rem;
+  cursor: pointer;
+  transition: all 0.2s;
+}
+
+.chart-btn:hover {
+  background: #F3F4F6;
+}
+
+.chart-btn.active {
+  background: #3B82F6;
+  color: white;
+  border-color: #3B82F6;
+}
+
+body[data-theme="dark"] .chart-btn {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #F9FAFB;
+}
+
+/* Action Bar */
+.action-bar {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  margin-bottom: 1rem;
+  gap: 1rem;
+}
+
+.action-bar-left,
+.action-bar-right {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.btn-primary,
+.btn-secondary,
+.btn-danger {
+  padding: 0.625rem 1.25rem;
+  border: none;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 500;
+  cursor: pointer;
+  transition: all 0.2s;
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.btn-primary {
+  background: #3B82F6;
+  color: white;
+}
+
+.btn-primary:hover {
+  background: #2563EB;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(59, 130, 246, 0.3);
+}
+
+.btn-secondary {
+  background: #6B7280;
+  color: white;
+}
+
+.btn-secondary:hover {
+  background: #4B5563;
+}
+
+.btn-danger {
+  background: #EF4444;
+  color: white;
+}
+
+.btn-danger:hover {
+  background: #DC2626;
+  transform: translateY(-1px);
+  box-shadow: 0 4px 8px rgba(239, 68, 68, 0.3);
+}
+
+/* Enhanced Controls */
+.control-group-filters {
+  flex: 1;
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.control-group-actions {
+  display: flex;
+  gap: 0.75rem;
+  flex-wrap: wrap;
+}
+
+.search-wrapper {
+  position: relative;
+  flex: 1;
+  min-width: 250px;
+}
+
+.search-wrapper svg {
+  position: absolute;
+  left: 0.75rem;
+  top: 50%;
+  transform: translateY(-50%);
+  color: #9CA3AF;
+  pointer-events: none;
+}
+
+.search-wrapper .search-input {
+  padding-left: 2.5rem;
+  width: 100%;
+}
+
+/* Enhanced Table */
+.table-header-info {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1rem;
+  background: #F9FAFB;
+  border-radius: 8px 8px 0 0;
+  font-size: 0.875rem;
+}
+
+body[data-theme="dark"] .table-header-info {
+  background: rgba(255, 255, 255, 0.02);
+}
+
+.table-count {
+  font-weight: 500;
+  color: #1F2937;
+}
+
+body[data-theme="dark"] .table-count {
+  color: #F9FAFB;
+}
+
+.table-sort-info {
+  color: #6B7280;
+  font-size: 0.75rem;
+}
+
+body[data-theme="dark"] .table-sort-info {
+  color: #9CA3AF;
+}
+
+.th-checkbox {
+  width: 40px;
+  text-align: center;
+}
+
+.sortable {
+  cursor: pointer;
+  user-select: none;
+  position: relative;
+}
+
+.sortable:hover {
+  background: #F3F4F6;
+}
+
+body[data-theme="dark"] .sortable:hover {
+  background: rgba(255, 255, 255, 0.05);
+}
+
+.sort-icon {
+  opacity: 0.3;
+  margin-left: 0.25rem;
+  font-size: 0.75rem;
+}
+
+.sortable.sorted-asc .sort-icon::before {
+  content: '↑';
+  opacity: 1;
+}
+
+.sortable.sorted-desc .sort-icon::before {
+  content: '↓';
+  opacity: 1;
+}
+
+/* Modal Styles */
+.modal {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  z-index: 1000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+}
+
+.modal-backdrop {
+  position: absolute;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 100%;
+  background: rgba(0, 0, 0, 0.5);
+  backdrop-filter: blur(4px);
+  animation: fadeIn 0.2s ease;
+}
+
+.modal-content {
+  position: relative;
+  background: #fff;
+  border-radius: 12px;
+  box-shadow: 0 20px 25px -5px rgba(0, 0, 0, 0.1);
+  max-width: 500px;
+  width: 90%;
+  max-height: 90vh;
+  overflow: auto;
+  animation: slideUp 0.3s ease;
+  z-index: 1001;
+}
+
+.modal-large {
+  max-width: 700px;
+}
+
+body[data-theme="dark"] .modal-content {
+  background: #1F2937;
+}
+
+.modal-header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 1.5rem;
+  border-bottom: 1px solid #E5E7EB;
+}
+
+body[data-theme="dark"] .modal-header {
+  border-bottom-color: rgba(255, 255, 255, 0.1);
+}
+
+.modal-header h2 {
+  margin: 0;
+  font-size: 1.5rem;
+  color: #1F2937;
+}
+
+body[data-theme="dark"] .modal-header h2 {
+  color: #F9FAFB;
+}
+
+.modal-close {
+  background: none;
+  border: none;
+  font-size: 2rem;
+  line-height: 1;
+  cursor: pointer;
+  color: #6B7280;
+  padding: 0;
+  width: 32px;
+  height: 32px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  border-radius: 4px;
+  transition: all 0.2s;
+}
+
+.modal-close:hover {
+  background: #F3F4F6;
+  color: #1F2937;
+}
+
+body[data-theme="dark"] .modal-close:hover {
+  background: rgba(255, 255, 255, 0.1);
+  color: #F9FAFB;
+}
+
+.modal-body {
+  padding: 1.5rem;
+}
+
+.modal-footer {
+  padding: 1.5rem;
+  border-top: 1px solid #E5E7EB;
+  display: flex;
+  justify-content: flex-end;
+  gap: 0.75rem;
+}
+
+body[data-theme="dark"] .modal-footer {
+  border-top-color: rgba(255, 255, 255, 0.1);
+}
+
+/* Form Elements */
+.form-group {
+  margin-bottom: 1.5rem;
+}
+
+.form-group label {
+  display: block;
+  margin-bottom: 0.5rem;
+  font-weight: 500;
+  color: #374151;
+  font-size: 0.875rem;
+}
+
+body[data-theme="dark"] .form-group label {
+  color: #D1D5DB;
+}
+
+.form-control {
+  width: 100%;
+  padding: 0.625rem 0.875rem;
+  border: 1px solid #D1D5DB;
+  border-radius: 6px;
+  font-size: 0.875rem;
+  transition: all 0.2s;
+}
+
+.form-control:focus {
+  outline: none;
+  border-color: #3B82F6;
+  box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.1);
+}
+
+body[data-theme="dark"] .form-control {
+  background: rgba(255, 255, 255, 0.05);
+  border-color: rgba(255, 255, 255, 0.1);
+  color: #F9FAFB;
+}
+
+.form-control textarea {
+  resize: vertical;
+  font-family: inherit;
+}
+
+.form-hint {
+  display: block;
+  margin-top: 0.5rem;
+  font-size: 0.75rem;
+  color: #6B7280;
+}
+
+body[data-theme="dark"] .form-hint {
+  color: #9CA3AF;
+}
+
+/* Animations */
+@keyframes fadeIn {
+  from {
+    opacity: 0;
+  }
+  to {
+    opacity: 1;
+  }
+}
+
+@keyframes slideUp {
+  from {
+    opacity: 0;
+    transform: translateY(20px);
+  }
+  to {
+    opacity: 1;
+    transform: translateY(0);
+  }
+}
+
+.spinner {
+  display: inline-block;
+  width: 14px;
+  height: 14px;
+  border: 2px solid rgba(255, 255, 255, 0.3);
+  border-top-color: white;
+  border-radius: 50%;
+  animation: spin 0.6s linear infinite;
+}
+
+@keyframes spin {
+  to {
+    transform: rotate(360deg);
+  }
+}
+
+/* Responsive Updates */
+@media (max-width: 768px) {
+  .dashboard-stats {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .action-bar {
+    flex-direction: column;
+    align-items: stretch;
+  }
+
+  .action-bar-left,
+  .action-bar-right {
+    width: 100%;
+  }
+
+  .control-group-filters,
+  .control-group-actions {
+    flex-direction: column;
+  }
+
+  .search-wrapper,
+  .filter-select {
+    width: 100%;
+  }
+
+  .btn-primary,
+  .btn-secondary,
+  .btn-danger {
+    width: 100%;
+    justify-content: center;
+  }
+
+  .modal-content {
+    width: 95%;
+  }
+
+  .section-header {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 1rem;
+  }
+
+  .chart-controls {
+    width: 100%;
+    justify-content: space-between;
   }
 }
 </style>
