@@ -139,12 +139,12 @@ permalink: /newsletter-dashboard
 
 <!-- Authentication Check -->
 <script>
-  // Initialize Supabase client
+  /* Initialize Supabase client */
   let supabase = null;
 
-  // Check authentication on page load
+  /* Check authentication on page load */
   (async function() {
-    // Create Supabase client
+    /* Create Supabase client */
     try {
       supabase = window.supabase.createClient(
         window.SUPABASE_URL,
@@ -165,29 +165,29 @@ permalink: /newsletter-dashboard
     const logoutBtn = document.getElementById('logout-btn');
 
     try {
-      // Get current session
+      /* Get current session */
       const { data: { session }, error } = await supabase.auth.getSession();
 
       if (error) throw error;
 
       if (!session) {
-        // Not authenticated - show auth required message
+        /* Not authenticated - show auth required message */
         authLoading.style.display = 'none';
         authRequired.style.display = 'block';
         return;
       }
 
-      // Authenticated - show dashboard
+      /* Authenticated - show dashboard */
       authLoading.style.display = 'none';
       dashboardContent.style.display = 'block';
 
-      // Display user email
+      /* Display user email */
       const userEmailSpan = document.querySelector('#user-email span');
       if (userEmailSpan) {
         userEmailSpan.textContent = session.user.email;
       }
 
-      // Handle logout
+      /* Handle logout */
       logoutBtn.addEventListener('click', async function() {
         if (confirm('Are you sure you want to logout?')) {
           await supabase.auth.signOut();
