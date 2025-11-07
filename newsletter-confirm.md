@@ -24,25 +24,25 @@ permalink: /newsletter-confirm
 </div>
 
 <script>
-  // Wait for newsletter.js to be ready
+  /* Wait for newsletter.js to be ready */
   function waitForNewsletterJS() {
     return new Promise((resolve) => {
-      // Check if confirmSubscription function is available
+      /* Check if confirmSubscription function is available */
       if (typeof window.confirmSubscription === 'function') {
         resolve();
       } else {
-        // Wait a bit and try again
+        /* Wait a bit and try again */
         setTimeout(() => waitForNewsletterJS().then(resolve), 100);
       }
     });
   }
 
-  // Auto-confirm on page load
+  /* Auto-confirm on page load */
   document.addEventListener('DOMContentLoaded', async function() {
-    // Wait for newsletter.js to load
+    /* Wait for newsletter.js to load */
     await waitForNewsletterJS();
 
-    // Get token from URL
+    /* Get token from URL */
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
 
@@ -66,7 +66,7 @@ permalink: /newsletter-confirm
       return;
     }
 
-    // Confirm subscription
+    /* Confirm subscription */
     try {
       const result = await confirmSubscription(token);
 
@@ -81,7 +81,7 @@ permalink: /newsletter-confirm
         titleEl.textContent = result.alreadyConfirmed ? 'Already Confirmed' : 'Subscription Confirmed!';
         messageEl.textContent = result.message;
 
-        // Add welcome message
+        /* Add welcome message */
         if (!result.alreadyConfirmed) {
           messageEl.innerHTML = `
             ${result.message}<br><br>
@@ -113,7 +113,7 @@ permalink: /newsletter-confirm
       messageEl.textContent = 'An error occurred while confirming your subscription.';
     }
 
-    // Show actions
+    /* Show actions */
     actionsDiv.style.display = 'flex';
   });
 </script>

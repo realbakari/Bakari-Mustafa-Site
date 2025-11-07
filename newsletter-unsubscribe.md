@@ -35,24 +35,24 @@ permalink: /newsletter-unsubscribe
 <script>
   let userEmail = '';
 
-  // Wait for newsletter.js to be ready
+  /* Wait for newsletter.js to be ready */
   function waitForNewsletterJS() {
     return new Promise((resolve) => {
-      // Check if unsubscribeFromNewsletter function is available
+      /* Check if unsubscribeFromNewsletter function is available */
       if (typeof window.unsubscribeFromNewsletter === 'function') {
         resolve();
       } else {
-        // Wait a bit and try again
+        /* Wait a bit and try again */
         setTimeout(() => waitForNewsletterJS().then(resolve), 100);
       }
     });
   }
 
-  // Auto-unsubscribe on page load
+  /* Auto-unsubscribe on page load */
   document.addEventListener('DOMContentLoaded', async function() {
-    // Wait for newsletter.js to load
+    /* Wait for newsletter.js to load */
     await waitForNewsletterJS();
-    // Get token from URL
+    /* Get token from URL */
     const urlParams = new URLSearchParams(window.location.search);
     const token = urlParams.get('token');
 
@@ -77,7 +77,7 @@ permalink: /newsletter-unsubscribe
       return;
     }
 
-    // Unsubscribe
+    /* Unsubscribe */
     try {
       const result = await unsubscribeFromNewsletter(token);
 
@@ -102,7 +102,7 @@ permalink: /newsletter-unsubscribe
           `;
         }
 
-        // Show resubscribe option
+        /* Show resubscribe option */
         if (userEmail) {
           document.getElementById('resubscribe-email').value = userEmail;
           resubscribeSection.style.display = 'block';
@@ -132,11 +132,11 @@ permalink: /newsletter-unsubscribe
       messageEl.textContent = 'An error occurred while unsubscribing.';
     }
 
-    // Show actions
+    /* Show actions */
     actionsDiv.style.display = 'flex';
   });
 
-  // Handle resubscribe
+  /* Handle resubscribe */
   const resubscribeForm = document.getElementById('resubscribe-form');
   if (resubscribeForm) {
     resubscribeForm.addEventListener('submit', async function(e) {
