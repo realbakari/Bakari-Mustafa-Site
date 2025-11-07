@@ -55,6 +55,10 @@ permalink: /newsletter-admin-login
       if (form) {
         form.addEventListener('submit', tempFormHandler);
         console.log('[Admin Login] Temporary form handler attached');
+        // Also set a flag we can check
+        window._loginInitialized = true;
+      } else {
+        console.error('[Admin Login] ERROR: Form not found when attaching temp handler!');
       }
     };
 
@@ -201,6 +205,8 @@ permalink: /newsletter-admin-login
 
     // Start initialization immediately
     // Temporary handler is already attached, safe to start polling
+    console.log('[Admin Login] Starting initialize()...');
+    window._loginInitStarted = true;
     initialize();
   })();
 </script>
