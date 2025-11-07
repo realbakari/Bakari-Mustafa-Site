@@ -35,8 +35,57 @@ permalink: /newsletter-admin-login
   (function() {
     let supabase = null;
 
-    // Wait for DOM to be ready
-    document.addEventListener('DOMContentLoaded', async function() {
+    // Immediately prevent form submission until we're ready
+    // This is a defensive measure in case user submits before Supabase loads
+    const tempFormHandler = function(e) {
+      e.preventDefault();
+      e.stopPropagation();
+      console.log('[Admin Login] Waiting for initialization...');
+      const messageDiv = document.getElementById('login-message');
+      if (messageDiv) {
+        messageDiv.textContent = 'Initializing... Please wait.';
+        messageDiv.className = 'login-message';
+      }
+      return false;
+    };
+
+    // Attach temporary handler immediately
+    const attachTempHandler = function() {
+      const form = document.getElementById('login-form');
+      if (form) {
+        form.addEventListener('submit', tempFormHandler);
+        console.log('[Admin Login] Temporary form handler attached');
+      }
+    };
+
+    // Try to attach immediately if DOM is ready, otherwise wait
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', attachTempHandler);
+    } else {
+      attachTempHandler();
+    }
+
+    // Function to wait for Supabase library to load
+    function waitForSupabase() {
+      return new Promise((resolve) => {
+        if (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+          resolve();
+        } else {
+          const checkInterval = setInterval(() => {
+            if (window.supabase && window.SUPABASE_URL && window.SUPABASE_ANON_KEY) {
+              clearInterval(checkInterval);
+              resolve();
+            }
+          }, 50);
+        }
+      });
+    }
+
+    // Initialize everything when both DOM and Supabase are ready
+    async function initialize() {
+      // Wait for Supabase library to be available
+      await waitForSupabase();
+
       // Create Supabase client
       try {
         supabase = window.supabase.createClient(
@@ -78,6 +127,10 @@ permalink: /newsletter-admin-login
         console.error('[Admin Login] Login form not found');
         return;
       }
+
+      // Remove temporary handler if it exists
+      loginForm.removeEventListener('submit', tempFormHandler);
+      console.log('[Admin Login] Temporary handler removed, attaching real handler');
 
       loginForm.addEventListener('submit', async function(e) {
         e.preventDefault();
@@ -147,7 +200,15 @@ permalink: /newsletter-admin-login
           loginBtn.textContent = 'Sign In';
         }
       });
-    });
+    }
+
+    // Start initialization when DOM is ready
+    if (document.readyState === 'loading') {
+      document.addEventListener('DOMContentLoaded', initialize);
+    } else {
+      // DOM is already loaded
+      initialize();
+    }
   })();
 </script>
 
