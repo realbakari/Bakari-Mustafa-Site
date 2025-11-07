@@ -68,11 +68,14 @@ async function subscribeToNewsletter(email, source = 'footer') {
       } else if (existing.status === 'unsubscribed') {
         // Resubscribe
         const confirmToken = generateToken();
+        const unsubscribeToken = existing.unsubscribe_token || generateToken();
+
         const { error: updateError } = await supabase
           .from('newsletter_subscribers')
           .update({
             status: 'pending',
             confirmation_token: confirmToken,
+            unsubscribe_token: unsubscribeToken,
             subscribed_at: new Date().toISOString(),
             unsubscribed_at: null
           })
@@ -80,10 +83,33 @@ async function subscribeToNewsletter(email, source = 'footer') {
 
         if (updateError) throw updateError;
 
+        // Send confirmation email via Netlify Function
+        try {
+          const emailResponse = await fetch('/.netlify/functions/send-confirmation-email', {
+            method: 'POST',
+            headers: {
+              'Content-Type': 'application/json'
+            },
+            body: JSON.stringify({
+              email: email.toLowerCase(),
+              confirmToken: confirmToken,
+              unsubscribeToken: unsubscribeToken,
+              type: 'confirmation'
+            })
+          });
+
+          if (!emailResponse.ok) {
+            console.warn('Failed to send resubscribe confirmation email');
+          }
+        } catch (emailError) {
+          console.warn('Email service error:', emailError);
+        }
+
         return {
           success: true,
           message: 'Welcome back! Please check your email to confirm your subscription.',
-          confirmToken: confirmToken
+          confirmToken: confirmToken,
+          unsubscribeToken: unsubscribeToken
         };
       }
     }
@@ -107,6 +133,29 @@ async function subscribeToNewsletter(email, source = 'footer') {
       .single();
 
     if (error) throw error;
+
+    // Send confirmation email via Netlify Function
+    try {
+      const emailResponse = await fetch('/.netlify/functions/send-confirmation-email', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body: JSON.stringify({
+          email: email.toLowerCase(),
+          confirmToken: confirmToken,
+          unsubscribeToken: unsubscribeToken,
+          type: 'confirmation'
+        })
+      });
+
+      if (!emailResponse.ok) {
+        console.warn('Failed to send confirmation email, but subscription was saved');
+      }
+    } catch (emailError) {
+      console.warn('Email service error:', emailError);
+      // Continue anyway - subscription is saved in database
+    }
 
     return {
       success: true,
