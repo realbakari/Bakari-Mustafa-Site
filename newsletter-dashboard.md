@@ -200,6 +200,13 @@ permalink: /newsletter-dashboard
       authLoading.style.display = 'none';
       dashboardContent.style.display = 'block';
 
+      /* Expose Supabase client to external dashboard.js */
+      window.supabaseClient = dashboardSupabase;
+      const supabaseReadyEvent = new CustomEvent('supabaseReady', {
+        detail: { client: dashboardSupabase }
+      });
+      window.dispatchEvent(supabaseReadyEvent);
+
       /* Display user email */
       const userEmailSpan = document.querySelector('#user-email span');
       if (userEmailSpan) {

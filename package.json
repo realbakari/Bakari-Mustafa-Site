@@ -1,0 +1,15 @@
+{
+  "name": "bakari-mustafa-site",
+  "version": "1.0.0",
+  "description": "Bakari Mustafa's personal blog and newsletter",
+  "private": true,
+  "scripts": {
+    "test": "echo \"No tests configured\" && exit 0"
+  },
+  "dependencies": {
+    "resend": "^3.0.0"
+  },
+  "engines": {
+    "node": ">=18.0.0"
+  }
+}
