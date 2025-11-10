@@ -1,0 +1,739 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor - Multi-Language Support</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        .header {
+            background: #252526;
+            padding: 15px 20px;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            flex-wrap: wrap;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 18px;
+            font-weight: 600;
+            margin-right: auto;
+        }
+
+        .header select,
+        .header button {
+            background: #3c3c3c;
+            color: #cccccc;
+            border: 1px solid #555555;
+            padding: 8px 16px;
+            border-radius: 4px;
+            font-size: 13px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        .header select:hover,
+        .header button:hover {
+            background: #4e4e4e;
+            border-color: #666666;
+        }
+
+        .header select:focus,
+        .header button:focus {
+            outline: 1px solid #007acc;
+            outline-offset: -1px;
+        }
+
+        .header label {
+            color: #cccccc;
+            font-size: 13px;
+            font-weight: 500;
+        }
+
+        .editor-wrapper {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #editor {
+            flex: 1;
+            position: relative;
+        }
+
+        .output-panel {
+            width: 350px;
+            background: #1e1e1e;
+            border-left: 1px solid #3e3e42;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .output-header {
+            background: #252526;
+            padding: 10px 15px;
+            border-bottom: 1px solid #3e3e42;
+            font-size: 13px;
+            font-weight: 600;
+            color: #ffffff;
+        }
+
+        .output-content {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 13px;
+            line-height: 1.6;
+        }
+
+        .output-content pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .output-log {
+            margin-bottom: 8px;
+            padding: 6px 10px;
+            border-radius: 3px;
+            background: #252526;
+        }
+
+        .output-log.error {
+            background: rgba(244, 67, 54, 0.1);
+            color: #f44336;
+            border-left: 3px solid #f44336;
+        }
+
+        .output-log.success {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+            border-left: 3px solid #4caf50;
+        }
+
+        .output-log.info {
+            background: rgba(33, 150, 243, 0.1);
+            color: #2196f3;
+            border-left: 3px solid #2196f3;
+        }
+
+        .button-primary {
+            background: #0e639c !important;
+            color: #ffffff !important;
+        }
+
+        .button-primary:hover {
+            background: #1177bb !important;
+        }
+
+        .button-success {
+            background: #16825d !important;
+            color: #ffffff !important;
+        }
+
+        .button-success:hover {
+            background: #1a9e6f !important;
+        }
+
+        .button-danger {
+            background: #c5000b !important;
+            color: #ffffff !important;
+        }
+
+        .button-danger:hover {
+            background: #e00012 !important;
+        }
+
+        /* Mobile responsive */
+        @media (max-width: 768px) {
+            .editor-wrapper {
+                flex-direction: column;
+            }
+
+            .output-panel {
+                width: 100%;
+                height: 250px;
+                border-left: none;
+                border-top: 1px solid #3e3e42;
+            }
+
+            .header {
+                padding: 10px 15px;
+            }
+
+            .header h1 {
+                font-size: 16px;
+            }
+        }
+
+        /* Loading screen */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #3e3e42;
+            border-top-color: #007acc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #cccccc;
+            font-size: 14px;
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Code Editor...</div>
+    </div>
+
+    <div class="container" style="display: none;" id="main-container">
+        <div class="header">
+            <h1>💻 Code Editor</h1>
+
+            <label for="language-select">Language:</label>
+            <select id="language-select">
+                <option value="javascript">JavaScript</option>
+                <option value="typescript">TypeScript</option>
+                <option value="python">Python</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="json">JSON</option>
+                <option value="markdown">Markdown</option>
+                <option value="sql">SQL</option>
+                <option value="yaml">YAML</option>
+                <option value="shell">Shell/Bash</option>
+                <option value="php">PHP</option>
+                <option value="ruby">Ruby</option>
+                <option value="go">Go</option>
+                <option value="rust">Rust</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="cpp">C++</option>
+            </select>
+
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="vs-dark">Dark (VS Code)</option>
+                <option value="vs">Light</option>
+                <option value="hc-black">High Contrast</option>
+            </select>
+
+            <button id="run-code" class="button-primary">▶ Run Code</button>
+            <button id="clear-output" class="button-danger">🗑️ Clear Output</button>
+            <button id="clear-editor">Clear Editor</button>
+            <button id="copy-code" class="button-success">📋 Copy Code</button>
+        </div>
+
+        <div class="editor-wrapper">
+            <div id="editor"></div>
+
+            <div class="output-panel">
+                <div class="output-header">📊 Output</div>
+                <div class="output-content" id="output-content">
+                    <div class="output-log info">Ready to run code... Select JavaScript and click "Run Code"</div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Monaco Editor from CDN -->
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <script>
+        require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' } });
+
+        let editor;
+
+        /* Code templates for different languages */
+        const codeTemplates = {
+            javascript: `/* JavaScript Example */
+function fibonacci(n) {
+  if (n <= 1) return n;
+  return fibonacci(n - 1) + fibonacci(n - 2);
+}
+
+console.log('Fibonacci sequence:');
+for (let i = 0; i <= 10; i++) {
+  console.log(\`F(\${i}) = \${fibonacci(i)}\`);
+}`,
+
+            typescript: `/* TypeScript Example */
+interface User {
+  name: string;
+  age: number;
+  email: string;
+}
+
+function greetUser(user: User): string {
+  return \`Hello, \${user.name}! You are \${user.age} years old.\`;
+}
+
+const user: User = {
+  name: 'John Doe',
+  age: 30,
+  email: 'john@example.com'
+};
+
+console.log(greetUser(user));`,
+
+            python: `# Python Example
+def fibonacci(n):
+    if n <= 1:
+        return n
+    return fibonacci(n - 1) + fibonacci(n - 2)
+
+print('Fibonacci sequence:')
+for i in range(11):
+    print(f'F({i}) = {fibonacci(i)}')`,
+
+            html: `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>My Awesome Page</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+    </style>
+</head>
+<body>
+    <h1>Hello World! 👋</h1>
+    <p>This is a sample HTML page.</p>
+</body>
+</html>`,
+
+            css: `/* CSS Example - Modern Card Design */
+.card {
+    background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+    border-radius: 12px;
+    padding: 30px;
+    color: white;
+    box-shadow: 0 10px 30px rgba(0, 0, 0, 0.3);
+    transition: transform 0.3s ease;
+}
+
+.card:hover {
+    transform: translateY(-5px);
+}
+
+.card h2 {
+    margin: 0 0 15px 0;
+    font-size: 24px;
+}`,
+
+            sql: `-- SQL Example - User Orders Query
+SELECT
+    u.id,
+    u.name,
+    u.email,
+    COUNT(o.id) as total_orders,
+    SUM(o.amount) as total_spent
+FROM users u
+LEFT JOIN orders o ON u.id = o.user_id
+WHERE u.created_at > '2024-01-01'
+GROUP BY u.id, u.name, u.email
+HAVING COUNT(o.id) > 0
+ORDER BY total_spent DESC
+LIMIT 10;`,
+
+            json: `{
+  "name": "My Project",
+  "version": "1.0.0",
+  "description": "A sample JSON configuration",
+  "author": {
+    "name": "John Doe",
+    "email": "john@example.com"
+  },
+  "dependencies": {
+    "express": "^4.18.2",
+    "mongoose": "^7.0.0"
+  },
+  "scripts": {
+    "start": "node index.js",
+    "dev": "nodemon index.js"
+  }
+}`,
+
+            markdown: `# Markdown Example
+
+## Features
+
+- **Bold text** and *italic text*
+- Lists and nested items
+- Code blocks with syntax highlighting
+
+### Code Example
+
+\`\`\`javascript
+function hello() {
+    console.log('Hello World!');
+}
+\`\`\`
+
+### Links and Images
+
+Check out [my website](https://bakarimustafa.com)
+
+> This is a blockquote with **important** information.`,
+
+            yaml: `# YAML Configuration Example
+app:
+  name: My Application
+  version: 1.0.0
+  environment: production
+
+server:
+  host: 0.0.0.0
+  port: 3000
+  ssl:
+    enabled: true
+    cert: /path/to/cert.pem
+    key: /path/to/key.pem
+
+database:
+  host: localhost
+  port: 5432
+  name: mydb
+  username: admin
+  password: secret`,
+
+            shell: `#!/bin/bash
+# Shell Script Example
+
+echo "Starting deployment..."
+
+# Variables
+APP_NAME="my-app"
+VERSION="1.0.0"
+
+# Functions
+deploy() {
+    echo "Deploying $APP_NAME version $VERSION"
+    npm install
+    npm run build
+    pm2 restart $APP_NAME
+}
+
+# Run deployment
+deploy
+echo "Deployment complete!"`,
+
+            php: `<?php
+// PHP Example - User Class
+
+class User {
+    private $name;
+    private $email;
+
+    public function __construct($name, $email) {
+        $this->name = $name;
+        $this->email = $email;
+    }
+
+    public function greet() {
+        return "Hello, {$this->name}!";
+    }
+
+    public function getEmail() {
+        return $this->email;
+    }
+}
+
+$user = new User("John Doe", "john@example.com");
+echo $user->greet();
+?>`,
+
+            ruby: `# Ruby Example - Fibonacci Generator
+
+def fibonacci(n)
+  return n if n <= 1
+  fibonacci(n - 1) + fibonacci(n - 2)
+end
+
+puts 'Fibonacci sequence:'
+(0..10).each do |i|
+  puts "F(#{i}) = #{fibonacci(i)}"
+end`,
+
+            go: `// Go Example - Web Server
+package main
+
+import (
+    "fmt"
+    "net/http"
+)
+
+func handler(w http.ResponseWriter, r *http.Request) {
+    fmt.Fprintf(w, "Hello, World!")
+}
+
+func main() {
+    http.HandleFunc("/", handler)
+    fmt.Println("Server starting on port 8080...")
+    http.ListenAndServe(":8080", nil)
+}`,
+
+            rust: `// Rust Example - Fibonacci
+fn fibonacci(n: u32) -> u32 {
+    match n {
+        0 => 0,
+        1 => 1,
+        _ => fibonacci(n - 1) + fibonacci(n - 2)
+    }
+}
+
+fn main() {
+    println!("Fibonacci sequence:");
+    for i in 0..11 {
+        println!("F({}) = {}", i, fibonacci(i));
+    }
+}`,
+
+            java: `// Java Example - Person Class
+public class Person {
+    private String name;
+    private int age;
+
+    public Person(String name, int age) {
+        this.name = name;
+        this.age = age;
+    }
+
+    public String greet() {
+        return "Hello, I'm " + name + " and I'm " + age + " years old.";
+    }
+
+    public static void main(String[] args) {
+        Person person = new Person("John", 30);
+        System.out.println(person.greet());
+    }
+}`,
+
+            csharp: `// C# Example - Program
+using System;
+
+namespace MyApp
+{
+    class Program
+    {
+        static void Main(string[] args)
+        {
+            Console.WriteLine("Hello, World!");
+
+            int[] numbers = { 1, 2, 3, 4, 5 };
+            int sum = 0;
+
+            foreach (int num in numbers)
+            {
+                sum += num;
+            }
+
+            Console.WriteLine($"Sum: {sum}");
+        }
+    }
+}`,
+
+            cpp: `// C++ Example - Vector Operations
+#include <iostream>
+#include <vector>
+
+int main() {
+    std::vector<int> numbers = {1, 2, 3, 4, 5};
+
+    std::cout << "Numbers: ";
+    for (int num : numbers) {
+        std::cout << num << " ";
+    }
+
+    int sum = 0;
+    for (int num : numbers) {
+        sum += num;
+    }
+
+    std::cout << "\\nSum: " << sum << std::endl;
+    return 0;
+}`
+        };
+
+        require(['vs/editor/editor.main'], function() {
+            /* Hide loading screen */
+            document.getElementById('loading').style.display = 'none';
+            document.getElementById('main-container').style.display = 'flex';
+
+            /* Create editor */
+            editor = monaco.editor.create(document.getElementById('editor'), {
+                value: codeTemplates.javascript,
+                language: 'javascript',
+                theme: 'vs-dark',
+                fontSize: 14,
+                minimap: { enabled: true },
+                automaticLayout: true,
+                scrollBeyondLastLine: false,
+                wordWrap: 'on',
+                lineNumbers: 'on',
+                renderLineHighlight: 'all',
+                cursorBlinking: 'smooth',
+                suggestOnTriggerCharacters: true
+            });
+
+            /* Language selector */
+            document.getElementById('language-select').addEventListener('change', (e) => {
+                const language = e.target.value;
+                const model = editor.getModel();
+                monaco.editor.setModelLanguage(model, language);
+
+                /* Load template for new language */
+                if (codeTemplates[language]) {
+                    editor.setValue(codeTemplates[language]);
+                }
+            });
+
+            /* Theme selector */
+            document.getElementById('theme-select').addEventListener('change', (e) => {
+                monaco.editor.setTheme(e.target.value);
+            });
+
+            /* Run code button */
+            document.getElementById('run-code').addEventListener('click', runCode);
+
+            /* Clear editor */
+            document.getElementById('clear-editor').addEventListener('click', () => {
+                if (confirm('Clear all code in the editor?')) {
+                    editor.setValue('');
+                }
+            });
+
+            /* Clear output */
+            document.getElementById('clear-output').addEventListener('click', () => {
+                document.getElementById('output-content').innerHTML =
+                    '<div class="output-log info">Output cleared.</div>';
+            });
+
+            /* Copy code */
+            document.getElementById('copy-code').addEventListener('click', () => {
+                const code = editor.getValue();
+                navigator.clipboard.writeText(code).then(() => {
+                    addOutput('✅ Code copied to clipboard!', 'success');
+                }).catch(err => {
+                    addOutput('❌ Failed to copy: ' + err.message, 'error');
+                });
+            });
+        });
+
+        /* Add output to panel */
+        function addOutput(message, type = 'info') {
+            const outputDiv = document.getElementById('output-content');
+            const logDiv = document.createElement('div');
+            logDiv.className = `output-log ${type}`;
+            logDiv.textContent = message;
+            outputDiv.appendChild(logDiv);
+            outputDiv.scrollTop = outputDiv.scrollHeight;
+        }
+
+        /* Run code function */
+        function runCode() {
+            const code = editor.getValue();
+            const language = document.getElementById('language-select').value;
+
+            /* Clear previous output */
+            document.getElementById('output-content').innerHTML = '';
+
+            if (language !== 'javascript' && language !== 'typescript') {
+                addOutput(`⚠️ Code execution only supports JavaScript. (Selected: ${language})`, 'error');
+                addOutput('💡 Tip: Select JavaScript language to run code.', 'info');
+                return;
+            }
+
+            /* Capture console output */
+            const originalLog = console.log;
+            const originalError = console.error;
+            const originalWarn = console.warn;
+
+            console.log = (...args) => {
+                addOutput(args.join(' '), 'info');
+            };
+
+            console.error = (...args) => {
+                addOutput('ERROR: ' + args.join(' '), 'error');
+            };
+
+            console.warn = (...args) => {
+                addOutput('WARN: ' + args.join(' '), 'info');
+            };
+
+            try {
+                addOutput('🚀 Running code...', 'success');
+                const result = eval(code);
+
+                if (result !== undefined) {
+                    addOutput('Return value: ' + JSON.stringify(result), 'success');
+                }
+
+                addOutput('✅ Code executed successfully!', 'success');
+            } catch (error) {
+                addOutput('❌ Error: ' + error.message, 'error');
+                if (error.stack) {
+                    addOutput('Stack trace: ' + error.stack, 'error');
+                }
+            } finally {
+                /* Restore console */
+                console.log = originalLog;
+                console.error = originalError;
+                console.warn = originalWarn;
+            }
+        }
+    </script>
+</body>
+</html>
