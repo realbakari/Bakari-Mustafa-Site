@@ -1,0 +1,639 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Code Editor Pro - Multi-Language IDE</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><text y='.9em' font-size='90'>💻</text></svg>">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: flex;
+            flex-direction: column;
+            height: 100vh;
+        }
+
+        /* Header */
+        .header {
+            background: #252526;
+            padding: 12px 20px;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            align-items: center;
+            gap: 12px;
+            flex-wrap: wrap;
+            z-index: 100;
+        }
+
+        .header h1 {
+            color: #ffffff;
+            font-size: 16px;
+            font-weight: 600;
+            margin-right: auto;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .header h1 i {
+            color: #007acc;
+        }
+
+        .header select,
+        .header button {
+            background: #3c3c3c;
+            color: #cccccc;
+            border: 1px solid #555555;
+            padding: 6px 12px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+        }
+
+        .header select:hover,
+        .header button:hover {
+            background: #4e4e4e;
+            border-color: #666666;
+        }
+
+        .header select:focus,
+        .header button:focus {
+            outline: 1px solid #007acc;
+            outline-offset: -1px;
+        }
+
+        .header label {
+            color: #cccccc;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .button-primary {
+            background: #0e639c !important;
+            color: #ffffff !important;
+        }
+
+        .button-primary:hover {
+            background: #1177bb !important;
+        }
+
+        .button-success {
+            background: #16825d !important;
+            color: #ffffff !important;
+        }
+
+        .button-success:hover {
+            background: #1a9e6f !important;
+        }
+
+        .button-danger {
+            background: #c5000b !important;
+            color: #ffffff !important;
+        }
+
+        .button-danger:hover {
+            background: #e00012 !important;
+        }
+
+        .button-icon {
+            background: transparent !important;
+            border: none !important;
+            padding: 6px !important;
+            font-size: 16px;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            background: #2d2d30;
+            border-bottom: 1px solid #3e3e42;
+            display: flex;
+            align-items: center;
+            overflow-x: auto;
+            min-height: 36px;
+        }
+
+        .tabs {
+            display: flex;
+            gap: 0;
+            flex: 1;
+        }
+
+        .tab {
+            padding: 8px 16px;
+            background: #2d2d30;
+            color: #969696;
+            border: none;
+            border-right: 1px solid #252526;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            white-space: nowrap;
+        }
+
+        .tab:hover {
+            background: #323233;
+            color: #ffffff;
+        }
+
+        .tab.active {
+            background: #1e1e1e;
+            color: #ffffff;
+            border-bottom: 2px solid #007acc;
+        }
+
+        .tab i {
+            font-size: 11px;
+        }
+
+        .tab .close-tab {
+            opacity: 0;
+            margin-left: 4px;
+            padding: 0 4px;
+            color: #969696;
+        }
+
+        .tab:hover .close-tab,
+        .tab.active .close-tab {
+            opacity: 1;
+        }
+
+        .close-tab:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .add-tab {
+            padding: 8px 16px;
+            background: #2d2d30;
+            color: #969696;
+            border: none;
+            cursor: pointer;
+            font-size: 16px;
+            transition: all 0.2s;
+        }
+
+        .add-tab:hover {
+            background: #323233;
+            color: #ffffff;
+        }
+
+        /* Editor Wrapper */
+        .editor-wrapper {
+            flex: 1;
+            display: flex;
+            overflow: hidden;
+        }
+
+        #editor {
+            flex: 1;
+            position: relative;
+        }
+
+        /* Output Panel */
+        .output-panel {
+            width: 350px;
+            background: #1e1e1e;
+            border-left: 1px solid #3e3e42;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .output-header {
+            background: #252526;
+            padding: 10px 15px;
+            border-bottom: 1px solid #3e3e42;
+            font-size: 12px;
+            font-weight: 600;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .output-content {
+            flex: 1;
+            padding: 15px;
+            overflow-y: auto;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+            line-height: 1.6;
+        }
+
+        .output-content pre {
+            margin: 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .output-log {
+            margin-bottom: 8px;
+            padding: 6px 10px;
+            border-radius: 3px;
+            background: #252526;
+            border-left: 3px solid #3e3e42;
+        }
+
+        .output-log.error {
+            background: rgba(244, 67, 54, 0.1);
+            color: #f44336;
+            border-left-color: #f44336;
+        }
+
+        .output-log.success {
+            background: rgba(76, 175, 80, 0.1);
+            color: #4caf50;
+            border-left-color: #4caf50;
+        }
+
+        .output-log.info {
+            background: rgba(33, 150, 243, 0.1);
+            color: #2196f3;
+            border-left-color: #2196f3;
+        }
+
+        .output-log.warn {
+            background: rgba(255, 152, 0, 0.1);
+            color: #ff9800;
+            border-left-color: #ff9800;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 6px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            color: #d4d4d4;
+        }
+
+        .modal-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-body input,
+        .modal-body textarea {
+            width: 100%;
+            padding: 8px 12px;
+            background: #3c3c3c;
+            border: 1px solid #555555;
+            border-radius: 3px;
+            color: #cccccc;
+            font-size: 13px;
+            font-family: inherit;
+            margin-top: 5px;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-footer button {
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #007acc;
+            color: #ffffff;
+            padding: 4px 12px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+        }
+
+        .status-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        /* Loading */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #3e3e42;
+            border-top-color: #007acc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #cccccc;
+            font-size: 13px;
+        }
+
+        /* Responsive */
+        @media (max-width: 768px) {
+            .editor-wrapper {
+                flex-direction: column;
+            }
+
+            .output-panel {
+                width: 100%;
+                height: 250px;
+                border-left: none;
+                border-top: 1px solid #3e3e42;
+            }
+
+            .header {
+                padding: 8px 12px;
+            }
+        }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #424242;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4e4e4e;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 20px;
+            right: 20px;
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            padding: 12px 20px;
+            color: #d4d4d4;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success { border-left: 3px solid #4caf50; }
+        .notification.error { border-left: 3px solid #f44336; }
+        .notification.info { border-left: 3px solid #2196f3; }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading Code Editor Pro...</div>
+    </div>
+
+    <div class="container" style="display: none;" id="main-container">
+        <div class="header">
+            <h1><i class="fas fa-code"></i> Code Editor Pro</h1>
+
+            <label for="language-select">Language:</label>
+            <select id="language-select">
+                <option value="javascript">JavaScript</option>
+                <option value="typescript">TypeScript</option>
+                <option value="python">Python</option>
+                <option value="ruby">Ruby</option>
+                <option value="html">HTML</option>
+                <option value="css">CSS</option>
+                <option value="json">JSON</option>
+                <option value="markdown">Markdown</option>
+                <option value="sql">SQL</option>
+                <option value="yaml">YAML</option>
+                <option value="shell">Shell</option>
+                <option value="php">PHP</option>
+                <option value="go">Go</option>
+                <option value="rust">Rust</option>
+                <option value="java">Java</option>
+                <option value="csharp">C#</option>
+                <option value="cpp">C++</option>
+            </select>
+
+            <label for="theme-select">Theme:</label>
+            <select id="theme-select">
+                <option value="vs-dark">Dark</option>
+                <option value="vs">Light</option>
+                <option value="hc-black">High Contrast</option>
+            </select>
+
+            <button id="run-code" class="button-primary">
+                <i class="fas fa-play"></i> Run
+            </button>
+            <button id="save-code" class="button-success">
+                <i class="fas fa-save"></i> Save
+            </button>
+            <button id="load-code">
+                <i class="fas fa-folder-open"></i> Load
+            </button>
+            <button id="share-code">
+                <i class="fas fa-share-alt"></i> Share
+            </button>
+            <button id="clear-output" class="button-danger">
+                <i class="fas fa-trash"></i> Clear
+            </button>
+        </div>
+
+        <div class="tabs-container">
+            <div class="tabs" id="tabs"></div>
+            <button class="add-tab" id="add-tab" title="New File">
+                <i class="fas fa-plus"></i>
+            </button>
+        </div>
+
+        <div class="editor-wrapper">
+            <div id="editor"></div>
+
+            <div class="output-panel">
+                <div class="output-header">
+                    <i class="fas fa-terminal"></i> Output
+                </div>
+                <div class="output-content" id="output-content">
+                    <div class="output-log info">
+                        <i class="fas fa-info-circle"></i> Ready. Select a language and click Run.
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <div class="status-bar">
+            <div class="status-bar-item">
+                <i class="fas fa-file-code"></i>
+                <span id="current-file">main.js</span>
+            </div>
+            <div class="status-bar-item">
+                <i class="fas fa-font"></i>
+                <span id="char-count">0 characters</span>
+            </div>
+            <div class="status-bar-item">
+                <i class="fas fa-list-ol"></i>
+                <span id="line-count">0 lines</span>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal" id="share-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-share-alt"></i> Share Code
+            </div>
+            <div class="modal-body">
+                <label>Shareable Link:</label>
+                <input type="text" id="share-url" readonly>
+                <p style="font-size: 11px; color: #969696; margin-top: 10px;">
+                    Copy this URL to share your code. The code is encoded in the URL.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="copyShareURL()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <button onclick="closeModal('share-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Save Modal -->
+    <div class="modal" id="save-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-save"></i> Save Project
+            </div>
+            <div class="modal-body">
+                <label>Project Name:</label>
+                <input type="text" id="project-name" placeholder="my-project">
+            </div>
+            <div class="modal-footer">
+                <button onclick="saveProject()" class="button-success">
+                    <i class="fas fa-check"></i> Save
+                </button>
+                <button onclick="closeModal('save-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Modal -->
+    <div class="modal" id="load-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-folder-open"></i> Load Project
+            </div>
+            <div class="modal-body" id="projects-list">
+                <p style="color: #969696;">No saved projects found.</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal('load-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <script src="/assets/js/code-editor-free-backend.js"></script>
+</body>
+</html>

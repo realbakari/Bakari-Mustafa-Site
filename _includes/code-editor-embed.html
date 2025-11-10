@@ -1,0 +1,175 @@
+<!-- Embedded Code Editor -->
+<div class="embedded-code-editor" id="embedded-editor-{{ include.id | default: 'default' }}">
+    <div class="embed-toolbar">
+        <select class="embed-language-select">
+            <option value="javascript" {% if include.language == 'javascript' %}selected{% endif %}>JavaScript</option>
+            <option value="python" {% if include.language == 'python' %}selected{% endif %}>Python</option>
+            <option value="html" {% if include.language == 'html' %}selected{% endif %}>HTML</option>
+            <option value="css" {% if include.language == 'css' %}selected{% endif %}>CSS</option>
+            <option value="typescript" {% if include.language == 'typescript' %}selected{% endif %}>TypeScript</option>
+            <option value="ruby" {% if include.language == 'ruby' %}selected{% endif %}>Ruby</option>
+            <option value="sql" {% if include.language == 'sql' %}selected{% endif %}>SQL</option>
+        </select>
+        <button class="embed-run-btn"><i class="fas fa-play"></i> Run</button>
+        <button class="embed-copy-btn"><i class="fas fa-copy"></i> Copy</button>
+    </div>
+    <div class="embed-editor-container" style="height: {{ include.height | default: '300px' }}"></div>
+    <div class="embed-output"></div>
+</div>
+
+<style>
+.embedded-code-editor {
+    margin: 20px 0;
+    border: 1px solid #3e3e42;
+    border-radius: 4px;
+    overflow: hidden;
+    background: #1e1e1e;
+}
+
+.embed-toolbar {
+    background: #252526;
+    padding: 8px 12px;
+    display: flex;
+    gap: 8px;
+    border-bottom: 1px solid #3e3e42;
+}
+
+.embed-toolbar select,
+.embed-toolbar button {
+    background: #3c3c3c;
+    color: #cccccc;
+    border: 1px solid #555555;
+    padding: 6px 12px;
+    border-radius: 3px;
+    font-size: 12px;
+    cursor: pointer;
+}
+
+.embed-toolbar button {
+    display: flex;
+    align-items: center;
+    gap: 4px;
+}
+
+.embed-toolbar button:hover {
+    background: #4e4e4e;
+}
+
+.embed-output {
+    background: #1e1e1e;
+    padding: 12px;
+    font-family: 'Consolas', monospace;
+    font-size: 12px;
+    color: #d4d4d4;
+    border-top: 1px solid #3e3e42;
+    min-height: 40px;
+    max-height: 200px;
+    overflow-y: auto;
+    display: none;
+}
+
+.embed-output.active {
+    display: block;
+}
+
+.embed-output.error {
+    color: #f44336;
+}
+
+.embed-output.success {
+    color: #4caf50;
+}
+</style>
+
+<script>
+(function() {
+    const containerId = 'embedded-editor-{{ include.id | default: "default" }}';
+    const container = document.getElementById(containerId);
+
+    if (!container) return;
+
+    const defaultCode = {{ include.code | default: '// Start coding...' | jsonify }};
+    const defaultLanguage = '{{ include.language | default: "javascript" }}';
+
+    require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' } });
+
+    require(['vs/editor/editor.main'], function() {
+        const editorContainer = container.querySelector('.embed-editor-container');
+        const output = container.querySelector('.embed-output');
+        const runBtn = container.querySelector('.embed-run-btn');
+        const copyBtn = container.querySelector('.embed-copy-btn');
+        const langSelect = container.querySelector('.embed-language-select');
+
+        const editor = monaco.editor.create(editorContainer, {
+            value: defaultCode,
+            language: defaultLanguage,
+            theme: 'vs-dark',
+            fontSize: 13,
+            minimap: { enabled: false },
+            scrollBeyondLastLine: false,
+            lineNumbers: 'on',
+            automaticLayout: true
+        });
+
+        /* Language change */
+        langSelect.addEventListener('change', (e) => {
+            const model = editor.getModel();
+            monaco.editor.setModelLanguage(model, e.target.value);
+        });
+
+        /* Run code */
+        runBtn.addEventListener('click', () => {
+            const code = editor.getValue();
+            const language = langSelect.value;
+
+            output.classList.add('active');
+            output.classList.remove('error', 'success');
+            output.textContent = 'Running...';
+
+            if (language === 'javascript') {
+                try {
+                    const logs = [];
+                    const originalLog = console.log;
+                    console.log = (...args) => logs.push(args.join(' '));
+
+                    eval(code);
+
+                    console.log = originalLog;
+                    output.textContent = logs.join('\n') || 'Execution completed (no output)';
+                    output.classList.add('success');
+                } catch (error) {
+                    output.textContent = 'Error: ' + error.message;
+                    output.classList.add('error');
+                }
+            } else {
+                output.textContent = 'Execution only available for JavaScript in embedded editor';
+                output.classList.add('error');
+            }
+        });
+
+        /* Copy code */
+        copyBtn.addEventListener('click', () => {
+            const code = editor.getValue();
+            navigator.clipboard.writeText(code).then(() => {
+                const originalText = copyBtn.innerHTML;
+                copyBtn.innerHTML = '<i class="fas fa-check"></i> Copied!';
+                setTimeout(() => {
+                    copyBtn.innerHTML = originalText;
+                }, 2000);
+            });
+        });
+    });
+})();
+</script>
+
+<!-- Load Monaco Editor if not already loaded -->
+<script>
+if (!window.require) {
+    const script = document.createElement('script');
+    script.src = 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js';
+    document.head.appendChild(script);
+}
+</script>
+
+<!-- Load Font Awesome if not already loaded -->
+<link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
