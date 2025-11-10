@@ -83,8 +83,10 @@ async function subscribeToNewsletter(email, source = 'footer') {
 
         if (updateError) throw updateError;
 
-        // Send confirmation email via Netlify Function
+        /* Send confirmation email via Netlify Function */
+        let emailSent = false;
         try {
+          console.log('[Newsletter] Attempting to send resubscribe confirmation email...');
           const emailResponse = await fetch('/.netlify/functions/send-confirmation-email', {
             method: 'POST',
             headers: {
@@ -98,16 +100,30 @@ async function subscribeToNewsletter(email, source = 'footer') {
             })
           });
 
-          if (!emailResponse.ok) {
-            console.warn('Failed to send resubscribe confirmation email');
+          if (emailResponse.ok) {
+            const emailResult = await emailResponse.json();
+            console.log('[Newsletter] ✅ Resubscribe confirmation email sent successfully!', emailResult);
+            emailSent = true;
+          } else {
+            const errorData = await emailResponse.json();
+            console.warn('[Newsletter] ⚠️ Failed to send resubscribe confirmation email:', errorData);
           }
         } catch (emailError) {
-          console.warn('Email service error:', emailError);
+          console.warn('[Newsletter] ⚠️ Email service error:', emailError);
+        }
+
+        /* Log URLs as fallback (only if email failed) */
+        if (!emailSent) {
+          console.log('[Newsletter] 📧 EMAIL NOT SENT - Use these URLs manually:');
+          console.log('Confirmation URL:', window.location.origin + '/newsletter-confirm?token=' + confirmToken);
+          console.log('Unsubscribe URL:', window.location.origin + '/newsletter-unsubscribe?token=' + unsubscribeToken);
         }
 
         return {
           success: true,
-          message: 'Welcome back! Please check your email to confirm your subscription.',
+          message: emailSent
+            ? 'Welcome back! Please check your email to confirm your subscription.'
+            : 'Subscription saved! Email service unavailable - please check console for confirmation link.',
           confirmToken: confirmToken,
           unsubscribeToken: unsubscribeToken
         };
@@ -134,8 +150,10 @@ async function subscribeToNewsletter(email, source = 'footer') {
 
     if (error) throw error;
 
-    // Send confirmation email via Netlify Function
+    /* Send confirmation email via Netlify Function */
+    let emailSent = false;
     try {
+      console.log('[Newsletter] Attempting to send confirmation email...');
       const emailResponse = await fetch('/.netlify/functions/send-confirmation-email', {
         method: 'POST',
         headers: {
@@ -149,17 +167,30 @@ async function subscribeToNewsletter(email, source = 'footer') {
         })
       });
 
-      if (!emailResponse.ok) {
-        console.warn('Failed to send confirmation email, but subscription was saved');
+      if (emailResponse.ok) {
+        const emailResult = await emailResponse.json();
+        console.log('[Newsletter] ✅ Confirmation email sent successfully!', emailResult);
+        emailSent = true;
+      } else {
+        const errorData = await emailResponse.json();
+        console.warn('[Newsletter] ⚠️ Failed to send confirmation email:', errorData);
       }
     } catch (emailError) {
-      console.warn('Email service error:', emailError);
-      // Continue anyway - subscription is saved in database
+      console.warn('[Newsletter] ⚠️ Email service error:', emailError);
+    }
+
+    /* Log URLs as fallback (only if email failed) */
+    if (!emailSent) {
+      console.log('[Newsletter] 📧 EMAIL NOT SENT - Use these URLs manually:');
+      console.log('Confirmation URL:', window.location.origin + '/newsletter-confirm?token=' + confirmToken);
+      console.log('Unsubscribe URL:', window.location.origin + '/newsletter-unsubscribe?token=' + unsubscribeToken);
     }
 
     return {
       success: true,
-      message: 'Almost there! Please check your email to confirm your subscription.',
+      message: emailSent
+        ? 'Almost there! Please check your email to confirm your subscription.'
+        : 'Subscription saved! Email service unavailable - please check console for confirmation link.',
       confirmToken: confirmToken,
       unsubscribeToken: unsubscribeToken
     };
@@ -339,19 +370,12 @@ function initNewsletterForm() {
       alert(result.message);
     }
 
-    // Reset form if successful
+    /* Reset form if successful */
     if (result.success) {
       emailInput.value = '';
-
-      // Log confirmation URL to console (in production, this would be sent via email)
-      if (result.confirmToken) {
-        console.log('Confirmation URL:', window.location.origin + '/newsletter-confirm?token=' + result.confirmToken);
-        console.log('Unsubscribe URL:', window.location.origin + '/newsletter-unsubscribe?token=' + result.unsubscribeToken);
-        console.log('⚠️ In production, these URLs would be sent via email.');
-      }
     }
 
-    // Re-enable form
+    /* Re-enable form */
     emailInput.disabled = false;
     submitButton.disabled = false;
     submitButton.textContent = 'Subscribe';
