@@ -465,12 +465,52 @@ async function runCode() {
         updateProblems([]);
 
     } catch (error) {
-        terminalOutput.innerHTML += `<div class="terminal-line error">Error: ${escapeHtml(error.message || error)}</div>`;
+        // Parse error message to extract useful info
+        let errorMessage = error.message || String(error);
+        let errorLine = 1;
+
+        // For Python syntax errors, extract the line number and clean up message
+        if (language === 'python' && errorMessage.includes('SyntaxError')) {
+            const lineMatch = errorMessage.match(/line (\d+)/);
+            if (lineMatch) {
+                errorLine = parseInt(lineMatch[1]);
+            }
+
+            // Extract just the SyntaxError part
+            const syntaxErrorMatch = errorMessage.match(/SyntaxError: (.+)/);
+            if (syntaxErrorMatch) {
+                const errorType = syntaxErrorMatch[1];
+                errorMessage = `Syntax Error on line ${errorLine}: ${errorType}`;
+            }
+        }
+
+        // For other Python errors, try to extract the actual error
+        if (language === 'python' && !errorMessage.includes('SyntaxError')) {
+            const lines = errorMessage.split('\n');
+            const lastLine = lines[lines.length - 1];
+            if (lastLine && (lastLine.includes('Error:') || lastLine.includes('Exception:'))) {
+                errorMessage = lastLine;
+            }
+        }
+
+        terminalOutput.innerHTML += `<div class="terminal-line error">❌ ${escapeHtml(errorMessage)}</div>`;
+
+        // Add helpful hints for common errors
+        if (language === 'python') {
+            if (errorMessage.includes('expected')) {
+                terminalOutput.innerHTML += `<div class="terminal-line warn">💡 Hint: Check for missing colons (:) after function definitions, if statements, loops, etc.</div>`;
+            } else if (errorMessage.includes('IndentationError')) {
+                terminalOutput.innerHTML += `<div class="terminal-line warn">💡 Hint: Python requires consistent indentation (use 4 spaces).</div>`;
+            } else if (errorMessage.includes('NameError')) {
+                terminalOutput.innerHTML += `<div class="terminal-line warn">💡 Hint: Variable or function is not defined. Check spelling and scope.</div>`;
+            }
+        }
+
         updateProblems([{
             type: 'error',
-            message: error.message || String(error),
+            message: errorMessage,
             file: files[currentFileIndex].name,
-            line: 1
+            line: errorLine
         }]);
     }
 
