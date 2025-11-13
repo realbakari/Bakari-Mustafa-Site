@@ -1,0 +1,1334 @@
+---
+layout: compress
+---
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>VS Code - Browser Edition</title>
+    <link rel="icon" href="data:image/svg+xml,<svg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 100 100'><rect width='100' height='100' fill='%23007acc'/><text x='50' y='75' font-size='60' text-anchor='middle' fill='white' font-family='monospace'>&lt;/&gt;</text></svg>">
+
+    <!-- Font Awesome Icons -->
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif;
+            background: #1e1e1e;
+            color: #d4d4d4;
+            height: 100vh;
+            overflow: hidden;
+        }
+
+        .container {
+            display: grid;
+            grid-template-rows: 35px 1fr 22px;
+            height: 100vh;
+        }
+
+        /* Title Bar */
+        .title-bar {
+            background: #323233;
+            border-bottom: 1px solid #252526;
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 10px;
+        }
+
+        .title-bar-menu {
+            display: flex;
+            gap: 5px;
+        }
+
+        .title-bar-menu-item {
+            padding: 5px 10px;
+            font-size: 12px;
+            color: #cccccc;
+            cursor: pointer;
+            border-radius: 3px;
+            transition: background 0.2s;
+        }
+
+        .title-bar-menu-item:hover {
+            background: #2a2d2e;
+        }
+
+        .title-bar-title {
+            flex: 1;
+            text-align: center;
+            font-size: 12px;
+            color: #cccccc;
+        }
+
+        /* Main Content */
+        .main-content {
+            display: grid;
+            grid-template-columns: 48px 200px 1fr 300px;
+            overflow: hidden;
+        }
+
+        /* Activity Bar */
+        .activity-bar {
+            background: #333333;
+            display: flex;
+            flex-direction: column;
+            border-right: 1px solid #252526;
+        }
+
+        .activity-bar-item {
+            width: 48px;
+            height: 48px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: #858585;
+            cursor: pointer;
+            border-left: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .activity-bar-item:hover {
+            color: #ffffff;
+        }
+
+        .activity-bar-item.active {
+            color: #ffffff;
+            border-left-color: #007acc;
+            background: #1e1e1e;
+        }
+
+        .activity-bar-item i {
+            font-size: 20px;
+        }
+
+        /* Sidebar */
+        .sidebar {
+            background: #252526;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            border-right: 1px solid #252526;
+        }
+
+        .sidebar.hidden {
+            display: none;
+        }
+
+        .sidebar-header {
+            padding: 12px 15px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #cccccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #252526;
+            border-bottom: 1px solid #1e1e1e;
+        }
+
+        .sidebar-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 8px 0;
+        }
+
+        /* File Explorer */
+        .file-item {
+            padding: 4px 15px;
+            font-size: 12px;
+            color: #cccccc;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            gap: 6px;
+            transition: background 0.2s;
+        }
+
+        .file-item:hover {
+            background: #2a2d2e;
+        }
+
+        .file-item.active {
+            background: #37373d;
+        }
+
+        .file-item i {
+            font-size: 14px;
+            width: 16px;
+        }
+
+        .file-item .file-name {
+            flex: 1;
+        }
+
+        .file-item .file-close {
+            opacity: 0;
+            padding: 2px 4px;
+            font-size: 10px;
+        }
+
+        .file-item:hover .file-close {
+            opacity: 1;
+        }
+
+        .file-item .file-close:hover {
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 2px;
+        }
+
+        .sidebar-button {
+            background: transparent;
+            border: none;
+            color: #858585;
+            padding: 6px 15px;
+            font-size: 12px;
+            cursor: pointer;
+            text-align: left;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+        }
+
+        .sidebar-button:hover {
+            background: #2a2d2e;
+            color: #ffffff;
+        }
+
+        /* Search Panel */
+        .search-input {
+            margin: 10px;
+            padding: 6px 10px;
+            background: #3c3c3c;
+            border: 1px solid #555555;
+            border-radius: 3px;
+            color: #cccccc;
+            font-size: 12px;
+            width: calc(100% - 20px);
+        }
+
+        .search-input:focus {
+            outline: 1px solid #007acc;
+        }
+
+        .search-options {
+            padding: 0 10px 10px 10px;
+            display: flex;
+            gap: 5px;
+        }
+
+        .search-option-btn {
+            background: #3c3c3c;
+            border: 1px solid #555555;
+            color: #cccccc;
+            padding: 4px 8px;
+            font-size: 11px;
+            cursor: pointer;
+            border-radius: 2px;
+        }
+
+        .search-option-btn.active {
+            background: #007acc;
+            border-color: #007acc;
+            color: #ffffff;
+        }
+
+        .search-results {
+            padding: 10px;
+            font-size: 11px;
+            color: #969696;
+        }
+
+        /* Editor Container */
+        .editor-container {
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+            background: #1e1e1e;
+        }
+
+        /* Breadcrumb */
+        .breadcrumb {
+            background: #252526;
+            padding: 6px 15px;
+            font-size: 11px;
+            color: #969696;
+            border-bottom: 1px solid #1e1e1e;
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .breadcrumb-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+        }
+
+        .breadcrumb-separator {
+            color: #555555;
+        }
+
+        /* Tabs */
+        .tabs-container {
+            background: #2d2d30;
+            border-bottom: 1px solid #252526;
+            display: flex;
+            overflow-x: auto;
+            min-height: 35px;
+        }
+
+        .tabs {
+            display: flex;
+            flex: 1;
+        }
+
+        .tab {
+            padding: 8px 12px;
+            background: #2d2d30;
+            color: #969696;
+            border: none;
+            border-right: 1px solid #252526;
+            cursor: pointer;
+            font-size: 12px;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            transition: all 0.2s;
+            white-space: nowrap;
+            max-width: 200px;
+        }
+
+        .tab:hover {
+            background: #323233;
+            color: #ffffff;
+        }
+
+        .tab.active {
+            background: #1e1e1e;
+            color: #ffffff;
+        }
+
+        .tab.dirty::after {
+            content: '●';
+            margin-left: 2px;
+            color: #858585;
+        }
+
+        .tab i {
+            font-size: 11px;
+        }
+
+        .tab-name {
+            flex: 1;
+            overflow: hidden;
+            text-overflow: ellipsis;
+        }
+
+        .tab-close {
+            opacity: 0;
+            padding: 0 4px;
+            color: #969696;
+            font-size: 14px;
+        }
+
+        .tab:hover .tab-close,
+        .tab.active .tab-close {
+            opacity: 1;
+        }
+
+        .tab-close:hover {
+            color: #ffffff;
+            background: rgba(255, 255, 255, 0.1);
+            border-radius: 3px;
+        }
+
+        .tab-actions {
+            display: flex;
+            align-items: center;
+            padding: 0 10px;
+            gap: 8px;
+        }
+
+        .tab-action {
+            color: #858585;
+            cursor: pointer;
+            padding: 4px;
+            font-size: 14px;
+        }
+
+        .tab-action:hover {
+            color: #ffffff;
+        }
+
+        /* Split Editor */
+        .editor-grid {
+            flex: 1;
+            display: grid;
+            grid-template-columns: 1fr;
+            gap: 1px;
+            background: #252526;
+            overflow: hidden;
+        }
+
+        .editor-grid.split {
+            grid-template-columns: 1fr 1fr;
+        }
+
+        .editor-pane {
+            position: relative;
+            overflow: hidden;
+        }
+
+        #editor,
+        #editor2 {
+            height: 100%;
+        }
+
+        /* Panel */
+        .panel {
+            background: #1e1e1e;
+            border-top: 1px solid #252526;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .panel.hidden {
+            display: none;
+        }
+
+        .panel-header {
+            background: #252526;
+            padding: 8px 15px;
+            display: flex;
+            gap: 15px;
+            align-items: center;
+            border-bottom: 1px solid #1e1e1e;
+        }
+
+        .panel-tab {
+            font-size: 11px;
+            color: #969696;
+            cursor: pointer;
+            padding: 4px 8px;
+            border-bottom: 2px solid transparent;
+            transition: all 0.2s;
+        }
+
+        .panel-tab:hover {
+            color: #ffffff;
+        }
+
+        .panel-tab.active {
+            color: #ffffff;
+            border-bottom-color: #007acc;
+        }
+
+        .panel-actions {
+            margin-left: auto;
+            display: flex;
+            gap: 8px;
+        }
+
+        .panel-action {
+            color: #858585;
+            cursor: pointer;
+            padding: 2px 4px;
+            font-size: 14px;
+        }
+
+        .panel-action:hover {
+            color: #ffffff;
+        }
+
+        .panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+        }
+
+        .panel-content-section {
+            display: none;
+        }
+
+        .panel-content-section.active {
+            display: block;
+        }
+
+        /* Problems */
+        .problem-item {
+            padding: 6px 10px;
+            border-bottom: 1px solid #2d2d30;
+            display: flex;
+            align-items: flex-start;
+            gap: 10px;
+            font-size: 11px;
+            cursor: pointer;
+        }
+
+        .problem-item:hover {
+            background: #2a2d2e;
+        }
+
+        .problem-icon {
+            margin-top: 2px;
+        }
+
+        .problem-icon.error {
+            color: #f44336;
+        }
+
+        .problem-icon.warning {
+            color: #ff9800;
+        }
+
+        .problem-details {
+            flex: 1;
+        }
+
+        .problem-message {
+            color: #cccccc;
+            margin-bottom: 2px;
+        }
+
+        .problem-location {
+            color: #858585;
+            font-size: 10px;
+        }
+
+        /* Terminal */
+        .terminal-output {
+            background: #1e1e1e;
+            color: #cccccc;
+            font-family: 'Consolas', 'Monaco', monospace;
+            font-size: 12px;
+            padding: 10px;
+            height: 100%;
+            overflow-y: auto;
+        }
+
+        .terminal-line {
+            padding: 2px 0;
+            white-space: pre-wrap;
+            word-wrap: break-word;
+        }
+
+        .terminal-line.error {
+            color: #f44336;
+        }
+
+        .terminal-line.success {
+            color: #4caf50;
+        }
+
+        .terminal-line.info {
+            color: #2196f3;
+        }
+
+        .terminal-line.warn {
+            color: #ff9800;
+        }
+
+        /* Right Panel */
+        .right-panel {
+            background: #252526;
+            border-left: 1px solid #252526;
+            display: flex;
+            flex-direction: column;
+            overflow: hidden;
+        }
+
+        .right-panel.hidden {
+            display: none;
+        }
+
+        .right-panel-header {
+            padding: 10px 15px;
+            font-size: 11px;
+            font-weight: 600;
+            color: #cccccc;
+            text-transform: uppercase;
+            letter-spacing: 0.5px;
+            background: #252526;
+            border-bottom: 1px solid #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+        }
+
+        .right-panel-content {
+            flex: 1;
+            overflow-y: auto;
+            padding: 10px;
+        }
+
+        .panel-section {
+            margin-bottom: 15px;
+        }
+
+        .panel-section-title {
+            font-size: 11px;
+            color: #858585;
+            margin-bottom: 8px;
+            font-weight: 600;
+        }
+
+        .panel-item {
+            padding: 6px 10px;
+            font-size: 12px;
+            color: #cccccc;
+            background: #1e1e1e;
+            border-radius: 3px;
+            margin-bottom: 5px;
+            cursor: pointer;
+        }
+
+        .panel-item:hover {
+            background: #2a2d2e;
+        }
+
+        /* Settings */
+        .setting-item {
+            padding: 10px;
+            border-bottom: 1px solid #2d2d30;
+        }
+
+        .setting-label {
+            font-size: 12px;
+            color: #cccccc;
+            margin-bottom: 5px;
+        }
+
+        .setting-description {
+            font-size: 11px;
+            color: #858585;
+            margin-bottom: 8px;
+        }
+
+        .setting-input {
+            background: #3c3c3c;
+            border: 1px solid #555555;
+            color: #cccccc;
+            padding: 4px 8px;
+            font-size: 12px;
+            border-radius: 2px;
+        }
+
+        select.setting-input {
+            cursor: pointer;
+        }
+
+        input[type="checkbox"].setting-input {
+            width: auto;
+        }
+
+        /* Status Bar */
+        .status-bar {
+            background: #007acc;
+            color: #ffffff;
+            padding: 0 12px;
+            font-size: 11px;
+            display: flex;
+            align-items: center;
+            gap: 15px;
+            height: 22px;
+        }
+
+        .status-bar-item {
+            display: flex;
+            align-items: center;
+            gap: 5px;
+            cursor: pointer;
+            padding: 0 4px;
+        }
+
+        .status-bar-item:hover {
+            background: rgba(255, 255, 255, 0.1);
+        }
+
+        .status-bar-right {
+            margin-left: auto;
+            display: flex;
+            gap: 15px;
+        }
+
+        /* Command Palette */
+        .command-palette {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.6);
+            z-index: 1000;
+            align-items: flex-start;
+            justify-content: center;
+            padding-top: 100px;
+        }
+
+        .command-palette.active {
+            display: flex;
+        }
+
+        .command-palette-content {
+            background: #252526;
+            border: 1px solid #454545;
+            border-radius: 4px;
+            width: 600px;
+            max-width: 90%;
+            box-shadow: 0 8px 24px rgba(0, 0, 0, 0.4);
+        }
+
+        .command-palette-input {
+            width: 100%;
+            padding: 12px 15px;
+            background: #3c3c3c;
+            border: none;
+            border-bottom: 1px solid #454545;
+            color: #cccccc;
+            font-size: 13px;
+        }
+
+        .command-palette-input:focus {
+            outline: none;
+        }
+
+        .command-palette-results {
+            max-height: 400px;
+            overflow-y: auto;
+        }
+
+        .command-item {
+            padding: 8px 15px;
+            cursor: pointer;
+            font-size: 12px;
+            color: #cccccc;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            border-left: 2px solid transparent;
+        }
+
+        .command-item:hover,
+        .command-item.selected {
+            background: #2a2d2e;
+        }
+
+        .command-item.selected {
+            border-left-color: #007acc;
+        }
+
+        .command-item i {
+            width: 16px;
+            color: #858585;
+        }
+
+        .command-item-text {
+            flex: 1;
+        }
+
+        .command-item-keys {
+            font-size: 10px;
+            color: #858585;
+        }
+
+        /* Modal */
+        .modal {
+            display: none;
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: rgba(0, 0, 0, 0.7);
+            z-index: 1000;
+            align-items: center;
+            justify-content: center;
+        }
+
+        .modal.active {
+            display: flex;
+        }
+
+        .modal-content {
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 6px;
+            padding: 20px;
+            max-width: 500px;
+            width: 90%;
+            color: #d4d4d4;
+        }
+
+        .modal-header {
+            font-size: 16px;
+            font-weight: 600;
+            margin-bottom: 15px;
+            color: #ffffff;
+            display: flex;
+            align-items: center;
+            gap: 8px;
+        }
+
+        .modal-body {
+            margin-bottom: 20px;
+        }
+
+        .modal-body input,
+        .modal-body textarea {
+            width: 100%;
+            padding: 8px 12px;
+            background: #3c3c3c;
+            border: 1px solid #555555;
+            border-radius: 3px;
+            color: #cccccc;
+            font-size: 13px;
+            font-family: inherit;
+            margin-top: 5px;
+        }
+
+        .modal-body label {
+            display: block;
+            margin-bottom: 10px;
+            font-size: 12px;
+            font-weight: 500;
+        }
+
+        .modal-footer {
+            display: flex;
+            gap: 10px;
+            justify-content: flex-end;
+        }
+
+        .modal-footer button {
+            padding: 8px 16px;
+            border-radius: 3px;
+            font-size: 12px;
+            cursor: pointer;
+            transition: all 0.2s;
+            background: #3c3c3c;
+            color: #cccccc;
+            border: 1px solid #555555;
+        }
+
+        .modal-footer button:hover {
+            background: #4e4e4e;
+        }
+
+        .modal-footer button.primary {
+            background: #0e639c;
+            color: #ffffff;
+            border-color: #0e639c;
+        }
+
+        .modal-footer button.primary:hover {
+            background: #1177bb;
+        }
+
+        /* Loading */
+        .loading {
+            position: fixed;
+            top: 0;
+            left: 0;
+            width: 100%;
+            height: 100%;
+            background: #1e1e1e;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            z-index: 9999;
+            flex-direction: column;
+            gap: 20px;
+        }
+
+        .loading-spinner {
+            width: 50px;
+            height: 50px;
+            border: 4px solid #3e3e42;
+            border-top-color: #007acc;
+            border-radius: 50%;
+            animation: spin 1s linear infinite;
+        }
+
+        @keyframes spin {
+            to { transform: rotate(360deg); }
+        }
+
+        .loading-text {
+            color: #cccccc;
+            font-size: 13px;
+        }
+
+        /* Notification */
+        .notification {
+            position: fixed;
+            top: 40px;
+            right: 20px;
+            background: #252526;
+            border: 1px solid #3e3e42;
+            border-radius: 4px;
+            padding: 12px 20px;
+            color: #d4d4d4;
+            box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+            z-index: 2000;
+            display: flex;
+            align-items: center;
+            gap: 10px;
+            animation: slideIn 0.3s ease;
+        }
+
+        @keyframes slideIn {
+            from {
+                transform: translateX(400px);
+                opacity: 0;
+            }
+            to {
+                transform: translateX(0);
+                opacity: 1;
+            }
+        }
+
+        .notification.success { border-left: 3px solid #4caf50; }
+        .notification.error { border-left: 3px solid #f44336; }
+        .notification.info { border-left: 3px solid #2196f3; }
+
+        /* Scrollbar */
+        ::-webkit-scrollbar {
+            width: 10px;
+            height: 10px;
+        }
+
+        ::-webkit-scrollbar-track {
+            background: #1e1e1e;
+        }
+
+        ::-webkit-scrollbar-thumb {
+            background: #424242;
+            border-radius: 5px;
+        }
+
+        ::-webkit-scrollbar-thumb:hover {
+            background: #4e4e4e;
+        }
+
+        /* Responsive */
+        @media (max-width: 1024px) {
+            .main-content {
+                grid-template-columns: 48px 1fr;
+            }
+
+            .sidebar,
+            .right-panel {
+                position: fixed;
+                left: 48px;
+                top: 35px;
+                height: calc(100vh - 57px);
+                z-index: 100;
+                box-shadow: 2px 0 8px rgba(0, 0, 0, 0.3);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="loading" id="loading">
+        <div class="loading-spinner"></div>
+        <div class="loading-text">Loading VS Code...</div>
+    </div>
+
+    <div class="container" style="display: none;" id="main-container">
+        <!-- Title Bar -->
+        <div class="title-bar">
+            <div class="title-bar-menu">
+                <div class="title-bar-menu-item" onclick="showCommandPalette()">File</div>
+                <div class="title-bar-menu-item" onclick="showCommandPalette()">Edit</div>
+                <div class="title-bar-menu-item" onclick="showCommandPalette()">View</div>
+                <div class="title-bar-menu-item" onclick="showCommandPalette()">Go</div>
+                <div class="title-bar-menu-item" onclick="showCommandPalette()">Run</div>
+                <div class="title-bar-menu-item" onclick="showCommandPalette()">Help</div>
+            </div>
+            <div class="title-bar-title">VS Code - Browser Edition</div>
+        </div>
+
+        <!-- Main Content -->
+        <div class="main-content">
+            <!-- Activity Bar -->
+            <div class="activity-bar">
+                <div class="activity-bar-item active" data-sidebar="explorer" onclick="switchSidebar('explorer')" title="Explorer (Ctrl+Shift+E)">
+                    <i class="fas fa-copy"></i>
+                </div>
+                <div class="activity-bar-item" data-sidebar="search" onclick="switchSidebar('search')" title="Search (Ctrl+Shift+F)">
+                    <i class="fas fa-search"></i>
+                </div>
+                <div class="activity-bar-item" data-sidebar="extensions" onclick="switchSidebar('extensions')" title="Extensions (Ctrl+Shift+X)">
+                    <i class="fas fa-th-large"></i>
+                </div>
+                <div class="activity-bar-item" data-sidebar="settings" onclick="switchSidebar('settings')" title="Settings (Ctrl+,)">
+                    <i class="fas fa-cog"></i>
+                </div>
+            </div>
+
+            <!-- Sidebar -->
+            <div class="sidebar" id="sidebar">
+                <!-- Explorer -->
+                <div class="sidebar-section" id="sidebar-explorer" style="display: flex; flex-direction: column; height: 100%;">
+                    <div class="sidebar-header">Explorer</div>
+                    <div class="sidebar-content" id="files-list"></div>
+                    <button class="sidebar-button" onclick="addNewFile()">
+                        <i class="fas fa-plus"></i> New File
+                    </button>
+                </div>
+
+                <!-- Search -->
+                <div class="sidebar-section" id="sidebar-search" style="display: none; flex-direction: column; height: 100%;">
+                    <div class="sidebar-header">Search</div>
+                    <input type="text" class="search-input" id="search-input" placeholder="Search in files...">
+                    <input type="text" class="search-input" id="replace-input" placeholder="Replace...">
+                    <div class="search-options">
+                        <button class="search-option-btn" id="case-sensitive" title="Match Case">Aa</button>
+                        <button class="search-option-btn" id="whole-word" title="Match Whole Word">Ab|</button>
+                        <button class="search-option-btn" id="regex" title="Use Regular Expression">.*</button>
+                    </div>
+                    <div class="sidebar-content">
+                        <div class="search-results" id="search-results">No results</div>
+                    </div>
+                    <button class="sidebar-button" onclick="performSearch()">
+                        <i class="fas fa-search"></i> Find All
+                    </button>
+                    <button class="sidebar-button" onclick="performReplace()">
+                        <i class="fas fa-exchange-alt"></i> Replace All
+                    </button>
+                </div>
+
+                <!-- Extensions -->
+                <div class="sidebar-section" id="sidebar-extensions" style="display: none; flex-direction: column; height: 100%;">
+                    <div class="sidebar-header">Extensions</div>
+                    <div class="sidebar-content">
+                        <div style="padding: 10px; color: #858585; font-size: 11px;">
+                            <p>Built-in features:</p>
+                            <div class="panel-item">
+                                <i class="fas fa-check" style="color: #4caf50;"></i> IntelliSense
+                            </div>
+                            <div class="panel-item">
+                                <i class="fas fa-check" style="color: #4caf50;"></i> Syntax Highlighting
+                            </div>
+                            <div class="panel-item">
+                                <i class="fas fa-check" style="color: #4caf50;"></i> Code Formatting
+                            </div>
+                            <div class="panel-item">
+                                <i class="fas fa-check" style="color: #4caf50;"></i> Multiple Cursors
+                            </div>
+                            <div class="panel-item">
+                                <i class="fas fa-check" style="color: #4caf50;"></i> Minimap
+                            </div>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Settings -->
+                <div class="sidebar-section" id="sidebar-settings" style="display: none; flex-direction: column; height: 100%;">
+                    <div class="sidebar-header">Settings</div>
+                    <div class="sidebar-content">
+                        <div class="setting-item">
+                            <div class="setting-label">Theme</div>
+                            <div class="setting-description">Choose your color theme</div>
+                            <select class="setting-input" id="theme-setting" onchange="changeTheme(this.value)">
+                                <option value="vs-dark">Dark (Visual Studio)</option>
+                                <option value="vs">Light (Visual Studio)</option>
+                                <option value="hc-black">High Contrast</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">Font Size</div>
+                            <div class="setting-description">Editor font size in pixels</div>
+                            <input type="number" class="setting-input" id="fontsize-setting" value="14" min="8" max="24" onchange="changeFontSize(this.value)">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">Tab Size</div>
+                            <div class="setting-description">Number of spaces for a tab</div>
+                            <input type="number" class="setting-input" id="tabsize-setting" value="4" min="2" max="8" onchange="changeTabSize(this.value)">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">Minimap</div>
+                            <div class="setting-description">Show minimap on the right side</div>
+                            <input type="checkbox" class="setting-input" id="minimap-setting" checked onchange="toggleMinimap(this.checked)">
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">Word Wrap</div>
+                            <div class="setting-description">Controls how lines should wrap</div>
+                            <select class="setting-input" id="wordwrap-setting" onchange="changeWordWrap(this.value)">
+                                <option value="off">Off</option>
+                                <option value="on">On</option>
+                                <option value="wordWrapColumn">Word Wrap Column</option>
+                            </select>
+                        </div>
+
+                        <div class="setting-item">
+                            <div class="setting-label">Auto Save</div>
+                            <div class="setting-description">Automatically save files</div>
+                            <input type="checkbox" class="setting-input" id="autosave-setting" onchange="toggleAutoSave(this.checked)">
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Editor Container -->
+            <div class="editor-container">
+                <!-- Breadcrumb -->
+                <div class="breadcrumb" id="breadcrumb">
+                    <div class="breadcrumb-item">
+                        <i class="fas fa-folder"></i>
+                        <span>workspace</span>
+                    </div>
+                    <span class="breadcrumb-separator">/</span>
+                    <div class="breadcrumb-item">
+                        <i class="fas fa-file-code"></i>
+                        <span id="breadcrumb-file">main.js</span>
+                    </div>
+                </div>
+
+                <!-- Tabs -->
+                <div class="tabs-container">
+                    <div class="tabs" id="tabs"></div>
+                    <div class="tab-actions">
+                        <div class="tab-action" onclick="addNewFile()" title="New File">
+                            <i class="fas fa-plus"></i>
+                        </div>
+                        <div class="tab-action" onclick="toggleSplitEditor()" title="Split Editor">
+                            <i class="fas fa-columns"></i>
+                        </div>
+                        <div class="tab-action" onclick="closeAllTabs()" title="Close All">
+                            <i class="fas fa-times"></i>
+                        </div>
+                    </div>
+                </div>
+
+                <!-- Editor Grid -->
+                <div class="editor-grid" id="editor-grid">
+                    <div class="editor-pane">
+                        <div id="editor"></div>
+                    </div>
+                </div>
+
+                <!-- Bottom Panel -->
+                <div class="panel" id="bottom-panel">
+                    <div class="panel-header">
+                        <div class="panel-tab active" data-panel="problems" onclick="switchPanel('problems')">
+                            <i class="fas fa-exclamation-circle"></i> Problems
+                        </div>
+                        <div class="panel-tab" data-panel="output" onclick="switchPanel('output')">
+                            <i class="fas fa-list-alt"></i> Output
+                        </div>
+                        <div class="panel-tab" data-panel="terminal" onclick="switchPanel('terminal')">
+                            <i class="fas fa-terminal"></i> Terminal
+                        </div>
+                        <div class="panel-tab" data-panel="console" onclick="switchPanel('console')">
+                            <i class="fas fa-bug"></i> Debug Console
+                        </div>
+                        <div class="panel-actions">
+                            <div class="panel-action" onclick="clearPanel()" title="Clear">
+                                <i class="fas fa-trash"></i>
+                            </div>
+                            <div class="panel-action" onclick="togglePanel()" title="Toggle Panel">
+                                <i class="fas fa-chevron-down"></i>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="panel-content">
+                        <!-- Problems -->
+                        <div class="panel-content-section active" id="panel-problems">
+                            <div id="problems-list" style="color: #858585; font-size: 11px;">No problems detected</div>
+                        </div>
+
+                        <!-- Output -->
+                        <div class="panel-content-section" id="panel-output">
+                            <div id="output-list" style="color: #cccccc; font-size: 12px;">Ready to run code...</div>
+                        </div>
+
+                        <!-- Terminal -->
+                        <div class="panel-content-section" id="panel-terminal">
+                            <div class="terminal-output" id="terminal-output">
+                                <div class="terminal-line">VS Code Terminal - Type commands or run code</div>
+                            </div>
+                        </div>
+
+                        <!-- Debug Console -->
+                        <div class="panel-content-section" id="panel-console">
+                            <div id="console-list" style="color: #cccccc; font-size: 12px;">Debug console ready</div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- Right Panel -->
+            <div class="right-panel hidden" id="right-panel">
+                <div class="right-panel-header">
+                    <span>Quick Actions</span>
+                    <i class="fas fa-times" onclick="toggleRightPanel()" style="cursor: pointer;"></i>
+                </div>
+                <div class="right-panel-content">
+                    <div class="panel-section">
+                        <div class="panel-section-title">Run & Debug</div>
+                        <div class="panel-item" onclick="runCode()">
+                            <i class="fas fa-play"></i> Run Code
+                        </div>
+                        <div class="panel-item" onclick="formatCode()">
+                            <i class="fas fa-align-left"></i> Format Document
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <div class="panel-section-title">File Operations</div>
+                        <div class="panel-item" onclick="openSaveModal()">
+                            <i class="fas fa-save"></i> Save Project
+                        </div>
+                        <div class="panel-item" onclick="openLoadModal()">
+                            <i class="fas fa-folder-open"></i> Load Project
+                        </div>
+                        <div class="panel-item" onclick="openShareModal()">
+                            <i class="fas fa-share-alt"></i> Share Code
+                        </div>
+                    </div>
+
+                    <div class="panel-section">
+                        <div class="panel-section-title">Languages</div>
+                        <select class="setting-input" id="language-select" onchange="changeLanguage(this.value)" style="width: 100%;">
+                            <option value="javascript">JavaScript</option>
+                            <option value="typescript">TypeScript</option>
+                            <option value="python">Python</option>
+                            <option value="ruby">Ruby</option>
+                            <option value="html">HTML</option>
+                            <option value="css">CSS</option>
+                            <option value="json">JSON</option>
+                            <option value="markdown">Markdown</option>
+                            <option value="sql">SQL</option>
+                            <option value="yaml">YAML</option>
+                            <option value="shell">Shell</option>
+                            <option value="php">PHP</option>
+                            <option value="go">Go</option>
+                            <option value="rust">Rust</option>
+                            <option value="java">Java</option>
+                            <option value="csharp">C#</option>
+                            <option value="cpp">C++</option>
+                        </select>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Status Bar -->
+        <div class="status-bar">
+            <div class="status-bar-item" onclick="togglePanel()">
+                <i class="fas fa-exclamation-circle"></i>
+                <span id="status-problems">0</span>
+            </div>
+            <div class="status-bar-item">
+                <i class="fas fa-code-branch"></i>
+                <span>main</span>
+            </div>
+            <div class="status-bar-item">
+                <i class="fas fa-sync-alt"></i>
+                <span>0 ↓ 0 ↑</span>
+            </div>
+            <div class="status-bar-right">
+                <div class="status-bar-item" id="status-position">
+                    Ln 1, Col 1
+                </div>
+                <div class="status-bar-item">
+                    <span>Spaces: 4</span>
+                </div>
+                <div class="status-bar-item">
+                    <span>UTF-8</span>
+                </div>
+                <div class="status-bar-item" id="status-language">
+                    JavaScript
+                </div>
+                <div class="status-bar-item" onclick="toggleRightPanel()">
+                    <i class="fas fa-bell"></i>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Command Palette -->
+    <div class="command-palette" id="command-palette">
+        <div class="command-palette-content">
+            <input type="text" class="command-palette-input" id="command-input" placeholder="Type a command...">
+            <div class="command-palette-results" id="command-results"></div>
+        </div>
+    </div>
+
+    <!-- Save Modal -->
+    <div class="modal" id="save-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-save"></i> Save Project
+            </div>
+            <div class="modal-body">
+                <label>Project Name:</label>
+                <input type="text" id="project-name" placeholder="my-awesome-project">
+            </div>
+            <div class="modal-footer">
+                <button class="primary" onclick="saveProject()">
+                    <i class="fas fa-check"></i> Save
+                </button>
+                <button onclick="closeModal('save-modal')">Cancel</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Load Modal -->
+    <div class="modal" id="load-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-folder-open"></i> Load Project
+            </div>
+            <div class="modal-body" id="projects-list">
+                <p style="color: #858585;">No saved projects found.</p>
+            </div>
+            <div class="modal-footer">
+                <button onclick="closeModal('load-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <!-- Share Modal -->
+    <div class="modal" id="share-modal">
+        <div class="modal-content">
+            <div class="modal-header">
+                <i class="fas fa-share-alt"></i> Share Code
+            </div>
+            <div class="modal-body">
+                <label>Shareable Link:</label>
+                <input type="text" id="share-url" readonly>
+                <p style="font-size: 11px; color: #858585; margin-top: 10px;">
+                    Copy this URL to share your code. The code is encoded in the URL.
+                </p>
+            </div>
+            <div class="modal-footer">
+                <button class="primary" onclick="copyShareURL()">
+                    <i class="fas fa-copy"></i> Copy
+                </button>
+                <button onclick="closeModal('share-modal')">Close</button>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs/loader.js"></script>
+    <script src="/assets/js/code-editor-vscode.js"></script>
+</body>
+</html>
