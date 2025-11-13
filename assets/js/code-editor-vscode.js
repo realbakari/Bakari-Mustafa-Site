@@ -295,10 +295,15 @@ function renderFilesList() {
 }
 
 function updateBreadcrumb() {
-    document.getElementById('breadcrumb-file').textContent = files[currentFileIndex].name;
+    const breadcrumbFile = document.getElementById('breadcrumb-file');
+    if (breadcrumbFile && files[currentFileIndex]) {
+        breadcrumbFile.textContent = files[currentFileIndex].name;
+    }
 }
 
 function updateStatusBar() {
+    if (!editor || !files[currentFileIndex]) return;
+
     const file = files[currentFileIndex];
     const content = editor.getValue();
     const lines = content.split('\n').length;
@@ -313,13 +318,23 @@ function updateStatusBar() {
 }
 
 function updateCursorPosition() {
+    if (!editor) return;
+
     const position = editor.getPosition();
-    document.getElementById('status-position').textContent = `Ln ${position.lineNumber}, Col ${position.column}`;
+    const statusPosition = document.getElementById('status-position');
+    if (statusPosition && position) {
+        statusPosition.textContent = `Ln ${position.lineNumber}, Col ${position.column}`;
+    }
 }
 
 function updateLanguageStatus() {
+    if (!files[currentFileIndex]) return;
+
     const language = files[currentFileIndex].language;
-    document.getElementById('status-language').textContent = getLanguageName(language);
+    const statusLanguage = document.getElementById('status-language');
+    if (statusLanguage) {
+        statusLanguage.textContent = getLanguageName(language);
+    }
 }
 
 // Sidebar Management
@@ -328,16 +343,27 @@ function switchSidebar(sidebarName) {
     document.querySelectorAll('.activity-bar-item').forEach(item => {
         item.classList.remove('active');
     });
-    document.querySelector(`[data-sidebar="${sidebarName}"]`).classList.add('active');
+
+    const sidebarItem = document.querySelector(`[data-sidebar="${sidebarName}"]`);
+    if (sidebarItem) {
+        sidebarItem.classList.add('active');
+    }
 
     // Show/hide sidebar sections
     document.querySelectorAll('.sidebar-section').forEach(section => {
         section.style.display = 'none';
     });
-    document.getElementById(`sidebar-${sidebarName}`).style.display = 'flex';
+
+    const sidebarSection = document.getElementById(`sidebar-${sidebarName}`);
+    if (sidebarSection) {
+        sidebarSection.style.display = 'flex';
+    }
 
     // Show sidebar if hidden
-    document.getElementById('sidebar').classList.remove('hidden');
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+        sidebar.classList.remove('hidden');
+    }
 }
 
 // Panel Management
@@ -346,43 +372,82 @@ function switchPanel(panelName) {
     document.querySelectorAll('.panel-tab').forEach(tab => {
         tab.classList.remove('active');
     });
-    document.querySelector(`[data-panel="${panelName}"]`).classList.add('active');
+
+    const panelTab = document.querySelector(`[data-panel="${panelName}"]`);
+    if (panelTab) {
+        panelTab.classList.add('active');
+    }
 
     // Show/hide panel content
     document.querySelectorAll('.panel-content-section').forEach(section => {
         section.classList.remove('active');
     });
-    document.getElementById(`panel-${panelName}`).classList.add('active');
+
+    const panelContent = document.getElementById(`panel-${panelName}`);
+    if (panelContent) {
+        panelContent.classList.add('active');
+    }
 }
 
 function togglePanel() {
     const panel = document.getElementById('bottom-panel');
-    panel.classList.toggle('hidden');
+    if (panel) {
+        panel.classList.toggle('hidden');
+    }
 }
 
 function clearPanel() {
-    const activePanel = document.querySelector('.panel-tab.active').dataset.panel;
-    document.getElementById(`${activePanel}-list`).innerHTML = '';
+    const activePanelTab = document.querySelector('.panel-tab.active');
+    if (!activePanelTab) return;
+
+    const activePanel = activePanelTab.dataset.panel;
 
     if (activePanel === 'terminal') {
-        document.getElementById('terminal-output').innerHTML = '<div class="terminal-line">Terminal cleared</div>';
+        const terminalOutput = document.getElementById('terminal-output');
+        if (terminalOutput) {
+            terminalOutput.innerHTML = '<div class="terminal-line">Terminal cleared</div>';
+        }
+    } else {
+        const panelElement = document.getElementById(`${activePanel}-list`);
+        if (panelElement) {
+            panelElement.innerHTML = '';
+
+            // Add default message based on panel type
+            if (activePanel === 'problems') {
+                panelElement.innerHTML = '<div style="color: #858585; font-size: 11px;">No problems detected</div>';
+            } else if (activePanel === 'output') {
+                panelElement.innerHTML = '<div style="color: #cccccc; font-size: 12px;">Ready to run code...</div>';
+            } else if (activePanel === 'console') {
+                panelElement.innerHTML = '<div style="color: #cccccc; font-size: 12px;">Debug console ready</div>';
+            }
+        }
     }
 }
 
 function toggleRightPanel() {
-    document.getElementById('right-panel').classList.toggle('hidden');
+    const rightPanel = document.getElementById('right-panel');
+    if (rightPanel) {
+        rightPanel.classList.toggle('hidden');
+    }
 }
 
 // Code Execution
 async function runCode() {
+    if (!editor || !files[currentFileIndex]) return;
+
     const code = editor.getValue();
     const language = files[currentFileIndex].language;
 
     // Switch to terminal panel
     switchPanel('terminal');
-    document.getElementById('bottom-panel').classList.remove('hidden');
+    const bottomPanel = document.getElementById('bottom-panel');
+    if (bottomPanel) {
+        bottomPanel.classList.remove('hidden');
+    }
 
     const terminalOutput = document.getElementById('terminal-output');
+    if (!terminalOutput) return;
+
     terminalOutput.innerHTML += `<div class="terminal-line info">Running ${files[currentFileIndex].name}...</div>`;
 
     try {
@@ -447,7 +512,9 @@ async function executePythonWithPyodide(code) {
     const terminalOutput = document.getElementById('terminal-output');
 
     if (!pyodideInstance) {
-        terminalOutput.innerHTML += '<div class="terminal-line info">Loading Python runtime (this may take 10-15 seconds on first run)...</div>';
+        if (terminalOutput) {
+            terminalOutput.innerHTML += '<div class="terminal-line info">Loading Python runtime (this may take 10-15 seconds on first run)...</div>';
+        }
 
         const script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
@@ -469,7 +536,9 @@ sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
         `);
 
-        terminalOutput.innerHTML += '<div class="terminal-line success">Python runtime loaded!</div>';
+        if (terminalOutput) {
+            terminalOutput.innerHTML += '<div class="terminal-line success">Python runtime loaded!</div>';
+        }
     }
 
     pyodideInstance.runPython(`
@@ -825,7 +894,13 @@ document.addEventListener('keydown', (e) => {
 // Problems Panel
 function updateProblems(problems) {
     const problemsList = document.getElementById('problems-list');
-    document.getElementById('status-problems').textContent = problems.length;
+    const statusProblems = document.getElementById('status-problems');
+
+    if (statusProblems) {
+        statusProblems.textContent = problems.length;
+    }
+
+    if (!problemsList) return;
 
     if (problems.length === 0) {
         problemsList.innerHTML = '<div style="color: #858585; font-size: 11px;">No problems detected</div>';
