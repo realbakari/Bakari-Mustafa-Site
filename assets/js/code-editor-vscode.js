@@ -1282,3 +1282,236 @@ function showNotification(message, type = 'info') {
         notification.remove();
     }, 3000);
 }
+
+/* ============================================
+   RESIZABLE PANELS
+   ============================================ */
+
+// Initialize resize handles
+function initializeResizeHandles() {
+    const sidebarResize = document.getElementById('sidebar-resize');
+    const rightPanelResize = document.getElementById('right-panel-resize');
+    const sidebar = document.getElementById('sidebar');
+    const rightPanel = document.getElementById('right-panel');
+
+    if (sidebarResize && sidebar) {
+        makeResizable(sidebarResize, sidebar, 'width', 'next');
+    }
+
+    if (rightPanelResize && rightPanel) {
+        makeResizable(rightPanelResize, rightPanel, 'width', 'prev');
+    }
+}
+
+function makeResizable(handle, panel, dimension, direction) {
+    let isResizing = false;
+    let startPos = 0;
+    let startSize = 0;
+
+    handle.addEventListener('mousedown', (e) => {
+        isResizing = true;
+        startPos = e.clientX;
+        startSize = panel.offsetWidth;
+        handle.classList.add('resizing');
+        document.body.style.cursor = 'col-resize';
+        e.preventDefault();
+    });
+
+    document.addEventListener('mousemove', (e) => {
+        if (!isResizing) return;
+
+        const delta = direction === 'next' ? (e.clientX - startPos) : (startPos - e.clientX);
+        const newSize = startSize + delta;
+
+        // Get min-width from CSS or use default
+        const minWidth = parseInt(getComputedStyle(panel).minWidth) || 150;
+        const maxWidth = window.innerWidth * 0.5; // Max 50% of screen
+
+        if (newSize >= minWidth && newSize <= maxWidth) {
+            panel.style.width = newSize + 'px';
+        }
+    });
+
+    document.addEventListener('mouseup', () => {
+        if (isResizing) {
+            isResizing = false;
+            handle.classList.remove('resizing');
+            document.body.style.cursor = 'default';
+        }
+    });
+}
+
+// Call this after Monaco editor initialization
+setTimeout(() => {
+    initializeResizeHandles();
+}, 1000);
+
+/* ============================================
+   FILE SYSTEM ACCESS API
+   ============================================ */
+
+let fileSystemDirectoryHandle = null;
+let fileHandles = new Map(); // Track file handles
+
+// Check if File System Access API is supported
+function isFileSystemAccessSupported() {
+    return 'showDirectoryPicker' in window;
+}
+
+// Open local folder
+async function openLocalFolder() {
+    if (!isFileSystemAccessSupported()) {
+        showNotification('File System Access API is only supported in Chrome and Edge browsers', 'error');
+        return;
+    }
+
+    try {
+        // Request directory access
+        const dirHandle = await window.showDirectoryPicker({
+            mode: 'readwrite'
+        });
+
+        fileSystemDirectoryHandle = dirHandle;
+        showNotification(`Opened folder: ${dirHandle.name}`, 'success');
+
+        // Load files from directory
+        await loadDirectoryFiles(dirHandle);
+    } catch (error) {
+        if (error.name !== 'AbortError') {
+            console.error('Error opening folder:', error);
+            showNotification('Failed to open folder: ' + error.message, 'error');
+        }
+    }
+}
+
+// Load files from directory
+async function loadDirectoryFiles(dirHandle, path = '') {
+    try {
+        const filesList = document.getElementById('files-list');
+        if (!filesList) return;
+
+        // Clear existing files if loading root
+        if (path === '') {
+            files = [];
+            filesList.innerHTML = '';
+        }
+
+        for await (const entry of dirHandle.values()) {
+            const fullPath = path ? `${path}/${entry.name}` : entry.name;
+
+            if (entry.kind === 'file') {
+                // Skip hidden files and certain file types
+                if (entry.name.startsWith('.') ||
+                    entry.name.endsWith('.exe') ||
+                    entry.name.endsWith('.dll')) {
+                    continue;
+                }
+
+                // Read file content
+                const fileHandle = await dirHandle.getFileHandle(entry.name);
+                const file = await fileHandle.getFile();
+                const content = await file.text();
+
+                // Detect language from extension
+                const language = detectLanguage(entry.name);
+
+                // Add to files array
+                files.push({
+                    name: entry.name,
+                    content: content,
+                    language: language,
+                    path: fullPath,
+                    handle: fileHandle
+                });
+
+                // Store file handle for saving
+                fileHandles.set(fullPath, fileHandle);
+            } else if (entry.kind === 'directory') {
+                // Recursively load subdirectories (limit depth to prevent infinite loops)
+                const depth = path.split('/').length;
+                if (depth < 3) {
+                    const subDirHandle = await dirHandle.getDirectoryHandle(entry.name);
+                    await loadDirectoryFiles(subDirHandle, fullPath);
+                }
+            }
+        }
+
+        // Update UI
+        updateFilesUI();
+
+        // Open the first file
+        if (files.length > 0 && path === '') {
+            openFile(0);
+        }
+    } catch (error) {
+        console.error('Error loading directory files:', error);
+        showNotification('Failed to load some files: ' + error.message, 'error');
+    }
+}
+
+// Detect language from filename
+function detectLanguage(filename) {
+    const ext = filename.split('.').pop().toLowerCase();
+    const languageMap = {
+        'js': 'javascript', 'jsx': 'javascript',
+        'ts': 'typescript', 'tsx': 'typescript',
+        'py': 'python', 'rb': 'ruby',
+        'html': 'html', 'htm': 'html',
+        'css': 'css', 'scss': 'scss', 'sass': 'sass',
+        'json': 'json', 'md': 'markdown',
+        'sql': 'sql', 'yaml': 'yaml', 'yml': 'yaml',
+        'sh': 'shell', 'bash': 'shell',
+        'php': 'php', 'go': 'go', 'rs': 'rust',
+        'java': 'java', 'cs': 'csharp', 'cpp': 'cpp', 'c': 'cpp'
+    };
+    return languageMap[ext] || 'plaintext';
+}
+
+// Save current file to disk
+async function saveFileToDisk() {
+    if (!editor || files.length === 0) return;
+
+    const currentFile = files[currentFileIndex];
+    if (!currentFile) return;
+
+    try {
+        // If we have a file handle from File System Access API, use it
+        if (fileHandles.has(currentFile.path || currentFile.name)) {
+            const fileHandle = fileHandles.get(currentFile.path || currentFile.name);
+            const writable = await fileHandle.createWritable();
+            await writable.write(editor.getValue());
+            await writable.close();
+
+            // Update file content
+            currentFile.content = editor.getValue();
+            markFileSaved(currentFileIndex);
+            showNotification(`Saved ${currentFile.name}`, 'success');
+        } else {
+            // Fallback to download if no file handle
+            downloadFile(currentFile.name, editor.getValue());
+        }
+    } catch (error) {
+        console.error('Error saving file:', error);
+        showNotification('Failed to save file: ' + error.message, 'error');
+    }
+}
+
+// Add keyboard shortcut for saving to disk (Ctrl+S)
+document.addEventListener('keydown', (e) => {
+    if (e.ctrlKey && e.key === 's') {
+        e.preventDefault();
+        saveFileToDisk();
+    }
+});
+
+// Helper function to download file
+function downloadFile(filename, content) {
+    const blob = new Blob([content], { type: 'text/plain' });
+    const url = URL.createObjectURL(blob);
+    const a = document.createElement('a');
+    a.href = url;
+    a.download = filename;
+    a.click();
+    URL.revokeObjectURL(url);
+    showNotification(`Downloaded ${filename}`, 'success');
+}

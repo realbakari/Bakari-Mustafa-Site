@@ -70,9 +70,26 @@ layout: compress
 
         /* Main Content */
         .main-content {
-            display: grid;
-            grid-template-columns: 48px 200px 1fr 300px;
+            display: flex;
             overflow: hidden;
+            height: 100%;
+        }
+
+        /* Resize Handle */
+        .resize-handle {
+            width: 4px;
+            background: #252526;
+            cursor: col-resize;
+            position: relative;
+            flex-shrink: 0;
+        }
+
+        .resize-handle:hover {
+            background: #007acc;
+        }
+
+        .resize-handle.resizing {
+            background: #007acc;
         }
 
         /* Activity Bar */
@@ -81,6 +98,8 @@ layout: compress
             display: flex;
             flex-direction: column;
             border-right: 1px solid #252526;
+            width: 48px;
+            flex-shrink: 0;
         }
 
         .activity-bar-item {
@@ -116,6 +135,9 @@ layout: compress
             flex-direction: column;
             overflow: hidden;
             border-right: 1px solid #252526;
+            width: 250px;
+            min-width: 150px;
+            flex-shrink: 0;
         }
 
         .sidebar.hidden {
@@ -252,6 +274,8 @@ layout: compress
             flex-direction: column;
             overflow: hidden;
             background: #1e1e1e;
+            flex: 1;
+            min-width: 300px;
         }
 
         /* Breadcrumb */
@@ -546,6 +570,9 @@ layout: compress
             display: flex;
             flex-direction: column;
             overflow: hidden;
+            width: 300px;
+            min-width: 200px;
+            flex-shrink: 0;
         }
 
         .right-panel.hidden {
@@ -949,15 +976,21 @@ layout: compress
     <div class="container" style="display: none;" id="main-container">
         <!-- Title Bar -->
         <div class="title-bar">
-            <div class="title-bar-menu">
-                <div class="title-bar-menu-item" onclick="showCommandPalette()">File</div>
-                <div class="title-bar-menu-item" onclick="showCommandPalette()">Edit</div>
-                <div class="title-bar-menu-item" onclick="showCommandPalette()">View</div>
-                <div class="title-bar-menu-item" onclick="showCommandPalette()">Go</div>
-                <div class="title-bar-menu-item" onclick="showCommandPalette()">Run</div>
-                <div class="title-bar-menu-item" onclick="showCommandPalette()">Help</div>
+            <div class="title-bar-title" style="flex: 1;">
+                <i class="fas fa-code" style="margin-right: 8px;"></i>
+                VS Code - Browser Edition
             </div>
-            <div class="title-bar-title">VS Code - Browser Edition</div>
+            <div class="title-bar-menu">
+                <div class="title-bar-menu-item" onclick="openLocalFolder()" title="Open Local Folder (Chrome/Edge only)">
+                    <i class="fas fa-folder-open"></i>
+                </div>
+                <div class="title-bar-menu-item" onclick="openSaveModal()" title="Save Project">
+                    <i class="fas fa-save"></i>
+                </div>
+                <div class="title-bar-menu-item" onclick="showCommandPalette()" title="Command Palette (Ctrl+Shift+P)">
+                    <i class="fas fa-terminal"></i>
+                </div>
+            </div>
         </div>
 
         <!-- Main Content -->
@@ -1086,6 +1119,9 @@ layout: compress
                 </div>
             </div>
 
+            <!-- Resize Handle -->
+            <div class="resize-handle" id="sidebar-resize"></div>
+
             <!-- Editor Container -->
             <div class="editor-container">
                 <!-- Breadcrumb -->
@@ -1173,6 +1209,9 @@ layout: compress
                     </div>
                 </div>
             </div>
+
+            <!-- Resize Handle -->
+            <div class="resize-handle" id="right-panel-resize"></div>
 
             <!-- Right Panel -->
             <div class="right-panel hidden" id="right-panel">
