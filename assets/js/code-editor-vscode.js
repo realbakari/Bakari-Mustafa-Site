@@ -616,10 +616,17 @@ function formatCode() {
 
 // Search & Replace
 function performSearch() {
-    const searchTerm = document.getElementById('search-input').value;
-    const caseSensitive = document.getElementById('case-sensitive').classList.contains('active');
-    const wholeWord = document.getElementById('whole-word').classList.contains('active');
-    const regex = document.getElementById('regex').classList.contains('active');
+    const searchInput = document.getElementById('search-input');
+    const caseSensitiveBtn = document.getElementById('case-sensitive');
+    const wholeWordBtn = document.getElementById('whole-word');
+    const regexBtn = document.getElementById('regex');
+
+    if (!searchInput) return;
+
+    const searchTerm = searchInput.value;
+    const caseSensitive = caseSensitiveBtn ? caseSensitiveBtn.classList.contains('active') : false;
+    const wholeWord = wholeWordBtn ? wholeWordBtn.classList.contains('active') : false;
+    const regex = regexBtn ? regexBtn.classList.contains('active') : false;
 
     if (!searchTerm) {
         showNotification('Enter a search term', 'error');
@@ -664,6 +671,8 @@ function performSearch() {
     });
 
     const searchResults = document.getElementById('search-results');
+    if (!searchResults) return;
+
     if (results.length === 0) {
         searchResults.innerHTML = '<div style="color: #858585;">No results found</div>';
     } else {
@@ -677,8 +686,10 @@ function performSearch() {
             `;
             resultItem.onclick = () => {
                 switchFile(result.fileIndex);
-                editor.revealLineInCenter(result.line);
-                editor.setPosition({ lineNumber: result.line, column: 1 });
+                if (editor) {
+                    editor.revealLineInCenter(result.line);
+                    editor.setPosition({ lineNumber: result.line, column: 1 });
+                }
             };
             searchResults.appendChild(resultItem);
         });
@@ -686,16 +697,23 @@ function performSearch() {
 }
 
 function performReplace() {
-    const searchTerm = document.getElementById('search-input').value;
-    const replaceTerm = document.getElementById('replace-input').value;
+    const searchInput = document.getElementById('search-input');
+    const replaceInput = document.getElementById('replace-input');
+    const caseSensitiveBtn = document.getElementById('case-sensitive');
+    const regexBtn = document.getElementById('regex');
+
+    if (!searchInput || !replaceInput) return;
+
+    const searchTerm = searchInput.value;
+    const replaceTerm = replaceInput.value;
 
     if (!searchTerm) {
         showNotification('Enter a search term', 'error');
         return;
     }
 
-    const caseSensitive = document.getElementById('case-sensitive').classList.contains('active');
-    const regex = document.getElementById('regex').classList.contains('active');
+    const caseSensitive = caseSensitiveBtn ? caseSensitiveBtn.classList.contains('active') : false;
+    const regex = regexBtn ? regexBtn.classList.contains('active') : false;
 
     let totalReplacements = 0;
 
@@ -934,6 +952,7 @@ function changeTheme(theme) {
 }
 
 function changeFontSize(size) {
+    if (!editor) return;
     editor.updateOptions({ fontSize: parseInt(size) });
     if (editor2) {
         editor2.updateOptions({ fontSize: parseInt(size) });
@@ -941,6 +960,7 @@ function changeFontSize(size) {
 }
 
 function changeTabSize(size) {
+    if (!editor) return;
     editor.updateOptions({ tabSize: parseInt(size) });
     if (editor2) {
         editor2.updateOptions({ tabSize: parseInt(size) });
@@ -948,6 +968,7 @@ function changeTabSize(size) {
 }
 
 function toggleMinimap(enabled) {
+    if (!editor) return;
     editor.updateOptions({ minimap: { enabled } });
     if (editor2) {
         editor2.updateOptions({ minimap: { enabled } });
@@ -955,6 +976,7 @@ function toggleMinimap(enabled) {
 }
 
 function changeWordWrap(wrap) {
+    if (!editor) return;
     editor.updateOptions({ wordWrap: wrap });
     if (editor2) {
         editor2.updateOptions({ wordWrap: wrap });
@@ -984,6 +1006,7 @@ function toggleAutoSave(enabled) {
 }
 
 function changeLanguage(language) {
+    if (!editor || !files[currentFileIndex]) return;
     files[currentFileIndex].language = language;
     monaco.editor.setModelLanguage(editor.getModel(), language);
     updateLanguageStatus();
@@ -992,13 +1015,22 @@ function changeLanguage(language) {
 
 // Save/Load/Share
 function openSaveModal() {
-    document.getElementById('save-modal').classList.add('active');
-    document.getElementById('project-name').focus();
+    const saveModal = document.getElementById('save-modal');
+    const projectName = document.getElementById('project-name');
+
+    if (saveModal) {
+        saveModal.classList.add('active');
+    }
+    if (projectName) {
+        projectName.focus();
+    }
 }
 
 function openLoadModal() {
     const projects = JSON.parse(localStorage.getItem('vsCodeProjects') || '{}');
     const projectsList = document.getElementById('projects-list');
+
+    if (!projectsList) return;
 
     if (Object.keys(projects).length === 0) {
         projectsList.innerHTML = '<p style="color: #858585;">No saved projects found.</p>';
@@ -1027,7 +1059,10 @@ function openLoadModal() {
         });
     }
 
-    document.getElementById('load-modal').classList.add('active');
+    const loadModal = document.getElementById('load-modal');
+    if (loadModal) {
+        loadModal.classList.add('active');
+    }
 }
 
 function openShareModal() {
@@ -1038,12 +1073,22 @@ function openShareModal() {
     const encoded = btoa(encodeURIComponent(JSON.stringify(data)));
     const url = `${window.location.origin}${window.location.pathname}?share=${encoded}`;
 
-    document.getElementById('share-url').value = url;
-    document.getElementById('share-modal').classList.add('active');
+    const shareUrl = document.getElementById('share-url');
+    const shareModal = document.getElementById('share-modal');
+
+    if (shareUrl) {
+        shareUrl.value = url;
+    }
+    if (shareModal) {
+        shareModal.classList.add('active');
+    }
 }
 
 function saveProject() {
-    const projectName = document.getElementById('project-name').value.trim();
+    const projectNameInput = document.getElementById('project-name');
+    if (!projectNameInput) return;
+
+    const projectName = projectNameInput.value.trim();
     if (!projectName) {
         showNotification('Please enter a project name', 'error');
         return;
@@ -1095,6 +1140,8 @@ function deleteProject(name) {
 
 function copyShareURL() {
     const input = document.getElementById('share-url');
+    if (!input) return;
+
     input.select();
     document.execCommand('copy');
     showNotification('Link copied to clipboard!', 'success');
@@ -1118,7 +1165,10 @@ function loadFromURL() {
 }
 
 function closeModal(modalId) {
-    document.getElementById(modalId).classList.remove('active');
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+    }
 }
 
 // Utility Functions
