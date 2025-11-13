@@ -295,10 +295,15 @@ function renderFilesList() {
 }
 
 function updateBreadcrumb() {
-    document.getElementById('breadcrumb-file').textContent = files[currentFileIndex].name;
+    const breadcrumbFile = document.getElementById('breadcrumb-file');
+    if (breadcrumbFile && files[currentFileIndex]) {
+        breadcrumbFile.textContent = files[currentFileIndex].name;
+    }
 }
 
 function updateStatusBar() {
+    if (!editor || !files[currentFileIndex]) return;
+
     const file = files[currentFileIndex];
     const content = editor.getValue();
     const lines = content.split('\n').length;
@@ -313,13 +318,23 @@ function updateStatusBar() {
 }
 
 function updateCursorPosition() {
+    if (!editor) return;
+
     const position = editor.getPosition();
-    document.getElementById('status-position').textContent = `Ln ${position.lineNumber}, Col ${position.column}`;
+    const statusPosition = document.getElementById('status-position');
+    if (statusPosition && position) {
+        statusPosition.textContent = `Ln ${position.lineNumber}, Col ${position.column}`;
+    }
 }
 
 function updateLanguageStatus() {
+    if (!files[currentFileIndex]) return;
+
     const language = files[currentFileIndex].language;
-    document.getElementById('status-language').textContent = getLanguageName(language);
+    const statusLanguage = document.getElementById('status-language');
+    if (statusLanguage) {
+        statusLanguage.textContent = getLanguageName(language);
+    }
 }
 
 // Sidebar Management
@@ -328,16 +343,27 @@ function switchSidebar(sidebarName) {
     document.querySelectorAll('.activity-bar-item').forEach(item => {
         item.classList.remove('active');
     });
-    document.querySelector(`[data-sidebar="${sidebarName}"]`).classList.add('active');
+
+    const sidebarItem = document.querySelector(`[data-sidebar="${sidebarName}"]`);
+    if (sidebarItem) {
+        sidebarItem.classList.add('active');
+    }
 
     // Show/hide sidebar sections
     document.querySelectorAll('.sidebar-section').forEach(section => {
         section.style.display = 'none';
     });
-    document.getElementById(`sidebar-${sidebarName}`).style.display = 'flex';
+
+    const sidebarSection = document.getElementById(`sidebar-${sidebarName}`);
+    if (sidebarSection) {
+        sidebarSection.style.display = 'flex';
+    }
 
     // Show sidebar if hidden
-    document.getElementById('sidebar').classList.remove('hidden');
+    const sidebar = document.getElementById('sidebar');
+    if (sidebar) {
+        sidebar.classList.remove('hidden');
+    }
 }
 
 // Panel Management
@@ -346,43 +372,82 @@ function switchPanel(panelName) {
     document.querySelectorAll('.panel-tab').forEach(tab => {
         tab.classList.remove('active');
     });
-    document.querySelector(`[data-panel="${panelName}"]`).classList.add('active');
+
+    const panelTab = document.querySelector(`[data-panel="${panelName}"]`);
+    if (panelTab) {
+        panelTab.classList.add('active');
+    }
 
     // Show/hide panel content
     document.querySelectorAll('.panel-content-section').forEach(section => {
         section.classList.remove('active');
     });
-    document.getElementById(`panel-${panelName}`).classList.add('active');
+
+    const panelContent = document.getElementById(`panel-${panelName}`);
+    if (panelContent) {
+        panelContent.classList.add('active');
+    }
 }
 
 function togglePanel() {
     const panel = document.getElementById('bottom-panel');
-    panel.classList.toggle('hidden');
+    if (panel) {
+        panel.classList.toggle('hidden');
+    }
 }
 
 function clearPanel() {
-    const activePanel = document.querySelector('.panel-tab.active').dataset.panel;
-    document.getElementById(`${activePanel}-list`).innerHTML = '';
+    const activePanelTab = document.querySelector('.panel-tab.active');
+    if (!activePanelTab) return;
+
+    const activePanel = activePanelTab.dataset.panel;
 
     if (activePanel === 'terminal') {
-        document.getElementById('terminal-output').innerHTML = '<div class="terminal-line">Terminal cleared</div>';
+        const terminalOutput = document.getElementById('terminal-output');
+        if (terminalOutput) {
+            terminalOutput.innerHTML = '<div class="terminal-line">Terminal cleared</div>';
+        }
+    } else {
+        const panelElement = document.getElementById(`${activePanel}-list`);
+        if (panelElement) {
+            panelElement.innerHTML = '';
+
+            // Add default message based on panel type
+            if (activePanel === 'problems') {
+                panelElement.innerHTML = '<div style="color: #858585; font-size: 11px;">No problems detected</div>';
+            } else if (activePanel === 'output') {
+                panelElement.innerHTML = '<div style="color: #cccccc; font-size: 12px;">Ready to run code...</div>';
+            } else if (activePanel === 'console') {
+                panelElement.innerHTML = '<div style="color: #cccccc; font-size: 12px;">Debug console ready</div>';
+            }
+        }
     }
 }
 
 function toggleRightPanel() {
-    document.getElementById('right-panel').classList.toggle('hidden');
+    const rightPanel = document.getElementById('right-panel');
+    if (rightPanel) {
+        rightPanel.classList.toggle('hidden');
+    }
 }
 
 // Code Execution
 async function runCode() {
+    if (!editor || !files[currentFileIndex]) return;
+
     const code = editor.getValue();
     const language = files[currentFileIndex].language;
 
     // Switch to terminal panel
     switchPanel('terminal');
-    document.getElementById('bottom-panel').classList.remove('hidden');
+    const bottomPanel = document.getElementById('bottom-panel');
+    if (bottomPanel) {
+        bottomPanel.classList.remove('hidden');
+    }
 
     const terminalOutput = document.getElementById('terminal-output');
+    if (!terminalOutput) return;
+
     terminalOutput.innerHTML += `<div class="terminal-line info">Running ${files[currentFileIndex].name}...</div>`;
 
     try {
@@ -447,7 +512,9 @@ async function executePythonWithPyodide(code) {
     const terminalOutput = document.getElementById('terminal-output');
 
     if (!pyodideInstance) {
-        terminalOutput.innerHTML += '<div class="terminal-line info">Loading Python runtime (this may take 10-15 seconds on first run)...</div>';
+        if (terminalOutput) {
+            terminalOutput.innerHTML += '<div class="terminal-line info">Loading Python runtime (this may take 10-15 seconds on first run)...</div>';
+        }
 
         const script = document.createElement('script');
         script.src = 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js';
@@ -469,7 +536,9 @@ sys.stdout = io.StringIO()
 sys.stderr = io.StringIO()
         `);
 
-        terminalOutput.innerHTML += '<div class="terminal-line success">Python runtime loaded!</div>';
+        if (terminalOutput) {
+            terminalOutput.innerHTML += '<div class="terminal-line success">Python runtime loaded!</div>';
+        }
     }
 
     pyodideInstance.runPython(`
@@ -547,10 +616,17 @@ function formatCode() {
 
 // Search & Replace
 function performSearch() {
-    const searchTerm = document.getElementById('search-input').value;
-    const caseSensitive = document.getElementById('case-sensitive').classList.contains('active');
-    const wholeWord = document.getElementById('whole-word').classList.contains('active');
-    const regex = document.getElementById('regex').classList.contains('active');
+    const searchInput = document.getElementById('search-input');
+    const caseSensitiveBtn = document.getElementById('case-sensitive');
+    const wholeWordBtn = document.getElementById('whole-word');
+    const regexBtn = document.getElementById('regex');
+
+    if (!searchInput) return;
+
+    const searchTerm = searchInput.value;
+    const caseSensitive = caseSensitiveBtn ? caseSensitiveBtn.classList.contains('active') : false;
+    const wholeWord = wholeWordBtn ? wholeWordBtn.classList.contains('active') : false;
+    const regex = regexBtn ? regexBtn.classList.contains('active') : false;
 
     if (!searchTerm) {
         showNotification('Enter a search term', 'error');
@@ -595,6 +671,8 @@ function performSearch() {
     });
 
     const searchResults = document.getElementById('search-results');
+    if (!searchResults) return;
+
     if (results.length === 0) {
         searchResults.innerHTML = '<div style="color: #858585;">No results found</div>';
     } else {
@@ -608,8 +686,10 @@ function performSearch() {
             `;
             resultItem.onclick = () => {
                 switchFile(result.fileIndex);
-                editor.revealLineInCenter(result.line);
-                editor.setPosition({ lineNumber: result.line, column: 1 });
+                if (editor) {
+                    editor.revealLineInCenter(result.line);
+                    editor.setPosition({ lineNumber: result.line, column: 1 });
+                }
             };
             searchResults.appendChild(resultItem);
         });
@@ -617,16 +697,23 @@ function performSearch() {
 }
 
 function performReplace() {
-    const searchTerm = document.getElementById('search-input').value;
-    const replaceTerm = document.getElementById('replace-input').value;
+    const searchInput = document.getElementById('search-input');
+    const replaceInput = document.getElementById('replace-input');
+    const caseSensitiveBtn = document.getElementById('case-sensitive');
+    const regexBtn = document.getElementById('regex');
+
+    if (!searchInput || !replaceInput) return;
+
+    const searchTerm = searchInput.value;
+    const replaceTerm = replaceInput.value;
 
     if (!searchTerm) {
         showNotification('Enter a search term', 'error');
         return;
     }
 
-    const caseSensitive = document.getElementById('case-sensitive').classList.contains('active');
-    const regex = document.getElementById('regex').classList.contains('active');
+    const caseSensitive = caseSensitiveBtn ? caseSensitiveBtn.classList.contains('active') : false;
+    const regex = regexBtn ? regexBtn.classList.contains('active') : false;
 
     let totalReplacements = 0;
 
@@ -825,7 +912,13 @@ document.addEventListener('keydown', (e) => {
 // Problems Panel
 function updateProblems(problems) {
     const problemsList = document.getElementById('problems-list');
-    document.getElementById('status-problems').textContent = problems.length;
+    const statusProblems = document.getElementById('status-problems');
+
+    if (statusProblems) {
+        statusProblems.textContent = problems.length;
+    }
+
+    if (!problemsList) return;
 
     if (problems.length === 0) {
         problemsList.innerHTML = '<div style="color: #858585; font-size: 11px;">No problems detected</div>';
@@ -859,6 +952,7 @@ function changeTheme(theme) {
 }
 
 function changeFontSize(size) {
+    if (!editor) return;
     editor.updateOptions({ fontSize: parseInt(size) });
     if (editor2) {
         editor2.updateOptions({ fontSize: parseInt(size) });
@@ -866,6 +960,7 @@ function changeFontSize(size) {
 }
 
 function changeTabSize(size) {
+    if (!editor) return;
     editor.updateOptions({ tabSize: parseInt(size) });
     if (editor2) {
         editor2.updateOptions({ tabSize: parseInt(size) });
@@ -873,6 +968,7 @@ function changeTabSize(size) {
 }
 
 function toggleMinimap(enabled) {
+    if (!editor) return;
     editor.updateOptions({ minimap: { enabled } });
     if (editor2) {
         editor2.updateOptions({ minimap: { enabled } });
@@ -880,6 +976,7 @@ function toggleMinimap(enabled) {
 }
 
 function changeWordWrap(wrap) {
+    if (!editor) return;
     editor.updateOptions({ wordWrap: wrap });
     if (editor2) {
         editor2.updateOptions({ wordWrap: wrap });
@@ -909,6 +1006,7 @@ function toggleAutoSave(enabled) {
 }
 
 function changeLanguage(language) {
+    if (!editor || !files[currentFileIndex]) return;
     files[currentFileIndex].language = language;
     monaco.editor.setModelLanguage(editor.getModel(), language);
     updateLanguageStatus();
@@ -917,13 +1015,22 @@ function changeLanguage(language) {
 
 // Save/Load/Share
 function openSaveModal() {
-    document.getElementById('save-modal').classList.add('active');
-    document.getElementById('project-name').focus();
+    const saveModal = document.getElementById('save-modal');
+    const projectName = document.getElementById('project-name');
+
+    if (saveModal) {
+        saveModal.classList.add('active');
+    }
+    if (projectName) {
+        projectName.focus();
+    }
 }
 
 function openLoadModal() {
     const projects = JSON.parse(localStorage.getItem('vsCodeProjects') || '{}');
     const projectsList = document.getElementById('projects-list');
+
+    if (!projectsList) return;
 
     if (Object.keys(projects).length === 0) {
         projectsList.innerHTML = '<p style="color: #858585;">No saved projects found.</p>';
@@ -952,7 +1059,10 @@ function openLoadModal() {
         });
     }
 
-    document.getElementById('load-modal').classList.add('active');
+    const loadModal = document.getElementById('load-modal');
+    if (loadModal) {
+        loadModal.classList.add('active');
+    }
 }
 
 function openShareModal() {
@@ -963,12 +1073,22 @@ function openShareModal() {
     const encoded = btoa(encodeURIComponent(JSON.stringify(data)));
     const url = `${window.location.origin}${window.location.pathname}?share=${encoded}`;
 
-    document.getElementById('share-url').value = url;
-    document.getElementById('share-modal').classList.add('active');
+    const shareUrl = document.getElementById('share-url');
+    const shareModal = document.getElementById('share-modal');
+
+    if (shareUrl) {
+        shareUrl.value = url;
+    }
+    if (shareModal) {
+        shareModal.classList.add('active');
+    }
 }
 
 function saveProject() {
-    const projectName = document.getElementById('project-name').value.trim();
+    const projectNameInput = document.getElementById('project-name');
+    if (!projectNameInput) return;
+
+    const projectName = projectNameInput.value.trim();
     if (!projectName) {
         showNotification('Please enter a project name', 'error');
         return;
@@ -1020,6 +1140,8 @@ function deleteProject(name) {
 
 function copyShareURL() {
     const input = document.getElementById('share-url');
+    if (!input) return;
+
     input.select();
     document.execCommand('copy');
     showNotification('Link copied to clipboard!', 'success');
@@ -1043,7 +1165,10 @@ function loadFromURL() {
 }
 
 function closeModal(modalId) {
-    document.getElementById(modalId).classList.remove('active');
+    const modal = document.getElementById(modalId);
+    if (modal) {
+        modal.classList.remove('active');
+    }
 }
 
 // Utility Functions
