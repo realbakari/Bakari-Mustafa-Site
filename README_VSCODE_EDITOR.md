@@ -94,10 +94,22 @@ print('Square root of 16:', math.sqrt(16))
 # List comprehension
 squares = [x**2 for x in range(1, 6)]
 print('Squares:', squares)
+
+# Functions - DON'T FORGET THE COLON!
+def factorial(n):
+    if n <= 1:
+        return 1
+    return n * factorial(n - 1)
+
+print('5! =', factorial(5))
 ```
 
 **First Run**: Wait 10-15s for "Python runtime loaded!"
 **Next Runs**: Instant!
+
+**Important**: Python requires colons (`:`) after function definitions, if statements, loops, etc.
+
+**More examples**: See `PYTHON_EXAMPLES.md` for complete Python examples and common error fixes.
 
 ### Ruby Test
 ```ruby
@@ -142,6 +154,26 @@ puts "Squares: #{squares}"
 ---
 
 ## Troubleshooting
+
+### Python Syntax Errors
+
+**Error**: `SyntaxError: expected ':'`
+**Cause**: Missing colon after function definition, if statement, or loop
+**Fix**: Add `:` at the end
+
+```python
+# ❌ Wrong
+def factorial(n)
+    return n
+
+# ✅ Correct
+def factorial(n):
+    return n
+```
+
+**The editor now shows helpful hints for common Python errors!**
+
+See `PYTHON_EXAMPLES.md` for more examples and fixes.
 
 ### Python Takes Long First Time
 **Normal**: 10-15s to download Pyodide (~6-8MB). Subsequent runs are instant.
