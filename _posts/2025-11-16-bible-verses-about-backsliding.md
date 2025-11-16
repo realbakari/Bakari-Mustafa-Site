@@ -5,7 +5,7 @@ date: 2025-11-16 10:00:00 +0000
 categories: [faith, spirituality]
 tags: [bible, christianity, spiritual-growth, restoration]
 description: "A comprehensive collection of Bible verses about backsliding, restoration, and returning to God. Find encouragement and hope in Scripture's promises of healing and renewal."
-image: https://images.unsplash.com/photo-1499652848871-1527a310b13a?q=80&w=2148&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
+image: https://images.unsplash.com/photo-1570786032462-2efc3ca8fccd?q=80&w=2370&auto=format&fit=crop&ixlib=rb-4.1.0&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D
 ---
 
 Backsliding is a spiritual reality that many believers face—a gradual drifting away from God and His ways. Yet Scripture is filled with messages of hope, restoration, and God's unfailing mercy for those who return to Him. This collection of verses reminds us that God is always ready to heal and restore those who come back with sincere hearts.
