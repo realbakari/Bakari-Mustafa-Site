@@ -126,3 +126,33 @@ home: true
 <div class="view-all">
   <a href="/posts/" class="view-all-link">View all posts →</a>
 </div>
+
+<!-- Popular Posts Data - Dynamic loading based on view counts -->
+<script>
+  // Post data for popular posts matching
+  (function() {
+    const postsData = [
+      {% for post in site.posts %}
+      {
+        url: "{{ post.url }}",
+        title: {{ post.title | jsonify }},
+        date: "{{ post.date | date_to_xmlschema }}",
+        words: {{ post.content | number_of_words }}
+      }{% unless forloop.last %},{% endunless %}
+      {% endfor %}
+    ];
+
+    // Set data when script loads
+    if (window.setPopularPostsData) {
+      window.setPopularPostsData(postsData);
+    } else {
+      // Store for later if script not loaded yet
+      window.addEventListener('load', function() {
+        if (window.setPopularPostsData) {
+          window.setPopularPostsData(postsData);
+        }
+      });
+    }
+  })();
+</script>
+<script src="/assets/js/popular-posts.js"></script>
