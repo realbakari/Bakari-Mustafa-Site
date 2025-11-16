@@ -3,6 +3,98 @@ layout: default
 home: true
 ---
 
+<!-- Featured Posts Section -->
+<section class="featured-section">
+  <h2 class="section-title">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <polygon points="12 2 15.09 8.26 22 9.27 17 14.14 18.18 21.02 12 17.77 5.82 21.02 7 14.14 2 9.27 8.91 8.26 12 2"></polygon>
+    </svg>
+    Featured Posts
+  </h2>
+  <div class="featured-grid">
+    {% assign featured_posts = site.posts | where_exp: "post", "post.tags contains 'featured'" | limit: 3 %}
+    {% if featured_posts.size == 0 %}
+      {% assign featured_posts = site.posts | limit: 3 %}
+    {% endif %}
+
+    {% for post in featured_posts %}
+    <article class="featured-card">
+      {% if post.image %}
+      <div class="featured-image" style="background-image: url('{{ post.image }}');"></div>
+      {% else %}
+      <div class="featured-image featured-image-placeholder">
+        <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M13 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V9z"></path>
+          <polyline points="13 2 13 9 20 9"></polyline>
+        </svg>
+      </div>
+      {% endif %}
+      <div class="featured-content">
+        <div class="featured-meta">
+          <span class="featured-date">{{ post.date | date: "%b %d, %Y" }}</span>
+          {% if post.tags and post.tags != empty %}
+          <span class="featured-tag">{{ post.tags | first | upcase }}</span>
+          {% endif %}
+        </div>
+        <h3 class="featured-title">
+          <a href="{{ post.url }}">{{ post.title | escape }}</a>
+        </h3>
+        {% if post.description %}
+        <p class="featured-excerpt">{{ post.description | strip_html | truncate: 120 }}</p>
+        {% elsif post.excerpt %}
+        <p class="featured-excerpt">{{ post.excerpt | strip_html | truncate: 120 }}</p>
+        {% endif %}
+        <a href="{{ post.url }}" class="featured-read-more">
+          Read article
+          <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+            <line x1="5" y1="12" x2="19" y2="12"></line>
+            <polyline points="12 5 19 12 12 19"></polyline>
+          </svg>
+        </a>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Popular Posts Section -->
+<section class="popular-section">
+  <h2 class="section-title">
+    <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"></path>
+    </svg>
+    Popular Posts
+  </h2>
+  <div class="popular-list">
+    {% assign popular_posts = site.posts | where_exp: "post", "post.tags contains 'popular'" | limit: 5 %}
+    {% if popular_posts.size == 0 %}
+      {% assign popular_posts = site.posts | limit: 5 | offset: 3 %}
+    {% endif %}
+
+    {% for post in popular_posts %}
+    <article class="popular-card">
+      <div class="popular-number">{{ forloop.index }}</div>
+      <div class="popular-content">
+        <h4 class="popular-title">
+          <a href="{{ post.url }}">{{ post.title | escape }}</a>
+        </h4>
+        <div class="popular-meta">
+          <span class="popular-date">{{ post.date | date: "%b %Y" }}</span>
+          <span class="popular-separator">•</span>
+          {% assign words = post.content | number_of_words %}
+          {% if words < 360 %}
+            <span class="popular-reading-time">1 min read</span>
+          {% else %}
+            <span class="popular-reading-time">{{ words | divided_by:180 }} min read</span>
+          {% endif %}
+        </div>
+      </div>
+    </article>
+    {% endfor %}
+  </div>
+</section>
+
+<!-- Recent Posts Section -->
 <h2 class="posts-item-note" aria-label="Recent Posts">Recent Posts</h2>
 <div class="posts-list">
 {%- for post in site.posts limit: site.number_of_posts -%}
