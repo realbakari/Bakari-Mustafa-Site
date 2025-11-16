@@ -52,28 +52,35 @@ layout: compress
           <h1 class="header-title" itemprop="headline">{{ page.title | escape }}</h1>
           {% if page.date %}
           <div class="post-meta">
-            <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">
-              {{ page.date | date: "%b %d, %Y" }}
-            </time>
-            <span class="post-meta-separator">•</span>
-            <span itemprop="author" itemscope itemtype="https://schema.org/Person">
-              <span itemprop="name">{{ site.author.name }}</span>
-            </span>
-            <span class="post-meta-separator">•</span>
-            {% assign words = content | number_of_words %}
-            {% if words < 360 %}
-              <span class="post-reading-time">1 min read</span>
-            {% else %}
-              <span class="post-reading-time">{{ words | divided_by:180 }} min read</span>
-            {% endif %}
-            <span class="post-meta-separator">•</span>
-            <span class="page-view-counter loading" data-view-counter="total">
-              <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-                <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
-                <circle cx="12" cy="12" r="3"></circle>
-              </svg>
-              <span class="view-count-number">0</span> views
-            </span>
+            <div class="post-author-info">
+              <img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" class="post-author-avatar">
+              <div class="post-author-details">
+                <span class="post-author-byline">
+                  By <span itemprop="author" itemscope itemtype="https://schema.org/Person">
+                    <span itemprop="name">{{ site.author.name }}</span>
+                  </span>
+                </span>
+                <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished" class="post-publish-date">
+                  published on {{ page.date | date: "%A, %b %d, %Y" }}
+                </time>
+              </div>
+            </div>
+            <div class="post-reading-stats">
+              {% assign words = content | number_of_words %}
+              {% if words < 360 %}
+                <span class="post-reading-time">1 min read</span>
+              {% else %}
+                <span class="post-reading-time">{{ words | divided_by:180 }} min read</span>
+              {% endif %}
+              <span class="post-meta-separator">•</span>
+              <span class="page-view-counter loading" data-view-counter="total">
+                <svg xmlns="http://www.w3.org/2000/svg" width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                <span class="view-count-number">0</span> views
+              </span>
+            </div>
             <time hidden datetime="{{ page.modified | date_to_xmlschema }}" itemprop="dateModified">
               {{ page.date | date: "%b %d, %Y" }}
             </time>
