@@ -1,26 +1,43 @@
-// Fonts preferences
-$sans-family: Roboto, sans-serif;
-$mono-family: Consolas, monospace;
+// Custom Fonts & Colors - Distinctive Design
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+// Fonts preferences - Unique & Distinctive
+$sans-family: 'Manrope', -apple-system, sans-serif;
+$mono-family: 'JetBrains Mono', 'Courier New', monospace;
+$heading-family: 'Crimson Pro', Georgia, serif;
 $base-font-size: 16px;
 $medium-font-size: $base-font-size * 0.938;
 $small-font-size: $base-font-size * 0.875;
 $base-line-height: 1.85;
 
 // Font weight
-// $light-weight: 300; // uncomment if necessary
 $normal-weight: 400;
+$medium-weight: 500;
+$semibold-weight: 600;
 $bold-weight: 700;
-// $black-weight: 900; // uncomment if necessary
+$extrabold-weight: 800;
+
+// Custom Color Palette - African-Australian fusion
+// Inspired by ochre earth, eucalyptus, and ocean
+$color-terracotta: #D4663D;
+$color-burnt-sienna: #B5533A;
+$color-deep-teal: #0A6E6E;
+$color-eucalyptus: #4A7C59;
+$color-warm-sand: #E8D5B7;
+$color-charcoal: #2A2A2A;
+$color-soft-cream: #FAF7F2;
+$color-ochre: #CC8B3C;
+$color-slate: #5A6C7D;
 
 //Light Colors
-$text-base-color: #434648;
-$text-link-blue: #003fff;
-$text-link-blue-active: #0036c7;
+$text-base-color: $color-charcoal;
+$text-link-blue: $color-deep-teal;
+$text-link-blue-active: $color-eucalyptus;
 
-$black: #0d122b;
-$light: #ececec;
-$smoke: #d2c7c7;
-$gray: #6b7886;
+$black: $color-charcoal;
+$light: lighten($color-warm-sand, 8%);
+$smoke: $color-warm-sand;
+$gray: $color-slate;
 $white: #fff;
 
 // Dark Colors

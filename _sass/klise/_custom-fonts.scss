@@ -1,0 +1,28 @@
+// Distinctive Typography - Avoiding generic fonts
+// Using Google Fonts with unique character
+
+@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+
+// Typography Variables
+$font-heading: 'Crimson Pro', Georgia, serif;
+$font-body: 'Manrope', -apple-system, sans-serif;
+$font-mono: 'JetBrains Mono', 'Courier New', monospace;
+
+// Custom Color Palette - African-Australian fusion
+// Inspired by ochre earth, eucalyptus, and ocean
+$color-terracotta: #D4663D;
+$color-burnt-sienna: #B5533A;
+$color-deep-teal: #0A6E6E;
+$color-eucalyptus: #4A7C59;
+$color-warm-sand: #E8D5B7;
+$color-charcoal: #2A2A2A;
+$color-soft-cream: #FAF7F2;
+$color-ochre: #CC8B3C;
+$color-slate: #5A6C7D;
+
+// Replace default variables
+$text-link-blue: $color-deep-teal;
+$text-link-blue-active: $color-eucalyptus;
+$black: $color-charcoal;
+$gray: $color-slate;
+$light: lighten($color-warm-sand, 5%);
