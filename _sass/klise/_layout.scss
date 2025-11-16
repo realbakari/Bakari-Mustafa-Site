@@ -6,7 +6,7 @@
   position: relative;
   margin-right: auto;
   margin-left: auto;
-  border-bottom: 1px solid rgba(128, 128, 128, 0.15);
+  border-bottom: 1px solid $light;
   padding: 1.25rem $spacing-full;
   @extend %clearfix;
 
@@ -96,7 +96,7 @@
 
     &:hover {
       opacity: 1;
-      background-color: rgba(0, 63, 255, 0.08);
+      background-color: rgba(10, 110, 110, 0.08);
       color: $text-link-blue;
     }
 
@@ -119,7 +119,7 @@
   .menu-link.active {
     opacity: 1;
     font-weight: 600;
-    background-color: rgba(0, 63, 255, 0.1);
+    background-color: rgba(10, 110, 110, 0.1);
     color: $text-link-blue;
   }
 
@@ -276,7 +276,7 @@
       width: 40px;
       height: 40px;
       border-radius: 50%;
-      background-color: rgba(128, 128, 128, 0.1);
+      background-color: $light;
       color: $black;
       transition: all 0.3s ease;
       text-decoration: none;
@@ -289,7 +289,7 @@
         background-color: $text-link-blue;
         color: $white;
         transform: translateY(-2px);
-        box-shadow: 0 4px 8px rgba(0, 63, 255, 0.2);
+        box-shadow: 0 4px 8px rgba(10, 110, 110, 0.2);
 
         svg {
           transform: scale(1.1);
@@ -332,7 +332,7 @@
   margin-top: 2.5rem;
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
-  border-bottom: 2px solid rgba(0, 63, 255, 0.2);
+  border-bottom: 2px solid rgba(10, 110, 110, 0.2);
   letter-spacing: -0.02em;
 
   &:first-of-type {
@@ -519,7 +519,7 @@
   margin-top: 6em;
   margin-bottom: 2em;
   padding-top: 2.5rem;
-  border-top: 1px solid rgba(128, 128, 128, 0.15);
+  border-top: 1px solid $light;
   text-align: center;
 
   @include media-query($on-mobile) {
@@ -550,7 +550,7 @@
     &:hover {
       opacity: 1;
       color: $text-link-blue;
-      background-color: rgba(0, 63, 255, 0.05);
+      background-color: rgba(10, 110, 110, 0.05);
     }
   }
 
@@ -613,8 +613,8 @@
     color: $text-base-color;
     -webkit-appearance: none;
     font-size: $base-font-size;
-    background-color: rgba(128, 128, 128, 0.1);
-    border: 1px solid rgba(128, 128, 128, 0.1);
+    background-color: $light;
+    border: 1px solid $light;
     &::-webkit-input-placeholder {
       color: #808080;
     }
@@ -637,7 +637,7 @@
   .tag-item {
     padding: 1px 3px;
     border-radius: 2px;
-    border: 1px solid rgba(128, 128, 128, 0.1);
-    background-color: rgba(128, 128, 128, 0.1);
+    border: 1px solid $light;
+    background-color: $light;
   }
 }
