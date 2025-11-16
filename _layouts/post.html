@@ -99,9 +99,15 @@ layout: compress
           </p>
           {% endif %}
         </div>
+
+        {% include author-bio.html %}
       </article>
 
       {% include social-share.html %}
+
+      {% include related-posts.html %}
+
+      {% include newsletter.html %}
 
       {% if page.comments %}
         {% include comments.html %}
@@ -118,6 +124,9 @@ layout: compress
   </div>
 
   {% include footer.html %}
+
+  <script src="/assets/js/table-of-contents.js"></script>
+  <script src="/assets/js/reading-progress.js"></script>
 </body>
 
 </html>
