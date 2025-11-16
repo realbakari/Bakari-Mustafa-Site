@@ -251,3 +251,21 @@
 .popular-separator {
   opacity: 0.5;
 }
+
+.popular-views {
+  font-weight: $medium-weight;
+  color: $color-eucalyptus;
+}
+
+.popular-loading {
+  text-align: center;
+  padding: 2rem;
+  color: $gray;
+  font-style: italic;
+}
+
+.no-posts {
+  text-align: center;
+  padding: 2rem;
+  color: $gray;
+}
