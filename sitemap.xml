@@ -1,0 +1,100 @@
+---
+layout: null
+---
+<?xml version="1.0" encoding="UTF-8"?>
+<urlset xmlns="http://www.sitemaps.org/schemas/sitemap/0.9">
+  <!-- Homepage - Highest Priority -->
+  <url>
+    <loc>{{ site.url }}/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>daily</changefreq>
+    <priority>1.0</priority>
+  </url>
+
+  <!-- High Priority Pages -->
+  <url>
+    <loc>{{ site.url }}/about/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>{{ site.url }}/booking/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.9</priority>
+  </url>
+
+  <url>
+    <loc>{{ site.url }}/archive/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.8</priority>
+  </url>
+
+  <!-- Blog Posts - High Priority for Recent Posts -->
+  {% for post in site.posts %}
+  {% assign days_since = site.time | date: "%s" | minus: post.date | date: "%s" | divided_by: 86400 %}
+  <url>
+    <loc>{{ post.url | absolute_url | remove: 'index.html' }}</loc>
+    <lastmod>{% if post.modified %}{{ post.modified | date_to_xmlschema }}{% else %}{{ post.date | date_to_xmlschema }}{% endif %}</lastmod>
+    <changefreq>{% if days_since < 30 %}weekly{% elsif days_since < 90 %}monthly{% else %}yearly{% endif %}</changefreq>
+    <priority>{% if days_since < 30 %}0.9{% elsif days_since < 90 %}0.8{% else %}0.7{% endif %}</priority>
+  </url>
+  {% endfor %}
+
+  <!-- Medium Priority Pages -->
+  <url>
+    <loc>{{ site.url }}/projects/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>{{ site.url }}/uses/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <url>
+    <loc>{{ site.url }}/now/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.7</priority>
+  </url>
+
+  <url>
+    <loc>{{ site.url }}/newsletter/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Archive and Tag Pages -->
+  <url>
+    <loc>{{ site.url }}/tags/</loc>
+    <lastmod>{{ site.time | date_to_xmlschema }}</lastmod>
+    <changefreq>weekly</changefreq>
+    <priority>0.6</priority>
+  </url>
+
+  <!-- Other Static Pages - Lower Priority -->
+  {% assign static_pages = site.html_pages | where_exp: "page", "page.url != '/404.html'" | where_exp: "page", "page.url != '/index.html'" %}
+  {% for page in static_pages %}
+  {% unless page.url contains '/admin/' or page.url contains '/newsletter-admin-login/' or page.url contains '/test-' or page.url contains '/code-editor' %}
+  {% assign priority = 0.5 %}
+  {% if page.url contains '/tools/' or page.url contains '/reading/' or page.url contains '/events/' %}
+    {% assign priority = 0.6 %}
+  {% endif %}
+  <url>
+    <loc>{{ page.url | absolute_url | remove: 'index.html' }}</loc>
+    <lastmod>{% if page.modified %}{{ page.modified | date_to_xmlschema }}{% else %}{{ site.time | date_to_xmlschema }}{% endif %}</lastmod>
+    <changefreq>monthly</changefreq>
+    <priority>{{ priority }}</priority>
+  </url>
+  {% endunless %}
+  {% endfor %}
+</urlset>

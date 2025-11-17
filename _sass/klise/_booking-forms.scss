@@ -1,263 +1,74 @@
-// Booking Forms Styling
+// Simple Contact Form Styling
 
-.booking-options {
-  margin: 3rem 0;
-}
+.simple-contact-form {
+  max-width: 600px;
+  margin: 2rem 0;
 
-.booking-tabs {
-  display: flex;
-  gap: 1rem;
-  margin-bottom: 2.5rem;
-  border-bottom: 2px solid $light;
-  flex-wrap: wrap;
-
-  @include media-query($on-mobile) {
-    gap: 0.5rem;
-  }
-}
-
-.booking-tab {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 1.5rem;
-  background: transparent;
-  border: none;
-  border-bottom: 3px solid transparent;
-  color: $gray;
-  font-size: 1em;
-  font-weight: $semibold-weight;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  position: relative;
-  top: 2px;
-
-  svg {
-    transition: transform 0.3s ease;
-  }
-
-  &:hover {
-    color: $color-deep-teal;
-
-    svg {
-      transform: translateY(-2px);
-    }
-  }
-
-  &.active {
-    color: $color-deep-teal;
-    border-bottom-color: $color-deep-teal;
-  }
-
-  @include media-query($on-mobile) {
-    padding: 0.75rem 1rem;
-    font-size: 0.9em;
-
-    svg {
-      width: 16px;
-      height: 16px;
-    }
-  }
-}
-
-.booking-form {
-  display: none;
-  animation: fadeIn 0.4s ease;
-
-  &.active {
-    display: block;
-  }
-}
-
-@keyframes fadeIn {
-  from {
-    opacity: 0;
-    transform: translateY(10px);
-  }
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
-}
-
-.form-intro {
-  margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: rgba($color-warm-sand, 0.2);
-  border-left: 4px solid $color-terracotta;
-  border-radius: 0 8px 8px 0;
-
-  h3 {
-    font-family: $heading-family;
-    font-size: 1.5em;
-    font-weight: $bold-weight;
-    margin: 0 0 0.75rem 0;
-    color: $black;
-  }
-
-  p {
-    margin: 0;
-    color: $gray;
-    line-height: 1.6;
-  }
-}
-
-.form-group {
-  margin-bottom: 1.5rem;
-
-  label {
-    display: block;
-    margin-bottom: 0.5rem;
-    font-weight: $semibold-weight;
-    color: $black;
-    font-size: 0.95em;
-
-    .required {
-      color: $color-terracotta;
-    }
-  }
-
-  input[type="text"],
-  input[type="email"],
-  input[type="url"],
-  input[type="date"],
-  select,
-  textarea {
-    width: 100%;
-    padding: 0.875rem 1rem;
-    border: 2px solid $light;
-    border-radius: 6px;
-    font-size: 1em;
-    font-family: $sans-family;
-    color: $text-base-color;
-    background: white;
-    transition: all 0.3s ease;
-
-    &:focus {
-      outline: none;
-      border-color: $color-deep-teal;
-      box-shadow: 0 0 0 3px rgba($color-deep-teal, 0.1);
-    }
-
-    &::placeholder {
-      color: $gray;
-      opacity: 0.6;
-    }
-  }
-
-  textarea {
-    resize: vertical;
-    min-height: 100px;
-    line-height: 1.6;
-  }
-
-  select {
-    cursor: pointer;
-    appearance: none;
-    background-image: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' width='12' height='12' viewBox='0 0 12 12'%3E%3Cpath fill='%235A6C7D' d='M6 9L1 4h10z'/%3E%3C/svg%3E");
-    background-repeat: no-repeat;
-    background-position: right 1rem center;
-    padding-right: 2.5rem;
-  }
-}
-
-.form-row {
-  display: grid;
-  grid-template-columns: 1fr 1fr;
-  gap: 1.5rem;
-
-  @include media-query($on-mobile) {
-    grid-template-columns: 1fr;
-  }
-}
-
-.form-submit {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.5rem;
-  padding: 1rem 2.5rem;
-  background: linear-gradient(135deg, $color-deep-teal, $color-eucalyptus);
-  color: white;
-  border: none;
-  border-radius: 8px;
-  font-size: 1em;
-  font-weight: $semibold-weight;
-  font-family: $sans-family;
-  cursor: pointer;
-  transition: all 0.3s ease;
-  box-shadow: 0 4px 12px rgba($color-deep-teal, 0.3);
-
-  &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba($color-deep-teal, 0.4);
-  }
-
-  &:active {
-    transform: translateY(0);
-  }
-
-  @include media-query($on-mobile) {
-    width: 100%;
-    justify-content: center;
-  }
-}
-
-// Contact Info Section
-.contact-info-section {
-  margin-top: 4rem;
-  padding-top: 3rem;
-  border-top: 1px solid $light;
-
-  h2 {
-    font-family: $heading-family;
-    font-size: 1.8em;
-    font-weight: $bold-weight;
-    margin-bottom: 1rem;
-    color: $black;
-  }
-
-  p {
-    color: $gray;
-    line-height: 1.6;
+  .form-group {
     margin-bottom: 1.5rem;
-  }
-}
 
-.contact-methods {
-  list-style: none;
-  margin: 0;
-  padding: 0;
-  display: flex;
-  flex-direction: column;
-  gap: 1rem;
-
-  li {
-    display: flex;
-    align-items: center;
-    gap: 0.75rem;
-    padding: 1rem;
-    background: rgba($color-warm-sand, 0.2);
-    border-radius: 6px;
-    font-size: 0.95em;
-
-    &::before {
-      content: none;
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: $semibold-weight;
+      color: $black;
+      font-size: 0.95em;
     }
 
-    svg {
-      color: $color-deep-teal;
-      flex-shrink: 0;
-    }
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid $light;
+      border-radius: 4px;
+      font-size: 1em;
+      font-family: $sans-family;
+      color: $text-base-color;
+      background: white;
+      transition: border-color 0.2s ease;
 
-    a {
-      color: $color-deep-teal;
-      text-decoration: none;
-      font-weight: $medium-weight;
-
-      &:hover {
-        color: $color-eucalyptus;
-        text-decoration: underline;
+      &:focus {
+        outline: none;
+        border-color: $color-deep-teal;
       }
+
+      &::placeholder {
+        color: $gray;
+        opacity: 0.6;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+
+    select {
+      cursor: pointer;
+    }
+  }
+
+  .submit-btn {
+    padding: 0.875rem 2rem;
+    background: $color-deep-teal;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: $semibold-weight;
+    font-family: $sans-family;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: $color-eucalyptus;
+    }
+
+    @include media-query($on-mobile) {
+      width: 100%;
     }
   }
 }
