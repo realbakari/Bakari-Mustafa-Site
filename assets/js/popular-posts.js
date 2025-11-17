@@ -24,28 +24,76 @@
         return;
       }
 
-      // Show loading state
-      popularSection.innerHTML = '<div class="popular-loading">Loading popular posts...</div>';
-
       // Fetch popular pages from Supabase
       const popularPages = await window.PageViewCounter.getPopularPages(10);
 
       if (!popularPages || popularPages.length === 0) {
-        // No view data yet, keep the default Jekyll-rendered posts
-        console.log('[PopularPosts] No view data available, using default');
+        // No view data yet, populate static placeholders
+        console.log('[PopularPosts] No view data available, populating static view counts');
+        await populateStaticViewCounts();
         return;
       }
 
       // Match popular pages with post data
       const popularPosts = matchPostsWithViews(popularPages);
 
-      // Render popular posts
+      if (popularPosts.length === 0) {
+        // No matched posts, populate static placeholders
+        console.log('[PopularPosts] No matched posts, populating static view counts');
+        await populateStaticViewCounts();
+        return;
+      }
+
+      // Render popular posts (replaces entire section)
       renderPopularPosts(popularPosts);
 
     } catch (error) {
       console.error('[PopularPosts] Error loading popular posts:', error);
-      // On error, keep the default Jekyll-rendered posts
+      // On error, populate static placeholders
+      await populateStaticViewCounts();
     }
+  }
+
+  /**
+   * Populate view counts for statically rendered posts
+   */
+  async function populateStaticViewCounts() {
+    const viewCountElements = popularSection.querySelectorAll('.popular-views[data-url]');
+
+    if (viewCountElements.length === 0) return;
+
+    // Get view counts for all visible posts
+    const viewCountsPromises = Array.from(viewCountElements).map(async (element) => {
+      const postUrl = element.getAttribute('data-url');
+      if (!postUrl) return;
+
+      try {
+        // Fetch view count for this specific post
+        const { data, error } = await window.supabase.createClient(
+          window.SUPABASE_URL,
+          window.SUPABASE_ANON_KEY
+        )
+          .from('page_views')
+          .select('view_count')
+          .eq('page_url', postUrl)
+          .single();
+
+        if (error && error.code !== 'PGRST116') {
+          console.warn('[PopularPosts] Error fetching view count for', postUrl, error);
+          return;
+        }
+
+        const viewCount = data ? data.view_count : 0;
+        const countElement = element.querySelector('.view-count');
+        if (countElement) {
+          countElement.textContent = window.PageViewCounter.formatNumber(viewCount);
+        }
+      } catch (err) {
+        console.warn('[PopularPosts] Error fetching view count for', postUrl, err);
+      }
+    });
+
+    await Promise.all(viewCountsPromises);
   }
 
   /**
@@ -87,14 +135,20 @@
           <div class="popular-number">${index + 1}</div>
           <div class="popular-content">
             <h4 class="popular-title">
-              <a href="${post.url}">${escapeHtml(post.title)}</a>
+              <a href="${escapeHtml(post.url)}">${escapeHtml(post.title)}</a>
             </h4>
             <div class="popular-meta">
               <span class="popular-date">${formatDate(post.date)}</span>
               <span class="popular-separator">•</span>
               <span class="popular-reading-time">${readingTime}</span>
               <span class="popular-separator">•</span>
-              <span class="popular-views">${window.PageViewCounter.formatNumber(post.viewCount)} views</span>
+              <span class="popular-views">
+                <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" style="vertical-align: middle; margin-right: 4px;">
+                  <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
+                  <circle cx="12" cy="12" r="3"></circle>
+                </svg>
+                ${window.PageViewCounter.formatNumber(post.viewCount)} views
+              </span>
             </div>
           </div>
         </article>
