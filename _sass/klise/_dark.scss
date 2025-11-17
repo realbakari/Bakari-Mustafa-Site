@@ -196,8 +196,8 @@ body[data-theme="dark"] {
     border-color: rgba(255, 255, 255, 0.1);
 
     &:hover {
-      border-color: rgba(255, 255, 255, 0.2);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 4px 12px rgba(255, 82, 119, 0.15);
     }
 
     .post-item-date {
@@ -213,7 +213,7 @@ body[data-theme="dark"] {
       color: $dark-white;
 
       &:hover {
-        color: rgba(255, 255, 255, 0.7);
+        color: $dark-text-link-blue;
       }
     }
 
@@ -222,10 +222,10 @@ body[data-theme="dark"] {
     }
 
     .read-more {
-      color: $dark-white;
+      color: $dark-text-link-blue;
 
       &:hover {
-        color: rgba(255, 255, 255, 0.7);
+        color: $dark-text-link-blue-active;
       }
     }
   }
@@ -2270,5 +2270,117 @@ body[data-theme="dark"] {
         background: rgba(255, 255, 255, 0.8);
       }
     }
+  }
+
+  // Homepage Featured & Popular Sections Dark Mode
+  .section-title {
+    color: $dark-white;
+
+    svg {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  // Featured Posts Dark Mode
+  .featured-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.4);
+    }
+
+    .featured-image {
+      background-color: rgba(255, 255, 255, 0.05);
+
+      &.featured-image-placeholder {
+        color: rgba(255, 255, 255, 0.3);
+      }
+    }
+
+    .featured-date {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .featured-tag {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.8);
+    }
+
+    .featured-title a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+
+    .featured-excerpt {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .featured-read-more {
+      color: $dark-text-link-blue;
+
+      &:hover {
+        color: $dark-text-link-blue-active;
+      }
+    }
+  }
+
+  // Popular Posts Dark Mode
+  .popular-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+
+      .popular-number {
+        background: $dark-text-link-blue;
+        color: $dark-black;
+      }
+    }
+
+    .popular-number {
+      background: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.9);
+    }
+
+    .popular-title a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+
+    .popular-meta {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .popular-date,
+    .popular-reading-time {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .popular-separator {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    .popular-views {
+      color: $dark-text-link-blue;
+
+      svg {
+        stroke: $dark-text-link-blue;
+      }
+    }
+  }
+
+  .popular-loading,
+  .no-posts {
+    color: rgba(255, 255, 255, 0.5);
   }
 }
