@@ -11,6 +11,15 @@ body[data-theme="dark"] {
   h6 {
     color: $dark-white;
   }
+  // Add this for post readability in dark mode:
+  .post-content,
+  .post-title,
+  .post-card-description,
+  .popular-title,
+  .popular-content,
+  .popular-meta {
+    color: $dark-white !important;
+  }
 
   // Table
   table {
