@@ -1,11 +1,8 @@
 ---
-title: Privacy
+title: Privacy Policy
 layout: page
-excerpt: This privacy policy outlines the types of personal information we collect,
-  how it is used, and how we protect it.
-comments: false
-description: This privacy policy outlines the types of personal information we collect,
-  how it is used, and how we protect it.
+excerpt: 'Details how bakarimustafa.com collects, uses, and protects visitor information. No personal data shared or sold.'
+description: 'Read the privacy policy for bakarimustafa.com, a personal site by Bakari Mustafa. This covers anonymous analytics, third-party providers (like Supabase and Netlify), your rights under GDPR, and steps to protect your privacy.'
 image: ''
 
 ---
@@ -17,27 +14,29 @@ This privacy policy outlines the types of personal information we collect, how i
 
 This website uses cookies and analytics tools to improve your experience and understand how visitors use the site. We do not collect or store personally identifiable data without your explicit consent through form submissions.
 
-### Analytics and Cookies:
+### Analytics and Cookies
 
-We use Google Analytics (tracking ID: UA-69813719-2) to analyze website traffic and user behavior. Google Analytics collects anonymous information including:
+We use Supabase and Google Analytics to analyze page views, website traffic, and user behavior.
 
-- Pages you visit and time spent on each page
-- Your geographic location (country/city level)
-- Browser type, device type, and screen resolution
-- Referring websites and search terms
-- Click patterns and navigation flow
+- **Supabase:** Used to anonymously track page views and popular content for analytics purposes. Supabase stores only aggregated page view data; it does not store IP addresses or personally identifiable information.
+- **Google Analytics:** Collects anonymous information including:
+  - Pages you visit and time spent on each page
+  - Your geographic location (country/city level)
+  - Browser type, device type, and screen resolution
+  - Referring websites and search terms
+  - Click patterns and navigation flow
 
 Google Analytics uses cookies to track this information. These cookies do not contain personally identifiable information. You can opt-out of Google Analytics by installing the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
 
 For more information on how Google uses data, visit [Google's Privacy Policy](https://policies.google.com/privacy).
 
-### Information Collection:
+### Information Collection
 
 We collect information from you when you fill out a form (such as our contact form) or enter information on our website. This information may include your name, email address, and any other information you choose to provide.
 
-We also collect anonymous browsing data through Google Analytics cookies as described above. This helps us understand which content is most valuable to our visitors and how to improve the website experience.
+We also collect anonymous browsing data through analytics cookies as described above. This helps us understand which content is most valuable to our visitors and how to improve the website experience.
 
-### Use of Information:
+### Use of Information
 
 We use the information we collect to:
 
@@ -49,26 +48,27 @@ We use the information we collect to:
 
 We will never sell your personal information or use it for purposes other than those listed above. Anonymous analytics data helps us make data-driven decisions about content and design.
 
-### Protection of Information:
+### Protection of Information
 
 We take appropriate security measures to protect against unauthorized access to or unauthorized alteration, disclosure, or destruction of data. These include internal reviews of our data collection, storage, and processing practices and security measures, as well as physical security measures to guard against unauthorized access to systems where we store personal data.
 
-### Sharing of Information:
+### Sharing of Information
 
 We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information.
 
 Third-party services we use:
 - **Netlify**: Website hosting (form submissions are processed through Netlify Forms)
 - **Google Analytics**: Anonymous website analytics
+- **Supabase**: Backend analytics for page views and popular content; stores only aggregated, non-personal data and does not collect IP addresses.
 - **Buy Me a Coffee**: Optional donation widget (processes its own data separately)
 
 These service providers have their own privacy policies and data handling practices. We ensure all partners maintain appropriate security standards and confidentiality agreements.
 
-### Third-Party Links:
+### Third-Party Links
 
 We may include or offer third-party products or services on our website. These third-party sites have separate and independent privacy policies. We, therefore, have no responsibility or liability for the content and activities of these linked sites.
 
-### Changes to Privacy Policy:
+### Changes to Privacy Policy
 
 We reserve the right to make changes to this privacy policy at any time. We will notify you of any changes by posting the new privacy policy on our website.
 
@@ -78,7 +78,7 @@ Under GDPR and other privacy regulations, you have the right to:
 - Request access to your personal data
 - Request correction of your personal data
 - Request deletion of your personal data
-- Object to processing of your personal data
+- Object to the processing of your personal data
 - Request restriction of processing your personal data
 - Request transfer of your personal data
 - Withdraw consent at any time
