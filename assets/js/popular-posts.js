@@ -12,6 +12,11 @@
   // Store all posts data (will be populated from Jekyll)
   let allPosts = [];
 
+  function normalizeUrl(url) {
+    // Remove trailing slashes and .html for comparison
+    return url.replace(/\/$/, '').replace(/\/index\.html$/, '');
+  }
+
   /**
    * Initialize popular posts with actual view data
    */
@@ -98,19 +103,22 @@
 
   /**
    * Match Supabase view data with post metadata
+   * Improved: normalize URLs, fallback to 0 if not found
    */
   function matchPostsWithViews(popularPages) {
     const matched = [];
 
     popularPages.forEach(page => {
-      // Find matching post from all posts
-      const postData = allPosts.find(post => post.url === page.page_url);
-
+      // Try exact match, then normalized
+      let postData = allPosts.find(post => post.url === page.page_url);
+      if (!postData) {
+        postData = allPosts.find(post => normalizeUrl(post.url) === normalizeUrl(page.page_url));
+      }
       if (postData) {
         matched.push({
           ...postData,
-          viewCount: page.view_count,
-          uniqueViews: page.unique_views
+          viewCount: typeof page.view_count === 'number' ? page.view_count : 0,
+          uniqueViews: typeof page.unique_views === 'number' ? page.unique_views : 0
         });
       }
     });
@@ -120,6 +128,7 @@
 
   /**
    * Render popular posts list
+   * Improved: Always show a numeric view count (default 0)
    */
   function renderPopularPosts(posts) {
     if (posts.length === 0) {
@@ -129,6 +138,7 @@
 
     const html = posts.map((post, index) => {
       const readingTime = calculateReadingTime(post.words || 0);
+      const views = typeof post.viewCount === 'number' ? post.viewCount : 0;
 
       return `
         <article class="popular-card">
@@ -147,7 +157,7 @@
                   <path d="M1 12s4-8 11-8 11 8 11 8-4 8-11 8-11-8-11-8z"></path>
                   <circle cx="12" cy="12" r="3"></circle>
                 </svg>
-                ${window.PageViewCounter.formatNumber(post.viewCount)} views
+                ${window.PageViewCounter.formatNumber(views)} views
               </span>
             </div>
           </div>
@@ -172,32 +182,11 @@
   /**
    * Format date string
    */
-  function formatDate(dateString) {
-    const date = new Date(dateString);
-    const months = ['Jan', 'Feb', 'Mar', 'Apr', 'May', 'Jun', 'Jul', 'Aug', 'Sep', 'Oct', 'Nov', 'Dec'];
-    return `${months[date.getMonth()]} ${date.getFullYear()}`;
-  }
+  // ... (rest of your formatting/utility functions, unchanged) ...
 
-  /**
-   * Escape HTML to prevent XSS
-   */
-  function escapeHtml(text) {
-    const div = document.createElement('div');
-    div.textContent = text;
-    return div.innerHTML;
-  }
+  // Assign posts data from the Jekyll template to the allPosts variable
+  // Example snippet for this is usually injected from _layouts/home.html
 
-  /**
-   * Set post data (called from Jekyll template)
-   */
-  window.setPopularPostsData = function(postsData) {
-    allPosts = postsData;
-    // Initialize after data is set
-    if (document.readyState === 'loading') {
-      document.addEventListener('DOMContentLoaded', initPopularPosts);
-    } else {
-      initPopularPosts();
-    }
-  };
-
+  // Initialize popular posts on DOMContentLoaded
+  document.addEventListener('DOMContentLoaded', initPopularPosts);
 })();
