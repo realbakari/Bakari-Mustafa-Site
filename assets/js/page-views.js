@@ -20,9 +20,15 @@
   /**
    * Get the current page identifier
    * Uses pathname to avoid tracking query parameters
+   * Normalizes URL by removing trailing slash
    */
   function getPageUrl() {
-    return window.location.pathname;
+    let url = window.location.pathname;
+    // Remove trailing slash if not root
+    if (url.length > 1 && url.endsWith('/')) {
+      url = url.slice(0, -1);
+    }
+    return url;
   }
 
   /**
@@ -203,6 +209,7 @@
    */
   async function trackPageView() {
     const pageUrl = getPageUrl();
+    console.log('[PageViews] Tracking view for:', pageUrl);
     const pageTitle = getPageTitle();
     const isUniqueView = !hasViewedThisSession(pageUrl);
 
