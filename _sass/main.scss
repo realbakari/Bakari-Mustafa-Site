@@ -66,6 +66,6 @@ $on-widescreen: 1152px;
   font-size: $base-font-size * $ratio;
 }
 
-// Import sass files
-@import "klise/fonts", "klise/base", "klise/layout", "klise/post",
+// Import sass files (custom-fonts first for legacy variable compatibility)
+@import "klise/custom-fonts", "klise/fonts", "klise/base", "klise/layout", "klise/post",
 "klise/miscellaneous", "klise/syntax", "klise/dark", "klise/homepage-features", "klise/booking-forms", "klise/analytics", "klise/dev-tools";
