@@ -1,0 +1,17 @@
+- title: Networking African-Australians
+  description: A community organization empowering African-Australian youth through education, mentorship, and leadership programs.
+  url: https://networkingafricanaustralians.com.au/
+  image: /uploads/naa-project.jpg
+  tags: [Community, Education, Leadership]
+
+- title: Mentors Outreach
+  description: A platform connecting young professionals with mentors, investors, and founders for career growth and inspiration.
+  url: https://mentorsoutreach.org
+  image: /uploads/mentors-outreach.jpg
+  tags: [Mentorship, Platform, Growth]
+
+- title: Experiments with P5.JS
+  description: Generative art and interactive visualizations created with P5.js code.
+  url: https://bakarimustafa.com/projects/experiments-with-p5.js/
+  image: /uploads/p5js-project.jpg
+  tags: [Creative Coding, JavaScript, Art]
