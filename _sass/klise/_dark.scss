@@ -11,6 +11,7 @@ body[data-theme="dark"] {
   h6 {
     color: $dark-white;
   }
+
   // Add this for post readability in dark mode:
   .post-content,
   .post-title,
@@ -50,6 +51,7 @@ body[data-theme="dark"] {
     h3 {
       border-color: $dark-light;
     }
+
     h1,
     h2,
     h3,
@@ -149,6 +151,7 @@ body[data-theme="dark"] {
         .mode-sunny {
           display: block;
         }
+
         .mode-moon {
           display: none;
         }
@@ -173,12 +176,12 @@ body[data-theme="dark"] {
         border-color: $dark-light;
 
         .menu-icon {
-          > svg {
+          >svg {
             fill: $dark-white;
           }
         }
 
-        input[type="checkbox"]:checked ~ .trigger {
+        input[type="checkbox"]:checked~.trigger {
           background: $dark-black;
         }
       }
@@ -202,11 +205,15 @@ body[data-theme="dark"] {
   // Post Cards
   .post-card {
     background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.1);
+    border-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
     &:hover {
       border-color: $dark-text-link-blue;
-      box-shadow: 0 4px 12px rgba(255, 82, 119, 0.15);
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+      transform: translateY(-5px);
     }
 
     .post-item-date {
@@ -266,6 +273,7 @@ body[data-theme="dark"] {
     .post-item-date {
       color: $dark-white;
     }
+
     .post-item-title {
       a {
         color: $dark-text-base-color;
@@ -349,22 +357,26 @@ body[data-theme="dark"] {
       color: $dark-white;
       text-shadow: 1px 0px 0px $dark-text-link-blue;
     }
+
     .phrase {
       color: $dark-text-base-color;
     }
+
     .solution {
       color: $dark-text-link-blue;
     }
+
     .solution:hover {
       color: $dark-text-link-blue-active;
     }
-  }  
+  }
 
   .search-article {
     input[type="search"] {
       color: $dark-text-base-color;
+
       &::-webkit-input-placeholder {
-        color: rgba(128,128,128,0.8);
+        color: rgba(128, 128, 128, 0.8);
       }
     }
   }
@@ -572,13 +584,17 @@ body[data-theme="dark"] {
   // Modern Card Layouts Dark Mode
   .book-card,
   .project-card {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
       border-color: $dark-text-link-blue;
-      box-shadow: 0 8px 24px rgba(10, 110, 110, 0.2);
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+      transform: translateY(-5px);
     }
 
     .card-header {
@@ -605,6 +621,7 @@ body[data-theme="dark"] {
     }
 
     .card-body {
+
       p,
       ul li {
         color: rgba(255, 255, 255, 0.7);
@@ -678,13 +695,17 @@ body[data-theme="dark"] {
 
   // Projects Grid Dark Mode
   .project-item {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.05);
+    backdrop-filter: blur(10px);
+    -webkit-backdrop-filter: blur(10px);
+    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
+      background: rgba(255, 255, 255, 0.05);
       border-color: $dark-text-link-blue;
-      box-shadow: 0 8px 24px rgba(10, 110, 110, 0.2);
+      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
+      transform: translateY(-5px);
     }
 
     h4 a {
@@ -1586,7 +1607,7 @@ body[data-theme="dark"] {
       color: $dark-white;
     }
 
-    > p {
+    >p {
       color: rgba(255, 255, 255, 0.6);
 
       #search-query-display {
@@ -1618,7 +1639,7 @@ body[data-theme="dark"] {
       color: $dark-white;
     }
 
-    > p {
+    >p {
       color: rgba(255, 255, 255, 0.6);
     }
   }

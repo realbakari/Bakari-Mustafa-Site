@@ -1,10 +1,10 @@
 // Custom Fonts & Colors - Distinctive Design
-@import url('https://fonts.googleapis.com/css2?family=Crimson+Pro:ital,wght@0,400;0,600;0,700;1,400&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Outfit:wght@400;500;600;700;800&family=Manrope:wght@400;500;600;700;800&family=JetBrains+Mono:wght@400;500;600&display=swap');
 
 // Fonts preferences - Unique & Distinctive
 $sans-family: 'Manrope', -apple-system, sans-serif;
 $mono-family: 'JetBrains Mono', 'Courier New', monospace;
-$heading-family: 'Crimson Pro', Georgia, serif;
+$heading-family: 'Outfit', sans-serif;
 $base-font-size: 16px;
 $medium-font-size: $base-font-size * 0.938;
 $small-font-size: $base-font-size * 0.875;
@@ -40,16 +40,16 @@ $smoke: $color-warm-sand;
 $gray: $color-slate;
 $white: #fff;
 
-// Dark Colors
-$dark-text-base-color: #c7bebe;
-$dark-text-link-blue: #ff5277;
-$dark-text-link-blue-active: #ff2957;
+// Dark Colors (Premium Slate & Neon Accents)
+$dark-text-base-color: #cbd5e1; // slate-300
+$dark-text-link-blue: #a78bfa; // violet-400 (Premium accent)
+$dark-text-link-blue-active: #c4b5fd; // violet-300
 
-$dark-black: #131418;
-$dark-white: #eaeaea;
-$dark-light: #1b1d25;
-$dark-smoke: #4a4d56;
-$dark-gray: #767f87;
+$dark-black: #0f172a; // slate-950 (Rich dark background)
+$dark-white: #f1f5f9; // slate-100
+$dark-light: #1e293b; // slate-800
+$dark-smoke: #334155; // slate-700
+$dark-gray: #64748b; // slate-500
 
 // Width of the content area
 $wide-size: 890px;

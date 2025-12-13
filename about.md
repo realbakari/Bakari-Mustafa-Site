@@ -16,19 +16,19 @@ Bakari Mustafa is an African-born Australian entrepreneur, technologist, and for
 
 ## What I'm Working On
 
-Currently, I serve on the leadership team at [Networking African-Australians](https://networkingafricanaustralians.com.au/), a Melbourne-based community organization dedicated to empowering African-Australian youth. Through our programs—including homework clubs, leadership camps, and mentorship initiatives—we provide students with the skills, experiences, and support they need to thrive in education, develop leadership capabilities, and build meaningful careers.
+Currently, I serve on the leadership team at [Networking African-Australians](https://networkingafricanaustralians.com.au/), a Melbourne-based community organization dedicated to empowering African-Australian youth. Through our programs—including homework clubs, leadership camps, and mentorship initiatives—we provide students with the skills, experiences, and support they need to succeed in education and build meaningful careers.
 
-In April 2025, we successfully hosted a transformative three-day leadership camp at Mount Eliza for 34 African-Australian students, creating lasting impact through workshops on confidence-building, teamwork, mental health, and cultural identity.
+In April 2025, we hosted a three-day leadership camp at Mount Eliza for 34 African-Australian students, focusing on confidence-building, teamwork, mental health, and cultural identity.
 
 ## Past Work & Impact
 
-I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a dynamic community platform connecting young professionals and students with mentors, investors, and founders. Through this platform, I've helped build a thriving network of peers and innovators dedicated to inspiring the next generation.
+I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a community platform connecting young professionals and students with mentors, investors, and founders. Through this platform, I've helped build a network of peers and innovators dedicated to inspiring the next generation.
 
 I've also created community-focused initiatives including:
 
-- **Dzaleka Connect** - An online portal and directory connecting current and former Dzaleka refugee camp residents and supporters, empowering them to drive social change and showcasing the talents of artists, entrepreneurs, and creators in the camp
-- **Hungry Innovators** - A non-profit STEM education organization founded in 2016, building a thriving network of peers and innovators dedicated to inspiring the next generation
-- **Transition Phase Podcast** - Interviewed entrepreneurs and creatives in Brisbane from 2018 to September 2019, sharing stories and insights to help others take control of their lives
+- **Dzaleka Connect** - An online directory connecting Dzaleka refugee camp residents and supporters to showcase the talents of artists, entrepreneurs, and creators in the camp
+- **Hungry Innovators** - A non-profit STEM education organization founded in 2016 to inspire the next generation
+- **Transition Phase Podcast** - Interviewed entrepreneurs and creatives in Brisbane from 2018 to September 2019
 
 ---
 

@@ -13,7 +13,7 @@ image: "/uploads/screen_shot_2021-05-06_at_3-15-55_pm.png"
 ---
 ### Why Use Snapchat Public Profiles?
 
-Snapchat launched public profiles in mid-2020, but until recently, only verified creators could access this feature. As of June 2021, all Snapchatters can create public profiles and leverage the many promotional opportunities they offer.
+Snapchat launched public profiles in mid-2020, but until recently, only verified creators could access this feature. As of June 2021, all Snapchatters can create public profiles and use the many promotional opportunities they offer.
 
 Essentially, a public profile is your business’s home on Snapchat. Snapchatters can find it through search, on the Discovery tab, via lenses, or through a paid ad. They can also access it directly from a snapcode or shareable URL.
 
@@ -45,6 +45,4 @@ You can set up a Snapchat public profile in just a few minutes. If you’re read
 * Add content like Lenses, Stories, and Highlights to the Public Profile from the Snapchat app.
 * All users are now able to find, engage with, and subscribe to the Public Profile.
 
-## Conclusion
-
-If your target audience includes typical Snapchat user demographics, creating a public profile is likely to be a smart choice for your business. Although you certainly don’t have to leverage all of the features, at the least, Snapchat recommends posting snaps or stories a few times a week to keep your audience engaged.
+If your target audience includes typical Snapchat user demographics, creating a public profile is likely to be a smart choice for your business. Although you certainly don’t have to use all of the features, at the least, Snapchat recommends posting snaps or stories a few times a week to keep your audience engaged.

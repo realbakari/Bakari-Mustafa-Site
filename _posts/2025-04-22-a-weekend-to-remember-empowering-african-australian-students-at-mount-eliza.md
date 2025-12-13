@@ -14,15 +14,15 @@ image: "https://miro.medium.com/v2/resize:fit:1400/1*Hb0vC8anaz39Mzm7y0caBQ.jpeg
 
 African-Australian students with NAA staff and guests at the Mount Eliza Camp.
 
-On April 11 to 13, 2025, my team at Networking African-Australians hosted a powerful and transformative three-day camp in Mount Eliza for 34 African-Australian students. This initiative, part of our Homework Club Program, was designed to do more than just fill the school break — it aimed to equip our young people with lifelong tools for growth, resilience, and leadership.
+On April 11 to 13, 2025, my team at Networking African-Australians hosted a three-day camp in Mount Eliza for 34 African-Australian students. This initiative, part of our Homework Club Program, filled the school break with opportunities for students to learn new tools for growth, resilience, and leadership.
 
-Throughout the camp, students engaged in interactive workshops and activities focused on building confidence, fostering teamwork, enhancing leadership abilities, and supporting mental health and well-being. These sessions weren’t lectures — they were lived experiences that encouraged reflection, connection, and community.
+Throughout the camp, students joined workshops and activities on confidence-building, teamwork, leadership, and mental health. These sessions were practical and encouraged reflection and connection.
 
-But this camp was also something more. It was a celebration of culture and heritage, a moment for African-Australian students to connect, share their stories, and embrace a shared identity. It was about belonging — about knowing that you are seen, supported, and capable.
+The camp was also a time for African-Australian students to connect, share their stories, and support each other.
 
-We extend our heartfelt thanks to the Department of Education, our dedicated team, incredible guests, and the amazing camp staff who helped bring this vision to life. Your support made this experience possible.
+We thank the Department of Education, our team, guests, and the camp staff who helped bring this vision to life. Your support made this experience possible.
 
-This is the kind of work that keeps me going. These young leaders are our future — and I’m proud to walk alongside them — and we’ll keep showing up to make sure they do.
+This work keeps me going. These young leaders are our future, and I’m proud to walk alongside them.
 
 About [Networking African-Australians](https://networkingafricanaustralians.com.au/):
 
