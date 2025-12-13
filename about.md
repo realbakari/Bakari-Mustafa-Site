@@ -2,8 +2,7 @@
 title: Biography
 permalink: "/about/"
 layout: page
-excerpt: Bakari Mustafa is an African-born Australian entrepreneur, technologist,
-  and former refugee.
+excerpt: I am an African-born Australian entrepreneur, technologist, and former refugee.
 comments: false
 image: "/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg"
 description: Bakari Mustafa is an African-born Australian entrepreneur, technologist,
@@ -12,7 +11,7 @@ description: Bakari Mustafa is an African-born Australian entrepreneur, technolo
 ---
 ![Bakari Mustafa - Entrepreneur, Technologist, and Former Refugee](/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg)
 
-Bakari Mustafa is an African-born Australian entrepreneur, technologist, and former refugee. He was born in Burundi, a small country located in central Africa, but grew up in Malawi, a country located in South-eastern Africa. Bakari settled in a UNHCR refugee camp in Malawi and migrated to Australia in 2015 after being granted asylum by the Australian government.
+I am an African-born Australian entrepreneur, technologist, and former refugee. Born in Burundi, Central Africa, I grew up in Malawi, South-eastern Africa. After living in a UNHCR refugee camp in Malawi, I migrated to Australia in 2015 upon being granted asylum by the Australian government.
 
 ## What I'm Working On
 
@@ -32,6 +31,6 @@ I've also created community-focused initiatives including:
 
 ---
 
-**Notes:** I feel very fortunate to get to connect with so many remarkable individuals. Whenever I have the chance, I set aside a few minutes to share what I'm learning here on my website. Have questions or suggestions? Feel free to hit me up on <a href="https://twitter.com/realbakari">Twitter</a>. Want to work together? <a href="mailto:bakari@bakarimustafa.com">Email me</a>. Also, feel free to also check out my <a href="/reading">reading list</a>.
+**Let's Connect:** I write here to document my journey and share what I'm learning about leadership, community building, and technology. If you have questions, suggestions, or want to collaborate, feel free to reach out on <a href="https://twitter.com/realbakari">Twitter</a> or <a href="mailto:bakari@bakarimustafa.com">email me</a>. You can also check out my <a href="/reading">reading list</a>.
 
-See you Online! 👋
+See you online! 👋
