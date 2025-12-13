@@ -321,22 +321,33 @@
 
   /**
    * Get view count for current page
+   * Handles both normalized URL and URL with trailing slash
    */
   async function getViewCount() {
-    const pageUrl = getPageUrl();
+    const pageUrl = getPageUrl(); // This is already normalized (no slash)
+    const pageUrlWithSlash = pageUrl + '/';
 
     try {
+      // Query for both variations
       const { data, error } = await supabase
         .from('page_views')
         .select('view_count, unique_views')
-        .eq('page_url', pageUrl)
-        .single();
+        .or(`page_url.eq.${pageUrl},page_url.eq.${pageUrlWithSlash}`);
 
-      if (error && error.code !== 'PGRST116') {
+      if (error) {
         throw error;
       }
 
-      return data || { view_count: 0, unique_views: 0 };
+      if (!data || data.length === 0) {
+        return { view_count: 0, unique_views: 0 };
+      }
+
+      // Sum up the counts from matched rows
+      return data.reduce((acc, row) => ({
+        view_count: acc.view_count + (row.view_count || 0),
+        unique_views: acc.unique_views + (row.unique_views || 0)
+      }), { view_count: 0, unique_views: 0 });
+
     } catch (error) {
       console.error('Error fetching view count:', error);
       return { view_count: 0, unique_views: 0 };
