@@ -94,7 +94,7 @@
 
         span[itemprop="author"] {
           font-weight: $bold-weight;
-          color: $color-burnt-sienna;
+          color: $black;
         }
       }
 
@@ -408,7 +408,7 @@
     padding: 0.5rem 1rem;
     font-size: 0.9em;
     font-weight: $medium-weight;
-    color: $color-deep-teal;
+    color: $black;
     text-decoration: none;
     border: 1px solid $light;
     border-radius: 4px;
@@ -419,9 +419,9 @@
     }
 
     &:hover {
-      background-color: $color-deep-teal;
+      background-color: $black;
       color: white;
-      border-color: $color-deep-teal;
+      border-color: $black;
     }
 
     @include media-query($on-mobile) {
@@ -437,11 +437,11 @@
   top: 0;
   left: 0;
   height: 3px;
-  background: $color-deep-teal;
+  background: $black;
   width: 0%;
   z-index: 1000;
   transition: width 0.1s ease;
-  box-shadow: 0 1px 3px rgba($color-deep-teal, 0.3);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 // Back to Top Button
@@ -452,14 +452,14 @@
   width: 48px;
   height: 48px;
   border-radius: 50%;
-  background-color: $color-deep-teal;
+  background-color: $black;
   color: white;
   border: none;
   cursor: pointer;
   display: flex;
   align-items: center;
   justify-content: center;
-  box-shadow: 0 4px 12px rgba($color-deep-teal, 0.3);
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.15);
   opacity: 0;
   visibility: hidden;
   transform: translateY(20px);
@@ -473,9 +473,9 @@
   }
 
   &:hover {
-    background-color: $color-eucalyptus;
+    background-color: lighten($black, 15%);
     transform: translateY(-3px);
-    box-shadow: 0 6px 16px rgba($color-deep-teal, 0.4);
+    box-shadow: 0 6px 16px rgba(0, 0, 0, 0.2);
   }
 
   &:active {
