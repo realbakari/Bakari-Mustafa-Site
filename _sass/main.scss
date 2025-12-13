@@ -77,3 +77,56 @@ $on-widescreen: 1152px;
 // Import sass files
 @import "klise/base", "klise/layout", "klise/post",
 "klise/miscellaneous", "klise/syntax", "klise/dark", "klise/homepage-features", "klise/booking-forms", "klise/analytics", "klise/dev-tools";
+
+// Semantic CSS Variables for Theming
+:root {
+  // Base Colors
+  --text-primary: #{$text-base-color};
+  --text-secondary: #{$gray};
+  --bg-primary: #{$white};
+  --bg-secondary: #{$smoke};
+  --bg-tertiary: #{$light};
+  --bg-surface: #{$white};
+
+  // Links & Accents
+  --link-color: #{$text-base-color};
+  --link-hover: #525252;
+  --accent-primary: #{$black};
+
+  // Borders
+  --border-subtle: rgba(0, 0, 0, 0.1);
+  --border-default: rgba(0, 0, 0, 0.15);
+  --border-strong: rgba(0, 0, 0, 0.25);
+
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+}
+
+[data-theme="dark"] {
+  // Base Colors
+  --text-primary: #{$dark-text-base-color};
+  --text-secondary: #{$dark-gray};
+  --bg-primary: #{$dark-black};
+  --bg-secondary: #{$dark-light};
+  --bg-tertiary: #2a2a2a;
+  --bg-surface: #{$dark-light};
+
+  // Links & Accents
+  --link-color: #{$dark-text-base-color};
+  --link-hover: #{$dark-gray};
+  --accent-primary: #{$white};
+
+  // Borders
+  --border-subtle: rgba(255, 255, 255, 0.1);
+  --border-default: rgba(255, 255, 255, 0.15);
+  --border-strong: rgba(255, 255, 255, 0.25);
+
+  // Shadows
+  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
+  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
+  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+}
