@@ -91,7 +91,7 @@
 
   p {
     margin-bottom: 1rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -415,7 +415,7 @@
     display: inline-flex;
     align-items: center;
     gap: 0.35rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     text-decoration: none;
     transition: color 0.2s ease;
     white-space: nowrap;
@@ -431,7 +431,7 @@
   }
 
   span {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -527,7 +527,7 @@
       align-items: center;
       gap: 0.75rem;
       font-size: 0.85rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       flex-wrap: wrap;
 
       .badge {
@@ -695,7 +695,7 @@
 
       span {
         display: block;
-        color: rgba(0, 0, 0, 0.6);
+        color: rgba(0, 0, 0, 0.7);
         font-size: 0.9rem;
       }
     }
@@ -750,7 +750,7 @@
 
   .project-meta {
     font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.65);
     margin-bottom: 1rem;
     font-style: italic;
   }
@@ -775,7 +775,7 @@
 
   .page-subtitle {
     font-size: 1.2rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     max-width: 700px;
     margin: 0 auto;
     line-height: 1.6;
@@ -900,7 +900,7 @@
   }
 
   .subtitle {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 1.1rem;
     margin-bottom: 0.5rem;
   }
@@ -972,7 +972,7 @@
 
     .social-description {
       font-size: 0.9rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       display: block;
     }
   }
@@ -996,7 +996,7 @@
   border-top: 1px solid rgba(128, 128, 128, 0.2);
 
   p {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 0.95rem;
   }
 }
@@ -1027,13 +1027,13 @@
 
 .footer-grid {
   display: grid;
-  grid-template-columns: 2fr 1fr 1fr 1fr;
+  grid-template-columns: 2fr 1fr 1fr;
   gap: 4rem;
   padding-bottom: 2rem;
 
   @include media-query($on-desktop) {
     gap: 3rem;
-    grid-template-columns: 1.5fr 1fr 1fr 1fr;
+    grid-template-columns: 1.5fr 1fr 1fr;
   }
 
   @include media-query($on-tablet) {
@@ -1249,7 +1249,7 @@
 
   p {
     margin: 0.5rem 0;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 0.9rem;
   }
 }
@@ -1299,7 +1299,7 @@
 
   p {
     margin: 0;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 0.95rem;
   }
 }
@@ -1742,10 +1742,10 @@
     align-items: center;
     gap: 0.4rem;
     font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
 
     svg {
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(0, 0, 0, 0.65);
     }
 
     .meta-value {
@@ -1861,7 +1861,7 @@
   .posts-subtitle {
     font-size: 1rem;
     line-height: 1.6;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     max-width: 600px;
     margin: 0 auto;
   }
@@ -1884,7 +1884,7 @@
       background: transparent;
       border: none;
       border-radius: 6px;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       font-size: 0.9rem;
 
       svg {
@@ -1982,7 +1982,7 @@
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
 
     &:hover {
       background: rgba(128, 128, 128, 0.2);
@@ -2005,7 +2005,7 @@
   text-align: center;
   margin-top: 0.75rem;
   font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.7);
   min-height: 1.5rem;
 }
 
@@ -2173,7 +2173,7 @@
       color: $black;
 
       .tag-count {
-        color: rgba(0, 0, 0, 0.6);
+        color: rgba(0, 0, 0, 0.7);
       }
     }
 
@@ -2266,7 +2266,7 @@
     }
 
     p {
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       margin: 0;
     }
   }
@@ -2357,7 +2357,7 @@
         align-items: center;
         gap: 0.4rem;
         font-size: 0.85rem;
-        color: rgba(0, 0, 0, 0.6);
+        color: rgba(0, 0, 0, 0.7);
 
         svg {
           color: #003FFF;
@@ -2522,7 +2522,7 @@ html {
   .search-page-subtitle {
     font-size: 1rem;
     line-height: 1.6;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     max-width: 600px;
     margin: 0 auto;
   }
@@ -2592,7 +2592,7 @@ html {
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     z-index: 1;
 
     &:hover {
@@ -2627,7 +2627,7 @@ html {
 
   .hint-label {
     font-size: 0.9rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-weight: 500;
   }
 
@@ -2719,7 +2719,7 @@ html {
   margin: 0 auto 1.5rem;
   text-align: center;
   font-size: 0.95rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.7);
   font-weight: 500;
 }
 
@@ -2789,12 +2789,12 @@ html {
 
     .result-date {
       font-size: 0.85rem;
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(0, 0, 0, 0.65);
     }
 
     .result-tags {
       font-size: 0.8rem;
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(0, 0, 0, 0.65);
       margin-left: auto;
 
       @include media-query($on-mobile) {
@@ -2873,7 +2873,7 @@ html {
   }
 
   > p {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 1.05rem;
     margin-bottom: 2rem;
 
@@ -2945,7 +2945,7 @@ html {
   > p {
     text-align: center;
     font-size: 1.1rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     margin-bottom: 3rem;
 
     @include media-query($on-mobile) {
@@ -3001,7 +3001,7 @@ html {
 
   p {
     margin: 0 0 1rem 0;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 0.9rem;
     line-height: 1.5;
   }
@@ -3077,13 +3077,13 @@ html {
   align-items: center;
   gap: 0.4rem;
   font-size: 0.9rem;
-  color: rgba(0, 0, 0, 0.6);
+  color: rgba(0, 0, 0, 0.7);
   padding: 0.25rem 0;
 
   svg {
     width: 16px;
     height: 16px;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.65);
   }
 
   .view-count-number {
@@ -3148,7 +3148,7 @@ html {
     width: 32px;
     height: 32px;
     margin: 0 auto 0.75rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
   }
 
   .stat-value {
@@ -3167,7 +3167,7 @@ html {
   .stat-label {
     display: block;
     font-size: 0.9rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 500;
@@ -3237,7 +3237,7 @@ html {
   }
 
   .popular-post-views {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 0.85rem;
     font-weight: 500;
     white-space: nowrap;
@@ -3283,7 +3283,7 @@ html {
   }
 
   .analytics-subtitle {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-size: 1.1rem;
     margin-bottom: 1.5rem;
   }
@@ -3384,7 +3384,7 @@ html {
 
   .stat-label {
     font-size: 0.875rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     text-transform: uppercase;
     letter-spacing: 0.5px;
     font-weight: 500;
@@ -3404,7 +3404,7 @@ html {
     }
 
     p {
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       font-size: 0.95rem;
     }
   }
@@ -3475,7 +3475,7 @@ html {
       display: flex;
       align-items: center;
       gap: 0.25rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
 
       svg {
         flex-shrink: 0;
@@ -3519,7 +3519,7 @@ html {
     height: 32px;
     background: rgba(0, 0, 0, 0.05);
     border-radius: 50%;
-    color: rgba(0, 0, 0, 0.5);
+    color: rgba(0, 0, 0, 0.65);
     flex-shrink: 0;
   }
 
@@ -3545,13 +3545,13 @@ html {
 
     .activity-time {
       font-size: 0.8rem;
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(0, 0, 0, 0.65);
     }
   }
 
   .activity-count {
     font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     font-weight: 500;
     white-space: nowrap;
   }
@@ -3656,7 +3656,7 @@ html {
 .loading-skeleton {
   padding: 2rem;
   text-align: center;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.65);
   font-style: italic;
 
   &.error {
@@ -3667,7 +3667,7 @@ html {
 .no-data {
   padding: 2rem;
   text-align: center;
-  color: rgba(0, 0, 0, 0.5);
+  color: rgba(0, 0, 0, 0.65);
   font-style: italic;
 }
 
@@ -3706,7 +3706,7 @@ html {
       }
 
       span:last-child {
-        color: rgba(0, 0, 0, 0.6);
+        color: rgba(0, 0, 0, 0.7);
       }
     }
 
@@ -3762,7 +3762,7 @@ html {
     }
 
     .referrer-count {
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       font-size: 0.875rem;
     }
   }
@@ -3833,7 +3833,7 @@ html {
 
   .device-count {
     font-size: 0.875rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -3869,7 +3869,7 @@ html {
 
   .browser-percentage {
     font-size: 0.875rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -3923,7 +3923,7 @@ html {
 
     .analytics-subtitle {
       margin: 0;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       font-size: 0.95rem;
     }
   }
@@ -3975,7 +3975,7 @@ html {
   }
 
   .visitor-label {
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
   }
 }
 
@@ -4074,7 +4074,7 @@ html {
 
     p {
       margin: 0;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       font-size: 0.875rem;
     }
   }
@@ -4175,7 +4175,7 @@ html {
 
     .page-url {
       font-size: 0.7rem;
-      color: rgba(0, 0, 0, 0.5);
+      color: rgba(0, 0, 0, 0.65);
       font-family: monospace;
       white-space: nowrap;
       overflow: hidden;
@@ -4246,7 +4246,7 @@ html {
 
     .stat-label {
       font-size: 0.875rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       text-align: center;
     }
   }
@@ -4294,7 +4294,7 @@ html {
 
     .query-stats {
       font-size: 0.8rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
     }
   }
 
@@ -4349,7 +4349,7 @@ html {
 
     .stat-label {
       font-size: 0.875rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
       text-align: center;
     }
   }
@@ -4411,7 +4411,7 @@ html {
 
     .error-count {
       font-size: 0.8rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
     }
   }
 
@@ -4438,7 +4438,7 @@ html {
   .referrer-count {
     font-size: 0.875rem;
     font-weight: 600;
-    color: rgba(0, 0, 0, 0.6);
+    color: rgba(0, 0, 0, 0.7);
     white-space: nowrap;
     margin-left: 1rem;
   }
@@ -4492,7 +4492,7 @@ html {
 
     .visitor-meta {
       font-size: 0.8rem;
-      color: rgba(0, 0, 0, 0.6);
+      color: rgba(0, 0, 0, 0.7);
     }
   }
 }
