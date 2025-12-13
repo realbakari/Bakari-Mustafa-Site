@@ -434,7 +434,7 @@ async function executeServerSide(code, language) {
         }
     } catch (error) {
         addOutput('Backend execution not configured', 'error');
-        addOutput('See CODE_EDITOR_INTEGRATION_GUIDE.md for setup', 'info');
+        addOutput('See documentation for setup', 'info');
     }
 }
 
