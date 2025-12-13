@@ -1,76 +1,12 @@
 ---
-layout: compress
+layout: default
 ---
 
-<!DOCTYPE html>
-<html lang="{{ page.lang | default: site.lang | default: " en " }}">
-
-{% include header.html %}
-<body data-theme="{{ site.mode }}" class="notransition">
-
-  <script>
-    const body = document.body;
-    const data = body.getAttribute("data-theme");
-
-    const initTheme = (state) => {
-      if (state === "dark") {
-        body.setAttribute("data-theme", "dark");
-      } else if (state === "light") {
-        body.removeAttribute("data-theme");
-      } else {
-        localStorage.setItem("theme", data);
-      }
-    };
- 
-    initTheme(localStorage.getItem("theme"));
-    
-    setTimeout(() => body.classList.remove("notransition"), 75);
-  </script>
-
-  {% include navbar.html %}
-  <div class="wrapper">
-    <main aria-label="Content">
-      <div class="not-found">
-        <div class="container">
-          <div class="title">404</div>
-          <p class="phrase">The page you requested does not exist.</p>
-          <p class="phrase-subtitle">But don't worry, there's plenty to explore!</p>
-
-          <div class="not-found-links">
-            <a class="solution-link" href="{{ site.url }}">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M3 9l9-7 9 7v11a2 2 0 0 1-2 2H5a2 2 0 0 1-2-2z"></path><polyline points="9 22 9 12 15 12 15 22"></polyline></svg>
-              Home
-            </a>
-            <a class="solution-link" href="/posts/">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M14 2H6a2 2 0 0 0-2 2v16a2 2 0 0 0 2 2h12a2 2 0 0 0 2-2V8z"></path><polyline points="14 2 14 8 20 8"></polyline></svg>
-              All Posts
-            </a>
-            <a class="solution-link" href="/about/">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M20 21v-2a4 4 0 0 0-4-4H8a4 4 0 0 0-4 4v2"></path><circle cx="12" cy="7" r="4"></circle></svg>
-              About Me
-            </a>
-            <a class="solution-link" href="/contact/">
-              <svg xmlns="http://www.w3.org/2000/svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M4 4h16c1.1 0 2 .9 2 2v12c0 1.1-.9 2-2 2H4c-1.1 0-2-.9-2-2V6c0-1.1.9-2 2-2z"></path><polyline points="22,6 12,13 2,6"></polyline></svg>
-              Contact
-            </a>
-          </div>
-
-          <div class="not-found-search">
-            <p>Try searching for what you need:</p>
-            <form action="/posts/" method="get" class="search-form-404">
-              <input type="search" name="q" placeholder="Search articles..." aria-label="Search" class="search-input-404">
-              <button type="submit" class="search-button-404">Search</button>
-            </form>
-          </div>
-        </div>
-      </div>
-    </main>
-  </div>
-
-  {% include footer.html %}
-
-  <!-- 404 Error Tracking -->
-  <script src="/assets/js/404-tracking.js"></script>
-</body>
-
-</html>
+<div class="error-page">
+  <h1 class="error-code">404</h1>
+  <h2 class="error-title">Page not found</h2>
+  <p class="error-message">
+    The page you're looking for doesn't exist or has been moved.
+  </p>
+  <a href="/" class="btn btn-primary">Go home</a>
+</div>
