@@ -19,20 +19,22 @@
     margin-bottom: 1rem;
 
     .tag {
-      font-weight: $semibold-weight;
+      font-weight: $medium-weight;
       font-size: $small-font-size - 2;
       padding: 0.35rem 0.75rem;
-      background: rgba($color-deep-teal, 0.1);
-      color: $color-deep-teal;
+      background: $dark-white; // Soft contrast
+      color: $black;
+      border: 1px solid rgba(0, 0, 0, 0.1);
       border-radius: 4px;
       text-transform: uppercase;
-      letter-spacing: 0.02em;
+      letter-spacing: 0.04em;
       transition: all 0.2s ease;
 
       &:hover {
         text-decoration: none;
-        background: $color-deep-teal;
-        color: white;
+        background: $black;
+        color: $white;
+        border-color: $black;
       }
     }
   }
@@ -168,6 +170,7 @@
   a {
     color: $text-link-blue;
     text-decoration: none;
+
     &[target="_blank"]::after {
       content: " \2197";
       font-size: $small-font-size;
@@ -186,14 +189,14 @@
     }
   }
 
-  > p {
+  >p {
     margin: 0;
     padding-top: $spacing-full - 15;
     padding-bottom: $spacing-full - 15;
   }
 
   ul.task-list {
-    list-style: none; 
+    list-style: none;
     margin: 0;
 
     li::before {
@@ -349,7 +352,7 @@
     display: flex;
     gap: 1.5rem;
     padding: 2rem;
-    background-color: rgba($color-warm-sand, 0.2);
+    background-color: $off-white;
     border-radius: 8px;
     border: 1px solid $light;
 

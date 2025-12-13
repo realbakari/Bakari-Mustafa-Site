@@ -143,7 +143,8 @@ body[data-theme="dark"] {
     }
 
     @media (min-width: 769px) {
-      background-color: rgba(19, 20, 24, 0.8);
+      background-color: rgba($dark-black, 0.95);
+      border-bottom: 1px solid $dark-light;
     }
 
     .menu {
@@ -204,16 +205,15 @@ body[data-theme="dark"] {
 
   // Post Cards
   .post-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    background: $dark-light;
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 
     &:hover {
       border-color: $dark-text-link-blue;
-      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-      transform: translateY(-5px);
+      transform: translateY(-2px);
     }
 
     .post-item-date {
@@ -584,17 +584,16 @@ body[data-theme="dark"] {
   // Modern Card Layouts Dark Mode
   .book-card,
   .project-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(255, 255, 255, 0.05);
-    backdrop-filter: blur(10px);
-    -webkit-backdrop-filter: blur(10px);
-    transition: transform 0.3s ease, box-shadow 0.3s ease, border-color 0.3s ease;
+    background: $dark-light; // Solid background
+    border: 1px solid rgba(255, 255, 255, 0.05);
+    backdrop-filter: none;
+    -webkit-backdrop-filter: none;
+    transition: transform 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      background: rgba(255, 255, 255, 0.05);
+      background: lighten($dark-light, 2%);
       border-color: $dark-text-link-blue;
-      box-shadow: 0 10px 40px -10px rgba(0, 0, 0, 0.5);
-      transform: translateY(-5px);
+      transform: translateY(-2px);
     }
 
     .card-header {

@@ -12,11 +12,12 @@
   padding: 1rem $spacing-full;
   @extend %clearfix;
 
-  // Base glass effect
-  background-color: rgba($white, 0.85);
-  backdrop-filter: blur(12px);
-  -webkit-backdrop-filter: blur(12px);
-  transition: all 0.3s ease;
+  // Minimalist Sticky Header
+  background-color: rgba($white, 0.95);
+  backdrop-filter: blur(8px);
+  -webkit-backdrop-filter: blur(8px);
+  border-bottom: 1px solid $light;
+  transition: padding 0.3s ease;
 
   @include media-query($on-mobile) {
     padding: 0.8rem $spacing-half;
@@ -679,10 +680,8 @@
     font-weight: 800;
     line-height: 1.1;
     margin-bottom: 1.5rem;
-    background: linear-gradient(135deg, $black 0%, lighten($black, 30%) 100%);
-    -webkit-background-clip: text;
-    -webkit-text-fill-color: transparent;
-    letter-spacing: -0.03em;
+    color: $black;
+    letter-spacing: -0.04em;
 
     @include media-query($on-mobile) {
       font-size: 2.5rem;
@@ -742,12 +741,13 @@
     }
   }
 }
+
 // Modern Footer Standardized Styles
 .modern-footer {
   margin-top: 6rem;
   border-top: 1px solid rgba(128, 128, 128, 0.1);
   padding: 4rem 0 2rem;
-  background-color: rgba(128, 128, 128, 0.02);
+  background-color: $smoke; // Using defined variable for "smoke" white
 }
 
 .footer-container {
@@ -864,32 +864,33 @@
 .footer-bottom {
   padding-top: 2rem;
   border-top: 1px solid rgba(128, 128, 128, 0.1);
-  
+
   .footer-bottom-content {
     display: flex;
     justify-content: space-between;
     align-items: center;
     flex-wrap: wrap;
     gap: 1rem;
-    
+
     @include media-query($on-mobile) {
       flex-direction: column;
       text-align: center;
     }
   }
-  
-  .footer-copyright, .footer-tagline {
+
+  .footer-copyright,
+  .footer-tagline {
     font-size: 0.85rem;
     color: rgba($black, 0.5);
     margin: 0;
   }
-  
+
   a {
     color: rgba($black, 0.6);
     text-decoration: none;
+
     &:hover {
       color: $black;
     }
   }
 }
-

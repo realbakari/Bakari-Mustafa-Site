@@ -16,7 +16,7 @@
   }
 
   100% {
-    filter: blur(4px);
+    filter: blur(8px);
   }
 }
 
@@ -122,7 +122,7 @@
   background: $black;
   color: white;
   border: 1px solid $black;
-  border-radius: 6px;
+  border-radius: 4px; // Sharper corners for minimalist look
   font-size: 1rem;
   font-weight: 500;
   cursor: pointer;
@@ -130,13 +130,12 @@
   box-shadow: none;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.85);
-    border-color: rgba(0, 0, 0, 0.85);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: lighten($black, 10%);
+    border-color: lighten($black, 10%);
   }
 
   &:active {
-    background: rgba(0, 0, 0, 0.95);
+    transform: translateY(1px);
   }
 }
 
@@ -280,6 +279,7 @@
   from {
     transform: translateY(100%);
   }
+
   to {
     transform: translateY(0);
   }
@@ -630,26 +630,25 @@
 
   li {
     background: $white;
-    border: 2px solid rgba(128, 128, 128, 0.15);
-    border-radius: 8px;
-    padding: 1.5rem;
-    transition: all 0.3s ease;
+    border: 1px solid rgba(0, 0, 0, 0.1); // Lighter border
+    border-radius: 4px; // Sharper corners
+    padding: 1.25rem;
+    transition: all 0.2s ease;
 
     &:hover {
+      border-color: $black; // High contrast hover
       transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(10, 110, 110, 0.12);
-      border-color: rgba(10, 110, 110, 0.3);
     }
 
     a {
       color: $black;
       text-decoration: none;
-      font-weight: 500;
+      font-weight: 600;
       display: block;
-      transition: color 0.2s ease;
+      transition: color 0.1s ease;
 
       &:hover {
-        color: #003FFF;
+        color: rgba(0, 0, 0, 0.7);
       }
     }
   }
@@ -847,7 +846,10 @@
 }
 
 .book-content {
-  h1, h2, h3 {
+
+  h1,
+  h2,
+  h3 {
     margin-top: 3rem;
     margin-bottom: 1.5rem;
   }
@@ -872,7 +874,8 @@
     display: block;
   }
 
-  ul, ol {
+  ul,
+  ol {
     margin: 1.5rem 0;
     padding-left: 2rem;
 
@@ -1434,9 +1437,11 @@
     transform: scale(0) rotate(-45deg);
     opacity: 0;
   }
+
   50% {
     transform: scale(1.2) rotate(5deg);
   }
+
   100% {
     transform: scale(1) rotate(0deg);
     opacity: 1;
@@ -1924,8 +1929,11 @@
 
 // Enhanced Search Container
 .enhanced-search-container {
-  margin-bottom: 2rem;
-  position: relative;
+  margin-bottom: 3rem;
+  background: transparent;
+  padding: 0;
+  border-radius: 0;
+  box-shadow: none;
 
   @include media-query($on-mobile) {
     position: sticky;
@@ -2065,28 +2073,25 @@
 }
 
 .filter-btn {
-  padding: 0.625rem 1.25rem;
-  background: $white;
-  border: 2px solid rgba(10, 110, 110, 0.2);
-  border-radius: 8px;
-  color: rgba(0, 0, 0, 0.7);
+  background: white;
+  border: 1px solid rgba(0, 0, 0, 0.15);
+  color: $black;
+  padding: 0.5rem 1rem;
+  border-radius: 4px;
   font-size: 0.9rem;
-  font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
-  white-space: nowrap;
+  transition: all 0.2s ease;
+  font-weight: 500;
 
   &:hover {
-    background: rgba(10, 110, 110, 0.05);
-    border-color: rgba(10, 110, 110, 0.4);
-    color: $black;
+    border-color: $black;
+    background: rgba(0, 0, 0, 0.02);
   }
 
   &.active {
-    background: #003FFF;
-    border-color: #003FFF;
+    background: $black;
     color: white;
-    box-shadow: 0 2px 8px rgba(10, 110, 110, 0.3);
+    border-color: $black;
   }
 
   @include media-query($on-mobile) {
@@ -2473,6 +2478,7 @@ html {
     opacity: 0;
     transform: translateY(20px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -2480,9 +2486,12 @@ html {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
   }
+
   50% {
     opacity: 0.5;
   }
@@ -2882,7 +2891,7 @@ html {
     }
   }
 
-  > p {
+  >p {
     color: rgba(0, 0, 0, 0.6);
     font-size: 1.05rem;
     margin-bottom: 2rem;
@@ -2952,7 +2961,7 @@ html {
     }
   }
 
-  > p {
+  >p {
     text-align: center;
     font-size: 1.1rem;
     color: rgba(0, 0, 0, 0.6);
@@ -3117,9 +3126,20 @@ html {
 
 // Loading animation for counter
 @keyframes loading-dots {
-  0%, 20% { content: '.'; }
-  40% { content: '..'; }
-  60%, 100% { content: '...'; }
+
+  0%,
+  20% {
+    content: '.';
+  }
+
+  40% {
+    content: '..';
+  }
+
+  60%,
+  100% {
+    content: '...';
+  }
 }
 
 // Variant for post meta (inline with date, author)
@@ -3331,8 +3351,13 @@ html {
 }
 
 @keyframes spin {
-  from { transform: rotate(0deg); }
-  to { transform: rotate(360deg); }
+  from {
+    transform: rotate(0deg);
+  }
+
+  to {
+    transform: rotate(360deg);
+  }
 }
 
 // Stats Overview
@@ -3688,7 +3713,8 @@ html {
   @include media-query($on-mobile) {
     font-size: 0.875rem;
 
-    th, td {
+    th,
+    td {
       padding: 0.75rem 0.5rem;
     }
   }
@@ -4022,10 +4048,13 @@ html {
 }
 
 @keyframes pulse {
-  0%, 100% {
+
+  0%,
+  100% {
     opacity: 1;
     transform: scale(1);
   }
+
   50% {
     opacity: 0.5;
     transform: scale(1.2);
@@ -4552,6 +4581,7 @@ html {
     opacity: 0;
     transform: translateY(-10px);
   }
+
   to {
     opacity: 1;
     transform: translateY(0);
@@ -4674,7 +4704,8 @@ html {
     .analytics-table {
       font-size: 0.8rem;
 
-      th, td {
+      th,
+      td {
         padding: 0.75rem 0.5rem;
       }
     }
