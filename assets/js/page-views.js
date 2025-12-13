@@ -225,32 +225,33 @@
       const viewedHour = now.getHours();
 
       // Update aggregated page_views table
+      // Check for both URL formats to avoid splitting stats
+      const pageUrlWithSlash = pageUrl + '/';
       const { data: existingData, error: fetchError } = await supabase
         .from('page_views')
-        .select('id, view_count, unique_views')
-        .eq('page_url', pageUrl)
-        .single();
+        .select('id, view_count, unique_views, page_url')
+        .or(`page_url.eq.${pageUrl},page_url.eq.${pageUrlWithSlash}`)
+        .maybeSingle(); // Use maybeSingle to handle 0 or 1 row. If duplicates exist, this might fail, but handled below.
 
-      if (fetchError && fetchError.code !== 'PGRST116') {
-        // PGRST116 means no rows found, which is fine
+      if (fetchError) {
         throw fetchError;
       }
 
       if (existingData) {
-        // Update existing record
+        // Update existing record (preserve its specific page_url)
         const { error: updateError } = await supabase
           .from('page_views')
           .update({
             view_count: existingData.view_count + 1,
             unique_views: isUniqueView ? existingData.unique_views + 1 : existingData.unique_views,
             last_viewed_at: now.toISOString(),
-            page_title: pageTitle // Update title in case it changed
+            page_title: pageTitle 
           })
           .eq('id', existingData.id);
 
         if (updateError) throw updateError;
       } else {
-        // Insert new record
+        // Insert new record (normalized)
         const { error: insertError } = await supabase
           .from('page_views')
           .insert({
