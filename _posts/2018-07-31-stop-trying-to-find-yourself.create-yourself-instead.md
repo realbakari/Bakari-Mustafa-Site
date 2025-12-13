@@ -11,7 +11,7 @@ description: Keep doing what you love, even if no one buys it, sponsors it, or s
 image: "/uploads/jordan-vkx0kgkx9va-unsplash.jpg"
 
 ---
-![](/uploads/jordan-vkx0kgkx9va-unsplash.jpg)
+![Stop Trying to Find Yourself. Create Yourself Instead.](/uploads/jordan-vkx0kgkx9va-unsplash.jpg)
 
 “Life isn’t about finding yourself. Life is about creating yourself.”
 

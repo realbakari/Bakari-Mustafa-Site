@@ -9,7 +9,7 @@ description: This is a book summary of Rich Dad Poor Dad by Robert Kiyosaki. Rea
   this Rich Dad Poor Dad summary to review key takeaways and lessons from the book.
 
 ---
-![](/uploads/robert-kiyosaki-rich-dad-poor-dad-book-poster-text-robert-kiyosaki-png-clip-art.png)
+![Rich Dad Poor Dad](/uploads/robert-kiyosaki-rich-dad-poor-dad-book-poster-text-robert-kiyosaki-png-clip-art.png)
 
 Robert Kiyosaki tells the story of his two Dad’s in his childhood. His own father and the father of his best friend. While he loved both, they were very different when it came to dealing with finances.
 

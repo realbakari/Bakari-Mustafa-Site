@@ -7,7 +7,7 @@ description: How to Reframe Bias, Cultivate Connection, and Create High-Performi
 image: "/uploads/unconscious-bias-book_ub_book_nobg.png"
 
 ---
-![](/uploads/unconscious-bias-book_ub_book_nobg.png)
+![The Leader’s Guide to Unconscious Bias](/uploads/unconscious-bias-book_ub_book_nobg.png)
 
 “To be human is to have a bias,” Pamela Fuller, Mark Murphy, and Anne Chow assert near the beginning of “The Leader’s Guide to Unconscious Bias: How to Reframe Bias, Cultivate Connection, and Create High-Performing Teams,” their new treatise on a high-profile topic that seems to permeate all dimensions of our society. “If you were to say, ‘I don’t have any bias,’ you’d be saying your brain isn’t functioning properly.
 

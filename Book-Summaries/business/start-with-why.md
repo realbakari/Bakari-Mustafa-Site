@@ -9,7 +9,7 @@ description: This is a book summary of Start with Why by Simon Sinek. Read this 
   with why summary to review key takeaways and lessons from the book.
 
 ---
-![](/uploads/start-with-why.png)
+![Start with Why by Simon Sinek](/uploads/start-with-why.png)
 
 ## The Five Big Ideas
 

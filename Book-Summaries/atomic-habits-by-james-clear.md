@@ -11,7 +11,7 @@ description: Everyone has bad habits that they want to get rid of, this book tea
   key lessons and important passages from the book.
 
 ---
-![](/uploads/atomic-habits_gallery_hi-res_04.jpg)
+![Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones](/uploads/atomic-habits_gallery_hi-res_04.jpg)
 
 Everyone has bad habits that they want to get rid of, this book teaches you the four laws needed to replace bad habits with better ones. This summary includes key lessons and important passages from the book.
 
@@ -32,7 +32,7 @@ Reading 15 pages a day is not a lot, but it accumulates into 105 pages a week, 4
 
 Remember, becoming 1% better today may not seem like much, but with time, it can make a huge difference.
 
-![](/uploads/tiny-gains-graph-700x700.jpg)
+![Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones](/uploads/tiny-gains-graph-700x700.jpg)
 
 How much of a difference does 1% make? if you can get just 1% better each day, you’ll end up with results that are nearly 37 times better after just one year.
 

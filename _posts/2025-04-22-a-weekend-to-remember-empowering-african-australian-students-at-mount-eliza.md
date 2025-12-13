@@ -10,7 +10,7 @@ description: On April 11 to 13, 2025, my team at Networking African-Australians 
 image: "https://miro.medium.com/v2/resize:fit:1400/1*Hb0vC8anaz39Mzm7y0caBQ.jpeg"
 
 ---
-![](https://miro.medium.com/v2/resize:fit:1400/1*Hb0vC8anaz39Mzm7y0caBQ.jpeg)
+![A Weekend to Remember: Empowering African-Australian Students at Mount Eliza](https://miro.medium.com/v2/resize:fit:1400/1*Hb0vC8anaz39Mzm7y0caBQ.jpeg)
 
 African-Australian students with NAA staff and guests at the Mount Eliza Camp.
 

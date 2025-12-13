@@ -17,7 +17,7 @@ Snapchat launched public profiles in mid-2020, but until recently, only verified
 
 Essentially, a public profile is your business’s home on Snapchat. Snapchatters can find it through search, on the Discovery tab, via lenses, or through a paid ad. They can also access it directly from a snapcode or shareable URL.
 
-![](/uploads/3_images_public_profiles.png)
+![How to Set up A Public Profile for your Business on Snapchat](/uploads/3_images_public_profiles.png)
 
 #### Public profiles come with these elements:
 

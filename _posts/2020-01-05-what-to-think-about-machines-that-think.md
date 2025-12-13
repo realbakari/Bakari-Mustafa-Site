@@ -11,7 +11,7 @@ description: This book explores the burgeoning field of artificial intelligence,
 image: "/uploads/2019_50_ai.jpg"
 
 ---
-![](/uploads/2019_50_ai.jpg)
+![What to Think About Machines That Think](/uploads/2019_50_ai.jpg)
 
 Today’s Leading Thinkers on the Age of Machine Intelligence.
 

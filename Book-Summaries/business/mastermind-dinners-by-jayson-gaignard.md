@@ -8,7 +8,7 @@ description: This is a book summary of Mastermind Dinners by Jayson Gaignard. Re
 image: "/uploads/419iudbjw7l-_sr600-315_piwhitestrip-bottomleft-0-35_sclzzzzzzz_fmpng_bg255-255-255.png"
 
 ---
-![](/uploads/419iudbjw7l-_sr600-315_piwhitestrip-bottomleft-0-35_sclzzzzzzz_fmpng_bg255-255-255.png)
+![Mastermind Dinners by Jayson Gaignard](/uploads/419iudbjw7l-_sr600-315_piwhitestrip-bottomleft-0-35_sclzzzzzzz_fmpng_bg255-255-255.png)
 
 The Book in Three Sentences
 

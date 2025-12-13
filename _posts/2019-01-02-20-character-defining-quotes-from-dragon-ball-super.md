@@ -9,7 +9,7 @@ description: Dragon Ball Super delivers the same over-the-top action coupled wit
 image: "/uploads/thumb-1920-610767.jpg"
 
 ---
-![](/uploads/thumb-1920-610767.jpg)
+![20 Character Defining Quotes from Dragon Ball Super](/uploads/thumb-1920-610767.jpg)
 
 Dragon Ball Super delivers the same over-the-top action coupled with the characters we’ve come to know and love. Here are 20 quotes that really define each character and set them apart.
 

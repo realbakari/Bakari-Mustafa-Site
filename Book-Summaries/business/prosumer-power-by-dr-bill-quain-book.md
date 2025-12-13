@@ -9,7 +9,7 @@ description: This is a book summary of Prosumer power by Dr. Bill Quain. Read th
   Prosumer power summary to review key takeaways and lessons from the book.
 
 ---
-![](/uploads/s-l400.jpg)
+![Pro-Sumer Power! How to Create Wealth by Buying Smarter, Not Cheaper!](/uploads/s-l400.jpg)
 
 Wealth by Being Smarter, Not Cheaper, and Referring Others to Do the Same by Bill Quain, Ph.D. In summary, this is a business book aimed to change your mindset from being a consumer to a “prosumer” (producer + consumer). I recommend this book because it is cheap and easy-to-read.
 

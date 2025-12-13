@@ -9,7 +9,7 @@ description: A simple, engaging, and practical guide to mastering your finances 
   achieving financial freedom with minimal time and effort.
 
 ---
-![](/uploads/the-simple-path-to-wealth-book.png)
+![The Simple Path to Wealth](/uploads/the-simple-path-to-wealth-book.png)
 
 ## Key Takeaways
 

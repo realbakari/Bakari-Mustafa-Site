@@ -9,7 +9,7 @@ description: This is the story of a man who has yet to realize what destiny hold
 image: "/uploads/ttgl-700x450.jpg"
 
 ---
-![](/uploads/ttgl-700x450.jpg)
+![Gurren Lagann and the Birth of Odin](/uploads/ttgl-700x450.jpg)
 
 Tengen Toppa Gurren Lagann, translating mostly to Heaven Piercing Crimson Face - is a show about the transformation of the soul. It’s about brotherly bonds and finding true love, and recognizing when someone else is oppressing you, and overcoming the evil forces at all odds. It’s a narrative on modern society and the spiritual movements that lead to a collective awakening of the human spirit, and rising to overcome our inner deadness and become full of life, love, and burning willpower! It’s about the activation of the human DNA and the intrinsic evolutionary spiral power inherent within each one of our hearts and how if we work together - there is nothing we can’t accomplish! It’s a story of redemption, grave emotional hardship, the craziest trials and tribulations, and above all else - it’s about learning to believe in yourself.
 

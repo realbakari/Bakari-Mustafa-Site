@@ -13,7 +13,7 @@ description: 'If there is any one secret of success, it lies in the ability to g
 '
 
 ---
-![](/uploads/how-to-win-friends-influence-people-by-dale-carnegie.jpg)
+![How to Win Friends and Influence People](/uploads/how-to-win-friends-influence-people-by-dale-carnegie.jpg)
 
 Ninety-nine times out of a hundred, people don’t criticize themselves for anything, no matter how wrong it may be.
 

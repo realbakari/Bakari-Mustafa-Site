@@ -39,7 +39,7 @@ This is a list of authors, books, and concepts mentioned in Free Will, which mig
 * Daniel Dennett’s writings on philosophy and compatibilism
 * Meditations on Violence by Rory Miller
 
-![](https://jamesclear.com/wp-content/uploads/2015/12/FreeWill-by-SamHarris.jpg)
+![Free Will by Sam Harris](https://jamesclear.com/wp-content/uploads/2015/12/FreeWill-by-SamHarris.jpg)
 
 ### Free Will by Sam Harris
 

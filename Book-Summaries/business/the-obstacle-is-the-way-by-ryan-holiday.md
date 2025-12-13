@@ -7,7 +7,7 @@ description: This is a book summary of The Obstacle Is the Way by Ryan Holiday. 
 image: "/uploads/img15.jpg"
 
 ---
-![](/uploads/img15.jpg)
+![The Obstacle Is the Way by Ryan Holiday](/uploads/img15.jpg)
 
 #### The Book in Three Sentences
 

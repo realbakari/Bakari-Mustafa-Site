@@ -17,7 +17,7 @@ description: 'Dark Matter the latest novel from Wayward Pines; trilogy author Bl
   up surrounded by hazmat suits.'
 
 ---
-![](/uploads/091216_darkmatter_carroll-2e16d0ba-fill-1200x630-c0.jpg)
+![Dark Matter Summary](/uploads/091216_darkmatter_carroll-2e16d0ba-fill-1200x630-c0.jpg)
 
 ‘Dark Matter,’ a novel by Blake Crouch.
 

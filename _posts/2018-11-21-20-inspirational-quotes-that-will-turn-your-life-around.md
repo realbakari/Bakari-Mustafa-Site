@@ -8,7 +8,7 @@ description: Quotes are those little reminders that we all need now and then and
 image: "/uploads/sean-click-6gcsichbjey-unsplash.jpg"
 
 ---
-![](/uploads/sean-click-6gcsichbjey-unsplash.jpg)
+![20 Inspirational Quotes That Will Turn Your Life Around](/uploads/sean-click-6gcsichbjey-unsplash.jpg)
 
 Quotes are those little reminders that we all need now and then and some are powerful enough to inspire us for the whole week.
 

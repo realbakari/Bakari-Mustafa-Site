@@ -7,7 +7,7 @@ description: This is a book summary of Positioning by Al Ries and Jack Trout. Re
 image: "/uploads/760025-_uy630_sr1200-630_.jpg"
 
 ---
-![](/uploads/760025-_uy630_sr1200-630_.jpg)
+![Positioning by Al Ries and Jack Trout](/uploads/760025-_uy630_sr1200-630_.jpg)
 
 ### What Is Positioning?
 

@@ -8,7 +8,7 @@ description: Oba Yozo’s attempts to reconcile himself to the world around him 
 image: "/uploads/32312667.jpeg"
 
 ---
-![](/uploads/32312667.jpeg)
+![No Longer Human](/uploads/32312667.jpeg)
 
 **Fiction by _Osamu Dazai_**
 

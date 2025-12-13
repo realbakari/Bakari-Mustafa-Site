@@ -13,7 +13,7 @@ description: 'Book Notes: An insightful new book from the multimillion-copy best
   proven to help businesses and individuals realize their most important goals.'
 
 ---
-![](/uploads/43117_lrg.jpg)
+![The 4 Disciplines Of Execution](/uploads/43117_lrg.jpg)
 
 There are two principal things a leader can influence when it comes to producing results: your strategy (or plan) and your ability to execute that strategy. Stop for a moment and ask yourself this question: Which of these do leaders struggle with more? Is it creating a strategy, or executing the strategy?
 

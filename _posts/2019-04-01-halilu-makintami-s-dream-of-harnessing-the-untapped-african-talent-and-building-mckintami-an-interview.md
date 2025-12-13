@@ -9,7 +9,7 @@ description: Empowering generations to strive and make a positive contribution t
 image: "/uploads/mckintami.jpg"
 
 ---
-![](/uploads/mckintami.jpg)
+![Halilu Makintami’s dream of harnessing the untapped African talent and building](/uploads/mckintami.jpg)
 
 Khalil Halilu M. is a 27 years old entrepreneur based in Brisbane, Australia. He is the founder of Mckintami, a brand whose mission is to create expectational products drawn from inspirations and stories with the aim of empowering and transforming culture through cutting edge products. Halilu graduated from the Queensland University of Technology with a master’s in information technology Majoring in Cybersecurity.
 

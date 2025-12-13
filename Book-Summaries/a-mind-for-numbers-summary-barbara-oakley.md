@@ -10,7 +10,7 @@ description: A practical, research-based guide to unlocking the power of your br
 image: "/uploads/18693655-_uy2698_ss2698_.jpg"
 
 ---
-![](/uploads/18693655-_uy2698_ss2698_.jpg)
+![A Mind For Numbers Summary – Barbara Oakley](/uploads/18693655-_uy2698_ss2698_.jpg)
 
 A Mind For Numbers Overview
 

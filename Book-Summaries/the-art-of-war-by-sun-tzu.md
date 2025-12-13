@@ -42,7 +42,7 @@ Know when to fight and when not to fight: avoid what is strong and strike at wha
 * “The principle on which to manage an army is to set up one standard of courage which all must reach.”
 * “If it is to your advantage, make a forward move. If not, stay where you are.”
 
-![](https://jamesclear.com/wp-content/uploads/2015/11/TheArtofWar-by-SunTzu.jpg)
+![The Art of War by Sun Tzu](https://jamesclear.com/wp-content/uploads/2015/11/TheArtofWar-by-SunTzu.jpg)
 
 ### The Art of War by Sun Tzu
 

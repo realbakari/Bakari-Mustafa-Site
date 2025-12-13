@@ -14,7 +14,7 @@ description: 'In 1997, a brilliant Igbo Electrical Engineer and Lecturer at the 
 image: "/uploads/dr-ezekiel-izuogu-900x400.jpg"
 
 ---
-![](/uploads/dr-ezekiel-izuogu-900x400.jpg)
+![How Nigeria killed the dream of an Igbo Engineer who built the first indigenous](/uploads/dr-ezekiel-izuogu-900x400.jpg)
 
 In 1997, a brilliant Igbo Electrical Engineer and Lecturer at the Federal Polytechnic Nekede, Dr. Ezekiel Izogu designed and developed the Izuogu Z-600, the first African indigenous manufactured car.
 

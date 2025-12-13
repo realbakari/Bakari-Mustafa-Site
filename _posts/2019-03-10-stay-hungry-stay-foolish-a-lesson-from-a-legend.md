@@ -10,7 +10,7 @@ description: Steve Jobs' Commencement address at Stanford on 12th June 2005 is o
 image: "/uploads/stevejobs2.jpg"
 
 ---
-![](/uploads/stevejobs2.jpg)
+![Stay Hungry, Stay Foolish - A Lesson from a Legend.](/uploads/stevejobs2.jpg)
 
 Steve Jobs' [Commencement address](https://news.stanford.edu/news/2005/june15/jobs-061505.html) at Stanford on 12th June 2005 is one of the all-time most shared, most-watched inspirational speeches of all time. Its impact doesn't seem to dim even now, over a decade later. It's truly a timeless reminder for creators, artists, and dreamers everywhere.
 

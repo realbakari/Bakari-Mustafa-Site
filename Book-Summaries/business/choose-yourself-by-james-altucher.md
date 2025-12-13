@@ -7,7 +7,7 @@ description: This is a book summary of Choose Yourself by James Altucher. Read t
 image: "/uploads/james-altucher-choose-yourself.jpg"
 
 ---
-![](/uploads/james-altucher-choose-yourself.jpg)
+![Choose Yourself by James Altucher](/uploads/james-altucher-choose-yourself.jpg)
 
 The Book in Three Sentences
 
