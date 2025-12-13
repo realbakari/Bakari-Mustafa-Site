@@ -71,13 +71,6 @@
 
 <script src="/assets/js/main.js" defer="defer"></script>
 
-{%- if page.google_analytics -%}
-  <script src="/assets/js/galite.js" defer="defer"></script>
-  <script>
-    var galite = galite || {};
-    galite.UA = "{{ site.google_analytics }}";
-  </script>
-{%- endif -%}
 {%- if page.url == '/posts/' -%}
   <script src="/assets/js/search.min.js" defer="defer"></script>
   <script>
