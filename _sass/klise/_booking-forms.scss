@@ -1,1 +1,74 @@
-// Booking forms placeholder - implement when needed
+// Simple Contact Form Styling
+
+.simple-contact-form {
+  max-width: 600px;
+  margin: 2rem 0;
+
+  .form-group {
+    margin-bottom: 1.5rem;
+
+    label {
+      display: block;
+      margin-bottom: 0.5rem;
+      font-weight: $semibold-weight;
+      color: $black;
+      font-size: 0.95em;
+    }
+
+    input[type="text"],
+    input[type="email"],
+    select,
+    textarea {
+      width: 100%;
+      padding: 0.75rem;
+      border: 1px solid $light;
+      border-radius: 4px;
+      font-size: 1em;
+      font-family: $sans-family;
+      color: $text-base-color;
+      background: white;
+      transition: border-color 0.2s ease;
+
+      &:focus {
+        outline: none;
+        border-color: $color-deep-teal;
+      }
+
+      &::placeholder {
+        color: $gray;
+        opacity: 0.6;
+      }
+    }
+
+    textarea {
+      resize: vertical;
+      min-height: 120px;
+      line-height: 1.6;
+    }
+
+    select {
+      cursor: pointer;
+    }
+  }
+
+  .submit-btn {
+    padding: 0.875rem 2rem;
+    background: $color-deep-teal;
+    color: white;
+    border: none;
+    border-radius: 4px;
+    font-size: 1em;
+    font-weight: $semibold-weight;
+    font-family: $sans-family;
+    cursor: pointer;
+    transition: background-color 0.2s ease;
+
+    &:hover {
+      background: $color-eucalyptus;
+    }
+
+    @include media-query($on-mobile) {
+      width: 100%;
+    }
+  }
+}

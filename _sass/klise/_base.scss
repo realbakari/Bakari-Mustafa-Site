@@ -1,246 +1,370 @@
-// ============================================
-// BASE STYLES
-// ============================================
+// Reset some basic elements
+* {
+  -webkit-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  -moz-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  -ms-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  -o-transition: background-color 75ms ease-in, border-color 75ms ease-in;
+  transition: background-color 75ms ease-in, border-color 75ms ease-in;
+}
 
-// Reset
-*,
-*::before,
-*::after {
-  box-sizing: border-box;
+.notransition {
+  -webkit-transition: none;
+  -moz-transition: none; 
+  -ms-transition: none;
+  -o-transition: none;
+  transition: none;
+}
+
+html {
+  overflow-x: hidden;
+  width: 100%;
+}
+
+body,
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+hr,
+dl,
+dd,
+ol,
+ul,
+figure {
   margin: 0;
   padding: 0;
 }
 
-html {
-  font-size: 100%;
+// Basic styling
+body {
+  min-height: 100vh;
+  overflow-x: hidden;
+  position: relative;
+  color: $text-base-color;
+  background-color: $white;
+  font: $normal-weight #{$base-font-size}/#{$base-line-height} $sans-family;
+  -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
-  text-rendering: optimizeLegibility;
+  -webkit-font-feature-settings: "kern" 1;
+  -moz-font-feature-settings: "kern" 1;
+  -o-font-feature-settings: "kern" 1;
+  font-feature-settings: "kern" 1;
+  font-kerning: normal;
+  box-sizing: border-box;
+  letter-spacing: -0.01em;
 }
 
-body {
-  font-family: $font-family;
-  font-size: $font-size-base;
-  line-height: $leading-relaxed;
-  color: $text-primary;
-  background-color: $bg-primary;
-  min-height: 100vh;
-  display: flex;
-  flex-direction: column;
+// Set `margin-bottom` to maintain vertical rhythm
+h1,
+h2,
+h3,
+h4,
+h5,
+h6,
+p,
+blockquote,
+pre,
+ul,
+ol,
+dl,
+figure,
+%vertical-rhythm {
+  margin-top: $spacing-full - 20;
+  margin-bottom: $spacing-full - 20;
 }
 
-// Typography
+// strong | bold
+strong,
+b {
+  font-weight: $bold-weight;
+  color: $black;
+}
+
+// horizontal rule
+hr {
+  border-bottom: 0;
+  border-style: solid;
+  border-color: $light;
+}
+
+// kbd tag
+kbd {
+  -moz-border-radius: 3px;
+  -webkit-border-radius: 3px;
+  border: 1px solid $light;
+  border-radius: 2px;
+  color: $black;
+  display: inline-block;
+  font-size: $small-font-size;
+  line-height: 1.4;
+  font-family: $mono-family;
+  margin: 0 0.1em;
+  font-weight: $bold-weight;
+  padding: 0.01em 0.4em;
+  text-shadow: 0 1px 0 $white;
+}
+
+// Image
+img {
+  max-width: 100%;
+  vertical-align: middle;
+  -webkit-user-drag: none;
+  margin: 0 auto;
+  text-align: center;
+}
+
+// Figure
+figure {
+  position: relative;
+}
+
+// Image inside Figure tag
+figure > img {
+  display: block;
+  position: relative;
+}
+
+// Image caption
+figcaption {
+  font-size: 13px;
+  text-align: center;
+}
+
+// List
+ul {
+  list-style: none;
+  li {
+    display: list-item;
+    text-align: -webkit-match-parent;
+  }
+  li::before {
+    content: "\FE63";
+    display: inline-block;
+    top: -1px;
+    width: 1.2em;
+    position: relative;
+    margin-left: -1.3em;
+    font-weight: 700;
+  }
+}
+
+ol {
+  list-style: none;
+  counter-reset: li;
+  li {
+    position: relative;
+    counter-increment: li;
+    &::before {
+      content: counter(li);
+      display: inline-block;
+      width: 1em;
+      margin-right: 0.5em;
+      margin-left: -1.6em;
+      text-align: right;
+      direction: rtl;
+      font-weight: $bold-weight;
+      font-size: $small-font-size;
+    }
+  }
+}
+
+ul,
+ol {
+  margin-top: 0;
+  margin-left: $spacing-full;
+}
+
+li {
+  padding-bottom: 1px;
+  padding-top: 1px;
+
+  &:before {
+    color: $black;
+  }
+
+  > ul,
+  > ol {
+    margin-bottom: 2px;
+    margin-top: 0;
+  }
+}
+
+// Headings
 h1,
 h2,
 h3,
 h4,
 h5,
 h6 {
-  font-weight: $font-semibold;
-  line-height: $leading-tight;
-  color: $text-primary;
-  margin-top: $space-8;
-  margin-bottom: $space-4;
+  color: $black;
+  font-weight: $bold-weight;
+  & + ul,
+  & + ol {
+    margin-top: 10px;
+  }
 
-  &:first-child {
+  @include media-query($on-mobile) {
+    scroll-margin-top: 65px;
+  }
+}
+
+// Headings with link
+h1 > a,
+h2 > a,
+h3 > a,
+h4 > a,
+h5 > a,
+h6 > a {
+  text-decoration: none;
+  border: none;
+
+  &:hover {
+    text-decoration: none;
+    border: none;
+  }
+}
+
+// Link
+a {
+  color: inherit;
+  text-decoration-color: $smoke;
+
+  &:hover {
+    color: $text-link-blue;
+  }
+
+  &:focus {
+    outline: 3px solid rgba(0, 54, 199, 0.6);
+    outline-offset: 2px;
+  }
+}
+
+// Del
+del {
+  color: inherit;
+}
+
+// Em
+em {
+  color: inherit;
+}
+
+// Blockquotes
+blockquote {
+  color: $gray;
+  font-style: italic;
+  text-align: center;
+  opacity: 0.9;
+  border-top: 1px solid $light;
+  border-bottom: 1px solid $light;
+  padding: 10px;
+  margin-left: 10px;
+  margin-right: 10px;
+  font-size: 1em;
+
+  > :last-child {
+    margin-bottom: 0;
     margin-top: 0;
   }
 }
 
-h1 {
-  font-size: $font-size-4xl;
-}
+// Wrapper
+.wrapper {
+  max-width: -webkit-calc(#{$narrow-size} - (#{$spacing-full} * 2));
+  max-width: calc(#{$narrow-size} - (#{$spacing-full} * 2));
+  position: relative;
+  margin-right: auto;
+  margin-left: auto;
+  padding-right: $spacing-full;
+  padding-left: $spacing-full;
+  @extend %clearfix;
 
-h2 {
-  font-size: $font-size-3xl;
-}
+  @include media-query($on-mobile) {
+    max-width: -webkit-calc(#{$narrow-size} - (#{$spacing-full}));
+    max-width: calc(#{$narrow-size} - (#{$spacing-full}));
+    padding-right: $spacing-full - 10;
+    padding-left: $spacing-full - 10;
 
-h3 {
-  font-size: $font-size-2xl;
-}
-
-h4 {
-  font-size: $font-size-xl;
-}
-
-h5 {
-  font-size: $font-size-lg;
-}
-
-h6 {
-  font-size: $font-size-base;
-}
-
-p {
-  margin-bottom: $space-4;
-
-  &:last-child {
-    margin-bottom: 0;
+    &.blurry {
+      animation: 0.2s ease-in forwards blur;
+      -webkit-animation: 0.2s ease-in forwards blur;
+    }
   }
 }
 
-a {
-  color: inherit;
-  text-decoration: underline;
-  text-decoration-thickness: 1px;
-  text-underline-offset: 2px;
-  transition: opacity 0.15s ease;
-
-  &:hover {
-    opacity: 0.7;
-  }
+// Underline
+u {
+  text-decoration-color: #d2c7c7;
 }
 
-// Lists
-ul,
-ol {
-  margin-bottom: $space-4;
-  padding-left: $space-6;
+// Small
+small {
+  font-size: $small-font-size;
 }
 
-li {
-  margin-bottom: $space-2;
+// Superscript
+sup {
+  border-radius: 10%;
+  top: -3px;
+  left: 2px;
+  font-size: small;
+  position: relative;
+  margin-right: 2px;
 }
 
-// Images
-img {
-  max-width: 100%;
-  height: auto;
-  display: block;
-}
-
-// Code
-code {
-  font-family: $font-mono;
-  font-size: 0.875em;
-  background-color: $bg-tertiary;
-  padding: 0.125em 0.375em;
-  border-radius: 4px;
-}
-
-pre {
-  font-family: $font-mono;
-  font-size: $font-size-sm;
-  background-color: $gray-900;
-  color: $gray-100;
-  padding: $space-4;
-  border-radius: 8px;
+// Table
+.overflow-table {
   overflow-x: auto;
-  margin-bottom: $space-4;
-
-  code {
-    background: none;
-    padding: 0;
-    font-size: inherit;
-  }
 }
 
-// Blockquote
-blockquote {
-  border-left: 3px solid $border-strong;
-  padding-left: $space-4;
-  margin: $space-4 0;
-  color: $text-secondary;
-  font-style: italic;
-}
-
-// Horizontal Rule
-hr {
-  border: none;
-  border-top: 1px solid $border-color;
-  margin: $space-8 0;
-}
-
-// Selection
-::selection {
-  background-color: $gray-900;
-  color: $white;
-}
-
-// ============================================
-// LAYOUT
-// ============================================
-
-.container {
+table {
   width: 100%;
-  max-width: $max-width-content;
-  margin: 0 auto;
-  padding: 0 $space-6;
+  margin-top: $spacing-half;
+  border-collapse: collapse;
+  font-size: $small-font-size;
 
-  @include media-query($breakpoint-sm) {
-    padding: 0 $space-4;
+  thead {
+    font-weight: $bold-weight;
+    color: $black;
+    border-bottom: 1px solid $light;
+  }
+
+  th,
+  td,
+  tr {
+    border: 1px solid $light;
+    padding: 2px 7px;
   }
 }
 
-.site-main {
-  flex: 1;
-  padding: $space-16 0;
-
-  @include media-query($breakpoint-md) {
-    padding: $space-10 0;
-  }
+// Clearfix
+%clearfix:after {
+  content: "";
+  display: table;
+  clear: both;
 }
 
-// ============================================
-// COMPONENTS
-// ============================================
-
-// Buttons
-.btn {
-  display: inline-flex;
-  align-items: center;
-  justify-content: center;
-  padding: $space-3 $space-5;
-  font-size: $font-size-sm;
-  font-weight: $font-medium;
-  text-decoration: none;
-  border-radius: 6px;
-  border: 1px solid transparent;
-  cursor: pointer;
-  transition: all 0.15s ease;
-
-  &:hover {
-    opacity: 1;
-  }
+// When mouse block a text set this color
+mark,
+::selection {
+  background: #fffba0;
+  color: $black;
 }
 
-.btn-primary {
-  background-color: $gray-900;
-  color: $white;
-  border-color: $gray-900;
+// Github Gist clear border
+.gist {
+  table {
+    border: 0;
 
-  &:hover {
-    background-color: $gray-800;
-    border-color: $gray-800;
-  }
-}
-
-.btn-secondary {
-  background-color: transparent;
-  color: $text-primary;
-  border-color: $border-strong;
-
-  &:hover {
-    background-color: $bg-secondary;
-  }
-}
-
-// Prose (for long-form content)
-.prose {
-  max-width: $max-width-prose;
-
-  >*+* {
-    margin-top: $space-4;
-  }
-
-  h2,
-  h3,
-  h4 {
-    margin-top: $space-8;
-  }
-
-  a {
-    color: $text-primary;
-    font-weight: $font-medium;
+    tr,
+    td {
+      border: 0;
+    }
   }
 }

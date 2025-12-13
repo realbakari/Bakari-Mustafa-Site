@@ -1,164 +1,72 @@
-// ============================================
-// DESIGN SYSTEM - Modern Minimalist
-// ============================================
+// Modern Minimalist Design System
+@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700;800&display=swap');
 
-// Typography
-// Single font family for cohesion
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
-
-$font-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', sans-serif;
-$font-mono: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
-
-// Type Scale (1.25 ratio)
-$font-size-xs: 0.75rem; // 12px
-$font-size-sm: 0.875rem; // 14px
-$font-size-base: 1rem; // 16px
-$font-size-lg: 1.125rem; // 18px
-$font-size-xl: 1.25rem; // 20px
-$font-size-2xl: 1.5rem; // 24px
-$font-size-3xl: 1.875rem; // 30px
-$font-size-4xl: 2.25rem; // 36px
-$font-size-5xl: 3rem; // 48px
-
-// Font Weights
-$font-normal: 400;
-$font-medium: 500;
-$font-semibold: 600;
-$font-bold: 700;
-
-// Line Heights
-$leading-tight: 1.25;
-$leading-snug: 1.375;
-$leading-normal: 1.5;
-$leading-relaxed: 1.625;
-$leading-loose: 1.75;
-
-// ============================================
-// Colors - True Monochrome
-// ============================================
-
-// Light Mode
-$white: #ffffff;
-$gray-50: #fafafa;
-$gray-100: #f5f5f5;
-$gray-200: #e5e5e5;
-$gray-300: #d4d4d4;
-$gray-400: #a3a3a3;
-$gray-500: #737373;
-$gray-600: #525252;
-$gray-700: #404040;
-$gray-800: #262626;
-$gray-900: #171717;
-$black: #0a0a0a;
-
-// Semantic Colors (Light Mode)
-$bg-primary: $white;
-$bg-secondary: $gray-50;
-$bg-tertiary: $gray-100;
-$text-primary: $gray-900;
-$text-secondary: $gray-600;
-$text-muted: $gray-400;
-$border-color: $gray-200;
-$border-strong: $gray-300;
-
-// Legacy variable mappings (for compatibility)
-$heading-family: $font-family;
-$sans-family: $font-family;
-$mono-family: $font-mono;
+// Typography - Clean & Professional
+$sans-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+$mono-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
+$heading-family: 'Inter', sans-serif;
 $base-font-size: 16px;
-$base-line-height: $leading-relaxed;
-$normal-weight: $font-normal;
-$medium-weight: $font-medium;
-$semibold-weight: $font-semibold;
-$bold-weight: $font-bold;
-$extrabold-weight: $font-bold;
-$small-font-size: $font-size-sm;
+$medium-font-size: $base-font-size * 0.938;
+$small-font-size: $base-font-size * 0.875;
+$base-line-height: 1.7;
 
-// Legacy color mappings
-$text-base-color: $text-primary;
-$text-link-blue: $black;
-$text-link-blue-active: $gray-600;
-$light: $border-color;
-$gray: $text-secondary;
-$smoke: $bg-secondary;
-$off-white: $bg-secondary;
+// Font weight
+$normal-weight: 400;
+$medium-weight: 500;
+$semibold-weight: 600;
+$bold-weight: 700;
+$extrabold-weight: 800;
 
-// Dark Mode
+// Modern Minimalist Color Palette
+// True monochrome with subtle warmth
+$color-terracotta: #1a1a1a; // Maps to black
+$color-burnt-sienna: #1a1a1a; // Maps to black
+$color-deep-teal: #1a1a1a; // Accent → black
+$color-eucalyptus: #525252; // Secondary → gray
+$color-warm-sand: #f5f5f5; // Light bg
+$color-charcoal: #171717; // Primary text
+$color-soft-cream: #fafafa; // Page bg
+$color-ochre: #404040; // Mid gray
+$color-slate: #6b7280; // Muted text
+
+// Light Mode Colors
+$text-base-color: #171717;
+$text-link-blue: #171717; // Links are black with underline
+$text-link-blue-active: #525252;
+
+$black: #171717;
+$light: #e5e5e5;
+$smoke: #f5f5f5;
+$gray: #6b7280;
+$white: #ffffff;
+
+// Dark Mode Colors (Rich, high contrast)
+$dark-text-base-color: #e5e5e5;
+$dark-text-link-blue: #ffffff;
+$dark-text-link-blue-active: #a3a3a3;
+
 $dark-black: #0a0a0a;
 $dark-white: #fafafa;
 $dark-light: #262626;
 $dark-smoke: #171717;
 $dark-gray: #a3a3a3;
-$dark-text-base-color: #e5e5e5;
-$dark-text-link-blue: $white;
-$dark-text-link-blue-active: $gray-300;
 
-// Legacy color compatibility
-$color-terracotta: $gray-900;
-$color-burnt-sienna: $gray-800;
-$color-deep-teal: $gray-900;
-$color-eucalyptus: $gray-600;
-$color-warm-sand: $gray-100;
-$color-charcoal: $gray-900;
-$color-soft-cream: $gray-50;
-$color-ochre: $gray-500;
-$color-slate: $gray-600;
-
-// ============================================
-// Spacing - 8px Grid
-// ============================================
-
-$space-1: 0.25rem; // 4px
-$space-2: 0.5rem; // 8px
-$space-3: 0.75rem; // 12px
-$space-4: 1rem; // 16px
-$space-5: 1.25rem; // 20px
-$space-6: 1.5rem; // 24px
-$space-8: 2rem; // 32px
-$space-10: 2.5rem; // 40px
-$space-12: 3rem; // 48px
-$space-16: 4rem; // 64px
-$space-20: 5rem; // 80px
-$space-24: 6rem; // 96px
-
-// Legacy spacing
-$spacing-full: $space-10;
-$spacing-half: $space-5;
-
-// ============================================
 // Layout
-// ============================================
+$wide-size: 900px;
+$narrow-size: 720px;
 
-$max-width-prose: 65ch;
-$max-width-content: 720px;
-$max-width-wide: 1080px;
-$max-width-full: 1280px;
+// Spacing (slightly more generous)
+$spacing-full: 32px;
+$spacing-half: $spacing-full / 2;
 
-// Legacy layout
-$wide-size: $max-width-wide;
-$narrow-size: $max-width-content;
+// State of devices
+$on-mobile: 768px;
+$on-tablet: 769px;
+$on-desktop: 1024px;
+$on-widescreen: 1152px;
 
-// ============================================
-// Breakpoints
-// ============================================
-
-$breakpoint-sm: 640px;
-$breakpoint-md: 768px;
-$breakpoint-lg: 1024px;
-$breakpoint-xl: 1280px;
-
-// Legacy breakpoints
-$on-mobile: $breakpoint-md;
-$on-tablet: $breakpoint-md + 1px;
-$on-desktop: $breakpoint-lg;
-$on-widescreen: $breakpoint-xl;
-
-// ============================================
-// Mixins
-// ============================================
-
-@mixin media-query($breakpoint) {
-  @media screen and (max-width: $breakpoint) {
+@mixin media-query($device) {
+  @media screen and (max-width: $device) {
     @content;
   }
 }
@@ -167,10 +75,6 @@ $on-widescreen: $breakpoint-xl;
   font-size: $base-font-size * $ratio;
 }
 
-// ============================================
-// Imports
-// ============================================
-
+// Import sass files
 @import "klise/fonts", "klise/base", "klise/layout", "klise/post",
-"klise/miscellaneous", "klise/syntax", "klise/dark", "klise/homepage-features",
-"klise/booking-forms", "klise/analytics", "klise/dev-tools";
+"klise/miscellaneous", "klise/syntax", "klise/dark", "klise/homepage-features", "klise/booking-forms", "klise/analytics", "klise/dev-tools";

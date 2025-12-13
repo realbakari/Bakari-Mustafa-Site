@@ -1,12 +1,8 @@
-// ============================================
-// DARK MODE
-// ============================================
-
 body[data-theme="dark"] {
-  background-color: $dark-black;
   color: $dark-text-base-color;
+  background-color: $dark-black;
 
-  // Typography
+  // Heading
   h1,
   h2,
   h3,
@@ -16,201 +12,2261 @@ body[data-theme="dark"] {
     color: $dark-white;
   }
 
-  a {
-    color: inherit;
+  // Table
+  table {
+    thead {
+      color: $dark-white;
+      border-color: $dark-light;
+    }
+
+    th,
+    td,
+    tr {
+      border-color: $dark-light;
+    }
   }
 
-  // Selection
-  ::selection {
-    background-color: $dark-white;
-    color: $dark-black;
+  // Post
+  .page-content {
+    a {
+      color: $dark-text-link-blue;
+
+      &:hover,
+      &:active,
+      &:focus {
+        color: $dark-text-link-blue-active;
+      }
+    }
+
+    h3 {
+      border-color: $dark-light;
+    }
+    h1,
+    h2,
+    h3,
+    h4,
+    h5,
+    h6 {
+      .anchor-head {
+        color: $dark-text-link-blue;
+      }
+    }
   }
 
-  // Code
+  // Syntax
   code {
-    background-color: $dark-light;
+    &.highlighter-rouge {
+      background-color: $dark-light;
+    }
   }
 
-  pre {
-    background-color: $dark-light;
-    color: $dark-text-base-color;
-  }
-
-  // Blockquote
-  blockquote {
+  // kbd tag
+  kbd {
     border-color: $dark-light;
-    color: $dark-gray;
+    color: $dark-white;
+    text-shadow: 0 1px 0 $dark-black;
   }
 
-  // HR
+  // horizontal rule
   hr {
     border-color: $dark-light;
   }
 
+  // Post Meta
+  .post-meta {
+    color: $dark-gray;
+
+    .post-meta-separator {
+      color: $dark-gray;
+    }
+
+    span[itemprop="author"] {
+      border-color: $dark-light;
+    }
+
+    .post-reading-time {
+      color: $dark-gray;
+    }
+  }
+
+  // Link
+  a {
+    color: inherit;
+    text-decoration-color: $dark-smoke;
+
+    &:hover {
+      color: $dark-text-link-blue;
+    }
+
+    &:focus {
+      outline-color: rgba(255, 82, 119, 0.6);
+    }
+  }
+
+  // List
+  li {
+    &:before {
+      color: $dark-white;
+    }
+  }
+
+  // Blockquote
+  blockquote {
+    color: $dark-gray;
+    border-color: $dark-light;
+  }
+
+  // Strong, Bold
+  strong,
+  b {
+    color: $dark-white;
+  }
+
   // Navbar
   .navbar {
-    background-color: $dark-black;
-    border-color: $dark-light;
+    border-color: rgba(255, 255, 255, 0.1);
+
+    @include media-query($on-mobile) {
+      background-color: $dark-black;
+      backdrop-filter: none;
+    }
+
+    @media (min-width: 769px) {
+      background-color: rgba(19, 20, 24, 0.8);
+    }
+
+    .menu {
+      a#mode {
+        .mode-sunny {
+          display: block;
+        }
+        .mode-moon {
+          display: none;
+        }
+      }
+
+      .menu-link {
+        color: $dark-white;
+
+        &:hover {
+          background-color: rgba(255, 82, 119, 0.15);
+          color: $dark-text-link-blue;
+        }
+      }
+
+      .menu-link.active {
+        background-color: rgba(255, 82, 119, 0.2);
+        color: $dark-text-link-blue;
+      }
+
+      @include media-query($on-mobile) {
+        background-color: $dark-black;
+        border-color: $dark-light;
+
+        .menu-icon {
+          > svg {
+            fill: $dark-white;
+          }
+        }
+
+        input[type="checkbox"]:checked ~ .trigger {
+          background: $dark-black;
+        }
+      }
+    }
   }
 
-  .nav-brand {
-    color: $dark-white;
-  }
-
-  .nav-link {
-    color: $dark-gray;
-
-    &:hover,
-    &.active {
+  // Author Social
+  .author-social {
+    .social-link {
+      background-color: rgba(128, 128, 128, 0.15);
       color: $dark-white;
-    }
-  }
 
-  .theme-toggle {
-    color: $dark-gray;
-
-    &:hover {
-      color: $dark-white;
-    }
-  }
-
-  // Footer
-  .site-footer {
-    border-color: $dark-light;
-  }
-
-  .footer-name {
-    color: $dark-white;
-  }
-
-  .footer-tagline {
-    color: $dark-gray;
-  }
-
-  .footer-links a {
-    color: $dark-gray;
-
-    &:hover {
-      color: $dark-white;
-    }
-  }
-
-  .footer-bottom {
-    border-color: $dark-light;
-  }
-
-  .footer-copyright {
-    color: $dark-gray;
-  }
-
-  // Hero
-  .hero-tagline,
-  .hero-description {
-    color: $dark-gray;
-  }
-
-  // Buttons
-  .btn-primary {
-    background-color: $dark-white;
-    color: $dark-black;
-    border-color: $dark-white;
-
-    &:hover {
-      background-color: $gray-200;
-      border-color: $gray-200;
-    }
-  }
-
-  .btn-secondary {
-    color: $dark-white;
-    border-color: $dark-light;
-
-    &:hover {
-      background-color: $dark-light;
+      &:hover {
+        background-color: $dark-text-link-blue;
+        color: $dark-white;
+        box-shadow: 0 4px 8px rgba(255, 82, 119, 0.3);
+      }
     }
   }
 
   // Post Cards
   .post-card {
-    border-color: $dark-light;
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
 
     &:hover {
-      border-color: $dark-gray;
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
     }
-  }
 
-  .post-date {
-    color: $dark-gray;
-  }
-
-  .post-title a {
-    color: $dark-white;
-  }
-
-  .post-excerpt {
-    color: $dark-gray;
-  }
-
-  // Single Post
-  .post-description {
-    color: $dark-gray;
-  }
-
-  .post-meta {
-    color: $dark-gray;
-  }
-
-  .post-footer {
-    border-color: $dark-light;
-  }
-
-  .tag {
-    background-color: $dark-light;
-    color: $dark-gray;
-
-    &:hover {
-      background-color: $dark-smoke;
+    .post-item-date {
+      color: rgba(255, 255, 255, 0.6);
     }
-  }
 
-  // Post Nav
-  .post-nav-prev,
-  .post-nav-next {
-    border-color: $dark-light;
-
-    &:hover {
-      border-color: $dark-gray;
+    .post-tag {
+      background-color: rgba(255, 255, 255, 0.08);
+      color: rgba(255, 255, 255, 0.7);
     }
-  }
 
-  .nav-label {
-    color: $dark-gray;
-  }
-
-  .nav-title {
-    color: $dark-white;
-  }
-
-  // Page
-  .page-description {
-    color: $dark-gray;
-  }
-
-  // Error Page
-  .error-code {
-    color: $dark-gray;
-  }
-
-  .error-message {
-    color: $dark-gray;
-  }
-
-  // Section
-  .section-link {
-    color: $dark-gray;
-
-    &:hover {
+    .post-item-title a {
       color: $dark-white;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .post-card-description {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .read-more {
+      color: $dark-white;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+  }
+
+  // View all link
+  .view-all-link {
+    background-color: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
+    box-shadow: none;
+
+    &:hover {
+      background-color: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background-color: rgba(255, 255, 255, 0.95);
+    }
+  }
+
+  // Post Item (Legacy - for archive page)
+  .post-item {
+    &:not(:first-child) {
+      border-color: $dark-light;
+    }
+
+    .post-item-date {
+      color: $dark-white;
+    }
+    .post-item-title {
+      a {
+        color: $dark-text-base-color;
+
+        &:hover,
+        &focus {
+          color: $dark-white;
+        }
+      }
+    }
+  }
+
+  // Posts item note
+  .posts-item-note {
+    color: $dark-white;
+  }
+
+  // Year headers
+  .posts-year-header {
+    color: $dark-white;
+    border-bottom-color: rgba(255, 82, 119, 0.3);
+  }
+
+  // Post Navigation
+  .post-nav {
+    border-color: $dark-light;
+
+    .post-nav-item {
+      font-weight: $bold-weight;
+
+      .post-title {
+        color: $dark-white;
+        opacity: 0.9;
+      }
+
+      &:hover,
+      &:focus {
+        .post-title {
+          color: $dark-text-link-blue-active;
+        }
+      }
+
+      .nav-arrow {
+        color: $dark-gray;
+      }
+    }
+
+    @include media-query($on-mobile) {
+      .post-nav-item:nth-child(even) {
+        border-color: $dark-light;
+      }
+    }
+  }
+
+  // Footer
+  .footer {
+    border-color: rgba(255, 255, 255, 0.1);
+
+    span.footer_item {
+      color: $dark-white;
+    }
+
+    a.footer_item {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+        background-color: rgba(255, 82, 119, 0.1);
+      }
+    }
+
+    .footer_copyright {
+      color: $dark-gray;
+      opacity: 0.8;
+    }
+  }
+
+  // 404 Page
+  .not-found {
+    .title {
+      color: $dark-white;
+      text-shadow: 1px 0px 0px $dark-text-link-blue;
+    }
+    .phrase {
+      color: $dark-text-base-color;
+    }
+    .solution {
+      color: $dark-text-link-blue;
+    }
+    .solution:hover {
+      color: $dark-text-link-blue-active;
+    }
+  }  
+
+  .search-article {
+    input[type="search"] {
+      color: $dark-text-base-color;
+      &::-webkit-input-placeholder {
+        color: rgba(128,128,128,0.8);
+      }
+    }
+  }
+
+  // Enhanced 404 Page Dark Mode
+  .phrase-subtitle {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .solution-link {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .not-found-search {
+    border-top-color: rgba(255, 255, 255, 0.1);
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .search-input-404 {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+    color: $dark-white;
+
+    &:focus {
+      border-color: rgba(255, 255, 255, 0.3);
+      box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  .search-button-404 {
+    background: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.95);
+    }
+  }
+
+  // Contact Form Dark Mode
+  .contact-form {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .form-group {
+    label {
+      color: $dark-white;
+
+      .required {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    input[type="text"],
+    input[type="email"],
+    textarea {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: $dark-white;
+
+      &:focus {
+        border-color: rgba(255, 255, 255, 0.3);
+        box-shadow: 0 0 0 3px rgba(255, 255, 255, 0.05);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+
+  .form-submit {
+    background: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.9);
+      border-color: rgba(255, 255, 255, 0.9);
+      box-shadow: 0 2px 4px rgba(255, 255, 255, 0.1);
+    }
+
+    &:active {
+      background: rgba(255, 255, 255, 0.95);
+    }
+  }
+
+  // Table of Contents Dark Mode
+  .table-of-contents {
+    background: rgba(255, 82, 119, 0.08);
+    border-color: rgba(255, 82, 119, 0.25);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .toc-grid a {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.2);
+    color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 82, 119, 0.15);
+      border-color: rgba(255, 82, 119, 0.4);
+      box-shadow: 0 2px 8px rgba(255, 82, 119, 0.2);
+    }
+  }
+
+  // Cookie Consent Banner Dark Mode
+  .cookie-consent {
+    background: $dark-black;
+    border-top-color: $dark-text-link-blue;
+    box-shadow: 0 -4px 20px rgba(0, 0, 0, 0.5);
+  }
+
+  .cookie-consent-text {
+    p {
+      color: $dark-text-base-color;
+
+      &:last-child {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .cookie-link {
+      color: $dark-text-link-blue;
+
+      &:hover {
+        color: $dark-text-link-blue-active;
+      }
+    }
+  }
+
+  .cookie-accept {
+    background: $dark-text-link-blue;
+    border-color: $dark-text-link-blue;
+
+    &:hover {
+      background: $dark-text-link-blue-active;
+      border-color: $dark-text-link-blue-active;
+      box-shadow: 0 4px 12px rgba(255, 82, 119, 0.4);
+    }
+  }
+
+  .cookie-decline {
+    border-color: rgba(255, 255, 255, 0.3);
+    color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.1);
+      border-color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // Breadcrumb Navigation Dark Mode
+  .breadcrumbs {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .breadcrumb-item {
+    a {
+      color: rgba(255, 255, 255, 0.6);
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+
+    span {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .breadcrumb-current span {
+    color: $dark-white;
+  }
+
+  .breadcrumb-separator {
+    color: rgba(255, 255, 255, 0.3);
+  }
+
+  // Modern Card Layouts Dark Mode
+  .book-card,
+  .project-card {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    .card-header {
+      border-bottom-color: rgba(255, 255, 255, 0.1);
+
+      h3 {
+        a {
+          color: $dark-white;
+
+          &:hover {
+            color: $dark-text-link-blue;
+          }
+        }
+      }
+
+      .card-meta {
+        color: rgba(255, 255, 255, 0.6);
+
+        .badge {
+          background: rgba(0, 63, 255, 0.2);
+          color: $dark-text-link-blue;
+        }
+      }
+    }
+
+    .card-body {
+      p,
+      ul li {
+        color: rgba(255, 255, 255, 0.7);
+      }
+    }
+
+    .card-footer {
+      border-top-color: rgba(255, 255, 255, 0.1);
+      background: rgba(255, 255, 255, 0.03);
+
+      a {
+        color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  // Book Summary List Dark Mode
+  .book-summary-list {
+    .year-section h2 {
+      color: $dark-white;
+      border-bottom-color: $dark-text-link-blue;
+    }
+  }
+
+  .book-list li {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.15);
+    }
+
+    a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  // Category Section Dark Mode
+  .category-section {
+    h3 {
+      color: $dark-white;
+      border-left-color: $dark-text-link-blue;
+    }
+
+    .book-links a {
+      background: rgba(0, 63, 255, 0.1);
+      border-color: rgba(0, 63, 255, 0.2);
+      color: $dark-white;
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.15);
+        border-color: $dark-text-link-blue;
+        box-shadow: -4px 0 0 0 $dark-text-link-blue;
+      }
+
+      strong {
+        color: $dark-white;
+      }
+
+      span {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Projects Grid Dark Mode
+  .project-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.08);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    h4 a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+
+    .project-meta {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Page Header Dark Mode
+  .page-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    .page-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    blockquote {
+      border-left-color: $dark-text-link-blue;
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Book Summary Individual Page Dark Mode
+  .book-summary-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    img {
+      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+    }
+
+    .book-excerpt {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .key-lessons {
+    background: rgba(0, 63, 255, 0.1);
+    border-left-color: $dark-text-link-blue;
+
+    h3 {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  .book-content {
+    blockquote {
+      background: rgba(255, 255, 255, 0.05);
+      border-left-color: $dark-text-link-blue;
+    }
+
+    img {
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+    }
+  }
+
+  // Linktree-style Social Links Dark Mode
+  .linktree-header {
+    .profile-image {
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.3);
+    }
+
+    .subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .bio {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .social-link-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.15);
+
+    &:hover {
+      background: rgba(0, 63, 255, 0.1);
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 6px 20px rgba(0, 63, 255, 0.25);
+    }
+
+    .social-icon {
+      background: rgba(0, 63, 255, 0.15);
+    }
+
+    &:hover .social-icon {
+      background: $dark-text-link-blue;
+    }
+
+    .social-content {
+      .social-title {
+        color: $dark-white;
+      }
+
+      .social-description {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .social-arrow {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    &:hover .social-arrow {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  .social-footer {
+    border-top-color: rgba(255, 255, 255, 0.2);
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Modern Footer Dark Mode
+  .modern-footer {
+    background: rgba(255, 255, 255, 0.02);
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-heading {
+    color: $dark-white;
+
+    &::after {
+      background: $dark-text-link-blue;
+    }
+  }
+
+  .footer-description {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .footer-social {
+    .social-icon-link {
+      background: rgba(0, 63, 255, 0.15);
+      color: $dark-text-link-blue;
+
+      &:hover {
+        background: $dark-text-link-blue;
+        color: $dark-white;
+        box-shadow: 0 4px 12px rgba(0, 63, 255, 0.4);
+      }
+    }
+  }
+
+  .footer-links {
+    li a {
+      color: rgba(255, 255, 255, 0.7);
+
+      &:hover {
+        color: $dark-text-link-blue;
+        background: rgba(0, 63, 255, 0.1);
+      }
+    }
+  }
+
+  .footer-cta-button {
+    background: $dark-text-link-blue;
+    color: $dark-white;
+
+    &:hover {
+      background: $dark-text-link-blue-active;
+      box-shadow: 0 6px 16px rgba(0, 63, 255, 0.4);
+    }
+  }
+
+  // Newsletter form dark mode
+  .footer-newsletter-description {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .newsletter-input {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+    color: $dark-white;
+
+    &:focus {
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.2);
+    }
+
+    &::placeholder {
+      color: rgba(255, 255, 255, 0.4);
+    }
+  }
+
+  .newsletter-submit {
+    background: $dark-text-link-blue;
+    color: $dark-white;
+
+    &:hover {
+      background: $dark-text-link-blue-active;
+      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.4);
+    }
+  }
+
+  .newsletter-message {
+    &.success {
+      background: rgba(16, 185, 129, 0.2);
+      color: #10B981;
+      border-color: rgba(16, 185, 129, 0.4);
+    }
+
+    &.error {
+      background: rgba(239, 68, 68, 0.2);
+      color: #EF4444;
+      border-color: rgba(239, 68, 68, 0.4);
+    }
+  }
+
+  .footer-bottom {
+    border-top-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .footer-copyright {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  .footer-tagline {
+    color: rgba(255, 255, 255, 0.5);
+
+    a {
+      color: $dark-text-link-blue;
+
+      &:hover {
+        color: $dark-text-link-blue-active;
+      }
+    }
+  }
+
+  // Social Share Dark Mode
+  .social-share {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+  }
+
+  .social-share-header {
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .share-button {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 63, 255, 0.3);
+    color: $dark-text-link-blue;
+
+    &:hover {
+      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+    }
+
+    // Platform-specific colors remain the same on hover
+    &.share-twitter:hover {
+      background: #1DA1F2;
+      border-color: #1DA1F2;
+      color: white;
+    }
+
+    &.share-linkedin:hover {
+      background: #0077B5;
+      border-color: #0077B5;
+      color: white;
+    }
+
+    &.share-facebook:hover {
+      background: #1877F2;
+      border-color: #1877F2;
+      color: white;
+    }
+
+    &.share-whatsapp:hover {
+      background: #25D366;
+      border-color: #25D366;
+      color: white;
+    }
+
+    &.share-reddit:hover {
+      background: #FF4500;
+      border-color: #FF4500;
+      color: white;
+    }
+
+    &.share-copy:hover {
+      background: $dark-text-link-blue;
+      border-color: $dark-text-link-blue;
+      color: white;
+    }
+
+    &.share-copy.copied {
+      background: #10B981;
+      border-color: #10B981;
+      color: white;
+    }
+  }
+
+  // Thank You Page Dark Mode
+  .thank-you-container {
+    h1 {
+      color: $dark-white;
+    }
+  }
+
+  .thank-you-message {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .thank-you-button {
+    &.primary {
+      background: $dark-text-link-blue;
+      border-color: $dark-text-link-blue;
+
+      &:hover {
+        background: $dark-text-link-blue-active;
+        border-color: $dark-text-link-blue-active;
+        box-shadow: 0 6px 16px rgba(0, 63, 255, 0.4);
+      }
+    }
+
+    &.secondary {
+      background: rgba(255, 255, 255, 0.05);
+      color: $dark-text-link-blue;
+      border-color: rgba(0, 63, 255, 0.3);
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.15);
+        border-color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  .thank-you-info {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .thank-you-social {
+    a {
+      background: rgba(0, 63, 255, 0.15);
+      color: $dark-text-link-blue;
+
+      &:hover {
+        background: $dark-text-link-blue;
+        color: $dark-white;
+        box-shadow: 0 4px 12px rgba(0, 63, 255, 0.4);
+      }
+    }
+  }
+
+  // Wattpad Collections Dark Mode
+  .wattpad-header {
+    background: linear-gradient(135deg, rgba(0, 63, 255, 0.08) 0%, rgba(0, 63, 255, 0.04) 100%);
+    border-color: rgba(0, 63, 255, 0.2);
+  }
+
+  .wattpad-profile-info {
+    h2 {
+      color: $dark-white;
+    }
+  }
+
+  .wattpad-bio {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .wattpad-follow-button {
+    background: #FF500A;
+    color: $dark-white;
+
+    &:hover {
+      background: #E64A09;
+      box-shadow: 0 6px 16px rgba(255, 80, 10, 0.4);
+    }
+  }
+
+  .wattpad-story-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    &:hover {
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.25);
+      border-color: rgba(0, 63, 255, 0.4);
+    }
+  }
+
+  .wattpad-story-title {
+    a {
+      color: $dark-white;
+
+      &:hover {
+        color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  .wattpad-story-description {
+    color: rgba(255, 255, 255, 0.7);
+  }
+
+  .wattpad-story-meta {
+    border-top-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    .meta-item {
+      color: rgba(255, 255, 255, 0.6);
+
+      svg {
+        color: $dark-text-link-blue;
+      }
+
+      .meta-value {
+        color: $dark-white;
+      }
+    }
+  }
+
+  .wattpad-story-tags {
+    .tag {
+      background: rgba(0, 63, 255, 0.15);
+      color: $dark-text-link-blue;
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.25);
+      }
+    }
+  }
+
+  .wattpad-cta {
+    background: linear-gradient(135deg, rgba(0, 63, 255, 0.08) 0%, rgba(255, 80, 10, 0.08) 100%);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  .wattpad-cta-button {
+    background: #FF500A;
+    color: $dark-white;
+
+    &:hover {
+      background: #E64A09;
+      box-shadow: 0 6px 16px rgba(255, 80, 10, 0.5);
+    }
+  }
+
+  // Enhanced Posts Page Dark Mode
+  .posts-page-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+  }
+
+  .posts-header-content {
+    .posts-main-title {
+      color: $dark-white;
+    }
+
+    .posts-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .posts-stats {
+      .stat-item {
+        background: transparent;
+        border: none;
+        color: rgba(255, 255, 255, 0.6);
+
+        svg {
+          color: rgba(255, 255, 255, 0.4);
+        }
+
+        .stat-value {
+          color: $dark-white;
+        }
+      }
+    }
+  }
+
+  // Enhanced Search Container Dark Mode
+  .enhanced-search-container {
+    @include media-query($on-mobile) {
+      background: $dark-black;
+      box-shadow: 0 4px 12px rgba(0, 0, 0, 0.3);
+    }
+  }
+
+  .search-article-enhanced {
+    input[type="search"] {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 63, 255, 0.3);
+      color: $dark-white;
+
+      &:focus {
+        border-color: $dark-text-link-blue;
+        box-shadow: 0 0 0 4px rgba(0, 63, 255, 0.15);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .clear-search-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: $dark-white;
+      }
+    }
+  }
+
+  .search-status {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  // Filter Controls Dark Mode
+  .posts-filters {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+  }
+
+  .filter-btn {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(0, 63, 255, 0.3);
+    color: rgba(255, 255, 255, 0.7);
+
+    &:hover {
+      background: rgba(0, 63, 255, 0.15);
+      border-color: rgba(0, 63, 255, 0.5);
+      color: $dark-white;
+    }
+
+    &.active {
+      background: $dark-text-link-blue;
+      border-color: $dark-text-link-blue;
+      color: $dark-white;
+      box-shadow: 0 2px 8px rgba(0, 63, 255, 0.4);
+    }
+  }
+
+  .sort-label {
+    color: $dark-white;
+  }
+
+  .sort-select {
+    background: rgba(255, 255, 255, 0.05) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23FF5277" d="M6 9L1 4h10z"/></svg>') no-repeat right 0.75rem center;
+    border-color: rgba(0, 63, 255, 0.3);
+    color: $dark-white;
+
+    &:hover {
+      border-color: rgba(0, 63, 255, 0.5);
+      background-color: rgba(0, 63, 255, 0.08);
+    }
+
+    &:focus {
+      border-color: $dark-text-link-blue;
+      box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.15);
+    }
+  }
+
+  // Popular Tags Section Dark Mode
+  .popular-tags-section {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .tags-section-title {
+      color: $dark-white;
+
+      &::before {
+        background: $dark-text-link-blue;
+      }
+    }
+
+    .tag-filter-btn {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+      color: rgba(255, 255, 255, 0.7);
+
+      .tag-count {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.15);
+        border-color: rgba(0, 63, 255, 0.4);
+        color: $dark-text-link-blue;
+
+        .tag-count {
+          color: $dark-text-link-blue;
+        }
+      }
+
+      &.active {
+        background: rgba(0, 63, 255, 0.2);
+        border-color: $dark-text-link-blue;
+        color: $dark-text-link-blue;
+
+        .tag-count {
+          color: $dark-text-link-blue;
+        }
+      }
+    }
+  }
+
+  // Search Results Container Dark Mode
+  .search-results-container {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.25);
+
+    .search-results-header {
+      h3 {
+        color: $dark-white;
+      }
+
+      .clear-results-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(0, 63, 255, 0.3);
+        color: $dark-text-link-blue;
+
+        &:hover {
+          background: $dark-text-link-blue;
+          border-color: $dark-text-link-blue;
+          color: $dark-white;
+        }
+      }
+    }
+
+    .no-results-message {
+      svg {
+        color: rgba(255, 255, 255, 0.3);
+      }
+
+      h4 {
+        color: $dark-white;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Enhanced Post Cards Dark Mode
+  .posts-list {
+    .posts-year-header {
+      color: $dark-white;
+      border-bottom-color: $dark-text-link-blue;
+
+      .year-post-count {
+        background: rgba(0, 63, 255, 0.2);
+        color: $dark-text-link-blue;
+      }
+    }
+
+    .post-card.enhanced {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+
+      &:hover {
+        border-color: rgba(0, 63, 255, 0.4);
+        box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+      }
+
+      .post-card-meta {
+        border-bottom-color: rgba(255, 255, 255, 0.1);
+
+        .post-item-date,
+        .post-reading-time {
+          color: rgba(255, 255, 255, 0.6);
+
+          svg {
+            color: $dark-text-link-blue;
+          }
+        }
+      }
+
+      .post-item-title {
+        a {
+          color: $dark-white;
+
+          &:hover {
+            color: $dark-text-link-blue;
+          }
+        }
+      }
+
+      .post-card-description {
+        color: rgba(255, 255, 255, 0.7);
+      }
+
+      .post-card-footer {
+        border-top-color: rgba(255, 255, 255, 0.1);
+
+        .post-card-tags {
+          .post-tag {
+            background: rgba(0, 63, 255, 0.15);
+            color: $dark-text-link-blue;
+
+            &:hover {
+              background: rgba(0, 63, 255, 0.25);
+            }
+          }
+        }
+
+        .read-more {
+          color: $dark-text-link-blue;
+
+          &:hover {
+            color: $dark-text-link-blue-active;
+          }
+        }
+      }
+    }
+  }
+
+  // Dedicated Search Page Dark Mode
+  .search-page-header-content {
+    .search-page-icon {
+      color: $dark-text-link-blue;
+    }
+
+    .search-page-title {
+      color: $dark-white;
+    }
+
+    .search-page-subtitle {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Main Search Container Dark Mode
+  .main-search-wrapper {
+    input[type="search"] {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(0, 63, 255, 0.3);
+      color: $dark-white;
+      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
+
+      &:focus {
+        border-color: $dark-text-link-blue;
+        box-shadow: 0 4px 16px rgba(0, 63, 255, 0.25);
+      }
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+    }
+
+    .clear-main-search-btn {
+      background: rgba(255, 255, 255, 0.1);
+      color: rgba(255, 255, 255, 0.6);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+        color: $dark-white;
+      }
+    }
+  }
+
+  // Search Hints Dark Mode
+  .search-hints {
+    .hint-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .search-hint-btn {
+      background: rgba(0, 63, 255, 0.15);
+      border-color: rgba(0, 63, 255, 0.3);
+      color: $dark-text-link-blue;
+
+      &:hover {
+        background: rgba(0, 63, 255, 0.25);
+        border-color: $dark-text-link-blue;
+      }
+    }
+  }
+
+  // Search Filters Dark Mode
+  .search-filters {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    .filter-section {
+      .filter-label {
+        color: $dark-white;
+      }
+
+      .search-filter-btn {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(0, 63, 255, 0.3);
+        color: rgba(255, 255, 255, 0.7);
+
+        &:hover {
+          background: rgba(0, 63, 255, 0.15);
+          border-color: rgba(0, 63, 255, 0.5);
+          color: $dark-white;
+        }
+
+        &.active {
+          background: $dark-text-link-blue;
+          border-color: $dark-text-link-blue;
+          color: $dark-white;
+          box-shadow: 0 2px 8px rgba(0, 63, 255, 0.4);
+        }
+      }
+    }
+  }
+
+  // Search Stats Dark Mode
+  .search-stats {
+    color: rgba(255, 255, 255, 0.6);
+  }
+
+  // Search Result Item Dark Mode
+  .search-result-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(0, 63, 255, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    .result-header {
+      .result-type-badge {
+        &.type-post {
+          background: rgba(0, 63, 255, 0.2);
+          color: $dark-text-link-blue;
+        }
+
+        &.type-page {
+          background: rgba(16, 185, 129, 0.2);
+          color: #10B981;
+        }
+      }
+
+      .result-date {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .result-tags {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    .result-title {
+      color: $dark-white;
+    }
+
+    &:hover .result-title {
+      color: $dark-text-link-blue;
+    }
+
+    .result-description {
+      color: rgba(255, 255, 255, 0.7);
+    }
+
+    .result-footer {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  // No Search Results Dark Mode
+  .no-search-results {
+    svg {
+      color: rgba(255, 255, 255, 0.2);
+    }
+
+    h3 {
+      color: $dark-white;
+    }
+
+    > p {
+      color: rgba(255, 255, 255, 0.6);
+
+      #search-query-display {
+        color: $dark-white;
+      }
+    }
+
+    .no-results-suggestions {
+      background: rgba(0, 63, 255, 0.08);
+      border-color: rgba(0, 63, 255, 0.2);
+
+      p {
+        color: $dark-white;
+      }
+
+      ul li {
+        color: rgba(255, 255, 255, 0.7);
+
+        a {
+          color: $dark-text-link-blue;
+        }
+      }
+    }
+  }
+
+  // Search Welcome Dark Mode
+  .search-welcome-content {
+    h2 {
+      color: $dark-white;
+    }
+
+    > p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Search Category Cards Dark Mode
+  .search-category-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(0, 63, 255, 0.4);
+      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+    }
+
+    svg {
+      color: $dark-text-link-blue;
+    }
+
+    h3 {
+      color: $dark-white;
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .category-link {
+      color: $dark-text-link-blue;
+    }
+  }
+
+  // Search Tips Dark Mode
+  .search-tips {
+    background: rgba(0, 63, 255, 0.08);
+    border-color: rgba(0, 63, 255, 0.2);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .tip-item {
+    svg {
+      color: #10B981;
+    }
+
+    span {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Page View Counter Dark Mode
+  .page-view-counter {
+    color: rgba(255, 255, 255, 0.6);
+
+    svg {
+      color: rgba(255, 255, 255, 0.5);
+    }
+
+    .view-count-number {
+      color: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .stat-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.2);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .stat-icon {
+      color: rgba(255, 255, 255, 0.6);
+    }
+
+    .stat-value {
+      color: $dark-white;
+    }
+
+    .stat-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .popular-post-item {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.03);
+    }
+
+    .popular-post-title {
+      color: $dark-white;
+
+      &:hover {
+        color: rgba(255, 255, 255, 0.8);
+      }
+
+      .post-rank {
+        background: rgba(255, 255, 255, 0.1);
+        color: rgba(255, 255, 255, 0.8);
+      }
+    }
+
+    .popular-post-views {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Analytics Dashboard Dark Mode
+  .analytics-dashboard {
+    .analytics-header {
+      h1 {
+        color: $dark-white;
+      }
+
+      .analytics-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+      }
+
+      .refresh-button {
+        background: rgba(255, 255, 255, 0.05);
+        color: $dark-white;
+        border-color: rgba(255, 255, 255, 0.1);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.08);
+          border-color: rgba(255, 255, 255, 0.2);
+        }
+      }
+    }
+
+    .section-header {
+      h2 {
+        color: $dark-white;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .loading-skeleton {
+      background: rgba(255, 255, 255, 0.03);
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // Analytics Table Dark Mode
+  .analytics-table {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    thead {
+      background: rgba(255, 255, 255, 0.05);
+      border-bottom-color: rgba(255, 255, 255, 0.15);
+
+      th {
+        color: $dark-white;
+        border-bottom-color: rgba(255, 255, 255, 0.15);
+
+        &.sortable {
+          &:hover {
+            background: rgba(255, 255, 255, 0.08);
+          }
+        }
+      }
+    }
+
+    tbody {
+      tr {
+        border-bottom-color: rgba(255, 255, 255, 0.08);
+
+        &:hover {
+          background: rgba(255, 255, 255, 0.03);
+        }
+
+        td {
+          color: rgba(255, 255, 255, 0.8);
+          border-bottom-color: rgba(255, 255, 255, 0.08);
+
+          a {
+            color: $dark-white;
+
+            &:hover {
+              color: rgba(255, 255, 255, 0.7);
+            }
+          }
+        }
+      }
+    }
+  }
+
+  .pages-table {
+    background: rgba(255, 255, 255, 0.02);
+  }
+
+  // Recent Activity Dark Mode
+  .recent-activity-list {
+    .activity-item {
+      background: rgba(255, 255, 255, 0.02);
+      border-color: rgba(255, 255, 255, 0.08);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.04);
+        border-color: rgba(255, 255, 255, 0.15);
+      }
+
+      .activity-time {
+        color: rgba(255, 255, 255, 0.5);
+      }
+
+      .activity-page {
+        color: $dark-white;
+      }
+
+      .activity-views {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Form Controls Dark Mode
+  .table-controls {
+    .search-input {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: $dark-white;
+
+      &::placeholder {
+        color: rgba(255, 255, 255, 0.4);
+      }
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+
+    .sort-select {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.1);
+      color: $dark-white;
+
+      &:focus {
+        background: rgba(255, 255, 255, 0.08);
+        border-color: rgba(255, 255, 255, 0.2);
+      }
+    }
+  }
+
+  // Traffic Chart Dark Mode
+  .traffic-chart {
+    background: rgba(255, 255, 255, 0.02);
+    border-color: rgba(255, 255, 255, 0.1);
+  }
+
+  // Error and Empty States Dark Mode
+  .analytics-error {
+    background: rgba(239, 68, 68, 0.1);
+    border-color: rgba(239, 68, 68, 0.3);
+    color: #fca5a5;
+  }
+
+  .empty-state {
+    color: rgba(255, 255, 255, 0.6);
+
+    svg {
+      color: rgba(255, 255, 255, 0.3);
+    }
+
+    p {
+      color: rgba(255, 255, 255, 0.5);
+    }
+  }
+
+  // Referrer Stats Dark Mode
+  .referrer-stats {
+    .stat-bar-label {
+      span:first-child {
+        color: $dark-white;
+      }
+
+      span:last-child {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .stat-bar-track {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .stat-bar-fill {
+      background: $dark-white;
+    }
+
+    .top-referrers h4 {
+      color: $dark-white;
+    }
+
+    .referrer-list {
+      border-color: rgba(255, 255, 255, 0.1);
+    }
+
+    .referrer-item {
+      border-bottom-color: rgba(255, 255, 255, 0.05);
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.03);
+      }
+
+      .referrer-domain {
+        color: $dark-white;
+      }
+
+      .referrer-count {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Device & Browser Analytics Dark Mode
+  .analytics-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .device-stat {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .device-name,
+    .device-percentage {
+      color: $dark-white;
+    }
+
+    .device-count {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  .browser-stat {
+    .browser-name {
+      color: $dark-white;
+    }
+
+    .browser-bar {
+      background: rgba(255, 255, 255, 0.1);
+    }
+
+    .browser-bar-fill {
+      background: $dark-white;
+    }
+
+    .browser-percentage {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Chart.js Dark Mode - use filter for inverted colors
+  .traffic-chart {
+    canvas {
+      filter: invert(0.9) hue-rotate(180deg);
+    }
+  }
+
+  // Analytics Header Dark Mode
+  .analytics-header {
+    border-bottom-color: rgba(255, 255, 255, 0.1);
+
+    .header-left {
+      h1 {
+        color: $dark-white;
+      }
+
+      .analytics-subtitle {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Active Visitors Badge Dark Mode
+  .active-visitors-badge {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .visitor-count {
+      color: $dark-white;
+
+      &.has-visitors {
+        color: #10B981;
+      }
+    }
+
+    .visitor-label {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Analytics Controls Dark Mode
+  .analytics-controls {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    .control-group {
+      label {
+        color: $dark-white;
+      }
+
+      .date-range-select {
+        background: rgba(255, 255, 255, 0.05);
+        border-color: rgba(255, 255, 255, 0.2);
+        color: $dark-white;
+
+        &:focus {
+          border-color: rgba(255, 255, 255, 0.4);
+        }
+      }
+    }
+  }
+
+  // Export Button Dark Mode
+  .export-btn {
+    background: $dark-white;
+    color: $dark-black;
+    border-color: $dark-white;
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.8);
+    }
+  }
+
+  .section-header {
+    div {
+      h2 {
+        color: $dark-white;
+      }
+
+      p {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Entry/Exit Pages Dark Mode
+  .entry-exit-card {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.1);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .entry-exit-item {
+    background: rgba(255, 255, 255, 0.05);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      border-color: rgba(255, 255, 255, 0.15);
+      box-shadow: 0 2px 4px rgba(0, 0, 0, 0.3);
+    }
+
+    .rank {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .page-info {
+      .page-title {
+        color: $dark-white;
+
+        &:hover {
+          color: rgba(255, 255, 255, 0.7);
+        }
+      }
+
+      .page-url {
+        color: rgba(255, 255, 255, 0.5);
+      }
+    }
+
+    .count {
+      color: rgba(255, 255, 255, 0.7);
+    }
+  }
+
+  // Search Analytics Dark Mode
+  .search-analytics {
+    .search-stat {
+      background: rgba(255, 255, 255, 0.03);
+      border-color: rgba(255, 255, 255, 0.1);
+
+      .stat-value {
+        color: $dark-white;
+      }
+
+      .stat-label {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  .search-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    &:hover {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.15);
+    }
+
+    .search-rank {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .search-query {
+      .query-text {
+        color: $dark-white;
+      }
+
+      .query-stats {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .zero-results-badge {
+      background: rgba(239, 68, 68, 0.2);
+      color: #FCA5A5;
+    }
+  }
+
+  // 404 Errors Dark Mode
+  .error-404-analytics {
+    .error-stat {
+      background: rgba(239, 68, 68, 0.1);
+      border-color: rgba(239, 68, 68, 0.3);
+
+      .stat-value {
+        color: #FCA5A5;
+      }
+
+      .stat-label {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+
+    .broken-links-section h4,
+    .error-referrers-section h4 {
+      color: $dark-white;
+    }
+  }
+
+  .broken-link-item,
+  .error-referrer-item {
+    background: rgba(255, 255, 255, 0.03);
+    border-color: rgba(255, 255, 255, 0.08);
+
+    .link-rank {
+      color: rgba(255, 255, 255, 0.4);
+    }
+
+    .link-info {
+      .broken-url {
+        color: #FCA5A5;
+        background: rgba(239, 68, 68, 0.15);
+      }
+
+      .error-count {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  .error-referrer-item {
+    .referrer-url {
+      color: $dark-white;
+    }
+
+    .referrer-count {
+      color: rgba(255, 255, 255, 0.6);
+    }
+  }
+
+  // Active Visitors Dark Mode
+  .active-visitor-item {
+    background: rgba(16, 185, 129, 0.1);
+    border-color: rgba(16, 185, 129, 0.3);
+
+    .visitor-info {
+      .visitor-page {
+        color: $dark-white;
+      }
+
+      .visitor-meta {
+        color: rgba(255, 255, 255, 0.6);
+      }
+    }
+  }
+
+  // Modal Dark Mode
+  .modal-overlay {
+    background: rgba(0, 0, 0, 0.7);
+  }
+
+  .modal-content {
+    background: $dark-black;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.5);
+
+    h3 {
+      color: $dark-white;
+    }
+  }
+
+  .date-input-group {
+    label {
+      color: $dark-white;
+    }
+
+    .date-input {
+      background: rgba(255, 255, 255, 0.05);
+      border-color: rgba(255, 255, 255, 0.2);
+      color: $dark-white;
+
+      &:focus {
+        border-color: rgba(255, 255, 255, 0.4);
+      }
+    }
+  }
+
+  .modal-actions {
+    .btn-secondary {
+      background: rgba(255, 255, 255, 0.1);
+      color: $dark-white;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.15);
+      }
+    }
+
+    .btn-primary {
+      background: $dark-white;
+      color: $dark-black;
+
+      &:hover {
+        background: rgba(255, 255, 255, 0.8);
+      }
     }
   }
 }
