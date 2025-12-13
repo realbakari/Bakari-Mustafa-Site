@@ -19,13 +19,24 @@
     toggleTheme(localStorage.getItem("theme"))
   );
 
-  // Blur the content when the menu is open
-  const cbox = document.getElementById("menu-trigger");
+  // Mobile menu toggle
+  const menuToggle = document.getElementById("menu-toggle");
+  const menuItems = document.getElementById("menu-items");
+  const area = document.querySelector(".wrapper");
 
-  cbox.addEventListener("change", function () {
-    const area = document.querySelector(".wrapper");
-    this.checked
-      ? area.classList.add("blurry")
-      : area.classList.remove("blurry");
-  });
+  if (menuToggle && menuItems) {
+    menuToggle.addEventListener("click", () => {
+      const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
+      menuToggle.setAttribute("aria-expanded", !isExpanded);
+      menuItems.classList.toggle("is-open");
+      
+      if (!isExpanded) {
+        area.classList.add("blurry");
+        document.body.style.overflow = "hidden";
+      } else {
+        area.classList.remove("blurry");
+        document.body.style.overflow = "";
+      }
+    });
+  }
 })();
