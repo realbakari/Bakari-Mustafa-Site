@@ -96,30 +96,32 @@
 <script src="/assets/js/main.js" defer="defer"></script>
 
 {%- if page.google_analytics -%}
-  <script src="/assets/js/galite.js"></script>
+  <script src="/assets/js/galite.js" defer="defer"></script>
   <script>
     var galite = galite || {};
     galite.UA = "{{ site.google_analytics }}";
   </script>
 {%- endif -%}
 {%- if page.url == '/posts/' -%}
-  <script src="/assets/js/search.min.js"></script>
+  <script src="/assets/js/search.min.js" defer="defer"></script>
   <script>
-    var sjs = SimpleJekyllSearch({
-      searchInput: document.getElementById('search-input'),
-      resultsContainer: document.getElementById('search-results'),
-      json: '/assets/search.json',
+    window.addEventListener('DOMContentLoaded', function() {
+      var sjs = SimpleJekyllSearch({
+        searchInput: document.getElementById('search-input'),
+        resultsContainer: document.getElementById('search-results'),
+        json: '/assets/search.json',
+      });
     });
   </script>
   <script src="/assets/js/posts-enhanced.js" defer="defer"></script>
 {%- endif -%}
 {%- if page.url == '/search/' -%}
-  <script src="/assets/js/search.min.js"></script>
+  <script src="/assets/js/search.min.js" defer="defer"></script>
   <script src="/assets/js/search-page.js" defer="defer"></script>
 {%- endif -%}
 
 <!-- Supabase Page View Counter -->
-<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2"></script>
+<script src="https://cdn.jsdelivr.net/npm/@supabase/supabase-js@2" defer="defer"></script>
 <script>
   // Supabase configuration
   // Note: The anon key is safe to expose publicly - it's meant for client-side use
@@ -128,14 +130,17 @@
   window.SUPABASE_ANON_KEY = "eyJhbGciOiJIUzI1NiIsInR5cCI6IkpXVCJ9.eyJpc3MiOiJzdXBhYmFzZSIsInJlZiI6ImZteXVrcHhmd2VpYm9kbnVhaWZyIiwicm9sZSI6ImFub24iLCJpYXQiOjE3MzQyOTgxMzUsImV4cCI6MjA0OTg3NDEzNX0.TUrP9YKKCl7qw6B6A0RqP1lhFGa2Rx7IDajMbqZR_bU";
 
   // Initialize Supabase client for global use
-  if (typeof window.supabase !== 'undefined') {
-    window.supabaseClient = window.supabase.createClient(
-      window.SUPABASE_URL,
-      window.SUPABASE_ANON_KEY
-    );
-    console.log('Supabase client initialized successfully');
-  }
+  // Wrapped in DOMContentLoaded because script is now deferred
+  window.addEventListener('DOMContentLoaded', function() {
+    if (typeof window.supabase !== 'undefined') {
+      window.supabaseClient = window.supabase.createClient(
+        window.SUPABASE_URL,
+        window.SUPABASE_ANON_KEY
+      );
+      console.log('Supabase client initialized successfully');
+    }
+  });
 </script>
-<script src="/assets/js/page-views.js"></script>
-<script src="/assets/js/newsletter.js"></script>
+<script src="/assets/js/page-views.js" defer="defer"></script>
+<script src="/assets/js/newsletter.js" defer="defer"></script>
 
