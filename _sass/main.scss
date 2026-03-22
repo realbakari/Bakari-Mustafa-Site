@@ -82,11 +82,11 @@ $on-widescreen: 1152px;
   --text-primary: #{$text-base-color};
   --text-secondary: #{$gray};
   --bg-primary: #{$white};
-  --bg-secondary: #{$smoke};
-  --bg-tertiary: #f2e7d8;
-  --bg-surface: rgba(255, 250, 244, 0.84);
+  --bg-secondary: #f7f3ed;
+  --bg-tertiary: #efe6dc;
+  --bg-surface: #{$white};
   --surface-strong: #fffaf4;
-  --surface-soft: rgba(255, 247, 238, 0.72);
+  --surface-soft: #fbf8f3;
 
   --link-color: #{$text-base-color};
   --link-hover: #{$color-burnt-sienna};
@@ -94,17 +94,17 @@ $on-widescreen: 1152px;
   --accent-secondary: #{$color-deep-teal};
   --accent-primary-rgb: 143, 59, 36;
   --accent-secondary-rgb: 31, 92, 82;
-  --hero-wash: rgba(184, 92, 56, 0.14);
-  --hero-mist: rgba(31, 92, 82, 0.12);
+  --hero-wash: rgba(184, 92, 56, 0.03);
+  --hero-mist: rgba(31, 92, 82, 0.02);
 
   --border-subtle: rgba(34, 27, 24, 0.08);
   --border-default: rgba(34, 27, 24, 0.14);
   --border-strong: rgba(34, 27, 24, 0.24);
 
-  --shadow-sm: 0 10px 24px rgba(84, 58, 36, 0.06);
-  --shadow-md: 0 18px 44px rgba(84, 58, 36, 0.09);
-  --shadow-lg: 0 26px 70px rgba(84, 58, 36, 0.14);
-  --shadow-card: 0 18px 42px rgba(84, 58, 36, 0.11);
+  --shadow-sm: 0 6px 18px rgba(84, 58, 36, 0.04);
+  --shadow-md: 0 14px 34px rgba(84, 58, 36, 0.06);
+  --shadow-lg: 0 20px 52px rgba(84, 58, 36, 0.08);
+  --shadow-card: 0 12px 28px rgba(84, 58, 36, 0.06);
 }
 
 [data-theme="dark"] {

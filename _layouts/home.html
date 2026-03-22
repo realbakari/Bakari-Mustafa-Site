@@ -5,82 +5,49 @@ home: true
 
 <div class="home-landing">
   <section class="home-hero">
-    <div class="home-hero__content">
-      <p class="home-kicker">Brisbane-based entrepreneur, technologist, and community builder</p>
-      <h1 class="home-hero__title">Building useful things for people who deserve more access, direction, and opportunity.</h1>
-      <p class="home-hero__lede">
-        I’m Bakari Mustafa. This site is part journal, part studio, part public notebook on leadership, technology, and the long work of creating better futures for African-Australian communities.
-      </p>
-      <div class="home-actions">
-        <a href="/about/" class="home-action home-action-primary">Read my story</a>
-        <a href="/projects/" class="home-action home-action-secondary">Explore projects</a>
-      </div>
-      <div class="home-signal-row">
-        <span class="home-signal-pill">Leadership programs</span>
-        <span class="home-signal-pill">Community platforms</span>
-        <span class="home-signal-pill">Writing and reflection</span>
-      </div>
-    </div>
-
-    <div class="home-hero__aside">
-      <article class="hero-portrait-card">
-        <div class="hero-portrait-frame">
-          <img src="{{ site.author.avatar }}" alt="{{ site.author.name }}" class="hero-portrait-image">
-        </div>
-        <div class="hero-portrait-copy">
-          <p class="hero-card-label">Current focus</p>
-          <p class="hero-card-text">Using technology, mentorship, and storytelling to help more young people access confidence, networks, and momentum.</p>
-        </div>
-      </article>
-
-      <article class="hero-pulse-card">
-        <p class="hero-card-label">Inside the site</p>
-        <div class="hero-pulse-list">
-          <div class="hero-pulse-item">
-            <span class="hero-pulse-number">01</span>
-            <p>Essays on ideas, faith, technology, and cultural memory.</p>
-          </div>
-          <div class="hero-pulse-item">
-            <span class="hero-pulse-number">02</span>
-            <p>Projects grounded in mentorship, education, and community infrastructure.</p>
-          </div>
-          <div class="hero-pulse-item">
-            <span class="hero-pulse-number">03</span>
-            <p>Reading notes from books that sharpen judgment and imagination.</p>
-          </div>
-        </div>
-      </article>
+    <p class="home-kicker">Bakari Mustafa</p>
+    <h1 class="home-hero__title">Entrepreneur, technologist, and community builder.</h1>
+    <p class="home-hero__lede">
+      I’m an African-born Australian founder and former refugee based in Brisbane. This site is where I share projects, essays, and reading notes on leadership, technology, faith, and community.
+    </p>
+    <p class="home-hero__support">
+      Much of my work is centered on education, mentorship, and creating stronger pathways for young African-Australians.
+    </p>
+    <div class="home-actions">
+      <a href="/about/" class="home-action home-action-primary">About</a>
+      <a href="/posts/" class="home-action home-action-secondary">Writing</a>
+      <a href="/projects/" class="home-action home-action-secondary">Projects</a>
     </div>
   </section>
 
   <section class="home-map">
     <div class="home-section-intro">
-      <p class="section-kicker">Browse by intent</p>
-      <h2 class="section-title">Start where your curiosity already is.</h2>
+      <p class="section-kicker">Overview</p>
+      <h2 class="section-title">What you’ll find here.</h2>
     </div>
     <div class="home-map-grid">
       <a href="/posts/" class="map-card map-card-writing">
         <span class="map-card-label">Writing</span>
-        <h3>Essays, observations, and working thoughts.</h3>
-        <p>Longer-form reflections on leadership, technology, belief, and building a meaningful life.</p>
+        <h3>Essays and working thoughts.</h3>
+        <p>Reflections on leadership, technology, belief, and building a meaningful life.</p>
       </a>
-      <a href="/reading/" class="map-card map-card-reading">
+      <a href="/projects/" class="map-card map-card-reading">
+        <span class="map-card-label">Projects</span>
+        <h3>Programs, platforms, and experiments.</h3>
+        <p>Community-focused work across mentorship, education, and digital products.</p>
+      </a>
+      <a href="/reading/" class="map-card map-card-library">
         <span class="map-card-label">Reading</span>
-        <h3>Books and ideas shaping my thinking.</h3>
-        <p>A living shelf of what I’m reading and the texts that keep influencing how I work.</p>
-      </a>
-      <a href="/book-summaries/" class="map-card map-card-library">
-        <span class="map-card-label">Summaries</span>
-        <h3>Condensed lessons worth revisiting.</h3>
-        <p>Notes from books on business, self-mastery, philosophy, and practical wisdom.</p>
+        <h3>Books and ideas that stay with me.</h3>
+        <p>A record of what I’m reading and the ideas continuing to shape my work.</p>
       </a>
     </div>
   </section>
 
   <section class="featured-section">
     <div class="home-section-intro">
-      <p class="section-kicker">Selected work</p>
-      <h2 class="section-title">Projects with a human center of gravity.</h2>
+      <p class="section-kicker">Selected Work</p>
+      <h2 class="section-title">Projects I care deeply about.</h2>
     </div>
     <div class="featured-grid">
       {% for project in site.data.featured_projects limit:2 %}
@@ -108,8 +75,8 @@ home: true
 
   <section class="popular-section">
     <div class="home-section-intro">
-      <p class="section-kicker">Fresh notes</p>
-      <h2 class="section-title">Recent writing, without the content-farm energy.</h2>
+      <p class="section-kicker">Recent Writing</p>
+      <h2 class="section-title">A few recent pieces.</h2>
     </div>
     <div class="popular-list">
       {% for post in site.posts limit: 3 %}
