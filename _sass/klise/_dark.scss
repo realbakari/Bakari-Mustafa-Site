@@ -616,18 +616,18 @@ body[data-theme="dark"] {
   .book-summary-list {
     .year-section h2 {
       color: $dark-white;
-      border-bottom-color: $dark-text-link-blue;
+      border-bottom-color: rgba(255, 255, 255, 0.12);
     }
   }
 
   .book-list li {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.12);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: $dark-text-link-blue;
-      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.15);
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: none;
     }
 
     a {
@@ -669,16 +669,16 @@ body[data-theme="dark"] {
 
   // Projects Grid Dark Mode
   .project-item {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.12);
 
     &:hover {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: $dark-text-link-blue;
-      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: none;
     }
 
-    h4 a {
+    h3 a {
       color: $dark-white;
 
       &:hover {
@@ -688,6 +688,10 @@ body[data-theme="dark"] {
 
     .project-meta {
       color: rgba(255, 255, 255, 0.5);
+    }
+
+    .project-role {
+      color: rgba(255, 255, 255, 0.55);
     }
 
     p {

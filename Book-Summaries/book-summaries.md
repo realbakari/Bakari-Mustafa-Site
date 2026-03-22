@@ -9,12 +9,13 @@ description: This page shares a full list of book summaries I have compiled duri
 
 ---
 
-<div class="page-header">
-  <h1>📚 Book Summaries</h1>
-  <p class="page-subtitle">This page shares a full list of book summaries I have compiled during my reading and research. If a particular book sounds interesting to you, click on the full book summary and you can browse all of my notes on it.</p>
+<div class="page-header books-page-header">
+  <p class="page-kicker">Reading Notes</p>
+  <h1>Book Summaries</h1>
+  <p class="page-subtitle">A running archive of summaries and notes from books that have shaped how I think about leadership, business, psychology, and creative work.</p>
 </div>
 
-<div class="book-summary-list">
+<div class="book-summary-list books-page">
   <div class="year-section">
     <h2>2021</h2>
     <ul class="book-list">
@@ -62,4 +63,4 @@ description: This page shares a full list of book summaries I have compiled duri
 
 ---
 
-*Browse the complete collection above or check out my [reading list](/reading/) for categorized recommendations.*
+<p class="books-page-footer">Browse the collection above or visit my <a href="/reading/">reading list</a> for broader recommendations and categories.</p>
