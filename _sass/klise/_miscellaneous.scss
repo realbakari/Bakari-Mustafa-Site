@@ -220,8 +220,8 @@
 
 // Table of Contents for long pages
 .table-of-contents {
-  background: rgba(0, 63, 255, 0.05);
-  border: 2px solid rgba(0, 63, 255, 0.15);
+  background: transparent;
+  border: 1px solid var(--border-default);
   border-radius: 8px;
   padding: 2rem;
   margin: 2rem 0 3rem;
@@ -242,19 +242,19 @@
   a {
     display: block;
     padding: 0.75rem 1rem;
-    background: $white;
-    border: 1px solid rgba(128, 128, 128, 0.2);
+    background: var(--bg-surface);
+    border: 1px solid var(--border-default);
     border-radius: 6px;
     text-decoration: none;
-    color: $black;
+    color: var(--text-primary);
     font-weight: 500;
     transition: all 0.3s ease;
 
     &:hover {
-      background: rgba(0, 63, 255, 0.08);
-      border-color: rgba(0, 63, 255, 0.3);
-      transform: translateY(-1px);
-      box-shadow: 0 2px 8px rgba(0, 63, 255, 0.15);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: none;
+      box-shadow: none;
     }
   }
 
@@ -269,9 +269,9 @@
   bottom: 0;
   left: 0;
   right: 0;
-  background: $white;
-  border-top: 1px solid rgba(0, 0, 0, 0.1);
-  box-shadow: 0 -2px 10px rgba(0, 0, 0, 0.05);
+  background: var(--bg-surface);
+  border-top: 1px solid var(--border-default);
+  box-shadow: 0 -6px 20px rgba(0, 0, 0, 0.04);
   z-index: 9999;
 }
 
@@ -310,12 +310,12 @@
   }
 
   .cookie-link {
-    color: #003FFF;
+    color: var(--accent-primary);
     text-decoration: underline;
     font-weight: 500;
 
     &:hover {
-      color: #0035db;
+      color: var(--text-primary);
     }
   }
 }
@@ -332,12 +332,12 @@
 
 .cookie-btn {
   padding: 0.75rem 1.5rem;
-  border: 2px solid;
-  border-radius: 6px;
-  font-size: 1rem;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
+  font-size: 0.95rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
 
   @include media-query($on-mobile) {
@@ -346,26 +346,26 @@
 }
 
 .cookie-accept {
-  background: #003FFF;
-  border-color: #003FFF;
-  color: white;
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--surface-strong);
 
   &:hover {
-    background: #0035db;
-    border-color: #0035db;
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    transform: none;
+    box-shadow: none;
   }
 }
 
 .cookie-decline {
   background: transparent;
-  border-color: rgba(128, 128, 128, 0.3);
-  color: $black;
+  border-color: var(--border-default);
+  color: var(--text-primary);
 
   &:hover {
-    background: rgba(128, 128, 128, 0.1);
-    border-color: rgba(128, 128, 128, 0.5);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
   }
 }
 
@@ -486,9 +486,9 @@
 
 .book-card,
 .project-card {
-  background: $white;
-  border: 2px solid rgba(128, 128, 128, 0.15);
-  border-radius: 12px;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
   overflow: hidden;
   transition: all 0.3s ease;
   height: 100%;
@@ -496,9 +496,9 @@
   flex-direction: column;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 63, 255, 0.15);
-    border-color: rgba(0, 63, 255, 0.3);
+    transform: none;
+    box-shadow: none;
+    border-color: var(--accent-primary);
   }
 
   .card-header {
@@ -517,7 +517,7 @@
         transition: color 0.2s ease;
 
         &:hover {
-          color: #003FFF;
+          color: var(--accent-primary);
         }
       }
     }
@@ -533,9 +533,10 @@
       .badge {
         display: inline-block;
         padding: 0.25rem 0.75rem;
-        background: rgba(0, 63, 255, 0.1);
-        color: #003FFF;
-        border-radius: 4px;
+        background: transparent;
+        color: var(--text-secondary);
+        border: 1px solid var(--border-default);
+        border-radius: 999px;
         font-weight: 500;
         font-size: 0.8rem;
       }
@@ -567,11 +568,11 @@
 
   .card-footer {
     padding: 1.25rem 1.5rem;
-    border-top: 1px solid rgba(128, 128, 128, 0.1);
-    background: rgba(128, 128, 128, 0.03);
+    border-top: 1px solid var(--border-subtle);
+    background: transparent;
 
     a {
-      color: #003FFF;
+      color: var(--text-primary);
       text-decoration: none;
       font-weight: 500;
       display: inline-flex;
@@ -580,6 +581,7 @@
       transition: gap 0.2s ease;
 
       &:hover {
+        color: var(--accent-primary);
         gap: 0.75rem;
       }
 
@@ -597,10 +599,11 @@
     margin-bottom: 3rem;
 
     h2 {
+      font-family: $heading-family;
       font-size: 2rem;
       margin-bottom: 2rem;
-      color: $black;
-      border-bottom: 3px solid #003FFF;
+      color: var(--text-primary);
+      border-bottom: 1px solid var(--border-default);
       padding-bottom: 0.75rem;
     }
   }
@@ -619,16 +622,16 @@
   }
 
   li {
-    background: $white;
-    border: 2px solid rgba(128, 128, 128, 0.15);
+    background: transparent;
+    border: 1px solid var(--border-default);
     border-radius: 8px;
     padding: 1.5rem;
     transition: all 0.3s ease;
 
     &:hover {
-      transform: translateY(-2px);
-      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.12);
-      border-color: rgba(0, 63, 255, 0.3);
+      transform: none;
+      box-shadow: none;
+      border-color: var(--accent-primary);
     }
 
     a {
@@ -639,7 +642,7 @@
       transition: color 0.2s ease;
 
       &:hover {
-        color: #003FFF;
+        color: var(--accent-primary);
       }
     }
   }
@@ -650,13 +653,14 @@
   margin-bottom: 3rem;
 
   h3 {
+    font-family: $heading-family;
     font-size: 1.5rem;
-    color: $black;
+    color: var(--text-primary);
     margin-bottom: 1.5rem;
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    border-left: 4px solid #003FFF;
+    border-left: 2px solid var(--accent-primary);
     padding-left: 1rem;
   }
 
@@ -672,23 +676,22 @@
     a {
       display: block;
       padding: 1.25rem;
-      background: rgba(0, 63, 255, 0.03);
-      border: 2px solid rgba(0, 63, 255, 0.15);
+      background: transparent;
+      border: 1px solid var(--border-default);
       border-radius: 8px;
-      color: $black;
+      color: var(--text-primary);
       text-decoration: none;
       transition: all 0.3s ease;
 
       &:hover {
-        background: rgba(0, 63, 255, 0.08);
-        border-color: rgba(0, 63, 255, 0.3);
-        transform: translateX(4px);
-        box-shadow: -4px 0 0 0 #003FFF;
+        border-color: var(--accent-primary);
+        transform: none;
+        box-shadow: none;
       }
 
       strong {
         display: block;
-        color: $black;
+        color: var(--text-primary);
         margin-bottom: 0.25rem;
         font-size: 1.05rem;
       }
@@ -715,16 +718,16 @@
 }
 
 .project-item {
-  background: $white;
-  border: 2px solid rgba(128, 128, 128, 0.15);
-  border-radius: 12px;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
   padding: 2rem;
   transition: all 0.3s ease;
 
   &:hover {
-    transform: translateY(-4px);
-    box-shadow: 0 8px 24px rgba(0, 63, 255, 0.15);
-    border-color: rgba(0, 63, 255, 0.3);
+    transform: none;
+    box-shadow: none;
+    border-color: var(--accent-primary);
   }
 
   .project-icon {
@@ -743,7 +746,7 @@
       transition: color 0.2s ease;
 
       &:hover {
-        color: #003FFF;
+        color: var(--accent-primary);
       }
     }
   }
@@ -764,20 +767,24 @@
 
 // Page Header Enhancement
 .page-header {
-  text-align: center;
-  margin-bottom: 3rem;
-  padding: 2rem 0;
-  border-bottom: 2px solid rgba(128, 128, 128, 0.1);
+  text-align: left;
+  margin-bottom: 2.75rem;
+  padding: 1.5rem 0 1.5rem;
+  border-bottom: 1px solid var(--border-default);
 
   h1 {
-    margin-bottom: 1rem;
+    margin-bottom: 0.75rem;
+    font-family: $heading-family;
+    font-size: clamp(2.25rem, 5vw, 3.5rem);
+    line-height: 1.04;
+    letter-spacing: -0.04em;
   }
 
   .page-subtitle {
-    font-size: 1.2rem;
-    color: rgba(0, 0, 0, 0.7);
+    font-size: 1.05rem;
+    color: var(--text-secondary);
     max-width: 700px;
-    margin: 0 auto;
+    margin: 0;
     line-height: 1.6;
   }
 
@@ -1287,19 +1294,21 @@
 }
 
 .social-share-header {
-  text-align: center;
-  margin-bottom: 1.5rem;
+  text-align: left;
+  margin-bottom: 1.25rem;
 
   h3 {
     margin: 0 0 0.5rem 0;
-    font-size: 1.5rem;
-    color: $black;
+    font-size: 1.35rem;
+    color: var(--text-primary);
     font-weight: $bold-weight;
+    font-family: $heading-family;
+    letter-spacing: -0.03em;
   }
 
   p {
     margin: 0;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     font-size: 0.95rem;
   }
 }
@@ -1323,10 +1332,10 @@
   justify-content: center;
   gap: 0.5rem;
   padding: 0.75rem 1rem;
-  background: white;
-  border: 2px solid rgba(0, 63, 255, 0.2);
+  background: transparent;
+  border: 1px solid var(--border-default);
   border-radius: 8px;
-  color: #003FFF;
+  color: var(--text-primary);
   font-weight: 500;
   font-size: 0.9rem;
   text-decoration: none;
@@ -1346,8 +1355,10 @@
   }
 
   &:hover {
-    transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.2);
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
+    transform: none;
+    box-shadow: none;
   }
 
   // Platform-specific colors
@@ -1382,8 +1393,8 @@
   }
 
   &.share-copy:hover {
-    background: #003FFF;
-    border-color: #003FFF;
+    background: var(--text-primary);
+    border-color: var(--text-primary);
     color: white;
   }
 
@@ -1481,28 +1492,28 @@
   }
 
   &.primary {
-    background: #003FFF;
-    color: white;
-    border: 2px solid #003FFF;
+    background: var(--text-primary);
+    color: var(--surface-strong);
+    border: 1px solid var(--text-primary);
 
     &:hover {
-      background: #0035db;
-      border-color: #0035db;
-      transform: translateY(-2px);
-      box-shadow: 0 6px 16px rgba(0, 63, 255, 0.3);
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      transform: none;
+      box-shadow: none;
     }
   }
 
   &.secondary {
-    background: white;
-    color: #003FFF;
-    border: 2px solid rgba(0, 63, 255, 0.3);
+    background: transparent;
+    color: var(--text-primary);
+    border: 1px solid var(--border-default);
 
     &:hover {
-      background: rgba(0, 63, 255, 0.05);
-      border-color: #003FFF;
-      transform: translateY(-2px);
-      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.15);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: none;
+      box-shadow: none;
     }
   }
 
@@ -1513,8 +1524,8 @@
 }
 
 .thank-you-info {
-  background: rgba(0, 63, 255, 0.03);
-  border: 1px solid rgba(0, 63, 255, 0.1);
+  background: transparent;
+  border: 1px solid var(--border-default);
   border-radius: 12px;
   padding: 2rem;
   margin-top: 3rem;
@@ -1546,16 +1557,17 @@
     justify-content: center;
     width: 48px;
     height: 48px;
-    background: rgba(0, 63, 255, 0.1);
-    border-radius: 10px;
-    color: #003FFF;
+    background: transparent;
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    color: var(--text-primary);
     transition: all 0.3s ease;
 
     &:hover {
-      background: #003FFF;
-      color: white;
-      transform: translateY(-3px);
-      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
+      transform: none;
+      box-shadow: none;
     }
 
     svg {
@@ -1835,10 +1847,10 @@
 
 // Enhanced Posts Page Styles
 .posts-page-header {
-  text-align: center;
-  padding: 2rem 0 2rem;
+  text-align: left;
+  padding: 1.5rem 0 1.75rem;
   margin-bottom: 2rem;
-  border-bottom: 1px solid rgba(0, 0, 0, 0.1);
+  border-bottom: 1px solid var(--border-default);
 
   @include media-query($on-mobile) {
     padding: 1.5rem 0 1.5rem;
@@ -1848,10 +1860,12 @@
 
 .posts-header-content {
   .posts-main-title {
-    font-size: 2rem;
+    font-family: $heading-family;
+    font-size: clamp(2.3rem, 5vw, 3.5rem);
     margin-bottom: 0.5rem;
-    color: $black;
+    color: var(--text-primary);
     font-weight: $bold-weight;
+    letter-spacing: -0.04em;
 
     @include media-query($on-mobile) {
       font-size: 1.75rem;
@@ -1861,14 +1875,14 @@
   .posts-subtitle {
     font-size: 1rem;
     line-height: 1.6;
-    color: rgba(0, 0, 0, 0.7);
-    max-width: 600px;
-    margin: 0 auto;
+    color: var(--text-secondary);
+    max-width: 640px;
+    margin: 0;
   }
 
   .posts-stats {
     display: flex;
-    justify-content: center;
+    justify-content: flex-start;
     gap: 1.5rem;
     margin-top: 1rem;
 
@@ -1921,10 +1935,10 @@
     position: sticky;
     top: 0;
     z-index: 100;
-    background: $white;
+    background: var(--bg-primary);
     padding: 1rem 0 0.5rem;
     margin-bottom: 1.5rem;
-    box-shadow: 0 4px 12px rgba(0, 0, 0, 0.05);
+    box-shadow: 0 8px 20px rgba(0, 0, 0, 0.04);
   }
 }
 
@@ -1946,17 +1960,17 @@
   input[type="search"] {
     width: 100%;
     padding: 1rem 3.5rem 1rem 3rem;
-    border: 2px solid rgba(0, 63, 255, 0.2);
-    border-radius: 12px;
+    border: 1px solid var(--border-default);
+    border-radius: 8px;
     font-size: 1rem;
-    transition: all 0.3s ease;
-    background: $white;
-    color: $black;
+    transition: all 0.2s ease;
+    background: var(--bg-surface);
+    color: var(--text-primary);
 
     &:focus {
       outline: none;
-      border-color: #003FFF;
-      box-shadow: 0 0 0 4px rgba(0, 63, 255, 0.1);
+      border-color: var(--border-strong);
+      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
     }
 
     &::placeholder {
@@ -1972,7 +1986,7 @@
   .clear-search-btn {
     position: absolute;
     right: 1rem;
-    background: rgba(128, 128, 128, 0.1);
+    background: rgba(128, 128, 128, 0.08);
     border: none;
     border-radius: 50%;
     width: 32px;
@@ -2016,9 +2030,9 @@
   justify-content: space-between;
   gap: 1.5rem;
   margin-bottom: 2rem;
-  padding: 1rem;
-  background: rgba(0, 0, 0, 0.02);
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  padding: 1rem 0 0;
+  background: transparent;
+  border: none;
   border-radius: 8px;
 
   @include media-query($on-tablet) {
@@ -2027,7 +2041,7 @@
   }
 
   @include media-query($on-mobile) {
-    padding: 0.875rem;
+    padding: 0.875rem 0 0;
     gap: 1rem;
   }
 }
@@ -2055,28 +2069,27 @@
 }
 
 .filter-btn {
-  padding: 0.625rem 1.25rem;
-  background: $white;
-  border: 2px solid rgba(0, 63, 255, 0.2);
-  border-radius: 8px;
-  color: rgba(0, 0, 0, 0.7);
+  padding: 0.45rem 0.8rem;
+  background: transparent;
+  border: 1px solid var(--border-default);
+  border-radius: 999px;
+  color: var(--text-secondary);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
-  transition: all 0.3s ease;
+  transition: all 0.2s ease;
   white-space: nowrap;
 
   &:hover {
-    background: rgba(0, 63, 255, 0.05);
-    border-color: rgba(0, 63, 255, 0.4);
-    color: $black;
+    border-color: var(--accent-primary);
+    color: var(--accent-primary);
   }
 
   &.active {
-    background: #003FFF;
-    border-color: #003FFF;
-    color: white;
-    box-shadow: 0 2px 8px rgba(0, 63, 255, 0.3);
+    background: transparent;
+    border-color: var(--text-primary);
+    color: var(--text-primary);
+    box-shadow: none;
   }
 
   @include media-query($on-mobile) {
@@ -2088,17 +2101,17 @@
 .sort-label {
   font-size: 0.9rem;
   font-weight: 500;
-  color: $black;
+  color: var(--text-primary);
   white-space: nowrap;
 }
 
 .sort-select {
   padding: 0.625rem 2.5rem 0.625rem 1rem;
-  background: $white url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23003FFF" d="M6 9L1 4h10z"/></svg>') no-repeat right 0.75rem center;
+  background: var(--bg-surface) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23221b18" d="M6 9L1 4h10z"/></svg>') no-repeat right 0.75rem center;
   background-size: 12px;
-  border: 2px solid rgba(0, 63, 255, 0.2);
+  border: 1px solid var(--border-default);
   border-radius: 8px;
-  color: $black;
+  color: var(--text-primary);
   font-size: 0.9rem;
   font-weight: 500;
   cursor: pointer;
@@ -2106,14 +2119,13 @@
   transition: all 0.3s ease;
 
   &:hover {
-    border-color: rgba(0, 63, 255, 0.4);
-    background-color: rgba(0, 63, 255, 0.02);
+    border-color: var(--border-strong);
   }
 
   &:focus {
     outline: none;
-    border-color: #003FFF;
-    box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.1);
+    border-color: var(--border-strong);
+    box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.04);
   }
 
   @include media-query($on-mobile) {
@@ -2125,10 +2137,10 @@
 // Popular Tags Section
 .popular-tags-section {
   margin-bottom: 2rem;
-  padding: 1.25rem;
+  padding: 1.25rem 0 0;
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.08);
-  border-radius: 8px;
+  border-top: 1px solid var(--border-default);
+  border-radius: 0;
 
   @include media-query($on-mobile) {
     padding: 1rem;
@@ -2152,11 +2164,11 @@
   }
 
   .tag-filter-btn {
-    padding: 0.375rem 0.75rem;
+    padding: 0.35rem 0.7rem;
     background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    color: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    color: var(--text-secondary);
     font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
@@ -2168,9 +2180,8 @@
     }
 
     &:hover {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.25);
-      color: $black;
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
 
       .tag-count {
         color: rgba(0, 0, 0, 0.7);
@@ -2178,12 +2189,12 @@
     }
 
     &.active {
-      background: $black;
-      border-color: $black;
-      color: $white;
+      background: transparent;
+      border-color: var(--text-primary);
+      color: var(--text-primary);
 
       .tag-count {
-        color: rgba(255, 255, 255, 0.8);
+        color: var(--text-secondary);
       }
     }
   }
@@ -2192,13 +2203,13 @@
 // Search Results Container
 .search-results-container {
   margin-bottom: 2rem;
-  padding: 1.5rem;
-  background: rgba(0, 63, 255, 0.02);
-  border: 1px solid rgba(0, 63, 255, 0.15);
-  border-radius: 12px;
+  padding: 1.5rem 0 0;
+  background: transparent;
+  border-top: 1px solid var(--border-default);
+  border-radius: 0;
 
   @include media-query($on-mobile) {
-    padding: 1rem;
+    padding: 1rem 0 0;
   }
 
   .search-results-header {
@@ -2216,24 +2227,23 @@
     h3 {
       margin: 0;
       font-size: 1.2rem;
-      color: $black;
+      color: var(--text-primary);
     }
 
     .clear-results-btn {
       padding: 0.5rem 1.25rem;
-      background: $white;
-      border: 2px solid rgba(0, 63, 255, 0.2);
-      border-radius: 6px;
-      color: #003FFF;
+      background: transparent;
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
+      color: var(--text-primary);
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
       transition: all 0.3s ease;
 
       &:hover {
-        background: #003FFF;
-        border-color: #003FFF;
-        color: white;
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
       }
 
       @include media-query($on-mobile) {
@@ -2287,11 +2297,12 @@
     display: flex;
     align-items: center;
     gap: 1rem;
+    font-family: $heading-family;
     font-size: 2rem;
     margin-bottom: 1.5rem;
-    color: $black;
+    color: var(--text-primary);
     padding-bottom: 0.75rem;
-    border-bottom: 3px solid #003FFF;
+    border-bottom: 1px solid var(--border-default);
 
     @include media-query($on-mobile) {
       font-size: 1.5rem;
@@ -2302,9 +2313,10 @@
       font-size: 0.9rem;
       font-weight: 500;
       padding: 0.35rem 0.75rem;
-      background: rgba(0, 63, 255, 0.1);
-      color: #003FFF;
-      border-radius: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
 
       @include media-query($on-mobile) {
         font-size: 0.8rem;
@@ -2314,16 +2326,17 @@
   }
 
   .post-card.enhanced {
-    background: $white;
-    border: 1px solid rgba(0, 0, 0, 0.1);
-    border-radius: 6px;
+    background: transparent;
+    border: none;
+    border-top: 1px solid var(--border-default);
+    border-radius: 0;
     margin-bottom: 1.25rem;
     transition: all 0.2s ease;
     overflow: hidden;
 
     &:hover {
-      border-color: rgba(0, 0, 0, 0.2);
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+      border-color: var(--border-strong);
+      box-shadow: none;
     }
 
     @include media-query($on-mobile) {
@@ -2331,10 +2344,10 @@
     }
 
     .post-card-content {
-      padding: 1.5rem;
+      padding: 1.4rem 0 0.75rem;
 
       @include media-query($on-mobile) {
-        padding: 1.25rem;
+        padding: 1.25rem 0;
       }
     }
 
@@ -2344,8 +2357,8 @@
       flex-wrap: wrap;
       gap: 1rem;
       margin-bottom: 1rem;
-      padding-bottom: 0.75rem;
-      border-bottom: 1px solid rgba(128, 128, 128, 0.1);
+      padding-bottom: 0;
+      border-bottom: none;
 
       @include media-query($on-mobile) {
         gap: 0.75rem;
@@ -2360,7 +2373,7 @@
         color: rgba(0, 0, 0, 0.7);
 
         svg {
-          color: #003FFF;
+          color: var(--text-secondary);
           flex-shrink: 0;
         }
       }
@@ -2368,29 +2381,31 @@
 
     .post-item-title {
       margin: 0 0 1rem 0;
-      font-size: 1.5rem;
-      line-height: 1.4;
+      font-family: $heading-family;
+      font-size: 1.75rem;
+      line-height: 1.1;
+      letter-spacing: -0.03em;
 
       @include media-query($on-mobile) {
         font-size: 1.25rem;
       }
 
       a {
-        color: $black;
+        color: var(--text-primary);
         text-decoration: none;
         transition: color 0.2s ease;
 
         &:hover {
-          color: #003FFF;
+          color: var(--accent-primary);
         }
       }
     }
 
     .post-card-description {
-      color: rgba(0, 0, 0, 0.7);
+      color: var(--text-secondary);
       line-height: 1.7;
       margin-bottom: 1.25rem;
-      font-size: 0.95rem;
+      font-size: 1rem;
     }
 
     .post-card-footer {
@@ -2399,7 +2414,7 @@
       justify-content: space-between;
       gap: 1rem;
       padding-top: 0.75rem;
-      border-top: 1px solid rgba(128, 128, 128, 0.1);
+      border-top: 1px solid var(--border-subtle);
 
       @include media-query($on-mobile) {
         flex-direction: column;
@@ -2412,16 +2427,22 @@
         gap: 0.5rem;
 
         .post-tag {
-          padding: 0.35rem 0.75rem;
-          background: rgba(0, 63, 255, 0.08);
-          color: #003FFF;
-          border-radius: 4px;
+          padding: 0;
+          background: transparent;
+          color: var(--text-secondary);
+          border-radius: 0;
           font-size: 0.8rem;
           font-weight: 500;
           transition: all 0.2s ease;
 
+          &::before {
+            content: "\2022";
+            margin-right: 0.3rem;
+            color: var(--accent-primary);
+          }
+
           &:hover {
-            background: rgba(0, 63, 255, 0.15);
+            color: var(--accent-primary);
           }
         }
       }
@@ -2490,7 +2511,7 @@ html {
 
 // Dedicated Search Page Styles
 .search-page-header {
-  text-align: center;
+  text-align: left;
   padding: 2rem 0 1.5rem;
   margin-bottom: 1.5rem;
 
@@ -2509,10 +2530,12 @@ html {
   }
 
   .search-page-title {
-    font-size: 2rem;
+    font-family: $heading-family;
+    font-size: clamp(2.3rem, 5vw, 3.3rem);
     margin-bottom: 0.5rem;
-    color: $black;
+    color: var(--text-primary);
     font-weight: $bold-weight;
+    letter-spacing: -0.04em;
 
     @include media-query($on-mobile) {
       font-size: 1.75rem;
@@ -2522,9 +2545,9 @@ html {
   .search-page-subtitle {
     font-size: 1rem;
     line-height: 1.6;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     max-width: 600px;
-    margin: 0 auto;
+    margin: 0;
   }
 }
 
@@ -2559,8 +2582,8 @@ html {
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.2s ease;
-    background: $white;
-    color: $black;
+    background: var(--bg-surface);
+    color: var(--text-primary);
     box-shadow: none;
 
     &:focus {
@@ -2627,25 +2650,24 @@ html {
 
   .hint-label {
     font-size: 0.9rem;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     font-weight: 500;
   }
 
   .search-hint-btn {
     padding: 0.375rem 0.875rem;
     background: transparent;
-    border: 1px solid rgba(0, 0, 0, 0.15);
-    border-radius: 4px;
-    color: rgba(0, 0, 0, 0.7);
+    border: 1px solid var(--border-default);
+    border-radius: 999px;
+    color: var(--text-secondary);
     font-size: 0.8rem;
     font-weight: 500;
     cursor: pointer;
     transition: all 0.2s ease;
 
     &:hover {
-      background: rgba(0, 0, 0, 0.03);
-      border-color: rgba(0, 0, 0, 0.25);
-      color: $black;
+      border-color: var(--accent-primary);
+      color: var(--accent-primary);
     }
   }
 }
@@ -2654,13 +2676,13 @@ html {
 .search-filters {
   max-width: 800px;
   margin: 0 auto 2rem;
-  padding: 1.25rem;
-  background: rgba(0, 63, 255, 0.03);
-  border: 1px solid rgba(0, 63, 255, 0.1);
-  border-radius: 12px;
+  padding: 1.25rem 0 0;
+  background: transparent;
+  border-top: 1px solid var(--border-default);
+  border-radius: 0;
 
   @include media-query($on-mobile) {
-    padding: 1rem;
+    padding: 1rem 0 0;
   }
 
   .filter-section {
@@ -2676,16 +2698,16 @@ html {
     .filter-label {
       font-size: 0.9rem;
       font-weight: 600;
-      color: $black;
+      color: var(--text-primary);
       white-space: nowrap;
     }
 
     .search-filter-btn {
-      padding: 0.625rem 1.25rem;
-      background: $white;
-      border: 2px solid rgba(0, 63, 255, 0.2);
-      border-radius: 8px;
-      color: rgba(0, 0, 0, 0.7);
+      padding: 0.5rem 0.9rem;
+      background: transparent;
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
+      color: var(--text-secondary);
       font-size: 0.9rem;
       font-weight: 500;
       cursor: pointer;
@@ -2693,16 +2715,15 @@ html {
       white-space: nowrap;
 
       &:hover {
-        background: rgba(0, 63, 255, 0.05);
-        border-color: rgba(0, 63, 255, 0.4);
-        color: $black;
+        border-color: var(--accent-primary);
+        color: var(--accent-primary);
       }
 
       &.active {
-        background: #003FFF;
-        border-color: #003FFF;
-        color: white;
-        box-shadow: 0 2px 8px rgba(0, 63, 255, 0.3);
+        background: transparent;
+        border-color: var(--text-primary);
+        color: var(--text-primary);
+        box-shadow: none;
       }
 
       @include media-query($on-mobile) {
@@ -2768,17 +2789,18 @@ html {
 
     .result-type-badge {
       padding: 0.35rem 0.75rem;
-      background: rgba(0, 63, 255, 0.1);
-      color: #003FFF;
-      border-radius: 6px;
+      background: transparent;
+      color: var(--text-secondary);
+      border: 1px solid var(--border-default);
+      border-radius: 999px;
       font-size: 0.75rem;
       font-weight: 600;
       text-transform: uppercase;
       letter-spacing: 0.5px;
 
       &.type-post {
-        background: rgba(0, 63, 255, 0.1);
-        color: #003FFF;
+        background: transparent;
+        color: var(--text-secondary);
       }
 
       &.type-page {
@@ -2818,7 +2840,7 @@ html {
   }
 
   &:hover .result-title {
-    color: #003FFF;
+    color: var(--accent-primary);
   }
 
   .result-description {
@@ -2832,7 +2854,7 @@ html {
     display: flex;
     align-items: center;
     gap: 0.5rem;
-    color: #003FFF;
+    color: var(--text-primary);
     font-weight: 500;
     font-size: 0.9rem;
 
@@ -2884,8 +2906,8 @@ html {
   }
 
   .no-results-suggestions {
-    background: rgba(0, 63, 255, 0.03);
-    border: 1px solid rgba(0, 63, 255, 0.1);
+    background: transparent;
+    border: 1px solid var(--border-default);
     border-radius: 12px;
     padding: 1.5rem;
     text-align: left;
@@ -2906,7 +2928,7 @@ html {
         line-height: 1.5;
 
         a {
-          color: #003FFF;
+          color: var(--accent-primary);
           text-decoration: none;
           font-weight: 500;
 
