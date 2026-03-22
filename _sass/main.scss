@@ -1,9 +1,9 @@
-// Modern Minimalist Design System
+// Editorial Warm Design System
 
-// Typography - Clean & Professional
-$sans-family: 'Inter', -apple-system, BlinkMacSystemFont, sans-serif;
+// Typography
+$sans-family: 'Manrope', -apple-system, BlinkMacSystemFont, sans-serif;
 $mono-family: 'SF Mono', 'Monaco', 'Inconsolata', monospace;
-$heading-family: 'Inter', sans-serif;
+$heading-family: 'Fraunces', Georgia, serif;
 $base-font-size: 16px;
 $medium-font-size: $base-font-size * 0.938;
 $small-font-size: $base-font-size * 0.875;
@@ -16,43 +16,42 @@ $semibold-weight: 600;
 $bold-weight: 700;
 $extrabold-weight: 800;
 
-// Modern Minimalist Color Palette
-// True monochrome with subtle warmth
-$color-terracotta: #1a1a1a; // Maps to black
-$color-burnt-sienna: #1a1a1a; // Maps to black
-$color-deep-teal: #1a1a1a; // Accent → black
-$color-eucalyptus: #525252; // Secondary → gray
-$color-warm-sand: #f5f5f5; // Light bg
-$color-charcoal: #171717; // Primary text
-$color-soft-cream: #fafafa; // Page bg
-$color-ochre: #404040; // Mid gray
-$color-slate: #6b7280; // Muted text
+// Color palette
+$color-terracotta: #b85c38;
+$color-burnt-sienna: #8f3b24;
+$color-deep-teal: #1f5c52;
+$color-eucalyptus: #3a7b6b;
+$color-warm-sand: #e7d3bb;
+$color-charcoal: #221b18;
+$color-soft-cream: #f6efe5;
+$color-ochre: #a26e40;
+$color-slate: #6f6257;
 
 // Light Mode Colors
-$text-base-color: #171717;
-$text-link-blue: #171717; // Links are black with underline
-$text-link-blue-active: #525252;
+$text-base-color: $color-charcoal;
+$text-link-blue: $color-burnt-sienna;
+$text-link-blue-active: $color-terracotta;
 
-$black: #171717;
-$light: #e5e5e5;
-$smoke: #f5f5f5;
-$gray: #6b7280;
-$white: #ffffff;
+$black: $color-charcoal;
+$light: #dac7b5;
+$smoke: #efe3d4;
+$gray: $color-slate;
+$white: #fffaf4;
 
-// Dark Mode Colors (Rich, high contrast)
-$dark-text-base-color: #e5e5e5;
-$dark-text-link-blue: #ffffff;
-$dark-text-link-blue-active: #a3a3a3;
+// Dark Mode Colors
+$dark-text-base-color: #f1e5d8;
+$dark-text-link-blue: #f0915a;
+$dark-text-link-blue-active: #ffbc8c;
 
-$dark-black: #0a0a0a;
-$dark-white: #fafafa;
-$dark-light: #262626;
-$dark-smoke: #171717;
-$dark-gray: #a3a3a3;
+$dark-black: #171310;
+$dark-white: #fff4ea;
+$dark-light: #241d18;
+$dark-smoke: #1d1713;
+$dark-gray: #b8a799;
 
 // Layout
-$wide-size: 900px;
-$narrow-size: 720px;
+$wide-size: 1080px;
+$narrow-size: 760px;
 
 // Spacing (slightly more generous)
 $spacing-full: 32px;
@@ -80,53 +79,59 @@ $on-widescreen: 1152px;
 
 // Semantic CSS Variables for Theming
 :root {
-  // Base Colors
   --text-primary: #{$text-base-color};
   --text-secondary: #{$gray};
   --bg-primary: #{$white};
   --bg-secondary: #{$smoke};
-  --bg-tertiary: #{$light};
-  --bg-surface: #{$white};
+  --bg-tertiary: #f2e7d8;
+  --bg-surface: rgba(255, 250, 244, 0.84);
+  --surface-strong: #fffaf4;
+  --surface-soft: rgba(255, 247, 238, 0.72);
 
-  // Links & Accents
   --link-color: #{$text-base-color};
-  --link-hover: #525252;
-  --accent-primary: #{$black};
+  --link-hover: #{$color-burnt-sienna};
+  --accent-primary: #{$color-burnt-sienna};
+  --accent-secondary: #{$color-deep-teal};
+  --accent-primary-rgb: 143, 59, 36;
+  --accent-secondary-rgb: 31, 92, 82;
+  --hero-wash: rgba(184, 92, 56, 0.14);
+  --hero-mist: rgba(31, 92, 82, 0.12);
 
-  // Borders
-  --border-subtle: rgba(0, 0, 0, 0.1);
-  --border-default: rgba(0, 0, 0, 0.15);
-  --border-strong: rgba(0, 0, 0, 0.25);
+  --border-subtle: rgba(34, 27, 24, 0.08);
+  --border-default: rgba(34, 27, 24, 0.14);
+  --border-strong: rgba(34, 27, 24, 0.24);
 
-  // Shadows
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.05);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.05);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.1);
-  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.08);
+  --shadow-sm: 0 10px 24px rgba(84, 58, 36, 0.06);
+  --shadow-md: 0 18px 44px rgba(84, 58, 36, 0.09);
+  --shadow-lg: 0 26px 70px rgba(84, 58, 36, 0.14);
+  --shadow-card: 0 18px 42px rgba(84, 58, 36, 0.11);
 }
 
 [data-theme="dark"] {
-  // Base Colors
   --text-primary: #{$dark-text-base-color};
   --text-secondary: #{$dark-gray};
   --bg-primary: #{$dark-black};
   --bg-secondary: #{$dark-light};
-  --bg-tertiary: #2a2a2a;
-  --bg-surface: #{$dark-light};
+  --bg-tertiary: #342920;
+  --bg-surface: rgba(29, 23, 19, 0.84);
+  --surface-strong: #261e19;
+  --surface-soft: rgba(41, 31, 25, 0.74);
 
-  // Links & Accents
   --link-color: #{$dark-text-base-color};
-  --link-hover: #{$dark-gray};
-  --accent-primary: #{$white};
+  --link-hover: #{$dark-text-link-blue};
+  --accent-primary: #{$dark-text-link-blue};
+  --accent-secondary: #90bdb2;
+  --accent-primary-rgb: 240, 145, 90;
+  --accent-secondary-rgb: 144, 189, 178;
+  --hero-wash: rgba(240, 145, 90, 0.16);
+  --hero-mist: rgba(144, 189, 178, 0.12);
 
-  // Borders
-  --border-subtle: rgba(255, 255, 255, 0.1);
-  --border-default: rgba(255, 255, 255, 0.15);
-  --border-strong: rgba(255, 255, 255, 0.25);
+  --border-subtle: rgba(255, 255, 255, 0.08);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.2);
 
-  // Shadows
-  --shadow-sm: 0 1px 2px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 6px rgba(0, 0, 0, 0.3);
-  --shadow-lg: 0 10px 15px rgba(0, 0, 0, 0.4);
-  --shadow-card: 0 4px 12px rgba(0, 0, 0, 0.3);
+  --shadow-sm: 0 12px 26px rgba(0, 0, 0, 0.22);
+  --shadow-md: 0 20px 46px rgba(0, 0, 0, 0.32);
+  --shadow-lg: 0 28px 78px rgba(0, 0, 0, 0.42);
+  --shadow-card: 0 20px 48px rgba(0, 0, 0, 0.34);
 }

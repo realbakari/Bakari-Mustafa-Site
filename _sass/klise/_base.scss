@@ -41,8 +41,12 @@ body {
   min-height: 100vh;
   overflow-x: hidden;
   position: relative;
-  color: $text-base-color;
-  background-color: $white;
+  color: var(--text-primary);
+  background-color: var(--bg-primary);
+  background-image:
+    radial-gradient(circle at top left, var(--hero-wash), transparent 32%),
+    radial-gradient(circle at top right, var(--hero-mist), transparent 28%),
+    linear-gradient(180deg, var(--bg-primary) 0%, var(--bg-secondary) 52%, var(--bg-primary) 100%);
   font: $normal-weight #{$base-font-size}/#{$base-line-height} $sans-family;
   -webkit-text-size-adjust: 100%;
   -webkit-font-smoothing: antialiased;
@@ -54,6 +58,7 @@ body {
   font-kerning: normal;
   box-sizing: border-box;
   letter-spacing: -0.01em;
+  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 // Set `margin-bottom` to maintain vertical rhythm
@@ -292,6 +297,11 @@ blockquote {
       -webkit-animation: 0.2s ease-in forwards blur;
     }
   }
+}
+
+.wrapper-home {
+  max-width: -webkit-calc(#{$wide-size} - (#{$spacing-full} * 2));
+  max-width: calc(#{$wide-size} - (#{$spacing-full} * 2));
 }
 
 // Underline

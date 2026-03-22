@@ -1003,14 +1003,20 @@
 
 // Modern Footer Design
 .modern-footer {
-  background: rgba(0, 63, 255, 0.02);
-  border-top: 2px solid rgba(0, 63, 255, 0.1);
-  margin-top: 4rem;
-  padding: 3rem 0 1rem;
+  background:
+    radial-gradient(circle at top left, rgba(var(--accent-primary-rgb), 0.08), transparent 32%),
+    linear-gradient(180deg, var(--surface-soft), transparent 100%);
+  border-top: 1px solid var(--border-default);
+  margin-top: 5rem;
+  padding: 3rem 0 1.2rem;
+  position: relative;
+  overflow: hidden;
 }
 
 .footer-container {
-  padding: 0 4rem;
+  max-width: calc(#{$wide-size} + 120px);
+  margin: 0 auto;
+  padding: 0 3rem;
 
   @include media-query($on-desktop) {
     padding: 0 3rem;
@@ -1052,7 +1058,7 @@
     font-size: 1.1rem;
     font-weight: 600;
     margin-bottom: 1rem;
-    color: $black;
+    color: var(--text-primary);
   }
 }
 
@@ -1067,13 +1073,13 @@
     bottom: 0;
     width: 40px;
     height: 3px;
-    background: #003FFF;
+    background: linear-gradient(90deg, var(--accent-primary), var(--accent-secondary));
     border-radius: 2px;
   }
 }
 
 .footer-description {
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--text-secondary);
   line-height: 1.7;
   margin-bottom: 1.5rem;
   font-size: 0.95rem;
@@ -1091,16 +1097,17 @@
   justify-content: center;
   width: 40px;
   height: 40px;
-  background: rgba(0, 63, 255, 0.1);
-  border-radius: 8px;
-  color: #003FFF;
+  background: rgba(var(--accent-primary-rgb), 0.1);
+  border: 1px solid rgba(var(--accent-primary-rgb), 0.14);
+  border-radius: 12px;
+  color: var(--accent-primary);
   transition: all 0.3s ease;
 
   &:hover {
-    background: #003FFF;
-    color: white;
+    background: var(--accent-primary);
+    color: var(--surface-strong);
     transform: translateY(-3px);
-    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+    box-shadow: var(--shadow-sm);
   }
 
   svg {
@@ -1120,15 +1127,19 @@
   li {
     margin-bottom: 0.75rem;
 
+    &::before {
+      content: none;
+    }
+
     a {
-      color: rgba(0, 0, 0, 0.7);
+      color: var(--text-secondary);
       text-decoration: none;
       font-size: 0.95rem;
       transition: all 0.2s ease;
       display: inline-block;
 
       &:hover {
-        color: #003FFF;
+        color: var(--accent-primary);
         transform: translateX(4px);
       }
     }
@@ -1142,24 +1153,24 @@
 .footer-cta-button {
   display: inline-block;
   padding: 0.75rem 1.5rem;
-  background: #003FFF;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--surface-strong);
   text-decoration: none;
-  border-radius: 8px;
+  border-radius: 999px;
   font-weight: 500;
   font-size: 0.95rem;
   transition: all 0.3s ease;
 
   &:hover {
-    background: #0035db;
+    background: var(--accent-secondary);
     transform: translateY(-2px);
-    box-shadow: 0 6px 16px rgba(0, 63, 255, 0.3);
+    box-shadow: var(--shadow-sm);
   }
 }
 
 // Newsletter Form Styles
 .footer-newsletter-description {
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--text-secondary);
   line-height: 1.6;
   margin-bottom: 1rem;
   font-size: 0.9rem;
@@ -1174,37 +1185,39 @@
 
 .newsletter-input {
   padding: 0.75rem 1rem;
-  border: 1px solid rgba(0, 0, 0, 0.2);
-  border-radius: 6px;
+  border: 1px solid var(--border-default);
+  border-radius: 12px;
   font-size: 0.9rem;
+  background: var(--bg-surface);
+  color: var(--text-primary);
   transition: all 0.2s ease;
 
   &:focus {
     outline: none;
-    border-color: #003FFF;
-    box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.1);
+    border-color: var(--accent-primary);
+    box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.12);
   }
 
   &::placeholder {
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-secondary);
   }
 }
 
 .newsletter-submit {
   padding: 0.75rem 1.5rem;
-  background: #003FFF;
-  color: white;
+  background: var(--accent-primary);
+  color: var(--surface-strong);
   border: none;
-  border-radius: 6px;
+  border-radius: 999px;
   font-weight: 500;
   font-size: 0.9rem;
   cursor: pointer;
   transition: all 0.2s ease;
 
   &:hover {
-    background: #0035db;
+    background: var(--accent-secondary);
     transform: translateY(-2px);
-    box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+    box-shadow: var(--shadow-sm);
   }
 
   &:active {
@@ -1239,7 +1252,7 @@
 }
 
 .footer-bottom {
-  border-top: 1px solid rgba(128, 128, 128, 0.2);
+  border-top: 1px solid var(--border-default);
   padding-top: 1.5rem;
   margin-top: 2rem;
 }
@@ -1249,7 +1262,7 @@
 
   p {
     margin: 0.5rem 0;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     font-size: 0.9rem;
   }
 }
@@ -1260,13 +1273,13 @@
 
 .footer-tagline {
   a {
-    color: #003FFF;
+    color: var(--accent-primary);
     text-decoration: none;
     font-weight: 500;
     transition: color 0.2s ease;
 
     &:hover {
-      color: #0035db;
+      color: var(--accent-secondary);
       text-decoration: underline;
     }
   }

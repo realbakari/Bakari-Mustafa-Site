@@ -70,7 +70,7 @@ layout: compress
 }
 </script>
   
-<body data-theme="{{ site.mode }}" class="notransition">
+<body data-theme="{{ site.mode }}" class="notransition{% if page.home %} page-home{% endif %}">
 
   <script>
     const body = document.body;
@@ -93,7 +93,7 @@ layout: compress
   
 
   {% include navbar.html %}
-  <div class="wrapper">
+  <div class="wrapper{% if page.home %} wrapper-home{% endif %}">
     {% unless page.home %}
       {% include author.html %}
     {% endunless %}

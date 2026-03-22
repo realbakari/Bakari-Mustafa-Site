@@ -805,7 +805,9 @@ body[data-theme="dark"] {
 
   // Modern Footer Dark Mode
   .modern-footer {
-    background: rgba(255, 255, 255, 0.02);
+    background:
+      radial-gradient(circle at top left, rgba(240, 145, 90, 0.08), transparent 34%),
+      linear-gradient(180deg, rgba(38, 30, 25, 0.94), transparent 100%);
     border-top-color: rgba(255, 255, 255, 0.1);
   }
 
@@ -813,7 +815,7 @@ body[data-theme="dark"] {
     color: $dark-white;
 
     &::after {
-      background: $dark-text-link-blue;
+      background: linear-gradient(90deg, $dark-text-link-blue, #90bdb2);
     }
   }
 
@@ -823,13 +825,14 @@ body[data-theme="dark"] {
 
   .footer-social {
     .social-icon-link {
-      background: rgba(0, 63, 255, 0.15);
+      background: rgba(240, 145, 90, 0.12);
       color: $dark-text-link-blue;
+      border-color: rgba(240, 145, 90, 0.22);
 
       &:hover {
         background: $dark-text-link-blue;
         color: $dark-white;
-        box-shadow: 0 4px 12px rgba(0, 63, 255, 0.4);
+        box-shadow: 0 12px 24px rgba(0, 0, 0, 0.26);
       }
     }
   }
@@ -840,7 +843,6 @@ body[data-theme="dark"] {
 
       &:hover {
         color: $dark-text-link-blue;
-        background: rgba(0, 63, 255, 0.1);
       }
     }
   }
@@ -867,7 +869,7 @@ body[data-theme="dark"] {
 
     &:focus {
       border-color: $dark-text-link-blue;
-      box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.2);
+      box-shadow: 0 0 0 3px rgba(240, 145, 90, 0.16);
     }
 
     &::placeholder {
@@ -880,8 +882,8 @@ body[data-theme="dark"] {
     color: $dark-white;
 
     &:hover {
-      background: $dark-text-link-blue-active;
-      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.4);
+      background: #90bdb2;
+      box-shadow: 0 12px 24px rgba(0, 0, 0, 0.26);
     }
   }
 
