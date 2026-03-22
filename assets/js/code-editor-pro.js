@@ -313,6 +313,8 @@ require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0
 require(['vs/editor/editor.main'], initializeEditor);
 
 function initializeEditor() {
+    registerEditorThemes();
+
     const initialState = getInitialState();
     files = initialState.files;
     currentFileIndex = initialState.currentFileIndex;
@@ -362,6 +364,61 @@ function initializeEditor() {
     if (startupNotice) {
         showNotification(startupNotice, 'success');
     }
+}
+
+function registerEditorThemes() {
+    monaco.editor.defineTheme('sublime-warm', {
+        base: 'vs-dark',
+        inherit: true,
+        rules: [
+            { token: 'comment', foreground: '75715E' },
+            { token: 'keyword', foreground: 'F92672' },
+            { token: 'number', foreground: 'AE81FF' },
+            { token: 'string', foreground: 'E6DB74' },
+            { token: 'delimiter', foreground: 'F8F8F2' },
+            { token: 'type.identifier', foreground: '66D9EF' },
+            { token: 'identifier', foreground: 'F8F8F2' }
+        ],
+        colors: {
+            'editor.background': '#272822',
+            'editor.foreground': '#F8F8F2',
+            'editorLineNumber.foreground': '#6F745F',
+            'editorLineNumber.activeForeground': '#F8F8F2',
+            'editorCursor.foreground': '#F8F8F0',
+            'editor.selectionBackground': '#49483E',
+            'editor.inactiveSelectionBackground': '#3E3D32',
+            'editor.lineHighlightBackground': '#3A3D32',
+            'editorIndentGuide.background1': '#414339',
+            'editorIndentGuide.activeBackground1': '#75715E',
+            'editorWhitespace.foreground': '#49483E'
+        }
+    });
+
+    monaco.editor.defineTheme('sublime-light', {
+        base: 'vs',
+        inherit: true,
+        rules: [
+            { token: 'comment', foreground: '8E908C' },
+            { token: 'keyword', foreground: '8959A8' },
+            { token: 'number', foreground: 'F5871F' },
+            { token: 'string', foreground: '718C00' },
+            { token: 'type.identifier', foreground: '4271AE' },
+            { token: 'identifier', foreground: '2F3337' }
+        ],
+        colors: {
+            'editor.background': '#F7F5EE',
+            'editor.foreground': '#2F3337',
+            'editorLineNumber.foreground': '#A9A29A',
+            'editorLineNumber.activeForeground': '#2F3337',
+            'editorCursor.foreground': '#2F3337',
+            'editor.selectionBackground': '#D9D6CC',
+            'editor.inactiveSelectionBackground': '#E7E3D9',
+            'editor.lineHighlightBackground': '#ECE8DE',
+            'editorIndentGuide.background1': '#DED9CE',
+            'editorIndentGuide.activeBackground1': '#B9B2A8',
+            'editorWhitespace.foreground': '#D1CBC0'
+        }
+    });
 }
 
 function getInitialState() {
