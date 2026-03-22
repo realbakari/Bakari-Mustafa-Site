@@ -149,14 +149,16 @@ body[data-theme="dark"] {
         color: $dark-white;
 
         &:hover {
-          background-color: rgba(255, 82, 119, 0.15);
+          background-color: transparent;
           color: $dark-text-link-blue;
+          border-bottom-color: rgba(255, 188, 140, 0.5);
         }
       }
 
       .menu-link.active {
-        background-color: rgba(255, 82, 119, 0.2);
+        background-color: transparent;
         color: $dark-text-link-blue;
+        border-bottom-color: $dark-text-link-blue;
       }
 
       @include media-query($on-mobile) {

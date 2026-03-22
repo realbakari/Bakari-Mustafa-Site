@@ -71,6 +71,8 @@
     const viewCountsPromises = Array.from(viewCountElements).map(async (element) => {
       const postUrl = element.getAttribute('data-url');
       if (!postUrl) return;
+      const normalizedUrl = normalizeUrl(postUrl);
+      const urlWithSlash = normalizedUrl === '/' ? '/' : normalizedUrl + '/';
 
       try {
         // Fetch view count for this specific post
@@ -80,15 +82,15 @@
         )
           .from('page_views')
           .select('view_count')
-          .eq('page_url', postUrl)
-          .single();
+          .or(`page_url.eq.${normalizedUrl},page_url.eq.${urlWithSlash}`);
 
-        if (error && error.code !== 'PGRST116') {
+        if (error) {
           console.warn('[PopularPosts] Error fetching view count for', postUrl, error);
           return;
         }
 
-        const viewCount = data ? data.view_count : 0;
+        const rows = Array.isArray(data) ? data : [];
+        const viewCount = rows.reduce((sum, row) => sum + (row.view_count || 0), 0);
         const countElement = element.querySelector('.view-count');
         if (countElement) {
           countElement.textContent = window.PageViewCounter.formatNumber(viewCount);

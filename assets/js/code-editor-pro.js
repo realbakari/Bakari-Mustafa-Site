@@ -1,636 +1,1360 @@
-/* Code Editor Pro - Advanced Multi-Language IDE */
+/* Code Editor Pro - Intentional workspace edition */
 
-let editor;
+let editor = null;
 let currentFileIndex = 0;
 let files = [];
+let pyodideInstance = null;
+let pyodideLoadingPromise = null;
+let yamlLibraryPromise = null;
+let markdownLibraryPromise = null;
+let isHydratingModel = false;
+let startupNotice = null;
 
-/* Code templates */
+const STORAGE_KEYS = {
+    projects: 'codeEditorProProjectsV2',
+    autoSave: 'codeEditorProAutoSaveV2'
+};
+
+const BACKEND_CONFIG = {
+    pistonApi: 'https://emkc.org/api/v2/piston'
+};
+
+const LANGUAGE_EXTENSIONS = {
+    javascript: 'js',
+    typescript: 'ts',
+    python: 'py',
+    ruby: 'rb',
+    html: 'html',
+    css: 'css',
+    json: 'json',
+    markdown: 'md',
+    yaml: 'yml',
+    sql: 'sql',
+    shell: 'sh',
+    php: 'php',
+    go: 'go',
+    rust: 'rs',
+    java: 'java',
+    csharp: 'cs',
+    cpp: 'cpp'
+};
+
+const LANGUAGE_ACCENTS = {
+    javascript: '#d1a14a',
+    typescript: '#4f7bd8',
+    python: '#5b8c6a',
+    ruby: '#9c5044',
+    html: '#ba6b3f',
+    css: '#5b7bd4',
+    json: '#8e6f41',
+    markdown: '#7f5a98',
+    yaml: '#857a6a',
+    sql: '#7d8f59',
+    shell: '#6d8a76',
+    php: '#7a6cb0',
+    go: '#4e8aa3',
+    rust: '#85593d',
+    java: '#a85f42',
+    csharp: '#6e8b4d',
+    cpp: '#5e72ad'
+};
+
 const codeTemplates = {
-    javascript: `// JavaScript Example
-function fibonacci(n) {
-  if (n <= 1) return n;
-  return fibonacci(n - 1) + fibonacci(n - 2);
-}
+    javascript: `const entries = [
+  { place: "Dzaleka", visitors: 12 },
+  { place: "Lilongwe", visitors: 7 }
+];
 
-console.log('Fibonacci(10):', fibonacci(10));`,
+const total = entries.reduce((sum, item) => sum + item.visitors, 0);
+console.log("Total visitors:", total);
+console.log("First entry:", entries[0]);`,
 
-    typescript: `// TypeScript Example
-interface User {
-  name: string;
-  age: number;
-}
+    typescript: `type Event = {
+  title: string;
+  year: number;
+};
 
-function greet(user: User): string {
-  return \`Hello, \${user.name}!\`;
-}
+const keynote: Event = {
+  title: "Designing with restraint",
+  year: 2026
+};
 
-const user: User = { name: 'John', age: 30 };
-console.log(greet(user));`,
+console.log(\`\${keynote.title} (\${keynote.year})\`);`,
 
-    python: `# Python Example
-def fibonacci(n):
-    if n <= 1:
-        return n
-    return fibonacci(n - 1) + fibonacci(n - 2)
+    python: `from statistics import mean
 
-print('Fibonacci(10):', fibonacci(10))`,
+scores = [82, 91, 88, 95]
+print("Average score:", mean(scores))`,
 
-    ruby: `# Ruby Example
-def fibonacci(n)
-  return n if n <= 1
-  fibonacci(n - 1) + fibonacci(n - 2)
-end
-
-puts "Fibonacci(10): #{fibonacci(10)}"`,
+    ruby: `cities = ["Dzaleka", "Blantyre", "Mzuzu"]
+puts "Known places:"
+cities.each { |city| puts "- #{city}" }`,
 
     html: `<!DOCTYPE html>
 <html lang="en">
 <head>
-    <meta charset="UTF-8">
-    <title>My Page</title>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Preview</title>
 </head>
 <body>
-    <h1>Hello World</h1>
+  <main class="card">
+    <p class="eyebrow">Field Notes</p>
+    <h1>Stories worth preserving.</h1>
+    <p>This preview uses the current HTML file plus any open CSS files.</p>
+  </main>
 </body>
 </html>`,
 
-    css: `.container {
-    max-width: 1200px;
-    margin: 0 auto;
-    padding: 20px;
+    css: `body {
+  margin: 0;
+  min-height: 100vh;
+  display: grid;
+  place-items: center;
+  background: linear-gradient(180deg, #f6efe7 0%, #f1e7dc 100%);
+  color: #241d18;
+  font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.card {
+  width: min(520px, calc(100vw - 48px));
+  padding: 3rem;
+  border-radius: 28px;
+  background: rgba(255, 252, 248, 0.88);
+  border: 1px solid rgba(43, 31, 22, 0.12);
+  box-shadow: 0 24px 60px rgba(40, 28, 18, 0.12);
+}
+
+.eyebrow {
+  text-transform: uppercase;
+  letter-spacing: 0.18em;
+  font-size: 0.75rem;
+  color: #9f6439;
+}
+
+h1 {
+  margin: 0.6rem 0 1rem;
+  font: 600 3rem/0.95 Georgia, serif;
 }`,
 
     json: `{
-  "name": "my-project",
-  "version": "1.0.0",
-  "description": "Sample project"
+  "name": "visit-dzaleka",
+  "founded": 2025,
+  "focus": ["culture", "history", "community"],
+  "active": true
 }`,
 
-    sql: `SELECT users.name, COUNT(orders.id) as order_count
-FROM users
-LEFT JOIN orders ON users.id = orders.user_id
-GROUP BY users.id
-ORDER BY order_count DESC;`,
+    markdown: `# Editor Notes
 
-    yaml: `app:
-  name: My Application
-  version: 1.0.0
-server:
-  host: localhost
-  port: 3000`,
+This workspace supports:
 
-    shell: `#!/bin/bash
-echo "Starting deployment..."
-npm install
-npm run build
-echo "Done!"`,
+- JavaScript in the browser
+- Python with Pyodide
+- Cloud execution for Ruby, Go, Rust, Java, C#, PHP, Shell, and more
+
+> Keep the interface quiet so the work can be loud.`,
+
+    yaml: `site:
+  name: Bakari Mustafa
+  location: Australia
+projects:
+  - name: Visit Dzaleka
+    active: true
+  - name: Dzaleka Digital Heritage
+    active: true`,
+
+    sql: `SELECT project_name, founded_year
+FROM heritage_projects
+WHERE active = true
+ORDER BY founded_year DESC;`,
+
+    shell: `echo "Deploy check"
+echo "Current environment looks healthy"`,
 
     php: `<?php
-function fibonacci($n) {
-    if ($n <= 1) return $n;
-    return fibonacci($n - 1) + fibonacci($n - 2);
-}
-echo "Fibonacci(10): " . fibonacci(10);
+$numbers = [4, 8, 15, 16, 23, 42];
+echo "Count: " . count($numbers) . PHP_EOL;
+echo "Largest: " . max($numbers) . PHP_EOL;
 ?>`,
 
     go: `package main
+
 import "fmt"
 
-func fibonacci(n int) int {
-    if n <= 1 {
-        return n
-    }
-    return fibonacci(n-1) + fibonacci(n-2)
-}
-
 func main() {
-    fmt.Println("Fibonacci(10):", fibonacci(10))
+    places := []string{"Dzaleka", "Mchinji", "Lilongwe"}
+    fmt.Println("Places:", places)
 }`,
 
-    rust: `fn fibonacci(n: u32) -> u32 {
-    match n {
-        0 => 0,
-        1 => 1,
-        _ => fibonacci(n - 1) + fibonacci(n - 2)
-    }
-}
-
-fn main() {
-    println!("Fibonacci(10): {}", fibonacci(10));
+    rust: `fn main() {
+    let values = [3, 5, 8, 13];
+    let total: i32 = values.iter().sum();
+    println!("Total: {}", total);
 }`,
 
     java: `public class Main {
-    public static int fibonacci(int n) {
-        if (n <= 1) return n;
-        return fibonacci(n - 1) + fibonacci(n - 2);
-    }
-
     public static void main(String[] args) {
-        System.out.println("Fibonacci(10): " + fibonacci(10));
+        String[] names = {"Bakari", "Amina", "Sam"};
+        System.out.println("People: " + String.join(", ", names));
     }
 }`,
 
     csharp: `using System;
 
 class Program {
-    static int Fibonacci(int n) {
-        if (n <= 1) return n;
-        return Fibonacci(n - 1) + Fibonacci(n - 2);
-    }
-
     static void Main() {
-        Console.WriteLine($"Fibonacci(10): {Fibonacci(10)}");
+        var title = "Dzaleka Digital Heritage";
+        Console.WriteLine(title);
     }
 }`,
 
     cpp: `#include <iostream>
-
-int fibonacci(int n) {
-    if (n <= 1) return n;
-    return fibonacci(n - 1) + fibonacci(n - 2);
-}
+#include <vector>
 
 int main() {
-    std::cout << "Fibonacci(10): " << fibonacci(10) << std::endl;
+    std::vector<int> values = {2, 4, 6, 8};
+    int total = 0;
+    for (int value : values) total += value;
+    std::cout << "Total: " << total << std::endl;
     return 0;
 }`
 };
 
-/* Initialize editor */
+const runtimeProfiles = {
+    javascript: {
+        label: 'Browser runtime',
+        description: 'JavaScript executes directly in the page and captures console output.',
+        short: 'In-browser console'
+    },
+    typescript: {
+        label: 'Cloud runtime',
+        description: 'TypeScript is sent to the Piston API for remote execution.',
+        short: 'Piston execution'
+    },
+    python: {
+        label: 'Pyodide runtime',
+        description: 'Python runs in-browser through Pyodide, with no backend required.',
+        short: 'Pyodide execution'
+    },
+    ruby: {
+        label: 'Cloud runtime',
+        description: 'Ruby is executed via the Piston API and streamed back into the console.',
+        short: 'Piston execution'
+    },
+    html: {
+        label: 'Live preview',
+        description: 'HTML renders in the preview pane and can include open CSS files.',
+        short: 'Preview mode'
+    },
+    css: {
+        label: 'Style preview',
+        description: 'CSS renders against a sample layout or the first open HTML file.',
+        short: 'Preview mode'
+    },
+    json: {
+        label: 'Validation mode',
+        description: 'JSON is parsed and prettified locally so you can confirm structure quickly.',
+        short: 'Validation'
+    },
+    markdown: {
+        label: 'Preview mode',
+        description: 'Markdown is converted into readable HTML in the preview pane.',
+        short: 'Preview mode'
+    },
+    yaml: {
+        label: 'Validation mode',
+        description: 'YAML is parsed locally and rendered as a structured JSON view.',
+        short: 'Validation'
+    },
+    sql: {
+        label: 'Inspection mode',
+        description: 'SQL is formatted for review and analyzed for statement type and tables.',
+        short: 'Inspection'
+    },
+    shell: {
+        label: 'Cloud runtime',
+        description: 'Shell scripts run remotely through the Piston API.',
+        short: 'Piston execution'
+    },
+    php: {
+        label: 'Cloud runtime',
+        description: 'PHP runs through the Piston API.',
+        short: 'Piston execution'
+    },
+    go: {
+        label: 'Cloud runtime',
+        description: 'Go runs through the Piston API.',
+        short: 'Piston execution'
+    },
+    rust: {
+        label: 'Cloud runtime',
+        description: 'Rust runs through the Piston API.',
+        short: 'Piston execution'
+    },
+    java: {
+        label: 'Cloud runtime',
+        description: 'Java runs through the Piston API.',
+        short: 'Piston execution'
+    },
+    csharp: {
+        label: 'Cloud runtime',
+        description: 'C# runs through the Piston API.',
+        short: 'Piston execution'
+    },
+    cpp: {
+        label: 'Cloud runtime',
+        description: 'C++ runs through the Piston API.',
+        short: 'Piston execution'
+    }
+};
+
 require.config({ paths: { vs: 'https://cdn.jsdelivr.net/npm/monaco-editor@0.45.0/min/vs' } });
 
-require(['vs/editor/editor.main'], function() {
-    /* Hide loading */
-    document.getElementById('loading').style.display = 'none';
-    document.getElementById('main-container').style.display = 'flex';
+require(['vs/editor/editor.main'], initializeEditor);
 
-    /* Initialize with default file */
-    files = [{
-        name: 'main.js',
-        language: 'javascript',
-        content: codeTemplates.javascript
-    }];
+function initializeEditor() {
+    const initialState = getInitialState();
+    files = initialState.files;
+    currentFileIndex = initialState.currentFileIndex;
 
-    /* Check for shared code in URL */
-    loadFromURL();
-
-    /* Create editor */
     editor = monaco.editor.create(document.getElementById('editor'), {
-        value: files[0].content,
-        language: files[0].language,
-        theme: 'vs-dark',
+        value: files[currentFileIndex].content,
+        language: files[currentFileIndex].language,
+        theme: document.getElementById('theme-select').value,
         fontSize: 14,
         minimap: { enabled: true },
         automaticLayout: true,
         scrollBeyondLastLine: false,
         wordWrap: 'on',
         lineNumbers: 'on',
-        renderLineHighlight: 'all'
+        renderLineHighlight: 'line',
+        smoothScrolling: true,
+        cursorBlinking: 'smooth',
+        bracketPairColorization: { enabled: true }
     });
 
-    /* Render tabs */
-    renderTabs();
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
+        runCode();
+    });
 
-    /* Update status bar */
-    updateStatusBar();
-
-    /* Listen to content changes */
     editor.onDidChangeModelContent(() => {
+        if (isHydratingModel || !files[currentFileIndex]) {
+            return;
+        }
+
         files[currentFileIndex].content = editor.getValue();
+        files[currentFileIndex].dirty = true;
+        renderTabs();
         updateStatusBar();
         autoSave();
     });
 
-    /* Event listeners */
-    setupEventListeners();
-
-    /* Load auto-saved content */
-    loadAutoSave();
-});
-
-/* Setup event listeners */
-function setupEventListeners() {
-    document.getElementById('language-select').addEventListener('change', (e) => {
-        const language = e.target.value;
-        files[currentFileIndex].language = language;
-        const model = editor.getModel();
-        monaco.editor.setModelLanguage(model, language);
-        renderTabs();
+    editor.onDidChangeCursorPosition(() => {
+        updateCursorPosition();
     });
 
-    document.getElementById('theme-select').addEventListener('change', (e) => {
-        monaco.editor.setTheme(e.target.value);
+    setupEventListeners();
+    hydrateCurrentFile();
+
+    document.getElementById('loading').style.display = 'none';
+    document.getElementById('main-container').style.display = 'block';
+
+    if (startupNotice) {
+        showNotification(startupNotice, 'success');
+    }
+}
+
+function getInitialState() {
+    const sharedState = parseSharedState();
+    if (sharedState) {
+        startupNotice = 'Loaded shared workspace.';
+        return sharedState;
+    }
+
+    const autoSavedState = parseAutoSavedState();
+    if (autoSavedState) {
+        startupNotice = 'Restored your last local session.';
+        return autoSavedState;
+    }
+
+    return {
+        files: [createFile('main.js', 'javascript', codeTemplates.javascript)],
+        currentFileIndex: 0
+    };
+}
+
+function createFile(name, language, content) {
+    return {
+        name,
+        language,
+        content,
+        dirty: false
+    };
+}
+
+function normalizeFiles(candidateFiles) {
+    if (!Array.isArray(candidateFiles) || candidateFiles.length === 0) {
+        return [createFile('main.js', 'javascript', codeTemplates.javascript)];
+    }
+
+    return candidateFiles.map((file, index) => {
+        const language = LANGUAGE_EXTENSIONS[file && file.language] ? file.language : 'javascript';
+        const fallbackName = index === 0 ? 'main.js' : `file-${index + 1}.${getFileExtension(language)}`;
+        const name = typeof file?.name === 'string' && file.name.trim() ? file.name.trim() : fallbackName;
+        const content = typeof file?.content === 'string' ? file.content : (codeTemplates[language] || '');
+
+        return {
+            name,
+            language,
+            content,
+            dirty: Boolean(file?.dirty)
+        };
+    });
+}
+
+function parseSharedState() {
+    const params = new URLSearchParams(window.location.search);
+    const shared = params.get('share');
+
+    if (!shared) {
+        return null;
+    }
+
+    try {
+        const decoded = JSON.parse(decodeURIComponent(atob(shared)));
+        const normalizedFiles = normalizeFiles(decoded.files);
+        const nextIndex = clampIndex(decoded.currentFileIndex, normalizedFiles.length);
+        return { files: normalizedFiles, currentFileIndex: nextIndex };
+    } catch (error) {
+        showNotification('Invalid share link. Starting with a clean workspace.', 'warn');
+        return null;
+    }
+}
+
+function parseAutoSavedState() {
+    const raw = localStorage.getItem(STORAGE_KEYS.autoSave);
+
+    if (!raw) {
+        return null;
+    }
+
+    try {
+        const parsed = JSON.parse(raw);
+        const normalizedFiles = normalizeFiles(parsed.files);
+        const nextIndex = clampIndex(parsed.currentFileIndex, normalizedFiles.length);
+        return { files: normalizedFiles, currentFileIndex: nextIndex };
+    } catch (error) {
+        return null;
+    }
+}
+
+function clampIndex(value, length) {
+    const index = Number.isInteger(value) ? value : 0;
+    if (index < 0) return 0;
+    if (index >= length) return length - 1;
+    return index;
+}
+
+function setupEventListeners() {
+    document.getElementById('language-select').addEventListener('change', event => {
+        const language = event.target.value;
+        const file = files[currentFileIndex];
+        const previousLanguage = file.language;
+        file.language = language;
+
+        if (isGeneratedFileName(file.name, previousLanguage)) {
+            file.name = generatedFileName(currentFileIndex, language);
+        }
+
+        monaco.editor.setModelLanguage(editor.getModel(), language);
+        updateEditorContext();
+        updateRuntimeUI();
+        updateStatusBar();
+        renderTabs();
+        autoSave();
+    });
+
+    document.getElementById('theme-select').addEventListener('change', event => {
+        monaco.editor.setTheme(event.target.value);
     });
 
     document.getElementById('run-code').addEventListener('click', runCode);
     document.getElementById('save-code').addEventListener('click', () => openModal('save-modal'));
     document.getElementById('load-code').addEventListener('click', openLoadModal);
     document.getElementById('share-code').addEventListener('click', generateShareURL);
-    document.getElementById('clear-output').addEventListener('click', clearOutput);
+    document.getElementById('clear-output').addEventListener('click', () => clearOutput(true));
     document.getElementById('add-tab').addEventListener('click', addNewFile);
+
+    document.querySelectorAll('.panel-tab').forEach(button => {
+        button.addEventListener('click', () => {
+            activatePanel(button.dataset.panelTarget);
+        });
+    });
+
+    document.addEventListener('click', event => {
+        if (event.target.classList.contains('modal')) {
+            event.target.classList.remove('active');
+            event.target.setAttribute('aria-hidden', 'true');
+        }
+    });
+
+    document.addEventListener('keydown', event => {
+        if (event.key === 'Escape') {
+            document.querySelectorAll('.modal.active').forEach(modal => {
+                modal.classList.remove('active');
+                modal.setAttribute('aria-hidden', 'true');
+            });
+        }
+    });
 }
 
-/* Render tabs */
+function hydrateCurrentFile() {
+    const file = files[currentFileIndex];
+    if (!file) {
+        return;
+    }
+
+    isHydratingModel = true;
+    editor.setValue(file.content);
+    monaco.editor.setModelLanguage(editor.getModel(), file.language);
+    isHydratingModel = false;
+
+    document.getElementById('language-select').value = file.language;
+    updateEditorContext();
+    updateRuntimeUI();
+    renderTabs();
+    updateStatusBar();
+    updateCursorPosition();
+}
+
+function saveCurrentEditorContent() {
+    if (!editor || !files[currentFileIndex]) {
+        return;
+    }
+
+    files[currentFileIndex].content = editor.getValue();
+}
+
 function renderTabs() {
     const tabsContainer = document.getElementById('tabs');
     tabsContainer.innerHTML = '';
 
     files.forEach((file, index) => {
-        const tab = document.createElement('button');
-        tab.className = 'tab' + (index === currentFileIndex ? ' active' : '');
-        tab.innerHTML = `
-            <i class="fas fa-file-code"></i>
-            <span>${file.name}</span>
-            ${files.length > 1 ? `<span class="close-tab" onclick="event.stopPropagation(); closeFile(${index})">
-                <i class="fas fa-times"></i>
-            </span>` : ''}
-        `;
-        tab.onclick = () => switchFile(index);
+        const tab = document.createElement('div');
+        tab.className = `tab${index === currentFileIndex ? ' active' : ''}`;
+        tab.tabIndex = 0;
+        tab.setAttribute('role', 'button');
+        tab.setAttribute('aria-label', `Open ${file.name}`);
+
+        const dot = document.createElement('span');
+        dot.className = 'tab-language';
+        dot.style.backgroundColor = LANGUAGE_ACCENTS[file.language] || '#a16439';
+
+        const name = document.createElement('span');
+        name.className = 'tab-name';
+        name.textContent = `${file.name}${file.dirty ? ' •' : ''}`;
+
+        tab.appendChild(dot);
+        tab.appendChild(name);
+
+        if (files.length > 1) {
+            const close = document.createElement('button');
+            close.type = 'button';
+            close.className = 'close-tab';
+            close.setAttribute('aria-label', `Close ${file.name}`);
+            close.textContent = '×';
+            close.addEventListener('click', event => {
+                event.stopPropagation();
+                closeFile(index);
+            });
+            tab.appendChild(close);
+        }
+
+        tab.addEventListener('click', () => {
+            switchFile(index);
+        });
+        tab.addEventListener('keydown', event => {
+            if (event.key === 'Enter' || event.key === ' ') {
+                event.preventDefault();
+                switchFile(index);
+            }
+        });
+
         tabsContainer.appendChild(tab);
     });
 }
 
-/* Switch to different file */
 function switchFile(index) {
-    if (index === currentFileIndex) return;
-
-    currentFileIndex = index;
-    const file = files[index];
-
-    editor.setValue(file.content);
-    const model = editor.getModel();
-    monaco.editor.setModelLanguage(model, file.language);
-
-    document.getElementById('language-select').value = file.language;
-    document.getElementById('current-file').textContent = file.name;
-
-    renderTabs();
-}
-
-/* Add new file */
-function addNewFile() {
-    const language = 'javascript';
-    const extension = getFileExtension(language);
-    const number = files.length + 1;
-
-    files.push({
-        name: `file${number}.${extension}`,
-        language: language,
-        content: codeTemplates[language] || '// New file'
-    });
-
-    switchFile(files.length - 1);
-}
-
-/* Close file */
-function closeFile(index) {
-    if (files.length === 1) {
-        showNotification('Cannot close the last file', 'error');
+    if (index < 0 || index >= files.length) {
         return;
     }
 
-    files.splice(index, 1);
+    saveCurrentEditorContent();
+    currentFileIndex = index;
+    hydrateCurrentFile();
+    autoSave();
+    editor.focus();
+}
 
-    if (currentFileIndex >= files.length) {
-        currentFileIndex = files.length - 1;
+function addNewFile() {
+    saveCurrentEditorContent();
+
+    const language = document.getElementById('language-select').value || 'javascript';
+    const newFile = createFile(
+        generatedFileName(files.length, language),
+        language,
+        codeTemplates[language] || ''
+    );
+
+    files.push(newFile);
+    currentFileIndex = files.length - 1;
+    hydrateCurrentFile();
+    autoSave();
+    showNotification(`Created ${newFile.name}.`, 'success');
+}
+
+function closeFile(index) {
+    if (files.length === 1) {
+        showNotification('The last file stays open so the workspace never collapses.', 'warn');
+        return;
     }
 
-    switchFile(currentFileIndex);
+    const closingCurrent = index === currentFileIndex;
+    files.splice(index, 1);
+
+    if (closingCurrent) {
+        currentFileIndex = Math.max(0, index - 1);
+    } else if (index < currentFileIndex) {
+        currentFileIndex -= 1;
+    }
+
+    currentFileIndex = clampIndex(currentFileIndex, files.length);
+    hydrateCurrentFile();
+    autoSave();
 }
 
-/* Get file extension */
+function generatedFileName(index, language) {
+    const extension = getFileExtension(language);
+    const nextNumber = index + 1;
+    return `untitled-${nextNumber}.${extension}`;
+}
+
+function isGeneratedFileName(name, language) {
+    const expectedExtension = getFileExtension(language);
+    return /^untitled-\d+\.[a-z0-9]+$/i.test(name) || name === `main.${expectedExtension}`;
+}
+
 function getFileExtension(language) {
-    const extensions = {
-        javascript: 'js',
-        typescript: 'ts',
-        python: 'py',
-        ruby: 'rb',
-        html: 'html',
-        css: 'css',
-        json: 'json',
-        markdown: 'md',
-        sql: 'sql',
-        yaml: 'yml',
-        shell: 'sh',
-        php: 'php',
-        go: 'go',
-        rust: 'rs',
-        java: 'java',
-        csharp: 'cs',
-        cpp: 'cpp'
-    };
-    return extensions[language] || 'txt';
+    return LANGUAGE_EXTENSIONS[language] || 'txt';
 }
 
-/* Update status bar */
+function updateEditorContext() {
+    const file = files[currentFileIndex];
+    const profile = runtimeProfiles[file.language] || runtimeProfiles.javascript;
+
+    document.getElementById('current-file').textContent = file.name;
+    document.getElementById('editor-context').textContent = `${file.name} • ${file.language}`;
+    document.getElementById('execution-mode').textContent = profile.short;
+}
+
+function updateRuntimeUI() {
+    const file = files[currentFileIndex];
+    const profile = runtimeProfiles[file.language] || runtimeProfiles.javascript;
+
+    document.getElementById('runtime-badge').textContent = profile.label;
+    document.getElementById('runtime-description').textContent = profile.description;
+}
+
 function updateStatusBar() {
-    const content = editor.getValue();
-    const lines = content.split('\n').length;
+    const content = editor ? editor.getValue() : (files[currentFileIndex]?.content || '');
+    const lines = content.length ? content.split('\n').length : 1;
     const chars = content.length;
 
-    document.getElementById('current-file').textContent = files[currentFileIndex].name;
-    document.getElementById('line-count').textContent = `${lines} lines`;
-    document.getElementById('char-count').textContent = `${chars} characters`;
+    document.getElementById('line-count').textContent = String(lines);
+    document.getElementById('char-count').textContent = String(chars);
+    document.getElementById('current-file').textContent = files[currentFileIndex]?.name || 'untitled';
 }
 
-/* Add output to panel */
+function updateCursorPosition() {
+    if (!editor) {
+        return;
+    }
+
+    const position = editor.getPosition();
+    if (!position) {
+        return;
+    }
+
+    document.getElementById('cursor-position').textContent = `Ln ${position.lineNumber}, Col ${position.column}`;
+}
+
+function clearOutput(resetPreview = false) {
+    document.getElementById('output-content').innerHTML =
+        '<div class="output-log info">Console cleared. Run or preview the current file when you are ready.</div>';
+
+    if (resetPreview) {
+        resetPreviewPanel();
+    }
+}
+
 function addOutput(message, type = 'info') {
     const outputDiv = document.getElementById('output-content');
     const logDiv = document.createElement('div');
     logDiv.className = `output-log ${type}`;
-
-    const icons = {
-        info: 'fa-info-circle',
-        success: 'fa-check-circle',
-        error: 'fa-exclamation-circle',
-        warn: 'fa-exclamation-triangle'
-    };
-
-    logDiv.innerHTML = `<i class="fas ${icons[type]}"></i> ${escapeHtml(message)}`;
+    logDiv.textContent = message;
     outputDiv.appendChild(logDiv);
     outputDiv.scrollTop = outputDiv.scrollHeight;
 }
 
-/* Clear output */
-function clearOutput() {
-    document.getElementById('output-content').innerHTML =
-        '<div class="output-log info"><i class="fas fa-info-circle"></i> Output cleared.</div>';
+function activatePanel(panelId) {
+    document.querySelectorAll('.panel-tab').forEach(button => {
+        button.classList.toggle('active', button.dataset.panelTarget === panelId);
+    });
+
+    document.querySelectorAll('.panel-view').forEach(view => {
+        view.classList.toggle('active', view.id === panelId);
+    });
 }
 
-/* Run code */
+function resetPreviewPanel() {
+    const frame = document.getElementById('preview-frame');
+    const empty = document.getElementById('preview-empty');
+    frame.removeAttribute('srcdoc');
+    frame.style.display = 'none';
+    empty.style.display = 'block';
+}
+
+function renderPreviewDocument(html) {
+    const frame = document.getElementById('preview-frame');
+    const empty = document.getElementById('preview-empty');
+    frame.srcdoc = html;
+    frame.style.display = 'block';
+    empty.style.display = 'none';
+    activatePanel('preview-panel');
+}
+
 async function runCode() {
-    const code = editor.getValue();
-    const language = files[currentFileIndex].language;
+    saveCurrentEditorContent();
+    const file = files[currentFileIndex];
+    const code = file.content;
+    const language = file.language;
+    const previewLanguages = new Set(['html', 'css', 'markdown', 'json', 'yaml', 'sql']);
 
-    clearOutput();
-    addOutput('Running code...', 'info');
+    clearOutput(false);
+    addOutput(`Preparing ${file.name}...`, 'info');
 
-    /* JavaScript execution (client-side) */
-    if (language === 'javascript' || language === 'typescript') {
-        executeJavaScript(code);
-        return;
+    if (!previewLanguages.has(language)) {
+        resetPreviewPanel();
     }
-
-    /* Server-side execution for Python/Ruby */
-    if (language === 'python' || language === 'ruby') {
-        await executeServerSide(code, language);
-        return;
-    }
-
-    addOutput(`Code execution not supported for ${language}`, 'warn');
-    addOutput('JavaScript and TypeScript run in browser. Python/Ruby require backend.', 'info');
-}
-
-/* Execute JavaScript */
-function executeJavaScript(code) {
-    const originalLog = console.log;
-    const originalError = console.error;
-    const originalWarn = console.warn;
-
-    console.log = (...args) => addOutput(args.join(' '), 'info');
-    console.error = (...args) => addOutput('ERROR: ' + args.join(' '), 'error');
-    console.warn = (...args) => addOutput('WARN: ' + args.join(' '), 'warn');
 
     try {
-        const result = eval(code);
-        if (result !== undefined) {
-            addOutput('Return: ' + JSON.stringify(result), 'success');
+        switch (language) {
+            case 'javascript':
+                activatePanel('console-panel');
+                await executeJavaScript(code);
+                break;
+            case 'python':
+                activatePanel('console-panel');
+                await executePythonWithPyodide(code);
+                break;
+            case 'html':
+                renderHtmlPreview(code);
+                addOutput('HTML preview rendered.', 'success');
+                break;
+            case 'css':
+                renderCssPreview(code);
+                addOutput('CSS preview rendered.', 'success');
+                break;
+            case 'markdown':
+                await renderMarkdownPreview(code);
+                addOutput('Markdown preview rendered.', 'success');
+                break;
+            case 'json':
+                renderJsonPreview(code);
+                addOutput('JSON parsed successfully.', 'success');
+                break;
+            case 'yaml':
+                await renderYamlPreview(code);
+                addOutput('YAML parsed successfully.', 'success');
+                break;
+            case 'sql':
+                renderSqlInspection(code);
+                addOutput('SQL inspected for statement type and referenced tables.', 'success');
+                break;
+            default:
+                activatePanel('console-panel');
+                await executeWithPiston(code, language);
+                break;
         }
-        addOutput('Execution completed', 'success');
     } catch (error) {
-        addOutput(error.message, 'error');
-        if (error.stack) {
-            addOutput(error.stack, 'error');
-        }
-    } finally {
-        console.log = originalLog;
-        console.error = originalError;
-        console.warn = originalWarn;
+        activatePanel('console-panel');
+        addOutput(error.message || 'Something went wrong while running the file.', 'error');
     }
 }
 
-/* Execute server-side (Python/Ruby) */
-async function executeServerSide(code, language) {
-    try {
-        const response = await fetch('/.netlify/functions/execute-code', {
-            method: 'POST',
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ code, language })
-        });
+async function executeJavaScript(code) {
+    const AsyncFunction = Object.getPrototypeOf(async function () {}).constructor;
 
-        if (!response.ok) {
-            throw new Error('Execution service unavailable');
+    const browserConsole = {
+        log: (...args) => addOutput(formatArgs(args), 'info'),
+        info: (...args) => addOutput(formatArgs(args), 'info'),
+        warn: (...args) => addOutput(formatArgs(args), 'warn'),
+        error: (...args) => addOutput(formatArgs(args), 'error')
+    };
+
+    try {
+        const runner = new AsyncFunction('console', code);
+        const result = await runner(browserConsole);
+
+        if (typeof result !== 'undefined') {
+            addOutput(`Return value: ${formatValue(result)}`, 'success');
         }
 
-        const result = await response.json();
+        addOutput('Execution finished in the browser.', 'success');
+    } catch (error) {
+        addOutput(error.stack || error.message, 'error');
+    }
+}
 
-        if (result.success) {
-            if (result.output) {
-                addOutput(result.output, 'info');
-            }
-            addOutput('Execution completed', 'success');
+async function ensurePyodide() {
+    if (pyodideInstance) {
+        return pyodideInstance;
+    }
+
+    if (!pyodideLoadingPromise) {
+        pyodideLoadingPromise = (async () => {
+            addOutput('Loading Pyodide for Python support. This can take a few seconds the first time.', 'info');
+            await loadScriptOnce('https://cdn.jsdelivr.net/pyodide/v0.24.1/full/pyodide.js');
+
+            pyodideInstance = await loadPyodide({
+                indexURL: 'https://cdn.jsdelivr.net/pyodide/v0.24.1/full/'
+            });
+
+            pyodideInstance.runPython(`
+import io
+import sys
+sys.stdout = io.StringIO()
+sys.stderr = io.StringIO()
+            `);
+
+            return pyodideInstance;
+        })();
+    }
+
+    return pyodideLoadingPromise;
+}
+
+async function executePythonWithPyodide(code) {
+    const pyodide = await ensurePyodide();
+
+    pyodide.runPython(`
+import io
+import sys
+sys.stdout = io.StringIO()
+sys.stderr = io.StringIO()
+    `);
+
+    await pyodide.runPythonAsync(code);
+
+    const stdout = pyodide.runPython('sys.stdout.getvalue()');
+    const stderr = pyodide.runPython('sys.stderr.getvalue()');
+
+    if (stdout) {
+        addOutput(stdout.trimEnd(), 'info');
+    }
+
+    if (stderr) {
+        addOutput(stderr.trimEnd(), 'error');
+    }
+
+    addOutput('Execution finished with Pyodide.', 'success');
+}
+
+async function executeWithPiston(code, language) {
+    const languageMap = {
+        typescript: 'typescript',
+        ruby: 'ruby',
+        shell: 'bash',
+        php: 'php',
+        go: 'go',
+        rust: 'rust',
+        java: 'java',
+        csharp: 'csharp',
+        cpp: 'cpp'
+    };
+
+    const pistonLanguage = languageMap[language];
+    if (!pistonLanguage) {
+        throw new Error(`${language} does not currently have a configured runtime.`);
+    }
+
+    addOutput(`Sending ${language} to the Piston runtime...`, 'info');
+
+    const response = await fetch(`${BACKEND_CONFIG.pistonApi}/execute`, {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+            language: pistonLanguage,
+            version: '*',
+            files: [{
+                name: `main.${getFileExtension(language)}`,
+                content: code
+            }]
+        })
+    });
+
+    if (!response.ok) {
+        throw new Error(`Piston returned ${response.status}.`);
+    }
+
+    const result = await response.json();
+    const run = result.run || {};
+
+    if (run.stdout) {
+        addOutput(run.stdout.trimEnd(), 'info');
+    }
+
+    if (run.stderr) {
+        addOutput(run.stderr.trimEnd(), 'error');
+    }
+
+    if (!run.stdout && !run.stderr && !run.output) {
+        addOutput('Execution completed with no printed output.', 'info');
+    }
+
+    if (run.output && !run.stdout) {
+        addOutput(run.output.trimEnd(), 'info');
+    }
+
+    addOutput('Execution finished with the cloud runtime.', 'success');
+}
+
+function renderHtmlPreview(code) {
+    const cssBlocks = files
+        .filter(file => file.language === 'css')
+        .map(file => file.content)
+        .join('\n\n');
+
+    let documentHtml = code;
+
+    if (cssBlocks.trim()) {
+        if (/<\/head>/i.test(documentHtml)) {
+            documentHtml = documentHtml.replace(/<\/head>/i, `<style>${cssBlocks}</style></head>`);
         } else {
-            addOutput(result.error || 'Execution failed', 'error');
+            documentHtml = `<!DOCTYPE html><html><head><style>${cssBlocks}</style></head><body>${documentHtml}</body></html>`;
         }
-    } catch (error) {
-        addOutput('Backend execution not configured', 'error');
-        addOutput('See documentation for setup', 'info');
     }
+
+    renderPreviewDocument(documentHtml);
 }
 
-/* Save project to localStorage */
+function renderCssPreview(code) {
+    const htmlFile = files.find(file => file.language === 'html');
+    const htmlMarkup = htmlFile ? htmlFile.content : `
+<main class="card">
+  <p class="eyebrow">Style Preview</p>
+  <h1>A quieter interface.</h1>
+  <p>This sample block helps you see spacing, type, links, and button treatments quickly.</p>
+  <p><a href="#">A sample link</a></p>
+</main>`;
+
+    const previewDocument = `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <style>${code}</style>
+</head>
+<body>
+    ${htmlMarkup}
+</body>
+</html>`;
+
+    renderPreviewDocument(previewDocument);
+}
+
+async function renderMarkdownPreview(code) {
+    const marked = await ensureMarked();
+    const html = marked.parse(code);
+    renderPreviewDocument(buildPreviewDocument({
+        title: 'Markdown Preview',
+        body: `<article class="prose">${html}</article>`,
+        extraStyles: previewStyles()
+    }));
+}
+
+function renderJsonPreview(code) {
+    const parsed = JSON.parse(code);
+    renderPreviewDocument(buildPreviewDocument({
+        title: 'JSON Preview',
+        body: `<pre>${escapeHtml(JSON.stringify(parsed, null, 2))}</pre>`,
+        extraStyles: previewStyles(true)
+    }));
+}
+
+async function renderYamlPreview(code) {
+    const yaml = await ensureYaml();
+    const parsed = yaml.load(code);
+    renderPreviewDocument(buildPreviewDocument({
+        title: 'YAML Preview',
+        body: `<pre>${escapeHtml(JSON.stringify(parsed, null, 2))}</pre>`,
+        extraStyles: previewStyles(true)
+    }));
+}
+
+function renderSqlInspection(code) {
+    const formatted = formatSql(code);
+    const statementMatch = code.trim().match(/^([a-z]+)/i);
+    const statement = statementMatch ? statementMatch[1].toUpperCase() : 'UNKNOWN';
+    const tableMatches = [...code.matchAll(/\b(?:FROM|JOIN|INTO|UPDATE|TABLE)\s+([a-zA-Z0-9_."`-]+)/gi)];
+    const tables = [...new Set(tableMatches.map(match => match[1].replace(/["`]/g, '')))];
+
+    addOutput(`Statement type: ${statement}`, 'info');
+    addOutput(`Referenced tables: ${tables.length ? tables.join(', ') : 'None detected'}`, 'info');
+    addOutput('SQL preview mode formats and inspects the query without executing it.', 'warn');
+
+    renderPreviewDocument(buildPreviewDocument({
+        title: 'SQL Inspection',
+        body: `<pre>${escapeHtml(formatted)}</pre>`,
+        extraStyles: previewStyles(true)
+    }));
+}
+
+function formatSql(code) {
+    const keywords = ['SELECT', 'FROM', 'WHERE', 'GROUP BY', 'ORDER BY', 'LEFT JOIN', 'RIGHT JOIN', 'INNER JOIN', 'JOIN', 'LIMIT', 'VALUES', 'SET'];
+    let formatted = code.trim().replace(/\s+/g, ' ');
+
+    keywords.forEach(keyword => {
+        const regex = new RegExp(`\\b${keyword.replace(' ', '\\s+')}\\b`, 'gi');
+        formatted = formatted.replace(regex, `\n${keyword}`);
+    });
+
+    return formatted.trim();
+}
+
+function buildPreviewDocument({ title, body, extraStyles = '' }) {
+    return `<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>${escapeHtml(title)}</title>
+    <style>${previewStyles()}${extraStyles}</style>
+</head>
+<body>
+    ${body}
+</body>
+</html>`;
+}
+
+function previewStyles(preformatted = false) {
+    return `
+body {
+    margin: 0;
+    padding: 28px;
+    background: linear-gradient(180deg, #f8f3ec 0%, #f1e8de 100%);
+    color: #221d18;
+    font-family: "Avenir Next", "Segoe UI", sans-serif;
+}
+
+.prose,
+pre {
+    width: min(760px, 100%);
+    margin: 0 auto;
+    padding: 28px;
+    border-radius: 24px;
+    background: rgba(255, 252, 248, 0.92);
+    border: 1px solid rgba(41, 31, 22, 0.1);
+    box-shadow: 0 20px 50px rgba(41, 31, 22, 0.1);
+}
+
+.prose h1,
+.prose h2,
+.prose h3 {
+    font-family: "Iowan Old Style", Georgia, serif;
+    letter-spacing: -0.04em;
+}
+
+.prose p,
+.prose li,
+.prose blockquote {
+    line-height: 1.75;
+    color: #554c43;
+}
+
+.prose a {
+    color: #9f6439;
+}
+
+.prose blockquote {
+    margin: 1.2rem 0;
+    padding-left: 1rem;
+    border-left: 3px solid rgba(159, 100, 57, 0.3);
+}
+
+pre {
+    white-space: ${preformatted ? 'pre-wrap' : 'pre-wrap'};
+    word-break: break-word;
+    font-family: "SFMono-Regular", Menlo, Monaco, Consolas, monospace;
+    font-size: 0.9rem;
+    line-height: 1.65;
+}
+`;
+}
+
+async function ensureMarked() {
+    if (window.marked) {
+        return window.marked;
+    }
+
+    if (!markdownLibraryPromise) {
+        markdownLibraryPromise = loadScriptOnce('https://cdn.jsdelivr.net/npm/marked/marked.min.js').then(() => window.marked);
+    }
+
+    return markdownLibraryPromise;
+}
+
+async function ensureYaml() {
+    if (window.jsyaml) {
+        return window.jsyaml;
+    }
+
+    if (!yamlLibraryPromise) {
+        yamlLibraryPromise = loadScriptOnce('https://cdn.jsdelivr.net/npm/js-yaml@4.1.0/dist/js-yaml.min.js').then(() => window.jsyaml);
+    }
+
+    return yamlLibraryPromise;
+}
+
+function loadScriptOnce(src) {
+    const existing = document.querySelector(`script[data-runtime-src="${src}"]`);
+    if (existing) {
+        if (existing.dataset.loaded === 'true') {
+            return Promise.resolve();
+        }
+
+        return new Promise((resolve, reject) => {
+            existing.addEventListener('load', () => resolve(), { once: true });
+            existing.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
+        });
+    }
+
+    return new Promise((resolve, reject) => {
+        const script = document.createElement('script');
+        script.src = src;
+        script.async = true;
+        script.dataset.runtimeSrc = src;
+        script.addEventListener('load', () => {
+            script.dataset.loaded = 'true';
+            resolve();
+        }, { once: true });
+        script.addEventListener('error', () => reject(new Error(`Failed to load ${src}`)), { once: true });
+        document.head.appendChild(script);
+    });
+}
+
 function saveProject() {
+    saveCurrentEditorContent();
     const projectName = document.getElementById('project-name').value.trim();
 
     if (!projectName) {
-        showNotification('Please enter a project name', 'error');
+        showNotification('Give the project a name before saving.', 'warn');
         return;
     }
 
-    const projects = JSON.parse(localStorage.getItem('codeEditorProjects') || '{}');
+    const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects) || '{}');
     projects[projectName] = {
-        files: files,
+        files,
+        currentFileIndex,
         timestamp: new Date().toISOString()
     };
 
-    localStorage.setItem('codeEditorProjects', JSON.stringify(projects));
-
+    localStorage.setItem(STORAGE_KEYS.projects, JSON.stringify(projects));
+    document.getElementById('project-name').value = '';
     closeModal('save-modal');
-    showNotification('Project saved successfully', 'success');
+    showNotification(`Saved ${projectName}.`, 'success');
 }
 
-/* Open load modal */
 function openLoadModal() {
-    const projects = JSON.parse(localStorage.getItem('codeEditorProjects') || '{}');
+    const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects) || '{}');
     const projectsList = document.getElementById('projects-list');
+    projectsList.innerHTML = '';
 
-    if (Object.keys(projects).length === 0) {
-        projectsList.innerHTML = '<p style="color: #969696;">No saved projects found.</p>';
+    const names = Object.keys(projects).sort((left, right) => {
+        return new Date(projects[right].timestamp) - new Date(projects[left].timestamp);
+    });
+
+    if (!names.length) {
+        projectsList.innerHTML = '<div class="empty-state">No saved projects yet. Save a workspace and it will show up here.</div>';
     } else {
-        projectsList.innerHTML = '';
-
-        Object.keys(projects).forEach(name => {
+        names.forEach(name => {
             const project = projects[name];
-            const div = document.createElement('div');
-            div.style.cssText = 'padding: 10px; margin-bottom: 10px; background: #3c3c3c; border-radius: 3px; display: flex; justify-content: space-between; align-items: center;';
-            div.innerHTML = `
-                <div>
-                    <div style="font-weight: 600; margin-bottom: 5px;">${escapeHtml(name)}</div>
-                    <div style="font-size: 11px; color: #969696;">${new Date(project.timestamp).toLocaleString()}</div>
-                </div>
-                <div style="display: flex; gap: 5px;">
-                    <button onclick="loadProject('${escapeHtml(name)}')" style="padding: 6px 12px; background: #007acc; color: white; border: none; border-radius: 3px; cursor: pointer;">
-                        <i class="fas fa-folder-open"></i> Load
-                    </button>
-                    <button onclick="deleteProject('${escapeHtml(name)}')" style="padding: 6px 12px; background: #c5000b; color: white; border: none; border-radius: 3px; cursor: pointer;">
-                        <i class="fas fa-trash"></i>
-                    </button>
-                </div>
-            `;
-            projectsList.appendChild(div);
+            const card = document.createElement('div');
+            card.className = 'project-card';
+
+            const info = document.createElement('div');
+            const title = document.createElement('h3');
+            title.textContent = name;
+            const meta = document.createElement('p');
+            const fileCount = Array.isArray(project.files) ? project.files.length : 0;
+            meta.textContent = `${fileCount} file${fileCount === 1 ? '' : 's'} • ${new Date(project.timestamp).toLocaleString()}`;
+
+            info.appendChild(title);
+            info.appendChild(meta);
+
+            const actions = document.createElement('div');
+            actions.className = 'project-actions';
+
+            const loadButton = document.createElement('button');
+            loadButton.type = 'button';
+            loadButton.textContent = 'Load';
+            loadButton.addEventListener('click', () => {
+                loadProject(name);
+            });
+
+            const deleteButton = document.createElement('button');
+            deleteButton.type = 'button';
+            deleteButton.className = 'button-danger';
+            deleteButton.textContent = 'Delete';
+            deleteButton.addEventListener('click', () => {
+                deleteProject(name);
+            });
+
+            actions.appendChild(loadButton);
+            actions.appendChild(deleteButton);
+            card.appendChild(info);
+            card.appendChild(actions);
+            projectsList.appendChild(card);
         });
     }
 
     openModal('load-modal');
 }
 
-/* Load project */
 function loadProject(name) {
-    const projects = JSON.parse(localStorage.getItem('codeEditorProjects') || '{}');
+    const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects) || '{}');
     const project = projects[name];
 
-    if (project) {
-        files = project.files;
-        currentFileIndex = 0;
-        switchFile(0);
-        closeModal('load-modal');
-        showNotification(`Loaded: ${name}`, 'success');
+    if (!project) {
+        showNotification('That saved project could not be found.', 'error');
+        return;
     }
+
+    files = normalizeFiles(project.files);
+    currentFileIndex = clampIndex(project.currentFileIndex, files.length);
+    hydrateCurrentFile();
+    autoSave();
+    closeModal('load-modal');
+    showNotification(`Loaded ${name}.`, 'success');
 }
 
-/* Delete project */
 function deleteProject(name) {
-    if (!confirm(`Delete project "${name}"?`)) return;
+    if (!window.confirm(`Delete "${name}" from this browser?`)) {
+        return;
+    }
 
-    const projects = JSON.parse(localStorage.getItem('codeEditorProjects') || '{}');
+    const projects = JSON.parse(localStorage.getItem(STORAGE_KEYS.projects) || '{}');
     delete projects[name];
-    localStorage.setItem('codeEditorProjects', JSON.stringify(projects));
-
+    localStorage.setItem(STORAGE_KEYS.projects, JSON.stringify(projects));
     openLoadModal();
-    showNotification('Project deleted', 'info');
+    showNotification(`Deleted ${name}.`, 'success');
 }
 
-/* Auto-save to localStorage */
 function autoSave() {
-    localStorage.setItem('codeEditorAutoSave', JSON.stringify({
-        files: files,
-        currentFileIndex: currentFileIndex
+    saveCurrentEditorContent();
+    localStorage.setItem(STORAGE_KEYS.autoSave, JSON.stringify({
+        files,
+        currentFileIndex
     }));
 }
 
-/* Load auto-save */
-function loadAutoSave() {
-    const autoSave = localStorage.getItem('codeEditorAutoSave');
-    if (autoSave) {
-        try {
-            const data = JSON.parse(autoSave);
-            if (data.files && data.files.length > 0) {
-                files = data.files;
-                currentFileIndex = data.currentFileIndex || 0;
-                switchFile(currentFileIndex);
-            }
-        } catch (e) {
-            console.error('Failed to load auto-save:', e);
-        }
-    }
-}
-
-/* Generate shareable URL */
 function generateShareURL() {
-    const data = {
-        files: files,
-        currentFileIndex: currentFileIndex
-    };
+    saveCurrentEditorContent();
 
-    const encoded = btoa(encodeURIComponent(JSON.stringify(data)));
+    const encoded = btoa(encodeURIComponent(JSON.stringify({
+        files,
+        currentFileIndex
+    })));
+
     const url = `${window.location.origin}${window.location.pathname}?share=${encoded}`;
-
     document.getElementById('share-url').value = url;
     openModal('share-modal');
 }
 
-/* Copy share URL */
-function copyShareURL() {
+async function copyShareURL() {
     const input = document.getElementById('share-url');
-    input.select();
-    navigator.clipboard.writeText(input.value).then(() => {
-        showNotification('Link copied to clipboard', 'success');
-    });
-}
 
-/* Load from URL */
-function loadFromURL() {
-    const params = new URLSearchParams(window.location.search);
-    const shared = params.get('share');
-
-    if (shared) {
-        try {
-            const decoded = JSON.parse(decodeURIComponent(atob(shared)));
-            if (decoded.files && decoded.files.length > 0) {
-                files = decoded.files;
-                currentFileIndex = decoded.currentFileIndex || 0;
-                showNotification('Loaded shared code', 'success');
-            }
-        } catch (e) {
-            console.error('Failed to load shared code:', e);
-            showNotification('Invalid share link', 'error');
+    try {
+        if (navigator.clipboard && navigator.clipboard.writeText) {
+            await navigator.clipboard.writeText(input.value);
+        } else {
+            input.select();
+            document.execCommand('copy');
         }
+
+        showNotification('Share link copied.', 'success');
+    } catch (error) {
+        showNotification('Clipboard access failed. You can still copy the link manually.', 'warn');
     }
 }
 
-/* Modal functions */
 function openModal(id) {
-    document.getElementById(id).classList.add('active');
+    const modal = document.getElementById(id);
+    modal.classList.add('active');
+    modal.setAttribute('aria-hidden', 'false');
 }
 
 function closeModal(id) {
-    document.getElementById(id).classList.remove('active');
+    const modal = document.getElementById(id);
+    modal.classList.remove('active');
+    modal.setAttribute('aria-hidden', 'true');
 }
 
-/* Show notification */
 function showNotification(message, type = 'info') {
+    const stack = document.getElementById('notification-stack');
+    if (!stack) {
+        return;
+    }
+
     const notification = document.createElement('div');
     notification.className = `notification ${type}`;
+    notification.textContent = message;
 
-    const icons = {
-        info: 'fa-info-circle',
-        success: 'fa-check-circle',
-        error: 'fa-exclamation-circle'
-    };
+    stack.appendChild(notification);
 
-    notification.innerHTML = `
-        <i class="fas ${icons[type]}"></i>
-        <span>${escapeHtml(message)}</span>
-    `;
-
-    document.body.appendChild(notification);
-
-    setTimeout(() => {
+    window.setTimeout(() => {
         notification.style.opacity = '0';
-        setTimeout(() => notification.remove(), 300);
-    }, 3000);
+        notification.style.transform = 'translateY(-4px)';
+        window.setTimeout(() => notification.remove(), 240);
+    }, 3200);
 }
 
-/* Utility functions */
+function formatArgs(args) {
+    return args.map(formatValue).join(' ');
+}
+
+function formatValue(value) {
+    if (typeof value === 'string') {
+        return value;
+    }
+
+    if (typeof value === 'undefined') {
+        return 'undefined';
+    }
+
+    if (typeof value === 'function') {
+        return '[Function]';
+    }
+
+    try {
+        return JSON.stringify(value, null, 2);
+    } catch (error) {
+        return String(value);
+    }
+}
+
 function escapeHtml(text) {
     const div = document.createElement('div');
     div.textContent = text;
     return div.innerHTML;
 }
-
-/* Close modals on click outside */
-document.addEventListener('click', (e) => {
-    if (e.target.classList.contains('modal')) {
-        e.target.classList.remove('active');
-    }
-});

@@ -141,6 +141,7 @@
 .map-card,
 .featured-card {
   display: block;
+  min-width: 0;
   padding: 1.3rem 0 0;
   border-top: 1px solid var(--border-default);
   text-decoration: none;
@@ -166,6 +167,7 @@
 .popular-excerpt {
   margin: 0;
   color: var(--text-secondary);
+  overflow-wrap: break-word;
 }
 
 .map-card:hover h3,
@@ -246,6 +248,7 @@
   gap: 1rem;
   padding: 1.35rem 0;
   border-bottom: 1px solid var(--border-default);
+  min-width: 0;
 
   @include media-query($on-mobile) {
     grid-template-columns: 1fr;
@@ -283,6 +286,7 @@
   margin: 0;
   font-size: 1.55rem;
   line-height: 1.08;
+  overflow-wrap: anywhere;
 
   a {
     color: inherit;
@@ -297,6 +301,7 @@
 
 .popular-views {
   color: var(--text-secondary);
+  overflow-wrap: anywhere;
 }
 
 .popular-loading,
