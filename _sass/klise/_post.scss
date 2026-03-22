@@ -40,6 +40,7 @@
     letter-spacing: -0.05em;
     margin-top: 0.85rem;
     margin-bottom: 1rem;
+    overflow-wrap: anywhere;
 
     &.center {
       text-align: center;
@@ -90,9 +91,34 @@
   padding-top: 0;
   font-size: 1.04rem;
   line-height: 1.85;
+  overflow-wrap: break-word;
 
   iframe {
+    display: block;
+    max-width: 100%;
     text-align: center;
+  }
+
+  img,
+  video,
+  embed,
+  object {
+    max-width: 100%;
+    height: auto;
+  }
+
+  table {
+    display: block;
+    width: 100%;
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  pre {
+    max-width: 100%;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
   }
 
   figure {
@@ -255,6 +281,7 @@
 
     .post-title {
       color: var(--text-primary);
+      overflow-wrap: anywhere;
     }
 
     &:hover,

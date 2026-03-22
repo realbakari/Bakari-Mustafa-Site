@@ -26,6 +26,7 @@
   display: flex;
   align-items: center;
   gap: 1rem;
+  min-width: 0;
   user-select: none;
   -ms-user-select: none;
   -webkit-user-select: none;
@@ -91,6 +92,7 @@
   .trigger {
     float: none;
     margin-left: auto;
+    min-width: 0;
   }
 
   .trigger-container {
@@ -99,6 +101,7 @@
     flex-wrap: wrap;
     justify-content: flex-end;
     gap: 0.4rem;
+    min-width: 0;
   }
 
   .menu-trigger {
@@ -305,6 +308,7 @@
     margin-top: 1rem;
     font-weight: 700;
     letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
 
     @include media-query($on-mobile) {
       font-size: 2rem;
@@ -462,6 +466,7 @@
     font-weight: 600;
     line-height: 1.1;
     letter-spacing: -0.03em;
+    overflow-wrap: anywhere;
 
     a {
       color: $black;

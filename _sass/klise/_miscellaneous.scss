@@ -1882,18 +1882,22 @@
 
   .posts-stats {
     display: flex;
+    flex-wrap: wrap;
+    align-items: center;
     justify-content: flex-start;
     gap: 1.5rem;
     margin-top: 1rem;
 
     @include media-query($on-mobile) {
       gap: 1rem;
+      align-items: flex-start;
     }
 
     .stat-item {
       display: flex;
       align-items: center;
       gap: 0.4rem;
+      min-width: 0;
       padding: 0.5rem 1rem;
       background: transparent;
       border: none;
@@ -2143,7 +2147,7 @@
   border-radius: 0;
 
   @include media-query($on-mobile) {
-    padding: 1rem;
+    padding: 1rem 0 0;
     margin-bottom: 1.5rem;
   }
 
@@ -2228,6 +2232,7 @@
       margin: 0;
       font-size: 1.2rem;
       color: var(--text-primary);
+      overflow-wrap: anywhere;
     }
 
     .clear-results-btn {
@@ -2296,6 +2301,7 @@
   .posts-year-header {
     display: flex;
     align-items: center;
+    flex-wrap: wrap;
     gap: 1rem;
     font-family: $heading-family;
     font-size: 2rem;
@@ -2385,6 +2391,7 @@
       font-size: 1.75rem;
       line-height: 1.1;
       letter-spacing: -0.03em;
+      overflow-wrap: anywhere;
 
       @include media-query($on-mobile) {
         font-size: 1.25rem;
@@ -2523,7 +2530,7 @@ html {
 .search-page-header-content {
   .search-page-icon {
     color: rgba(0, 0, 0, 0.3);
-    margin: 0 auto 1rem;
+    margin: 0 0 1rem;
     display: block;
     width: 40px;
     height: 40px;
@@ -2536,6 +2543,7 @@ html {
     color: var(--text-primary);
     font-weight: $bold-weight;
     letter-spacing: -0.04em;
+    overflow-wrap: anywhere;
 
     @include media-query($on-mobile) {
       font-size: 1.75rem;
@@ -2548,6 +2556,7 @@ html {
     color: var(--text-secondary);
     max-width: 600px;
     margin: 0;
+    overflow-wrap: break-word;
   }
 }
 
@@ -2692,7 +2701,7 @@ html {
     flex-wrap: wrap;
 
     @include media-query($on-mobile) {
-      justify-content: center;
+      justify-content: flex-start;
     }
 
     .filter-label {
@@ -2818,6 +2827,7 @@ html {
       font-size: 0.8rem;
       color: rgba(0, 0, 0, 0.65);
       margin-left: auto;
+      overflow-wrap: anywhere;
 
       @include media-query($on-mobile) {
         margin-left: 0;
@@ -2833,6 +2843,7 @@ html {
     color: $black;
     line-height: 1.4;
     transition: color 0.2s ease;
+    overflow-wrap: anywhere;
 
     @include media-query($on-mobile) {
       font-size: 1.2rem;
