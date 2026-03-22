@@ -25,17 +25,42 @@
   const area = document.querySelector(".wrapper");
 
   if (menuToggle && menuItems) {
+    const closeMenu = () => {
+      menuToggle.setAttribute("aria-expanded", "false");
+      menuItems.classList.remove("is-open");
+      if (area) area.classList.remove("blurry");
+      document.body.style.overflow = "";
+    };
+
+    const openMenu = () => {
+      menuToggle.setAttribute("aria-expanded", "true");
+      menuItems.classList.add("is-open");
+      if (area) area.classList.add("blurry");
+      document.body.style.overflow = "hidden";
+    };
+
     menuToggle.addEventListener("click", () => {
       const isExpanded = menuToggle.getAttribute("aria-expanded") === "true";
-      menuToggle.setAttribute("aria-expanded", !isExpanded);
-      menuItems.classList.toggle("is-open");
-      
-      if (!isExpanded) {
-        area.classList.add("blurry");
-        document.body.style.overflow = "hidden";
+      if (isExpanded) {
+        closeMenu();
       } else {
-        area.classList.remove("blurry");
-        document.body.style.overflow = "";
+        openMenu();
+      }
+    });
+
+    menuItems.querySelectorAll(".menu-link").forEach((link) => {
+      link.addEventListener("click", closeMenu);
+    });
+
+    window.addEventListener("resize", () => {
+      if (window.innerWidth > 768) {
+        closeMenu();
+      }
+    });
+
+    document.addEventListener("keydown", (event) => {
+      if (event.key === "Escape") {
+        closeMenu();
       }
     });
   }
