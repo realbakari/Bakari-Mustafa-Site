@@ -704,7 +704,7 @@ body[data-theme="dark"] {
     }
 
     blockquote {
-      border-left-color: $dark-text-link-blue;
+      border-left-color: rgba(255, 255, 255, 0.18);
       color: rgba(255, 255, 255, 0.7);
     }
   }
@@ -714,7 +714,8 @@ body[data-theme="dark"] {
     border-bottom-color: rgba(255, 255, 255, 0.1);
 
     img {
-      box-shadow: 0 4px 16px rgba(0, 0, 0, 0.4);
+      box-shadow: none;
+      border-color: rgba(255, 255, 255, 0.14);
     }
 
     .book-excerpt {
@@ -723,30 +724,32 @@ body[data-theme="dark"] {
   }
 
   .key-lessons {
-    background: rgba(0, 63, 255, 0.1);
-    border-left-color: $dark-text-link-blue;
+    background: transparent;
+    border-top-color: rgba(255, 255, 255, 0.12);
+    border-left-color: transparent;
 
     h3 {
-      color: $dark-text-link-blue;
+      color: $dark-white;
     }
   }
 
   .book-content {
     blockquote {
-      background: rgba(255, 255, 255, 0.05);
-      border-left-color: $dark-text-link-blue;
+      background: transparent;
+      border-left-color: rgba(255, 255, 255, 0.18);
     }
 
     img {
-      box-shadow: 0 2px 8px rgba(0, 0, 0, 0.4);
+      box-shadow: none;
+      border-color: rgba(255, 255, 255, 0.14);
     }
   }
 
   // Linktree-style Social Links Dark Mode
   .linktree-header {
     .profile-image {
-      border-color: $dark-text-link-blue;
-      box-shadow: 0 4px 16px rgba(0, 63, 255, 0.3);
+      border-color: rgba(255, 255, 255, 0.14);
+      box-shadow: none;
     }
 
     .subtitle {
@@ -759,21 +762,25 @@ body[data-theme="dark"] {
   }
 
   .social-link-item {
-    background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(255, 255, 255, 0.15);
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.12);
 
     &:hover {
-      background: rgba(0, 63, 255, 0.1);
-      border-color: $dark-text-link-blue;
-      box-shadow: 0 6px 20px rgba(0, 63, 255, 0.25);
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.25);
+      box-shadow: none;
     }
 
     .social-icon {
-      background: rgba(0, 63, 255, 0.15);
+      background: transparent;
+      border-color: rgba(255, 255, 255, 0.14);
+      color: $dark-white;
     }
 
     &:hover .social-icon {
-      background: $dark-text-link-blue;
+      background: transparent;
+      border-color: $dark-text-link-blue;
+      color: $dark-text-link-blue;
     }
 
     .social-content {
@@ -787,11 +794,12 @@ body[data-theme="dark"] {
     }
 
     .social-arrow {
-      color: rgba(255, 255, 255, 0.3);
+      color: rgba(255, 255, 255, 0.55);
     }
 
     &:hover .social-arrow {
       color: $dark-text-link-blue;
+      transform: none;
     }
   }
 
@@ -984,8 +992,8 @@ body[data-theme="dark"] {
     }
 
     &.share-copy.copied {
-      background: #10B981;
-      border-color: #10B981;
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
       color: white;
     }
   }
@@ -1053,8 +1061,9 @@ body[data-theme="dark"] {
 
   // Wattpad Collections Dark Mode
   .wattpad-header {
-    background: linear-gradient(135deg, rgba(0, 63, 255, 0.08) 0%, rgba(0, 63, 255, 0.04) 100%);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: transparent;
+    border-top-color: rgba(255, 255, 255, 0.1);
+    border-bottom-color: rgba(255, 255, 255, 0.1);
   }
 
   .wattpad-profile-info {
@@ -1068,22 +1077,24 @@ body[data-theme="dark"] {
   }
 
   .wattpad-follow-button {
-    background: #FF500A;
-    color: $dark-white;
+    background: var(--text-primary);
+    color: var(--surface-strong);
+    border-color: var(--text-primary);
 
     &:hover {
-      background: #E64A09;
-      box-shadow: 0 6px 16px rgba(255, 80, 10, 0.4);
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      box-shadow: none;
     }
   }
 
   .wattpad-story-card {
-    background: rgba(255, 255, 255, 0.03);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: transparent;
+    border-color: rgba(255, 255, 255, 0.12);
 
     &:hover {
-      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.25);
-      border-color: rgba(0, 63, 255, 0.4);
+      box-shadow: none;
+      border-color: rgba(255, 255, 255, 0.25);
     }
   }
 
@@ -1109,7 +1120,7 @@ body[data-theme="dark"] {
       color: rgba(255, 255, 255, 0.6);
 
       svg {
-        color: $dark-text-link-blue;
+        color: rgba(255, 255, 255, 0.55);
       }
 
       .meta-value {
@@ -1120,18 +1131,21 @@ body[data-theme="dark"] {
 
   .wattpad-story-tags {
     .tag {
-      background: rgba(0, 63, 255, 0.15);
-      color: $dark-text-link-blue;
+      background: transparent;
+      color: rgba(255, 255, 255, 0.7);
+      border-color: rgba(255, 255, 255, 0.16);
 
       &:hover {
-        background: rgba(0, 63, 255, 0.25);
+        background: transparent;
+        color: $dark-text-link-blue;
+        border-color: $dark-text-link-blue;
       }
     }
   }
 
   .wattpad-cta {
-    background: linear-gradient(135deg, rgba(0, 63, 255, 0.08) 0%, rgba(255, 80, 10, 0.08) 100%);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: transparent;
+    border-top-color: rgba(255, 255, 255, 0.1);
 
     h3 {
       color: $dark-white;
@@ -1143,12 +1157,14 @@ body[data-theme="dark"] {
   }
 
   .wattpad-cta-button {
-    background: #FF500A;
-    color: $dark-white;
+    background: var(--text-primary);
+    color: var(--surface-strong);
+    border-color: var(--text-primary);
 
     &:hover {
-      background: #E64A09;
-      box-shadow: 0 6px 16px rgba(255, 80, 10, 0.5);
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
+      box-shadow: none;
     }
   }
 
@@ -1538,8 +1554,8 @@ body[data-theme="dark"] {
         }
 
         &.type-page {
-          background: rgba(16, 185, 129, 0.2);
-          color: #10B981;
+          background: transparent;
+          color: rgba(255, 255, 255, 0.6);
         }
       }
 
@@ -1655,7 +1671,7 @@ body[data-theme="dark"] {
 
   .tip-item {
     svg {
-      color: #10B981;
+      color: $dark-text-link-blue;
     }
 
     span {
@@ -2013,7 +2029,7 @@ body[data-theme="dark"] {
       color: $dark-white;
 
       &.has-visitors {
-        color: #10B981;
+        color: var(--accent-primary);
       }
     }
 
