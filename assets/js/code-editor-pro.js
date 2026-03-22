@@ -9,6 +9,7 @@ let yamlLibraryPromise = null;
 let markdownLibraryPromise = null;
 let isHydratingModel = false;
 let startupNotice = null;
+let currentTheme = 'sublime-warm';
 
 const STORAGE_KEYS = {
     projects: 'codeEditorProProjectsV2',
@@ -37,6 +38,32 @@ const LANGUAGE_EXTENSIONS = {
     java: 'java',
     csharp: 'cs',
     cpp: 'cpp'
+};
+
+const EXTENSION_LANGUAGES = {
+    js: 'javascript',
+    ts: 'typescript',
+    py: 'python',
+    rb: 'ruby',
+    html: 'html',
+    htm: 'html',
+    css: 'css',
+    json: 'json',
+    md: 'markdown',
+    markdown: 'markdown',
+    yml: 'yaml',
+    yaml: 'yaml',
+    sql: 'sql',
+    sh: 'shell',
+    bash: 'shell',
+    php: 'php',
+    go: 'go',
+    rs: 'rust',
+    java: 'java',
+    cs: 'csharp',
+    cpp: 'cpp',
+    cxx: 'cpp',
+    cc: 'cpp'
 };
 
 const LANGUAGE_ACCENTS = {
@@ -318,11 +345,13 @@ function initializeEditor() {
     const initialState = getInitialState();
     files = initialState.files;
     currentFileIndex = initialState.currentFileIndex;
+    currentTheme = initialState.theme || currentTheme;
+    document.getElementById('theme-select').value = currentTheme;
 
     editor = monaco.editor.create(document.getElementById('editor'), {
         value: files[currentFileIndex].content,
         language: files[currentFileIndex].language,
-        theme: document.getElementById('theme-select').value,
+        theme: currentTheme,
         fontSize: 14,
         minimap: { enabled: true },
         automaticLayout: true,
@@ -334,6 +363,8 @@ function initializeEditor() {
         cursorBlinking: 'smooth',
         bracketPairColorization: { enabled: true }
     });
+
+    registerKeyboardShortcuts();
 
     editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Enter, () => {
         runCode();
@@ -436,7 +467,8 @@ function getInitialState() {
 
     return {
         files: [createFile('main.js', 'javascript', codeTemplates.javascript)],
-        currentFileIndex: 0
+        currentFileIndex: 0,
+        theme: currentTheme
     };
 }
 
@@ -481,7 +513,11 @@ function parseSharedState() {
         const decoded = JSON.parse(decodeURIComponent(atob(shared)));
         const normalizedFiles = normalizeFiles(decoded.files);
         const nextIndex = clampIndex(decoded.currentFileIndex, normalizedFiles.length);
-        return { files: normalizedFiles, currentFileIndex: nextIndex };
+        return {
+            files: normalizedFiles,
+            currentFileIndex: nextIndex,
+            theme: typeof decoded.theme === 'string' ? decoded.theme : currentTheme
+        };
     } catch (error) {
         showNotification('Invalid share link. Starting with a clean workspace.', 'warn');
         return null;
@@ -499,7 +535,11 @@ function parseAutoSavedState() {
         const parsed = JSON.parse(raw);
         const normalizedFiles = normalizeFiles(parsed.files);
         const nextIndex = clampIndex(parsed.currentFileIndex, normalizedFiles.length);
-        return { files: normalizedFiles, currentFileIndex: nextIndex };
+        return {
+            files: normalizedFiles,
+            currentFileIndex: nextIndex,
+            theme: typeof parsed.theme === 'string' ? parsed.theme : currentTheme
+        };
     } catch (error) {
         return null;
     }
@@ -532,7 +572,9 @@ function setupEventListeners() {
     });
 
     document.getElementById('theme-select').addEventListener('change', event => {
-        monaco.editor.setTheme(event.target.value);
+        currentTheme = event.target.value;
+        monaco.editor.setTheme(currentTheme);
+        autoSave();
     });
 
     document.getElementById('run-code').addEventListener('click', runCode);
@@ -541,6 +583,13 @@ function setupEventListeners() {
     document.getElementById('share-code').addEventListener('click', generateShareURL);
     document.getElementById('clear-output').addEventListener('click', () => clearOutput(true));
     document.getElementById('add-tab').addEventListener('click', addNewFile);
+    document.getElementById('sidebar-new-file').addEventListener('click', () => addNewFile({ promptForName: true }));
+    document.getElementById('sidebar-rename-file').addEventListener('click', renameCurrentFile);
+    document.getElementById('sidebar-duplicate-file').addEventListener('click', duplicateCurrentFile);
+    document.getElementById('sidebar-import-file').addEventListener('click', triggerImportFile);
+    document.getElementById('sidebar-download-file').addEventListener('click', downloadCurrentFile);
+    document.getElementById('import-file-input').addEventListener('change', importFilesFromInput);
+    document.getElementById('sidebar-file-filter').addEventListener('input', renderSidebarFiles);
 
     document.querySelectorAll('.panel-tab').forEach(button => {
         button.addEventListener('click', () => {
@@ -580,8 +629,48 @@ function hydrateCurrentFile() {
     updateEditorContext();
     updateRuntimeUI();
     renderTabs();
+    renderSidebarFiles();
+    updateSidebarInfo();
     updateStatusBar();
     updateCursorPosition();
+}
+
+function registerKeyboardShortcuts() {
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyS, () => {
+        openModal('save-modal');
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyN, () => {
+        addNewFile({ promptForName: true });
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyW, () => {
+        closeFile(currentFileIndex);
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyR, () => {
+        renameCurrentFile();
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyMod.Shift | monaco.KeyCode.KeyD, () => {
+        duplicateCurrentFile();
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyO, () => {
+        triggerImportFile();
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyF, () => {
+        editor.getAction('actions.find').run();
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.KeyH, () => {
+        editor.getAction('editor.action.startFindReplaceAction').run();
+    });
+
+    editor.addCommand(monaco.KeyMod.CtrlCmd | monaco.KeyCode.Slash, () => {
+        editor.getAction('editor.action.commentLine').run();
+    });
 }
 
 function saveCurrentEditorContent() {
@@ -590,6 +679,83 @@ function saveCurrentEditorContent() {
     }
 
     files[currentFileIndex].content = editor.getValue();
+}
+
+function renderSidebarFiles() {
+    const sidebarList = document.getElementById('sidebar-file-list');
+    if (!sidebarList) {
+        return;
+    }
+
+    sidebarList.innerHTML = '';
+    const filterValue = (document.getElementById('sidebar-file-filter')?.value || '').trim().toLowerCase();
+    const matchingFiles = files
+        .map((file, index) => ({ file, index }))
+        .filter(({ file }) => {
+            if (!filterValue) {
+                return true;
+            }
+
+            return file.name.toLowerCase().includes(filterValue) || file.language.toLowerCase().includes(filterValue);
+        });
+
+    if (!matchingFiles.length) {
+        const empty = document.createElement('div');
+        empty.className = 'empty-state';
+        empty.textContent = 'No matching files.';
+        sidebarList.appendChild(empty);
+        return;
+    }
+
+    matchingFiles.forEach(({ file, index }) => {
+        const button = document.createElement('button');
+        button.type = 'button';
+        button.className = `sidebar-file${index === currentFileIndex ? ' active' : ''}`;
+
+        const nameRow = document.createElement('div');
+        nameRow.className = 'sidebar-file-name-row';
+
+        const dot = document.createElement('span');
+        dot.className = 'sidebar-file-dot';
+        dot.style.backgroundColor = LANGUAGE_ACCENTS[file.language] || '#f89d1b';
+
+        const name = document.createElement('span');
+        name.className = 'sidebar-file-name';
+        name.textContent = file.name;
+
+        nameRow.appendChild(dot);
+        nameRow.appendChild(name);
+
+        if (file.dirty) {
+            const dirty = document.createElement('span');
+            dirty.className = 'sidebar-file-dirty';
+            dirty.textContent = '•';
+            nameRow.appendChild(dirty);
+        }
+
+        const meta = document.createElement('div');
+        meta.className = 'sidebar-file-meta';
+        meta.textContent = file.language;
+
+        button.appendChild(nameRow);
+        button.appendChild(meta);
+        button.addEventListener('click', () => {
+            switchFile(index);
+        });
+        sidebarList.appendChild(button);
+    });
+}
+
+function updateSidebarInfo() {
+    const file = files[currentFileIndex];
+    if (!file) {
+        return;
+    }
+
+    document.getElementById('sidebar-active-file').textContent = file.name;
+    document.getElementById('sidebar-open-count').textContent = String(files.length);
+    document.getElementById('sidebar-active-language').textContent = file.language;
+    document.getElementById('sidebar-theme-name').textContent = getThemeLabel(currentTheme);
 }
 
 function renderTabs() {
@@ -653,12 +819,27 @@ function switchFile(index) {
     editor.focus();
 }
 
-function addNewFile() {
+function addNewFile(options = {}) {
     saveCurrentEditorContent();
 
-    const language = document.getElementById('language-select').value || 'javascript';
+    const fallbackLanguage = document.getElementById('language-select').value || 'javascript';
+    let language = fallbackLanguage;
+    let fileName = generatedFileName(files.length, language);
+
+    if (options.promptForName) {
+        const suggestedName = generatedFileName(files.length, fallbackLanguage);
+        const requestedName = window.prompt('Name the new file:', suggestedName);
+
+        if (requestedName === null) {
+            return;
+        }
+
+        fileName = normalizeFileName(requestedName, fallbackLanguage) || suggestedName;
+        language = getLanguageFromFileName(fileName) || fallbackLanguage;
+    }
+
     const newFile = createFile(
-        generatedFileName(files.length, language),
+        fileName,
         language,
         codeTemplates[language] || ''
     );
@@ -696,6 +877,177 @@ function generatedFileName(index, language) {
     return `untitled-${nextNumber}.${extension}`;
 }
 
+function getLanguageFromFileName(fileName) {
+    const extension = fileName.includes('.') ? fileName.split('.').pop().toLowerCase() : '';
+    return EXTENSION_LANGUAGES[extension] || null;
+}
+
+function normalizeFileName(fileName, fallbackLanguage = 'javascript') {
+    const trimmed = String(fileName || '').trim().replace(/[\\/:*?"<>|]+/g, '-');
+
+    if (!trimmed) {
+        return '';
+    }
+
+    if (trimmed.includes('.')) {
+        return trimmed;
+    }
+
+    return `${trimmed}.${getFileExtension(fallbackLanguage)}`;
+}
+
+function createCopyName(fileName) {
+    const lastDot = fileName.lastIndexOf('.');
+
+    if (lastDot === -1) {
+        return `${fileName}-copy`;
+    }
+
+    return `${fileName.slice(0, lastDot)}-copy${fileName.slice(lastDot)}`;
+}
+
+function renameCurrentFile() {
+    const file = files[currentFileIndex];
+    if (!file) {
+        return;
+    }
+
+    const requestedName = window.prompt('Rename file:', file.name);
+    if (requestedName === null) {
+        return;
+    }
+
+    const nextName = normalizeFileName(requestedName, file.language);
+    if (!nextName) {
+        showNotification('File name cannot be empty.', 'warn');
+        return;
+    }
+
+    file.name = nextName;
+
+    const nextLanguage = getLanguageFromFileName(nextName);
+    if (nextLanguage) {
+        file.language = nextLanguage;
+        monaco.editor.setModelLanguage(editor.getModel(), nextLanguage);
+        document.getElementById('language-select').value = nextLanguage;
+    }
+
+    hydrateCurrentFile();
+    autoSave();
+    showNotification(`Renamed to ${nextName}.`, 'success');
+}
+
+function duplicateCurrentFile() {
+    saveCurrentEditorContent();
+    const file = files[currentFileIndex];
+    if (!file) {
+        return;
+    }
+
+    const suggestedName = createCopyName(file.name);
+    const requestedName = window.prompt('Duplicate file as:', suggestedName);
+    if (requestedName === null) {
+        return;
+    }
+
+    const nextName = normalizeFileName(requestedName, file.language);
+    if (!nextName) {
+        showNotification('File name cannot be empty.', 'warn');
+        return;
+    }
+
+    const nextLanguage = getLanguageFromFileName(nextName) || file.language;
+    files.push(createFile(nextName, nextLanguage, file.content));
+    currentFileIndex = files.length - 1;
+    hydrateCurrentFile();
+    autoSave();
+    showNotification(`Duplicated as ${nextName}.`, 'success');
+}
+
+function triggerImportFile() {
+    const input = document.getElementById('import-file-input');
+    if (!input) {
+        return;
+    }
+
+    input.value = '';
+    input.click();
+}
+
+async function importFilesFromInput(event) {
+    const importedFiles = Array.from(event.target.files || []);
+    if (!importedFiles.length) {
+        return;
+    }
+
+    saveCurrentEditorContent();
+
+    for (const importedFile of importedFiles) {
+        const content = await importedFile.text();
+        const name = normalizeFileName(importedFile.name, 'javascript');
+        const language = getLanguageFromFileName(name) || 'javascript';
+        files.push(createFile(name, language, content));
+    }
+
+    currentFileIndex = files.length - 1;
+    hydrateCurrentFile();
+    autoSave();
+    showNotification(`Imported ${importedFiles.length} file${importedFiles.length === 1 ? '' : 's'}.`, 'success');
+}
+
+function downloadCurrentFile() {
+    saveCurrentEditorContent();
+    const file = files[currentFileIndex];
+    if (!file) {
+        return;
+    }
+
+    const blob = new Blob([file.content], { type: `${getMimeType(file.language)};charset=utf-8` });
+    const url = URL.createObjectURL(blob);
+    const anchor = document.createElement('a');
+    anchor.href = url;
+    anchor.download = file.name;
+    document.body.appendChild(anchor);
+    anchor.click();
+    anchor.remove();
+    URL.revokeObjectURL(url);
+    showNotification(`Downloaded ${file.name}.`, 'success');
+}
+
+function getMimeType(language) {
+    const mimeTypes = {
+        javascript: 'application/javascript',
+        typescript: 'application/typescript',
+        python: 'text/x-python',
+        ruby: 'application/x-ruby',
+        html: 'text/html',
+        css: 'text/css',
+        json: 'application/json',
+        markdown: 'text/markdown',
+        yaml: 'application/x-yaml',
+        sql: 'application/sql',
+        shell: 'application/x-sh',
+        php: 'application/x-httpd-php',
+        go: 'text/plain',
+        rust: 'text/plain',
+        java: 'text/x-java-source',
+        csharp: 'text/plain',
+        cpp: 'text/plain'
+    };
+
+    return mimeTypes[language] || 'text/plain';
+}
+
+function getThemeLabel(themeValue) {
+    const labels = {
+        'sublime-warm': 'Sublime Warm',
+        'sublime-light': 'Sublime Light',
+        'hc-black': 'High Contrast'
+    };
+
+    return labels[themeValue] || themeValue;
+}
+
 function isGeneratedFileName(name, language) {
     const expectedExtension = getFileExtension(language);
     return /^untitled-\d+\.[a-z0-9]+$/i.test(name) || name === `main.${expectedExtension}`;
@@ -719,7 +1071,7 @@ function updateRuntimeUI() {
     const profile = runtimeProfiles[file.language] || runtimeProfiles.javascript;
 
     document.getElementById('runtime-badge').textContent = profile.label;
-    document.getElementById('runtime-description').textContent = profile.description;
+    document.getElementById('runtime-description').textContent = profile.short;
 }
 
 function updateStatusBar() {
@@ -730,6 +1082,7 @@ function updateStatusBar() {
     document.getElementById('line-count').textContent = String(lines);
     document.getElementById('char-count').textContent = String(chars);
     document.getElementById('current-file').textContent = files[currentFileIndex]?.name || 'untitled';
+    updateSidebarInfo();
 }
 
 function updateCursorPosition() {
@@ -1223,6 +1576,7 @@ function saveProject() {
     projects[projectName] = {
         files,
         currentFileIndex,
+        theme: currentTheme,
         timestamp: new Date().toISOString()
     };
 
@@ -1299,6 +1653,9 @@ function loadProject(name) {
 
     files = normalizeFiles(project.files);
     currentFileIndex = clampIndex(project.currentFileIndex, files.length);
+    currentTheme = typeof project.theme === 'string' ? project.theme : currentTheme;
+    document.getElementById('theme-select').value = currentTheme;
+    monaco.editor.setTheme(currentTheme);
     hydrateCurrentFile();
     autoSave();
     closeModal('load-modal');
@@ -1321,7 +1678,8 @@ function autoSave() {
     saveCurrentEditorContent();
     localStorage.setItem(STORAGE_KEYS.autoSave, JSON.stringify({
         files,
-        currentFileIndex
+        currentFileIndex,
+        theme: currentTheme
     }));
 }
 
@@ -1330,7 +1688,8 @@ function generateShareURL() {
 
     const encoded = btoa(encodeURIComponent(JSON.stringify({
         files,
-        currentFileIndex
+        currentFileIndex,
+        theme: currentTheme
     })));
 
     const url = `${window.location.origin}${window.location.pathname}?share=${encoded}`;

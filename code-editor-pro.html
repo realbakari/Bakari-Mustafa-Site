@@ -312,6 +312,113 @@ layout: compress
             gap: 10px;
         }
 
+        .sidebar-actions {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 8px;
+        }
+
+        .sidebar-search {
+            width: 100%;
+            min-height: 32px;
+            padding: 0 10px;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+        }
+
+        .sidebar-search:focus-visible {
+            outline: 2px solid rgba(248, 157, 27, 0.28);
+            outline-offset: 2px;
+        }
+
+        .sidebar-button {
+            min-height: 30px;
+            padding: 0 10px;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.05);
+            color: var(--text);
+            font-size: 0.78rem;
+        }
+
+        .sidebar-button:hover {
+            background: rgba(255, 255, 255, 0.09);
+            border-color: var(--line-strong);
+        }
+
+        .sidebar-file-list {
+            display: grid;
+            gap: 6px;
+            max-height: 280px;
+            overflow: auto;
+            padding-right: 2px;
+        }
+
+        .sidebar-file {
+            width: 100%;
+            padding: 10px;
+            border-radius: 7px;
+            border: 1px solid transparent;
+            background: rgba(255, 255, 255, 0.03);
+            color: var(--text);
+            text-align: left;
+            display: grid;
+            gap: 6px;
+        }
+
+        .sidebar-file:hover {
+            background: rgba(255, 255, 255, 0.07);
+            border-color: var(--line);
+        }
+
+        .sidebar-file.active {
+            background: rgba(248, 157, 27, 0.12);
+            border-color: rgba(248, 157, 27, 0.24);
+        }
+
+        .sidebar-file-name-row {
+            display: flex;
+            align-items: center;
+            gap: 8px;
+            min-width: 0;
+        }
+
+        .sidebar-file-dot {
+            width: 8px;
+            height: 8px;
+            border-radius: 999px;
+            flex-shrink: 0;
+            background: var(--accent);
+        }
+
+        .sidebar-file-name {
+            min-width: 0;
+            overflow: hidden;
+            text-overflow: ellipsis;
+            white-space: nowrap;
+            font-size: 0.84rem;
+            font-weight: 500;
+        }
+
+        .sidebar-file-dirty {
+            color: #ffd9a6;
+            font-size: 0.78rem;
+            flex-shrink: 0;
+        }
+
+        .sidebar-file-meta {
+            color: var(--text-dim);
+            font-size: 0.74rem;
+            text-transform: uppercase;
+            letter-spacing: 0.04em;
+        }
+
+        .import-file-input {
+            display: none;
+        }
+
         .side-panel h2,
         .panel-heading {
             font-size: 0.9rem;
@@ -345,6 +452,36 @@ layout: compress
             border: 1px solid var(--line);
             display: grid;
             gap: 6px;
+        }
+
+        .sidebar-stats {
+            display: grid;
+            gap: 8px;
+        }
+
+        .sidebar-stat {
+            display: flex;
+            align-items: center;
+            justify-content: space-between;
+            gap: 10px;
+            padding: 9px 10px;
+            border-radius: 6px;
+            background: rgba(255, 255, 255, 0.03);
+            border: 1px solid rgba(255, 255, 255, 0.04);
+        }
+
+        .sidebar-stat-label {
+            color: var(--text-dim);
+            font-size: 0.72rem;
+            text-transform: uppercase;
+            letter-spacing: 0.05em;
+        }
+
+        .sidebar-stat-value {
+            color: var(--text);
+            font-size: 0.82rem;
+            font-weight: 500;
+            text-align: right;
         }
 
         .runtime-badge {
@@ -888,24 +1025,49 @@ layout: compress
             <main class="workspace">
                 <aside class="side-panel">
                     <div class="explorer-section">
-                        <div class="panel-label">Sidebar</div>
-                        <h2>Workspace</h2>
-                        <p>A simpler, Sublime-style layout with a steady sidebar, main editor, and bottom panel.</p>
+                        <div class="panel-label">Explorer</div>
+                        <h2>Files</h2>
+                        <input class="sidebar-search" id="sidebar-file-filter" type="text" placeholder="Filter files">
+                        <div class="sidebar-actions">
+                            <button class="sidebar-button" id="sidebar-new-file" type="button">New</button>
+                            <button class="sidebar-button" id="sidebar-rename-file" type="button">Rename</button>
+                            <button class="sidebar-button" id="sidebar-duplicate-file" type="button">Duplicate</button>
+                            <button class="sidebar-button" id="sidebar-import-file" type="button">Import</button>
+                            <button class="sidebar-button" id="sidebar-download-file" type="button">Download</button>
+                        </div>
+                        <div class="sidebar-file-list" id="sidebar-file-list"></div>
+                        <input class="import-file-input" id="import-file-input" type="file" multiple>
                     </div>
 
                     <div class="runtime-card">
-                        <div class="panel-label">Current Runtime</div>
+                        <div class="panel-label">Runtime</div>
                         <div class="runtime-badge" id="runtime-badge">Browser runtime</div>
-                        <p class="panel-note" id="runtime-description">JavaScript executes directly in the browser with captured console output.</p>
+                        <div class="sidebar-stat">
+                            <span class="sidebar-stat-label">Mode</span>
+                            <span class="sidebar-stat-value" id="runtime-description">In-browser console</span>
+                        </div>
                     </div>
 
                     <div class="explorer-section">
-                        <div class="panel-label">Shortcuts</div>
-                        <ul class="side-list">
-                            <li><strong>Cmd/Ctrl + Enter</strong> runs the current file.</li>
-                            <li><strong>Save / Load</strong> stores projects locally in this browser.</li>
-                            <li><strong>Preview</strong> is available for HTML, CSS, Markdown, JSON, YAML, and SQL inspection.</li>
-                        </ul>
+                        <div class="panel-label">Session</div>
+                        <div class="sidebar-stats">
+                            <div class="sidebar-stat">
+                                <span class="sidebar-stat-label">Active File</span>
+                                <span class="sidebar-stat-value" id="sidebar-active-file">main.js</span>
+                            </div>
+                            <div class="sidebar-stat">
+                                <span class="sidebar-stat-label">Open Files</span>
+                                <span class="sidebar-stat-value" id="sidebar-open-count">1</span>
+                            </div>
+                            <div class="sidebar-stat">
+                                <span class="sidebar-stat-label">Language</span>
+                                <span class="sidebar-stat-value" id="sidebar-active-language">javascript</span>
+                            </div>
+                            <div class="sidebar-stat">
+                                <span class="sidebar-stat-label">Theme</span>
+                                <span class="sidebar-stat-value" id="sidebar-theme-name">Sublime Warm</span>
+                            </div>
+                        </div>
                     </div>
                 </aside>
 
