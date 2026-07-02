@@ -93,9 +93,6 @@ layout: compress
 
   {% include navbar.html %}
   <div class="wrapper{% if page.home %} wrapper-home{% endif %}">
-    {% unless page.home %}
-      {% include author.html %}
-    {% endunless %}
     <main aria-label="Content">
       {{ content }}
     </main>

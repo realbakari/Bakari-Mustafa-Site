@@ -2,7 +2,7 @@
 title: Privacy Policy
 layout: page
 excerpt: 'Details how bakarimustafa.com collects, uses, and protects visitor information. No personal data shared or sold.'
-description: 'Read the privacy policy for bakarimustafa.com, a personal site by Bakari Mustafa. This covers anonymous analytics, third-party providers (like Supabase and Netlify), your rights under GDPR, and steps to protect your privacy.'
+description: 'Read the privacy policy for bakarimustafa.com, a personal site by Bakari Mustafa. This covers what information is collected, third-party providers (like Supabase and Netlify), your rights under GDPR, and steps to protect your privacy.'
 image: ''
 
 ---
@@ -12,41 +12,20 @@ This privacy policy outlines the types of personal information we collect, how i
 
 ### What background data is collected?
 
-This website uses cookies and analytics tools to improve your experience and understand how visitors use the site. We do not collect or store personally identifiable data without your explicit consent through form submissions.
-
-### Analytics and Cookies
-
-We use Supabase and Google Analytics to analyze page views, website traffic, and user behavior.
-
-- **Supabase:** Used to anonymously track page views and popular content for analytics purposes. Supabase stores only aggregated page view data; it does not store IP addresses or personally identifiable information.
-- **Google Analytics:** Collects anonymous information including:
-  - Pages you visit and time spent on each page
-  - Your geographic location (country/city level)
-  - Browser type, device type, and screen resolution
-  - Referring websites and search terms
-  - Click patterns and navigation flow
-
-Google Analytics uses cookies to track this information. These cookies do not contain personally identifiable information. You can opt-out of Google Analytics by installing the [Google Analytics Opt-out Browser Add-on](https://tools.google.com/dlpage/gaoptout).
-
-For more information on how Google uses data, visit [Google's Privacy Policy](https://policies.google.com/privacy).
+This website does not use analytics services or tracking cookies. We do not track your visits, and we do not collect or store personally identifiable data unless you explicitly provide it through a form (such as the contact form or newsletter signup). One preference — your light/dark theme choice — is stored locally in your own browser and never sent to us.
 
 ### Information Collection
 
-We collect information from you when you fill out a form (such as our contact form) or enter information on our website. This information may include your name, email address, and any other information you choose to provide.
-
-We also collect anonymous browsing data through analytics cookies as described above. This helps us understand which content is most valuable to our visitors and how to improve the website experience.
+We collect information from you when you fill out a form (such as our contact form) or subscribe to the newsletter. This information may include your name, email address, and any other information you choose to provide.
 
 ### Use of Information
 
 We use the information we collect to:
 
 - Respond to your inquiries submitted through contact forms
-- Provide you with a better user experience
-- Analyze website traffic and improve our content
-- Understand which articles and resources are most helpful
-- Improve website performance and functionality
+- Send you the newsletter, if you subscribed (you can unsubscribe at any time)
 
-We will never sell your personal information or use it for purposes other than those listed above. Anonymous analytics data helps us make data-driven decisions about content and design.
+We will never sell your personal information or use it for purposes other than those listed above.
 
 ### Protection of Information
 
@@ -58,9 +37,8 @@ We do not sell, trade, or otherwise transfer to outside parties your personally 
 
 Third-party services we use:
 - **Netlify**: Website hosting (form submissions are processed through Netlify Forms)
-- **Google Analytics**: Anonymous website analytics
-- **Supabase**: Backend analytics for page views and popular content; stores only aggregated, non-personal data and does not collect IP addresses.
-- **Buy Me a Coffee**: Optional donation widget (processes its own data separately)
+- **Supabase**: Stores newsletter subscriber email addresses and subscription status
+- **Resend**: Delivers newsletter confirmation emails
 
 These service providers have their own privacy policies and data handling practices. We ensure all partners maintain appropriate security standards and confidentiality agreements.
 
@@ -91,4 +69,4 @@ If you've any reason to complain about the ways I handle your privacy, please co
 
 Thank you for visiting my official website. We take your privacy seriously and will do our best to protect your personal information.
 
-Last updated: November 2025
+Last updated: July 2026

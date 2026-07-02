@@ -336,3 +336,44 @@
 .post-updated-at {
   font-family: "Ubuntu mono", "monospace";
 }
+
+// Share row
+.post-share {
+  display: flex;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 8px 16px;
+  margin: 2.5rem 0 1.5rem;
+  padding-top: 1.25rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: $small-font-size;
+}
+
+// Scoped under .page-content to out-rank the article link styles
+.page-content .post-share {
+  a,
+  .post-share-copy {
+    color: var(--text-secondary);
+    text-decoration: none;
+    background: none;
+    border: none;
+    padding: 0;
+    font-family: $sans-family;
+    font-size: $small-font-size;
+    cursor: pointer;
+
+    &:hover,
+    &:focus {
+      color: var(--accent-primary);
+    }
+  }
+
+  a[target="_blank"]::after {
+    content: none;
+  }
+}
+
+.post-share-label {
+  color: var(--text-primary);
+  font-weight: $medium-weight;
+}
