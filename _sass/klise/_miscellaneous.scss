@@ -145,9 +145,9 @@
   max-width: 600px;
   margin: 2rem auto;
   padding: 2rem;
-  background: rgba(0, 0, 0, 0.02);
-  border-radius: 6px;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--bg-surface);
+  border-radius: 8px;
+  border: 1px solid var(--border-default);
 }
 
 .form-group {
@@ -157,10 +157,10 @@
     display: block;
     margin-bottom: 0.5rem;
     font-weight: 500;
-    color: $black;
+    color: var(--text-primary);
 
     .required {
-      color: rgba(0, 0, 0, 0.4);
+      color: var(--text-secondary);
     }
   }
 
@@ -169,22 +169,22 @@
   textarea {
     width: 100%;
     padding: 0.75rem;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-default);
     border-radius: 6px;
     font-size: 1rem;
     font-family: inherit;
     transition: all 0.2s ease;
-    background: $white;
-    color: $black;
+    background: var(--bg-primary);
+    color: var(--text-primary);
 
     &:focus {
       outline: none;
-      border-color: rgba(0, 0, 0, 0.3);
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+      border-color: rgba(var(--accent-primary-rgb), 0.55);
+      box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.1);
     }
 
     &::placeholder {
-      color: rgba(0, 0, 0, 0.4);
+      color: var(--text-secondary);
     }
   }
 
@@ -197,10 +197,10 @@
 .form-submit {
   width: 100%;
   padding: 1rem 2rem;
-  background: $black;
-  color: white;
-  border: 1px solid $black;
-  border-radius: 6px;
+  background: var(--text-primary);
+  color: var(--surface-strong);
+  border: 1px solid var(--text-primary);
+  border-radius: 8px;
   font-size: 1.1rem;
   font-weight: 500;
   cursor: pointer;
@@ -208,13 +208,13 @@
   box-shadow: none;
 
   &:hover {
-    background: rgba(0, 0, 0, 0.85);
-    border-color: rgba(0, 0, 0, 0.85);
-    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+    background: var(--accent-primary);
+    border-color: var(--accent-primary);
+    box-shadow: none;
   }
 
   &:active {
-    background: rgba(0, 0, 0, 0.95);
+    background: var(--accent-primary);
   }
 }
 
@@ -630,7 +630,7 @@
       color: var(--text-primary);
       border-bottom: 1px solid var(--border-default);
       padding-bottom: 0.75rem;
-      letter-spacing: -0.03em;
+      letter-spacing: 0;
     }
   }
 }
@@ -734,7 +734,7 @@
 
       span {
         display: block;
-        color: rgba(0, 0, 0, 0.7);
+        color: var(--text-secondary);
         font-size: 0.9rem;
       }
     }
@@ -754,7 +754,7 @@
     font-family: $heading-family;
     font-size: 1.95rem;
     line-height: 1.04;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     color: var(--text-primary);
   }
 }
@@ -773,7 +773,7 @@
 .project-item {
   background: transparent;
   border: 1px solid var(--border-default);
-  border-radius: 0;
+  border-radius: 8px;
   padding: 1.6rem 1.5rem;
   transition: border-color 0.2s ease;
 
@@ -788,7 +788,7 @@
     font-family: $heading-family;
     font-size: 1.55rem;
     line-height: 1.08;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
 
     a {
       color: var(--text-primary);
@@ -819,7 +819,7 @@
 
   p {
     margin: 0;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     line-height: 1.6;
 
     &:last-child {
@@ -840,7 +840,7 @@
     font-family: $heading-family;
     font-size: clamp(2.25rem, 5vw, 3.5rem);
     line-height: 1.04;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
   }
 
   .page-subtitle {
@@ -972,7 +972,7 @@
     margin-bottom: 0.5rem;
     font-family: $heading-family;
     font-size: 2rem;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   .subtitle {
@@ -1380,7 +1380,7 @@
     color: var(--text-primary);
     font-weight: $bold-weight;
     font-family: $heading-family;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
   }
 
   p {
@@ -1501,6 +1501,7 @@
 
 .thank-you-icon {
   margin-bottom: 2rem;
+  color: var(--accent-primary);
 
   svg {
     animation: checkmark 0.8s ease-in-out;
@@ -1524,7 +1525,7 @@
 .thank-you-container h1 {
   font-size: 2.5rem;
   margin-bottom: 1.5rem;
-  color: $black;
+  color: var(--text-primary);
 
   @include media-query($on-mobile) {
     font-size: 2rem;
@@ -1534,7 +1535,7 @@
 .thank-you-message {
   font-size: 1.1rem;
   line-height: 1.7;
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--text-secondary);
   margin-bottom: 2.5rem;
 }
 
@@ -1603,18 +1604,18 @@
 .thank-you-info {
   background: transparent;
   border: 1px solid var(--border-default);
-  border-radius: 12px;
+  border-radius: 8px;
   padding: 2rem;
   margin-top: 3rem;
 
   h3 {
     font-size: 1.3rem;
     margin-bottom: 0.75rem;
-    color: $black;
+    color: var(--text-primary);
   }
 
   p {
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     margin-bottom: 1.5rem;
   }
 
@@ -1678,7 +1679,7 @@
     font-size: 2rem;
     margin-bottom: 1rem;
     color: var(--text-primary);
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
 
     @include media-query($on-mobile) {
       font-size: 1.5rem;
@@ -1953,7 +1954,7 @@
     margin-bottom: 0.5rem;
     color: var(--text-primary);
     font-weight: $bold-weight;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
 
     @include media-query($on-mobile) {
       font-size: 1.75rem;
@@ -1990,11 +1991,11 @@
       background: transparent;
       border: none;
       border-radius: 6px;
-      color: rgba(0, 0, 0, 0.7);
+      color: var(--text-secondary);
       font-size: 0.9rem;
 
       svg {
-        color: rgba(0, 0, 0, 0.4);
+        color: var(--text-secondary);
         flex-shrink: 0;
         width: 14px;
         height: 14px;
@@ -2003,7 +2004,7 @@
       .stat-value {
         font-weight: 600;
         font-size: 0.95rem;
-        color: $black;
+        color: var(--text-primary);
       }
 
       @include media-query($on-mobile) {
@@ -2478,7 +2479,7 @@
       font-family: $heading-family;
       font-size: 1.75rem;
       line-height: 1.1;
-      letter-spacing: -0.03em;
+      letter-spacing: 0;
       overflow-wrap: anywhere;
 
       @include media-query($on-mobile) {
@@ -2617,7 +2618,7 @@ html {
 
 .search-page-header-content {
   .search-page-icon {
-    color: rgba(0, 0, 0, 0.3);
+    color: var(--text-secondary);
     margin: 0 0 1rem;
     display: block;
     width: 40px;
@@ -2630,7 +2631,7 @@ html {
     margin-bottom: 0.5rem;
     color: var(--text-primary);
     font-weight: $bold-weight;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     overflow-wrap: anywhere;
 
     @include media-query($on-mobile) {
@@ -2675,7 +2676,7 @@ html {
   input[type="search"] {
     width: 100%;
     padding: 1rem 3.5rem 1rem 3rem;
-    border: 1px solid rgba(0, 0, 0, 0.15);
+    border: 1px solid var(--border-default);
     border-radius: 8px;
     font-size: 1rem;
     transition: all 0.2s ease;
@@ -2685,12 +2686,12 @@ html {
 
     &:focus {
       outline: none;
-      border-color: rgba(0, 0, 0, 0.3);
-      box-shadow: 0 0 0 3px rgba(0, 0, 0, 0.05);
+      border-color: rgba(var(--accent-primary-rgb), 0.55);
+      box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.1);
     }
 
     &::placeholder {
-      color: rgba(128, 128, 128, 0.5);
+      color: var(--text-secondary);
     }
 
     @include media-query($on-mobile) {
@@ -2702,8 +2703,8 @@ html {
   .clear-main-search-btn {
     position: absolute;
     right: 1.25rem;
-    background: rgba(128, 128, 128, 0.1);
-    border: none;
+    background: var(--bg-secondary);
+    border: 1px solid var(--border-default);
     border-radius: 50%;
     width: 36px;
     height: 36px;
@@ -2712,12 +2713,12 @@ html {
     justify-content: center;
     cursor: pointer;
     transition: all 0.2s ease;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     z-index: 1;
 
     &:hover {
-      background: rgba(128, 128, 128, 0.2);
-      color: $black;
+      background: var(--bg-tertiary);
+      color: var(--text-primary);
     }
 
     @include media-query($on-mobile) {
@@ -2837,7 +2838,7 @@ html {
   margin: 0 auto 1.5rem;
   text-align: center;
   font-size: 0.95rem;
-  color: rgba(0, 0, 0, 0.7);
+  color: var(--text-secondary);
   font-weight: 500;
 }
 
@@ -2857,17 +2858,17 @@ html {
 }
 
 .search-result-item {
-  background: $white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
-  border-radius: 6px;
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
+  border-radius: 8px;
   padding: 1.5rem;
   transition: all 0.2s ease;
   text-decoration: none;
   display: block;
 
   &:hover {
-    border-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-color: rgba(var(--accent-primary-rgb), 0.45);
+    box-shadow: none;
   }
 
   @include media-query($on-mobile) {
@@ -2908,12 +2909,12 @@ html {
 
     .result-date {
       font-size: 0.85rem;
-      color: rgba(0, 0, 0, 0.65);
+      color: var(--text-secondary);
     }
 
     .result-tags {
       font-size: 0.8rem;
-      color: rgba(0, 0, 0, 0.65);
+      color: var(--text-secondary);
       margin-left: auto;
       overflow-wrap: anywhere;
 
@@ -2928,7 +2929,7 @@ html {
     margin: 0 0 0.75rem 0;
     font-size: 1.4rem;
     font-weight: 600;
-    color: $black;
+    color: var(--text-primary);
     line-height: 1.4;
     transition: color 0.2s ease;
     overflow-wrap: anywhere;
@@ -2944,7 +2945,7 @@ html {
 
   .result-description {
     margin: 0 0 0.75rem 0;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     line-height: 1.6;
     font-size: 0.95rem;
   }
@@ -2986,7 +2987,7 @@ html {
   h3 {
     font-size: 1.8rem;
     margin-bottom: 0.75rem;
-    color: $black;
+    color: var(--text-primary);
 
     @include media-query($on-mobile) {
       font-size: 1.5rem;
@@ -2994,27 +2995,27 @@ html {
   }
 
   > p {
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     font-size: 1.05rem;
     margin-bottom: 2rem;
 
     #search-query-display {
       font-weight: 600;
-      color: $black;
+      color: var(--text-primary);
     }
   }
 
   .no-results-suggestions {
     background: transparent;
     border: 1px solid var(--border-default);
-    border-radius: 12px;
+    border-radius: 8px;
     padding: 1.5rem;
     text-align: left;
 
     p {
       margin: 0 0 0.75rem 0;
       font-weight: 600;
-      color: $black;
+      color: var(--text-primary);
     }
 
     ul {
@@ -3023,7 +3024,7 @@ html {
 
       li {
         margin-bottom: 0.5rem;
-        color: rgba(0, 0, 0, 0.7);
+        color: var(--text-secondary);
         line-height: 1.5;
 
         a {
@@ -3056,7 +3057,7 @@ html {
     text-align: center;
     font-size: 2rem;
     margin-bottom: 0.75rem;
-    color: $black;
+    color: var(--text-primary);
 
     @include media-query($on-mobile) {
       font-size: 1.5rem;
@@ -3066,7 +3067,7 @@ html {
   > p {
     text-align: center;
     font-size: 1.1rem;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     margin-bottom: 3rem;
 
     @include media-query($on-mobile) {
@@ -3091,16 +3092,16 @@ html {
 }
 
 .search-category-card {
-  background: $white;
-  border: 1px solid rgba(0, 0, 0, 0.1);
+  background: var(--bg-surface);
+  border: 1px solid var(--border-default);
   border-radius: 8px;
   padding: 1.5rem;
   transition: all 0.2s ease;
   text-align: center;
 
   &:hover {
-    border-color: rgba(0, 0, 0, 0.2);
-    box-shadow: 0 2px 8px rgba(0, 0, 0, 0.06);
+    border-color: rgba(var(--accent-primary-rgb), 0.45);
+    box-shadow: none;
   }
 
   @include media-query($on-mobile) {
@@ -3108,7 +3109,7 @@ html {
   }
 
   svg {
-    color: rgba(0, 0, 0, 0.4);
+    color: var(--text-secondary);
     margin-bottom: 0.875rem;
     width: 28px;
     height: 28px;
@@ -3117,18 +3118,18 @@ html {
   h3 {
     margin: 0 0 0.5rem 0;
     font-size: 1.1rem;
-    color: $black;
+    color: var(--text-primary);
   }
 
   p {
     margin: 0 0 1rem 0;
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     font-size: 0.9rem;
     line-height: 1.5;
   }
 
   .category-link {
-    color: $black;
+    color: var(--text-primary);
     text-decoration: none;
     font-weight: 500;
     font-size: 0.85rem;
@@ -3138,7 +3139,7 @@ html {
     transition: color 0.2s ease;
 
     &:hover {
-      color: rgba(0, 0, 0, 0.7);
+      color: var(--accent-primary);
     }
   }
 }
@@ -3146,7 +3147,7 @@ html {
 // Search Tips
 .search-tips {
   background: transparent;
-  border: 1px solid rgba(0, 0, 0, 0.08);
+  border: 1px solid var(--border-default);
   border-radius: 8px;
   padding: 1.5rem;
   margin-top: 2.5rem;
@@ -3159,7 +3160,7 @@ html {
   h3 {
     margin: 0 0 1.25rem 0;
     font-size: 1.1rem;
-    color: $black;
+    color: var(--text-primary);
     text-align: center;
   }
 }
@@ -3186,7 +3187,7 @@ html {
   }
 
   span {
-    color: rgba(0, 0, 0, 0.7);
+    color: var(--text-secondary);
     line-height: 1.5;
     font-size: 0.95rem;
   }

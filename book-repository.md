@@ -1,22 +1,23 @@
 ---
-title: Book Depository
-permalink: "/reading/"
+title: Book Repository
+permalink: "/book-repository/"
 layout: page
+hide_title: true
 excerpt: A list of the books I’ve read or re-read in the last few years, arranged
-  in basically the order I read them, topmost recent.
+  from most recent to oldest.
 comments: false
 image: "/uploads/alfons-morales-ylswjsy7stw-unsplash.jpg"
 description: A list of the books I’ve read or re-read in the last few years, arranged
-  in basically the order I read them, topmost recent.
+  from most recent to oldest.
 
 ---
 # Recommended Reading List
 
 _Last updated Fri, 13 August 2021_
 
-A list of the books I’ve read or re-read in the last few years, arranged in basically the order I read them, topmost recent. If I don’t enjoy a book, I don’t finish it, so each book on this list is recommended to some extent.
+A list of books I’ve read or re-read in recent years, arranged from most recent to oldest. If I don’t enjoy a book, I usually don’t finish it, so each book on this list is recommended to some extent.
 
-I'm constantly updating this list of books to help you discover the best books to read.
+I update this list as I read and revisit books.
 
 ### Best Entrepreneurship Books
 

@@ -6,15 +6,15 @@
   url: /about/
   external: false
   
-- title: CV
+- title: LinkedIn
   url: http://www.linkedin.com/in/realbakari
   external: true
   
-- title: Writing 
+- title: Writing
   url: /posts/
   external: false
   
-- title: Book Summaries 
+- title: Book Summaries
   url: /book-summaries/
   external: false
   

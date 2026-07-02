@@ -5,41 +5,56 @@ home: true
 
 <div class="home-landing">
   <section class="home-hero">
-    <p class="home-kicker">Bakari Mustafa</p>
-    <h1 class="home-hero__title">Entrepreneur, technologist, and community builder.</h1>
-    <p class="home-hero__lede">
-      I’m an African-born Australian founder and former refugee based in Brisbane. This site is where I share projects, essays, and reading notes on leadership, technology, faith, and community.
-    </p>
-    <p class="home-hero__support">
-      Much of my work is centered on education, mentorship, and creating stronger pathways for young African-Australians.
-    </p>
-    <div class="home-actions">
-      <a href="/about/" class="home-action home-action-primary">About</a>
-      <a href="/posts/" class="home-action home-action-secondary">Writing</a>
-      <a href="/projects/" class="home-action home-action-secondary">Projects</a>
+    <div class="home-hero__copy">
+      <p class="home-kicker">Brisbane, Australia</p>
+      <h1 class="home-hero__title">Bakari Mustafa</h1>
+      <p class="home-hero__lede">
+        Entrepreneur, technologist, and community builder focused on education, mentorship, and stronger pathways for young African-Australians.
+      </p>
+      <p class="home-hero__support">
+        I use this site to share active projects, essays, reading notes, and lessons from building community-focused work.
+      </p>
+      <div class="home-actions">
+        <a href="/about/" class="home-action home-action-primary">About Bakari</a>
+        <a href="/projects/" class="home-action home-action-secondary">View Projects</a>
+        <a href="/posts/" class="home-action home-action-secondary">Read Writing</a>
+      </div>
     </div>
+    <aside class="home-hero__media" aria-label="Bakari Mustafa profile">
+      <img src="/uploads/bakari_mustafa.jpg" alt="Bakari Mustafa" loading="eager" decoding="async">
+      <div class="home-proof-grid" aria-label="Focus areas">
+        <div>
+          <span>Focus</span>
+          <strong>Education and mentorship</strong>
+        </div>
+        <div>
+          <span>Work</span>
+          <strong>Community platforms</strong>
+        </div>
+      </div>
+    </aside>
   </section>
 
   <section class="home-map">
     <div class="home-section-intro">
-      <p class="section-kicker">Overview</p>
-      <h2 class="section-title">What you’ll find here.</h2>
+      <p class="section-kicker">Start Here</p>
+      <h2 class="section-title">Explore the main sections.</h2>
     </div>
     <div class="home-map-grid">
       <a href="/posts/" class="map-card map-card-writing">
         <span class="map-card-label">Writing</span>
-        <h3>Essays and working thoughts.</h3>
-        <p>Reflections on leadership, technology, belief, and building a meaningful life.</p>
+        <h3>Essays and notes.</h3>
+        <p>Reflections on leadership, technology, faith, community, and building a useful life.</p>
       </a>
       <a href="/projects/" class="map-card map-card-reading">
         <span class="map-card-label">Projects</span>
-        <h3>Programs, platforms, and experiments.</h3>
-        <p>Community-focused work across mentorship, education, and digital products.</p>
+        <h3>Programs and platforms.</h3>
+        <p>Community-focused work across mentorship, education, cultural preservation, and digital products.</p>
       </a>
       <a href="/reading/" class="map-card map-card-library">
         <span class="map-card-label">Reading</span>
-        <h3>Books and ideas that stay with me.</h3>
-        <p>A record of what I’m reading and the ideas continuing to shape my work.</p>
+        <h3>Books and summaries.</h3>
+        <p>A practical record of books, summaries, and ideas that continue to shape my work.</p>
       </a>
     </div>
   </section>
@@ -47,7 +62,7 @@ home: true
   <section class="featured-section">
     <div class="home-section-intro">
       <p class="section-kicker">Selected Work</p>
-      <h2 class="section-title">Projects I care deeply about.</h2>
+      <h2 class="section-title">Current and recent projects.</h2>
     </div>
     <div class="featured-grid">
       {% for project in site.data.featured_projects limit:2 %}
@@ -76,7 +91,7 @@ home: true
   <section class="popular-section">
     <div class="home-section-intro">
       <p class="section-kicker">Recent Writing</p>
-      <h2 class="section-title">A few recent pieces.</h2>
+      <h2 class="section-title">Latest essays and notes.</h2>
     </div>
     <div class="popular-list">
       {% for post in site.posts limit: 3 %}

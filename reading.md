@@ -2,6 +2,7 @@
 title: Reading List
 permalink: "/reading/"
 layout: page
+hide_title: true
 excerpt: Books I've read and recommend, including detailed summaries and reviews across various genres.
 description: Explore Bakari Mustafa's reading list featuring book summaries, reviews, and recommendations on business, personal development, science fiction, and more.
 image: '/uploads/bakari_mustafa.jpg'
@@ -10,21 +11,22 @@ comments: false
 ---
 
 <div class="page-header">
-  <h1>📚 Reading List</h1>
+  <p class="page-kicker">Books and Notes</p>
+  <h1>Reading List</h1>
   <blockquote>"A reader lives a thousand lives before he dies. The man who never reads lives only one." - George R.R. Martin</blockquote>
-  <p class="page-subtitle">I'm passionate about continuous learning and personal growth through reading. Here you'll find books I've read, summaries I've written, and recommendations across various genres.</p>
+  <p class="page-subtitle">Books I've read, summaries I've written, and recommendations across business, personal development, science, fiction, and philosophy.</p>
 </div>
 
 ## Book Summaries
 
-I write detailed summaries of books that have impacted my thinking. These summaries help me retain key insights and share valuable lessons with others.
+I write summaries for books that have shaped my thinking. The notes help me retain useful ideas and make them easier to revisit.
 
 <div class="category-section">
-  <h3>💼 Business & Entrepreneurship</h3>
+  <h3>Business and Entrepreneurship</h3>
   <div class="book-links">
     <a href="/Book-Summaries/business/start-with-why">
       <strong>Start with Why</strong>
-      <span>Simon Sinek's powerful framework for inspirational leadership</span>
+      <span>Simon Sinek on purpose-led leadership</span>
     </a>
     <a href="/Book-Summaries/business/choose-yourself-by-james-altucher">
       <strong>Choose Yourself</strong>
@@ -46,7 +48,7 @@ I write detailed summaries of books that have impacted my thinking. These summar
 </div>
 
 <div class="category-section">
-  <h3>💰 Personal Finance</h3>
+  <h3>Personal Finance</h3>
   <div class="book-links">
     <a href="/Book-Summaries/personal-finance/the-simple-path-to-wealth">
       <strong>The Simple Path to Wealth</strong>
@@ -64,7 +66,7 @@ I write detailed summaries of books that have impacted my thinking. These summar
 </div>
 
 <div class="category-section">
-  <h3>🎯 Personal Development</h3>
+  <h3>Personal Development</h3>
   <div class="book-links">
     <a href="/Book-Summaries/atomic-habits-by-james-clear">
       <strong>Atomic Habits</strong>
@@ -94,7 +96,7 @@ I write detailed summaries of books that have impacted my thinking. These summar
 </div>
 
 <div class="category-section">
-  <h3>🔬 Science & Philosophy</h3>
+  <h3>Science and Philosophy</h3>
   <div class="book-links">
     <a href="/Book-Summaries/1984-by-george-orwell">
       <strong>1984</strong>
@@ -116,7 +118,7 @@ I write detailed summaries of books that have impacted my thinking. These summar
 </div>
 
 <div class="category-section">
-  <h3>🧠 Psychology & Strategy</h3>
+  <h3>Psychology and Strategy</h3>
   <div class="book-links">
     <a href="/Book-Summaries/the-art-of-war-by-sun-tzu">
       <strong>The Art of War</strong>
@@ -138,7 +140,7 @@ I write detailed summaries of books that have impacted my thinking. These summar
 </div>
 
 <div class="category-section">
-  <h3>📖 Fiction & Literature</h3>
+  <h3>Fiction and Literature</h3>
   <div class="book-links">
     <a href="/Book-Summaries/dark-matter-summary">
       <strong>Dark Matter</strong>
@@ -155,7 +157,7 @@ I write detailed summaries of books that have impacted my thinking. These summar
   </div>
 </div>
 
-## 📖 Book Library
+## Book Library
 
 Books I'm currently reading or have on my shelf:
 
@@ -164,28 +166,28 @@ Books I'm currently reading or have on my shelf:
 - [At Night All Blood is Black by David Diop](/Book-library/at-night-all-blood-is-black-by-david-diop) - International Booker Prize winner
 - [The Shadow King by Maaza Mengiste](/Book-library/the-shadow-king-by-maaza-mengiste) - Historical fiction from Ethiopia
 
-## 📝 Reading List Posts
+## Reading List Posts
 
-For more comprehensive reading recommendations, check out these curated lists:
+For broader reading recommendations, browse these curated lists:
 
 - [The Best Books - Recommended Reading List (2022)](/the-best-books-recommended-reading-list/) - My most recent comprehensive recommendations
 - [21 Books Everyone Should Read at Least Once in Their Lives](/21-books-everyone-should-read-at-least-once-in-their-lives/)
 - [5 Books Recommendation That Will Make Your Life Better](/5-books-recommendation-that-will-make-your-life-better/)
 - [10 Japanese Books You Need to Read](/10-japanese-books-you-need-to-read/)
 
-## 💡 Why I Read
+## Why I Read
 
-Reading has transformed my life in countless ways. It's helped me:
+Reading has changed how I think, work, and make decisions. It helps me:
 
 - **Expand my perspective** - Understanding different viewpoints and cultures
 - **Build better habits** - Implementing proven strategies for success
 - **Make better decisions** - Learning from others' experiences and mistakes
-- **Stay curious** - Continuously learning about diverse topics
+- **Stay curious** - Keep learning across different fields
 - **Improve my thinking** - Developing critical thinking and analytical skills
 
-## 📬 Book Recommendations
+## Book Recommendations
 
-Have a book recommendation for me? I'd love to hear it! Feel free to [reach out on Twitter](https://twitter.com/realbakari) or [send me an email](mailto:bakari@bakarimustafa.com).
+Have a book recommendation for me? Send it through [Twitter](https://twitter.com/realbakari) or [email](mailto:bakari@bakarimustafa.com).
 
 ---
 

@@ -2,8 +2,9 @@
 title: What I'm Doing Now
 permalink: "/now/"
 layout: page
+hide_title: true
 excerpt: What I'm currently working on, learning, and focusing on right now.
-description: Current projects, books, skills, and goals that Bakari Mustafa is focused on right now. Updated regularly to show what's happening in real-time.
+description: Current projects, books, skills, and goals Bakari Mustafa is focused on.
 image: '/uploads/bakari_mustafa.jpg'
 comments: false
 
@@ -17,11 +18,11 @@ This is a [now page](https://nownownow.com/about), inspired by Derek Sivers. It 
 
 ---
 
-## 🏢 Current Work
+## Current Work
 
 ### Networking African-Australians
 
-I'm actively serving on the leadership team at [Networking African-Australians](https://networkingafricanaustralians.com.au/), where we're running several impactful programs:
+I'm serving on the leadership team at [Networking African-Australians](https://networkingafricanaustralians.com.au/), where we're running several programs:
 
 **Mentoring Through Mental Health Program** - Our newest initiative providing culturally appropriate mental health support to young African-Australian individuals through:
 - Personalized one-on-one mentoring
@@ -31,7 +32,7 @@ I'm actively serving on the leadership team at [Networking African-Australians](
 
 **Homework Club Program** - Ongoing academic support for African-Australian students across Melbourne and Regional Victoria, helping them excel in their studies while building confidence and community connections.
 
-**Leadership Development** - Following the success of our April 2025 Mount Eliza camp (34 students!), we're planning our next leadership retreat and developing new workshops focused on:
+**Leadership Development** - Following the April 2025 Mount Eliza camp with 34 students, we're planning our next leadership retreat and developing new workshops focused on:
 - Public speaking and communication
 - Goal-setting and career planning
 - Cultural identity and belonging
@@ -47,7 +48,7 @@ I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit
 
 ---
 
-## 📚 Currently Reading
+## Currently Reading
 
 **Leadership & Community Building:**
 - *Dare to Lead* by Brené Brown - Exploring brave leadership and vulnerability in community work
@@ -55,14 +56,14 @@ I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit
 
 **Personal Development:**
 - *Atomic Habits* by James Clear (re-reading) - Reinforcing systems for personal and organizational growth
-- *Range* by David Epstein - Understanding the power of diverse experiences (very relevant to my journey!)
+- *Range* by David Epstein - Understanding the value of diverse experience
 
 **African Literature:**
 - Continuing to explore African-Australian voices and stories to better understand and serve our community
 
 ---
 
-## 🎯 Skills I'm Learning
+## Skills I'm Learning
 
 **Community Management Technology:**
 - Exploring advanced features of Circle.so for better community engagement
@@ -81,7 +82,7 @@ I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit
 
 ---
 
-## 🎓 Personal Goals This Quarter
+## Personal Goals This Quarter
 
 **Q4 2025 Goals:**
 
@@ -98,7 +99,7 @@ I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit
 
 ---
 
-## 💭 What I'm Thinking About
+## What I'm Thinking About
 
 **Big Questions:**
 - How can we create more sustainable funding models for community organizations like NAA?
@@ -117,29 +118,29 @@ I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit
 
 ---
 
-## 🌱 Recent Wins
+## Recent Wins
 
-- ✅ Successfully hosted Mount Eliza leadership camp for 34 students (April 2025)
-- ✅ Launched Mentoring Through Mental Health Program at NAA
-- ✅ Grew Mentors Outreach mentor network by 25%
-- ✅ Improved this website with modern UI, accessibility features, and GDPR compliance
-- ✅ Established new partnerships with 3 community organizations
+- Hosted the Mount Eliza leadership camp for 34 students in April 2025
+- Launched the Mentoring Through Mental Health Program at NAA
+- Grew the Mentors Outreach mentor network by 25%
+- Improved this website with refreshed interface, accessibility updates, and GDPR compliance
+- Established new partnerships with three community organizations
 
 ---
 
-## 📍 Where I'm Based
+## Where I'm Based
 
 Currently based in **Brisbane, Queensland, Australia**, working remotely and traveling to support African-Australian communities, particularly through my work with Networking African-Australians in Victoria.
 
 ---
 
-## 📬 Get In Touch
+## Get In Touch
 
 If any of this resonates with you:
 - Want to collaborate on community programs? [Email me](mailto:bakari@bakarimustafa.com)
 - Need a speaker on youth empowerment or refugee experience? Check my [press kit](/press-kit)
 - Looking for mentorship? Reach out through [Mentors Outreach](https://mentorsoutreach.org)
-- Just want to say hi? I'm most active on [LinkedIn](https://www.linkedin.com/in/realbakari/) and [Twitter](https://twitter.com/realbakari)
+- For general updates, I'm most active on [LinkedIn](https://www.linkedin.com/in/realbakari/) and [Twitter](https://twitter.com/realbakari)
 
 ---
 

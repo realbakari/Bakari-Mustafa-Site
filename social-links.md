@@ -2,6 +2,7 @@
 title: Social Links
 permalink: "/links/"
 layout: page
+hide_title: true
 excerpt: Connect with me across social media platforms - LinkedIn, Twitter, Instagram, Facebook, TikTok, Snapchat, YouTube, and Telegram.
 description: Follow Bakari Mustafa on social media. Connect on LinkedIn, Twitter, Instagram, Facebook, TikTok, Snapchat, YouTube, and Telegram for updates, insights, and community engagement.
 image: '/uploads/bakari_mustafa.jpg'
@@ -14,7 +15,7 @@ comments: false
     <img src="/uploads/bakari_mustafa.jpg" alt="Bakari Mustafa" class="profile-image">
     <h1>@realbakari</h1>
     <p class="subtitle">Entrepreneur | Community Builder | Technologist</p>
-    <p class="bio">Connecting communities, empowering youth, and building meaningful platforms. Follow me on your favorite social platform!</p>
+    <p class="bio">Community building, youth empowerment, technology, and project updates in one place.</p>
   </div>
 
   <div class="social-links-grid">
@@ -166,6 +167,6 @@ comments: false
   </div>
 
   <div class="social-footer">
-    <p>Thanks for connecting! Looking forward to staying in touch. 🙏</p>
+    <p>Thanks for connecting. I look forward to staying in touch.</p>
   </div>
 </div>

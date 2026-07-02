@@ -571,7 +571,7 @@ body[data-theme="dark"] {
     &:hover {
       background: rgba(255, 255, 255, 0.08);
       border-color: $dark-text-link-blue;
-      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+      box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.2);
     }
 
     .card-header {
@@ -591,7 +591,7 @@ body[data-theme="dark"] {
         color: rgba(255, 255, 255, 0.6);
 
         .badge {
-          background: rgba(0, 63, 255, 0.2);
+          background: rgba(var(--accent-primary-rgb), 0.2);
           color: $dark-text-link-blue;
         }
       }
@@ -649,12 +649,12 @@ body[data-theme="dark"] {
     }
 
     .book-links a {
-      background: rgba(0, 63, 255, 0.1);
-      border-color: rgba(0, 63, 255, 0.2);
+      background: rgba(var(--accent-primary-rgb), 0.1);
+      border-color: rgba(var(--accent-primary-rgb), 0.2);
       color: $dark-white;
 
       &:hover {
-        background: rgba(0, 63, 255, 0.15);
+        background: rgba(var(--accent-primary-rgb), 0.15);
         border-color: $dark-text-link-blue;
         box-shadow: -4px 0 0 0 $dark-text-link-blue;
       }
@@ -867,7 +867,7 @@ body[data-theme="dark"] {
 
     &:hover {
       background: $dark-text-link-blue-active;
-      box-shadow: 0 6px 16px rgba(0, 63, 255, 0.4);
+      box-shadow: 0 6px 16px rgba(var(--accent-primary-rgb), 0.4);
     }
   }
 
@@ -937,8 +937,8 @@ body[data-theme="dark"] {
 
   // Social Share Dark Mode
   .social-share {
-    background: rgba(0, 63, 255, 0.08);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: rgba(var(--accent-primary-rgb), 0.08);
+    border-color: rgba(var(--accent-primary-rgb), 0.2);
   }
 
   .social-share-header {
@@ -953,11 +953,11 @@ body[data-theme="dark"] {
 
   .share-button {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(0, 63, 255, 0.3);
+    border-color: rgba(var(--accent-primary-rgb), 0.3);
     color: $dark-text-link-blue;
 
     &:hover {
-      box-shadow: 0 4px 12px rgba(0, 63, 255, 0.3);
+      box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.3);
     }
 
     // Platform-specific colors remain the same on hover
@@ -1023,25 +1023,25 @@ body[data-theme="dark"] {
       &:hover {
         background: $dark-text-link-blue-active;
         border-color: $dark-text-link-blue-active;
-        box-shadow: 0 6px 16px rgba(0, 63, 255, 0.4);
+        box-shadow: 0 6px 16px rgba(var(--accent-primary-rgb), 0.4);
       }
     }
 
     &.secondary {
       background: rgba(255, 255, 255, 0.05);
       color: $dark-text-link-blue;
-      border-color: rgba(0, 63, 255, 0.3);
+      border-color: rgba(var(--accent-primary-rgb), 0.3);
 
       &:hover {
-        background: rgba(0, 63, 255, 0.15);
+        background: rgba(var(--accent-primary-rgb), 0.15);
         border-color: $dark-text-link-blue;
       }
     }
   }
 
   .thank-you-info {
-    background: rgba(0, 63, 255, 0.08);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: rgba(var(--accent-primary-rgb), 0.08);
+    border-color: rgba(var(--accent-primary-rgb), 0.2);
 
     h3 {
       color: $dark-white;
@@ -1054,13 +1054,13 @@ body[data-theme="dark"] {
 
   .thank-you-social {
     a {
-      background: rgba(0, 63, 255, 0.15);
+      background: rgba(var(--accent-primary-rgb), 0.15);
       color: $dark-text-link-blue;
 
       &:hover {
         background: $dark-text-link-blue;
         color: $dark-white;
-        box-shadow: 0 4px 12px rgba(0, 63, 255, 0.4);
+        box-shadow: 0 4px 12px rgba(var(--accent-primary-rgb), 0.4);
       }
     }
   }
@@ -1216,12 +1216,12 @@ body[data-theme="dark"] {
   .search-article-enhanced {
     input[type="search"] {
       background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(0, 63, 255, 0.3);
+      border-color: rgba(var(--accent-primary-rgb), 0.3);
       color: $dark-white;
 
       &:focus {
         border-color: $dark-text-link-blue;
-        box-shadow: 0 0 0 4px rgba(0, 63, 255, 0.15);
+        box-shadow: 0 0 0 4px rgba(var(--accent-primary-rgb), 0.15);
       }
 
       &::placeholder {
@@ -1246,18 +1246,18 @@ body[data-theme="dark"] {
 
   // Filter Controls Dark Mode
   .posts-filters {
-    background: rgba(0, 63, 255, 0.08);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: rgba(var(--accent-primary-rgb), 0.08);
+    border-color: rgba(var(--accent-primary-rgb), 0.2);
   }
 
   .filter-btn {
     background: rgba(255, 255, 255, 0.05);
-    border-color: rgba(0, 63, 255, 0.3);
+    border-color: rgba(var(--accent-primary-rgb), 0.3);
     color: rgba(255, 255, 255, 0.7);
 
     &:hover {
-      background: rgba(0, 63, 255, 0.15);
-      border-color: rgba(0, 63, 255, 0.5);
+      background: rgba(var(--accent-primary-rgb), 0.15);
+      border-color: rgba(var(--accent-primary-rgb), 0.5);
       color: $dark-white;
     }
 
@@ -1265,7 +1265,7 @@ body[data-theme="dark"] {
       background: $dark-text-link-blue;
       border-color: $dark-text-link-blue;
       color: $dark-white;
-      box-shadow: 0 2px 8px rgba(0, 63, 255, 0.4);
+      box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.4);
     }
   }
 
@@ -1274,18 +1274,18 @@ body[data-theme="dark"] {
   }
 
   .sort-select {
-    background: rgba(255, 255, 255, 0.05) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%23FF5277" d="M6 9L1 4h10z"/></svg>') no-repeat right 0.75rem center;
-    border-color: rgba(0, 63, 255, 0.3);
+    background: rgba(255, 255, 255, 0.05) url('data:image/svg+xml;utf8,<svg xmlns="http://www.w3.org/2000/svg" width="12" height="12" viewBox="0 0 12 12"><path fill="%235ee0c2" d="M6 9L1 4h10z"/></svg>') no-repeat right 0.75rem center;
+    border-color: rgba(var(--accent-primary-rgb), 0.3);
     color: $dark-white;
 
     &:hover {
-      border-color: rgba(0, 63, 255, 0.5);
-      background-color: rgba(0, 63, 255, 0.08);
+      border-color: rgba(var(--accent-primary-rgb), 0.5);
+      background-color: rgba(var(--accent-primary-rgb), 0.08);
     }
 
     &:focus {
       border-color: $dark-text-link-blue;
-      box-shadow: 0 0 0 3px rgba(0, 63, 255, 0.15);
+      box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.15);
     }
   }
 
@@ -1312,8 +1312,8 @@ body[data-theme="dark"] {
       }
 
       &:hover {
-        background: rgba(0, 63, 255, 0.15);
-        border-color: rgba(0, 63, 255, 0.4);
+        background: rgba(var(--accent-primary-rgb), 0.15);
+        border-color: rgba(var(--accent-primary-rgb), 0.4);
         color: $dark-text-link-blue;
 
         .tag-count {
@@ -1322,7 +1322,7 @@ body[data-theme="dark"] {
       }
 
       &.active {
-        background: rgba(0, 63, 255, 0.2);
+        background: rgba(var(--accent-primary-rgb), 0.2);
         border-color: $dark-text-link-blue;
         color: $dark-text-link-blue;
 
@@ -1335,8 +1335,8 @@ body[data-theme="dark"] {
 
   // Search Results Container Dark Mode
   .search-results-container {
-    background: rgba(0, 63, 255, 0.08);
-    border-color: rgba(0, 63, 255, 0.25);
+    background: rgba(var(--accent-primary-rgb), 0.08);
+    border-color: rgba(var(--accent-primary-rgb), 0.25);
 
     .search-results-header {
       h3 {
@@ -1345,7 +1345,7 @@ body[data-theme="dark"] {
 
       .clear-results-btn {
         background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(0, 63, 255, 0.3);
+        border-color: rgba(var(--accent-primary-rgb), 0.3);
         color: $dark-text-link-blue;
 
         &:hover {
@@ -1378,7 +1378,7 @@ body[data-theme="dark"] {
       border-bottom-color: $dark-text-link-blue;
 
       .year-post-count {
-        background: rgba(0, 63, 255, 0.2);
+        background: rgba(var(--accent-primary-rgb), 0.2);
         color: $dark-text-link-blue;
       }
     }
@@ -1388,8 +1388,8 @@ body[data-theme="dark"] {
       border-color: rgba(255, 255, 255, 0.1);
 
       &:hover {
-        border-color: rgba(0, 63, 255, 0.4);
-        box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+        border-color: rgba(var(--accent-primary-rgb), 0.4);
+        box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.2);
       }
 
       .post-card-meta {
@@ -1424,11 +1424,11 @@ body[data-theme="dark"] {
 
         .post-card-tags {
           .post-tag {
-            background: rgba(0, 63, 255, 0.15);
+            background: rgba(var(--accent-primary-rgb), 0.15);
             color: $dark-text-link-blue;
 
             &:hover {
-              background: rgba(0, 63, 255, 0.25);
+              background: rgba(var(--accent-primary-rgb), 0.25);
             }
           }
         }
@@ -1463,13 +1463,13 @@ body[data-theme="dark"] {
   .main-search-wrapper {
     input[type="search"] {
       background: rgba(255, 255, 255, 0.05);
-      border-color: rgba(0, 63, 255, 0.3);
+      border-color: rgba(var(--accent-primary-rgb), 0.3);
       color: $dark-white;
       box-shadow: 0 2px 8px rgba(0, 0, 0, 0.3);
 
       &:focus {
         border-color: $dark-text-link-blue;
-        box-shadow: 0 4px 16px rgba(0, 63, 255, 0.25);
+        box-shadow: 0 4px 16px rgba(var(--accent-primary-rgb), 0.25);
       }
 
       &::placeholder {
@@ -1495,12 +1495,12 @@ body[data-theme="dark"] {
     }
 
     .search-hint-btn {
-      background: rgba(0, 63, 255, 0.15);
-      border-color: rgba(0, 63, 255, 0.3);
+      background: rgba(var(--accent-primary-rgb), 0.15);
+      border-color: rgba(var(--accent-primary-rgb), 0.3);
       color: $dark-text-link-blue;
 
       &:hover {
-        background: rgba(0, 63, 255, 0.25);
+        background: rgba(var(--accent-primary-rgb), 0.25);
         border-color: $dark-text-link-blue;
       }
     }
@@ -1508,8 +1508,8 @@ body[data-theme="dark"] {
 
   // Search Filters Dark Mode
   .search-filters {
-    background: rgba(0, 63, 255, 0.08);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: rgba(var(--accent-primary-rgb), 0.08);
+    border-color: rgba(var(--accent-primary-rgb), 0.2);
 
     .filter-section {
       .filter-label {
@@ -1518,12 +1518,12 @@ body[data-theme="dark"] {
 
       .search-filter-btn {
         background: rgba(255, 255, 255, 0.05);
-        border-color: rgba(0, 63, 255, 0.3);
+        border-color: rgba(var(--accent-primary-rgb), 0.3);
         color: rgba(255, 255, 255, 0.7);
 
         &:hover {
-          background: rgba(0, 63, 255, 0.15);
-          border-color: rgba(0, 63, 255, 0.5);
+          background: rgba(var(--accent-primary-rgb), 0.15);
+          border-color: rgba(var(--accent-primary-rgb), 0.5);
           color: $dark-white;
         }
 
@@ -1531,7 +1531,7 @@ body[data-theme="dark"] {
           background: $dark-text-link-blue;
           border-color: $dark-text-link-blue;
           color: $dark-white;
-          box-shadow: 0 2px 8px rgba(0, 63, 255, 0.4);
+          box-shadow: 0 2px 8px rgba(var(--accent-primary-rgb), 0.4);
         }
       }
     }
@@ -1548,14 +1548,14 @@ body[data-theme="dark"] {
     border-color: rgba(255, 255, 255, 0.1);
 
     &:hover {
-      border-color: rgba(0, 63, 255, 0.4);
-      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+      border-color: rgba(var(--accent-primary-rgb), 0.4);
+      box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.2);
     }
 
     .result-header {
       .result-type-badge {
         &.type-post {
-          background: rgba(0, 63, 255, 0.2);
+          background: rgba(var(--accent-primary-rgb), 0.2);
           color: $dark-text-link-blue;
         }
 
@@ -1610,8 +1610,8 @@ body[data-theme="dark"] {
     }
 
     .no-results-suggestions {
-      background: rgba(0, 63, 255, 0.08);
-      border-color: rgba(0, 63, 255, 0.2);
+      background: rgba(var(--accent-primary-rgb), 0.08);
+      border-color: rgba(var(--accent-primary-rgb), 0.2);
 
       p {
         color: $dark-white;
@@ -1644,8 +1644,8 @@ body[data-theme="dark"] {
     border-color: rgba(255, 255, 255, 0.1);
 
     &:hover {
-      border-color: rgba(0, 63, 255, 0.4);
-      box-shadow: 0 8px 24px rgba(0, 63, 255, 0.2);
+      border-color: rgba(var(--accent-primary-rgb), 0.4);
+      box-shadow: 0 8px 24px rgba(var(--accent-primary-rgb), 0.2);
     }
 
     svg {
@@ -1667,8 +1667,8 @@ body[data-theme="dark"] {
 
   // Search Tips Dark Mode
   .search-tips {
-    background: rgba(0, 63, 255, 0.08);
-    border-color: rgba(0, 63, 255, 0.2);
+    background: rgba(var(--accent-primary-rgb), 0.08);
+    border-color: rgba(var(--accent-primary-rgb), 0.2);
 
     h3 {
       color: $dark-white;

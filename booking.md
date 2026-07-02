@@ -8,7 +8,7 @@ description: Connect with Bakari Mustafa for speaking engagements, mentorship se
 
 ## Let's Connect
 
-I'm available for speaking engagements, mentorship, and strategic partnerships. Fill out the form below or reach out via email.
+I'm available for speaking engagements, mentorship, and strategic partnerships. Use the form below or reach out by email.
 
 ### What I Offer
 
@@ -16,7 +16,7 @@ I'm available for speaking engagements, mentorship, and strategic partnerships. 
 Topics: Entrepreneurship, African-Australian perspectives, technology, and youth empowerment.
 
 **Mentorship**
-For aspiring entrepreneurs, students, and professionals building impactful ventures.
+For aspiring entrepreneurs, students, and professionals building practical ventures.
 
 **Partnerships**
 Strategic collaborations, joint ventures, and advisory opportunities.
@@ -42,7 +42,7 @@ Strategic collaborations, joint ventures, and advisory opportunities.
   <div class="form-group">
     <label for="inquiry-type">I'm interested in *</label>
     <select name="inquiry-type" id="inquiry-type" required>
-      <option value="">Select...</option>
+      <option value="">Select an option</option>
       <option value="speaking">Speaking Engagement</option>
       <option value="mentorship">Mentorship</option>
       <option value="partnership">Partnership</option>
@@ -52,7 +52,7 @@ Strategic collaborations, joint ventures, and advisory opportunities.
 
   <div class="form-group">
     <label for="message">Message *</label>
-    <textarea name="message" id="message" rows="6" required placeholder="Tell me about your inquiry..."></textarea>
+    <textarea name="message" id="message" rows="6" required placeholder="Tell me about your inquiry"></textarea>
   </div>
 
   <button type="submit" class="submit-btn">Send Message</button>

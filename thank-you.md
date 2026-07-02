@@ -1,24 +1,24 @@
 ---
-title: Thank You!
+title: Thank You
 layout: page
 permalink: /thank-you/
-excerpt: Thank you for getting in touch! I'll respond to your message as soon as possible.
+excerpt: Thank you for getting in touch. I will respond as soon as possible.
 comments: false
 description: Thank you for contacting Bakari Mustafa. Your message has been received.
 ---
 
 <div class="thank-you-container">
   <div class="thank-you-icon">
-    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="#003FFF" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+    <svg xmlns="http://www.w3.org/2000/svg" width="80" height="80" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
       <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
       <polyline points="22 4 12 14.01 9 11.01"></polyline>
     </svg>
   </div>
 
-  <h1>Message Received!</h1>
+  <h1>Message Received</h1>
 
   <p class="thank-you-message">
-    Thank you for reaching out. I've received your message and will get back to you as soon as possible, typically within a few business days.
+    Thank you for reaching out. I've received your message and will respond within a few business days when a reply is needed.
   </p>
 
   <div class="thank-you-actions">
@@ -39,8 +39,8 @@ description: Thank you for contacting Bakari Mustafa. Your message has been rece
   </div>
 
   <div class="thank-you-info">
-    <h3>In the meantime...</h3>
-    <p>Feel free to connect with me on social media or explore more content on the site.</p>
+    <h3>In the meantime</h3>
+    <p>You can connect with me on social media or continue exploring the site.</p>
     <div class="thank-you-social">
       <a href="https://www.linkedin.com/in/realbakari/" target="_blank" rel="noopener noreferrer" aria-label="LinkedIn">
         <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="currentColor">

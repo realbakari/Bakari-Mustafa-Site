@@ -263,13 +263,13 @@ body[data-theme="dark"] .form-group input {
 
 .form-group input:focus {
   outline: none;
-  border-color: #003FFF;
+  border-color: #176b5b;
 }
 
 .btn-login {
   width: 100%;
   padding: 0.875rem;
-  background: #003FFF;
+  background: #176b5b;
   color: white;
   border: none;
   border-radius: 6px;
@@ -279,7 +279,7 @@ body[data-theme="dark"] .form-group input {
 }
 
 .btn-login:hover {
-  background: #0035db;
+  background: #125548;
 }
 
 .btn-login:disabled {
@@ -325,7 +325,7 @@ body[data-theme="dark"] .login-message.error {
 }
 
 .back-link:hover {
-  color: #003FFF;
+  color: #176b5b;
 }
 
 body[data-theme="dark"] .back-link {

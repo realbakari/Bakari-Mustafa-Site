@@ -2,8 +2,9 @@
 title: Uses
 permalink: "/uses/"
 layout: page
+hide_title: true
 excerpt: The tools, tech stack, software, and hardware I use daily for work, community building, and content creation.
-description: Bakari Mustafa's complete tech stack - hardware, software, services, and tools used for community building, development, and productivity.
+description: Bakari Mustafa's current hardware, software, services, and tools for community building, development, and productivity.
 image: '/uploads/bakari_mustafa.jpg'
 comments: false
 
@@ -11,24 +12,24 @@ comments: false
 
 # What I Use
 
-People often ask me what tools and technology I use for my work in community building, content creation, and staying productive. Here's my complete setup!
+People often ask what tools and technology I use for community building, content creation, and day-to-day work. This is my current setup.
 
 *Last updated: November 2025*
 
 ---
 
-## 💻 Hardware
+## Hardware
 
 ### Computer Setup
 
 **Primary Machine: Apple iMac 24" (2021)**
 - M1 chip with 8GB RAM
-- Perfect for community management, content creation, and multitasking
-- Beautiful display for design work and video editing
-- Currently planning to upgrade to a newer model soon
+- Used for community management, content creation, and multitasking
+- Strong display for design work and video editing
+- Planning a future upgrade
 
 **Portable Setup: MacBook Air 13"**
-- M1 chip - incredibly powerful for its size
+- M1 chip with reliable performance for its size
 - My go-to for workshops, events, and working on the go
 - All-day battery life for those long community events
 - Lightweight enough for daily commute
@@ -39,7 +40,7 @@ People often ask me what tools and technology I use for my work in community bui
 
 **iPhone 15 Pro Max**
 - Primary communication device for community management
-- Great camera for capturing moments at NAA events and camps
+- Strong camera for documenting NAA events and camps
 - Long battery life essential for full-day programs
 - ProRAW for better photo quality when documenting our work
 
@@ -62,7 +63,7 @@ People often ask me what tools and technology I use for my work in community bui
 
 ---
 
-## 🛠 Software & Apps
+## Software and Apps
 
 ### Productivity & Organization
 
@@ -87,7 +88,7 @@ People often ask me what tools and technology I use for my work in community bui
 
 **Primary Platform:**
 - **[Circle.so](https://circle.so/)** - My #1 recommendation for community platforms
-  - Why I love it: Clean interface, easy member management, great for cohort programs
+  - Why I use it: Clean interface, easy member management, and useful cohort features
   - Use case: Could scale Mentors Outreach or NAA programs here
   - Features I value: Spaces, events, member directory, mobile app
 
@@ -97,7 +98,7 @@ People often ask me what tools and technology I use for my work in community bui
 - **Buffer** (occasionally) - Scheduling posts across platforms
 
 **Email & Newsletters:**
-- Exploring **Substack** or **ConvertKit** for newsletter (coming soon!)
+- Exploring **Substack** or **ConvertKit** for the newsletter
 
 **Video & Content:**
 - **iMovie** - Basic video editing for social media content
@@ -113,7 +114,7 @@ People often ask me what tools and technology I use for my work in community bui
 - **Netlify** - Website hosting and deployment
   - Why Netlify: Free for personal sites, automatic deploys, easy SSL
   - Built-in forms (using for contact page)
-  - Great performance and CDN
+  - Strong performance and CDN
 
 **Analytics & SEO:**
 - **Google Analytics** - Website traffic and behavior tracking
@@ -128,13 +129,13 @@ People often ask me what tools and technology I use for my work in community bui
 
 ---
 
-## 🌐 Services & Platforms
+## Services and Platforms
 
 ### Web Infrastructure
 
 **Hosting & Deployment:**
 - **Netlify** - Static site hosting (this website)
-  - Free tier is incredibly generous
+  - Useful free tier
   - Automatic HTTPS
   - Form handling
   - Deploy previews
@@ -168,17 +169,17 @@ People often ask me what tools and technology I use for my work in community bui
 
 ---
 
-## 🤝 Community Building Tools I Recommend
+## Community Building Tools I Recommend
 
 Based on my experience with Mentors Outreach and Networking African-Australians:
 
 ### For Starting Out (Free/Low-Cost)
 
-**[Circle.so](https://circle.so/)** ⭐ **My top recommendation**
+**[Circle.so](https://circle.so/)** - **My top recommendation**
 - Best for: Building membership communities, cohort programs
 - Pricing: Free up to 100 members, then paid tiers
-- Why I love it: Clean UX, member engagement features, mobile app
-- Perfect for: Mentorship programs, leadership cohorts, alumni networks
+- Why I use it: Clean UX, member engagement features, and a mobile app
+- Best for: Mentorship programs, leadership cohorts, and alumni networks
 
 **Discord**
 - Best for: Real-time communication, younger audiences
@@ -206,7 +207,7 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 
 **Canva**
 - Best for: Social media graphics, presentation design
-- Pricing: Free tier is excellent, paid for teams
+- Pricing: Strong free tier, paid plans for teams
 - Essential for creating engaging content quickly
 
 **Typeform/Google Forms**
@@ -215,7 +216,7 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 
 ---
 
-## 📱 Mobile Apps I Use Daily
+## Mobile Apps I Use Daily
 
 **Productivity:**
 - Gmail, Outlook - Email management
@@ -240,7 +241,7 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 
 ---
 
-## 💡 Setup Philosophy
+## Setup Philosophy
 
 **Why I Choose These Tools:**
 
@@ -254,7 +255,7 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 
 - **Don't chase shiny tools** - Master what you have before adding more
 - **Mobile matters** - Our community members are often mobile-first
-- **Free ≠ cheap** - Many free tools (Netlify, Circle.so free tier) are excellent
+- **Free does not mean low quality** - Many free tools, including Netlify and Circle.so's free tier, are useful
 - **Integration > perfection** - Tools that work together beat perfect isolated tools
 - **Simple scales** - Complex setups break when your community grows
 
@@ -264,7 +265,7 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 
 **Currently Testing:**
 - **Notion** - For comprehensive knowledge management
-- **ConvertKit/Substack** - Newsletter platform (coming soon!)
+- **ConvertKit/Substack** - Newsletter platform
 - **Loom** - Video messages for async communication
 - **Calendly** - Meeting scheduling automation
 
@@ -275,7 +276,7 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 
 ---
 
-## 📚 Resources That Helped Me Choose
+## Resources That Helped Me Choose
 
 **Communities:**
 - [uses.tech](https://uses.tech/) - Collection of developer /uses pages
@@ -296,11 +297,11 @@ Based on my experience with Mentors Outreach and Networking African-Australians:
 - Email me at [bakari@bakarimustafa.com](mailto:bakari@bakarimustafa.com)
 
 **Building a community and need advice?**
-- Happy to share what's worked (and what hasn't!)
-- Circle.so affiliate link coming soon if you want to support my work
+- Happy to share what has worked and what has not
+- Circle.so affiliate link to be added later
 
 ---
 
-*This page is updated as my setup evolves. Check back occasionally for updates!*
+*This page is updated as my setup evolves.*
 
 *Inspired by [uses.tech](https://uses.tech/) and [Wes Bos](https://wesbos.com/uses)*

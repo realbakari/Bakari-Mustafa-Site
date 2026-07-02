@@ -2,11 +2,11 @@
 title: Search
 permalink: "/search/"
 layout: page
+hide_title: true
 excerpt: Search all content on Bakari Mustafa's site
 comments: false
 ---
 
-<!-- Search Page Header -->
 <div class="search-page-header">
   <div class="search-page-header-content">
     <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" class="search-page-icon">
@@ -14,15 +14,14 @@ comments: false
       <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
     </svg>
     <h1 class="search-page-title">Search</h1>
-    <p class="search-page-subtitle">Find articles, pages, books, and more across the entire site</p>
+    <p class="search-page-subtitle">Find articles, projects, pages, and book notes across the site.</p>
   </div>
 </div>
 
-<!-- Main Search Input -->
 <div class="main-search-container">
   <div class="main-search-wrapper">
     <label for="main-search-input" aria-hidden="true">
-      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="rgba(128,128,128,0.8)" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+      <svg xmlns="http://www.w3.org/2000/svg" width="24" height="24" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
         <circle cx="11" cy="11" r="8"></circle>
         <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
       </svg>
@@ -30,7 +29,7 @@ comments: false
     <input
       type="search"
       id="main-search-input"
-      placeholder="Type to search articles, pages, books, projects..."
+      placeholder="Search articles, pages, books, and projects"
       aria-label="Search site content"
       autocomplete="off"
     >
@@ -50,7 +49,6 @@ comments: false
   </div>
 </div>
 
-<!-- Search Filters -->
 <div class="search-filters" id="search-filters" style="display: none;">
   <div class="filter-section">
     <span class="filter-label">Filter by type:</span>
@@ -60,17 +58,14 @@ comments: false
   </div>
 </div>
 
-<!-- Search Stats -->
 <div id="search-stats" class="search-stats" style="display: none;">
   <span id="search-stats-text"></span>
 </div>
 
-<!-- Search Results -->
 <div id="main-search-results-container" class="main-search-results-container" style="display: none;">
   <div id="main-search-results" class="main-search-results"></div>
 </div>
 
-<!-- No Results Message -->
 <div id="no-search-results" class="no-search-results" style="display: none;">
   <svg xmlns="http://www.w3.org/2000/svg" width="64" height="64" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="1.5" stroke-linecap="round" stroke-linejoin="round">
     <circle cx="11" cy="11" r="8"></circle>
@@ -89,11 +84,10 @@ comments: false
   </div>
 </div>
 
-<!-- Welcome State (before search) -->
 <div id="search-welcome" class="search-welcome">
   <div class="search-welcome-content">
     <h2>What are you looking for?</h2>
-    <p>Search through {{ site.posts | size }} articles, pages, book summaries, and project documentation.</p>
+    <p>Search through {{ site.posts | size }} articles, public pages, book summaries, and project notes.</p>
 
     <div class="search-categories">
       <div class="search-category-card">
@@ -102,8 +96,8 @@ comments: false
           <polyline points="14 2 14 8 20 8"></polyline>
         </svg>
         <h3>Articles</h3>
-        <p>Blog posts on technology, leadership, and community building</p>
-        <a href="/posts/" class="category-link">Browse all articles →</a>
+        <p>Essays and notes on technology, leadership, faith, and community building.</p>
+        <a href="/posts/" class="category-link">Browse all articles</a>
       </div>
 
       <div class="search-category-card">
@@ -112,8 +106,8 @@ comments: false
           <path d="M6.5 2H20v20H6.5A2.5 2.5 0 0 1 4 19.5v-15A2.5 2.5 0 0 1 6.5 2z"></path>
         </svg>
         <h3>Book Summaries</h3>
-        <p>Insights and key takeaways from books I've read</p>
-        <a href="/books/" class="category-link">View book summaries →</a>
+        <p>Notes and takeaways from books I've read.</p>
+        <a href="/book-summaries/" class="category-link">View book summaries</a>
       </div>
 
       <div class="search-category-card">
@@ -122,8 +116,8 @@ comments: false
           <polyline points="8 6 2 12 8 18"></polyline>
         </svg>
         <h3>Projects</h3>
-        <p>Open source projects and technical work</p>
-        <a href="/projects/" class="category-link">Explore projects →</a>
+        <p>Community initiatives, digital products, and creative work.</p>
+        <a href="/projects/" class="category-link">Explore projects</a>
       </div>
 
       <div class="search-category-card">
@@ -132,8 +126,8 @@ comments: false
           <circle cx="12" cy="7" r="4"></circle>
         </svg>
         <h3>About</h3>
-        <p>Learn more about my background and interests</p>
-        <a href="/about/" class="category-link">About me →</a>
+        <p>Background, current work, and contact details.</p>
+        <a href="/about/" class="category-link">About Bakari</a>
       </div>
     </div>
 

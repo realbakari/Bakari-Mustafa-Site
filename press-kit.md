@@ -1,6 +1,7 @@
 ---
 title: Press Kit
 layout: page
+hide_title: true
 excerpt: Media resources, biography, and high-resolution photos of Bakari Mustafa for press and media inquiries.
 description: 'Bakari Mustafa press kit with biography, photos, media assets, and contact information for journalists, podcasters, and event organizers.'
 image: "/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg"
@@ -10,11 +11,11 @@ comments: false
 
 # Press Kit
 
-Welcome to the official press kit for Bakari Mustafa. This page provides media resources, biography information, and high-resolution assets for journalists, podcasters, event organizers, and media professionals.
+This press kit provides media resources, biography information, and high-resolution assets for journalists, podcasters, event organizers, and media professionals.
 
 ## Quick Bio
 
-**Bakari Mustafa** is an African-born Australian entrepreneur, technologist, and former refugee based in Brisbane, Queensland. Currently serving on the leadership team at Networking African-Australians, he is dedicated to empowering African-Australian youth through education, leadership development, and community engagement.
+**Bakari Mustafa** is an African-born Australian entrepreneur, technologist, and former refugee based in Brisbane, Queensland. He serves on the leadership team at Networking African-Australians, supporting African-Australian youth through education, leadership development, and community engagement.
 
 ---
 
@@ -33,13 +34,13 @@ Bakari has also created community-focused initiatives including **Dzaleka Connec
 ## Biography Variations
 
 ### 100-Word Bio
-Bakari Mustafa is an African-born Australian entrepreneur, technologist, and former refugee. Born in Burundi and raised in Malawi, he migrated to Australia in 2015. Bakari serves on the leadership team at Networking African-Australians in Melbourne, empowering African-Australian youth through education and leadership programs. He founded Mentors Outreach, a platform connecting young professionals with mentors and investors. His initiatives include Dzaleka Connect (supporting Dzaleka refugee camp residents), Hungry Innovators (a non-profit STEM education organization), and the Transition Phase Podcast (2018-2019). Bakari is passionate about using technology and entrepreneurship to create positive social impact.
+Bakari Mustafa is an African-born Australian entrepreneur, technologist, and former refugee. Born in Burundi and raised in Malawi, he migrated to Australia in 2015. Bakari serves on the leadership team at Networking African-Australians in Melbourne, supporting African-Australian youth through education and leadership programs. He founded Mentors Outreach, a platform connecting young professionals with mentors and investors. His initiatives include Dzaleka Connect (supporting Dzaleka refugee camp residents), Hungry Innovators (a non-profit STEM education organization), and the Transition Phase Podcast (2018-2019). Bakari uses technology and entrepreneurship to support community-focused work.
 
 ### 50-Word Bio
 Bakari Mustafa is an African-born Australian entrepreneur and former refugee. He serves on the leadership team at Networking African-Australians and founded Mentors Outreach, a platform connecting young professionals with mentors. Passionate about technology and social impact, Bakari empowers youth through education, leadership development, and community engagement.
 
 ### One-Liner
-African-born Australian entrepreneur and community leader empowering youth through technology, education, and mentorship.
+African-born Australian entrepreneur and community leader supporting youth through technology, education, and mentorship.
 
 ---
 
@@ -126,10 +127,10 @@ Australia
 
 ## Press Mentions
 
-Looking to feature a story or interview? We'd love to hear from you! Please reach out to [media@bakarimustafa.com](mailto:media@bakarimustafa.com) with details about your publication, audience, and story angle.
+For story or interview requests, contact [media@bakarimustafa.com](mailto:media@bakarimustafa.com) with details about your publication, audience, and story angle.
 
 ---
 
 *Last Updated: November 2025*
 
-*For any questions or additional materials not listed here, please don't hesitate to contact us at [media@bakarimustafa.com](mailto:media@bakarimustafa.com).*
+*For additional materials not listed here, contact [media@bakarimustafa.com](mailto:media@bakarimustafa.com).*

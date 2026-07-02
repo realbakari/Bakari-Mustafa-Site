@@ -11,7 +11,7 @@
       display: block;
       margin-bottom: 0.5rem;
       font-weight: $semibold-weight;
-      color: $black;
+      color: var(--text-primary);
       font-size: 0.95em;
     }
 
@@ -21,22 +21,23 @@
     textarea {
       width: 100%;
       padding: 0.75rem;
-      border: 1px solid $light;
-      border-radius: 4px;
+      border: 1px solid var(--border-default);
+      border-radius: 8px;
       font-size: 1em;
       font-family: $sans-family;
-      color: $text-base-color;
-      background: white;
-      transition: border-color 0.2s ease;
+      color: var(--text-primary);
+      background: var(--bg-surface);
+      transition: border-color 0.2s ease, box-shadow 0.2s ease;
 
       &:focus {
         outline: none;
-        border-color: $color-deep-teal;
+        border-color: rgba(var(--accent-primary-rgb), 0.55);
+        box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.1);
       }
 
       &::placeholder {
-        color: $gray;
-        opacity: 0.6;
+        color: var(--text-secondary);
+        opacity: 1;
       }
     }
 
@@ -53,18 +54,19 @@
 
   .submit-btn {
     padding: 0.875rem 2rem;
-    background: $color-deep-teal;
-    color: white;
-    border: none;
-    border-radius: 4px;
+    background: var(--text-primary);
+    color: var(--surface-strong);
+    border: 1px solid var(--text-primary);
+    border-radius: 8px;
     font-size: 1em;
     font-weight: $semibold-weight;
     font-family: $sans-family;
     cursor: pointer;
-    transition: background-color 0.2s ease;
+    transition: background-color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      background: $color-eucalyptus;
+      background: var(--accent-primary);
+      border-color: var(--accent-primary);
     }
 
     @include media-query($on-mobile) {

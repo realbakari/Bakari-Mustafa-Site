@@ -142,7 +142,7 @@
     font-weight: $bold-weight;
     color: var(--text-primary);
     text-decoration: none;
-    letter-spacing: -0.01em;
+    letter-spacing: 0;
     margin-right: auto;
     margin-left: 0.15rem;
 
@@ -344,7 +344,7 @@
     margin-bottom: 0.5rem;
     margin-top: 1rem;
     font-weight: 700;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
     overflow-wrap: anywhere;
 
     @include media-query($on-mobile) {
@@ -399,7 +399,7 @@
   font-weight: 700;
   margin-bottom: 2rem;
   color: $black;
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 
   @include media-query($on-mobile) {
     font-size: 1.3em;
@@ -423,7 +423,7 @@
   margin-bottom: 1.5rem;
   padding-bottom: 0.5rem;
   border-bottom: 2px solid rgba(0, 0, 0, 0.1);
-  letter-spacing: -0.02em;
+  letter-spacing: 0;
 
   &:first-of-type {
     margin-top: 0;
@@ -471,7 +471,7 @@
 
   .post-item-date {
     font-size: 0.85rem;
-    color: rgba(0, 0, 0, 0.6);
+    color: var(--text-secondary);
     font-weight: 500;
   }
 
@@ -502,11 +502,11 @@
     font-size: 1.75rem;
     font-weight: 600;
     line-height: 1.1;
-    letter-spacing: -0.03em;
+    letter-spacing: 0;
     overflow-wrap: anywhere;
 
     a {
-      color: $black;
+      color: var(--text-primary);
       text-decoration: none;
       transition: color 0.2s ease;
 

@@ -700,8 +700,8 @@ body[data-theme="dark"] #page-info {
 .auth-loading-spinner {
   width: 50px;
   height: 50px;
-  border: 4px solid rgba(0, 63, 255, 0.2);
-  border-top-color: #003FFF;
+  border: 4px solid rgba(23, 107, 91, 0.2);
+  border-top-color: #176b5b;
   border-radius: 50%;
   animation: spin 0.8s linear infinite;
   margin-bottom: 1rem;
@@ -775,7 +775,7 @@ body[data-theme="dark"] .auth-message p {
 .btn-login-link {
   display: inline-block;
   padding: 0.875rem 2rem;
-  background: #003FFF;
+  background: #176b5b;
   color: white;
   text-decoration: none;
   border-radius: 8px;
@@ -784,9 +784,9 @@ body[data-theme="dark"] .auth-message p {
 }
 
 .btn-login-link:hover {
-  background: #0035db;
+  background: #125548;
   transform: translateY(-2px);
-  box-shadow: 0 6px 16px rgba(0, 63, 255, 0.3);
+  box-shadow: 0 6px 16px rgba(23, 107, 91, 0.3);
 }
 
 /* Dashboard Header with Logout */
@@ -827,7 +827,7 @@ body[data-theme="dark"] .user-email {
 
 .user-email span {
   font-weight: 500;
-  color: #003FFF;
+  color: #176b5b;
 }
 
 body[data-theme="dark"] .user-email span {

@@ -2,6 +2,7 @@
 title: Book Summaries
 permalink: "/book-summaries/"
 layout: page
+hide_title: true
 excerpt: ''
 comments: false
 image: "/uploads/alfons-morales-ylswjsy7stw-unsplash.jpg"
