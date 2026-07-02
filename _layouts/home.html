@@ -3,114 +3,51 @@ layout: default
 home: true
 ---
 
-<div class="home-landing">
-  <section class="home-hero" aria-labelledby="home-hero-title">
-    <div class="home-hero__copy">
-      <p class="home-kicker">Entrepreneur, technologist, community builder</p>
-      <h1 class="home-hero__title" id="home-hero-title">Bakari Mustafa</h1>
-      <p class="home-hero__lede">
-        Brisbane-based founder and former refugee focused on education, mentorship, technology, and stronger pathways for young African-Australians.
-      </p>
-      <div class="home-actions">
-        <a href="/about/" class="home-action home-action-primary">About</a>
-        <a href="/projects/" class="home-action home-action-secondary">Projects</a>
-        <a href="/posts/" class="home-action home-action-secondary">Writing</a>
-      </div>
-    </div>
-    <div class="home-hero__portrait" aria-hidden="true">
-      <img src="/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg" alt="" loading="eager" decoding="async">
-    </div>
+<div class="home">
+  <section class="home-intro">
+    <img class="home-portrait" src="{{ site.author.avatar }}" alt="{{ site.author.name }}" loading="eager" decoding="async">
+    <h1 class="home-name">Bakari Mustafa</h1>
+    <p class="home-lede">
+      Brisbane-based founder and technologist. I work on education, mentorship,
+      and stronger pathways for young African-Australians, and write about
+      leadership, technology, faith, and community along the way.
+    </p>
+    <nav class="home-links" aria-label="Primary sections">
+      <a href="/about/">About</a>
+      <a href="/projects/">Projects</a>
+      <a href="/reading/">Reading</a>
+      <a href="/book-summaries/">Book Summaries</a>
+      <a href="/contact/">Contact</a>
+    </nav>
   </section>
 
-  <section class="home-map">
-    <div class="home-section-intro">
-      <p class="section-kicker">Start Here</p>
-      <h2 class="section-title">Explore the main sections.</h2>
+  <section class="home-section" aria-labelledby="home-writing">
+    <div class="home-section-head">
+      <h2 id="home-writing">Writing</h2>
+      <a class="home-section-more" href="/posts/">All posts</a>
     </div>
-    <div class="home-map-grid">
-      <a href="/posts/" class="map-card map-card-writing">
-        <span class="map-card-label">Writing</span>
-        <h3>Essays and notes.</h3>
-        <p>Reflections on leadership, technology, faith, community, and building a useful life.</p>
-      </a>
-      <a href="/projects/" class="map-card map-card-reading">
-        <span class="map-card-label">Projects</span>
-        <h3>Programs and platforms.</h3>
-        <p>Community-focused work across mentorship, education, cultural preservation, and digital products.</p>
-      </a>
-      <a href="/reading/" class="map-card map-card-library">
-        <span class="map-card-label">Reading</span>
-        <h3>Books and summaries.</h3>
-        <p>A practical record of books, summaries, and ideas that continue to shape my work.</p>
-      </a>
-    </div>
-  </section>
-
-  <section class="featured-section">
-    <div class="home-section-intro">
-      <p class="section-kicker">Selected Work</p>
-      <h2 class="section-title">Current and recent projects.</h2>
-    </div>
-    <div class="featured-grid">
-      {% for project in site.data.featured_projects limit:2 %}
-      <article class="featured-card featured-card-{{ forloop.index }}">
-        <div class="featured-content">
-          <p class="featured-label">Featured project</p>
-          <h3 class="featured-title">
-            <a href="{{ project.url }}">{{ project.title }}</a>
-          </h3>
-          <p class="featured-excerpt">{{ project.description }}</p>
-          <div class="featured-meta">
-            {% for tag in project.tags %}
-            <span class="featured-tag">{{ tag }}</span>
-            {% endfor %}
-          </div>
-          <a href="{{ project.url }}" class="featured-read-more">Open project</a>
-        </div>
-      </article>
+    <ul class="home-post-list">
+      {% for post in site.posts limit: 6 %}
+      <li class="home-post">
+        <a class="home-post-link" href="{{ post.url }}">{{ post.title }}</a>
+        <time class="home-post-date" datetime="{{ post.date | date_to_xmlschema }}">{{ post.date | date: "%b %Y" }}</time>
+      </li>
       {% endfor %}
-    </div>
-    <div class="view-all view-all-left">
-      <a href="/projects/" class="view-all-link">See the full project archive</a>
-    </div>
+    </ul>
   </section>
 
-  <section class="popular-section">
-    <div class="home-section-intro">
-      <p class="section-kicker">Recent Writing</p>
-      <h2 class="section-title">Latest essays and notes.</h2>
+  <section class="home-section" aria-labelledby="home-projects">
+    <div class="home-section-head">
+      <h2 id="home-projects">Projects</h2>
+      <a class="home-section-more" href="/projects/">All projects</a>
     </div>
-    <div class="popular-list">
-      {% for post in site.posts limit: 3 %}
-      {% assign read_time = post.content | number_of_words | plus: 179 | divided_by: 180 %}
-      <article class="popular-card">
-        <div class="popular-number">0{{ forloop.index }}</div>
-        <div class="popular-content">
-          <div class="popular-meta">
-            <span class="popular-date">{{ post.date | date: "%b %d, %Y" }}</span>
-            <span class="popular-separator">•</span>
-            <span class="popular-reading-time">{{ read_time }} min read</span>
-            <span class="popular-separator">•</span>
-            <span class="popular-views" data-url="{{ post.url }}"><span class="view-count">0</span> views</span>
-          </div>
-          <h3 class="popular-title">
-            <a href="{{ post.url }}">{{ post.title }}</a>
-          </h3>
-          <p class="popular-excerpt">
-            {% if post.description %}
-              {{ post.description | strip_html | truncate: 160 }}
-            {% elsif post.excerpt %}
-              {{ post.excerpt | strip_html | truncate: 160 }}
-            {% else %}
-              {{ post.content | strip_html | truncate: 160 }}
-            {% endif %}
-          </p>
-        </div>
-      </article>
+    <ul class="home-project-list">
+      {% for project in site.data.featured_projects %}
+      <li class="home-project">
+        <a class="home-project-link" href="{{ project.url }}">{{ project.title }}</a>
+        <p class="home-project-desc">{{ project.description }}</p>
+      </li>
       {% endfor %}
-    </div>
-    <div class="view-all view-all-left">
-      <a href="/posts/" class="view-all-link">Read the writing archive</a>
-    </div>
+    </ul>
   </section>
 </div>

@@ -6,3 +6,5 @@ _drafts
 klise-*.gem
 .env
 .env.local
+vendor/
+.bundle/
