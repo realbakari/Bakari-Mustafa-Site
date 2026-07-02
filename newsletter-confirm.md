@@ -85,7 +85,7 @@ permalink: /newsletter-confirm
         if (!result.alreadyConfirmed) {
           messageEl.innerHTML = `
             ${result.message}<br><br>
-            <strong>You'll now receive updates about new posts and exclusive content.</strong>
+            <strong>You will now receive new posts, reading notes, and project updates.</strong>
           `;
         }
       } else {

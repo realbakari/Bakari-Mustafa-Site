@@ -102,28 +102,28 @@ async function subscribeToNewsletter(email, source = 'footer') {
 
           if (emailResponse.ok) {
             const emailResult = await emailResponse.json();
-            console.log('[Newsletter] ✅ Resubscribe confirmation email sent successfully!', emailResult);
+            console.log('[Newsletter] Resubscribe confirmation email sent.', emailResult);
             emailSent = true;
           } else {
             const errorData = await emailResponse.json();
-            console.warn('[Newsletter] ⚠️ Failed to send resubscribe confirmation email:', errorData);
+            console.warn('[Newsletter] Failed to send resubscribe confirmation email:', errorData);
           }
         } catch (emailError) {
-          console.warn('[Newsletter] ⚠️ Email service error:', emailError);
+          console.warn('[Newsletter] Email service error:', emailError);
         }
 
         /* Log URLs as fallback (only if email failed) */
         if (!emailSent) {
-          console.log('[Newsletter] 📧 EMAIL NOT SENT - Use these URLs manually:');
+          console.log('[Newsletter] Email was not sent. Manual confirmation URLs:');
           console.log('Confirmation URL:', window.location.origin + '/newsletter-confirm?token=' + confirmToken);
           console.log('Unsubscribe URL:', window.location.origin + '/newsletter-unsubscribe?token=' + unsubscribeToken);
         }
 
         return {
           success: true,
-          message: emailSent
-            ? 'Welcome back! Please check your email to confirm your subscription.'
-            : 'Subscription saved! Email service unavailable - please check console for confirmation link.',
+      message: emailSent
+        ? 'Welcome back. Please check your email to confirm your subscription.'
+        : 'Subscription saved, but the confirmation email could not be sent. Please try again later.',
           confirmToken: confirmToken,
           unsubscribeToken: unsubscribeToken
         };
@@ -169,19 +169,19 @@ async function subscribeToNewsletter(email, source = 'footer') {
 
       if (emailResponse.ok) {
         const emailResult = await emailResponse.json();
-        console.log('[Newsletter] ✅ Confirmation email sent successfully!', emailResult);
+        console.log('[Newsletter] Confirmation email sent.', emailResult);
         emailSent = true;
       } else {
         const errorData = await emailResponse.json();
-        console.warn('[Newsletter] ⚠️ Failed to send confirmation email:', errorData);
+        console.warn('[Newsletter] Failed to send confirmation email:', errorData);
       }
     } catch (emailError) {
-      console.warn('[Newsletter] ⚠️ Email service error:', emailError);
+      console.warn('[Newsletter] Email service error:', emailError);
     }
 
     /* Log URLs as fallback (only if email failed) */
     if (!emailSent) {
-      console.log('[Newsletter] 📧 EMAIL NOT SENT - Use these URLs manually:');
+      console.log('[Newsletter] Email was not sent. Manual confirmation URLs:');
       console.log('Confirmation URL:', window.location.origin + '/newsletter-confirm?token=' + confirmToken);
       console.log('Unsubscribe URL:', window.location.origin + '/newsletter-unsubscribe?token=' + unsubscribeToken);
     }
@@ -189,8 +189,8 @@ async function subscribeToNewsletter(email, source = 'footer') {
     return {
       success: true,
       message: emailSent
-        ? 'Almost there! Please check your email to confirm your subscription.'
-        : 'Subscription saved! Email service unavailable - please check console for confirmation link.',
+        ? 'Please check your email to confirm your subscription.'
+        : 'Subscription saved, but the confirmation email could not be sent. Please try again later.',
       confirmToken: confirmToken,
       unsubscribeToken: unsubscribeToken
     };
@@ -199,7 +199,7 @@ async function subscribeToNewsletter(email, source = 'footer') {
     console.error('Newsletter subscription error:', error);
     return {
       success: false,
-      message: 'Oops! Something went wrong. Please try again later.'
+      message: 'Subscription failed. Please try again later.'
     };
   }
 }
@@ -327,20 +327,28 @@ async function unsubscribeFromNewsletter(token) {
 }
 
 /**
- * Initialize newsletter form on page load
+ * Initialize a newsletter form.
  */
-function initNewsletterForm() {
-  console.log('[Newsletter] initNewsletterForm called');
-  const newsletterForm = document.getElementById('newsletter-form');
-  if (!newsletterForm) {
-    console.log('[Newsletter] No newsletter form found on this page');
+function bindNewsletterForm(newsletterForm) {
+  if (!newsletterForm || newsletterForm.dataset.newsletterBound === 'true') {
     return;
   }
-  console.log('[Newsletter] Newsletter form found, attaching handlers');
 
   const emailInput = newsletterForm.querySelector('input[type="email"]');
   const submitButton = newsletterForm.querySelector('button[type="submit"]');
-  const messageDiv = document.getElementById('newsletter-message');
+  const describedBy = newsletterForm.getAttribute('aria-describedby');
+  const messageDiv = (describedBy ? document.getElementById(describedBy) : null)
+    || newsletterForm.querySelector('[data-newsletter-message]')
+    || newsletterForm.parentElement?.querySelector('[data-newsletter-message], .newsletter-message')
+    || null;
+
+  if (!emailInput || !submitButton) {
+    console.warn('[Newsletter] Form is missing an email input or submit button.');
+    return;
+  }
+
+  newsletterForm.dataset.newsletterBound = 'true';
+  submitButton.dataset.defaultText = submitButton.textContent.trim() || 'Subscribe';
 
   newsletterForm.addEventListener('submit', async function(e) {
     e.preventDefault();
@@ -351,7 +359,7 @@ function initNewsletterForm() {
     // Disable form during submission
     emailInput.disabled = true;
     submitButton.disabled = true;
-    submitButton.textContent = 'Subscribing...';
+    submitButton.textContent = 'Sending...';
 
     // Clear previous messages
     if (messageDiv) {
@@ -378,8 +386,26 @@ function initNewsletterForm() {
     /* Re-enable form */
     emailInput.disabled = false;
     submitButton.disabled = false;
-    submitButton.textContent = 'Subscribe';
+    submitButton.textContent = submitButton.dataset.defaultText || 'Subscribe';
   });
+}
+
+/**
+ * Initialize newsletter forms on page load.
+ */
+function initNewsletterForms() {
+  const forms = Array.from(new Set([
+    ...document.querySelectorAll('form[data-newsletter-form]'),
+    ...document.querySelectorAll('#newsletter-form')
+  ]));
+
+  if (!forms.length) {
+    console.log('[Newsletter] No newsletter forms found on this page.');
+    return;
+  }
+
+  forms.forEach(bindNewsletterForm);
+  console.log(`[Newsletter] Bound ${forms.length} newsletter form${forms.length === 1 ? '' : 's'}.`);
 }
 
 // Initialize everything
@@ -397,12 +423,12 @@ function initNewsletterForm() {
     return;
   }
 
-  // Initialize newsletter form
+  // Initialize newsletter forms
   // DOM is ready at this point (script is in footer after body content)
   if (document.readyState === 'loading') {
-    document.addEventListener('DOMContentLoaded', initNewsletterForm);
+    document.addEventListener('DOMContentLoaded', initNewsletterForms);
   } else {
-    initNewsletterForm();
+    initNewsletterForms();
   }
 })();
 

@@ -6,7 +6,7 @@ layout: compress
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Code Editor Pro</title>
+    <title>Code Workspace</title>
     <link rel="icon" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='12' fill='%23242724'/%3E%3Cpath d='M21 22L11 32l10 10M43 22l10 10-10 10M35 16L29 48' fill='none' stroke='%23f8f8f2' stroke-width='4' stroke-linecap='round' stroke-linejoin='round'/%3E%3C/svg%3E">
 
     <style>
@@ -133,6 +133,7 @@ layout: compress
             display: flex;
             align-items: center;
             gap: 10px;
+            flex-wrap: wrap;
             border-bottom: 1px solid var(--line);
             background: linear-gradient(180deg, #2f3136 0%, #26292d 100%);
         }
@@ -142,6 +143,7 @@ layout: compress
             align-items: center;
             gap: 10px;
             flex-shrink: 0;
+            min-height: 32px;
         }
 
         .brand-dot {
@@ -173,6 +175,10 @@ layout: compress
             flex-wrap: wrap;
         }
 
+        .toolbar-cluster.view-controls {
+            margin-left: auto;
+        }
+
         .control-group {
             display: flex;
             align-items: center;
@@ -186,27 +192,6 @@ layout: compress
             color: var(--text-dim);
             letter-spacing: 0.05em;
             text-transform: uppercase;
-        }
-
-        .workspace-meta {
-            display: flex;
-            align-items: center;
-            gap: 8px;
-            flex-shrink: 0;
-        }
-
-        .meta-pill {
-            height: 28px;
-            padding: 0 10px;
-            border-radius: 999px;
-            border: 1px solid var(--line);
-            background: rgba(255, 255, 255, 0.03);
-            color: var(--text-dim);
-            display: inline-flex;
-            align-items: center;
-            font-size: 0.72rem;
-            text-transform: uppercase;
-            letter-spacing: 0.04em;
         }
 
         .toolbar select,
@@ -262,6 +247,20 @@ layout: compress
             outline-offset: 2px;
         }
 
+        .toolbar button:disabled,
+        .panel-tool:disabled {
+            cursor: not-allowed;
+            opacity: 0.55;
+            transform: none;
+        }
+
+        .toolbar button:disabled:hover,
+        .panel-tool:disabled:hover {
+            background: rgba(255, 255, 255, 0.04);
+            border-color: var(--line);
+            transform: none;
+        }
+
         .button-primary,
         .panel-tab.active {
             background: var(--accent);
@@ -288,16 +287,18 @@ layout: compress
         }
 
         .workspace {
+            --sidebar-width: 220px;
             flex: 1;
             min-height: 0;
             display: grid;
-            grid-template-columns: 220px minmax(0, 1fr);
-            grid-template-rows: minmax(0, 1fr) 220px;
+            grid-template-columns: var(--sidebar-width) 8px minmax(0, 1fr);
+        }
+
+        .workspace.sidebar-collapsed {
+            grid-template-columns: 0 0 minmax(0, 1fr);
         }
 
         .side-panel {
-            grid-column: 1;
-            grid-row: 1 / span 2;
             min-height: 0;
             padding: 12px;
             display: grid;
@@ -305,6 +306,107 @@ layout: compress
             align-content: start;
             background: linear-gradient(180deg, #2c2f35 0%, #25282d 100%);
             border-right: 1px solid var(--line);
+        }
+
+        .workspace.sidebar-collapsed .side-panel,
+        .workspace.sidebar-collapsed .sidebar-splitter {
+            display: none;
+        }
+
+        .workspace-main {
+            --panel-size: 220px;
+            min-height: 0;
+            min-width: 0;
+            display: grid;
+        }
+
+        .workspace-main.panel-bottom {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: minmax(0, 1fr) 8px var(--panel-size);
+        }
+
+        .workspace-main.panel-right {
+            grid-template-columns: minmax(0, 1fr) 8px var(--panel-size);
+            grid-template-rows: minmax(0, 1fr);
+        }
+
+        .workspace-main.panel-hidden {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: minmax(0, 1fr);
+        }
+
+        .workspace-main.panel-hidden .output-panel,
+        .workspace-main.panel-hidden .panel-splitter {
+            display: none;
+        }
+
+        .workspace-main.panel-maximized {
+            grid-template-columns: minmax(0, 1fr);
+            grid-template-rows: minmax(0, 1fr);
+        }
+
+        .workspace-main.panel-maximized .editor-column,
+        .workspace-main.panel-maximized .panel-splitter {
+            display: none;
+        }
+
+        .workspace-main.panel-right .editor-column {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .workspace-main.panel-right .panel-splitter {
+            grid-column: 2;
+            grid-row: 1;
+            cursor: col-resize;
+        }
+
+        .workspace-main.panel-right .output-panel {
+            grid-column: 3;
+            grid-row: 1;
+            border-left: 1px solid var(--line);
+            border-top: none;
+        }
+
+        .workspace-main.panel-bottom .editor-column {
+            grid-column: 1;
+            grid-row: 1;
+        }
+
+        .workspace-main.panel-bottom .panel-splitter {
+            grid-column: 1;
+            grid-row: 2;
+            cursor: row-resize;
+        }
+
+        .workspace-main.panel-bottom .output-panel {
+            grid-column: 1;
+            grid-row: 3;
+            border-top: 1px solid var(--line);
+            border-left: none;
+        }
+
+        .workspace-main.panel-maximized .output-panel {
+            grid-column: 1;
+            grid-row: 1;
+            border-top: none;
+            border-left: none;
+        }
+
+        .splitter {
+            background: rgba(255, 255, 255, 0.03);
+            position: relative;
+        }
+
+        .splitter:hover,
+        .splitter.dragging {
+            background: rgba(248, 157, 27, 0.16);
+        }
+
+        .sidebar-splitter {
+            cursor: col-resize;
+            border-left: 1px solid rgba(255, 255, 255, 0.03);
+            border-right: 1px solid rgba(0, 0, 0, 0.2);
         }
 
         .explorer-section {
@@ -425,24 +527,10 @@ layout: compress
             font-weight: 600;
         }
 
-        .side-panel p,
-        .side-panel li,
-        .panel-note,
         .preview-empty {
             color: var(--text-soft);
             line-height: 1.55;
             font-size: 0.86rem;
-        }
-
-        .side-list {
-            list-style: none;
-            display: grid;
-            gap: 10px;
-        }
-
-        .side-list li {
-            padding-top: 10px;
-            border-top: 1px solid var(--line);
         }
 
         .runtime-card {
@@ -498,8 +586,6 @@ layout: compress
         }
 
         .editor-column {
-            grid-column: 2;
-            grid-row: 1;
             min-height: 0;
             display: flex;
             flex-direction: column;
@@ -609,13 +695,39 @@ layout: compress
         }
 
         .output-panel {
-            grid-column: 2;
-            grid-row: 2;
             min-height: 0;
             display: flex;
             flex-direction: column;
             background: var(--panel-3);
-            border-top: 1px solid var(--line);
+        }
+
+        .panel-header-row {
+            display: flex;
+            align-items: flex-start;
+            justify-content: space-between;
+            gap: 10px;
+        }
+
+        .panel-header-actions {
+            display: flex;
+            gap: 8px;
+            flex-wrap: wrap;
+            justify-content: flex-end;
+        }
+
+        .panel-tool {
+            min-height: 28px;
+            padding: 0 10px;
+            border-radius: 6px;
+            border: 1px solid var(--line);
+            background: rgba(255, 255, 255, 0.04);
+            color: var(--text);
+            font-size: 0.76rem;
+        }
+
+        .panel-tool:hover {
+            background: rgba(255, 255, 255, 0.08);
+            border-color: var(--line-strong);
         }
 
         .output-header {
@@ -873,30 +985,45 @@ layout: compress
             border-color: rgba(224, 190, 116, 0.2);
         }
 
-        @media (max-width: 1080px) {
-            .workspace-meta {
-                display: none;
-            }
-        }
-
         @media (max-width: 900px) {
+            .toolbar-cluster.view-controls {
+                margin-left: 0;
+            }
+
             .workspace {
                 grid-template-columns: 1fr;
-                grid-template-rows: minmax(0, 1fr) 220px;
             }
 
-            .side-panel {
-                display: none;
+            .side-panel,
+            .sidebar-splitter {
+                display: none !important;
             }
 
-            .editor-column {
+            .workspace-main.panel-right,
+            .workspace-main.panel-bottom {
+                grid-template-columns: 1fr;
+                grid-template-rows: minmax(0, 1fr) 8px minmax(180px, var(--panel-size));
+            }
+
+            .workspace-main.panel-right .editor-column,
+            .workspace-main.panel-bottom .editor-column {
                 grid-column: 1;
                 grid-row: 1;
             }
 
-            .output-panel {
+            .workspace-main.panel-right .panel-splitter,
+            .workspace-main.panel-bottom .panel-splitter {
                 grid-column: 1;
                 grid-row: 2;
+                cursor: row-resize;
+            }
+
+            .workspace-main.panel-right .output-panel,
+            .workspace-main.panel-bottom .output-panel {
+                grid-column: 1;
+                grid-row: 3;
+                border-left: none;
+                border-top: 1px solid var(--line);
             }
         }
 
@@ -918,6 +1045,7 @@ layout: compress
 
             .toolbar {
                 width: 100%;
+                flex-basis: 100%;
             }
 
             .control-group label {
@@ -926,7 +1054,12 @@ layout: compress
 
             .workspace {
                 grid-template-columns: 1fr;
-                grid-template-rows: minmax(58vh, 1fr) 220px;
+            }
+
+            .workspace-main.panel-right,
+            .workspace-main.panel-bottom {
+                grid-template-columns: 1fr;
+                grid-template-rows: minmax(58vh, 1fr) 8px 220px;
             }
 
             .tab-name {
@@ -968,7 +1101,7 @@ layout: compress
             <header class="workspace-header">
                 <div class="workspace-brand">
                     <span class="brand-dot" aria-hidden="true"></span>
-                    <h1>Code Editor Pro</h1>
+                    <h1>Code Workspace</h1>
                 </div>
 
                 <div class="toolbar">
@@ -1013,21 +1146,21 @@ layout: compress
                         <button id="share-code">Share</button>
                         <button id="clear-output" class="button-danger">Clear</button>
                     </div>
-                </div>
 
-                <div class="workspace-meta">
-                    <div class="meta-pill">Monokai</div>
-                    <div class="meta-pill">Preview</div>
-                    <div class="meta-pill">Local Save</div>
+                    <div class="toolbar-cluster view-controls">
+                        <button id="sidebar-toggle" type="button" title="Show or hide the file sidebar">Hide files</button>
+                        <button id="panel-position-toggle" type="button" title="Move output between the bottom and right side">Dock right</button>
+                        <button id="panel-toggle" type="button" title="Show or hide the output panel">Hide output</button>
+                    </div>
                 </div>
             </header>
 
-            <main class="workspace">
+            <main class="workspace" id="workspace">
                 <aside class="side-panel">
                     <div class="explorer-section">
-                        <div class="panel-label">Explorer</div>
-                        <h2>Files</h2>
-                        <input class="sidebar-search" id="sidebar-file-filter" type="text" placeholder="Filter files">
+                        <div class="panel-label">Files</div>
+                        <h2>Workspace files</h2>
+                        <input class="sidebar-search" id="sidebar-file-filter" type="text" placeholder="Filter by name or language">
                         <div class="sidebar-actions">
                             <button class="sidebar-button" id="sidebar-new-file" type="button">New</button>
                             <button class="sidebar-button" id="sidebar-rename-file" type="button">Rename</button>
@@ -1049,7 +1182,7 @@ layout: compress
                     </div>
 
                     <div class="explorer-section">
-                        <div class="panel-label">Session</div>
+                        <div class="panel-label">Workspace</div>
                         <div class="sidebar-stats">
                             <div class="sidebar-stat">
                                 <span class="sidebar-stat-label">Active File</span>
@@ -1071,55 +1204,67 @@ layout: compress
                     </div>
                 </aside>
 
-                <section class="editor-column" aria-label="Editor">
-                    <div class="tabs-container">
-                        <div class="tabs" id="tabs"></div>
-                        <button class="add-tab" id="add-tab" type="button">New File</button>
-                    </div>
+                <div class="splitter sidebar-splitter" id="sidebar-splitter" aria-hidden="true"></div>
 
-                    <div class="editor-frame">
-                        <div class="editor-note">
-                            <span id="editor-context">Current file</span>
-                            <span id="execution-mode">Ready</span>
-                        </div>
-                        <div id="editor"></div>
-                    </div>
-                </section>
-
-                <section class="output-panel" aria-label="Output">
-                    <div class="output-header">
-                        <div>
-                            <div class="panel-label">Bottom Panel</div>
-                            <div class="panel-heading">Console and Preview</div>
+                <div class="workspace-main panel-bottom" id="workspace-main">
+                    <section class="editor-column" aria-label="Code editor">
+                        <div class="tabs-container">
+                            <div class="tabs" id="tabs"></div>
+                            <button class="add-tab" id="add-tab" type="button">New File</button>
                         </div>
 
-                        <div class="panel-switcher">
-                            <button class="panel-tab active" type="button" data-panel-target="console-panel">Console</button>
-                            <button class="panel-tab" type="button" data-panel-target="preview-panel">Preview</button>
+                        <div class="editor-frame">
+                            <div class="editor-note">
+                                <span id="editor-context">Current file</span>
+                                <span id="execution-mode">Ready</span>
+                            </div>
+                            <div id="editor"></div>
                         </div>
-                    </div>
+                    </section>
 
-                    <div class="panel-stage">
-                        <div class="panel-view active" id="console-panel">
-                            <div class="output-content" id="output-content">
-                                <div class="output-log info">Ready. Edit the current file and press Run.</div>
+                    <div class="splitter panel-splitter" id="panel-splitter" aria-hidden="true"></div>
+
+                    <section class="output-panel" aria-label="Console and preview">
+                        <div class="output-header">
+                            <div class="panel-header-row">
+                                <div>
+                                    <div class="panel-label" id="panel-location-label">Docked bottom</div>
+                                    <div class="panel-heading">Output</div>
+                                </div>
+
+                                <div class="panel-header-actions">
+                                    <button class="panel-tool" id="panel-maximize-toggle" type="button">Maximize output</button>
+                                </div>
+                            </div>
+
+                            <div class="panel-switcher">
+                                <button class="panel-tab active" type="button" data-panel-target="console-panel">Console</button>
+                                <button class="panel-tab" type="button" data-panel-target="preview-panel">Preview</button>
                             </div>
                         </div>
 
-                        <div class="panel-view preview-panel" id="preview-panel">
-                            <iframe id="preview-frame" title="Preview output" sandbox="allow-scripts"></iframe>
-                            <div class="preview-empty" id="preview-empty">Preview output will appear here when the current language supports it.</div>
-                        </div>
-                    </div>
+                        <div class="panel-stage">
+                            <div class="panel-view active" id="console-panel">
+                                <div class="output-content" id="output-content">
+                                    <div class="output-log info">Ready. Choose Run to execute or preview the active file.</div>
+                                </div>
+                            </div>
 
-                    <div class="status-bar">
-                        <span><strong>File:</strong> <span id="current-file">main.js</span></span>
-                        <span><strong>Lines:</strong> <span id="line-count">0</span></span>
-                        <span><strong>Characters:</strong> <span id="char-count">0</span></span>
-                        <span><strong>Cursor:</strong> <span id="cursor-position">Ln 1, Col 1</span></span>
-                    </div>
-                </section>
+                            <div class="panel-view preview-panel" id="preview-panel">
+                                <iframe id="preview-frame" title="Preview output" sandbox="allow-scripts"></iframe>
+                                <div class="preview-empty" id="preview-empty">Run an HTML, CSS, Markdown, JSON, YAML, or SQL file to show a preview.</div>
+                            </div>
+                        </div>
+                    </section>
+                </div>
             </main>
+
+            <div class="status-bar">
+                <span><strong>File:</strong> <span id="current-file">main.js</span></span>
+                <span><strong>Lines:</strong> <span id="line-count">0</span></span>
+                <span><strong>Characters:</strong> <span id="char-count">0</span></span>
+                <span><strong>Cursor:</strong> <span id="cursor-position">Ln 1, Col 1</span></span>
+            </div>
         </div>
     </div>
 
@@ -1127,7 +1272,7 @@ layout: compress
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Share workspace</h2>
-                <p>The current files are encoded into the URL so someone else can open the same editor state.</p>
+                <p>Create a link that includes your open files, active file, theme, and layout.</p>
             </div>
 
             <div class="modal-body">
@@ -1148,13 +1293,13 @@ layout: compress
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Save project</h2>
-                <p>Projects save locally in this browser so you can reopen them later.</p>
+                <p>Saved projects stay in this browser and can be reopened later.</p>
             </div>
 
             <div class="modal-body">
                 <label for="project-name">
                     Project name
-                    <input type="text" id="project-name" placeholder="my-project">
+                    <input type="text" id="project-name" placeholder="project-name">
                 </label>
             </div>
 
@@ -1169,7 +1314,7 @@ layout: compress
         <div class="modal-content">
             <div class="modal-header">
                 <h2>Load project</h2>
-                <p>Pick a saved workspace to reopen or remove.</p>
+                <p>Choose a saved workspace or delete one you no longer need.</p>
             </div>
 
             <div class="modal-body">

@@ -7,21 +7,21 @@
       </svg>
     </div>
     <div class="newsletter-text">
-      <h3 class="newsletter-title">Stay Updated</h3>
+      <h3 class="newsletter-title">Get updates by email</h3>
       <p class="newsletter-description">
-        Get the latest posts and insights delivered directly to your inbox. Join the community!
+        Receive new essays, reading notes, and project updates when they are published.
       </p>
     </div>
   </div>
 
-  <form class="newsletter-form" action="#" method="post" id="newsletter-form">
+  <form class="newsletter-form" action="#" method="post" id="inline-newsletter-form" data-newsletter-form data-source="inline" aria-describedby="inline-newsletter-message">
     <div class="newsletter-input-group">
       <input
         type="email"
         name="email"
         id="newsletter-email"
         class="newsletter-input"
-        placeholder="your@email.com"
+        placeholder="Email address"
         required
         aria-label="Email address"
       >
@@ -36,65 +36,6 @@
     <p class="newsletter-privacy">
       No spam, ever. Unsubscribe at any time.
     </p>
+    <div id="inline-newsletter-message" class="newsletter-message" data-newsletter-message></div>
   </form>
-
-  <div class="newsletter-success" id="newsletter-success" style="display: none;">
-    <svg xmlns="http://www.w3.org/2000/svg" width="48" height="48" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
-      <path d="M22 11.08V12a10 10 0 1 1-5.93-9.14"></path>
-      <polyline points="22 4 12 14.01 9 11.01"></polyline>
-    </svg>
-    <h4>Thanks for subscribing!</h4>
-    <p>Check your email to confirm your subscription.</p>
-  </div>
 </div>
-
-<script>
-(function() {
-  const form = document.getElementById('newsletter-form');
-  const successMessage = document.getElementById('newsletter-success');
-
-  if (form) {
-    form.addEventListener('submit', function(e) {
-      e.preventDefault();
-
-      const email = document.getElementById('newsletter-email').value;
-
-      // TODO: Replace this with your actual newsletter service endpoint
-      // Examples:
-      // - Mailchimp: Update action attribute with your Mailchimp form URL
-      // - ConvertKit: Use ConvertKit form embed
-      // - Buttondown: Use Buttondown API
-      // - Substack: Redirect to Substack subscription page
-
-      // For now, just show success message
-      console.log('Newsletter subscription for:', email);
-
-      // Hide form and show success message
-      form.style.display = 'none';
-      successMessage.style.display = 'block';
-
-      // Optional: Send to your backend or newsletter service via fetch
-      /*
-      fetch('/api/newsletter/subscribe', {
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json',
-        },
-        body: JSON.stringify({ email: email })
-      })
-      .then(response => response.json())
-      .then(data => {
-        if (data.success) {
-          form.style.display = 'none';
-          successMessage.style.display = 'block';
-        }
-      })
-      .catch(error => {
-        console.error('Error:', error);
-        alert('Something went wrong. Please try again.');
-      });
-      */
-    });
-  }
-})();
-</script>

@@ -1,4 +1,4 @@
-/* Code Editor Pro - Intentional workspace edition */
+/* Code Workspace */
 
 let editor = null;
 let currentFileIndex = 0;
@@ -10,6 +10,17 @@ let markdownLibraryPromise = null;
 let isHydratingModel = false;
 let startupNotice = null;
 let currentTheme = 'sublime-warm';
+let layoutState = null;
+
+const DEFAULT_LAYOUT_STATE = {
+    sidebarCollapsed: false,
+    panelVisible: true,
+    panelPosition: 'bottom',
+    panelMaximized: false,
+    sidebarWidth: 220,
+    panelBottomSize: 220,
+    panelRightSize: 360
+};
 
 const STORAGE_KEYS = {
     projects: 'codeEditorProProjectsV2',
@@ -102,7 +113,7 @@ console.log("First entry:", entries[0]);`,
 };
 
 const keynote: Event = {
-  title: "Designing with restraint",
+  title: "Planning a community workshop",
   year: 2026
 };
 
@@ -126,9 +137,9 @@ cities.each { |city| puts "- #{city}" }`,
 </head>
 <body>
   <main class="card">
-    <p class="eyebrow">Field Notes</p>
-    <h1>Stories worth preserving.</h1>
-    <p>This preview uses the current HTML file plus any open CSS files.</p>
+    <p class="eyebrow">Field notes</p>
+    <h1>Workshop notes</h1>
+    <p>This preview uses the active HTML file plus any open CSS files.</p>
   </main>
 </body>
 </html>`,
@@ -138,30 +149,30 @@ cities.each { |city| puts "- #{city}" }`,
   min-height: 100vh;
   display: grid;
   place-items: center;
-  background: linear-gradient(180deg, #f6efe7 0%, #f1e7dc 100%);
-  color: #241d18;
+  background: #f6f7f9;
+  color: #20242a;
   font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
 .card {
   width: min(520px, calc(100vw - 48px));
-  padding: 3rem;
-  border-radius: 28px;
-  background: rgba(255, 252, 248, 0.88);
-  border: 1px solid rgba(43, 31, 22, 0.12);
-  box-shadow: 0 24px 60px rgba(40, 28, 18, 0.12);
+  padding: 2.5rem;
+  border-radius: 12px;
+  background: #ffffff;
+  border: 1px solid rgba(32, 36, 42, 0.12);
+  box-shadow: 0 16px 42px rgba(32, 36, 42, 0.12);
 }
 
 .eyebrow {
   text-transform: uppercase;
   letter-spacing: 0.18em;
   font-size: 0.75rem;
-  color: #9f6439;
+  color: #52616f;
 }
 
 h1 {
   margin: 0.6rem 0 1rem;
-  font: 600 3rem/0.95 Georgia, serif;
+  font: 600 2.5rem/1 Georgia, serif;
 }`,
 
     json: `{
@@ -177,9 +188,9 @@ This workspace supports:
 
 - JavaScript in the browser
 - Python with Pyodide
-- Cloud execution for Ruby, Go, Rust, Java, C#, PHP, Shell, and more
+- Remote execution for Ruby, Go, Rust, Java, C#, PHP, Shell, and more
 
-> Keep the interface quiet so the work can be loud.`,
+> Use Console for execution output and Preview for rendered files.`,
 
     yaml: `site:
   name: Bakari Mustafa
@@ -251,22 +262,22 @@ const runtimeProfiles = {
     javascript: {
         label: 'Browser runtime',
         description: 'JavaScript executes directly in the page and captures console output.',
-        short: 'In-browser console'
+        short: 'Browser console'
     },
     typescript: {
-        label: 'Cloud runtime',
-        description: 'TypeScript is sent to the Piston API for remote execution.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'TypeScript runs through a remote execution service.',
+        short: 'Remote execution'
     },
     python: {
         label: 'Pyodide runtime',
         description: 'Python runs in-browser through Pyodide, with no backend required.',
-        short: 'Pyodide execution'
+        short: 'Local Python'
     },
     ruby: {
-        label: 'Cloud runtime',
-        description: 'Ruby is executed via the Piston API and streamed back into the console.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'Ruby runs through a remote execution service.',
+        short: 'Remote execution'
     },
     html: {
         label: 'Live preview',
@@ -299,39 +310,39 @@ const runtimeProfiles = {
         short: 'Inspection'
     },
     shell: {
-        label: 'Cloud runtime',
-        description: 'Shell scripts run remotely through the Piston API.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'Shell scripts run through a remote execution service.',
+        short: 'Remote execution'
     },
     php: {
-        label: 'Cloud runtime',
-        description: 'PHP runs through the Piston API.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'PHP runs through a remote execution service.',
+        short: 'Remote execution'
     },
     go: {
-        label: 'Cloud runtime',
-        description: 'Go runs through the Piston API.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'Go runs through a remote execution service.',
+        short: 'Remote execution'
     },
     rust: {
-        label: 'Cloud runtime',
-        description: 'Rust runs through the Piston API.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'Rust runs through a remote execution service.',
+        short: 'Remote execution'
     },
     java: {
-        label: 'Cloud runtime',
-        description: 'Java runs through the Piston API.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'Java runs through a remote execution service.',
+        short: 'Remote execution'
     },
     csharp: {
-        label: 'Cloud runtime',
-        description: 'C# runs through the Piston API.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'C# runs through a remote execution service.',
+        short: 'Remote execution'
     },
     cpp: {
-        label: 'Cloud runtime',
-        description: 'C++ runs through the Piston API.',
-        short: 'Piston execution'
+        label: 'Remote runtime',
+        description: 'C++ runs through a remote execution service.',
+        short: 'Remote execution'
     }
 };
 
@@ -346,6 +357,7 @@ function initializeEditor() {
     files = initialState.files;
     currentFileIndex = initialState.currentFileIndex;
     currentTheme = initialState.theme || currentTheme;
+    layoutState = normalizeLayoutState(initialState.layout);
     document.getElementById('theme-select').value = currentTheme;
 
     editor = monaco.editor.create(document.getElementById('editor'), {
@@ -387,7 +399,9 @@ function initializeEditor() {
     });
 
     setupEventListeners();
+    applyLayoutState();
     hydrateCurrentFile();
+    initSplitters();
 
     document.getElementById('loading').style.display = 'none';
     document.getElementById('main-container').style.display = 'block';
@@ -468,7 +482,8 @@ function getInitialState() {
     return {
         files: [createFile('main.js', 'javascript', codeTemplates.javascript)],
         currentFileIndex: 0,
-        theme: currentTheme
+        theme: currentTheme,
+        layout: DEFAULT_LAYOUT_STATE
     };
 }
 
@@ -516,7 +531,8 @@ function parseSharedState() {
         return {
             files: normalizedFiles,
             currentFileIndex: nextIndex,
-            theme: typeof decoded.theme === 'string' ? decoded.theme : currentTheme
+            theme: typeof decoded.theme === 'string' ? decoded.theme : currentTheme,
+            layout: decoded.layout
         };
     } catch (error) {
         showNotification('Invalid share link. Starting with a clean workspace.', 'warn');
@@ -538,7 +554,8 @@ function parseAutoSavedState() {
         return {
             files: normalizedFiles,
             currentFileIndex: nextIndex,
-            theme: typeof parsed.theme === 'string' ? parsed.theme : currentTheme
+            theme: typeof parsed.theme === 'string' ? parsed.theme : currentTheme,
+            layout: parsed.layout
         };
     } catch (error) {
         return null;
@@ -550,6 +567,43 @@ function clampIndex(value, length) {
     if (index < 0) return 0;
     if (index >= length) return length - 1;
     return index;
+}
+
+function clampNumber(value, min, max, fallback) {
+    const numericValue = Number(value);
+    if (!Number.isFinite(numericValue)) {
+        return fallback;
+    }
+
+    return Math.min(max, Math.max(min, numericValue));
+}
+
+function normalizeLayoutState(candidate = {}) {
+    const nextState = {
+        sidebarCollapsed: Boolean(candidate?.sidebarCollapsed),
+        panelVisible: candidate?.panelVisible !== false,
+        panelPosition: candidate?.panelPosition === 'right' ? 'right' : 'bottom',
+        panelMaximized: Boolean(candidate?.panelMaximized),
+        sidebarWidth: clampNumber(candidate?.sidebarWidth, 180, 420, DEFAULT_LAYOUT_STATE.sidebarWidth),
+        panelBottomSize: clampNumber(
+            candidate?.panelBottomSize ?? candidate?.panelSize,
+            160,
+            520,
+            DEFAULT_LAYOUT_STATE.panelBottomSize
+        ),
+        panelRightSize: clampNumber(
+            candidate?.panelRightSize ?? candidate?.panelSize,
+            260,
+            760,
+            DEFAULT_LAYOUT_STATE.panelRightSize
+        )
+    };
+
+    if (!nextState.panelVisible) {
+        nextState.panelMaximized = false;
+    }
+
+    return nextState;
 }
 
 function setupEventListeners() {
@@ -574,6 +628,7 @@ function setupEventListeners() {
     document.getElementById('theme-select').addEventListener('change', event => {
         currentTheme = event.target.value;
         monaco.editor.setTheme(currentTheme);
+        updateSidebarInfo();
         autoSave();
     });
 
@@ -588,6 +643,10 @@ function setupEventListeners() {
     document.getElementById('sidebar-duplicate-file').addEventListener('click', duplicateCurrentFile);
     document.getElementById('sidebar-import-file').addEventListener('click', triggerImportFile);
     document.getElementById('sidebar-download-file').addEventListener('click', downloadCurrentFile);
+    document.getElementById('sidebar-toggle').addEventListener('click', toggleSidebar);
+    document.getElementById('panel-toggle').addEventListener('click', togglePanelVisibility);
+    document.getElementById('panel-position-toggle').addEventListener('click', togglePanelPosition);
+    document.getElementById('panel-maximize-toggle').addEventListener('click', togglePanelMaximize);
     document.getElementById('import-file-input').addEventListener('change', importFilesFromInput);
     document.getElementById('sidebar-file-filter').addEventListener('input', renderSidebarFiles);
 
@@ -611,6 +670,10 @@ function setupEventListeners() {
                 modal.setAttribute('aria-hidden', 'true');
             });
         }
+    });
+
+    window.addEventListener('resize', () => {
+        applyLayoutState();
     });
 }
 
@@ -758,6 +821,231 @@ function updateSidebarInfo() {
     document.getElementById('sidebar-theme-name').textContent = getThemeLabel(currentTheme);
 }
 
+function isCompactLayout() {
+    return window.matchMedia('(max-width: 900px)').matches;
+}
+
+function getPanelSizeForCurrentLayout() {
+    if (layoutState.panelPosition === 'right' && !isCompactLayout()) {
+        return layoutState.panelRightSize;
+    }
+
+    return layoutState.panelBottomSize;
+}
+
+function updateLayoutControls() {
+    const sidebarToggle = document.getElementById('sidebar-toggle');
+    const panelToggle = document.getElementById('panel-toggle');
+    const panelPositionToggle = document.getElementById('panel-position-toggle');
+    const panelMaximizeToggle = document.getElementById('panel-maximize-toggle');
+    const panelLocationLabel = document.getElementById('panel-location-label');
+
+    if (!sidebarToggle || !panelToggle || !panelPositionToggle || !panelMaximizeToggle || !panelLocationLabel) {
+        return;
+    }
+
+    const compact = isCompactLayout();
+
+    sidebarToggle.textContent = compact
+        ? 'Files hidden'
+        : layoutState.sidebarCollapsed ? 'Show files' : 'Hide files';
+    sidebarToggle.disabled = compact;
+
+    panelToggle.textContent = layoutState.panelVisible ? 'Hide output' : 'Show output';
+
+    panelPositionToggle.textContent = compact
+        ? 'Docked bottom'
+        : layoutState.panelPosition === 'right' ? 'Dock bottom' : 'Dock right';
+    panelPositionToggle.disabled = compact;
+
+    panelMaximizeToggle.textContent = layoutState.panelMaximized ? 'Restore editor' : 'Maximize output';
+    panelMaximizeToggle.disabled = !layoutState.panelVisible;
+
+    let label = layoutState.panelPosition === 'right' && !compact ? 'Docked right' : 'Docked bottom';
+    if (!layoutState.panelVisible) {
+        label = 'Output hidden';
+    } else if (layoutState.panelMaximized) {
+        label = 'Output maximized';
+    }
+
+    panelLocationLabel.textContent = label;
+}
+
+function applyLayoutState() {
+    const workspace = document.getElementById('workspace');
+    const workspaceMain = document.getElementById('workspace-main');
+
+    if (!workspace || !workspaceMain || !layoutState) {
+        return;
+    }
+
+    workspace.classList.toggle('sidebar-collapsed', layoutState.sidebarCollapsed);
+    workspace.style.setProperty('--sidebar-width', `${layoutState.sidebarWidth}px`);
+
+    workspaceMain.classList.remove('panel-bottom', 'panel-right', 'panel-hidden', 'panel-maximized');
+    workspaceMain.classList.add(layoutState.panelPosition === 'right' ? 'panel-right' : 'panel-bottom');
+
+    if (!layoutState.panelVisible) {
+        workspaceMain.classList.add('panel-hidden');
+    } else if (layoutState.panelMaximized) {
+        workspaceMain.classList.add('panel-maximized');
+    }
+
+    workspaceMain.style.setProperty('--panel-size', `${getPanelSizeForCurrentLayout()}px`);
+    updateLayoutControls();
+
+    if (editor) {
+        window.requestAnimationFrame(() => {
+            editor.layout();
+        });
+    }
+}
+
+function toggleSidebar() {
+    if (isCompactLayout()) {
+        return;
+    }
+
+    layoutState.sidebarCollapsed = !layoutState.sidebarCollapsed;
+    applyLayoutState();
+    autoSave();
+}
+
+function togglePanelVisibility() {
+    layoutState.panelVisible = !layoutState.panelVisible;
+
+    if (!layoutState.panelVisible) {
+        layoutState.panelMaximized = false;
+    }
+
+    applyLayoutState();
+    autoSave();
+}
+
+function togglePanelPosition() {
+    if (isCompactLayout()) {
+        return;
+    }
+
+    layoutState.panelPosition = layoutState.panelPosition === 'right' ? 'bottom' : 'right';
+    applyLayoutState();
+    autoSave();
+}
+
+function togglePanelMaximize() {
+    if (!layoutState.panelVisible) {
+        layoutState.panelVisible = true;
+    }
+
+    layoutState.panelMaximized = !layoutState.panelMaximized;
+    applyLayoutState();
+    autoSave();
+}
+
+function initSplitters() {
+    const sidebarSplitter = document.getElementById('sidebar-splitter');
+    const panelSplitter = document.getElementById('panel-splitter');
+
+    if (sidebarSplitter && !sidebarSplitter.dataset.bound) {
+        sidebarSplitter.dataset.bound = 'true';
+        sidebarSplitter.addEventListener('pointerdown', event => {
+            startResize(event, 'sidebar');
+        });
+    }
+
+    if (panelSplitter && !panelSplitter.dataset.bound) {
+        panelSplitter.dataset.bound = 'true';
+        panelSplitter.addEventListener('pointerdown', event => {
+            startResize(event, 'panel');
+        });
+    }
+}
+
+function startResize(event, kind) {
+    if (!layoutState || (event.button !== undefined && event.button !== 0)) {
+        return;
+    }
+
+    if (kind === 'sidebar' && (layoutState.sidebarCollapsed || isCompactLayout())) {
+        return;
+    }
+
+    if (kind === 'panel' && (!layoutState.panelVisible || layoutState.panelMaximized)) {
+        return;
+    }
+
+    event.preventDefault();
+
+    const splitter = event.currentTarget;
+    const workspace = document.getElementById('workspace');
+    const workspaceMain = document.getElementById('workspace-main');
+
+    if (!workspace || !workspaceMain) {
+        return;
+    }
+
+    const workspaceRect = workspace.getBoundingClientRect();
+    const workspaceMainRect = workspaceMain.getBoundingClientRect();
+    const panelUsesRightDock = layoutState.panelPosition === 'right' && !isCompactLayout();
+    const dragCursor = kind === 'sidebar' || panelUsesRightDock ? 'col-resize' : 'row-resize';
+
+    splitter.classList.add('dragging');
+    document.body.style.userSelect = 'none';
+    document.body.style.cursor = dragCursor;
+
+    const onPointerMove = moveEvent => {
+        if (kind === 'sidebar') {
+            const maxSidebarWidth = Math.max(240, Math.min(460, workspaceRect.width - 360));
+            layoutState.sidebarWidth = clampNumber(
+                moveEvent.clientX - workspaceRect.left,
+                180,
+                maxSidebarWidth,
+                layoutState.sidebarWidth
+            );
+            workspace.style.setProperty('--sidebar-width', `${layoutState.sidebarWidth}px`);
+        } else if (panelUsesRightDock) {
+            const maxRightPanel = Math.max(320, Math.min(760, workspaceMainRect.width - 240));
+            layoutState.panelRightSize = clampNumber(
+                workspaceMainRect.right - moveEvent.clientX,
+                260,
+                maxRightPanel,
+                layoutState.panelRightSize
+            );
+            workspaceMain.style.setProperty('--panel-size', `${layoutState.panelRightSize}px`);
+        } else {
+            const maxBottomPanel = Math.max(220, Math.min(560, workspaceMainRect.height - 180));
+            layoutState.panelBottomSize = clampNumber(
+                workspaceMainRect.bottom - moveEvent.clientY,
+                160,
+                maxBottomPanel,
+                layoutState.panelBottomSize
+            );
+            workspaceMain.style.setProperty('--panel-size', `${layoutState.panelBottomSize}px`);
+        }
+
+        if (editor) {
+            window.requestAnimationFrame(() => {
+                editor.layout();
+            });
+        }
+    };
+
+    const stopResize = () => {
+        splitter.classList.remove('dragging');
+        document.body.style.userSelect = '';
+        document.body.style.cursor = '';
+        window.removeEventListener('pointermove', onPointerMove);
+        window.removeEventListener('pointerup', stopResize);
+        window.removeEventListener('pointercancel', stopResize);
+        applyLayoutState();
+        autoSave();
+    };
+
+    window.addEventListener('pointermove', onPointerMove);
+    window.addEventListener('pointerup', stopResize);
+    window.addEventListener('pointercancel', stopResize);
+}
+
 function renderTabs() {
     const tabsContainer = document.getElementById('tabs');
     tabsContainer.innerHTML = '';
@@ -853,7 +1141,7 @@ function addNewFile(options = {}) {
 
 function closeFile(index) {
     if (files.length === 1) {
-        showNotification('The last file stays open so the workspace never collapses.', 'warn');
+        showNotification('Keep at least one file open.', 'warn');
         return;
     }
 
@@ -1100,7 +1388,7 @@ function updateCursorPosition() {
 
 function clearOutput(resetPreview = false) {
     document.getElementById('output-content').innerHTML =
-        '<div class="output-log info">Console cleared. Run or preview the current file when you are ready.</div>';
+        '<div class="output-log info">Console cleared. Run the active file when you are ready.</div>';
 
     if (resetPreview) {
         resetPreviewPanel();
@@ -1117,6 +1405,12 @@ function addOutput(message, type = 'info') {
 }
 
 function activatePanel(panelId) {
+    if (!layoutState.panelVisible) {
+        layoutState.panelVisible = true;
+        applyLayoutState();
+        autoSave();
+    }
+
     document.querySelectorAll('.panel-tab').forEach(button => {
         button.classList.toggle('active', button.dataset.panelTarget === panelId);
     });
@@ -1151,7 +1445,7 @@ async function runCode() {
     const previewLanguages = new Set(['html', 'css', 'markdown', 'json', 'yaml', 'sql']);
 
     clearOutput(false);
-    addOutput(`Preparing ${file.name}...`, 'info');
+    addOutput(`Running ${file.name}...`, 'info');
 
     if (!previewLanguages.has(language)) {
         resetPreviewPanel();
@@ -1169,15 +1463,15 @@ async function runCode() {
                 break;
             case 'html':
                 renderHtmlPreview(code);
-                addOutput('HTML preview rendered.', 'success');
+                addOutput('HTML preview updated.', 'success');
                 break;
             case 'css':
                 renderCssPreview(code);
-                addOutput('CSS preview rendered.', 'success');
+                addOutput('CSS preview updated.', 'success');
                 break;
             case 'markdown':
                 await renderMarkdownPreview(code);
-                addOutput('Markdown preview rendered.', 'success');
+                addOutput('Markdown preview updated.', 'success');
                 break;
             case 'json':
                 renderJsonPreview(code);
@@ -1189,7 +1483,7 @@ async function runCode() {
                 break;
             case 'sql':
                 renderSqlInspection(code);
-                addOutput('SQL inspected for statement type and referenced tables.', 'success');
+                addOutput('SQL inspection updated.', 'success');
                 break;
             default:
                 activatePanel('console-panel');
@@ -1220,7 +1514,7 @@ async function executeJavaScript(code) {
             addOutput(`Return value: ${formatValue(result)}`, 'success');
         }
 
-        addOutput('Execution finished in the browser.', 'success');
+        addOutput('JavaScript execution finished.', 'success');
     } catch (error) {
         addOutput(error.stack || error.message, 'error');
     }
@@ -1277,7 +1571,7 @@ sys.stderr = io.StringIO()
         addOutput(stderr.trimEnd(), 'error');
     }
 
-    addOutput('Execution finished with Pyodide.', 'success');
+    addOutput('Python execution finished.', 'success');
 }
 
 async function executeWithPiston(code, language) {
@@ -1295,10 +1589,10 @@ async function executeWithPiston(code, language) {
 
     const pistonLanguage = languageMap[language];
     if (!pistonLanguage) {
-        throw new Error(`${language} does not currently have a configured runtime.`);
+        throw new Error(`No runtime is configured for ${language}.`);
     }
 
-    addOutput(`Sending ${language} to the Piston runtime...`, 'info');
+    addOutput(`Running ${language} remotely...`, 'info');
 
     const response = await fetch(`${BACKEND_CONFIG.pistonApi}/execute`, {
         method: 'POST',
@@ -1314,7 +1608,7 @@ async function executeWithPiston(code, language) {
     });
 
     if (!response.ok) {
-        throw new Error(`Piston returned ${response.status}.`);
+        throw new Error(`Remote runtime returned ${response.status}.`);
     }
 
     const result = await response.json();
@@ -1336,7 +1630,7 @@ async function executeWithPiston(code, language) {
         addOutput(run.output.trimEnd(), 'info');
     }
 
-    addOutput('Execution finished with the cloud runtime.', 'success');
+    addOutput('Remote execution finished.', 'success');
 }
 
 function renderHtmlPreview(code) {
@@ -1362,9 +1656,9 @@ function renderCssPreview(code) {
     const htmlFile = files.find(file => file.language === 'html');
     const htmlMarkup = htmlFile ? htmlFile.content : `
 <main class="card">
-  <p class="eyebrow">Style Preview</p>
-  <h1>A quieter interface.</h1>
-  <p>This sample block helps you see spacing, type, links, and button treatments quickly.</p>
+  <p class="eyebrow">Style preview</p>
+  <h1>Sample layout</h1>
+  <p>This block shows spacing, type, links, and button treatments.</p>
   <p><a href="#">A sample link</a></p>
 </main>`;
 
@@ -1462,8 +1756,8 @@ function previewStyles(preformatted = false) {
 body {
     margin: 0;
     padding: 28px;
-    background: linear-gradient(180deg, #f8f3ec 0%, #f1e8de 100%);
-    color: #221d18;
+    background: #f6f7f9;
+    color: #20242a;
     font-family: "Avenir Next", "Segoe UI", sans-serif;
 }
 
@@ -1472,34 +1766,34 @@ pre {
     width: min(760px, 100%);
     margin: 0 auto;
     padding: 28px;
-    border-radius: 24px;
-    background: rgba(255, 252, 248, 0.92);
-    border: 1px solid rgba(41, 31, 22, 0.1);
-    box-shadow: 0 20px 50px rgba(41, 31, 22, 0.1);
+    border-radius: 12px;
+    background: #ffffff;
+    border: 1px solid rgba(32, 36, 42, 0.1);
+    box-shadow: 0 14px 36px rgba(32, 36, 42, 0.1);
 }
 
 .prose h1,
 .prose h2,
 .prose h3 {
     font-family: "Iowan Old Style", Georgia, serif;
-    letter-spacing: -0.04em;
+    letter-spacing: 0;
 }
 
 .prose p,
 .prose li,
 .prose blockquote {
     line-height: 1.75;
-    color: #554c43;
+    color: #4f5863;
 }
 
 .prose a {
-    color: #9f6439;
+    color: #355c8a;
 }
 
 .prose blockquote {
     margin: 1.2rem 0;
     padding-left: 1rem;
-    border-left: 3px solid rgba(159, 100, 57, 0.3);
+    border-left: 3px solid rgba(53, 92, 138, 0.3);
 }
 
 pre {
@@ -1577,6 +1871,7 @@ function saveProject() {
         files,
         currentFileIndex,
         theme: currentTheme,
+        layout: layoutState,
         timestamp: new Date().toISOString()
     };
 
@@ -1596,7 +1891,7 @@ function openLoadModal() {
     });
 
     if (!names.length) {
-        projectsList.innerHTML = '<div class="empty-state">No saved projects yet. Save a workspace and it will show up here.</div>';
+        projectsList.innerHTML = '<div class="empty-state">No saved projects yet.</div>';
     } else {
         names.forEach(name => {
             const project = projects[name];
@@ -1654,8 +1949,10 @@ function loadProject(name) {
     files = normalizeFiles(project.files);
     currentFileIndex = clampIndex(project.currentFileIndex, files.length);
     currentTheme = typeof project.theme === 'string' ? project.theme : currentTheme;
+    layoutState = normalizeLayoutState(project.layout);
     document.getElementById('theme-select').value = currentTheme;
     monaco.editor.setTheme(currentTheme);
+    applyLayoutState();
     hydrateCurrentFile();
     autoSave();
     closeModal('load-modal');
@@ -1679,7 +1976,8 @@ function autoSave() {
     localStorage.setItem(STORAGE_KEYS.autoSave, JSON.stringify({
         files,
         currentFileIndex,
-        theme: currentTheme
+        theme: currentTheme,
+        layout: layoutState
     }));
 }
 
@@ -1689,7 +1987,8 @@ function generateShareURL() {
     const encoded = btoa(encodeURIComponent(JSON.stringify({
         files,
         currentFileIndex,
-        theme: currentTheme
+        theme: currentTheme,
+        layout: layoutState
     })));
 
     const url = `${window.location.origin}${window.location.pathname}?share=${encoded}`;
