@@ -279,3 +279,148 @@
     }
   }
 }
+
+// Writing archive (/posts/)
+
+.archive-header {
+  margin-bottom: 32px;
+
+  .archive-title {
+    font-family: $heading-family;
+    font-size: 2.25rem;
+    font-weight: $semibold-weight;
+    line-height: 1.15;
+    margin: 0 0 12px;
+    color: var(--text-primary);
+
+    @include media-query($on-mobile) {
+      font-size: 1.85rem;
+    }
+  }
+
+  .archive-lede {
+    margin: 0;
+    color: var(--text-secondary);
+    max-width: 36em;
+  }
+}
+
+.archive-search {
+  margin-bottom: 40px;
+
+  input[type="search"] {
+    width: 100%;
+    padding: 10px 14px;
+    font-size: $small-font-size;
+    font-family: $sans-family;
+    color: var(--text-primary);
+    background: var(--bg-primary);
+    border: 1px solid var(--border-default);
+    border-radius: 6px;
+
+    &:focus {
+      outline: none;
+      border-color: var(--accent-primary);
+    }
+
+    &::placeholder {
+      color: var(--text-secondary);
+    }
+  }
+}
+
+.archive-results-head {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 16px;
+  margin-bottom: 16px;
+}
+
+.archive-results-title {
+  margin: 0;
+  color: var(--text-secondary);
+  font-size: $small-font-size;
+}
+
+.archive-results-clear {
+  background: none;
+  border: none;
+  padding: 0;
+  font-family: $sans-family;
+  font-size: $small-font-size;
+  color: var(--accent-primary);
+  cursor: pointer;
+
+  &:hover {
+    text-decoration: underline;
+  }
+}
+
+.archive-no-results {
+  color: var(--text-secondary);
+}
+
+.archive-year {
+  padding: 32px 0 8px;
+  border-top: 1px solid var(--border-subtle);
+
+  h2 {
+    font-family: $heading-family;
+    font-size: 1.3rem;
+    font-weight: $semibold-weight;
+    margin: 0 0 16px;
+    color: var(--text-primary);
+  }
+}
+
+.archive-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li::before {
+    content: none;
+  }
+}
+
+.archive-item {
+  display: flex;
+  align-items: baseline;
+  justify-content: space-between;
+  gap: 24px;
+  padding: 8px 0;
+
+  @include media-query($on-mobile) {
+    flex-direction: column;
+    gap: 2px;
+  }
+}
+
+.archive-item-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  line-height: 1.5;
+
+  &:hover {
+    color: var(--accent-primary);
+  }
+}
+
+.archive-item-date {
+  flex-shrink: 0;
+  font-size: $small-font-size;
+  color: var(--text-secondary);
+  font-variant-numeric: tabular-nums;
+}
+
+// Archive links sit inside .page-content; out-rank its article link styles
+.page-content .archive-list .archive-item-link {
+  color: var(--text-primary);
+  text-decoration: none;
+
+  &:hover,
+  &:focus {
+    color: var(--accent-primary);
+  }
+}

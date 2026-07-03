@@ -39,15 +39,6 @@
 
 {%- if page.url == '/posts/' -%}
   <script src="/assets/js/search.min.js" defer="defer"></script>
-  <script>
-    window.addEventListener('DOMContentLoaded', function() {
-      var sjs = SimpleJekyllSearch({
-        searchInput: document.getElementById('search-input'),
-        resultsContainer: document.getElementById('search-results'),
-        json: '/assets/search.json',
-      });
-    });
-  </script>
   <script src="/assets/js/posts-enhanced.js" defer="defer"></script>
 {%- endif -%}
 {%- if page.url == '/search/' -%}

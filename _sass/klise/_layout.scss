@@ -13,6 +13,12 @@
   @include media-query($on-mobile) {
     backdrop-filter: none;
     background-color: var(--bg-primary);
+    // The inner .menu becomes a fixed 50px bar on mobile; reserve its height
+    // in the document flow so page content starts below it.
+    box-sizing: border-box;
+    height: 50px;
+    padding: 0;
+    border-bottom: none;
   }
 
   @media (min-width: 769px) {
@@ -160,10 +166,6 @@
     bottom: -3px;
     outline: none;
     padding: 0.5rem;
-  }
-
-  @include media-query($on-mobile) {
-    opacity: 0.8;
   }
 
 .menu-link.active {
