@@ -461,71 +461,120 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   grid-column: 1 / -1;
 }
 
-/* On-Site Sermon Reader Modal */
-.msg-reader-backdrop {
-  position: fixed;
-  top: 0;
-  left: 0;
-  width: 100vw;
-  height: 100vh;
-  background-color: rgba(0, 0, 0, 0.7);
-  backdrop-filter: blur(6px);
-  z-index: 2000;
-  display: flex;
-  align-items: center;
-  justify-content: center;
-  padding: 1rem;
-  box-sizing: border-box;
-}
-
-.msg-reader-dialog {
+/* Full Immersion Sermon Reader View */
+.msg-full-reader {
   background-color: var(--bg-primary, #ffffff);
-  border: 1px solid var(--border-default, #334155);
-  border-radius: 14px;
-  width: 100%;
-  max-width: 900px;
-  height: 90vh;
-  display: flex;
-  flex-direction: column;
-  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  border-radius: 16px;
+  border: 1px solid var(--border-default, #e2e8f0);
+  margin-top: 1rem;
+  margin-bottom: 3rem;
+  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
   overflow: hidden;
 }
 
-.msg-reader-header {
-  padding: 1rem 1.25rem;
+.msg-reader-toolbar {
+  padding: 1rem 1.5rem;
+  background-color: var(--bg-secondary, #f8fafc);
   border-bottom: 1px solid var(--border-default, #e2e8f0);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
-  background-color: var(--bg-secondary, #f8fafc);
+  flex-wrap: wrap;
+  position: sticky;
+  top: 0;
+  z-index: 100;
 }
 
-.msg-reader-title {
-  font-size: 1.15rem;
+.msg-reader-back-btn {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.4rem;
+  padding: 0.5rem 1rem;
+  font-size: 0.875rem;
   font-weight: 700;
+  border-radius: 8px;
+  background-color: var(--bg-primary, #ffffff);
+  border: 1px solid var(--border-default, #cbd5e1);
+  color: var(--text-primary);
+  cursor: pointer;
+  transition: all 0.15s ease;
+  text-decoration: none !important;
+}
+
+.msg-reader-back-btn:hover {
+  border-color: var(--accent-primary, #2563eb);
+  color: var(--accent-primary, #2563eb);
+}
+
+.msg-reader-meta-title {
+  font-size: 1.25rem;
+  font-weight: 800;
   color: var(--text-primary);
   margin: 0;
 }
 
-.msg-reader-sub {
-  font-size: 0.8rem;
+.msg-reader-meta-sub {
+  font-size: 0.85rem;
   color: var(--text-secondary);
+  margin-top: 0.2rem;
 }
 
-.msg-reader-tools {
+.msg-reader-controls-right {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.6rem;
+  flex-wrap: wrap;
 }
 
-.msg-reader-body {
-  flex: 1;
-  overflow-y: auto;
-  padding: 1.5rem;
-  font-size: 1.05rem;
-  line-height: 1.75;
+.msg-font-btn {
+  padding: 0.35rem 0.65rem;
+  font-size: 0.85rem;
+  font-weight: 700;
+  border: 1px solid var(--border-default, #cbd5e1);
+  background-color: var(--bg-primary, #ffffff);
   color: var(--text-primary);
+  border-radius: 6px;
+  cursor: pointer;
+}
+
+.msg-reader-main-content {
+  max-width: 840px;
+  margin: 0 auto;
+  padding: 2.5rem 1.5rem 4rem;
+  font-size: 1.125rem;
+  line-height: 1.85;
+  color: var(--text-primary);
+  font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+}
+
+.msg-paragraph-item {
+  margin-bottom: 1.5rem;
+  display: flex;
+  gap: 1rem;
+  padding: 0.5rem 0.75rem;
+  border-radius: 8px;
+  transition: background-color 0.15s ease;
+}
+
+.msg-paragraph-item:hover {
+  background-color: var(--bg-secondary, rgba(0, 0, 0, 0.03));
+}
+
+.msg-para-num {
+  font-family: monospace;
+  font-size: 0.85rem;
+  font-weight: 700;
+  color: var(--accent-primary, #2563eb);
+  background-color: var(--bg-secondary, rgba(0, 0, 0, 0.05));
+  padding: 0.2rem 0.5rem;
+  border-radius: 6px;
+  height: fit-content;
+  user-select: none;
+}
+
+.msg-para-text {
+  flex: 1;
 }
 
 .msg-reader-tabs {
@@ -554,20 +603,6 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   color: var(--accent-primary, #2563eb);
   box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
-
-.msg-paragraph-item {
-  margin-bottom: 1.25rem;
-  display: flex;
-  gap: 0.75rem;
-}
-
-.msg-para-num {
-  font-family: monospace;
-  font-size: 0.825rem;
-  font-weight: 700;
-  color: var(--accent-primary, #2563eb);
-  background-color: var(--bg-secondary, rgba(0,0,0,0.04));
-  padding: 0.15rem 0.4rem;
   border-radius: 4px;
   height: fit-content;
   user-select: none;
@@ -695,150 +730,182 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
 <div class="msg-library-wrapper">
 
-  <!-- Site Layout Page Header -->
-  <div class="page-header msg-header">
-    <p class="page-kicker">Digital Library & Archives</p>
-    <h1>The Message</h1>
-    <p class="page-subtitle">Audio recordings, PDF transcripts, and multi-lingual catalogues of William Marrion Branham's sermons across 72+ global languages.</p>
+  <!-- Full Immersion Sermon Reader View (Hidden by default) -->
+  <div id="full-reader-section" class="msg-full-reader" style="display: none;">
+    <div class="msg-reader-toolbar">
+      <button class="msg-reader-back-btn" onclick="closeFullReader()">← Back to Library Catalogue</button>
 
-    <div class="msg-stats-bar">
-      <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">1,200+</strong></span>
-      <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">72</strong></span>
-      <span class="msg-stat-chip">🌐 Global Multi-Lingual Archive</span>
-      <span class="msg-stat-chip">⚡ Public REST API</span>
-    </div>  <!-- Filters & Controls (Primary Top Section) -->
-  <section class="msg-controls-panel">
-    <div class="msg-search-group">
-      <input type="text" id="msg-search" class="msg-input-box" placeholder="Search title, date, or ID (e.g. 65-0718M)..." oninput="applyFilters()">
-
-      <select id="msg-lang-select" class="msg-select-box" onchange="applyFilters()">
-        <option value="">All Languages (72)</option>
-        <option value="en" selected>English</option>
-        <option value="fr">Français</option>
-        <option value="es">Español</option>
-        <option value="ny">Chichewa (Nyanja)</option>
-        <option value="sw">Kiswahili</option>
-        <option value="pt">Português</option>
-        <option value="de">Deutsch</option>
-        <option value="ru">Русский</option>
-      </select>
-
-      <select id="msg-year-select" class="msg-select-box" onchange="applyFilters()">
-        <option value="">All Years</option>
-        <option value="1965">1965</option>
-        <option value="1964">1964</option>
-        <option value="1963">1963</option>
-      </select>
-    </div>
-
-    <div class="msg-quick-tags">
-      <span class="msg-tag-label">Quick Filters:</span>
-      <button class="msg-filter-tag active" onclick="setQuickLang('')">All Languages</button>
-      <button class="msg-filter-tag" onclick="setQuickLang('en')">🇬🇧 English</button>
-      <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965 Sermons</button>
-      <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963 Seven Seals</button>
-    </div>
-
-    <div class="msg-view-mode-bar">
-      <div class="msg-view-toggle">
-        <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">🎴 Cards Grid</button>
-        <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">📋 Archival Table</button>
+      <div>
+        <h2 class="msg-reader-meta-title" id="reader-sermon-title">Sermon Title</h2>
+        <div class="msg-reader-meta-sub" id="reader-sermon-sub">ID • Date • Language</div>
       </div>
-      <div id="results-count-text" class="msg-results-count">Showing 0 sermons</div>
+
+      <div class="msg-reader-controls-right">
+        <div class="msg-reader-tabs">
+          <button id="tab-btn-text" class="msg-tab-btn active" onclick="switchReaderTab('text')">📖 HTML Text</button>
+          <button id="tab-btn-pdf" class="msg-tab-btn" onclick="switchReaderTab('pdf')">📄 PDF Book View</button>
+        </div>
+        <button class="msg-font-btn" onclick="adjustFontSize(-1)" title="Smaller font">A-</button>
+        <button class="msg-font-btn" onclick="adjustFontSize(1)" title="Larger font">A+</button>
+        <a id="reader-download-btn" href="#" target="_blank" class="msg-btn msg-btn-pdf" style="padding: 0.35rem 0.75rem;">⬇ PDF</a>
+      </div>
     </div>
-  </section>
 
-  <!-- Sermons Grid / Table Area -->
-  <main class="msg-grid" id="sermons-container">
-    <!-- Loaded dynamically -->
-  </main>
-
-  <!-- Pagination Controls -->
-  <div id="pagination-controls" class="msg-pagination-bar" style="display: none;">
-    <button id="btn-prev-page" class="msg-btn" onclick="changePage(-1)">← Previous</button>
-    <span id="page-info-text" class="msg-page-info">Page 1 of 1</span>
-    <button id="btn-next-page" class="msg-btn" onclick="changePage(1)">Next →</button>
+    <main class="msg-reader-main-content" id="reader-content-area">
+      <!-- Full paragraph transcript / embedded document view -->
+    </main>
   </div>
 
-  <!-- Bottom Analytics & Region Map Section -->
-  <div class="msg-stats-dashboard" style="margin-top: 3rem;">
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-sermons">577</div>
-      <div class="msg-stat-lbl">Indexed Sermons</div>
+  <!-- Library Catalogue Section -->
+  <div id="catalogue-section">
+    <!-- Site Layout Page Header -->
+    <div class="page-header msg-header">
+      <p class="page-kicker">Digital Library & Archives</p>
+      <h1>The Message</h1>
+      <p class="page-subtitle">Audio recordings, PDF transcripts, and multi-lingual catalogues of William Marrion Branham's sermons across 72+ global languages.</p>
+
+      <div class="msg-stats-bar">
+        <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">1,200+</strong></span>
+        <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">72</strong></span>
+        <span class="msg-stat-chip">🌐 Global Multi-Lingual Archive</span>
+        <span class="msg-stat-chip">⚡ Public REST API</span>
+      </div>
     </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-audio">577</div>
-      <div class="msg-stat-lbl">Audio Streams</div>
+
+    <!-- Filters & Controls (Primary Top Section) -->
+    <section class="msg-controls-panel">
+      <div class="msg-search-group">
+        <input type="text" id="msg-search" class="msg-input-box" placeholder="Search title, date, or ID (e.g. 65-0718M)..." oninput="applyFilters()">
+
+        <select id="msg-lang-select" class="msg-select-box" onchange="applyFilters()">
+          <option value="">All Languages (72)</option>
+          <option value="en" selected>English</option>
+          <option value="fr">Français</option>
+          <option value="es">Español</option>
+          <option value="ny">Chichewa (Nyanja)</option>
+          <option value="sw">Kiswahili</option>
+          <option value="pt">Português</option>
+          <option value="de">Deutsch</option>
+          <option value="ru">Русский</option>
+        </select>
+
+        <select id="msg-year-select" class="msg-select-box" onchange="applyFilters()">
+          <option value="">All Years</option>
+          <option value="1965">1965</option>
+          <option value="1964">1964</option>
+          <option value="1963">1963</option>
+        </select>
+      </div>
+
+      <div class="msg-quick-tags">
+        <span class="msg-tag-label">Quick Filters:</span>
+        <button class="msg-filter-tag active" onclick="setQuickLang('')">All Languages</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('en')">🇬🇧 English</button>
+        <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965 Sermons</button>
+        <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963 Seven Seals</button>
+      </div>
+
+      <div class="msg-view-mode-bar">
+        <div class="msg-view-toggle">
+          <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">🎴 Cards Grid</button>
+          <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">📋 Archival Table</button>
+        </div>
+        <div id="results-count-text" class="msg-results-count">Showing 0 sermons</div>
+      </div>
+    </section>
+
+    <!-- Sermons Grid / Table Area -->
+    <main class="msg-grid" id="sermons-container">
+      <!-- Loaded dynamically -->
+    </main>
+
+    <!-- Pagination Controls -->
+    <div id="pagination-controls" class="msg-pagination-bar" style="display: none;">
+      <button id="btn-prev-page" class="msg-btn" onclick="changePage(-1)">← Previous</button>
+      <span id="page-info-text" class="msg-page-info">Page 1 of 1</span>
+      <button id="btn-next-page" class="msg-btn" onclick="changePage(1)">Next →</button>
     </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-pdf">577</div>
-      <div class="msg-stat-lbl">PDF Transcripts</div>
+
+    <!-- Bottom Analytics & Region Map Section -->
+    <div class="msg-stats-dashboard" style="margin-top: 3rem;">
+      <div class="msg-stat-card">
+        <div class="msg-stat-val" id="stat-exact-sermons">577</div>
+        <div class="msg-stat-lbl">Indexed Sermons</div>
+      </div>
+      <div class="msg-stat-card">
+        <div class="msg-stat-val" id="stat-exact-audio">577</div>
+        <div class="msg-stat-lbl">Audio Streams</div>
+      </div>
+      <div class="msg-stat-card">
+        <div class="msg-stat-val" id="stat-exact-pdf">577</div>
+        <div class="msg-stat-lbl">PDF Transcripts</div>
+      </div>
+      <div class="msg-stat-card">
+        <div class="msg-stat-val" id="stat-exact-text">577</div>
+        <div class="msg-stat-lbl">Full Text Records</div>
+      </div>
+      <div class="msg-stat-card">
+        <div class="msg-stat-val" id="stat-exact-langs">72</div>
+        <div class="msg-stat-lbl">Global Languages</div>
+      </div>
     </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-text">577</div>
-      <div class="msg-stat-lbl">Full Text Records</div>
-    </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-langs">72</div>
-      <div class="msg-stat-lbl">Global Languages</div>
-    </div>
+
+    <!-- Interactive Global Translation Region Map -->
+    <section class="msg-map-section">
+      <div class="msg-map-title">
+        <span>🌍 Global Translation Coverage Map</span>
+      </div>
+      <div class="msg-map-sub">Select a region below to filter translations across 72 global languages:</div>
+
+      <div class="msg-region-grid">
+        <div class="msg-region-card" onclick="filterByRegion('africa')">
+          <div class="msg-region-header">
+            <span class="msg-region-name">🌍 Africa</span>
+            <span class="msg-region-badge">18 Languages</span>
+          </div>
+          <div class="msg-region-langs">🇲🇼 Chichewa (ny), 🇰🇪 Kiswahili (sw), 🇿🇦 Afrikaans (af), 🇳🇬 Igbo (ig), 🇳🇬 Yoruba (yo), 🇨🇩 Lingala (ln)...</div>
+        </div>
+
+        <div class="msg-region-card" onclick="filterByRegion('americas')">
+          <div class="msg-region-header">
+            <span class="msg-region-name">🌎 Americas</span>
+            <span class="msg-region-badge">8 Languages</span>
+          </div>
+          <div class="msg-region-langs">🇺🇸 English (en), 🇲🇽 Español (es), 🇧🇷 Português (pt), 🇭🇹 Kreyòl Ayisyen (ht)...</div>
+        </div>
+
+        <div class="msg-region-card" onclick="filterByRegion('europe')">
+          <div class="msg-region-header">
+            <span class="msg-region-name">🌍 Europe</span>
+            <span class="msg-region-badge">24 Languages</span>
+          </div>
+          <div class="msg-region-langs">🇫🇷 Français (fr), 🇩🇪 Deutsch (de), 🇮🇹 Italiano (it), 🇷🇴 Română (ro), 🇷🇺 Русский (ru)...</div>
+        </div>
+
+        <div class="msg-region-card" onclick="filterByRegion('asia')">
+          <div class="msg-region-header">
+            <span class="msg-region-name">🌏 Asia & Pacific</span>
+            <span class="msg-region-badge">22 Languages</span>
+          </div>
+          <div class="msg-region-langs">🇵🇭 Tagalog (tl), 🇮🇩 Bahasa Indonesia (id), 🇮🇳 Hindi (hi), 🇮🇳 Tamil (ta), 🇨🇳 Chinese...</div>
+        </div>
+      </div>
+    </section>
+
+    <!-- REST API Details Section -->
+    <section class="msg-api-box">
+      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
+        <h3 style="margin: 0;">⚡ Public JSON REST API & Developer Docs</h3>
+        <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="padding: 0.45rem 0.95rem; font-weight: 700;">🚀 Open Interactive API Explorer & Full Docs →</a>
+      </div>
+      <p>Developers can fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST API:</p>
+      <ul>
+        <li><code>GET /api/messages?language=ny</code> — List Chichewa sermons</li>
+        <li><code>GET /api/messages/65-0718M/text</code> — Get sermon transcript & paragraphs</li>
+        <li><code>GET /api/search?q=seven+seals</code> — Full-text search</li>
+      </ul>
+    </section>
   </div>
-
-  <!-- Interactive Global Translation Region Map -->
-  <section class="msg-map-section">
-    <div class="msg-map-title">
-      <span>🌍 Global Translation Coverage Map</span>
-    </div>
-    <div class="msg-map-sub">Select a region below to filter translations across 72 global languages:</div>
-
-    <div class="msg-region-grid">
-      <div class="msg-region-card" onclick="filterByRegion('africa')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌍 Africa</span>
-          <span class="msg-region-badge">18 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇲🇼 Chichewa (ny), 🇰🇪 Kiswahili (sw), 🇿🇦 Afrikaans (af), 🇳🇬 Igbo (ig), 🇳🇬 Yoruba (yo), 🇨🇩 Lingala (ln)...</div>
-      </div>
-
-      <div class="msg-region-card" onclick="filterByRegion('americas')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌎 Americas</span>
-          <span class="msg-region-badge">8 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇺🇸 English (en), 🇲🇽 Español (es), 🇧🇷 Português (pt), 🇭🇹 Kreyòl Ayisyen (ht)...</div>
-      </div>
-
-      <div class="msg-region-card" onclick="filterByRegion('europe')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌍 Europe</span>
-          <span class="msg-region-badge">24 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇫🇷 Français (fr), 🇩🇪 Deutsch (de), 🇮🇹 Italiano (it), 🇷🇴 Română (ro), 🇷🇺 Русский (ru)...</div>
-      </div>
-
-      <div class="msg-region-card" onclick="filterByRegion('asia')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌏 Asia & Pacific</span>
-          <span class="msg-region-badge">22 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇵🇭 Tagalog (tl), 🇮🇩 Bahasa Indonesia (id), 🇮🇳 Hindi (hi), 🇮🇳 Tamil (ta), 🇨🇳 Chinese...</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- REST API Details Section -->
-  <section class="msg-api-box">
-    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
-      <h3 style="margin: 0;">⚡ Public JSON REST API & Developer Docs</h3>
-      <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="padding: 0.45rem 0.95rem; font-weight: 700;">🚀 Open Interactive API Explorer & Full Docs →</a>
-    </div>
-    <p>Developers can fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST API:</p>
-    <ul>
-      <li><code>GET /api/messages?language=ny</code> — List Chichewa sermons</li>
-      <li><code>GET /api/messages/65-0718M/text</code> — Get sermon transcript & paragraphs</li>
-      <li><code>GET /api/search?q=seven+seals</code> — Full-text search</li>
-    </ul>
-  </section>
 
   <!-- On-Site Sermon Reader Modal -->
   <div id="reader-modal-backdrop" class="msg-reader-backdrop" style="display: none;">
@@ -1085,10 +1152,10 @@ function renderSermons(items) {
             ${pageItems.map(s => {
               const langCode = (s.language || 'en').toUpperCase();
               const textBtn = (s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
-                ? `<button class="msg-btn msg-btn-text" style="padding: 0.25rem 0.5rem;" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
+                ? `<button class="msg-btn msg-btn-text" style="padding: 0.25rem 0.5rem;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
                 : '';
               const pdfBtn = s.pdf_url 
-                ? `<button class="msg-btn msg-btn-pdf" style="padding: 0.25rem 0.5rem;" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
+                ? `<button class="msg-btn msg-btn-pdf" style="padding: 0.25rem 0.5rem;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
                 : '';
               const audioBtn = s.m4a_url
                 ? `<button class="msg-btn msg-btn-audio" style="padding: 0.25rem 0.5rem;" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Audio</button>`
@@ -1120,11 +1187,11 @@ function renderSermons(items) {
     const langCode = (s.language || 'en').toUpperCase();
     
     const textBtn = (s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
-      ? `<button class="msg-btn msg-btn-text" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
+      ? `<button class="msg-btn msg-btn-text" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
       : `<span class="msg-btn msg-btn-text msg-btn-disabled">📖 Text</span>`;
 
     const pdfBtn = s.pdf_url 
-      ? `<button class="msg-btn msg-btn-pdf" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
+      ? `<button class="msg-btn msg-btn-pdf" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
       : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📄 PDF</span>`;
       
     const audioBtn = s.m4a_url
@@ -1215,9 +1282,17 @@ function closePlayer() {
 }
 
 let currentReaderSermon = null;
+let currentReaderFontSize = 1.125;
 
-async function openReaderModal(title, id, date, pdfUrl, language = 'en', defaultTab = 'text') {
-  const modal = document.getElementById('reader-modal-backdrop');
+function adjustFontSize(delta) {
+  currentReaderFontSize = Math.max(0.9, Math.min(1.6, currentReaderFontSize + (delta * 0.1)));
+  const contentArea = document.getElementById('reader-content-area');
+  if (contentArea) contentArea.style.fontSize = `${currentReaderFontSize}rem`;
+}
+
+async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultTab = 'text') {
+  const catalogueSection = document.getElementById('catalogue-section');
+  const readerSection = document.getElementById('full-reader-section');
   const titleEl = document.getElementById('reader-sermon-title');
   const subEl = document.getElementById('reader-sermon-sub');
   const downloadBtn = document.getElementById('reader-download-btn');
@@ -1225,15 +1300,31 @@ async function openReaderModal(title, id, date, pdfUrl, language = 'en', default
   currentReaderSermon = { title, id, date, pdfUrl, language };
 
   if (titleEl) titleEl.innerText = title;
-  if (subEl) subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'}`;
+  if (subEl) subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'} • Language: ${language.toUpperCase()}`;
   if (downloadBtn) downloadBtn.href = pdfUrl || '#';
 
-  if (modal) {
-    modal.style.display = 'flex';
-    document.body.style.overflow = 'hidden';
-  }
+  if (catalogueSection) catalogueSection.style.display = 'none';
+  if (readerSection) readerSection.style.display = 'block';
+
+  window.scrollTo({ top: 0, behavior: 'smooth' });
+
+  /* Update browser URL query parameter for deep-linking */
+  const newUrl = `${window.location.pathname}?read=${encodeURIComponent(id)}&lang=${encodeURIComponent(language)}`;
+  window.history.pushState({ sermonId: id }, '', newUrl);
 
   switchReaderTab(defaultTab);
+}
+
+function closeFullReader() {
+  const catalogueSection = document.getElementById('catalogue-section');
+  const readerSection = document.getElementById('full-reader-section');
+  const contentArea = document.getElementById('reader-content-area');
+
+  if (contentArea) contentArea.innerHTML = '';
+  if (readerSection) readerSection.style.display = 'none';
+  if (catalogueSection) catalogueSection.style.display = 'block';
+
+  window.history.pushState({}, '', window.location.pathname);
 }
 
 async function switchReaderTab(tab) {
@@ -1248,11 +1339,11 @@ async function switchReaderTab(tab) {
   if (btnPdf) btnPdf.classList.toggle('active', tab === 'pdf');
 
   if (tab === 'pdf') {
-    contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
+    contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" style="width:100%; height:80vh; border:none; border-radius:8px;" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
     return;
   }
 
-  contentArea.innerHTML = '<div style="text-align:center; padding: 3rem; color: var(--text-secondary);">📖 Loading transcript text...</div>';
+  contentArea.innerHTML = '<div style="text-align:center; padding: 4rem; color: var(--text-secondary);">📖 Loading transcript text...</div>';
 
   try {
     const res = await fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${currentReaderSermon.language}`);
@@ -1261,14 +1352,14 @@ async function switchReaderTab(tab) {
       const item = json.data || {};
       if (item.paragraphs && item.paragraphs.length > 0) {
         contentArea.innerHTML = item.paragraphs.map(p => `
-          <div class="msg-paragraph-item">
+          <div class="msg-paragraph-item" id="p${p.number}">
             <span class="msg-para-num">¶${p.number}</span>
             <div class="msg-para-text">${escapeHtml(p.text)}</div>
           </div>
         `).join('');
         return;
       } else if (item.full_text) {
-        contentArea.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${escapeHtml(item.full_text)}</div>`;
+        contentArea.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.85;">${escapeHtml(item.full_text)}</div>`;
         return;
       }
     }
@@ -1278,19 +1369,11 @@ async function switchReaderTab(tab) {
 
   /* Fallback to embedded PDF reader if text transcript is loading or unparsed */
   contentArea.innerHTML = `
-    <div style="text-align:center; padding: 3rem 1rem;">
+    <div style="text-align:center; padding: 4rem 1rem;">
       <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Transcript is ready in PDF document view:</p>
-      <button class="msg-btn msg-btn-pdf" onclick="switchReaderTab('pdf')">📄 Open PDF Document Viewer</button>
+      <button class="msg-btn msg-btn-pdf" onclick="switchReaderTab('pdf')">📄 Open PDF Book View</button>
     </div>
   `;
-}
-
-function closeReaderModal() {
-  const modal = document.getElementById('reader-modal-backdrop');
-  const contentArea = document.getElementById('reader-content-area');
-  if (contentArea) contentArea.innerHTML = '';
-  if (modal) modal.style.display = 'none';
-  document.body.style.overflow = '';
 }
 
 function escapeHtml(str) {
@@ -1301,5 +1384,25 @@ function escapeJs(str) {
   return (str || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
-document.addEventListener('DOMContentLoaded', loadSermonsData);
+/* Deep-linking check on page init */
+window.addEventListener('popstate', () => {
+  const urlParams = new URLSearchParams(window.location.search);
+  const readId = urlParams.get('read');
+  if (!readId) {
+    closeFullReader();
+  }
+});
+
+document.addEventListener('DOMContentLoaded', async () => {
+  await loadSermonsData();
+  const urlParams = new URLSearchParams(window.location.search);
+  const readId = urlParams.get('read');
+  const readLang = urlParams.get('lang') || 'en';
+  if (readId && allSermons && allSermons.length > 0) {
+    const found = allSermons.find(s => s.id === readId);
+    if (found) {
+      openFullReader(found.title, found.id, found.date || found.year || '', found.pdf_url, readLang, 'text');
+    }
+  }
+});
 </script>
