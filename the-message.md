@@ -633,8 +633,27 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   padding: 0.5rem 0.75rem;
   background-color: var(--bg-secondary, rgba(0,0,0,0.04));
   border-radius: 6px;
-  margin-bottom: 1.5rem;
-  color: var(--accent-primary, #2563eb);
+/* Live Audio Active Reading Paragraph Highlight */
+.msg-paragraph-item.msg-para-active-reading {
+  background-color: var(--bg-secondary, rgba(37, 99, 235, 0.12)) !important;
+  border-left: 4px solid var(--accent-primary, #2563eb) !important;
+  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+  transition: all 0.25s ease;
+}
+
+/* Fullscreen Focus Mode Scrollability */
+#full-reader-section:fullscreen {
+  overflow-y: auto !important;
+  background-color: var(--bg-primary, #ffffff);
+  padding: 1.5rem 2rem 5rem;
+  box-sizing: border-box;
+}
+
+#full-reader-section:fullscreen .msg-reader-toolbar {
+  top: 0;
+  border-radius: 0;
+  border-left: none;
+  border-right: none;
 }
 
 /* Paragraph Highlight Persistence States */
@@ -1436,13 +1455,30 @@ function playAudio(title, id, lang, url) {
   audioEl.src = url;
   bar.style.display = 'flex';
   audioEl.play().catch(e => console.log('Audio autoplay blocked:', e));
+
+  /* Live Audio Karaoke Paragraph Follow & Auto-Scroll */
+  audioEl.ontimeupdate = function() {
+    if (!audioEl.duration || audioEl.paused) return;
+    const progress = audioEl.currentTime / audioEl.duration;
+    const paraItems = document.querySelectorAll('#reader-content-area .msg-paragraph-item');
+    if (paraItems.length === 0) return;
+
+    const activeIndex = Math.min(paraItems.length - 1, Math.floor(progress * paraItems.length));
+    const activeEl = paraItems[activeIndex];
+
+    if (activeEl && !activeEl.classList.contains('msg-para-active-reading')) {
+      document.querySelectorAll('.msg-para-active-reading').forEach(el => el.classList.remove('msg-para-active-reading'));
+      activeEl.classList.add('msg-para-active-reading');
+      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+    }
+  };
 }
 
 function closePlayer() {
   const bar = document.getElementById('audio-player-bar');
   const audioEl = document.getElementById('audio-element');
-  audioEl.pause();
-  bar.style.display = 'none';
+  if (audioEl) audioEl.pause();
+  if (bar) bar.style.display = 'none';
 }
 
 let currentReaderSermon = null;
@@ -1540,6 +1576,10 @@ async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultT
   const searchInput = document.getElementById('reader-search-input');
   const audioBtn = document.getElementById('reader-audio-btn');
 
+  /* Hide main site header nav while reading for distraction-free immersion */
+  const siteHeader = document.querySelector('.site-header, header.site-header, header');
+  if (siteHeader) siteHeader.style.display = 'none';
+
   currentReaderSermon = { title, id, date, pdfUrl, language };
 
   if (titleEl) titleEl.innerText = title;
@@ -1582,6 +1622,10 @@ function closeFullReader() {
   const catalogueSection = document.getElementById('catalogue-section');
   const readerSection = document.getElementById('full-reader-section');
   const contentArea = document.getElementById('reader-content-area');
+
+  /* Restore site header nav */
+  const siteHeader = document.querySelector('.site-header, header.site-header, header');
+  if (siteHeader) siteHeader.style.display = '';
 
   if (contentArea) contentArea.innerHTML = '';
   if (readerSection) readerSection.style.display = 'none';
