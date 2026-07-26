@@ -633,12 +633,36 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   padding: 0.5rem 0.75rem;
   background-color: var(--bg-secondary, rgba(0,0,0,0.04));
   border-radius: 6px;
-/* Live Audio Active Reading Paragraph Highlight */
+/* Live Audio Active Reading Karaoke Highlight & Badge */
 .msg-paragraph-item.msg-para-active-reading {
-  background-color: var(--bg-secondary, rgba(37, 99, 235, 0.12)) !important;
-  border-left: 4px solid var(--accent-primary, #2563eb) !important;
-  box-shadow: 0 4px 14px rgba(37, 99, 235, 0.12);
+  background-color: var(--bg-secondary, rgba(37, 99, 235, 0.15)) !important;
+  border-left: 5px solid var(--accent-primary, #2563eb) !important;
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.18);
   transition: all 0.25s ease;
+}
+
+.msg-para-active-reading .msg-para-text {
+  font-weight: 500;
+}
+
+.msg-karaoke-badge {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.3rem;
+  font-size: 0.725rem;
+  font-weight: 800;
+  color: #ffffff;
+  background-color: var(--accent-primary, #2563eb);
+  padding: 0.2rem 0.55rem;
+  border-radius: 999px;
+  animation: karaokePulse 1.5s infinite alternate;
+  user-select: none;
+  height: fit-content;
+}
+
+@keyframes karaokePulse {
+  0% { transform: scale(1); opacity: 0.95; }
+  100% { transform: scale(1.05); opacity: 1; box-shadow: 0 0 10px rgba(37, 99, 235, 0.5); }
 }
 
 /* Fullscreen Focus Mode Scrollability */
@@ -1467,8 +1491,22 @@ function playAudio(title, id, lang, url) {
     const activeEl = paraItems[activeIndex];
 
     if (activeEl && !activeEl.classList.contains('msg-para-active-reading')) {
-      document.querySelectorAll('.msg-para-active-reading').forEach(el => el.classList.remove('msg-para-active-reading'));
+      document.querySelectorAll('.msg-para-active-reading').forEach(el => {
+        el.classList.remove('msg-para-active-reading');
+        const oldBadge = el.querySelector('.msg-karaoke-badge');
+        if (oldBadge) oldBadge.remove();
+      });
+
       activeEl.classList.add('msg-para-active-reading');
+
+      const numEl = activeEl.querySelector('.msg-para-num');
+      if (numEl && !activeEl.querySelector('.msg-karaoke-badge')) {
+        const badge = document.createElement('span');
+        badge.className = 'msg-karaoke-badge';
+        badge.innerHTML = '🎙️ READING NOW';
+        numEl.after(badge);
+      }
+
       activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
     }
   };
