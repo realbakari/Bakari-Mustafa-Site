@@ -981,7 +981,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
       <div class="msg-stats-bar">
         <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">1,200+</strong></span>
         <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">72</strong></span>
-        <span class="msg-stat-chip">🌐 Global Multi-Lingual Archive</span>
+        <span class="msg-stat-chip" style="cursor: pointer; border-color: var(--accent-primary); color: var(--accent-primary); font-weight: 700;" onclick="playLwbRadio('gospel_music')" title="Listen to Living Word Broadcast 24/7 End Time Gospel Music">📻 24/7 Gospel Radio</span>
         <span class="msg-stat-chip">⚡ Public REST API</span>
       </div>
     </div>
@@ -1495,6 +1495,26 @@ function setQuickLang(code) {
 function setQuickYear(year) {
   document.getElementById('msg-year-select').value = year;
   applyFilters();
+}
+
+function playLwbRadio(type = 'gospel_music') {
+  const streams = {
+    gospel_music: {
+      title: 'End Time Gospel Music (24/7 LWB Radio)',
+      url: 'http://stream.lwbcast.org:8000/stream.mp3'
+    },
+    featured_sermon: {
+      title: 'Featured Sermon Broadcast (24/7 LWB Radio)',
+      url: 'http://stream.lwbcast.org:8000/sermon.mp3'
+    },
+    prayer_healing: {
+      title: 'Prayer & Healing Stream (24/7 LWB Radio)',
+      url: 'http://stream.lwbcast.org:8000/healing.mp3'
+    }
+  };
+
+  const selected = streams[type] || streams.gospel_music;
+  playAudio(selected.title, 'LWB 24/7 Radio', 'EN', selected.url);
 }
 
 function playAudio(title, id, lang, url) {

@@ -187,9 +187,41 @@ exports.handler = async (event) => {
       return json(200, result);
     }
 
+    /* ── GET /api/radio ────────────────────────────────────────── */
+    if (segments[0] === 'radio') {
+      return json(200, {
+        provider: 'Living Word Broadcast (LWB Cast)',
+        website: 'https://www.lwbcast.org',
+        description: '24/7 End Time Gospel Music & William Branham Sermons Broadcast Streams',
+        streams: [
+          {
+            id: 'gospel_music',
+            name: '24/7 End Time Gospel Music',
+            genre: 'Gospel Music & Hymns',
+            stream_url: 'http://stream.lwbcast.org:8000/stream.mp3',
+            source_page: 'https://www.lwbcast.org/OtherTabs/Music.php'
+          },
+          {
+            id: 'featured_sermon',
+            name: '24/7 Featured Sermon Stream',
+            genre: 'Sermon Broadcast',
+            stream_url: 'http://stream.lwbcast.org:8000/sermon.mp3',
+            source_page: 'https://www.lwbcast.org/OtherTabs/Music.php'
+          },
+          {
+            id: 'prayer_healing',
+            name: '24/7 Prayer & Healing Stream',
+            genre: 'Prayer & Healing',
+            stream_url: 'http://stream.lwbcast.org:8000/healing.mp3',
+            source_page: 'https://www.lwbcast.org/OtherTabs/Music.php'
+          }
+        ]
+      });
+    }
+
     /* ── GET /api/stats ───────────────────────────────────────── */
     if (segments[0] === 'stats') {
-      const stats = getStats();
+      const stats = await getStats();
       return json(200, { data: stats });
     }
 
