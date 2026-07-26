@@ -18,6 +18,7 @@
 const {
   getSermons,
   getSermonById,
+  getSermonText,
   getLanguages,
   getYears,
   searchSermons,
@@ -91,6 +92,21 @@ exports.handler = async (event) => {
         limit: params.limit,
       });
       return json(200, result);
+    }
+
+    /* ── GET /api/messages/:id/text ───────────────────────────── */
+    if (
+      segments[0] === 'messages' &&
+      segments.length === 3 &&
+      segments[2] === 'text'
+    ) {
+      const id = decodeURIComponent(segments[1]);
+      const result = getSermonText(id, params.language);
+
+      if (!result) {
+        return notFound(`Sermon '${id}' text transcript not found`);
+      }
+      return json(200, { data: result });
     }
 
     /* ── GET /api/messages/:id ────────────────────────────────── */
@@ -178,11 +194,12 @@ exports.handler = async (event) => {
         name: 'The Message Sermon API',
         version: '1.0.0',
         description:
-          'REST API for browsing and searching themessage.com sermon catalogue.',
+          'REST API for browsing and searching William Branham sermon archives.',
+        documentation_url: 'https://bakarimustafa.com/api-docs/',
         endpoints: {
           messages: {
-            list: 'GET /api/messages?page=1&limit=50&language=en&year=65',
-            get: 'GET /api/messages/:id?language=en',
+            list: 'GET /api/messages?page=1&limit=50&language=ny&year=65',
+            get: 'GET /api/messages/:id?language=ny',
           },
           languages: {
             list: 'GET /api/languages',
@@ -192,10 +209,10 @@ exports.handler = async (event) => {
             list: 'GET /api/years',
             messages: 'GET /api/years/:year/messages',
           },
-          search: 'GET /api/search?q=keyword&language=en',
+          search: 'GET /api/search?q=keyword&language=ny',
           stats: 'GET /api/stats',
         },
-        source: 'https://themessage.com',
+        source: 'https://themessage.com + https://search.messagehub.info',
       });
     }
 

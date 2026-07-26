@@ -130,6 +130,25 @@ function getSermonById(id, language = null) {
 }
 
 /**
+ * Get full transcript text and structured paragraphs for a sermon.
+ */
+function getSermonText(id, language = null) {
+  const sermon = getSermonById(id, language);
+  if (!sermon) return null;
+
+  return {
+    id: sermon.id,
+    title: sermon.title,
+    language: sermon.language,
+    date: sermon.date,
+    pdf_url: sermon.pdf_url,
+    m4a_url: sermon.m4a_url,
+    full_text: sermon.pdf_text || null,
+    paragraphs: sermon.paragraphs || [],
+  };
+}
+
+/**
  * Get all available languages with sermon counts.
  */
 function getLanguages() {
@@ -254,6 +273,7 @@ function getStats() {
 module.exports = {
   getSermons,
   getSermonById,
+  getSermonText,
   getLanguages,
   getYears,
   searchSermons,

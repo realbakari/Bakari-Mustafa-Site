@@ -199,10 +199,14 @@ async function main() {
         for (const sermon of sermons) {
           const key = `${sermon.language}:${sermon.id}`;
           if (!existingKeys.has(key)) {
-            /* Optionally extract PDF text */
+            /* Optionally extract PDF text & structured paragraphs */
             if (opts.extractPdf && sermon.pdf_url) {
               process.stdout.write(` [extracting PDF]`);
-              sermon.pdf_text = await pdfExtractor.extractText(sermon.pdf_url);
+              const pdfResult = await pdfExtractor.extractText(sermon.pdf_url);
+              if (pdfResult) {
+                sermon.pdf_text = pdfResult.full_text;
+                sermon.paragraphs = pdfResult.paragraphs;
+              }
             }
 
             allSermons.push(sermon);
