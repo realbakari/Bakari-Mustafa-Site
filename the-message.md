@@ -608,20 +608,28 @@ const pageSize = 24;
 async function loadLanguagesData() {
   try {
     let languages = [];
-    const res = await fetch('/api/languages');
-    if (res.ok) {
-      const result = await res.json();
-      languages = result.data || result;
-    } else {
-      const staticRes = await fetch('/_data/languages.json');
+    try {
+      const res = await fetch('/api/languages');
+      if (res.ok) {
+        const result = await res.json();
+        languages = result.data || result;
+      }
+    } catch (e) {
+      /* API route un-routed locally */
+    }
+
+    if (!languages || languages.length === 0) {
+      const staticRes = await fetch('{{ "/_data/languages.json" | relative_url }}');
       if (staticRes.ok) languages = await staticRes.json();
     }
 
     if (languages && languages.length > 0) {
       const select = document.getElementById('msg-lang-select');
-      const selectedVal = select.value || 'en';
-      select.innerHTML = '<option value="">All Languages (72)</option>' + 
-        languages.map(l => `<option value="${l.code}" ${l.code === selectedVal ? 'selected' : ''}>${l.name} (${l.english_name || l.name})</option>`).join('');
+      if (select) {
+        const selectedVal = select.value || 'en';
+        select.innerHTML = '<option value="">All Languages (72)</option>' + 
+          languages.map(l => `<option value="${l.code}" ${l.code === selectedVal ? 'selected' : ''}>${l.name} (${l.english_name || l.name})</option>`).join('');
+      }
       
       const langsStat = document.getElementById('stat-langs');
       if (langsStat) langsStat.innerText = `${languages.length}`;
@@ -634,21 +642,22 @@ async function loadLanguagesData() {
 async function loadSermonsData() {
   await loadLanguagesData();
   try {
-    const res = await fetch('/api/messages?limit=500');
-    if (res.ok) {
-      const result = await res.json();
-      allSermons = result.data || result;
-    } else {
-      const staticRes = await fetch('/_data/sermons.json');
+    try {
+      const res = await fetch('/api/messages?limit=500');
+      if (res.ok) {
+        const result = await res.json();
+        allSermons = result.data || result;
+      }
+    } catch (e) {
+      /* API route un-routed locally */
+    }
+
+    if (!allSermons || allSermons.length === 0) {
+      const staticRes = await fetch('{{ "/_data/sermons.json" | relative_url }}');
       if (staticRes.ok) allSermons = await staticRes.json();
     }
   } catch (err) {
-    try {
-      const staticRes = await fetch('/_data/sermons.json');
-      if (staticRes.ok) allSermons = await staticRes.json();
-    } catch (e) {
-      console.error('Failed to load sermon data:', e);
-    }
+    console.error('Failed to load sermon data:', err);
   }
 
   const statEl = document.getElementById('stat-total');
@@ -796,12 +805,15 @@ async function openReaderModal(title, id, date, pdfUrl, language = 'en') {
   const downloadBtn = document.getElementById('reader-download-btn');
 
   currentReaderSermon = { title, id, date, pdfUrl, language };
-  titleEl.innerText = title;
-  subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'}`;
-  downloadBtn.href = pdfUrl || '#';
 
-  modal.style.display = 'flex';
-  document.body.style.overflow = 'hidden';
+  if (titleEl) titleEl.innerText = title;
+  if (subEl) subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'}`;
+  if (downloadBtn) downloadBtn.href = pdfUrl || '#';
+
+  if (modal) {
+    modal.style.display = 'flex';
+    document.body.style.overflow = 'hidden';
+  }
 
   switchReaderTab('text');
 }
@@ -812,15 +824,16 @@ async function switchReaderTab(tab) {
   const btnPdf = document.getElementById('tab-btn-pdf');
   const contentArea = document.getElementById('reader-content-area');
 
+  if (!contentArea) return;
+
+  if (btnText) btnText.classList.toggle('active', tab === 'text');
+  if (btnPdf) btnPdf.classList.toggle('active', tab === 'pdf');
+
   if (tab === 'pdf') {
-    btnText.classList.remove('active');
-    btnPdf.classList.add('active');
     contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
     return;
   }
 
-  btnText.classList.add('active');
-  btnPdf.classList.remove('active');
   contentArea.innerHTML = '<div style="text-align:center; padding: 3rem; color: var(--text-secondary);">📖 Loading transcript text...</div>';
 
   try {
@@ -857,8 +870,8 @@ async function switchReaderTab(tab) {
 function closeReaderModal() {
   const modal = document.getElementById('reader-modal-backdrop');
   const contentArea = document.getElementById('reader-content-area');
-  contentArea.innerHTML = '';
-  modal.style.display = 'none';
+  if (contentArea) contentArea.innerHTML = '';
+  if (modal) modal.style.display = 'none';
   document.body.style.overflow = '';
 }
 
