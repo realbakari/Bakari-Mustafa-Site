@@ -1,0 +1,74 @@
+# The Message REST API — Complete AI / LLM Technical Reference
+
+> Full technical reference for LLMs, autonomous AI agents, Custom GPTs, and LangChain OpenAPI toolkits.
+> Host URL: https://bakarimustafa.com
+> Public Interactive Explorer: https://bakarimustafa.com/api-docs/
+> OpenAPI 3.0 Spec: https://bakarimustafa.com/api/openapi.json
+
+## JSON Response Schemas
+
+### 1. GET /api/stats
+Returns database overview metrics.
+
+```json
+{
+  "success": true,
+  "data": {
+    "total_sermons": 577,
+    "available_languages": 72,
+    "sermons_with_pdf": 572,
+    "sermons_with_audio": 525,
+    "sermons_with_text": 572
+  }
+}
+```
+
+### 2. GET /api/messages?language=en
+Returns list of sermon records.
+
+```json
+{
+  "success": true,
+  "count": 577,
+  "data": [
+    {
+      "id": "64-0112",
+      "title": "Shalom",
+      "date": "1964-01-12",
+      "year": "1964",
+      "language": "en",
+      "pdf_url": "https://branham.org/.../64-0112%20Shalom%20VGR.pdf",
+      "m4a_url": "https://branham.org/.../64-0112%20Shalom.m4a",
+      "cover_image": "https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg"
+    }
+  ]
+}
+```
+
+### 3. GET /api/messages/{id}/text?language=en
+Returns full sermon transcript broken into numbered paragraph blocks.
+
+```json
+{
+  "success": true,
+  "data": {
+    "id": "64-0112",
+    "title": "Shalom",
+    "language": "en",
+    "paragraphs": [
+      {
+        "number": 1,
+        "text": "SHALOM... Thank you, very much, Brother Isaacson..."
+      },
+      {
+        "number": 2,
+        "text": "Good morning, friends, you may sit down..."
+      }
+    ]
+  }
+}
+```
+
+## OpenAPI 3.0 JSON Definition
+
+AI agents can directly consume the OpenAPI spec at `https://bakarimustafa.com/api/openapi.json`.

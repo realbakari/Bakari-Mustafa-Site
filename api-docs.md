@@ -232,7 +232,21 @@ body[data-theme="dark"] .method-get {
       <span class="api-chip">⚡ Base URL: <strong>https://bakarimustafa.com/api</strong></span>
       <span class="api-chip">🔓 Open Access (No API Key Required)</span>
       <span class="api-chip">🌐 CORS Enabled</span>
-      <span class="api-chip">📦 Response Format: JSON</span>
+      <span class="api-chip">🤖 LLM / AI Native</span>
+    </div>
+  </div>
+
+  <!-- AI Agents & LLM Discovery Banner -->
+  <div style="background-color: var(--bg-secondary, #f8fafc); border: 1px solid var(--accent-primary, #2563eb); border-radius: 12px; padding: 1.25rem 1.5rem; margin-bottom: 2rem;">
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 0.75rem; margin-bottom: 0.5rem;">
+      <h3 style="margin: 0; font-size: 1.1rem; color: var(--text-primary); display: flex; align-items: center; gap: 0.5rem;">🤖 AI Agent & LLM Machine-Readable Specifications</h3>
+      <span style="font-size: 0.8rem; font-weight: 700; padding: 0.2rem 0.6rem; border-radius: 999px; background: rgba(37,99,235,0.1); color: var(--accent-primary);">100% LLM Native</span>
+    </div>
+    <p style="font-size: 0.9rem; margin-bottom: 1rem; color: var(--text-secondary);">Autonomous AI agents, Custom GPTs, Claude Tools, and LangChain OpenAPI toolkits can consume the machine-readable specifications directly:</p>
+    <div style="display: flex; gap: 0.6rem; flex-wrap: wrap;">
+      <a href="{{ '/llms.txt' | relative_url }}" target="_blank" class="api-chip" style="text-decoration: none; font-weight: 700;">📄 /llms.txt (AI Discovery Context)</a>
+      <a href="{{ '/llms-full.txt' | relative_url }}" target="_blank" class="api-chip" style="text-decoration: none; font-weight: 700;">📘 /llms-full.txt (Full Technical Reference)</a>
+      <a href="{{ '/api/openapi.json' | relative_url }}" target="_blank" class="api-chip" style="text-decoration: none; font-weight: 700; border-color: var(--accent-primary);">⚡ /api/openapi.json (OpenAPI 3.0 Spec)</a>
     </div>
   </div>
 
