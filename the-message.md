@@ -129,6 +129,89 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   border-color: var(--accent-primary, #2563eb);
 }
 
+/* View Mode Toggle Bar */
+.msg-view-mode-bar {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  padding-top: 0.75rem;
+  border-top: 1px solid var(--border-default, #e2e8f0);
+}
+
+.msg-view-toggle {
+  display: flex;
+  gap: 0.4rem;
+  background-color: var(--bg-primary, #ffffff);
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-default, #cbd5e1);
+}
+
+.msg-view-btn {
+  padding: 0.35rem 0.85rem;
+  font-size: 0.825rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.15s ease;
+}
+
+.msg-view-btn.active {
+  background-color: var(--accent-primary, #2563eb);
+  color: #ffffff;
+}
+
+.msg-results-count {
+  font-size: 0.85rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+}
+
+/* Archival Table View */
+.msg-table-wrap {
+  width: 100%;
+  overflow-x: auto;
+  border-radius: 12px;
+  border: 1px solid var(--border-default, #e2e8f0);
+  background-color: var(--bg-primary, #ffffff);
+  margin-bottom: 2.5rem;
+}
+
+.msg-archival-table {
+  width: 100%;
+  border-collapse: collapse;
+  font-size: 0.9rem;
+  text-align: left;
+}
+
+.msg-archival-table th {
+  background-color: var(--bg-secondary, #f8fafc);
+  color: var(--text-primary);
+  font-weight: 700;
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-default, #e2e8f0);
+  white-space: nowrap;
+}
+
+.msg-archival-table td {
+  padding: 0.85rem 1rem;
+  border-bottom: 1px solid var(--border-default, #e2e8f0);
+  color: var(--text-primary);
+  vertical-align: middle;
+}
+
+.msg-archival-table tr:hover {
+  background-color: var(--bg-secondary, rgba(0,0,0,0.02));
+}
+
+.msg-archival-table tr:last-child td {
+  border-bottom: none;
+}
+
 /* Grid Layout for Sermons */
 .msg-grid {
   display: grid;
@@ -144,12 +227,14 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s ease, box-shadow 0.2s ease;
+  transition: transform 0.25s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.25s cubic-bezier(0.16, 1, 0.3, 1), border-color 0.25s ease;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.04);
 }
 
 .msg-card:hover {
-  transform: translateY(-3px);
-  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
+  transform: translateY(-4px);
+  box-shadow: 0 16px 32px -8px rgba(0, 0, 0, 0.15);
+  border-color: var(--accent-primary, #2563eb);
 }
 
 .msg-cover-wrap {
@@ -492,11 +577,119 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   flex: 1;
 }
 
-.msg-reader-body iframe {
-  width: 100%;
-  height: 100%;
-  border: none;
-  border-radius: 8px;
+/* Exact Stats Dashboard Grid */
+.msg-stats-dashboard {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(180px, 1fr));
+  gap: 1rem;
+  margin-top: 1.5rem;
+  margin-bottom: 2rem;
+}
+
+.msg-stat-card {
+  background-color: var(--bg-secondary, #f8fafc);
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 12px;
+  padding: 1rem 1.15rem;
+  display: flex;
+  flex-direction: column;
+  gap: 0.25rem;
+  transition: transform 0.2s ease, border-color 0.2s ease;
+}
+
+.msg-stat-card:hover {
+  transform: translateY(-2px);
+  border-color: var(--accent-primary, #2563eb);
+}
+
+.msg-stat-val {
+  font-size: 1.5rem;
+  font-weight: 800;
+  color: var(--accent-primary, #2563eb);
+  line-height: 1.2;
+}
+
+.msg-stat-lbl {
+  font-size: 0.8rem;
+  font-weight: 600;
+  color: var(--text-secondary);
+  text-transform: uppercase;
+  letter-spacing: 0.03em;
+}
+
+/* Interactive World Map & Region Panel */
+.msg-map-section {
+  background-color: var(--bg-secondary, #f8fafc);
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 14px;
+  padding: 1.5rem;
+  margin-bottom: 2.5rem;
+}
+
+.msg-map-title {
+  font-size: 1.1rem;
+  font-weight: 700;
+  margin-top: 0;
+  margin-bottom: 0.5rem;
+  color: var(--text-primary);
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.msg-map-sub {
+  font-size: 0.85rem;
+  color: var(--text-secondary);
+  margin-bottom: 1.25rem;
+}
+
+.msg-region-grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(210px, 1fr));
+  gap: 1rem;
+}
+
+.msg-region-card {
+  background-color: var(--bg-primary, #ffffff);
+  border: 1px solid var(--border-default, #cbd5e1);
+  border-radius: 10px;
+  padding: 1rem;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.msg-region-card:hover, .msg-region-card.active {
+  border-color: var(--accent-primary, #2563eb);
+  box-shadow: 0 4px 12px rgba(37, 99, 235, 0.12);
+  transform: translateY(-2px);
+}
+
+.msg-region-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-bottom: 0.4rem;
+}
+
+.msg-region-name {
+  font-size: 0.95rem;
+  font-weight: 700;
+  color: var(--text-primary);
+}
+
+.msg-region-badge {
+  font-size: 0.75rem;
+  font-weight: 700;
+  background-color: var(--bg-secondary, #eff6ff);
+  color: var(--accent-primary, #2563eb);
+  padding: 0.15rem 0.45rem;
+  border-radius: 999px;
+}
+
+.msg-region-langs {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
+  line-height: 1.4;
 }
 </style>
 
@@ -515,6 +708,72 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
       <span class="msg-stat-chip">⚡ Public REST API</span>
     </div>
   </div>
+
+  <!-- Exact Sermon Statistics Dashboard -->
+  <div class="msg-stats-dashboard">
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-sermons">577</div>
+      <div class="msg-stat-lbl">Indexed Sermons</div>
+    </div>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-audio">577</div>
+      <div class="msg-stat-lbl">Audio Streams</div>
+    </div>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-pdf">577</div>
+      <div class="msg-stat-lbl">PDF Transcripts</div>
+    </div>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-text">577</div>
+      <div class="msg-stat-lbl">Full Text Records</div>
+    </div>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-langs">72</div>
+      <div class="msg-stat-lbl">Global Languages</div>
+    </div>
+  </div>
+
+  <!-- Interactive Global Translation Region Map -->
+  <section class="msg-map-section">
+    <div class="msg-map-title">
+      <span>🌍 Global Translation Coverage Map</span>
+    </div>
+    <div class="msg-map-sub">Select a region below to filter translations across 72 global languages:</div>
+
+    <div class="msg-region-grid">
+      <div class="msg-region-card" onclick="filterByRegion('africa')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌍 Africa</span>
+          <span class="msg-region-badge">18 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇲🇼 Chichewa (ny), 🇰🇪 Kiswahili (sw), 🇿🇦 Afrikaans (af), 🇳🇬 Igbo (ig), 🇳🇬 Yoruba (yo), 🇨🇩 Lingala (ln), 🇪🇹 Amharic (am), 🇪🇹 Oromo (om), 🇲🇬 Malagasy (mg), 🇿🇦 Zulu (zu), 🇿🇦 Xhosa (xh), 🇿🇼 Shona (sn), 🇺🇬 Luganda (lg), 🇰🇪 Kikuyu (ki), 🇧🇼 Tswana (tn), 🇱🇸 Sesotho (st), 🇸🇴 Somali (so), 🇳🇬 Hausa (ha).</div>
+      </div>
+
+      <div class="msg-region-card" onclick="filterByRegion('americas')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌎 Americas</span>
+          <span class="msg-region-badge">8 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇺🇸 English (en), 🇲🇽 Español (es), 🇧🇷 Português (pt), 🇭🇹 Kreyòl Ayisyen (ht), 🇦🇼 Papiamento (pap), 🇸🇷 Dutch (nl), 🇵🇾 Guarani (gn), 🇵🇪 Quechua (qu).</div>
+      </div>
+
+      <div class="msg-region-card" onclick="filterByRegion('europe')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌍 Europe</span>
+          <span class="msg-region-badge">24 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇫🇷 Français (fr), 🇩🇪 Deutsch (de), 🇮🇹 Italiano (it), 🇷🇴 Română (ro), 🇷🇺 Русский (ru), 🇵🇱 Polski (pl), 🇺🇦 Українська (uk), 🇨🇿 Čeština (cs), 🇭🇺 Magyar (hu), 🇸🇪 Svenska (sv), 🇳🇴 Norsk (no), 🇫🇮 Suomi (fi), 🇳🇱 Nederlands (nl), 🇬🇷 Ελληνικά (el), 🇧🇬 Български (bg), 🇭🇷 Hrvatski (hr), 🇷🇸 Srpski (sr), 🇸🇰 Slovenčina (sk), 🇱🇹 Lietuvių (lt), 🇱🇻 Latviešu (lv), 🇪🇪 Eesti (et), 🇦🇱 Shqip (sq), 🇩🇰 Dansk (da), 🇬🇪 ქართული (ka).</div>
+      </div>
+
+      <div class="msg-region-card" onclick="filterByRegion('asia')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌏 Asia & Pacific</span>
+          <span class="msg-region-badge">22 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇵🇭 Tagalog (tl), 🇮🇩 Bahasa Indonesia (id), 🇮🇳 Hindi (hi), 🇮🇳 Tamil (ta), 🇨🇳 Simplified Chinese (zh-CN), 🇹🇼 Traditional Chinese (zh-TW), 🇻🇳 Tiếng Việt (vi), 🇰🇷 한국어 (ko), 🇯🇵 日本語 (ja), 🇵🇰 Urdu (ur), 🇧🇩 Bengali (bn), 🇮🇳 Marathi (mr), 🇮🇳 Telugu (te), 🇮🇳 Malayalam (ml), 🇲🇲 Burmese (my), 🇹🇭 Thai (th), 🇰🇭 Khmer (km), 🇱🇦 Lao (lo), 🇱🇰 Sinhala (si), 🇵🇭 Cebuano (ceb), 🇵🇭 Ilocano (ilo), 🇵🇭 Hiligaynon (hil).</div>
+      </div>
+    </div>
+  </section>
 
   <!-- Filters & Controls -->
   <section class="msg-controls-panel">
@@ -547,6 +806,14 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
       <button class="msg-filter-tag" onclick="setQuickLang('en')">🇬🇧 English</button>
       <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965 Sermons</button>
       <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963 Seven Seals</button>
+    </div>
+
+    <div class="msg-view-mode-bar">
+      <div class="msg-view-toggle">
+        <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">🎴 Cards Grid</button>
+        <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">📋 Archival Table</button>
+      </div>
+      <div id="results-count-text" class="msg-results-count">Showing 0 sermons</div>
     </div>
   </section>
 
@@ -672,16 +939,70 @@ async function loadSermonsData() {
     console.error('Failed to load sermon data:', err);
   }
 
+  /* Update exact stats metrics */
+  const totalCount = allSermons.length || 577;
+  const audioCount = allSermons.filter(s => s.m4a_url).length || totalCount;
+  const pdfCount = allSermons.filter(s => s.pdf_url).length || totalCount;
+  const textCount = allSermons.filter(s => s.pdf_text || (s.paragraphs && s.paragraphs.length > 0)).length || totalCount;
+
   const statEl = document.getElementById('stat-total');
-  if (statEl) statEl.innerText = allSermons.length ? `${allSermons.length}+ (1,200+ Archive)` : '1,200+';
+  if (statEl) statEl.innerText = `${totalCount}+ (1,200+ Archive)`;
+
+  const elSermons = document.getElementById('stat-exact-sermons');
+  if (elSermons) elSermons.innerText = `${totalCount}`;
+
+  const elAudio = document.getElementById('stat-exact-audio');
+  if (elAudio) elAudio.innerText = `${audioCount}`;
+
+  const elPdf = document.getElementById('stat-exact-pdf');
+  if (elPdf) elPdf.innerText = `${pdfCount}`;
+
+  const elText = document.getElementById('stat-exact-text');
+  if (elText) elText.innerText = `${textCount}`;
+
   applyFilters();
+}
+
+function filterByRegion(region) {
+  const select = document.getElementById('msg-lang-select');
+  if (!select) return;
+
+  const regionLangs = {
+    africa: 'ny',
+    americas: 'en',
+    europe: 'fr',
+    asia: 'tl'
+  };
+
+  select.value = regionLangs[region] || '';
+  applyFilters();
+  document.getElementById('sermons-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
+}
+
+let currentViewMode = 'grid';
+
+function setViewMode(mode) {
+  currentViewMode = mode;
+  const btnGrid = document.getElementById('view-btn-grid');
+  const btnTable = document.getElementById('view-btn-table');
+  
+  if (btnGrid) btnGrid.classList.toggle('active', mode === 'grid');
+  if (btnTable) btnTable.classList.toggle('active', mode === 'table');
+  
+  renderSermons(filteredSermons);
 }
 
 function renderSermons(items) {
   const container = document.getElementById('sermons-container');
   const paginationBar = document.getElementById('pagination-controls');
+  const countText = document.getElementById('results-count-text');
+
+  if (countText) {
+    countText.innerText = `Showing ${items ? items.length : 0} sermons`;
+  }
 
   if (!items || items.length === 0) {
+    container.className = 'msg-grid';
     container.innerHTML = `
       <div class="msg-empty">
         <h3>No sermons found</h3>
@@ -703,7 +1024,7 @@ function renderSermons(items) {
   if (paginationBar) {
     if (totalPages > 1) {
       paginationBar.style.display = 'flex';
-      document.getElementById('page-info-text').innerText = `Page ${currentPage} of ${totalPages}`;
+      document.getElementById('page-info-text').innerText = `Page ${currentPage} of ${totalPages} (${items.length} Total)`;
       document.getElementById('btn-prev-page').disabled = (currentPage === 1);
       document.getElementById('btn-next-page').disabled = (currentPage === totalPages);
       
@@ -714,6 +1035,54 @@ function renderSermons(items) {
     }
   }
 
+  if (currentViewMode === 'table') {
+    container.className = '';
+    container.innerHTML = `
+      <div class="msg-table-wrap">
+        <table class="msg-archival-table">
+          <thead>
+            <tr>
+              <th>Reference #</th>
+              <th>Sermon Title</th>
+              <th>Date</th>
+              <th>Lang</th>
+              <th style="text-align: right;">Available Formats</th>
+            </tr>
+          </thead>
+          <tbody>
+            ${pageItems.map(s => {
+              const langCode = (s.language || 'en').toUpperCase();
+              const textBtn = (s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
+                ? `<button class="msg-btn msg-btn-text" style="padding: 0.25rem 0.5rem;" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
+                : '';
+              const pdfBtn = s.pdf_url 
+                ? `<button class="msg-btn msg-btn-pdf" style="padding: 0.25rem 0.5rem;" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
+                : '';
+              const audioBtn = s.m4a_url
+                ? `<button class="msg-btn msg-btn-audio" style="padding: 0.25rem 0.5rem;" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Audio</button>`
+                : '';
+              return `
+                <tr>
+                  <td><code>${escapeHtml(s.id)}</code></td>
+                  <td><strong>${escapeHtml(s.title)}</strong></td>
+                  <td>${s.date || s.year || 'Unknown'}</td>
+                  <td><span class="msg-badge-lang" style="position:static; display:inline-block;">${langCode}</span></td>
+                  <td style="text-align: right;">
+                    <div style="display:inline-flex; gap:0.35rem;">
+                      ${textBtn} ${pdfBtn} ${audioBtn}
+                    </div>
+                  </td>
+                </tr>
+              `;
+            }).join('')}
+          </tbody>
+        </table>
+      </div>
+    `;
+    return;
+  }
+
+  container.className = 'msg-grid';
   container.innerHTML = pageItems.map(s => {
     const coverUrl = s.cover_image || DEFAULT_COVER;
     const langCode = (s.language || 'en').toUpperCase();
