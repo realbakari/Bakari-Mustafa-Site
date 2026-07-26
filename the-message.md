@@ -10,9 +10,16 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 ---
 
 <style>
-/* Seamless Theme Integration for The Message Library */
+/* Seamless Theme Integration for The Message Library & Full Viewport Breakout */
 .msg-library-wrapper {
-  margin-top: 1.5rem;
+  margin-top: 1rem;
+  margin-left: calc(-50vw + 50%);
+  margin-right: calc(-50vw + 50%);
+  width: 100vw;
+  max-width: 100vw;
+  padding-left: clamp(1rem, 5vw, 4rem);
+  padding-right: clamp(1rem, 5vw, 4rem);
+  box-sizing: border-box;
 }
 
 .msg-header {
@@ -753,7 +760,8 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
       </div>
 
       <div class="msg-reader-controls-right">
-        <input type="text" id="reader-search-input" class="msg-input-box" style="width: 170px; padding: 0.35rem 0.65rem; font-size: 0.85rem;" placeholder="🔍 Find in text..." oninput="searchInTranscript(this.value)">
+        <button id="reader-audio-btn" class="msg-btn msg-btn-audio" style="padding: 0.35rem 0.75rem;" onclick="toggleReaderAudio()">🎧 Play Audio</button>
+        <input type="text" id="reader-search-input" class="msg-input-box" style="width: 160px; padding: 0.35rem 0.65rem; font-size: 0.85rem;" placeholder="🔍 Find in text..." oninput="searchInTranscript(this.value)">
 
         <div class="msg-reader-tabs">
           <button id="tab-btn-text" class="msg-tab-btn active" onclick="switchReaderTab('text')">📖 HTML Text</button>
@@ -1355,6 +1363,31 @@ function searchInTranscript(query) {
   });
 }
 
+function toggleReaderAudio() {
+  if (!currentReaderSermon) return;
+  const audioEl = document.getElementById('audio-element');
+  const btn = document.getElementById('reader-audio-btn');
+
+  let audioUrl = currentReaderSermon.m4aUrl;
+  if (!audioUrl && allSermons) {
+    const found = allSermons.find(s => s.id === currentReaderSermon.id);
+    if (found) audioUrl = found.m4a_url;
+  }
+
+  if (!audioUrl) {
+    alert('Audio stream recording is not available for this sermon.');
+    return;
+  }
+
+  if (audioEl.src && !audioEl.paused) {
+    audioEl.pause();
+    if (btn) btn.innerText = '🎧 Play Audio';
+  } else {
+    playAudio(currentReaderSermon.title, currentReaderSermon.id, currentReaderSermon.language, audioUrl);
+    if (btn) btn.innerText = '⏸ Pause Audio';
+  }
+}
+
 function adjustFontSize(delta) {
   currentReaderFontSize = Math.max(0.9, Math.min(1.6, currentReaderFontSize + (delta * 0.1)));
   const contentArea = document.getElementById('reader-content-area');
@@ -1368,6 +1401,7 @@ async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultT
   const subEl = document.getElementById('reader-sermon-sub');
   const downloadBtn = document.getElementById('reader-download-btn');
   const searchInput = document.getElementById('reader-search-input');
+  const audioBtn = document.getElementById('reader-audio-btn');
 
   currentReaderSermon = { title, id, date, pdfUrl, language };
 
@@ -1375,6 +1409,16 @@ async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultT
   if (subEl) subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'} • Language: ${language.toUpperCase()}`;
   if (downloadBtn) downloadBtn.href = pdfUrl || '#';
   if (searchInput) searchInput.value = '';
+
+  /* Sync audio button state */
+  const audioEl = document.getElementById('audio-element');
+  if (audioBtn) {
+    if (audioEl && !audioEl.paused && audioEl.src) {
+      audioBtn.innerText = '⏸ Pause Audio';
+    } else {
+      audioBtn.innerText = '🎧 Play Audio';
+    }
+  }
 
   populateReaderSermonSelect(id);
 
