@@ -555,17 +555,23 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
 /* Reading Canvas Themes: Light / Sepia / Dark */
 .msg-reader-main-content {
-  max-width: 1050px;
+  max-width: 1400px;
   width: 100%;
   margin: 0 auto;
-  padding: 2rem 1.5rem 6rem;
-  font-size: 1.25rem;
+  padding: 2.5rem 2rem 6rem;
+  font-size: 1.3rem;
   line-height: 1.95;
   color: var(--text-primary);
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   box-sizing: border-box;
   border-radius: 14px;
   transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.msg-reader-main-content.msg-reader-wide {
+  max-width: 100% !important;
+  padding-left: 1rem !important;
+  padding-right: 1rem !important;
 }
 
 .msg-reader-main-content.msg-theme-sepia {
@@ -1673,6 +1679,8 @@ async function switchReaderTab(tab, customParallelLang = null) {
   if (btnParallel) btnParallel.classList.toggle('active', tab === 'parallel');
   if (btnPdf) btnPdf.classList.toggle('active', tab === 'pdf');
 
+  contentArea.classList.toggle('msg-reader-wide', tab === 'parallel');
+
   if (parSelect) {
     parSelect.style.display = (tab === 'parallel') ? 'inline-block' : 'none';
   }
@@ -1701,10 +1709,24 @@ async function switchReaderTab(tab, customParallelLang = null) {
       const paras2 = (json2.data && json2.data.paragraphs) || [];
 
       const maxLen = Math.max(paras1.length, paras2.length);
-      if (maxLen > 0) {
+      if (maxLen > 0 || paras1.length > 0) {
         if (subEl) {
-          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Parallel Dual Reader: ${currentReaderSermon.language.toUpperCase()} ↔ ${selectedParallelLang.toUpperCase()} (${maxLen} Paragraphs)`;
+          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Parallel Dual Reader: ${currentReaderSermon.language.toUpperCase()} ↔ ${selectedParallelLang.toUpperCase()} (${paras1.length} Paragraphs)`;
         }
+
+        const secColumnHtml = paras2.length > 0 
+          ? paras2.map(p => `
+              <div class="msg-paragraph-item" id="p_sec_${p.number}">
+                <span class="msg-para-num">¶${p.number}</span>
+                <div class="msg-para-text">${escapeHtml(p.text)}</div>
+              </div>
+            `).join('')
+          : `
+            <div style="padding: 2.5rem 1.5rem; background-color: var(--bg-secondary, rgba(0,0,0,0.03)); border: 1px dashed var(--border-default, #cbd5e1); border-radius: 12px; text-align: center; color: var(--text-secondary);">
+              <p style="font-size: 1.1rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">ℹ️ Translation Not Available Yet</p>
+              <p style="font-size: 0.95rem; line-height: 1.6; margin: 0;">The <strong>${selectedParallelLang.toUpperCase()}</strong> text transcript is not available for this specific sermon. Please select another language from the dropdown above (e.g. 🇬🇧 EN, 🇫🇷 FR, 🇲🇽 ES, 🇩🇪 DE).</p>
+            </div>
+          `;
 
         let html = `
           <div class="msg-parallel-grid">
@@ -1719,12 +1741,7 @@ async function switchReaderTab(tab, customParallelLang = null) {
             </div>
             <div class="msg-parallel-col">
               <div class="msg-parallel-col-header">Parallel Translation (${selectedParallelLang.toUpperCase()})</div>
-              ${paras2.map(p => `
-                <div class="msg-paragraph-item" id="p_sec_${p.number}">
-                  <span class="msg-para-num">¶${p.number}</span>
-                  <div class="msg-para-text">${escapeHtml(p.text)}</div>
-                </div>
-              `).join('')}
+              ${secColumnHtml}
             </div>
           </div>
         `;
