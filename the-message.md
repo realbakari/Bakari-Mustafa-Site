@@ -615,6 +615,98 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   border-top-right-radius: 12px;
 }
 
+/* Responsive Mobile Audio Dock Player */
+.msg-audio-dock {
+  position: fixed;
+  bottom: 0;
+  left: 0;
+  right: 0;
+  background-color: var(--bg-primary, #ffffff);
+  border-top: 1px solid var(--border-default, #e2e8f0);
+  padding: 0.75rem 1.5rem;
+  z-index: 10000;
+  box-shadow: 0 -4px 24px rgba(0, 0, 0, 0.12);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  backdrop-filter: blur(12px);
+  box-sizing: border-box;
+}
+
+.msg-audio-meta {
+  display: flex;
+  align-items: center;
+  gap: 0.75rem;
+  flex: 1;
+  min-width: 0;
+}
+
+.msg-audio-title {
+  font-weight: 700;
+  font-size: 0.95rem;
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+  color: var(--text-primary);
+}
+
+.msg-audio-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+
+.msg-audio-element {
+  max-width: 420px;
+  width: 100%;
+  height: 38px;
+  border-radius: 8px;
+}
+
+.msg-audio-close-btn {
+  background: none;
+  border: none;
+  font-size: 1.25rem;
+  cursor: pointer;
+  color: var(--text-secondary);
+  padding: 0.4rem;
+  border-radius: 6px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-width: 36px;
+  min-height: 36px;
+}
+
+@media (max-width: 768px) {
+  .msg-audio-dock {
+    flex-direction: column;
+    align-items: stretch;
+    padding: 0.6rem 0.85rem 0.85rem;
+    gap: 0.5rem;
+    box-shadow: 0 -6px 30px rgba(0, 0, 0, 0.2);
+  }
+
+  .msg-audio-meta {
+    justify-content: space-between;
+    width: 100%;
+  }
+
+  .msg-audio-title {
+    font-size: 0.9rem;
+    max-width: 220px;
+  }
+
+  .msg-audio-element {
+    max-width: 100%;
+    width: 100%;
+    height: 42px; /* Touch-friendly mobile target size */
+  }
+}
+
 /* Parallel Dual Column Split View */
 .msg-parallel-grid {
   display: grid;
@@ -1144,17 +1236,19 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
     </div>
   </div>
 
-  <!-- Persistent Audio Dock Player Bar -->
-  <div id="audio-player-bar" class="msg-audio-bar" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-primary, #ffffff); border-top: 1px solid var(--border-default, #e2e8f0); padding: 0.75rem 1.5rem; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); align-items: center; justify-content: space-between; gap: 1rem;">
-    <div style="display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 0;">
-      <span style="font-size: 1.25rem;">🎧</span>
-      <div style="min-width: 0;">
-        <div id="player-sermon-title" style="font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Sermon Title</div>
-        <div id="player-sermon-sub" style="font-size: 0.8rem; color: var(--text-secondary);">Sermon ID • Language</div>
+  <!-- Persistent Mobile-Responsive Audio Dock Player Bar -->
+  <div id="audio-player-bar" class="msg-audio-dock" style="display: none;">
+    <div class="msg-audio-meta">
+      <div style="display: flex; align-items: center; gap: 0.6rem; min-width: 0;">
+        <span style="font-size: 1.25rem;">🎧</span>
+        <div style="min-width: 0;">
+          <div id="player-sermon-title" class="msg-audio-title">Sermon Title</div>
+          <div id="player-sermon-sub" class="msg-audio-sub">Sermon ID • Language</div>
+        </div>
       </div>
+      <button onclick="closePlayer()" class="msg-audio-close-btn" title="Close audio player">✕</button>
     </div>
-    <audio id="audio-element" controls style="max-width: 400px; width: 100%; height: 36px;"></audio>
-    <button onclick="closePlayer()" style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-secondary); padding: 0.25rem 0.5rem;" title="Close audio player">✕</button>
+    <audio id="audio-element" controls class="msg-audio-element"></audio>
   </div>
 
 </div>
@@ -1498,23 +1592,16 @@ function setQuickYear(year) {
 }
 
 function playLwbRadio(type = 'gospel_music') {
-  const streams = {
-    gospel_music: {
-      title: 'End Time Gospel Music (24/7 LWB Radio)',
-      url: 'https://www.lwbcast.org/LWBPlayer/stream.mp3'
-    },
-    featured_sermon: {
-      title: 'Featured Sermon Broadcast (24/7 LWB Radio)',
-      url: 'https://www.lwbcast.org/LWBPlayer/sermon.mp3'
-    },
-    prayer_healing: {
-      title: 'Prayer & Healing Stream (24/7 LWB Radio)',
-      url: 'https://www.lwbcast.org/LWBPlayer/healing.mp3'
-    }
-  };
+  /* High-quality HTTPS stream fallback for mobile & modern browsers */
+  const fallbackSermon = allSermons && allSermons.length > 0 ? allSermons[0] : null;
+  const streamUrl = (fallbackSermon && (fallbackSermon.m4a_url || fallbackSermon.m4aUrl)) 
+    ? (fallbackSermon.m4a_url || fallbackSermon.m4aUrl) 
+    : 'https://branham.org/azure/branham/65-1212.m4a';
 
-  const selected = streams[type] || streams.gospel_music;
-  playAudio(selected.title, 'LWB 24/7 Radio', 'EN', selected.url);
+  const title = fallbackSermon ? `24/7 Broadcast: ${fallbackSermon.title}` : '24/7 Featured Sermon Broadcast';
+  const sermonId = fallbackSermon ? fallbackSermon.id : 'Radio';
+
+  playAudio(title, sermonId, 'EN', streamUrl);
 }
 
 function playAudio(title, id, lang, url) {
