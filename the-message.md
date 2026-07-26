@@ -428,8 +428,57 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   overflow-y: auto;
   padding: 1.5rem;
   font-size: 1.05rem;
-  line-height: 1.7;
+  line-height: 1.75;
   color: var(--text-primary);
+}
+
+.msg-reader-tabs {
+  display: flex;
+  gap: 0.5rem;
+  background-color: var(--bg-secondary, rgba(0,0,0,0.04));
+  padding: 0.25rem;
+  border-radius: 8px;
+  border: 1px solid var(--border-default, rgba(0,0,0,0.1));
+}
+
+.msg-tab-btn {
+  padding: 0.35rem 0.75rem;
+  font-size: 0.85rem;
+  font-weight: 600;
+  border: none;
+  background: transparent;
+  color: var(--text-secondary);
+  border-radius: 6px;
+  cursor: pointer;
+  transition: all 0.2s ease;
+}
+
+.msg-tab-btn.active {
+  background-color: var(--bg-primary, #ffffff);
+  color: var(--accent-primary, #2563eb);
+  box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+.msg-paragraph-item {
+  margin-bottom: 1.25rem;
+  display: flex;
+  gap: 0.75rem;
+}
+
+.msg-para-num {
+  font-family: monospace;
+  font-size: 0.825rem;
+  font-weight: 700;
+  color: var(--accent-primary, #2563eb);
+  background-color: var(--bg-secondary, rgba(0,0,0,0.04));
+  padding: 0.15rem 0.4rem;
+  border-radius: 4px;
+  height: fit-content;
+  user-select: none;
+}
+
+.msg-para-text {
+  flex: 1;
 }
 
 .msg-reader-body iframe {
@@ -533,7 +582,11 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
           <div class="msg-reader-sub" id="reader-sermon-sub">ID • Date</div>
         </div>
         <div class="msg-reader-tools">
-          <a id="reader-download-btn" href="#" target="_blank" class="msg-btn msg-btn-pdf" style="padding: 0.35rem 0.75rem;">⬇ Download PDF</a>
+          <div class="msg-reader-tabs">
+            <button id="tab-btn-text" class="msg-tab-btn active" onclick="switchReaderTab('text')">📖 Text View</button>
+            <button id="tab-btn-pdf" class="msg-tab-btn" onclick="switchReaderTab('pdf')">📄 PDF View</button>
+          </div>
+          <a id="reader-download-btn" href="#" target="_blank" class="msg-btn msg-btn-pdf" style="padding: 0.35rem 0.75rem;">⬇ PDF</a>
           <button class="msg-close-player" onclick="closeReaderModal()" title="Close reader">✕</button>
         </div>
       </header>
@@ -645,7 +698,7 @@ function renderSermons(items) {
     const langCode = (s.language || 'en').toUpperCase();
     
     const readBtn = s.pdf_url 
-      ? `<button class="msg-btn msg-btn-pdf" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}')">📖 Read</button>`
+      ? `<button class="msg-btn msg-btn-pdf" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}')">📖 Read</button>`
       : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📖 Read</span>`;
       
     const audioBtn = s.m4a_url
@@ -734,21 +787,71 @@ function closePlayer() {
   bar.style.display = 'none';
 }
 
-function openReaderModal(title, id, date, pdfUrl) {
+let currentReaderSermon = null;
+
+async function openReaderModal(title, id, date, pdfUrl, language = 'en') {
   const modal = document.getElementById('reader-modal-backdrop');
   const titleEl = document.getElementById('reader-sermon-title');
   const subEl = document.getElementById('reader-sermon-sub');
-  const contentArea = document.getElementById('reader-content-area');
   const downloadBtn = document.getElementById('reader-download-btn');
 
+  currentReaderSermon = { title, id, date, pdfUrl, language };
   titleEl.innerText = title;
   subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'}`;
-  downloadBtn.href = pdfUrl;
+  downloadBtn.href = pdfUrl || '#';
 
-  /* Embed in-browser PDF reader iframe */
-  contentArea.innerHTML = `<iframe src="${pdfUrl}#toolbar=1" title="${escapeHtml(title)}"></iframe>`;
   modal.style.display = 'flex';
   document.body.style.overflow = 'hidden';
+
+  switchReaderTab('text');
+}
+
+async function switchReaderTab(tab) {
+  if (!currentReaderSermon) return;
+  const btnText = document.getElementById('tab-btn-text');
+  const btnPdf = document.getElementById('tab-btn-pdf');
+  const contentArea = document.getElementById('reader-content-area');
+
+  if (tab === 'pdf') {
+    btnText.classList.remove('active');
+    btnPdf.classList.add('active');
+    contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
+    return;
+  }
+
+  btnText.classList.add('active');
+  btnPdf.classList.remove('active');
+  contentArea.innerHTML = '<div style="text-align:center; padding: 3rem; color: var(--text-secondary);">📖 Loading transcript text...</div>';
+
+  try {
+    const res = await fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${currentReaderSermon.language}`);
+    if (res.ok) {
+      const json = await res.json();
+      const item = json.data || {};
+      if (item.paragraphs && item.paragraphs.length > 0) {
+        contentArea.innerHTML = item.paragraphs.map(p => `
+          <div class="msg-paragraph-item">
+            <span class="msg-para-num">¶${p.number}</span>
+            <div class="msg-para-text">${escapeHtml(p.text)}</div>
+          </div>
+        `).join('');
+        return;
+      } else if (item.full_text) {
+        contentArea.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.8;">${escapeHtml(item.full_text)}</div>`;
+        return;
+      }
+    }
+  } catch (e) {
+    console.warn('Could not load transcript text:', e);
+  }
+
+  /* Fallback to embedded PDF reader if text transcript is loading or unparsed */
+  contentArea.innerHTML = `
+    <div style="text-align:center; padding: 3rem 1rem;">
+      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Transcript is ready in PDF document view:</p>
+      <button class="msg-btn msg-btn-pdf" onclick="switchReaderTab('pdf')">📄 Open PDF Document Viewer</button>
+    </div>
+  `;
 }
 
 function closeReaderModal() {
