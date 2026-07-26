@@ -1501,15 +1501,15 @@ function playLwbRadio(type = 'gospel_music') {
   const streams = {
     gospel_music: {
       title: 'End Time Gospel Music (24/7 LWB Radio)',
-      url: 'http://stream.lwbcast.org:8000/stream.mp3'
+      url: 'https://www.lwbcast.org/LWBPlayer/stream.mp3'
     },
     featured_sermon: {
       title: 'Featured Sermon Broadcast (24/7 LWB Radio)',
-      url: 'http://stream.lwbcast.org:8000/sermon.mp3'
+      url: 'https://www.lwbcast.org/LWBPlayer/sermon.mp3'
     },
     prayer_healing: {
       title: 'Prayer & Healing Stream (24/7 LWB Radio)',
-      url: 'http://stream.lwbcast.org:8000/healing.mp3'
+      url: 'https://www.lwbcast.org/LWBPlayer/healing.mp3'
     }
   };
 
@@ -1523,11 +1523,30 @@ function playAudio(title, id, lang, url) {
   const subEl = document.getElementById('player-sermon-sub');
   const audioEl = document.getElementById('audio-element');
 
+  if (!audioEl) return;
+
+  /* Force HTTPS to avoid mixed content blocking */
+  let secureUrl = url || '';
+  if (secureUrl.startsWith('http://')) {
+    secureUrl = secureUrl.replace('http://', 'https://');
+  }
+
   titleEl.innerText = title;
   subEl.innerText = `Sermon ${id} • ${lang.toUpperCase()}`;
-  audioEl.src = url;
+  audioEl.src = secureUrl;
   bar.style.display = 'flex';
-  audioEl.play().catch(e => console.log('Audio autoplay blocked:', e));
+
+  audioEl.onerror = function() {
+    console.warn('Audio stream unavailable or blocked:', secureUrl);
+    subEl.innerText = `Sermon ${id} • Live Radio Stream Connecting...`;
+  };
+
+  const playPromise = audioEl.play();
+  if (playPromise !== undefined) {
+    playPromise.catch(e => {
+      console.log('Audio playback waiting for user click:', e);
+    });
+  }
 
   /* Live Audio Karaoke Paragraph & Sentence-by-Sentence Laser Reader */
   audioEl.ontimeupdate = function() {

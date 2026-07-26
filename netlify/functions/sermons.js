@@ -198,21 +198,21 @@ exports.handler = async (event) => {
             id: 'gospel_music',
             name: '24/7 End Time Gospel Music',
             genre: 'Gospel Music & Hymns',
-            stream_url: 'http://stream.lwbcast.org:8000/stream.mp3',
+            stream_url: 'https://www.lwbcast.org/LWBPlayer/stream.mp3',
             source_page: 'https://www.lwbcast.org/OtherTabs/Music.php'
           },
           {
             id: 'featured_sermon',
             name: '24/7 Featured Sermon Stream',
             genre: 'Sermon Broadcast',
-            stream_url: 'http://stream.lwbcast.org:8000/sermon.mp3',
+            stream_url: 'https://www.lwbcast.org/LWBPlayer/sermon.mp3',
             source_page: 'https://www.lwbcast.org/OtherTabs/Music.php'
           },
           {
             id: 'prayer_healing',
             name: '24/7 Prayer & Healing Stream',
             genre: 'Prayer & Healing',
-            stream_url: 'http://stream.lwbcast.org:8000/healing.mp3',
+            stream_url: 'https://www.lwbcast.org/LWBPlayer/healing.mp3',
             source_page: 'https://www.lwbcast.org/OtherTabs/Music.php'
           }
         ]
