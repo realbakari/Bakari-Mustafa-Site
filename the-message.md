@@ -466,10 +466,12 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   background-color: var(--bg-primary, #ffffff);
   border-radius: 16px;
   border: 1px solid var(--border-default, #e2e8f0);
-  margin-top: 1rem;
+  margin-top: 0.5rem;
   margin-bottom: 3rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.06);
+  min-height: 85vh;
+  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
   overflow: hidden;
+  width: 100%;
 }
 
 .msg-reader-toolbar {
@@ -508,16 +510,16 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 }
 
 .msg-reader-meta-title {
-  font-size: 1.25rem;
+  font-size: 1.5rem;
   font-weight: 800;
   color: var(--text-primary);
   margin: 0;
 }
 
 .msg-reader-meta-sub {
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   color: var(--text-secondary);
-  margin-top: 0.2rem;
+  margin-top: 0.25rem;
 }
 
 .msg-reader-controls-right {
@@ -539,21 +541,23 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 }
 
 .msg-reader-main-content {
-  max-width: 840px;
+  max-width: 1100px;
+  width: 100%;
   margin: 0 auto;
-  padding: 2.5rem 1.5rem 4rem;
-  font-size: 1.125rem;
-  line-height: 1.85;
+  padding: 2.5rem 2rem 6rem;
+  font-size: 1.25rem;
+  line-height: 1.9;
   color: var(--text-primary);
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
+  box-sizing: border-box;
 }
 
 .msg-paragraph-item {
-  margin-bottom: 1.5rem;
+  margin-bottom: 1.75rem;
   display: flex;
-  gap: 1rem;
-  padding: 0.5rem 0.75rem;
-  border-radius: 8px;
+  gap: 1.15rem;
+  padding: 0.75rem 1rem;
+  border-radius: 10px;
   transition: background-color 0.15s ease;
 }
 
@@ -563,11 +567,11 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
 .msg-para-num {
   font-family: monospace;
-  font-size: 0.85rem;
+  font-size: 0.9rem;
   font-weight: 700;
   color: var(--accent-primary, #2563eb);
-  background-color: var(--bg-secondary, rgba(0, 0, 0, 0.05));
-  padding: 0.2rem 0.5rem;
+  background-color: var(--bg-secondary, rgba(0, 0, 0, 0.06));
+  padding: 0.25rem 0.6rem;
   border-radius: 6px;
   height: fit-content;
   user-select: none;
@@ -575,6 +579,8 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
 .msg-para-text {
   flex: 1;
+  font-size: 1.25rem;
+  line-height: 1.9;
 }
 
 .msg-reader-tabs {
@@ -733,14 +739,22 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   <!-- Full Immersion Sermon Reader View (Hidden by default) -->
   <div id="full-reader-section" class="msg-full-reader" style="display: none;">
     <div class="msg-reader-toolbar">
-      <button class="msg-reader-back-btn" onclick="closeFullReader()">← Back to Library Catalogue</button>
+      <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
+        <button class="msg-reader-back-btn" onclick="closeFullReader()">← Library</button>
 
-      <div>
-        <h2 class="msg-reader-meta-title" id="reader-sermon-title">Sermon Title</h2>
-        <div class="msg-reader-meta-sub" id="reader-sermon-sub">ID • Date • Language</div>
+        <div style="display: flex; gap: 0.25rem;">
+          <button class="msg-btn msg-btn-text" id="reader-prev-btn" style="padding: 0.35rem 0.65rem;" onclick="navigateSermon(-1)">← Prev</button>
+          <button class="msg-btn msg-btn-text" id="reader-next-btn" style="padding: 0.35rem 0.65rem;" onclick="navigateSermon(1)">Next →</button>
+        </div>
+
+        <select id="reader-sermon-select" class="msg-select-box" style="max-width: 280px; padding: 0.35rem 0.65rem; font-size: 0.85rem;" onchange="onReaderSermonSelect(this.value)">
+          <!-- Loaded dynamically -->
+        </select>
       </div>
 
       <div class="msg-reader-controls-right">
+        <input type="text" id="reader-search-input" class="msg-input-box" style="width: 170px; padding: 0.35rem 0.65rem; font-size: 0.85rem;" placeholder="🔍 Find in text..." oninput="searchInTranscript(this.value)">
+
         <div class="msg-reader-tabs">
           <button id="tab-btn-text" class="msg-tab-btn active" onclick="switchReaderTab('text')">📖 HTML Text</button>
           <button id="tab-btn-pdf" class="msg-tab-btn" onclick="switchReaderTab('pdf')">📄 PDF Book View</button>
@@ -749,6 +763,11 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
         <button class="msg-font-btn" onclick="adjustFontSize(1)" title="Larger font">A+</button>
         <a id="reader-download-btn" href="#" target="_blank" class="msg-btn msg-btn-pdf" style="padding: 0.35rem 0.75rem;">⬇ PDF</a>
       </div>
+    </div>
+
+    <div style="padding: 1.25rem 1.5rem 0.5rem; max-width: 840px; margin: 0 auto;">
+      <h2 class="msg-reader-meta-title" id="reader-sermon-title">Sermon Title</h2>
+      <div class="msg-reader-meta-sub" id="reader-sermon-sub">ID • Date • Language</div>
     </div>
 
     <main class="msg-reader-main-content" id="reader-content-area">
@@ -1284,6 +1303,58 @@ function closePlayer() {
 let currentReaderSermon = null;
 let currentReaderFontSize = 1.125;
 
+function populateReaderSermonSelect(currentId) {
+  const select = document.getElementById('reader-sermon-select');
+  if (!select || !allSermons || allSermons.length === 0) return;
+
+  select.innerHTML = allSermons.map(s => `
+    <option value="${s.id}" ${s.id === currentId ? 'selected' : ''}>
+      ${s.id} — ${escapeHtml(s.title)}
+    </option>
+  `).join('');
+}
+
+function onReaderSermonSelect(sermonId) {
+  if (!allSermons || !sermonId) return;
+  const found = allSermons.find(s => s.id === sermonId);
+  if (found) {
+    const lang = currentReaderSermon ? currentReaderSermon.language : 'en';
+    openFullReader(found.title, found.id, found.date || found.year || '', found.pdf_url, lang, 'text');
+  }
+}
+
+function navigateSermon(direction) {
+  if (!currentReaderSermon || !allSermons || allSermons.length === 0) return;
+  const currentIndex = allSermons.findIndex(s => s.id === currentReaderSermon.id);
+  if (currentIndex === -1) return;
+
+  const targetIndex = currentIndex + direction;
+  if (targetIndex >= 0 && targetIndex < allSermons.length) {
+    const target = allSermons[targetIndex];
+    openFullReader(target.title, target.id, target.date || target.year || '', target.pdf_url, currentReaderSermon.language, 'text');
+  }
+}
+
+function searchInTranscript(query) {
+  query = (query || '').toLowerCase().trim();
+  const paraItems = document.querySelectorAll('#reader-content-area .msg-paragraph-item');
+
+  paraItems.forEach(item => {
+    const textEl = item.querySelector('.msg-para-text');
+    if (!textEl) return;
+    const text = textEl.textContent || '';
+    if (!query) {
+      item.style.display = 'flex';
+      item.style.backgroundColor = '';
+    } else if (text.toLowerCase().includes(query)) {
+      item.style.display = 'flex';
+      item.style.backgroundColor = 'var(--bg-secondary, rgba(37, 99, 235, 0.1))';
+    } else {
+      item.style.display = 'none';
+    }
+  });
+}
+
 function adjustFontSize(delta) {
   currentReaderFontSize = Math.max(0.9, Math.min(1.6, currentReaderFontSize + (delta * 0.1)));
   const contentArea = document.getElementById('reader-content-area');
@@ -1296,12 +1367,23 @@ async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultT
   const titleEl = document.getElementById('reader-sermon-title');
   const subEl = document.getElementById('reader-sermon-sub');
   const downloadBtn = document.getElementById('reader-download-btn');
+  const searchInput = document.getElementById('reader-search-input');
 
   currentReaderSermon = { title, id, date, pdfUrl, language };
 
   if (titleEl) titleEl.innerText = title;
   if (subEl) subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'} • Language: ${language.toUpperCase()}`;
   if (downloadBtn) downloadBtn.href = pdfUrl || '#';
+  if (searchInput) searchInput.value = '';
+
+  populateReaderSermonSelect(id);
+
+  /* Enable/disable prev/next buttons based on position */
+  const currentIndex = allSermons ? allSermons.findIndex(s => s.id === id) : -1;
+  const btnPrev = document.getElementById('reader-prev-btn');
+  const btnNext = document.getElementById('reader-next-btn');
+  if (btnPrev) btnPrev.disabled = (currentIndex <= 0);
+  if (btnNext) btnNext.disabled = (currentIndex === -1 || currentIndex >= allSermons.length - 1);
 
   if (catalogueSection) catalogueSection.style.display = 'none';
   if (readerSection) readerSection.style.display = 'block';
