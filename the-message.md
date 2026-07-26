@@ -635,14 +635,43 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   border-radius: 6px;
 /* Live Audio Active Reading Karaoke Highlight & Badge */
 .msg-paragraph-item.msg-para-active-reading {
-  background-color: var(--bg-secondary, rgba(37, 99, 235, 0.15)) !important;
+  background-color: var(--bg-secondary, rgba(37, 99, 235, 0.12)) !important;
   border-left: 5px solid var(--accent-primary, #2563eb) !important;
-  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.18);
+  box-shadow: 0 6px 20px rgba(37, 99, 235, 0.15);
   transition: all 0.25s ease;
 }
 
 .msg-para-active-reading .msg-para-text {
   font-weight: 500;
+}
+
+/* Live Karaoke Sentence-by-Sentence & Laser Line Reader */
+.msg-sentence {
+  transition: background-color 0.2s ease, color 0.2s ease, box-shadow 0.2s ease;
+  padding: 0.1rem 0.25rem;
+  border-radius: 4px;
+  position: relative;
+  display: inline;
+}
+
+.msg-sentence.active-sentence {
+  background-color: rgba(253, 224, 71, 0.65) !important;
+  color: #0f172a !important;
+  font-weight: 600;
+  border-bottom: 2px solid var(--accent-primary, #2563eb);
+  box-shadow: 0 2px 10px rgba(37, 99, 235, 0.25);
+}
+
+.msg-reader-main-content.msg-theme-dark .msg-sentence.active-sentence {
+  background-color: rgba(14, 165, 233, 0.4) !important;
+  color: #ffffff !important;
+  border-bottom: 2px solid #38bdf8;
+}
+
+.msg-reader-main-content.msg-theme-sepia .msg-sentence.active-sentence {
+  background-color: rgba(234, 179, 8, 0.4) !important;
+  color: #432818 !important;
+  border-bottom: 2px solid #854d0e;
 }
 
 .msg-karaoke-badge {
@@ -1480,34 +1509,50 @@ function playAudio(title, id, lang, url) {
   bar.style.display = 'flex';
   audioEl.play().catch(e => console.log('Audio autoplay blocked:', e));
 
-  /* Live Audio Karaoke Paragraph Follow & Auto-Scroll */
+  /* Live Audio Karaoke Paragraph & Sentence-by-Sentence Laser Reader */
   audioEl.ontimeupdate = function() {
     if (!audioEl.duration || audioEl.paused) return;
     const progress = audioEl.currentTime / audioEl.duration;
     const paraItems = document.querySelectorAll('#reader-content-area .msg-paragraph-item');
     if (paraItems.length === 0) return;
 
-    const activeIndex = Math.min(paraItems.length - 1, Math.floor(progress * paraItems.length));
+    const totalProgress = progress * paraItems.length;
+    const activeIndex = Math.min(paraItems.length - 1, Math.floor(totalProgress));
     const activeEl = paraItems[activeIndex];
 
-    if (activeEl && !activeEl.classList.contains('msg-para-active-reading')) {
-      document.querySelectorAll('.msg-para-active-reading').forEach(el => {
-        el.classList.remove('msg-para-active-reading');
-        const oldBadge = el.querySelector('.msg-karaoke-badge');
-        if (oldBadge) oldBadge.remove();
-      });
+    if (activeEl) {
+      if (!activeEl.classList.contains('msg-para-active-reading')) {
+        document.querySelectorAll('.msg-para-active-reading').forEach(el => {
+          el.classList.remove('msg-para-active-reading');
+          const oldBadge = el.querySelector('.msg-karaoke-badge');
+          if (oldBadge) oldBadge.remove();
+        });
 
-      activeEl.classList.add('msg-para-active-reading');
+        activeEl.classList.add('msg-para-active-reading');
 
-      const numEl = activeEl.querySelector('.msg-para-num');
-      if (numEl && !activeEl.querySelector('.msg-karaoke-badge')) {
-        const badge = document.createElement('span');
-        badge.className = 'msg-karaoke-badge';
-        badge.innerHTML = '🎙️ READING NOW';
-        numEl.after(badge);
+        const numEl = activeEl.querySelector('.msg-para-num');
+        if (numEl && !activeEl.querySelector('.msg-karaoke-badge')) {
+          const badge = document.createElement('span');
+          badge.className = 'msg-karaoke-badge';
+          badge.innerHTML = '🎙️ READING NOW';
+          numEl.after(badge);
+        }
+
+        activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
-      activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      /* Highlight active sentence / line of text inside paragraph */
+      const sentences = activeEl.querySelectorAll('.msg-sentence');
+      if (sentences.length > 0) {
+        const paraFraction = totalProgress - Math.floor(totalProgress);
+        const activeSentenceIdx = Math.min(sentences.length - 1, Math.floor(paraFraction * sentences.length));
+        const activeSentenceEl = sentences[activeSentenceIdx];
+
+        if (activeSentenceEl && !activeSentenceEl.classList.contains('active-sentence')) {
+          document.querySelectorAll('.msg-sentence.active-sentence').forEach(s => s.classList.remove('active-sentence'));
+          activeSentenceEl.classList.add('active-sentence');
+        }
+      }
     }
   };
 }
@@ -1855,7 +1900,7 @@ async function switchReaderTab(tab, customParallelLang = null) {
           return `
             <div class="msg-paragraph-item ${hlClass}" id="p${p.number}">
               <span class="msg-para-num" style="cursor:pointer;" onclick="toggleHighlight('${currentReaderSermon.id}', ${p.number})" title="Click to highlight paragraph">¶${p.number}</span>
-              <div class="msg-para-text">${escapeHtml(p.text)}</div>
+              <div class="msg-para-text">${formatKaraokeSentences(p.number, p.text)}</div>
               <button id="copy-btn-${p.number}" class="msg-copy-para-btn" onclick="copyQuote(${p.number}, '${escapeJs(p.text)}')">📋 Copy</button>
             </div>
           `;
@@ -1876,6 +1921,14 @@ async function switchReaderTab(tab, customParallelLang = null) {
       <button class="msg-btn msg-btn-pdf" onclick="switchReaderTab('pdf')">📄 Open PDF Book View</button>
     </div>
   `;
+}
+
+function formatKaraokeSentences(pNumber, text) {
+  if (!text) return '';
+  const sentences = text.match(/[^.!?]+[.!?]+(\s+|$)|[^.!?]+$/g) || [text];
+  return sentences.map((s, idx) => `
+    <span class="msg-sentence" id="s_${pNumber}_${idx}">${escapeHtml(s)}</span>
+  `).join('');
 }
 
 function escapeHtml(str) {
