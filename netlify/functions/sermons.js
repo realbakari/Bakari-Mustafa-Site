@@ -106,7 +106,7 @@ exports.handler = async (event) => {
       segments[2] === 'text'
     ) {
       const id = decodeURIComponent(segments[1]);
-      const result = getSermonText(id, params.language);
+      const result = await getSermonText(id, params.language);
 
       if (!result) {
         return notFound(`Sermon '${id}' text transcript not found`);

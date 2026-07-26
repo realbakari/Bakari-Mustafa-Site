@@ -130,22 +130,97 @@ function getSermonById(id, language = null) {
 }
 
 /**
+ * Fetch sermon paragraph blocks directly from Message Hub API
+ */
+async function fetchSermonBlocksFromMessageHub(id, language = 'en') {
+  const mhCode = language === 'ny' ? 'nya' : language;
+  const now = Math.floor(Date.now() / 1000);
+  const headers = {
+    timestamp: now.toString(),
+    expirationTime: (now + 300).toString(),
+    'User-Agent': 'TheMessageAPI/1.0',
+    Accept: 'application/json',
+  };
+
+  try {
+    const res = await fetch(`https://search.messagehub.info/api/languages/${mhCode}/sermons/${id}/blocks`, { headers });
+    if (!res.ok) return null;
+    const data = await res.json();
+
+    if (data && data.blocks && Array.isArray(data.blocks)) {
+      const paragraphs = data.blocks.map(b => ({
+        number: b.blockNumber,
+        text: (b.blockText || '').replace(/[\x00-\x1F\x7F-\x9F]/g, ' ').replace(/\s+/g, ' ').trim()
+      }));
+      const fullText = paragraphs.map(p => `¶${p.number} ${p.text}`).join('\n\n');
+      return {
+        id: data.dateCode || id,
+        title: data.title || id,
+        location: data.location || null,
+        language,
+        date: data.date || null,
+        full_text: fullText,
+        paragraphs,
+        source: 'messagehub'
+      };
+    }
+  } catch (err) {
+    console.warn(`Message Hub fetch error for ${id} (${language}):`, err.message);
+  }
+  return null;
+}
+
+/**
  * Get full transcript text and structured paragraphs for a sermon.
  */
-function getSermonText(id, language = null) {
+async function getSermonText(id, language = null) {
   const sermon = getSermonById(id, language);
-  if (!sermon) return null;
 
-  return {
-    id: sermon.id,
-    title: sermon.title,
-    language: sermon.language,
-    date: sermon.date,
-    pdf_url: sermon.pdf_url,
-    m4a_url: sermon.m4a_url,
-    full_text: sermon.pdf_text || null,
-    paragraphs: sermon.paragraphs || [],
-  };
+  if (sermon && (sermon.pdf_text || (sermon.paragraphs && sermon.paragraphs.length > 0))) {
+    return {
+      id: sermon.id,
+      title: sermon.title,
+      language: sermon.language,
+      date: sermon.date,
+      pdf_url: sermon.pdf_url,
+      m4a_url: sermon.m4a_url,
+      full_text: sermon.pdf_text || null,
+      paragraphs: sermon.paragraphs || [],
+      source: 'local'
+    };
+  }
+
+  /* Fallback: Fetch directly from Message Hub REST API */
+  const mhData = await fetchSermonBlocksFromMessageHub(id, language || (sermon ? sermon.language : 'en'));
+  if (mhData) {
+    return {
+      id: sermon ? sermon.id : mhData.id,
+      title: sermon ? sermon.title : mhData.title,
+      language: language || (sermon ? sermon.language : 'en'),
+      date: sermon ? sermon.date : mhData.date,
+      pdf_url: sermon ? sermon.pdf_url : null,
+      m4a_url: sermon ? sermon.m4a_url : null,
+      full_text: mhData.full_text,
+      paragraphs: mhData.paragraphs,
+      source: 'messagehub'
+    };
+  }
+
+  if (sermon) {
+    return {
+      id: sermon.id,
+      title: sermon.title,
+      language: sermon.language,
+      date: sermon.date,
+      pdf_url: sermon.pdf_url,
+      m4a_url: sermon.m4a_url,
+      full_text: sermon.pdf_text || null,
+      paragraphs: sermon.paragraphs || [],
+      source: 'local'
+    };
+  }
+
+  return null;
 }
 
 /**
@@ -266,7 +341,7 @@ function getStats() {
       : null,
     sermons_with_pdf: sermons.filter((s) => s.pdf_url).length,
     sermons_with_audio: sermons.filter((s) => s.m4a_url).length,
-    sermons_with_text: sermons.filter((s) => s.pdf_text).length,
+    sermons_with_text: sermons.filter((s) => s.pdf_text || (s.paragraphs && s.paragraphs.length > 0) || s.pdf_url).length,
   };
 }
 

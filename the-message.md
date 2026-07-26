@@ -706,76 +706,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
       <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">72</strong></span>
       <span class="msg-stat-chip">🌐 Global Multi-Lingual Archive</span>
       <span class="msg-stat-chip">⚡ Public REST API</span>
-    </div>
-  </div>
-
-  <!-- Exact Sermon Statistics Dashboard -->
-  <div class="msg-stats-dashboard">
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-sermons">577</div>
-      <div class="msg-stat-lbl">Indexed Sermons</div>
-    </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-audio">577</div>
-      <div class="msg-stat-lbl">Audio Streams</div>
-    </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-pdf">577</div>
-      <div class="msg-stat-lbl">PDF Transcripts</div>
-    </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-text">577</div>
-      <div class="msg-stat-lbl">Full Text Records</div>
-    </div>
-    <div class="msg-stat-card">
-      <div class="msg-stat-val" id="stat-exact-langs">72</div>
-      <div class="msg-stat-lbl">Global Languages</div>
-    </div>
-  </div>
-
-  <!-- Interactive Global Translation Region Map -->
-  <section class="msg-map-section">
-    <div class="msg-map-title">
-      <span>🌍 Global Translation Coverage Map</span>
-    </div>
-    <div class="msg-map-sub">Select a region below to filter translations across 72 global languages:</div>
-
-    <div class="msg-region-grid">
-      <div class="msg-region-card" onclick="filterByRegion('africa')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌍 Africa</span>
-          <span class="msg-region-badge">18 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇲🇼 Chichewa (ny), 🇰🇪 Kiswahili (sw), 🇿🇦 Afrikaans (af), 🇳🇬 Igbo (ig), 🇳🇬 Yoruba (yo), 🇨🇩 Lingala (ln), 🇪🇹 Amharic (am), 🇪🇹 Oromo (om), 🇲🇬 Malagasy (mg), 🇿🇦 Zulu (zu), 🇿🇦 Xhosa (xh), 🇿🇼 Shona (sn), 🇺🇬 Luganda (lg), 🇰🇪 Kikuyu (ki), 🇧🇼 Tswana (tn), 🇱🇸 Sesotho (st), 🇸🇴 Somali (so), 🇳🇬 Hausa (ha).</div>
-      </div>
-
-      <div class="msg-region-card" onclick="filterByRegion('americas')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌎 Americas</span>
-          <span class="msg-region-badge">8 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇺🇸 English (en), 🇲🇽 Español (es), 🇧🇷 Português (pt), 🇭🇹 Kreyòl Ayisyen (ht), 🇦🇼 Papiamento (pap), 🇸🇷 Dutch (nl), 🇵🇾 Guarani (gn), 🇵🇪 Quechua (qu).</div>
-      </div>
-
-      <div class="msg-region-card" onclick="filterByRegion('europe')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌍 Europe</span>
-          <span class="msg-region-badge">24 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇫🇷 Français (fr), 🇩🇪 Deutsch (de), 🇮🇹 Italiano (it), 🇷🇴 Română (ro), 🇷🇺 Русский (ru), 🇵🇱 Polski (pl), 🇺🇦 Українська (uk), 🇨🇿 Čeština (cs), 🇭🇺 Magyar (hu), 🇸🇪 Svenska (sv), 🇳🇴 Norsk (no), 🇫🇮 Suomi (fi), 🇳🇱 Nederlands (nl), 🇬🇷 Ελληνικά (el), 🇧🇬 Български (bg), 🇭🇷 Hrvatski (hr), 🇷🇸 Srpski (sr), 🇸🇰 Slovenčina (sk), 🇱🇹 Lietuvių (lt), 🇱🇻 Latviešu (lv), 🇪🇪 Eesti (et), 🇦🇱 Shqip (sq), 🇩🇰 Dansk (da), 🇬🇪 ქართული (ka).</div>
-      </div>
-
-      <div class="msg-region-card" onclick="filterByRegion('asia')">
-        <div class="msg-region-header">
-          <span class="msg-region-name">🌏 Asia & Pacific</span>
-          <span class="msg-region-badge">22 Languages</span>
-        </div>
-        <div class="msg-region-langs">🇵🇭 Tagalog (tl), 🇮🇩 Bahasa Indonesia (id), 🇮🇳 Hindi (hi), 🇮🇳 Tamil (ta), 🇨🇳 Simplified Chinese (zh-CN), 🇹🇼 Traditional Chinese (zh-TW), 🇻🇳 Tiếng Việt (vi), 🇰🇷 한국어 (ko), 🇯🇵 日本語 (ja), 🇵🇰 Urdu (ur), 🇧🇩 Bengali (bn), 🇮🇳 Marathi (mr), 🇮🇳 Telugu (te), 🇮🇳 Malayalam (ml), 🇲🇲 Burmese (my), 🇹🇭 Thai (th), 🇰🇭 Khmer (km), 🇱🇦 Lao (lo), 🇱🇰 Sinhala (si), 🇵🇭 Cebuano (ceb), 🇵🇭 Ilocano (ilo), 🇵🇭 Hiligaynon (hil).</div>
-      </div>
-    </div>
-  </section>
-
-  <!-- Filters & Controls -->
+    </div>  <!-- Filters & Controls (Primary Top Section) -->
   <section class="msg-controls-panel">
     <div class="msg-search-group">
       <input type="text" id="msg-search" class="msg-input-box" placeholder="Search title, date, or ID (e.g. 65-0718M)..." oninput="applyFilters()">
@@ -817,7 +748,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
     </div>
   </section>
 
-  <!-- Sermons Grid -->
+  <!-- Sermons Grid / Table Area -->
   <main class="msg-grid" id="sermons-container">
     <!-- Loaded dynamically -->
   </main>
@@ -829,25 +760,82 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
     <button id="btn-next-page" class="msg-btn" onclick="changePage(1)">Next →</button>
   </div>
 
-  <!-- Floating Audio Player -->
-  <div id="audio-player-bar" class="msg-player-dock" style="display: none;">
-    <div class="msg-player-details">
-      <div class="msg-player-title" id="player-sermon-title">Sermon Title</div>
-      <div class="msg-player-sub" id="player-sermon-sub">ID • Language</div>
+  <!-- Bottom Analytics & Region Map Section -->
+  <div class="msg-stats-dashboard" style="margin-top: 3rem;">
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-sermons">577</div>
+      <div class="msg-stat-lbl">Indexed Sermons</div>
     </div>
-    <div class="msg-player-controls">
-      <audio id="audio-element" controls autoplay></audio>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-audio">577</div>
+      <div class="msg-stat-lbl">Audio Streams</div>
     </div>
-    <button class="msg-close-player" onclick="closePlayer()" title="Close player">✕</button>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-pdf">577</div>
+      <div class="msg-stat-lbl">PDF Transcripts</div>
+    </div>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-text">577</div>
+      <div class="msg-stat-lbl">Full Text Records</div>
+    </div>
+    <div class="msg-stat-card">
+      <div class="msg-stat-val" id="stat-exact-langs">72</div>
+      <div class="msg-stat-lbl">Global Languages</div>
+    </div>
   </div>
+
+  <!-- Interactive Global Translation Region Map -->
+  <section class="msg-map-section">
+    <div class="msg-map-title">
+      <span>🌍 Global Translation Coverage Map</span>
+    </div>
+    <div class="msg-map-sub">Select a region below to filter translations across 72 global languages:</div>
+
+    <div class="msg-region-grid">
+      <div class="msg-region-card" onclick="filterByRegion('africa')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌍 Africa</span>
+          <span class="msg-region-badge">18 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇲🇼 Chichewa (ny), 🇰🇪 Kiswahili (sw), 🇿🇦 Afrikaans (af), 🇳🇬 Igbo (ig), 🇳🇬 Yoruba (yo), 🇨🇩 Lingala (ln)...</div>
+      </div>
+
+      <div class="msg-region-card" onclick="filterByRegion('americas')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌎 Americas</span>
+          <span class="msg-region-badge">8 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇺🇸 English (en), 🇲🇽 Español (es), 🇧🇷 Português (pt), 🇭🇹 Kreyòl Ayisyen (ht)...</div>
+      </div>
+
+      <div class="msg-region-card" onclick="filterByRegion('europe')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌍 Europe</span>
+          <span class="msg-region-badge">24 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇫🇷 Français (fr), 🇩🇪 Deutsch (de), 🇮🇹 Italiano (it), 🇷🇴 Română (ro), 🇷🇺 Русский (ru)...</div>
+      </div>
+
+      <div class="msg-region-card" onclick="filterByRegion('asia')">
+        <div class="msg-region-header">
+          <span class="msg-region-name">🌏 Asia & Pacific</span>
+          <span class="msg-region-badge">22 Languages</span>
+        </div>
+        <div class="msg-region-langs">🇵🇭 Tagalog (tl), 🇮🇩 Bahasa Indonesia (id), 🇮🇳 Hindi (hi), 🇮🇳 Tamil (ta), 🇨🇳 Chinese...</div>
+      </div>
+    </div>
+  </section>
 
   <!-- REST API Details Section -->
   <section class="msg-api-box">
-    <h3>⚡ Public JSON REST API</h3>
-    <p>Developers can fetch structured sermon metadata, PDF transcript links, and audio stream URLs directly from the site API:</p>
+    <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
+      <h3 style="margin: 0;">⚡ Public JSON REST API & Developer Docs</h3>
+      <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="padding: 0.45rem 0.95rem; font-weight: 700;">🚀 Open Interactive API Explorer & Full Docs →</a>
+    </div>
+    <p>Developers can fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST API:</p>
     <ul>
       <li><code>GET /api/messages?language=ny</code> — List Chichewa sermons</li>
-      <li><code>GET /api/messages/65-0718M</code> — Single sermon lookup</li>
+      <li><code>GET /api/messages/65-0718M/text</code> — Get sermon transcript & paragraphs</li>
       <li><code>GET /api/search?q=seven+seals</code> — Full-text search</li>
     </ul>
   </section>
@@ -918,6 +906,49 @@ async function loadLanguagesData() {
   }
 }
 
+async function loadStatsData() {
+  try {
+    let stats = null;
+    try {
+      const res = await fetch('/api/stats');
+      if (res.ok) {
+        const json = await res.json();
+        stats = json.data || json;
+      }
+    } catch (e) {
+      /* API route un-routed locally */
+    }
+
+    if (stats) {
+      const totalCount = stats.total_sermons || allSermons.length || 577;
+      const audioCount = stats.sermons_with_audio || totalCount;
+      const pdfCount = stats.sermons_with_pdf || totalCount;
+      const textCount = stats.sermons_with_text || totalCount;
+      const langCount = stats.available_languages || stats.total_languages || 72;
+
+      const statEl = document.getElementById('stat-total');
+      if (statEl) statEl.innerText = `${totalCount}+ (1,200+ Archive)`;
+
+      const elSermons = document.getElementById('stat-exact-sermons');
+      if (elSermons) elSermons.innerText = `${totalCount}`;
+
+      const elAudio = document.getElementById('stat-exact-audio');
+      if (elAudio) elAudio.innerText = `${audioCount}`;
+
+      const elPdf = document.getElementById('stat-exact-pdf');
+      if (elPdf) elPdf.innerText = `${pdfCount}`;
+
+      const elText = document.getElementById('stat-exact-text');
+      if (elText) elText.innerText = `${textCount}`;
+
+      const elLangs = document.getElementById('stat-exact-langs');
+      if (elLangs) elLangs.innerText = `${langCount}`;
+    }
+  } catch (err) {
+    console.warn('Could not load API stats:', err);
+  }
+}
+
 async function loadSermonsData() {
   await loadLanguagesData();
   try {
@@ -939,7 +970,7 @@ async function loadSermonsData() {
     console.error('Failed to load sermon data:', err);
   }
 
-  /* Update exact stats metrics */
+  /* Update stats from API or dataset */
   const totalCount = allSermons.length || 577;
   const audioCount = allSermons.filter(s => s.m4a_url).length || totalCount;
   const pdfCount = allSermons.filter(s => s.pdf_url).length || totalCount;
@@ -960,6 +991,7 @@ async function loadSermonsData() {
   const elText = document.getElementById('stat-exact-text');
   if (elText) elText.innerText = `${textCount}`;
 
+  await loadStatsData();
   applyFilters();
 }
 
