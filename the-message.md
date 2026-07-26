@@ -10,81 +10,45 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 ---
 
 <style>
-/* Library Specific Styles */
-.sermon-library-container {
-  max-width: 1100px;
-  margin: 0 auto;
-  font-family: system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+/* Seamless Theme Integration for The Message Library */
+.msg-library-wrapper {
+  margin-top: 1.5rem;
 }
 
-.library-hero {
-  text-align: center;
-  padding: 2.5rem 1rem 2rem;
-  background: linear-gradient(135deg, #1e293b 0%, #0f172a 100%);
-  border-radius: 16px;
-  color: #ffffff;
+.msg-header {
   margin-bottom: 2rem;
-  box-shadow: 0 10px 30px rgba(0, 0, 0, 0.15);
-  position: relative;
-  overflow: hidden;
 }
 
-.library-hero::before {
-  content: '';
-  position: absolute;
-  top: -50%;
-  left: -50%;
-  width: 200%;
-  height: 200%;
-  background: radial-gradient(circle, rgba(59, 130, 246, 0.1) 0%, transparent 60%);
-  pointer-events: none;
-}
-
-.library-hero h1 {
-  font-size: 2.5rem;
-  font-weight: 800;
-  margin-bottom: 0.75rem;
-  color: #ffffff;
-  letter-spacing: -0.025em;
-}
-
-.library-hero p {
-  font-size: 1.1rem;
-  color: #94a3b8;
-  max-width: 680px;
-  margin: 0 auto 1.5rem;
-  line-height: 1.6;
-}
-
-.hero-badges {
+.msg-stats-bar {
   display: flex;
-  justify-content: center;
-  gap: 0.75rem;
   flex-wrap: wrap;
+  gap: 0.75rem;
+  margin-top: 1.25rem;
+  margin-bottom: 0.5rem;
 }
 
-.hero-badge {
+.msg-stat-chip {
   display: inline-flex;
   align-items: center;
   gap: 0.4rem;
   padding: 0.35rem 0.85rem;
-  background: rgba(255, 255, 255, 0.08);
-  backdrop-filter: blur(8px);
-  border: 1px solid rgba(255, 255, 255, 0.12);
-  border-radius: 9999px;
-  font-size: 0.85rem;
-  color: #cbd5e1;
+  border-radius: 999px;
+  font-size: 0.825rem;
+  font-weight: 500;
+  background-color: var(--bg-secondary, rgba(0,0,0,0.04));
+  border: 1px solid var(--border-default, rgba(0,0,0,0.1));
+  color: var(--text-primary);
 }
 
-.hero-badge strong {
-  color: #60a5fa;
+.msg-stat-chip strong {
+  color: var(--accent-primary, #2563eb);
 }
 
-/* Search & Filters Bar */
-.filter-bar {
-  background: #f8fafc;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+/* Controls & Filter Panel */
+.msg-controls-panel {
+  background-color: var(--bg-secondary, #f8fafc);
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 12px;
   padding: 1.25rem;
   margin-bottom: 2rem;
   display: flex;
@@ -92,362 +56,338 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   gap: 1rem;
 }
 
-body.dark-mode .filter-bar,
-html[data-theme="dark"] .filter-bar {
-  background: #1e293b;
-  border-color: #334155;
-}
-
-.search-row {
-  display: flex;
+.msg-search-group {
+  display: grid;
+  grid-template-columns: 1fr auto auto;
   gap: 0.75rem;
-  flex-wrap: wrap;
 }
 
-.search-input-wrapper {
-  flex: 1;
-  min-width: 260px;
-  position: relative;
+@media (max-width: 640px) {
+  .msg-search-group {
+    grid-template-columns: 1fr;
+  }
 }
 
-.search-input-wrapper input {
+.msg-input-box {
   width: 100%;
-  padding: 0.75rem 1rem 0.75rem 2.75rem;
-  font-size: 1rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  background: #ffffff;
-  color: #1e293b;
-  transition: all 0.2s ease;
+  padding: 0.65rem 1rem;
+  font-size: 0.95rem;
+  border: 1px solid var(--border-default, #cbd5e1);
+  border-radius: 8px;
+  background-color: var(--bg-primary, #ffffff);
+  color: var(--text-primary, #0f172a);
   box-sizing: border-box;
+  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
-.search-input-wrapper input:focus {
+.msg-input-box:focus {
   outline: none;
-  border-color: #3b82f6;
+  border-color: var(--accent-primary, #3b82f6);
   box-shadow: 0 0 0 3px rgba(59, 130, 246, 0.15);
 }
 
-.search-icon {
-  position: absolute;
-  left: 0.9rem;
-  top: 50%;
-  transform: translateY(-50%);
-  color: #94a3b8;
-  pointer-events: none;
-}
-
-.filter-select {
-  padding: 0.75rem 1rem;
-  font-size: 0.95rem;
-  border: 1px solid #cbd5e1;
-  border-radius: 10px;
-  background: #ffffff;
-  color: #334155;
+.msg-select-box {
+  padding: 0.65rem 1rem;
+  font-size: 0.9rem;
+  border: 1px solid var(--border-default, #cbd5e1);
+  border-radius: 8px;
+  background-color: var(--bg-primary, #ffffff);
+  color: var(--text-primary, #0f172a);
   cursor: pointer;
-  min-width: 140px;
 }
 
-.quick-pills {
+.msg-quick-tags {
   display: flex;
+  align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  align-items: center;
+  font-size: 0.85rem;
 }
 
-.pill-label {
-  font-size: 0.85rem;
+.msg-tag-label {
   font-weight: 600;
-  color: #64748b;
+  color: var(--text-secondary, #64748b);
   margin-right: 0.25rem;
 }
 
-.pill-btn {
-  padding: 0.35rem 0.75rem;
-  border-radius: 9999px;
-  font-size: 0.825rem;
+.msg-filter-tag {
+  padding: 0.3rem 0.75rem;
+  border-radius: 999px;
+  font-size: 0.8rem;
   font-weight: 500;
-  border: 1px solid #cbd5e1;
-  background: #ffffff;
-  color: #475569;
+  border: 1px solid var(--border-default, #cbd5e1);
+  background-color: var(--bg-primary, #ffffff);
+  color: var(--text-primary, #334155);
   cursor: pointer;
   transition: all 0.15s ease;
 }
 
-.pill-btn:hover, .pill-btn.active {
-  background: #3b82f6;
+.msg-filter-tag:hover,
+.msg-filter-tag.active {
+  background-color: var(--accent-primary, #2563eb);
   color: #ffffff;
-  border-color: #3b82f6;
+  border-color: var(--accent-primary, #2563eb);
 }
 
-/* Sermon Cards Grid */
-.sermons-grid {
+/* Grid Layout for Sermons */
+.msg-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(290px, 1fr));
   gap: 1.5rem;
   margin-bottom: 2.5rem;
 }
 
-.sermon-card {
-  background: #ffffff;
-  border: 1px solid #e2e8f0;
-  border-radius: 14px;
+.msg-card {
+  background-color: var(--bg-primary, #ffffff);
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 12px;
   overflow: hidden;
   display: flex;
   flex-direction: column;
   transition: transform 0.2s ease, box-shadow 0.2s ease;
-  box-shadow: 0 4px 6px -1px rgba(0, 0, 0, 0.05);
 }
 
-.sermon-card:hover {
-  transform: translateY(-4px);
-  box-shadow: 0 12px 20px -3px rgba(0, 0, 0, 0.1);
+.msg-card:hover {
+  transform: translateY(-3px);
+  box-shadow: 0 8px 16px rgba(0, 0, 0, 0.08);
 }
 
-.card-cover {
+.msg-cover-wrap {
   position: relative;
   width: 100%;
-  height: 170px;
-  background: #0f172a;
+  height: 160px;
+  background-color: var(--bg-secondary, #0f172a);
   overflow: hidden;
 }
 
-.card-cover img {
+.msg-cover-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
   transition: transform 0.3s ease;
 }
 
-.sermon-card:hover .card-cover img {
-  transform: scale(1.05);
+.msg-card:hover .msg-cover-wrap img {
+  transform: scale(1.04);
 }
 
-.card-badge-id {
+.msg-badge-id {
   position: absolute;
-  top: 0.75rem;
-  left: 0.75rem;
+  top: 0.6rem;
+  left: 0.6rem;
   background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(6px);
+  backdrop-filter: blur(4px);
   color: #60a5fa;
   font-family: monospace;
   font-weight: 700;
-  font-size: 0.8rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
-  border: 1px solid rgba(255, 255, 255, 0.15);
+  font-size: 0.775rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
 }
 
-.card-badge-lang {
+.msg-badge-lang {
   position: absolute;
-  top: 0.75rem;
-  right: 0.75rem;
-  background: #2563eb;
+  top: 0.6rem;
+  right: 0.6rem;
+  background: var(--accent-primary, #2563eb);
   color: #ffffff;
   font-weight: 700;
-  font-size: 0.75rem;
-  padding: 0.25rem 0.6rem;
-  border-radius: 6px;
+  font-size: 0.725rem;
+  padding: 0.2rem 0.55rem;
+  border-radius: 4px;
   text-transform: uppercase;
 }
 
-.card-body {
-  padding: 1.25rem;
+.msg-card-content {
+  padding: 1.15rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
-.card-title {
-  font-size: 1.1rem;
+.msg-card-title {
+  font-size: 1.05rem;
   font-weight: 700;
-  color: #0f172a;
-  line-height: 1.4;
-  margin-bottom: 0.5rem;
+  line-height: 1.35;
+  color: var(--text-primary);
+  margin-bottom: 0.4rem;
 }
 
-.card-meta {
-  font-size: 0.85rem;
-  color: #64748b;
-  display: flex;
-  align-items: center;
-  gap: 0.5rem;
+.msg-card-meta {
+  font-size: 0.825rem;
+  color: var(--text-secondary);
   margin-bottom: 1rem;
 }
 
-.card-actions {
+.msg-card-actions {
   margin-top: auto;
   display: flex;
   gap: 0.5rem;
   padding-top: 0.75rem;
-  border-top: 1px solid #f1f5f9;
+  border-top: 1px solid var(--border-default, #f1f5f9);
 }
 
-.btn-action {
+.msg-btn {
   flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.55rem 0.75rem;
-  font-size: 0.85rem;
+  padding: 0.5rem 0.75rem;
+  font-size: 0.825rem;
   font-weight: 600;
-  border-radius: 8px;
+  border-radius: 6px;
   text-decoration: none !important;
   transition: all 0.15s ease;
   cursor: pointer;
-  border: none;
+  border: 1px solid var(--border-default, #cbd5e1);
 }
 
-.btn-pdf {
-  background: #eff6ff;
-  color: #1d4ed8;
+.msg-btn-pdf {
+  background-color: var(--bg-secondary, #eff6ff);
+  color: var(--text-primary);
 }
 
-.btn-pdf:hover {
-  background: #dbeafe;
-}
-
-.btn-audio {
-  background: #10b981;
+.msg-btn-pdf:hover {
+  background-color: var(--accent-primary, #3b82f6);
   color: #ffffff;
+  border-color: var(--accent-primary, #3b82f6);
 }
 
-.btn-audio:hover {
-  background: #059669;
+.msg-btn-audio {
+  background-color: #10b981;
+  color: #ffffff;
+  border-color: #10b981;
 }
 
-.btn-disabled {
+.msg-btn-audio:hover {
+  background-color: #059669;
+  border-color: #059669;
+}
+
+.msg-btn-disabled {
   opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
 }
 
-/* Inline Audio Player Bar */
-.sticky-player-bar {
+/* Audio Player Floating Dock */
+.msg-player-dock {
   position: fixed;
-  bottom: 1.5rem;
+  bottom: 1.25rem;
   left: 50%;
   transform: translateX(-50%);
-  width: 90%;
-  max-width: 700px;
-  background: #0f172a;
-  border: 1px solid #334155;
-  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.4);
-  border-radius: 16px;
-  padding: 1rem 1.25rem;
-  color: #ffffff;
+  width: calc(100% - 2rem);
+  max-width: 680px;
+  background-color: var(--bg-primary, #0f172a);
+  border: 1px solid var(--border-default, #334155);
+  box-shadow: 0 12px 30px rgba(0, 0, 0, 0.25);
+  border-radius: 12px;
+  padding: 0.85rem 1.15rem;
+  color: var(--text-primary);
   display: flex;
   align-items: center;
   gap: 1rem;
   z-index: 1000;
-  animation: slideUp 0.3s cubic-bezier(0.16, 1, 0.3, 1);
 }
 
-@keyframes slideUp {
-  from { transform: translate(-50%, 100%); opacity: 0; }
-  to { transform: translate(-50%, 0); opacity: 1; }
-}
-
-.player-info {
+.msg-player-details {
   flex: 1;
   min-width: 0;
 }
 
-.player-title {
-  font-size: 0.95rem;
+.msg-player-title {
+  font-size: 0.9rem;
   font-weight: 700;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
 }
 
-.player-sub {
-  font-size: 0.8rem;
-  color: #94a3b8;
+.msg-player-sub {
+  font-size: 0.775rem;
+  color: var(--text-secondary);
 }
 
-.player-audio {
+.msg-player-controls audio {
   height: 36px;
   outline: none;
 }
 
-.close-player {
+.msg-close-player {
   background: transparent;
   border: none;
-  color: #94a3b8;
-  font-size: 1.25rem;
+  color: var(--text-secondary);
+  font-size: 1.2rem;
   cursor: pointer;
   padding: 0.2rem;
 }
 
-.close-player:hover {
-  color: #ffffff;
+.msg-close-player:hover {
+  color: var(--text-primary);
 }
 
-/* Empty State */
-.empty-state {
-  text-align: center;
-  padding: 4rem 1rem;
-  color: #64748b;
-  grid-column: 1 / -1;
-}
-
-.empty-state h3 {
-  font-size: 1.3rem;
-  margin-bottom: 0.5rem;
-  color: #334155;
-}
-
-/* API Banner */
-.api-banner {
-  background: #0f172a;
-  border-radius: 12px;
-  padding: 1.5rem;
-  color: #94a3b8;
-  font-family: monospace;
-  font-size: 0.875rem;
+/* API Info Box */
+.msg-api-box {
+  background-color: var(--bg-secondary, #f8fafc);
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 10px;
+  padding: 1.25rem;
   margin-top: 3rem;
+  font-size: 0.875rem;
 }
 
-.api-banner h4 {
-  color: #60a5fa;
-  font-family: sans-serif;
+.msg-api-box h3 {
+  font-size: 1.05rem;
+  margin-top: 0;
   margin-bottom: 0.5rem;
 }
 
-.api-code {
-  color: #a7f3d0;
+/* Pagination Bar */
+.msg-pagination-bar {
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  gap: 1rem;
+  margin: 2rem 0;
+}
+
+.msg-page-info {
+  font-size: 0.9rem;
+  font-weight: 600;
+  color: var(--text-secondary, #64748b);
+}
+
+.msg-empty {
+  text-align: center;
+  padding: 3rem 1rem;
+  color: var(--text-secondary);
+  grid-column: 1 / -1;
 }
 </style>
 
-<div class="sermon-library-container">
+<div class="msg-library-wrapper">
 
-  <!-- Hero Header -->
-  <header class="library-hero">
-    <h1>The Message Sermon Library</h1>
-    <p>Explore, listen to, and download transcripts of over 1,200 sermons by William Marrion Branham translated into Chichewa, English, French, and over 40 languages worldwide.</p>
-    
-    <div class="hero-badges">
-      <span class="hero-badge">📖 Total Sermons: <strong id="stat-total">595+</strong></span>
-      <span class="hero-badge">🌍 Languages: <strong id="stat-langs">42</strong></span>
-      <span class="hero-badge">🇲🇼 Chichewa Included</span>
-      <span class="hero-badge">⚡ Public JSON API Available</span>
+  <!-- Site Layout Page Header -->
+  <div class="page-header msg-header">
+    <p class="page-kicker">Digital Library & Archives</p>
+    <h1>The Message</h1>
+    <p class="page-subtitle">Audio recordings, PDF transcripts, and multi-lingual catalogues of William Marrion Branham's sermons, including Chichewa translations.</p>
+
+    <div class="msg-stats-bar">
+      <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">595+</strong></span>
+      <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">42</strong></span>
+      <span class="msg-stat-chip">🇲🇼 Chichewa Included</span>
+      <span class="msg-stat-chip">⚡ Public REST API</span>
     </div>
-  </header>
+  </div>
 
-  <!-- Search & Filter Controls -->
-  <section class="filter-bar">
-    <div class="search-row">
-      <div class="search-input-wrapper">
-        <svg class="search-icon" width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-          <circle cx="11" cy="11" r="8"></circle>
-          <line x1="21" y1="21" x2="16.65" y2="16.65"></line>
-        </svg>
-        <input type="text" id="library-search" placeholder="Search sermons by title, ID (e.g. 65-0718M), or topic..." oninput="handleSearch()">
-      </div>
+  <!-- Filters & Controls -->
+  <section class="msg-controls-panel">
+    <div class="msg-search-group">
+      <input type="text" id="msg-search" class="msg-input-box" placeholder="Search title, date, or ID (e.g. 65-0718M)..." oninput="applyFilters()">
 
-      <select id="lang-select" class="filter-select" onchange="applyFilters()">
+      <select id="msg-lang-select" class="msg-select-box" onchange="applyFilters()">
         <option value="">All Languages</option>
         <option value="en" selected>English</option>
         <option value="ny">Chichewa (Nyanja)</option>
@@ -457,7 +397,7 @@ html[data-theme="dark"] .filter-bar {
         <option value="ru">Русский</option>
       </select>
 
-      <select id="year-select" class="filter-select" onchange="applyFilters()">
+      <select id="msg-year-select" class="msg-select-box" onchange="applyFilters()">
         <option value="">All Years</option>
         <option value="1965">1965</option>
         <option value="1964">1964</option>
@@ -465,66 +405,71 @@ html[data-theme="dark"] .filter-bar {
       </select>
     </div>
 
-    <div class="quick-pills">
-      <span class="pill-label">Quick Filters:</span>
-      <button class="pill-btn active" onclick="setQuickLang('')">All</button>
-      <button class="pill-btn" onclick="setQuickLang('ny')">🇲🇼 Chichewa</button>
-      <button class="pill-btn" onclick="setQuickLang('en')">🇬🇧 English</button>
-      <button class="pill-btn" onclick="setQuickYear('1965')">1965 Sermons</button>
-      <button class="pill-btn" onclick="setQuickYear('1963')">1963 Seven Seals Year</button>
+    <div class="msg-quick-tags">
+      <span class="msg-tag-label">Quick Filters:</span>
+      <button class="msg-filter-tag active" onclick="setQuickLang('')">All</button>
+      <button class="msg-filter-tag" onclick="setQuickLang('ny')">🇲🇼 Chichewa</button>
+      <button class="msg-filter-tag" onclick="setQuickLang('en')">🇬🇧 English</button>
+      <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965 Sermons</button>
+      <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963 Seven Seals</button>
     </div>
   </section>
 
   <!-- Sermons Grid -->
-  <main class="sermons-grid" id="sermons-container">
-    <!-- Loaded dynamically via JavaScript -->
+  <main class="msg-grid" id="sermons-container">
+    <!-- Loaded dynamically -->
   </main>
 
-  <!-- Sticky Audio Player -->
-  <div id="audio-player-bar" class="sticky-player-bar" style="display: none;">
-    <div class="player-info">
-      <div class="player-title" id="player-sermon-title">Sermon Title</div>
-      <div class="player-sub" id="player-sermon-sub">ID • Language</div>
-    </div>
-    <audio id="audio-element" class="player-audio" controls autoplay></audio>
-    <button class="close-player" onclick="closePlayer()" title="Close player">✕</button>
+  <!-- Pagination Controls -->
+  <div id="pagination-controls" class="msg-pagination-bar" style="display: none;">
+    <button id="btn-prev-page" class="msg-btn" onclick="changePage(-1)">← Previous</button>
+    <span id="page-info-text" class="msg-page-info">Page 1 of 1</span>
+    <button id="btn-next-page" class="msg-btn" onclick="changePage(1)">Next →</button>
   </div>
 
-  <!-- Developer API Banner -->
-  <footer class="api-banner">
-    <h4>⚡ Developer REST API</h4>
-    <p>You can query this sermon catalogue directly via JSON endpoints:</p>
-    <code>
-      GET <span class="api-code">/api/messages?language=ny</span><br>
-      GET <span class="api-code">/api/messages/65-0718M</span><br>
-      GET <span class="api-code">/api/search?q=seven+seals</span>
-    </code>
-  </footer>
+  <!-- Floating Audio Player -->
+  <div id="audio-player-bar" class="msg-player-dock" style="display: none;">
+    <div class="msg-player-details">
+      <div class="msg-player-title" id="player-sermon-title">Sermon Title</div>
+      <div class="msg-player-sub" id="player-sermon-sub">ID • Language</div>
+    </div>
+    <div class="msg-player-controls">
+      <audio id="audio-element" controls autoplay></audio>
+    </div>
+    <button class="msg-close-player" onclick="closePlayer()" title="Close player">✕</button>
+  </div>
+
+  <!-- REST API Details Section -->
+  <section class="msg-api-box">
+    <h3>⚡ Public JSON REST API</h3>
+    <p>Developers can fetch structured sermon metadata, PDF transcript links, and audio stream URLs directly from the site API:</p>
+    <ul>
+      <li><code>GET /api/messages?language=ny</code> — List Chichewa sermons</li>
+      <li><code>GET /api/messages/65-0718M</code> — Single sermon lookup</li>
+      <li><code>GET /api/search?q=seven+seals</code> — Full-text search</li>
+    </ul>
+  </section>
 
 </div>
 
-<!-- Data Loading & Interactive Client Logic -->
 <script>
 const DEFAULT_COVER = "https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg";
 let allSermons = [];
 let filteredSermons = [];
+let currentPage = 1;
+const pageSize = 24;
 
 async function loadSermonsData() {
   try {
-    /* Fetch pre-built dataset from Jekyll _data output or Netlify function */
-    const res = await fetch('/api/messages?limit=200');
+    const res = await fetch('/api/messages?limit=500');
     if (res.ok) {
       const result = await res.json();
       allSermons = result.data || result;
     } else {
-      /* Fallback to static JSON file */
       const staticRes = await fetch('/_data/sermons.json');
-      if (staticRes.ok) {
-        allSermons = await staticRes.json();
-      }
+      if (staticRes.ok) allSermons = await staticRes.json();
     }
   } catch (err) {
-    console.warn('API fetch fallback:', err);
     try {
       const staticRes = await fetch('/_data/sermons.json');
       if (staticRes.ok) allSermons = await staticRes.json();
@@ -533,48 +478,74 @@ async function loadSermonsData() {
     }
   }
 
-  /* Update counter badges */
-  document.getElementById('stat-total').innerText = `${allSermons.length || 595}+`;
+  const statEl = document.getElementById('stat-total');
+  if (statEl) statEl.innerText = `${allSermons.length || 595}+`;
   applyFilters();
 }
 
 function renderSermons(items) {
   const container = document.getElementById('sermons-container');
+  const paginationBar = document.getElementById('pagination-controls');
+
   if (!items || items.length === 0) {
     container.innerHTML = `
-      <div class="empty-state">
+      <div class="msg-empty">
         <h3>No sermons found</h3>
-        <p>Try adjusting your search query or language filter.</p>
+        <p>Try searching another keyword or clearing your language filter.</p>
       </div>
     `;
+    if (paginationBar) paginationBar.style.display = 'none';
     return;
   }
 
-  container.innerHTML = items.map(s => {
+  /* Calculate pagination slice */
+  const totalPages = Math.ceil(items.length / pageSize);
+  currentPage = Math.max(1, Math.min(currentPage, totalPages));
+  
+  const startIdx = (currentPage - 1) * pageSize;
+  const pageItems = items.slice(startIdx, startIdx + pageSize);
+
+  /* Update pagination bar */
+  if (paginationBar) {
+    if (totalPages > 1) {
+      paginationBar.style.display = 'flex';
+      document.getElementById('page-info-text').innerText = `Page ${currentPage} of ${totalPages}`;
+      document.getElementById('btn-prev-page').disabled = (currentPage === 1);
+      document.getElementById('btn-next-page').disabled = (currentPage === totalPages);
+      
+      document.getElementById('btn-prev-page').classList.toggle('msg-btn-disabled', currentPage === 1);
+      document.getElementById('btn-next-page').classList.toggle('msg-btn-disabled', currentPage === totalPages);
+    } else {
+      paginationBar.style.display = 'none';
+    }
+  }
+
+  container.innerHTML = pageItems.map(s => {
     const coverUrl = s.cover_image || DEFAULT_COVER;
     const langCode = (s.language || 'en').toUpperCase();
+    
     const pdfBtn = s.pdf_url 
-      ? `<a href="${s.pdf_url}" target="_blank" class="btn-action btn-pdf">📄 PDF</a>`
-      : `<span class="btn-action btn-pdf btn-disabled">📄 PDF</span>`;
+      ? `<a href="${s.pdf_url}" target="_blank" class="msg-btn msg-btn-pdf">📄 PDF</a>`
+      : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📄 PDF</span>`;
       
     const audioBtn = s.m4a_url
-      ? `<button class="btn-action btn-audio" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Listen</button>`
-      : `<span class="btn-action btn-audio btn-disabled">🎧 Audio</span>`;
+      ? `<button class="msg-btn msg-btn-audio" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Audio</button>`
+      : `<span class="msg-btn msg-btn-audio msg-btn-disabled">🎧 Audio</span>`;
 
     return `
-      <article class="sermon-card">
-        <div class="card-cover">
+      <article class="msg-card">
+        <div class="msg-cover-wrap">
           <img src="${coverUrl}" alt="${escapeHtml(s.title)}" loading="lazy" />
-          <span class="card-badge-id">${escapeHtml(s.id)}</span>
-          <span class="card-badge-lang">${langCode}</span>
+          <span class="msg-badge-id">${escapeHtml(s.id)}</span>
+          <span class="msg-badge-lang">${langCode}</span>
         </div>
-        <div class="card-body">
-          <h3 class="card-title">${escapeHtml(s.title)}</h3>
-          <div class="card-meta">
+        <div class="msg-card-content">
+          <h3 class="msg-card-title">${escapeHtml(s.title)}</h3>
+          <div class="msg-card-meta">
             <span>📅 ${s.date || s.year || 'Unknown Date'}</span>
             ${s.number ? `<span>• #${s.number}</span>` : ''}
           </div>
-          <div class="card-actions">
+          <div class="msg-card-actions">
             ${pdfBtn}
             ${audioBtn}
           </div>
@@ -585,54 +556,42 @@ function renderSermons(items) {
 }
 
 function applyFilters() {
-  const query = (document.getElementById('library-search').value || '').toLowerCase().trim();
-  const selectedLang = document.getElementById('lang-select').value;
-  const selectedYear = document.getElementById('year-select').value;
+  currentPage = 1;
+  const query = (document.getElementById('msg-search').value || '').toLowerCase().trim();
+  const selectedLang = document.getElementById('msg-lang-select').value;
+  const selectedYear = document.getElementById('msg-year-select').value;
 
   filteredSermons = allSermons.filter(s => {
-    /* Language filter */
     if (selectedLang && s.language !== selectedLang) return false;
-
-    /* Year filter */
     if (selectedYear) {
       const sermonYear = String(s.year || '');
       if (!sermonYear.includes(selectedYear) && !selectedYear.endsWith(sermonYear)) return false;
     }
-
-    /* Text search query */
     if (query) {
       const titleMatch = (s.title || '').toLowerCase().includes(query);
       const idMatch = (s.id || '').toLowerCase().includes(query);
-      const seriesMatch = (s.series || '').toLowerCase().includes(query);
-      if (!titleMatch && !idMatch && !seriesMatch) return false;
+      if (!titleMatch && !idMatch) return false;
     }
-
     return true;
   });
 
   renderSermons(filteredSermons);
 }
 
-function handleSearch() {
-  applyFilters();
+function changePage(delta) {
+  currentPage += delta;
+  renderSermons(filteredSermons);
+  document.getElementById('sermons-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
 }
 
 function setQuickLang(code) {
-  document.getElementById('lang-select').value = code;
-  updatePillState();
+  document.getElementById('msg-lang-select').value = code;
   applyFilters();
 }
 
 function setQuickYear(year) {
-  document.getElementById('year-select').value = year;
+  document.getElementById('msg-year-select').value = year;
   applyFilters();
-}
-
-function updatePillState() {
-  const currentLang = document.getElementById('lang-select').value;
-  document.querySelectorAll('.pill-btn').forEach(btn => {
-    btn.classList.remove('active');
-  });
 }
 
 function playAudio(title, id, lang, url) {
@@ -663,6 +622,5 @@ function escapeJs(str) {
   return (str || '').replace(/'/g, "\\'").replace(/"/g, '\\"');
 }
 
-/* Initialize library on page load */
 document.addEventListener('DOMContentLoaded', loadSermonsData);
 </script>
