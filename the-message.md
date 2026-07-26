@@ -468,40 +468,42 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   grid-column: 1 / -1;
 }
 
-/* Full Immersion Sermon Reader View */
+/* Full Immersion Seamless Sermon Reader View */
 .msg-full-reader {
-  background-color: var(--bg-primary, #ffffff);
-  border-radius: 16px;
-  border: 1px solid var(--border-default, #e2e8f0);
+  background-color: transparent;
+  border: none;
+  box-shadow: none;
   margin-top: 0.5rem;
   margin-bottom: 3rem;
   min-height: 85vh;
-  box-shadow: 0 12px 36px rgba(0, 0, 0, 0.08);
-  overflow: hidden;
   width: 100%;
 }
 
 .msg-reader-toolbar {
-  padding: 1rem 1.5rem;
+  padding: 0.65rem 1rem;
   background-color: var(--bg-secondary, #f8fafc);
-  border-bottom: 1px solid var(--border-default, #e2e8f0);
+  border: 1px solid var(--border-default, #e2e8f0);
+  border-radius: 12px;
   display: flex;
   align-items: center;
   justify-content: space-between;
-  gap: 1rem;
+  gap: 0.75rem;
   flex-wrap: wrap;
   position: sticky;
-  top: 0;
+  top: 0.75rem;
   z-index: 100;
+  box-shadow: 0 4px 12px rgba(0, 0, 0, 0.04);
 }
 
-.msg-reader-back-btn {
+.msg-reader-btn {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.5rem 1rem;
-  font-size: 0.875rem;
-  font-weight: 700;
+  justify-content: center;
+  gap: 0.35rem;
+  height: 36px;
+  padding: 0 0.85rem;
+  font-size: 0.85rem;
+  font-weight: 600;
   border-radius: 8px;
   background-color: var(--bg-primary, #ffffff);
   border: 1px solid var(--border-default, #cbd5e1);
@@ -509,54 +511,122 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   cursor: pointer;
   transition: all 0.15s ease;
   text-decoration: none !important;
+  box-sizing: border-box;
 }
 
-.msg-reader-back-btn:hover {
+.msg-reader-btn:hover {
   border-color: var(--accent-primary, #2563eb);
   color: var(--accent-primary, #2563eb);
 }
 
+.msg-reader-btn.active {
+  background-color: var(--accent-primary, #2563eb);
+  color: #ffffff !important;
+  border-color: var(--accent-primary, #2563eb);
+}
+
+.msg-reader-btn:disabled {
+  opacity: 0.4;
+  cursor: not-allowed;
+  border-color: var(--border-default, #cbd5e1);
+  color: var(--text-secondary);
+}
+
 .msg-reader-meta-title {
-  font-size: 1.5rem;
+  font-size: 1.65rem;
   font-weight: 800;
   color: var(--text-primary);
   margin: 0;
+  line-height: 1.3;
 }
 
 .msg-reader-meta-sub {
   font-size: 0.9rem;
   color: var(--text-secondary);
-  margin-top: 0.25rem;
+  margin-top: 0.35rem;
 }
 
 .msg-reader-controls-right {
   display: flex;
   align-items: center;
-  gap: 0.6rem;
+  gap: 0.5rem;
   flex-wrap: wrap;
 }
 
-.msg-font-btn {
-  padding: 0.35rem 0.65rem;
-  font-size: 0.85rem;
-  font-weight: 700;
-  border: 1px solid var(--border-default, #cbd5e1);
-  background-color: var(--bg-primary, #ffffff);
-  color: var(--text-primary);
-  border-radius: 6px;
-  cursor: pointer;
-}
-
+/* Reading Canvas Themes: Light / Sepia / Dark */
 .msg-reader-main-content {
-  max-width: 1100px;
+  max-width: 1050px;
   width: 100%;
   margin: 0 auto;
-  padding: 2.5rem 2rem 6rem;
+  padding: 2rem 1.5rem 6rem;
   font-size: 1.25rem;
-  line-height: 1.9;
+  line-height: 1.95;
   color: var(--text-primary);
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   box-sizing: border-box;
+  border-radius: 14px;
+  transition: background-color 0.25s ease, color 0.25s ease;
+}
+
+.msg-reader-main-content.msg-theme-sepia {
+  background-color: #fbf0d9 !important;
+  color: #432818 !important;
+}
+
+.msg-reader-main-content.msg-theme-dark {
+  background-color: #0f172a !important;
+  color: #e2e8f0 !important;
+}
+
+.msg-reader-main-content.msg-theme-sepia .msg-para-num {
+  background-color: #f4e3c1 !important;
+  color: #854d0e !important;
+}
+
+.msg-reader-main-content.msg-theme-dark .msg-para-num {
+  background-color: #1e293b !important;
+  color: #38bdf8 !important;
+}
+
+.msg-reader-main-content.msg-theme-sepia .msg-paragraph-item:hover {
+  background-color: rgba(67, 40, 24, 0.05) !important;
+}
+
+.msg-reader-main-content.msg-theme-dark .msg-paragraph-item:hover {
+  background-color: rgba(255, 255, 255, 0.05) !important;
+}
+
+/* Reading Progress Bar */
+.msg-reading-progress {
+  position: absolute;
+  top: 0;
+  left: 0;
+  height: 3px;
+  background-color: var(--accent-primary, #2563eb);
+  width: 0%;
+  transition: width 0.1s ease;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
+}
+
+/* Copy Quote Button */
+.msg-copy-para-btn {
+  opacity: 0;
+  font-size: 0.75rem;
+  font-weight: 600;
+  padding: 0.15rem 0.45rem;
+  border-radius: 4px;
+  background-color: var(--bg-secondary, rgba(0,0,0,0.05));
+  border: 1px solid var(--border-default, rgba(0,0,0,0.1));
+  color: var(--text-secondary);
+  cursor: pointer;
+  transition: opacity 0.15s ease;
+  height: fit-content;
+  user-select: none;
+}
+
+.msg-paragraph-item:hover .msg-copy-para-btn {
+  opacity: 1;
 }
 
 .msg-paragraph-item {
@@ -587,7 +657,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 .msg-para-text {
   flex: 1;
   font-size: 1.25rem;
-  line-height: 1.9;
+  line-height: 1.95;
 }
 
 .msg-reader-tabs {
@@ -745,35 +815,47 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
   <!-- Full Immersion Sermon Reader View (Hidden by default) -->
   <div id="full-reader-section" class="msg-full-reader" style="display: none;">
-    <div class="msg-reader-toolbar">
-      <div style="display: flex; align-items: center; gap: 0.6rem; flex-wrap: wrap;">
-        <button class="msg-reader-back-btn" onclick="closeFullReader()">← Library</button>
+    <div class="msg-reader-toolbar" style="position: relative;">
+      <div id="reading-progress-bar" class="msg-reading-progress"></div>
+
+      <div style="display: flex; align-items: center; gap: 0.5rem; flex-wrap: wrap;">
+        <button class="msg-reader-btn" onclick="closeFullReader()">← Library</button>
 
         <div style="display: flex; gap: 0.25rem;">
-          <button class="msg-btn msg-btn-text" id="reader-prev-btn" style="padding: 0.35rem 0.65rem;" onclick="navigateSermon(-1)">← Prev</button>
-          <button class="msg-btn msg-btn-text" id="reader-next-btn" style="padding: 0.35rem 0.65rem;" onclick="navigateSermon(1)">Next →</button>
+          <button class="msg-reader-btn" id="reader-prev-btn" onclick="navigateSermon(-1)">← Prev</button>
+          <button class="msg-reader-btn" id="reader-next-btn" onclick="navigateSermon(1)">Next →</button>
         </div>
 
-        <select id="reader-sermon-select" class="msg-select-box" style="max-width: 280px; padding: 0.35rem 0.65rem; font-size: 0.85rem;" onchange="onReaderSermonSelect(this.value)">
+        <select id="reader-sermon-select" class="msg-select-box" style="height: 36px; max-width: 250px; padding: 0 0.65rem; font-size: 0.85rem; border-radius: 8px;" onchange="onReaderSermonSelect(this.value)">
           <!-- Loaded dynamically -->
         </select>
       </div>
 
       <div class="msg-reader-controls-right">
-        <button id="reader-audio-btn" class="msg-btn msg-btn-audio" style="padding: 0.35rem 0.75rem;" onclick="toggleReaderAudio()">🎧 Play Audio</button>
-        <input type="text" id="reader-search-input" class="msg-input-box" style="width: 160px; padding: 0.35rem 0.65rem; font-size: 0.85rem;" placeholder="🔍 Find in text..." oninput="searchInTranscript(this.value)">
+        <button id="reader-audio-btn" class="msg-reader-btn" onclick="toggleReaderAudio()">🎧 Play Audio</button>
+        <input type="text" id="reader-search-input" class="msg-input-box" style="height: 36px; width: 150px; padding: 0 0.65rem; font-size: 0.85rem; border-radius: 8px;" placeholder="🔍 Find in text..." oninput="searchInTranscript(this.value)">
 
-        <div class="msg-reader-tabs">
-          <button id="tab-btn-text" class="msg-tab-btn active" onclick="switchReaderTab('text')">📖 HTML Text</button>
-          <button id="tab-btn-pdf" class="msg-tab-btn" onclick="switchReaderTab('pdf')">📄 PDF Book View</button>
+        <select id="reader-theme-select" class="msg-select-box" style="height: 36px; padding: 0 0.55rem; font-size: 0.85rem; border-radius: 8px;" onchange="setReaderTheme(this.value)">
+          <option value="light">☀️ Light</option>
+          <option value="sepia">📜 Sepia</option>
+          <option value="dark">🌙 Dark</option>
+        </select>
+
+        <div style="display: flex; gap: 0.25rem;">
+          <button id="tab-btn-text" class="msg-reader-btn active" onclick="switchReaderTab('text')">📖 HTML Text</button>
+          <button id="tab-btn-pdf" class="msg-reader-btn" onclick="switchReaderTab('pdf')">📄 PDF View</button>
         </div>
-        <button class="msg-font-btn" onclick="adjustFontSize(-1)" title="Smaller font">A-</button>
-        <button class="msg-font-btn" onclick="adjustFontSize(1)" title="Larger font">A+</button>
-        <a id="reader-download-btn" href="#" target="_blank" class="msg-btn msg-btn-pdf" style="padding: 0.35rem 0.75rem;">⬇ PDF</a>
+
+        <div style="display: flex; gap: 0.25rem;">
+          <button class="msg-reader-btn" style="padding: 0 0.5rem;" onclick="adjustFontSize(-1)" title="Smaller font">A-</button>
+          <button class="msg-reader-btn" style="padding: 0 0.5rem;" onclick="adjustFontSize(1)" title="Larger font">A+</button>
+        </div>
+
+        <a id="reader-download-btn" href="#" target="_blank" class="msg-reader-btn">⬇ PDF</a>
       </div>
     </div>
 
-    <div style="padding: 1.25rem 1.5rem 0.5rem; max-width: 840px; margin: 0 auto;">
+    <div style="padding: 2rem 1.5rem 0.5rem; max-width: 1050px; margin: 0 auto;">
       <h2 class="msg-reader-meta-title" id="reader-sermon-title">Sermon Title</h2>
       <div class="msg-reader-meta-sub" id="reader-sermon-sub">ID • Date • Language</div>
     </div>
@@ -1453,11 +1535,52 @@ function closeFullReader() {
   window.history.pushState({}, '', window.location.pathname);
 }
 
+function setReaderTheme(theme) {
+  const contentArea = document.getElementById('reader-content-area');
+  if (!contentArea) return;
+  contentArea.classList.remove('msg-theme-light', 'msg-theme-sepia', 'msg-theme-dark');
+  if (theme === 'sepia') contentArea.classList.add('msg-theme-sepia');
+  else if (theme === 'dark') contentArea.classList.add('msg-theme-dark');
+}
+
+function updateReadingProgress() {
+  const progressBar = document.getElementById('reading-progress-bar');
+  const readerSection = document.getElementById('full-reader-section');
+  if (!progressBar || !readerSection || readerSection.style.display === 'none') return;
+
+  const totalHeight = document.documentElement.scrollHeight - window.innerHeight;
+  if (totalHeight <= 0) {
+    progressBar.style.width = '0%';
+    return;
+  }
+  const progress = Math.min(100, Math.max(0, (window.scrollY / totalHeight) * 100));
+  progressBar.style.width = `${progress}%`;
+}
+
+window.addEventListener('scroll', updateReadingProgress);
+
+function copyQuote(number, text) {
+  const sermonTitle = currentReaderSermon ? currentReaderSermon.title : '';
+  const sermonId = currentReaderSermon ? currentReaderSermon.id : '';
+  const quoteText = `"${text}"\n\n— William Branham (${sermonId} ${sermonTitle}, ¶${number})`;
+
+  navigator.clipboard.writeText(quoteText).then(() => {
+    const btn = document.getElementById(`copy-btn-${number}`);
+    if (btn) {
+      btn.innerText = '✓ Copied!';
+      setTimeout(() => btn.innerText = '📋 Copy', 2000);
+    }
+  }).catch(err => {
+    console.error('Copy failed:', err);
+  });
+}
+
 async function switchReaderTab(tab) {
   if (!currentReaderSermon) return;
   const btnText = document.getElementById('tab-btn-text');
   const btnPdf = document.getElementById('tab-btn-pdf');
   const contentArea = document.getElementById('reader-content-area');
+  const subEl = document.getElementById('reader-sermon-sub');
 
   if (!contentArea) return;
 
@@ -1465,7 +1588,7 @@ async function switchReaderTab(tab) {
   if (btnPdf) btnPdf.classList.toggle('active', tab === 'pdf');
 
   if (tab === 'pdf') {
-    contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" style="width:100%; height:80vh; border:none; border-radius:8px;" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
+    contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" style="width:100%; height:82vh; border:none; border-radius:10px;" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
     return;
   }
 
@@ -1477,15 +1600,24 @@ async function switchReaderTab(tab) {
       const json = await res.json();
       const item = json.data || {};
       if (item.paragraphs && item.paragraphs.length > 0) {
+        /* Compute word count and estimated reading time */
+        const totalWords = item.paragraphs.reduce((sum, p) => sum + (p.text ? p.text.split(/\s+/).length : 0), 0);
+        const estMinutes = Math.ceil(totalWords / 200);
+
+        if (subEl) {
+          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Date: ${currentReaderSermon.date || 'Catalogue Archive'} • Language: ${currentReaderSermon.language.toUpperCase()} • ⏱ ~${estMinutes} min read (${item.paragraphs.length} Paragraphs)`;
+        }
+
         contentArea.innerHTML = item.paragraphs.map(p => `
           <div class="msg-paragraph-item" id="p${p.number}">
             <span class="msg-para-num">¶${p.number}</span>
             <div class="msg-para-text">${escapeHtml(p.text)}</div>
+            <button id="copy-btn-${p.number}" class="msg-copy-para-btn" onclick="copyQuote(${p.number}, '${escapeJs(p.text)}')">📋 Copy</button>
           </div>
         `).join('');
         return;
       } else if (item.full_text) {
-        contentArea.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.85;">${escapeHtml(item.full_text)}</div>`;
+        contentArea.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.95;">${escapeHtml(item.full_text)}</div>`;
         return;
       }
     }
@@ -1493,7 +1625,6 @@ async function switchReaderTab(tab) {
     console.warn('Could not load transcript text:', e);
   }
 
-  /* Fallback to embedded PDF reader if text transcript is loading or unparsed */
   contentArea.innerHTML = `
     <div style="text-align:center; padding: 4rem 1rem;">
       <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Transcript is ready in PDF document view:</p>
