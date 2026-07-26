@@ -364,6 +364,80 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   color: var(--text-secondary);
   grid-column: 1 / -1;
 }
+
+/* On-Site Sermon Reader Modal */
+.msg-reader-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100vw;
+  height: 100vh;
+  background-color: rgba(0, 0, 0, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 2000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+  box-sizing: border-box;
+}
+
+.msg-reader-dialog {
+  background-color: var(--bg-primary, #ffffff);
+  border: 1px solid var(--border-default, #334155);
+  border-radius: 14px;
+  width: 100%;
+  max-width: 900px;
+  height: 90vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 25px 50px -12px rgba(0, 0, 0, 0.35);
+  overflow: hidden;
+}
+
+.msg-reader-header {
+  padding: 1rem 1.25rem;
+  border-bottom: 1px solid var(--border-default, #e2e8f0);
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  gap: 1rem;
+  background-color: var(--bg-secondary, #f8fafc);
+}
+
+.msg-reader-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  color: var(--text-primary);
+  margin: 0;
+}
+
+.msg-reader-sub {
+  font-size: 0.8rem;
+  color: var(--text-secondary);
+}
+
+.msg-reader-tools {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+}
+
+.msg-reader-body {
+  flex: 1;
+  overflow-y: auto;
+  padding: 1.5rem;
+  font-size: 1.05rem;
+  line-height: 1.7;
+  color: var(--text-primary);
+}
+
+.msg-reader-body iframe {
+  width: 100%;
+  height: 100%;
+  border: none;
+  border-radius: 8px;
+}
 </style>
 
 <div class="msg-library-wrapper">
@@ -376,7 +450,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
     <div class="msg-stats-bar">
       <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">595+</strong></span>
-      <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">42</strong></span>
+      <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">72</strong></span>
       <span class="msg-stat-chip">🇲🇼 Chichewa Included</span>
       <span class="msg-stat-chip">⚡ Public REST API</span>
     </div>
@@ -450,6 +524,25 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
     </ul>
   </section>
 
+  <!-- On-Site Sermon Reader Modal -->
+  <div id="reader-modal-backdrop" class="msg-reader-backdrop" style="display: none;">
+    <div class="msg-reader-dialog">
+      <header class="msg-reader-header">
+        <div>
+          <h2 class="msg-reader-title" id="reader-sermon-title">Sermon Title</h2>
+          <div class="msg-reader-sub" id="reader-sermon-sub">ID • Date</div>
+        </div>
+        <div class="msg-reader-tools">
+          <a id="reader-download-btn" href="#" target="_blank" class="msg-btn msg-btn-pdf" style="padding: 0.35rem 0.75rem;">⬇ Download PDF</a>
+          <button class="msg-close-player" onclick="closeReaderModal()" title="Close reader">✕</button>
+        </div>
+      </header>
+      <main class="msg-reader-body" id="reader-content-area">
+        <!-- Embedded document / reader content -->
+      </main>
+    </div>
+  </div>
+
 </div>
 
 <script>
@@ -459,7 +552,34 @@ let filteredSermons = [];
 let currentPage = 1;
 const pageSize = 24;
 
+async function loadLanguagesData() {
+  try {
+    let languages = [];
+    const res = await fetch('/api/languages');
+    if (res.ok) {
+      const result = await res.json();
+      languages = result.data || result;
+    } else {
+      const staticRes = await fetch('/_data/languages.json');
+      if (staticRes.ok) languages = await staticRes.json();
+    }
+
+    if (languages && languages.length > 0) {
+      const select = document.getElementById('msg-lang-select');
+      const selectedVal = select.value || 'en';
+      select.innerHTML = '<option value="">All Languages (72)</option>' + 
+        languages.map(l => `<option value="${l.code}" ${l.code === selectedVal ? 'selected' : ''}>${l.name} (${l.english_name || l.name})</option>`).join('');
+      
+      const langsStat = document.getElementById('stat-langs');
+      if (langsStat) langsStat.innerText = `${languages.length}`;
+    }
+  } catch (e) {
+    console.warn('Could not load dynamic language list:', e);
+  }
+}
+
 async function loadSermonsData() {
+  await loadLanguagesData();
   try {
     const res = await fetch('/api/messages?limit=500');
     if (res.ok) {
@@ -524,9 +644,9 @@ function renderSermons(items) {
     const coverUrl = s.cover_image || DEFAULT_COVER;
     const langCode = (s.language || 'en').toUpperCase();
     
-    const pdfBtn = s.pdf_url 
-      ? `<a href="${s.pdf_url}" target="_blank" class="msg-btn msg-btn-pdf">📄 PDF</a>`
-      : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📄 PDF</span>`;
+    const readBtn = s.pdf_url 
+      ? `<button class="msg-btn msg-btn-pdf" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}')">📖 Read</button>`
+      : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📖 Read</span>`;
       
     const audioBtn = s.m4a_url
       ? `<button class="msg-btn msg-btn-audio" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Audio</button>`
@@ -546,7 +666,7 @@ function renderSermons(items) {
             ${s.number ? `<span>• #${s.number}</span>` : ''}
           </div>
           <div class="msg-card-actions">
-            ${pdfBtn}
+            ${readBtn}
             ${audioBtn}
           </div>
         </div>
@@ -612,6 +732,31 @@ function closePlayer() {
   const audioEl = document.getElementById('audio-element');
   audioEl.pause();
   bar.style.display = 'none';
+}
+
+function openReaderModal(title, id, date, pdfUrl) {
+  const modal = document.getElementById('reader-modal-backdrop');
+  const titleEl = document.getElementById('reader-sermon-title');
+  const subEl = document.getElementById('reader-sermon-sub');
+  const contentArea = document.getElementById('reader-content-area');
+  const downloadBtn = document.getElementById('reader-download-btn');
+
+  titleEl.innerText = title;
+  subEl.innerText = `Sermon ID: ${id} • Date: ${date || 'Catalogue Archive'}`;
+  downloadBtn.href = pdfUrl;
+
+  /* Embed in-browser PDF reader iframe */
+  contentArea.innerHTML = `<iframe src="${pdfUrl}#toolbar=1" title="${escapeHtml(title)}"></iframe>`;
+  modal.style.display = 'flex';
+  document.body.style.overflow = 'hidden';
+}
+
+function closeReaderModal() {
+  const modal = document.getElementById('reader-modal-backdrop');
+  const contentArea = document.getElementById('reader-content-area');
+  contentArea.innerHTML = '';
+  modal.style.display = 'none';
+  document.body.style.overflow = '';
 }
 
 function escapeHtml(str) {

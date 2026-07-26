@@ -1,212 +1,434 @@
 [
   {
+    "code": "orm",
+    "name": "Afaan Oromo",
+    "english_name": "Afaan Oromo",
+    "source": "themessage.com + messagehub"
+  },
+  {
     "code": "af",
     "name": "Afrikaans",
-    "sermon_count": 0
+    "english_name": "Afrikaans",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ibo",
+    "name": "Asụsụ Igbo",
+    "english_name": "Igbo",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "teo",
+    "name": "Ateso",
+    "english_name": "Ateso",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "aym",
+    "name": "Aymara",
+    "english_name": "Aymara",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "id",
     "name": "Bahasa Indonesia",
-    "sermon_count": 0
+    "english_name": "Indonesian",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "ceb",
-    "name": "Cebuano",
-    "sermon_count": 0
+    "code": "bem",
+    "name": "ChiBemba",
+    "english_name": "Bemba",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "ny",
     "name": "Chichewa",
-    "sermon_count": 350
+    "english_name": "Chichewa",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "sn",
-    "name": "ChiShona",
-    "sermon_count": 0
-  },
-  {
-    "code": "tog",
-    "name": "Chitonga",
-    "sermon_count": 0
-  },
-  {
-    "code": "tum",
-    "name": "Chitumbuka",
-    "sermon_count": 0
-  },
-  {
-    "code": "lua",
-    "name": "Ciluba",
-    "sermon_count": 0
+    "code": "dan",
+    "name": "Dansk",
+    "english_name": "Danish",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "de",
     "name": "Deutsch",
-    "sermon_count": 0
+    "english_name": "German",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "en",
     "name": "English",
-    "sermon_count": 227
+    "english_name": "English",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "es",
     "name": "Español",
-    "sermon_count": 0
-  },
-  {
-    "code": "ee",
-    "name": "Eʋegbe",
-    "sermon_count": 0
+    "english_name": "Spanish",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "fr",
     "name": "Français",
-    "sermon_count": 0
+    "english_name": "French",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "bem",
-    "name": "Icibemba",
-    "sermon_count": 0
+    "code": "fra",
+    "name": "Français-A",
+    "english_name": "French-A",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "xh",
-    "name": "isiXhosa",
-    "sermon_count": 0
+    "code": "hr",
+    "name": "Hrvatski",
+    "english_name": "Croatian",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "zu",
-    "name": "isiZulu",
-    "sermon_count": 0
+    "code": "rw",
+    "name": "Ikinyarwanda",
+    "english_name": "Kinyarwanda",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "run",
+    "name": "Ikirundi",
+    "english_name": "Kirundi",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "it",
     "name": "Italiano",
-    "sermon_count": 0
-  },
-  {
-    "code": "kon",
-    "name": "Kikongo-Kituba",
-    "sermon_count": 0
+    "english_name": "Italian",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "sw",
     "name": "Kiswahili",
-    "sermon_count": 0
+    "english_name": "Swahili",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "lv",
+    "name": "Latviešu",
+    "english_name": "Latvian",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "lit",
+    "name": "Lietuvių",
+    "english_name": "Lithuanian",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "ln",
-    "name": "Lingála",
-    "sermon_count": 0
+    "name": "Lingala",
+    "english_name": "Lingala",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "mg",
-    "name": "Malagasy",
-    "sermon_count": 0
+    "code": "lug",
+    "name": "Luganda",
+    "english_name": "Luganda",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "hu",
+    "name": "Magyar",
+    "english_name": "Hungarian",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "fij",
+    "name": "Na Vosa Vakaviti",
+    "english_name": "Fijian",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "nl",
     "name": "Nederlands",
-    "sermon_count": 0
+    "english_name": "Dutch",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "no",
+    "code": "kdj",
+    "name": "Ngakarimojong",
+    "english_name": "Karamojong",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "nn",
     "name": "Norsk",
-    "sermon_count": 0
-  },
-  {
-    "code": "nso",
-    "name": "Northern Sotho",
-    "sermon_count": 0
-  },
-  {
-    "code": "kj",
-    "name": "Oshikwanyama",
-    "sermon_count": 0
+    "english_name": "Norwegian",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "pl",
     "name": "Polski",
-    "sermon_count": 0
+    "english_name": "Polish",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "pt",
     "name": "Português",
-    "sermon_count": 0
+    "english_name": "Portuguese",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ptb",
+    "name": "Português-B",
+    "english_name": "Portuguese-B",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "que",
+    "name": "Quechua",
+    "english_name": "Quechua",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "ro",
     "name": "Română",
-    "sermon_count": 0
+    "english_name": "Romanian",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "tn",
+    "code": "rya",
+    "name": "Runyakitara",
+    "english_name": "Runyakitara",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "tsn",
     "name": "Setswana",
-    "sermon_count": 0
+    "english_name": "Tswana",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "ss",
-    "name": "SiSwati",
-    "sermon_count": 0
+    "code": "ceb",
+    "name": "Sinugboanong Binisaya",
+    "english_name": "Cebuano",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "st",
-    "name": "Southern Sesotho",
-    "sermon_count": 0
+    "code": "slo",
+    "name": "Slovak",
+    "english_name": "Slovak",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "fi",
-    "name": "Suomi",
-    "sermon_count": 0
+    "code": "sl",
+    "name": "Slovenščina",
+    "english_name": "Slovenian",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "sv",
-    "name": "Svenska",
-    "sermon_count": 0
+    "code": "sr",
+    "name": "Srpski",
+    "english_name": "Serbian",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "fin",
+    "name": "Suomenkieli",
+    "english_name": "Finnish",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "tl",
     "name": "Tagalog",
-    "sermon_count": 0
+    "english_name": "Tagalog",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "tha",
+    "name": "Thai",
+    "english_name": "Thai",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "vi",
     "name": "Tiếng Việt",
-    "sermon_count": 0
+    "english_name": "Vietnamese",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "ts",
-    "name": "Xitsonga",
-    "sermon_count": 0
+    "code": "lua",
+    "name": "Tshiluba",
+    "english_name": "Tshiluba",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ven",
+    "name": "Tshivenda",
+    "english_name": "Venda",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "twi",
+    "name": "Twi",
+    "english_name": "Twi",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "tur",
+    "name": "Türkçe",
+    "english_name": "Turkish",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "yor",
+    "name": "Yoruba",
+    "english_name": "Yoruba",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "sna",
+    "name": "chiShona",
+    "english_name": "Shona",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "cs",
+    "name": "Čeština",
+    "english_name": "Czech",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "bg",
+    "name": "Български",
+    "english_name": "Bulgarian",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "ru",
     "name": "Русский",
-    "sermon_count": 0
+    "english_name": "Russian",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "uk",
-    "name": "Українська",
-    "sermon_count": 0
+    "code": "mkd",
+    "name": "македонски",
+    "english_name": "Macedonian",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "mon",
+    "name": "монгол",
+    "english_name": "Mongolian",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ur",
+    "name": "اردو",
+    "english_name": "Urdu",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ar",
+    "name": "العربية",
+    "english_name": "Arabic",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "fa",
+    "name": "فارسی",
+    "english_name": "Farsi",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ne",
+    "name": "नेपाली",
+    "english_name": "Nepali",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "mr",
+    "name": "मराठी",
+    "english_name": "Marathi",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "hi",
-    "name": "हिंदी",
-    "sermon_count": 0
+    "name": "हिन्दी",
+    "english_name": "Hindi",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "pa",
+    "name": "ਪੰਜਾਬੀ",
+    "english_name": "Punjabi",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "or",
+    "name": "ଓଡ଼ିଆ",
+    "english_name": "Odia",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "ta",
     "name": "தமிழ்",
-    "sermon_count": 0
+    "english_name": "Tamil",
+    "source": "themessage.com + messagehub"
   },
   {
-    "code": "ml",
-    "name": "മലയാളം",
-    "sermon_count": 0
+    "code": "te",
+    "name": "తెలుగు",
+    "english_name": "Telugu",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "lao",
+    "name": "ລາວ",
+    "english_name": "Lao",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "mya",
+    "name": "မြန်မာဘာသာ",
+    "english_name": "Myanmar",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "tir",
+    "name": "ትግርኛ",
+    "english_name": "Tigrinya",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "amh",
+    "name": "አማርኛ",
+    "english_name": "Amharic",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "khm",
+    "name": "ភាសាខ្មែរ",
+    "english_name": "Khmer",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ja",
+    "name": "日本語",
+    "english_name": "Japanese",
+    "source": "themessage.com + messagehub"
   },
   {
     "code": "zh",
     "name": "简体中文",
-    "sermon_count": 0
+    "english_name": "Chinese",
+    "source": "themessage.com + messagehub"
+  },
+  {
+    "code": "ko",
+    "name": "한국어",
+    "english_name": "Korean",
+    "source": "themessage.com + messagehub"
   }
 ]
