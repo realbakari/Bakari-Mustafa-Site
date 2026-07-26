@@ -55,14 +55,19 @@ function notFound(message = 'Not found') {
  *      → segments = ["messages", "65-0718M"]
  */
 function parseRoute(rawPath) {
-  /* Strip the function prefix */
-  const cleanPath = rawPath
+  let cleanPath = (rawPath || '')
     .replace(/^\/?\.netlify\/functions\/sermons\/?/, '')
-    .replace(/^api\/?/, '')
+    .replace(/^\/?api\/?/, '')
     .replace(/\/$/, '');
 
   if (!cleanPath) return [];
-  return cleanPath.split('/').filter(Boolean);
+  return cleanPath.split('/').map(s => {
+    try {
+      return decodeURIComponent(s);
+    } catch (e) {
+      return s;
+    }
+  }).filter(Boolean);
 }
 
 /* ── Main Handler ──────────────────────────────────────────────── */
