@@ -243,15 +243,26 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   border: 1px solid var(--border-default, #cbd5e1);
 }
 
+.msg-btn-text {
+  background-color: var(--bg-secondary, #f1f5f9);
+  color: var(--text-primary);
+}
+
+.msg-btn-text:hover {
+  background-color: var(--accent-primary, #2563eb);
+  color: #ffffff;
+  border-color: var(--accent-primary, #2563eb);
+}
+
 .msg-btn-pdf {
   background-color: var(--bg-secondary, #eff6ff);
   color: var(--text-primary);
 }
 
 .msg-btn-pdf:hover {
-  background-color: var(--accent-primary, #3b82f6);
+  background-color: #4f46e5;
   color: #ffffff;
-  border-color: var(--accent-primary, #3b82f6);
+  border-color: #4f46e5;
 }
 
 .msg-btn-audio {
@@ -495,12 +506,12 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   <div class="page-header msg-header">
     <p class="page-kicker">Digital Library & Archives</p>
     <h1>The Message</h1>
-    <p class="page-subtitle">Audio recordings, PDF transcripts, and multi-lingual catalogues of William Marrion Branham's sermons, including Chichewa translations.</p>
+    <p class="page-subtitle">Audio recordings, PDF transcripts, and multi-lingual catalogues of William Marrion Branham's sermons across 72+ global languages.</p>
 
     <div class="msg-stats-bar">
-      <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">595+</strong></span>
+      <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">1,200+</strong></span>
       <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">72</strong></span>
-      <span class="msg-stat-chip">🇲🇼 Chichewa Included</span>
+      <span class="msg-stat-chip">🌐 Global Multi-Lingual Archive</span>
       <span class="msg-stat-chip">⚡ Public REST API</span>
     </div>
   </div>
@@ -511,12 +522,14 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
       <input type="text" id="msg-search" class="msg-input-box" placeholder="Search title, date, or ID (e.g. 65-0718M)..." oninput="applyFilters()">
 
       <select id="msg-lang-select" class="msg-select-box" onchange="applyFilters()">
-        <option value="">All Languages</option>
+        <option value="">All Languages (72)</option>
         <option value="en" selected>English</option>
-        <option value="ny">Chichewa (Nyanja)</option>
         <option value="fr">Français</option>
         <option value="es">Español</option>
-        <option value="ro">Română</option>
+        <option value="ny">Chichewa (Nyanja)</option>
+        <option value="sw">Kiswahili</option>
+        <option value="pt">Português</option>
+        <option value="de">Deutsch</option>
         <option value="ru">Русский</option>
       </select>
 
@@ -530,8 +543,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
     <div class="msg-quick-tags">
       <span class="msg-tag-label">Quick Filters:</span>
-      <button class="msg-filter-tag active" onclick="setQuickLang('')">All</button>
-      <button class="msg-filter-tag" onclick="setQuickLang('ny')">🇲🇼 Chichewa</button>
+      <button class="msg-filter-tag active" onclick="setQuickLang('')">All Languages</button>
       <button class="msg-filter-tag" onclick="setQuickLang('en')">🇬🇧 English</button>
       <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965 Sermons</button>
       <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963 Seven Seals</button>
@@ -661,7 +673,7 @@ async function loadSermonsData() {
   }
 
   const statEl = document.getElementById('stat-total');
-  if (statEl) statEl.innerText = `${allSermons.length || 595}+`;
+  if (statEl) statEl.innerText = allSermons.length ? `${allSermons.length}+ (1,200+ Archive)` : '1,200+';
   applyFilters();
 }
 
@@ -706,9 +718,13 @@ function renderSermons(items) {
     const coverUrl = s.cover_image || DEFAULT_COVER;
     const langCode = (s.language || 'en').toUpperCase();
     
-    const readBtn = s.pdf_url 
-      ? `<button class="msg-btn msg-btn-pdf" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}')">📖 Read</button>`
-      : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📖 Read</span>`;
+    const textBtn = (s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
+      ? `<button class="msg-btn msg-btn-text" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
+      : `<span class="msg-btn msg-btn-text msg-btn-disabled">📖 Text</span>`;
+
+    const pdfBtn = s.pdf_url 
+      ? `<button class="msg-btn msg-btn-pdf" onclick="openReaderModal('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
+      : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📄 PDF</span>`;
       
     const audioBtn = s.m4a_url
       ? `<button class="msg-btn msg-btn-audio" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Audio</button>`
@@ -728,7 +744,8 @@ function renderSermons(items) {
             ${s.number ? `<span>• #${s.number}</span>` : ''}
           </div>
           <div class="msg-card-actions">
-            ${readBtn}
+            ${textBtn}
+            ${pdfBtn}
             ${audioBtn}
           </div>
         </div>
@@ -798,7 +815,7 @@ function closePlayer() {
 
 let currentReaderSermon = null;
 
-async function openReaderModal(title, id, date, pdfUrl, language = 'en') {
+async function openReaderModal(title, id, date, pdfUrl, language = 'en', defaultTab = 'text') {
   const modal = document.getElementById('reader-modal-backdrop');
   const titleEl = document.getElementById('reader-sermon-title');
   const subEl = document.getElementById('reader-sermon-sub');
@@ -815,7 +832,7 @@ async function openReaderModal(title, id, date, pdfUrl, language = 'en') {
     document.body.style.overflow = 'hidden';
   }
 
-  switchReaderTab('text');
+  switchReaderTab(defaultTab);
 }
 
 async function switchReaderTab(tab) {
