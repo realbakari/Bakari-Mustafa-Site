@@ -477,7 +477,25 @@ body[data-theme="dark"] .method-get {
       <span class="method-tag method-get">GET</span> Catalogue Statistics
     </div>
     <div class="endpoint-url">https://bakarimustafa.com/api/stats</div>
-    <p>Aggregated metrics detailing total sermon counts, language breakdown, and media availability.</p>
+    <p>Aggregated metrics detailing total sermon counts, language breakdown, audio streams, PDF transcripts, and text availability.</p>
+
+    <h4>Example Response (200 OK)</h4>
+    <div class="code-snippet">
+<pre>{
+  "data": {
+    "total_sermons": 577,
+    "total_languages": 2,
+    "available_languages": 72,
+    "year_range": {
+      "earliest": 1950,
+      "latest": 1965
+    },
+    "sermons_with_pdf": 572,
+    "sermons_with_audio": 525,
+    "sermons_with_text": 572
+  }
+}</pre>
+    </div>
   </section>
 
   <!-- Code Examples -->
