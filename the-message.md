@@ -863,9 +863,12 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
           <option value="dark">🌙 Dark</option>
         </select>
 
-        <div style="display: flex; gap: 0.25rem;">
+        <div style="display: flex; gap: 0.25rem; align-items: center;">
           <button id="tab-btn-text" class="msg-reader-btn active" onclick="switchReaderTab('text')">📖 Single Text</button>
           <button id="tab-btn-parallel" class="msg-reader-btn" onclick="switchReaderTab('parallel')">🌐 Parallel Dual</button>
+          <select id="parallel-lang-select" class="msg-select-box" style="display: none; height: 36px; padding: 0 0.55rem; font-size: 0.85rem; border-radius: 8px; border-color: var(--accent-primary);" onchange="updateParallelLanguage(this.value)">
+            <!-- Populated dynamically with all 72 languages -->
+          </select>
           <button id="tab-btn-pdf" class="msg-reader-btn" onclick="switchReaderTab('pdf')">📄 PDF View</button>
         </div>
 
@@ -1111,6 +1114,11 @@ async function loadLanguagesData() {
         const selectedVal = select.value || 'en';
         select.innerHTML = '<option value="">All Languages (72)</option>' + 
           languages.map(l => `<option value="${l.code}" ${l.code === selectedVal ? 'selected' : ''}>${l.name} (${l.english_name || l.name})</option>`).join('');
+      }
+
+      const parSelect = document.getElementById('parallel-lang-select');
+      if (parSelect) {
+        parSelect.innerHTML = languages.map(l => `<option value="${l.code}" ${l.code === 'ny' ? 'selected' : ''}>🌐 ${l.name} (${l.code.toUpperCase()})</option>`).join('');
       }
       
       const langsStat = document.getElementById('stat-langs');
@@ -1646,10 +1654,15 @@ function toggleHighlight(sermonId, paraNum) {
   }
 }
 
-async function switchReaderTab(tab) {
+function updateParallelLanguage(targetLang) {
+  switchReaderTab('parallel', targetLang);
+}
+
+async function switchReaderTab(tab, customParallelLang = null) {
   if (!currentReaderSermon) return;
   const btnText = document.getElementById('tab-btn-text');
   const btnParallel = document.getElementById('tab-btn-parallel');
+  const parSelect = document.getElementById('parallel-lang-select');
   const btnPdf = document.getElementById('tab-btn-pdf');
   const contentArea = document.getElementById('reader-content-area');
   const subEl = document.getElementById('reader-sermon-sub');
@@ -1660,6 +1673,10 @@ async function switchReaderTab(tab) {
   if (btnParallel) btnParallel.classList.toggle('active', tab === 'parallel');
   if (btnPdf) btnPdf.classList.toggle('active', tab === 'pdf');
 
+  if (parSelect) {
+    parSelect.style.display = (tab === 'parallel') ? 'inline-block' : 'none';
+  }
+
   if (tab === 'pdf') {
     contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" style="width:100%; height:82vh; border:none; border-radius:10px;" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
     return;
@@ -1669,11 +1686,13 @@ async function switchReaderTab(tab) {
 
   /* Dual Parallel View Handler */
   if (tab === 'parallel') {
-    const secondaryLang = currentReaderSermon.language === 'en' ? 'ny' : 'en';
+    const selectedParallelLang = customParallelLang || (parSelect ? parSelect.value : (currentReaderSermon.language === 'en' ? 'ny' : 'en'));
+    if (parSelect) parSelect.value = selectedParallelLang;
+
     try {
       const [resPrimary, resSecondary] = await Promise.all([
         fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${currentReaderSermon.language}`),
-        fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${secondaryLang}`)
+        fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${selectedParallelLang}`)
       ]);
 
       const json1 = resPrimary.ok ? await resPrimary.json() : {};
@@ -1683,10 +1702,14 @@ async function switchReaderTab(tab) {
 
       const maxLen = Math.max(paras1.length, paras2.length);
       if (maxLen > 0) {
+        if (subEl) {
+          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Parallel Dual Reader: ${currentReaderSermon.language.toUpperCase()} ↔ ${selectedParallelLang.toUpperCase()} (${maxLen} Paragraphs)`;
+        }
+
         let html = `
           <div class="msg-parallel-grid">
             <div class="msg-parallel-col">
-              <div class="msg-parallel-col-header">Primary (${currentReaderSermon.language.toUpperCase()})</div>
+              <div class="msg-parallel-col-header">Primary Transcript (${currentReaderSermon.language.toUpperCase()})</div>
               ${paras1.map(p => `
                 <div class="msg-paragraph-item" id="p${p.number}">
                   <span class="msg-para-num" onclick="toggleHighlight('${currentReaderSermon.id}', ${p.number})">¶${p.number}</span>
@@ -1695,7 +1718,7 @@ async function switchReaderTab(tab) {
               `).join('')}
             </div>
             <div class="msg-parallel-col">
-              <div class="msg-parallel-col-header">Parallel (${secondaryLang.toUpperCase()})</div>
+              <div class="msg-parallel-col-header">Parallel Translation (${selectedParallelLang.toUpperCase()})</div>
               ${paras2.map(p => `
                 <div class="msg-paragraph-item" id="p_sec_${p.number}">
                   <span class="msg-para-num">¶${p.number}</span>
