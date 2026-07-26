@@ -8,3 +8,6 @@ klise-*.gem
 .env.local
 vendor/
 .bundle/
+node_modules/
+.DS_Store
+

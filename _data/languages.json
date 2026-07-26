@@ -1,0 +1,212 @@
+[
+  {
+    "code": "af",
+    "name": "Afrikaans",
+    "sermon_count": 0
+  },
+  {
+    "code": "id",
+    "name": "Bahasa Indonesia",
+    "sermon_count": 0
+  },
+  {
+    "code": "ceb",
+    "name": "Cebuano",
+    "sermon_count": 0
+  },
+  {
+    "code": "ny",
+    "name": "Chichewa",
+    "sermon_count": 350
+  },
+  {
+    "code": "sn",
+    "name": "ChiShona",
+    "sermon_count": 0
+  },
+  {
+    "code": "tog",
+    "name": "Chitonga",
+    "sermon_count": 0
+  },
+  {
+    "code": "tum",
+    "name": "Chitumbuka",
+    "sermon_count": 0
+  },
+  {
+    "code": "lua",
+    "name": "Ciluba",
+    "sermon_count": 0
+  },
+  {
+    "code": "de",
+    "name": "Deutsch",
+    "sermon_count": 0
+  },
+  {
+    "code": "en",
+    "name": "English",
+    "sermon_count": 227
+  },
+  {
+    "code": "es",
+    "name": "Español",
+    "sermon_count": 0
+  },
+  {
+    "code": "ee",
+    "name": "Eʋegbe",
+    "sermon_count": 0
+  },
+  {
+    "code": "fr",
+    "name": "Français",
+    "sermon_count": 0
+  },
+  {
+    "code": "bem",
+    "name": "Icibemba",
+    "sermon_count": 0
+  },
+  {
+    "code": "xh",
+    "name": "isiXhosa",
+    "sermon_count": 0
+  },
+  {
+    "code": "zu",
+    "name": "isiZulu",
+    "sermon_count": 0
+  },
+  {
+    "code": "it",
+    "name": "Italiano",
+    "sermon_count": 0
+  },
+  {
+    "code": "kon",
+    "name": "Kikongo-Kituba",
+    "sermon_count": 0
+  },
+  {
+    "code": "sw",
+    "name": "Kiswahili",
+    "sermon_count": 0
+  },
+  {
+    "code": "ln",
+    "name": "Lingála",
+    "sermon_count": 0
+  },
+  {
+    "code": "mg",
+    "name": "Malagasy",
+    "sermon_count": 0
+  },
+  {
+    "code": "nl",
+    "name": "Nederlands",
+    "sermon_count": 0
+  },
+  {
+    "code": "no",
+    "name": "Norsk",
+    "sermon_count": 0
+  },
+  {
+    "code": "nso",
+    "name": "Northern Sotho",
+    "sermon_count": 0
+  },
+  {
+    "code": "kj",
+    "name": "Oshikwanyama",
+    "sermon_count": 0
+  },
+  {
+    "code": "pl",
+    "name": "Polski",
+    "sermon_count": 0
+  },
+  {
+    "code": "pt",
+    "name": "Português",
+    "sermon_count": 0
+  },
+  {
+    "code": "ro",
+    "name": "Română",
+    "sermon_count": 0
+  },
+  {
+    "code": "tn",
+    "name": "Setswana",
+    "sermon_count": 0
+  },
+  {
+    "code": "ss",
+    "name": "SiSwati",
+    "sermon_count": 0
+  },
+  {
+    "code": "st",
+    "name": "Southern Sesotho",
+    "sermon_count": 0
+  },
+  {
+    "code": "fi",
+    "name": "Suomi",
+    "sermon_count": 0
+  },
+  {
+    "code": "sv",
+    "name": "Svenska",
+    "sermon_count": 0
+  },
+  {
+    "code": "tl",
+    "name": "Tagalog",
+    "sermon_count": 0
+  },
+  {
+    "code": "vi",
+    "name": "Tiếng Việt",
+    "sermon_count": 0
+  },
+  {
+    "code": "ts",
+    "name": "Xitsonga",
+    "sermon_count": 0
+  },
+  {
+    "code": "ru",
+    "name": "Русский",
+    "sermon_count": 0
+  },
+  {
+    "code": "uk",
+    "name": "Українська",
+    "sermon_count": 0
+  },
+  {
+    "code": "hi",
+    "name": "हिंदी",
+    "sermon_count": 0
+  },
+  {
+    "code": "ta",
+    "name": "தமிழ்",
+    "sermon_count": 0
+  },
+  {
+    "code": "ml",
+    "name": "മലയാളം",
+    "sermon_count": 0
+  },
+  {
+    "code": "zh",
+    "name": "简体中文",
+    "sermon_count": 0
+  }
+]

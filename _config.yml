@@ -65,6 +65,7 @@ sass:
   style: compressed
 
 include:
+  - _data
   - _redirects
   - .htaccess
 

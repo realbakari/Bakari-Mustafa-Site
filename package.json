@@ -4,12 +4,22 @@
   "description": "Bakari Mustafa's personal blog and newsletter",
   "private": true,
   "scripts": {
-    "test": "echo \"No tests configured\" && exit 0"
+    "test": "echo \"No tests configured\" && exit 0",
+    "scrape": "node scraper/index.js",
+    "scrape:en": "node scraper/index.js --language=en",
+    "scrape:ny": "node scraper/index.js --language=ny",
+    "scrape:pdf": "node scraper/index.js --language=en --extract-pdf"
   },
   "dependencies": {
     "resend": "^3.0.0"
+  },
+  "devDependencies": {
+    "cheerio": "^1.0.0-rc.12",
+    "node-fetch": "^2.6.9",
+    "pdf-parse": "^1.1.1"
   },
   "engines": {
     "node": ">=18.0.0"
   }
 }
+
