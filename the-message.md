@@ -609,20 +609,42 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   border-top-right-radius: 12px;
 }
 
-/* Copy Quote Button */
-.msg-copy-para-btn {
-  opacity: 0;
-  font-size: 0.75rem;
-  font-weight: 600;
-  padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  background-color: var(--bg-secondary, rgba(0,0,0,0.05));
-  border: 1px solid var(--border-default, rgba(0,0,0,0.1));
-  color: var(--text-secondary);
-  cursor: pointer;
-  transition: opacity 0.15s ease;
-  height: fit-content;
-  user-select: none;
+/* Parallel Dual Column Split View */
+.msg-parallel-grid {
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  gap: 2rem;
+  width: 100%;
+}
+
+.msg-parallel-col {
+  min-width: 0;
+}
+
+.msg-parallel-col-header {
+  font-weight: 700;
+  font-size: 0.95rem;
+  padding: 0.5rem 0.75rem;
+  background-color: var(--bg-secondary, rgba(0,0,0,0.04));
+  border-radius: 6px;
+  margin-bottom: 1.5rem;
+  color: var(--accent-primary, #2563eb);
+}
+
+/* Paragraph Highlight Persistence States */
+.msg-paragraph-item.msg-para-highlighted-yellow {
+  background-color: rgba(254, 240, 138, 0.45) !important;
+  border-left: 3px solid #eab308;
+}
+
+.msg-paragraph-item.msg-para-highlighted-green {
+  background-color: rgba(187, 247, 208, 0.45) !important;
+  border-left: 3px solid #22c55e;
+}
+
+.msg-paragraph-item.msg-para-highlighted-blue {
+  background-color: rgba(191, 219, 254, 0.45) !important;
+  border-left: 3px solid #3b82f6;
 }
 
 .msg-paragraph-item:hover .msg-copy-para-btn {
@@ -842,7 +864,8 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
         </select>
 
         <div style="display: flex; gap: 0.25rem;">
-          <button id="tab-btn-text" class="msg-reader-btn active" onclick="switchReaderTab('text')">📖 HTML Text</button>
+          <button id="tab-btn-text" class="msg-reader-btn active" onclick="switchReaderTab('text')">📖 Single Text</button>
+          <button id="tab-btn-parallel" class="msg-reader-btn" onclick="switchReaderTab('parallel')">🌐 Parallel Dual</button>
           <button id="tab-btn-pdf" class="msg-reader-btn" onclick="switchReaderTab('pdf')">📄 PDF View</button>
         </div>
 
@@ -851,6 +874,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
           <button class="msg-reader-btn" style="padding: 0 0.5rem;" onclick="adjustFontSize(1)" title="Larger font">A+</button>
         </div>
 
+        <button class="msg-reader-btn" onclick="toggleFocusMode()" title="Toggle full-screen focus reading mode">📺 Focus Mode</button>
         <a id="reader-download-btn" href="#" target="_blank" class="msg-reader-btn">⬇ PDF</a>
       </div>
     </div>
@@ -1039,6 +1063,19 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
     </div>
   </div>
 
+  <!-- Persistent Audio Dock Player Bar -->
+  <div id="audio-player-bar" class="msg-audio-bar" style="display: none; position: fixed; bottom: 0; left: 0; right: 0; background: var(--bg-primary, #ffffff); border-top: 1px solid var(--border-default, #e2e8f0); padding: 0.75rem 1.5rem; z-index: 1000; box-shadow: 0 -4px 20px rgba(0,0,0,0.1); align-items: center; justify-content: space-between; gap: 1rem;">
+    <div style="display: flex; align-items: center; gap: 1rem; flex: 1; min-width: 0;">
+      <span style="font-size: 1.25rem;">🎧</span>
+      <div style="min-width: 0;">
+        <div id="player-sermon-title" style="font-weight: 700; font-size: 0.95rem; white-space: nowrap; overflow: hidden; text-overflow: ellipsis;">Sermon Title</div>
+        <div id="player-sermon-sub" style="font-size: 0.8rem; color: var(--text-secondary);">Sermon ID • Language</div>
+      </div>
+    </div>
+    <audio id="audio-element" controls style="max-width: 400px; width: 100%; height: 36px;"></audio>
+    <button onclick="closePlayer()" style="background: none; border: none; font-size: 1.1rem; cursor: pointer; color: var(--text-secondary); padding: 0.25rem 0.5rem;" title="Close audio player">✕</button>
+  </div>
+
 </div>
 
 <script>
@@ -1051,19 +1088,21 @@ const pageSize = 24;
 async function loadLanguagesData() {
   try {
     let languages = [];
+    /* Try static file first for instant zero-latency loading */
     try {
-      const res = await fetch('/api/languages');
-      if (res.ok) {
-        const result = await res.json();
-        languages = result.data || result;
-      }
-    } catch (e) {
-      /* API route un-routed locally */
-    }
-
-    if (!languages || languages.length === 0) {
       const staticRes = await fetch('{{ "/_data/languages.json" | relative_url }}');
       if (staticRes.ok) languages = await staticRes.json();
+    } catch (e) {}
+
+    /* Try API endpoint if static data was empty */
+    if (!languages || languages.length === 0) {
+      try {
+        const res = await fetch('/api/languages');
+        if (res.ok) {
+          const result = await res.json();
+          languages = result.data || result;
+        }
+      } catch (e) {}
     }
 
     if (languages && languages.length > 0) {
@@ -1128,19 +1167,21 @@ async function loadStatsData() {
 async function loadSermonsData() {
   await loadLanguagesData();
   try {
+    /* Try static json data first for instant loading */
     try {
-      const res = await fetch('/api/messages?limit=500');
-      if (res.ok) {
-        const result = await res.json();
-        allSermons = result.data || result;
-      }
-    } catch (e) {
-      /* API route un-routed locally */
-    }
-
-    if (!allSermons || allSermons.length === 0) {
       const staticRes = await fetch('{{ "/_data/sermons.json" | relative_url }}');
       if (staticRes.ok) allSermons = await staticRes.json();
+    } catch (e) {}
+
+    /* Try API endpoint if static data empty */
+    if (!allSermons || allSermons.length === 0) {
+      try {
+        const res = await fetch('/api/messages?limit=500');
+        if (res.ok) {
+          const result = await res.json();
+          allSermons = result.data || result;
+        }
+      } catch (e) {}
     }
   } catch (err) {
     console.error('Failed to load sermon data:', err);
@@ -1461,7 +1502,7 @@ function toggleReaderAudio() {
     return;
   }
 
-  if (audioEl.src && !audioEl.paused) {
+  if (audioEl && audioEl.src && !audioEl.paused) {
     audioEl.pause();
     if (btn) btn.innerText = '🎧 Play Audio';
   } else {
@@ -1492,10 +1533,10 @@ async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultT
   if (downloadBtn) downloadBtn.href = pdfUrl || '#';
   if (searchInput) searchInput.value = '';
 
-  /* Sync audio button state */
+  /* Sync audio button state safely */
   const audioEl = document.getElementById('audio-element');
   if (audioBtn) {
-    if (audioEl && !audioEl.paused && audioEl.src) {
+    if (audioEl && audioEl.src && !audioEl.paused) {
       audioBtn.innerText = '⏸ Pause Audio';
     } else {
       audioBtn.innerText = '🎧 Play Audio';
@@ -1575,9 +1616,40 @@ function copyQuote(number, text) {
   });
 }
 
+function toggleFocusMode() {
+  const section = document.getElementById('full-reader-section');
+  if (!document.fullscreenElement) {
+    if (section.requestFullscreen) section.requestFullscreen();
+  } else {
+    if (document.exitFullscreen) document.exitFullscreen();
+  }
+}
+
+function toggleHighlight(sermonId, paraNum) {
+  const key = `msg_hl_${sermonId}_${paraNum}`;
+  const current = localStorage.getItem(key);
+  const itemEl = document.getElementById(`p${paraNum}`);
+  if (!itemEl) return;
+
+  itemEl.classList.remove('msg-para-highlighted-yellow', 'msg-para-highlighted-green', 'msg-para-highlighted-blue');
+
+  let nextState = 'yellow';
+  if (current === 'yellow') nextState = 'green';
+  else if (current === 'green') nextState = 'blue';
+  else if (current === 'blue') nextState = 'none';
+
+  if (nextState !== 'none') {
+    localStorage.setItem(key, nextState);
+    itemEl.classList.add(`msg-para-highlighted-${nextState}`);
+  } else {
+    localStorage.removeItem(key);
+  }
+}
+
 async function switchReaderTab(tab) {
   if (!currentReaderSermon) return;
   const btnText = document.getElementById('tab-btn-text');
+  const btnParallel = document.getElementById('tab-btn-parallel');
   const btnPdf = document.getElementById('tab-btn-pdf');
   const contentArea = document.getElementById('reader-content-area');
   const subEl = document.getElementById('reader-sermon-sub');
@@ -1585,6 +1657,7 @@ async function switchReaderTab(tab) {
   if (!contentArea) return;
 
   if (btnText) btnText.classList.toggle('active', tab === 'text');
+  if (btnParallel) btnParallel.classList.toggle('active', tab === 'parallel');
   if (btnPdf) btnPdf.classList.toggle('active', tab === 'pdf');
 
   if (tab === 'pdf') {
@@ -1593,6 +1666,52 @@ async function switchReaderTab(tab) {
   }
 
   contentArea.innerHTML = '<div style="text-align:center; padding: 4rem; color: var(--text-secondary);">📖 Loading transcript text...</div>';
+
+  /* Dual Parallel View Handler */
+  if (tab === 'parallel') {
+    const secondaryLang = currentReaderSermon.language === 'en' ? 'ny' : 'en';
+    try {
+      const [resPrimary, resSecondary] = await Promise.all([
+        fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${currentReaderSermon.language}`),
+        fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${secondaryLang}`)
+      ]);
+
+      const json1 = resPrimary.ok ? await resPrimary.json() : {};
+      const json2 = resSecondary.ok ? await resSecondary.json() : {};
+      const paras1 = (json1.data && json1.data.paragraphs) || [];
+      const paras2 = (json2.data && json2.data.paragraphs) || [];
+
+      const maxLen = Math.max(paras1.length, paras2.length);
+      if (maxLen > 0) {
+        let html = `
+          <div class="msg-parallel-grid">
+            <div class="msg-parallel-col">
+              <div class="msg-parallel-col-header">Primary (${currentReaderSermon.language.toUpperCase()})</div>
+              ${paras1.map(p => `
+                <div class="msg-paragraph-item" id="p${p.number}">
+                  <span class="msg-para-num" onclick="toggleHighlight('${currentReaderSermon.id}', ${p.number})">¶${p.number}</span>
+                  <div class="msg-para-text">${escapeHtml(p.text)}</div>
+                </div>
+              `).join('')}
+            </div>
+            <div class="msg-parallel-col">
+              <div class="msg-parallel-col-header">Parallel (${secondaryLang.toUpperCase()})</div>
+              ${paras2.map(p => `
+                <div class="msg-paragraph-item" id="p_sec_${p.number}">
+                  <span class="msg-para-num">¶${p.number}</span>
+                  <div class="msg-para-text">${escapeHtml(p.text)}</div>
+                </div>
+              `).join('')}
+            </div>
+          </div>
+        `;
+        contentArea.innerHTML = html;
+        return;
+      }
+    } catch (e) {
+      console.warn('Parallel fetch failed:', e);
+    }
+  }
 
   try {
     const res = await fetch(`/api/messages/${encodeURIComponent(currentReaderSermon.id)}/text?language=${currentReaderSermon.language}`);
@@ -1608,13 +1727,17 @@ async function switchReaderTab(tab) {
           subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Date: ${currentReaderSermon.date || 'Catalogue Archive'} • Language: ${currentReaderSermon.language.toUpperCase()} • ⏱ ~${estMinutes} min read (${item.paragraphs.length} Paragraphs)`;
         }
 
-        contentArea.innerHTML = item.paragraphs.map(p => `
-          <div class="msg-paragraph-item" id="p${p.number}">
-            <span class="msg-para-num">¶${p.number}</span>
-            <div class="msg-para-text">${escapeHtml(p.text)}</div>
-            <button id="copy-btn-${p.number}" class="msg-copy-para-btn" onclick="copyQuote(${p.number}, '${escapeJs(p.text)}')">📋 Copy</button>
-          </div>
-        `).join('');
+        contentArea.innerHTML = item.paragraphs.map(p => {
+          const hlKey = `msg_hl_${currentReaderSermon.id}_${p.number}`;
+          const hlClass = localStorage.getItem(hlKey) ? `msg-para-highlighted-${localStorage.getItem(hlKey)}` : '';
+          return `
+            <div class="msg-paragraph-item ${hlClass}" id="p${p.number}">
+              <span class="msg-para-num" style="cursor:pointer;" onclick="toggleHighlight('${currentReaderSermon.id}', ${p.number})" title="Click to highlight paragraph">¶${p.number}</span>
+              <div class="msg-para-text">${escapeHtml(p.text)}</div>
+              <button id="copy-btn-${p.number}" class="msg-copy-para-btn" onclick="copyQuote(${p.number}, '${escapeJs(p.text)}')">📋 Copy</button>
+            </div>
+          `;
+        }).join('');
         return;
       } else if (item.full_text) {
         contentArea.innerHTML = `<div style="white-space: pre-wrap; line-height: 1.95;">${escapeHtml(item.full_text)}</div>`;
