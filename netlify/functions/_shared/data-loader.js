@@ -133,17 +133,23 @@ function getSermonById(id, language = null) {
  * Fetch sermon paragraph blocks directly from Message Hub API
  */
 async function fetchSermonBlocksFromMessageHub(id, language = 'en') {
-  const mhCode = language === 'ny' ? 'nya' : language;
+  const crypto = require('crypto');
+  const mhCode = language === 'ny' ? 'nya' : (language === 'eng' ? 'en' : language);
   const now = Math.floor(Date.now() / 1000);
+  const exp = now + 300;
+  const secret = 'MessageHubSecretKey2021';
+  const token = crypto.createHash('md5').update(`${now}${exp}${secret}`).digest('hex');
+
   const headers = {
+    token: token,
     timestamp: now.toString(),
-    expirationTime: (now + 300).toString(),
-    'User-Agent': 'TheMessageAPI/1.0',
+    expirationTime: exp.toString(),
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
     Accept: 'application/json',
   };
 
   try {
-    const res = await fetch(`https://search.messagehub.info/api/languages/${mhCode}/sermons/${id}/blocks`, { headers });
+    const res = await fetch(`https://search.messagehub.info/api/languages/${mhCode}/sermons/${encodeURIComponent(id)}/blocks`, { headers });
     if (!res.ok) return null;
     const data = await res.json();
 
