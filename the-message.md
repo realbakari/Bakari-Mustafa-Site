@@ -1143,6 +1143,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
           <select id="parallel-lang-select" class="msg-select-box" style="display: none; height: 36px; padding: 0 0.55rem; font-size: 0.85rem; border-radius: 8px; border-color: var(--accent-primary);" onchange="updateParallelLanguage(this.value)">
             <!-- Populated dynamically with all 72 languages -->
           </select>
+          <button id="tab-btn-bible" class="msg-reader-btn" onclick="switchReaderTab('bible')">📜 KJV Bible (Bolls.life)</button>
           <button id="tab-btn-pdf" class="msg-reader-btn" onclick="switchReaderTab('pdf')">📄 PDF View</button>
         </div>
 
@@ -1177,6 +1178,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
       <div class="msg-stats-bar">
         <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">1,200+</strong></span>
         <span class="msg-stat-chip" style="cursor: pointer; border-color: var(--accent-primary); color: var(--accent-primary); font-weight: 700;" onclick="playLwbRadio('gospel_music')" title="Listen to 24/7 Sermon Broadcast">📻 24/7 Broadcast</span>
+        <span class="msg-stat-chip" style="cursor: pointer; border-color: var(--accent-primary); font-weight: 700;" onclick="openStandaloneBibleReader()" title="Open Standalone Bolls.life KJV Bible Reader">📜 KJV Bible Reader</span>
         <a href="https://www.lwbcast.org/OtherTabs/Music.php" target="_blank" rel="noopener" class="msg-stat-chip" style="text-decoration: none;" title="Visit Living Word Broadcast web player page">🔗 LWB Site</a>
         <span class="msg-stat-chip">⚡ Public REST API</span>
       </div>
@@ -2031,9 +2033,9 @@ function updateParallelLanguage(targetLang) {
 }
 
 async function switchReaderTab(tab, customParallelLang = null) {
-  if (!currentReaderSermon) return;
   const btnText = document.getElementById('tab-btn-text');
   const btnParallel = document.getElementById('tab-btn-parallel');
+  const btnBible = document.getElementById('tab-btn-bible');
   const parSelect = document.getElementById('parallel-lang-select');
   const btnPdf = document.getElementById('tab-btn-pdf');
   const contentArea = document.getElementById('reader-content-area');
@@ -2043,13 +2045,22 @@ async function switchReaderTab(tab, customParallelLang = null) {
 
   if (btnText) btnText.classList.toggle('active', tab === 'text');
   if (btnParallel) btnParallel.classList.toggle('active', tab === 'parallel');
+  if (btnBible) btnBible.classList.toggle('active', tab === 'bible');
   if (btnPdf) btnPdf.classList.toggle('active', tab === 'pdf');
 
-  contentArea.classList.toggle('msg-reader-wide', tab === 'parallel');
+  contentArea.classList.toggle('msg-reader-wide', tab === 'parallel' || tab === 'bible');
 
   if (parSelect) {
     parSelect.style.display = (tab === 'parallel') ? 'inline-block' : 'none';
   }
+
+  if (tab === 'bible') {
+    if (subEl) subEl.innerText = `Full KJV Bible Reader & Interlinear Lexicon (Powered by Bolls.life)`;
+    renderBollsBibleReader();
+    return;
+  }
+
+  if (!currentReaderSermon) return;
 
   if (tab === 'pdf') {
     contentArea.innerHTML = `<iframe src="${currentReaderSermon.pdfUrl}#toolbar=1" style="width:100%; height:82vh; border:none; border-radius:10px;" title="${escapeHtml(currentReaderSermon.title)}"></iframe>`;
@@ -2314,6 +2325,95 @@ async function fetchStrongsDefinition(number, isNT) {
       <div class="msg-strongs-def-box">
         <strong>Strong's ${type.toUpperCase()} #${number}</strong>
         <p style="margin-top: 0.25rem;">Definition lookup available on Blue Letter Bible.</p>
+      </div>
+    `;
+  }
+}
+
+function openStandaloneBibleReader() {
+  if (!allSermons || allSermons.length === 0) return;
+  const sampleSermon = allSermons[0];
+  openFullReader(sampleSermon.title, sampleSermon.id, sampleSermon.date || '', sampleSermon.pdf_url, 'en', 'bible');
+}
+
+function renderBollsBibleReader() {
+  const contentArea = document.getElementById('reader-content-area');
+  if (!contentArea) return;
+
+  const bookOptions = Object.keys(BIBLE_BOOKS).filter(k => !/\d+Sam|\d+Kgs|\d+Cor|\d+Thess|\d+Tim|\d+Pet|\d+Jn|St\b|Ps\b|Gen\b|Ex\b|Lev\b|Num\b|Deut\b|Josh\b|Judg\b|Neh\b|Prov\b|Eccl\b|Song\b|Isa\b|Jer\b|Lam\b|Ezek\b|Dan\b|Hos\b|Obad\b|Mic\b|Nah\b|Hab\b|Zeph\b|Hag\b|Zech\b|Mal\b|Matt\b|Mt\b|Mk\b|Lk\b|Jn\b|Rom\b|Gal\b|Eph\b|Phil\b|Col\b|Philem\b|Heb\b|Jas\b|Rev\b/.test(k))
+    .map(b => `<option value="${b}">${b}</option>`).join('');
+
+  contentArea.innerHTML = `
+    <div style="max-width: 900px; margin: 0 auto; padding: 1.5rem 0;">
+      <div style="display: flex; gap: 0.75rem; align-items: center; justify-content: center; flex-wrap: wrap; background: var(--bg-secondary, rgba(0,0,0,0.03)); padding: 1rem 1.25rem; border-radius: 12px; border: 1px solid var(--border-default, #cbd5e1); margin-bottom: 2rem;">
+        <label style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">📖 Select Bible Book:</label>
+        <select id="standalone-book-select" class="msg-select-box" style="height: 38px; font-size: 0.95rem;" onchange="loadBollsBibleChapter()">
+          ${bookOptions}
+        </select>
+        <label style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Chapter:</label>
+        <input type="number" id="standalone-chapter-input" class="msg-input-box" style="height: 38px; width: 80px; text-align: center;" value="1" min="1" max="150" onchange="loadBollsBibleChapter()">
+        <button class="msg-reader-btn active" style="height: 38px; padding: 0 1.25rem;" onclick="loadBollsBibleChapter()">📖 Load KJV Chapter</button>
+      </div>
+
+      <div id="standalone-bible-text-area" style="font-size: 1.2rem; font-family: serif; line-height: 1.9; color: var(--text-primary);">
+        Loading Genesis Chapter 1...
+      </div>
+    </div>
+  `;
+
+  loadBollsBibleChapter();
+}
+
+async function loadBollsBibleChapter() {
+  const bookSelect = document.getElementById('standalone-book-select');
+  const chapInput = document.getElementById('standalone-chapter-input');
+  const textArea = document.getElementById('standalone-bible-text-area');
+
+  if (!bookSelect || !chapInput || !textArea) return;
+
+  const bookName = bookSelect.value || 'Genesis';
+  const chapter = parseInt(chapInput.value, 10) || 1;
+  const bookId = BIBLE_BOOKS[bookName] || 1;
+  const isNT = bookId >= 40;
+
+  textArea.innerHTML = `<div style="text-align:center; padding: 3rem; color: var(--text-secondary);">📖 Fetching ${bookName} Chapter ${chapter} (KJV & Strong's Interlinear)...</div>`;
+
+  try {
+    const res = await fetch(`https://bolls.life/get-text/KJV/${bookId}/${chapter}/`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const verses = await res.json();
+    if (!verses || verses.length === 0) throw new Error('No verses returned');
+
+    let html = verses.map(v => {
+      const vNum = v.verse;
+      const rawText = v.text || '';
+      const parsedText = rawText.replace(/<S>(\d+)<\/S>/g, (match, number) => {
+        const type = isNT ? 'greek' : 'hebrew';
+        return ` <span class="msg-strongs-tag" onclick="fetchStrongsDefinition('${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} dictionary definition">${isNT ? 'G' : 'H'}${number}</span>`;
+      });
+      return `
+        <div style="margin-bottom: 1.1rem; display: flex; gap: 0.75rem; align-items: baseline;">
+          <span style="font-family: monospace; font-size: 0.9rem; font-weight: 700; color: var(--accent-primary, #2563eb); background: var(--bg-secondary, rgba(0,0,0,0.05)); padding: 0.2rem 0.5rem; border-radius: 6px;">v${vNum}</span>
+          <div style="flex: 1;">${parsedText}</div>
+        </div>
+      `;
+    }).join('');
+
+    textArea.innerHTML = `
+      <div style="border-bottom: 2px solid var(--accent-primary, #2563eb); padding-bottom: 0.75rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0; font-size: 1.4rem; font-weight: 700;">📖 ${bookName} Chapter ${chapter}</h2>
+        <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent-primary);">King James Version • Interlinear Lexicon</span>
+      </div>
+      <div>${html}</div>
+      <div id="strongs-def-container"></div>
+    `;
+  } catch (err) {
+    console.warn('Bolls.life chapter fetch error:', err);
+    textArea.innerHTML = `
+      <div style="text-align:center; padding: 3rem;">
+        <p style="color: var(--text-secondary);">Unable to load KJV chapter text for <strong>${escapeHtml(bookName)} ${chapter}</strong>.</p>
+        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(bookName + ' ' + chapter)}" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 1rem; display: inline-block;">🔍 Read on Blue Letter Bible</a>
       </div>
     `;
   }
