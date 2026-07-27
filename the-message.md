@@ -2165,14 +2165,17 @@ async function switchReaderTab(tab, customParallelLang = null) {
 function parseScripturePills(text) {
   if (!text) return '';
 
-  /* Clean raw Message Hub transcript symbols (@@ and ^^) */
+  /* Clean raw Message Hub transcript symbols (@@) */
   let cleanText = text.replace(/^@@\s*/gm, '');
-  cleanText = cleanText.replace(/\^\^([^\^]+)\^\^/g, '<em style="color: var(--accent-primary, #2563eb); font-style: normal; font-weight: 600;">$1</em>');
 
-  const escaped = escapeHtml(cleanText);
+  /* Escape raw HTML FIRST to prevent XSS and prevent escaping generated tags */
+  let formatted = escapeHtml(cleanText);
+
+  /* Convert ^^word^^ scripture emphasis tags to clean <em> elements */
+  formatted = formatted.replace(/\^\^([^\^]+)\^\^/g, '<em style="color: var(--accent-primary, #2563eb); font-style: normal; font-weight: 600;">$1</em>');
 
   /* Detect bracketed references [Genesis 1:1], [Revelation 10:7], [St. John 3:16], [I Corinthians 3:7], [Malachi 4:5-6] */
-  let formatted = escaped.replace(/\[((?:[I|V|X]+|[123]|St\.)?\s*[\w\.\s]+?)\s+(\d+):(\d+)(?:-(\d+))?\]/gi, (match, bookRaw, chap, startVerse, endVerse) => {
+  formatted = formatted.replace(/\[((?:[I|V|X]+|[123]|St\.)?\s*[\w\.\s]+?)\s+(\d+):(\d+)(?:-(\d+))?\]/gi, (match, bookRaw, chap, startVerse, endVerse) => {
     const cleanBook = bookRaw.trim();
     const verseLabel = endVerse ? `${startVerse}-${endVerse}` : startVerse;
     const safeBookEscaped = cleanBook.replace(/'/g, "\\'");
