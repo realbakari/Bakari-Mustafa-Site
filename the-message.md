@@ -2164,11 +2164,30 @@ async function switchReaderTab(tab, customParallelLang = null) {
 
 function parseScripturePills(text) {
   if (!text) return '';
-  const escaped = escapeHtml(text);
-  /* Matches references like [Genesis 1:1] or [Revelation 10:7] or [John 3:16] */
-  return escaped.replace(/\[((?:[123]\s+)?\w+)\s+(\d+):(\d+)\]/g, (match, book, chap, verse) => {
-    return `<span class="msg-scripture-ref" onclick="openBibleModal('${book}', ${chap}, ${verse})" title="Click to view KJV Text & Strong's Concordance">📖 [${book} ${chap}:${verse}]</span>`;
+
+  /* Clean raw Message Hub transcript symbols (@@ and ^^) */
+  let cleanText = text.replace(/^@@\s*/gm, '');
+  cleanText = cleanText.replace(/\^\^([^\^]+)\^\^/g, '<em style="color: var(--accent-primary, #2563eb); font-style: normal; font-weight: 600;">$1</em>');
+
+  const escaped = escapeHtml(cleanText);
+
+  /* Detect bracketed references [Genesis 1:1], [Revelation 10:7], [St. John 3:16], [I Corinthians 3:7], [Malachi 4:5-6] */
+  let formatted = escaped.replace(/\[((?:[I|V|X]+|[123]|St\.)?\s*[\w\.\s]+?)\s+(\d+):(\d+)(?:-(\d+))?\]/gi, (match, bookRaw, chap, startVerse, endVerse) => {
+    const cleanBook = bookRaw.trim();
+    const verseLabel = endVerse ? `${startVerse}-${endVerse}` : startVerse;
+    const safeBookEscaped = cleanBook.replace(/'/g, "\\'");
+    return `<span class="msg-scripture-ref" onclick="openBibleModal('${safeBookEscaped}', ${chap}, ${startVerse}${endVerse ? `, ${endVerse}` : ''})" title="Click to view KJV Text & Strong's Concordance">📖 [${cleanBook} ${chap}:${verseLabel}]</span>`;
   });
+
+  /* Detect unbracketed references like Genesis 1:1 or Revelation 10:7 or John 3:16 */
+  formatted = formatted.replace(/\b((?:St\.\s*)?(?:[123]|I{1,3})?\s*(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation))\s+(\d+):(\d+)(?:-(\d+))?\b/gi, (match, bookRaw, chap, startVerse, endVerse) => {
+    const cleanBook = bookRaw.trim();
+    const verseLabel = endVerse ? `${startVerse}-${endVerse}` : startVerse;
+    const safeBookEscaped = cleanBook.replace(/'/g, "\\'");
+    return `<span class="msg-scripture-ref" onclick="openBibleModal('${safeBookEscaped}', ${chap}, ${startVerse}${endVerse ? `, ${endVerse}` : ''})" title="Click to view KJV Text & Strong's Concordance">📖 ${cleanBook} ${chap}:${verseLabel}</span>`;
+  });
+
+  return formatted;
 }
 
 function formatKaraokeSentences(pNumber, text) {
@@ -2181,52 +2200,75 @@ function formatKaraokeSentences(pNumber, text) {
 
 /* Bolls.life Bible & Strong's Concordance Study Tool Integration */
 const BIBLE_BOOKS = {
-  "Genesis": 1, "Exodus": 2, "Leviticus": 3, "Numbers": 4, "Deuteronomy": 5,
-  "Joshua": 6, "Judges": 7, "Ruth": 8, "1 Samuel": 9, "2 Samuel": 10,
-  "1 Kings": 11, "2 Kings": 12, "1 Chronicles": 13, "2 Chronicles": 14,
-  "Ezra": 15, "Nehemiah": 16, "Esther": 17, "Job": 18, "Psalms": 19, "Psalm": 19,
-  "Proverbs": 20, "Ecclesiastes": 21, "Song of Solomon": 22, "Isaiah": 23,
-  "Jeremiah": 24, "Lamentations": 25, "Ezekiel": 26, "Daniel": 27, "Hosea": 28,
-  "Joel": 29, "Amos": 30, "Obadiah": 31, "Jonah": 32, "Micah": 33, "Nahum": 34,
-  "Habakkuk": 35, "Zephaniah": 36, "Haggai": 37, "Zechariah": 38, "Malachi": 39,
-  "Matthew": 40, "Mark": 41, "Luke": 42, "John": 43, "Acts": 44, "Romans": 45,
-  "1 Corinthians": 46, "2 Corinthians": 47, "Galatians": 48, "Ephesians": 49,
-  "Philippians": 50, "Colossians": 51, "1 Thessalonians": 52, "2 Thessalonians": 53,
-  "1 Timothy": 54, "2 Timothy": 55, "Titus": 56, "Philemon": 57, "Hebrews": 58,
-  "James": 59, "1 Peter": 60, "2 Peter": 61, "1 John": 62, "2 John": 63,
-  "3 John": 64, "Jude": 65, "Revelation": 66
+  "Genesis": 1, "Gen": 1, "Exodus": 2, "Ex": 2, "Leviticus": 3, "Lev": 3, "Numbers": 4, "Num": 4, "Deuteronomy": 5, "Deut": 5,
+  "Joshua": 6, "Josh": 6, "Judges": 7, "Judg": 7, "Ruth": 8, "1 Samuel": 9, "I Samuel": 9, "1Sam": 9, "2 Samuel": 10, "II Samuel": 10, "2Sam": 10,
+  "1 Kings": 11, "I Kings": 11, "1Kgs": 11, "2 Kings": 12, "II Kings": 12, "2Kgs": 12, "1 Chronicles": 13, "I Chronicles": 13, "2 Chronicles": 14, "II Chronicles": 14,
+  "Ezra": 15, "Nehemiah": 16, "Neh": 16, "Esther": 17, "Job": 18, "Psalms": 19, "Psalm": 19, "Psa": 19, "Ps": 19,
+  "Proverbs": 20, "Prov": 20, "Ecclesiastes": 21, "Eccl": 21, "Song of Solomon": 22, "Song": 22, "Isaiah": 23, "Isa": 23,
+  "Jeremiah": 24, "Jer": 24, "Lamentations": 25, "Lam": 25, "Ezekiel": 26, "Ezek": 26, "Daniel": 27, "Dan": 27, "Hosea": 28, "Hos": 28,
+  "Joel": 29, "Amos": 30, "Obadiah": 31, "Obad": 31, "Jonah": 32, "Micah": 33, "Mic": 33, "Nahum": 34, "Nah": 34,
+  "Habakkuk": 35, "Hab": 35, "Zephaniah": 36, "Zeph": 36, "Haggai": 37, "Hag": 37, "Zechariah": 38, "Zech": 38, "Malachi": 39, "Mal": 39,
+  "Matthew": 40, "St. Matthew": 40, "St Matthew": 40, "Matt": 40, "Mt": 40,
+  "Mark": 41, "St. Mark": 41, "St Mark": 41, "Mk": 41,
+  "Luke": 42, "St. Luke": 42, "St Luke": 42, "Lk": 42,
+  "John": 43, "St. John": 43, "St John": 43, "Jn": 43,
+  "Acts": 44, "Romans": 45, "Rom": 45,
+  "1 Corinthians": 46, "I Corinthians": 46, "1Cor": 46, "2 Corinthians": 47, "II Corinthians": 47, "2Cor": 47,
+  "Galatians": 48, "Gal": 48, "Ephesians": 49, "Eph": 49, "Philippians": 50, "Phil": 50, "Colossians": 51, "Col": 51,
+  "1 Thessalonians": 52, "I Thessalonians": 52, "1Thess": 52, "2 Thessalonians": 53, "II Thessalonians": 53, "2Thess": 53,
+  "1 Timothy": 54, "I Timothy": 54, "1Tim": 54, "2 Timothy": 55, "II Timothy": 55, "2Tim": 55,
+  "Titus": 56, "Philemon": 57, "Philem": 57, "Hebrews": 58, "Heb": 58,
+  "James": 59, "Jas": 59, "1 Peter": 60, "I Peter": 60, "1Pet": 60, "2 Peter": 61, "II Peter": 61, "2Pet": 61,
+  "1 John": 62, "I John": 62, "1Jn": 62, "2 John": 63, "II John": 63, "2Jn": 63, "3 John": 64, "III John": 64, "3Jn": 64,
+  "Jude": 65, "Revelation": 66, "Rev": 66
 };
 
-async function openBibleModal(bookName, chapter, verse) {
+async function openBibleModal(bookName, chapter, startVerse, endVerse = null) {
   const modal = document.getElementById('bible-modal-backdrop');
   const titleEl = document.getElementById('bible-modal-title');
   const bodyEl = document.getElementById('bible-modal-body');
 
   if (!modal || !bodyEl) return;
 
-  const bookId = BIBLE_BOOKS[bookName] || 1;
+  const normalizedBook = bookName.replace(/^St\.\s*/i, '').trim();
+  const bookId = BIBLE_BOOKS[normalizedBook] || BIBLE_BOOKS[bookName] || 1;
   const isNT = bookId >= 40;
 
-  if (titleEl) titleEl.innerText = `📖 ${bookName} ${chapter}:${verse} — King James Version (Strong's Concordance)`;
+  const refTitle = endVerse ? `${bookName} ${chapter}:${startVerse}-${endVerse}` : `${bookName} ${chapter}:${startVerse}`;
+
+  if (titleEl) titleEl.innerText = `📖 ${refTitle} — King James Version (Strong's Concordance)`;
   bodyEl.innerHTML = '<div style="text-align:center; padding: 2rem; color: var(--text-secondary);">📖 Fetching KJV Verse & Strong\'s Interlinear...</div>';
   modal.style.display = 'flex';
 
   try {
-    const res = await fetch(`https://bolls.life/get-verse/KJV/${bookId}/${chapter}/${verse}/`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const maxVerse = endVerse ? parseInt(endVerse, 10) : parseInt(startVerse, 10);
+    const minVerse = parseInt(startVerse, 10);
+    const fetchPromises = [];
 
-    const data = await res.json();
-    const rawText = data.text || '';
+    for (let v = minVerse; v <= Math.min(maxVerse, minVerse + 5); v++) {
+      fetchPromises.push(
+        fetch(`https://bolls.life/get-verse/KJV/${bookId}/${chapter}/${v}/`).then(r => r.ok ? r.json() : null)
+      );
+    }
 
-    /* Parse Strong's tags like <S>7225</S> */
-    const parsedHtml = rawText.replace(/<S>(\d+)<\/S>/g, (match, number) => {
-      const type = isNT ? 'greek' : 'hebrew';
-      return ` <span class="msg-strongs-tag" onclick="fetchStrongsDefinition('${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} dictionary definition">${isNT ? 'G' : 'H'}${number}</span>`;
-    });
+    const results = await Promise.all(fetchPromises);
+    const validResults = results.filter(Boolean);
+
+    if (validResults.length === 0) throw new Error('No verses returned');
+
+    let versesHtml = validResults.map(data => {
+      const vNum = data.verse;
+      const rawText = data.text || '';
+      const parsedText = rawText.replace(/<S>(\d+)<\/S>/g, (match, number) => {
+        const type = isNT ? 'greek' : 'hebrew';
+        return ` <span class="msg-strongs-tag" onclick="fetchStrongsDefinition('${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} dictionary definition">${isNT ? 'G' : 'H'}${number}</span>`;
+      });
+      return `<p style="margin-bottom: 0.85rem;"><sup style="font-weight: 700; color: var(--accent-primary); margin-right: 0.35rem;">${vNum}</sup>${parsedText}</p>`;
+    }).join('');
 
     bodyEl.innerHTML = `
-      <div style="font-size: 1.15rem; font-family: serif; line-height: 1.8; color: var(--text-primary);">
-        <strong style="color: var(--accent-primary);">[${bookName} ${chapter}:${verse}]</strong> ${parsedHtml}
+      <div style="font-size: 1.1rem; font-family: serif; line-height: 1.8; color: var(--text-primary);">
+        ${versesHtml}
       </div>
       <div id="strongs-def-container"></div>
     `;
@@ -2234,8 +2276,8 @@ async function openBibleModal(bookName, chapter, verse) {
     console.warn('Bolls.life fetch error:', err);
     bodyEl.innerHTML = `
       <div style="text-align:center; padding: 2rem;">
-        <p style="color: var(--text-secondary);">Unable to load KJV text for <strong>${escapeHtml(bookName)} ${chapter}:${verse}</strong>.</p>
-        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(bookName + ' ' + chapter + ':' + verse)}" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 1rem; display: inline-block;">🔍 Search on Blue Letter Bible</a>
+        <p style="color: var(--text-secondary);">Unable to load KJV text for <strong>${escapeHtml(refTitle)}</strong>.</p>
+        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(refTitle)}" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 1rem; display: inline-block;">🔍 Search on Blue Letter Bible</a>
       </div>
     `;
   }
