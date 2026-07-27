@@ -707,6 +707,110 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   }
 }
 
+/* Clickable Bible Reference Pill */
+.msg-scripture-ref {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.2rem;
+  padding: 0.15rem 0.45rem;
+  background-color: var(--bg-secondary, rgba(37, 99, 235, 0.08));
+  border: 1px solid var(--accent-primary, #2563eb);
+  color: var(--accent-primary, #2563eb);
+  border-radius: 6px;
+  font-size: 0.875rem;
+  font-weight: 600;
+  cursor: pointer;
+  transition: all 0.2s ease;
+  user-select: none;
+  text-decoration: none;
+}
+
+.msg-scripture-ref:hover {
+  background-color: var(--accent-primary, #2563eb);
+  color: #ffffff;
+  box-shadow: 0 2px 8px rgba(37, 99, 235, 0.3);
+  transform: translateY(-1px);
+}
+
+/* Bible & Strong's Concordance Study Modal */
+.msg-bible-backdrop {
+  position: fixed;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: rgba(15, 23, 42, 0.7);
+  backdrop-filter: blur(6px);
+  z-index: 20000;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  padding: 1rem;
+}
+
+.msg-bible-dialog {
+  background-color: var(--bg-primary, #ffffff);
+  border: 1px solid var(--border-default, #cbd5e1);
+  border-radius: 16px;
+  max-width: 650px;
+  width: 100%;
+  max-height: 85vh;
+  display: flex;
+  flex-direction: column;
+  box-shadow: 0 20px 40px rgba(0, 0, 0, 0.25);
+  overflow: hidden;
+}
+
+.msg-bible-header {
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  padding: 1.1rem 1.5rem;
+  border-bottom: 1px solid var(--border-default, #e2e8f0);
+  background-color: var(--bg-secondary, #f8fafc);
+}
+
+.msg-bible-title {
+  font-size: 1.15rem;
+  font-weight: 700;
+  margin: 0;
+  color: var(--text-primary);
+}
+
+.msg-bible-body {
+  padding: 1.5rem;
+  overflow-y: auto;
+  font-size: 1rem;
+  line-height: 1.7;
+}
+
+.msg-strongs-tag {
+  display: inline-block;
+  font-size: 0.75rem;
+  font-weight: 700;
+  color: var(--accent-primary, #2563eb);
+  background: var(--bg-secondary, rgba(37, 99, 235, 0.1));
+  padding: 0.1rem 0.35rem;
+  border-radius: 4px;
+  margin-left: 0.2rem;
+  cursor: pointer;
+  border: 1px solid rgba(37, 99, 235, 0.3);
+}
+
+.msg-strongs-tag:hover {
+  background: var(--accent-primary, #2563eb);
+  color: #ffffff;
+}
+
+.msg-strongs-def-box {
+  margin-top: 1.25rem;
+  padding: 1rem 1.25rem;
+  background-color: var(--bg-secondary, #f1f5f9);
+  border-left: 4px solid var(--accent-primary, #2563eb);
+  border-radius: 8px;
+  font-size: 0.9rem;
+}
+
 /* Parallel Dual Column Split View */
 .msg-parallel-grid {
   display: grid;
@@ -1211,6 +1315,19 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
         <li><code>GET /api/search?q=seven+seals</code> — Full-text search</li>
       </ul>
     </section>
+  </div>
+
+  <!-- KJV Scripture & Strong's Concordance Study Modal -->
+  <div id="bible-modal-backdrop" class="msg-bible-backdrop" style="display: none;">
+    <div class="msg-bible-dialog">
+      <header class="msg-bible-header">
+        <h3 id="bible-modal-title" class="msg-bible-title">📖 Genesis 1:1 — King James Version</h3>
+        <button onclick="closeBibleModal()" class="msg-audio-close-btn" title="Close Bible modal">✕</button>
+      </header>
+      <main id="bible-modal-body" class="msg-bible-body">
+        <div>Loading scripture verse & Strong's Concordance lexicon...</div>
+      </main>
+    </div>
   </div>
 
   <!-- On-Site Sermon Reader Modal -->
@@ -2041,12 +2158,121 @@ async function switchReaderTab(tab, customParallelLang = null) {
   `;
 }
 
+function parseScripturePills(text) {
+  if (!text) return '';
+  const escaped = escapeHtml(text);
+  /* Matches references like [Genesis 1:1] or [Revelation 10:7] or [John 3:16] */
+  return escaped.replace(/\[((?:[123]\s+)?\w+)\s+(\d+):(\d+)\]/g, (match, book, chap, verse) => {
+    return `<span class="msg-scripture-ref" onclick="openBibleModal('${book}', ${chap}, ${verse})" title="Click to view KJV Text & Strong's Concordance">📖 [${book} ${chap}:${verse}]</span>`;
+  });
+}
+
 function formatKaraokeSentences(pNumber, text) {
   if (!text) return '';
   const sentences = text.match(/[^.!?]+[.!?]+(\s+|$)|[^.!?]+$/g) || [text];
   return sentences.map((s, idx) => `
-    <span class="msg-sentence" id="s_${pNumber}_${idx}">${escapeHtml(s)}</span>
+    <span class="msg-sentence" id="s_${pNumber}_${idx}">${parseScripturePills(s)}</span>
   `).join('');
+}
+
+/* Bolls.life Bible & Strong's Concordance Study Tool Integration */
+const BIBLE_BOOKS = {
+  "Genesis": 1, "Exodus": 2, "Leviticus": 3, "Numbers": 4, "Deuteronomy": 5,
+  "Joshua": 6, "Judges": 7, "Ruth": 8, "1 Samuel": 9, "2 Samuel": 10,
+  "1 Kings": 11, "2 Kings": 12, "1 Chronicles": 13, "2 Chronicles": 14,
+  "Ezra": 15, "Nehemiah": 16, "Esther": 17, "Job": 18, "Psalms": 19, "Psalm": 19,
+  "Proverbs": 20, "Ecclesiastes": 21, "Song of Solomon": 22, "Isaiah": 23,
+  "Jeremiah": 24, "Lamentations": 25, "Ezekiel": 26, "Daniel": 27, "Hosea": 28,
+  "Joel": 29, "Amos": 30, "Obadiah": 31, "Jonah": 32, "Micah": 33, "Nahum": 34,
+  "Habakkuk": 35, "Zephaniah": 36, "Haggai": 37, "Zechariah": 38, "Malachi": 39,
+  "Matthew": 40, "Mark": 41, "Luke": 42, "John": 43, "Acts": 44, "Romans": 45,
+  "1 Corinthians": 46, "2 Corinthians": 47, "Galatians": 48, "Ephesians": 49,
+  "Philippians": 50, "Colossians": 51, "1 Thessalonians": 52, "2 Thessalonians": 53,
+  "1 Timothy": 54, "2 Timothy": 55, "Titus": 56, "Philemon": 57, "Hebrews": 58,
+  "James": 59, "1 Peter": 60, "2 Peter": 61, "1 John": 62, "2 John": 63,
+  "3 John": 64, "Jude": 65, "Revelation": 66
+};
+
+async function openBibleModal(bookName, chapter, verse) {
+  const modal = document.getElementById('bible-modal-backdrop');
+  const titleEl = document.getElementById('bible-modal-title');
+  const bodyEl = document.getElementById('bible-modal-body');
+
+  if (!modal || !bodyEl) return;
+
+  const bookId = BIBLE_BOOKS[bookName] || 1;
+  const isNT = bookId >= 40;
+
+  if (titleEl) titleEl.innerText = `📖 ${bookName} ${chapter}:${verse} — King James Version (Strong's Concordance)`;
+  bodyEl.innerHTML = '<div style="text-align:center; padding: 2rem; color: var(--text-secondary);">📖 Fetching KJV Verse & Strong\'s Interlinear...</div>';
+  modal.style.display = 'flex';
+
+  try {
+    const res = await fetch(`https://bolls.life/get-verse/KJV/${bookId}/${chapter}/${verse}/`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+    const rawText = data.text || '';
+
+    /* Parse Strong's tags like <S>7225</S> */
+    const parsedHtml = rawText.replace(/<S>(\d+)<\/S>/g, (match, number) => {
+      const type = isNT ? 'greek' : 'hebrew';
+      return ` <span class="msg-strongs-tag" onclick="fetchStrongsDefinition('${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} dictionary definition">${isNT ? 'G' : 'H'}${number}</span>`;
+    });
+
+    bodyEl.innerHTML = `
+      <div style="font-size: 1.15rem; font-family: serif; line-height: 1.8; color: var(--text-primary);">
+        <strong style="color: var(--accent-primary);">[${bookName} ${chapter}:${verse}]</strong> ${parsedHtml}
+      </div>
+      <div id="strongs-def-container"></div>
+    `;
+  } catch (err) {
+    console.warn('Bolls.life fetch error:', err);
+    bodyEl.innerHTML = `
+      <div style="text-align:center; padding: 2rem;">
+        <p style="color: var(--text-secondary);">Unable to load KJV text for <strong>${escapeHtml(bookName)} ${chapter}:${verse}</strong>.</p>
+        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(bookName + ' ' + chapter + ':' + verse)}" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 1rem; display: inline-block;">🔍 Search on Blue Letter Bible</a>
+      </div>
+    `;
+  }
+}
+
+async function fetchStrongsDefinition(number, isNT) {
+  const container = document.getElementById('strongs-def-container');
+  if (!container) return;
+
+  const type = isNT ? 'greek' : 'hebrew';
+  container.innerHTML = `<div class="msg-strongs-def-box">📖 Loading Strong's ${type.toUpperCase()} #${number} definition...</div>`;
+
+  try {
+    const res = await fetch(`https://bolls.life/get-dictionary/definition/strongs/${type}/${number}/`);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+
+    const data = await res.json();
+    const definition = data.definition || data.entry || 'No definition text available.';
+
+    container.innerHTML = `
+      <div class="msg-strongs-def-box">
+        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; color: var(--accent-primary);">
+          Strong's ${type.toUpperCase()} #${number}
+        </div>
+        <div style="line-height: 1.6;">${definition}</div>
+      </div>
+    `;
+  } catch (err) {
+    console.warn('Strong definition error:', err);
+    container.innerHTML = `
+      <div class="msg-strongs-def-box">
+        <strong>Strong's ${type.toUpperCase()} #${number}</strong>
+        <p style="margin-top: 0.25rem;">Definition lookup available on Blue Letter Bible.</p>
+      </div>
+    `;
+  }
+}
+
+function closeBibleModal() {
+  const modal = document.getElementById('bible-modal-backdrop');
+  if (modal) modal.style.display = 'none';
 }
 
 function escapeHtml(str) {
