@@ -811,6 +811,28 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   font-size: 0.9rem;
 }
 
+.msg-strongs-popover-card {
+  position: absolute;
+  z-index: 100000;
+  width: 330px;
+  max-width: 90vw;
+  background: var(--bg-primary, #ffffff);
+  color: var(--text-primary, #0f172a);
+  border: 1.5px solid var(--accent-primary, #2563eb);
+  border-radius: 12px;
+  padding: 1.1rem 1.25rem;
+  box-shadow: 0 14px 40px rgba(0, 0, 0, 0.25);
+  font-family: inherit;
+  font-size: 0.925rem;
+  line-height: 1.6;
+  animation: popoverFadeIn 0.18s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+@keyframes popoverFadeIn {
+  from { opacity: 0; transform: translateY(6px) scale(0.97); }
+  to { opacity: 1; transform: translateY(0) scale(1); }
+}
+
 /* Parallel Dual Column Split View */
 .msg-parallel-grid {
   display: grid;
@@ -2275,7 +2297,7 @@ async function openBibleModal(bookName, chapter, startVerse, endVerse = null) {
       const rawText = data.text || '';
       const parsedText = rawText.replace(/<S>(\d+)<\/S>/g, (match, number) => {
         const type = isNT ? 'greek' : 'hebrew';
-        return ` <span class="msg-strongs-tag" onclick="fetchStrongsDefinition('${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} dictionary definition">${isNT ? 'G' : 'H'}${number}</span>`;
+        return ` <span class="msg-strongs-tag" onclick="showStrongsPopover(event, '${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} Interlinear Card">${isNT ? 'G' : 'H'}${number}</span>`;
       });
       return `<p style="margin-bottom: 0.85rem;"><sup style="font-weight: 700; color: var(--accent-primary); margin-right: 0.35rem;">${vNum}</sup>${parsedText}</p>`;
     }).join('');
@@ -2324,6 +2346,97 @@ async function loadStrongsDictionary(isNT) {
   }
   return null;
 }
+
+let currentStrongsPopover = null;
+
+function closeStrongsPopover() {
+  if (currentStrongsPopover && currentStrongsPopover.parentNode) {
+    currentStrongsPopover.parentNode.removeChild(currentStrongsPopover);
+    currentStrongsPopover = null;
+  }
+}
+
+async function showStrongsPopover(evt, number, isNT) {
+  if (evt) {
+    evt.preventDefault();
+    evt.stopPropagation();
+  }
+
+  closeStrongsPopover();
+
+  const targetEl = evt ? evt.currentTarget : null;
+  if (!targetEl) return;
+
+  const type = isNT ? 'greek' : 'hebrew';
+  const prefix = isNT ? 'G' : 'H';
+  const paddedNum = `${prefix}${number}`;
+
+  const popover = document.createElement('div');
+  popover.className = 'msg-strongs-popover-card';
+  popover.id = 'strongs-popover-card';
+  popover.innerHTML = `
+    <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+      <span style="font-weight: 700; font-size: 0.95rem; color: var(--accent-primary, #2563eb);">Strong's ${type.toUpperCase()} #${number}</span>
+      <button onclick="closeStrongsPopover()" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary); line-height: 1;">&times;</button>
+    </div>
+    <div style="font-size: 0.85rem; color: var(--text-secondary);">📖 Fetching Interlinear Lexicon Card...</div>
+  `;
+
+  document.body.appendChild(popover);
+  currentStrongsPopover = popover;
+
+  /* Position card directly below target element */
+  const rect = targetEl.getBoundingClientRect();
+  const cardWidth = 330;
+  let leftPos = rect.left + window.scrollX;
+  if (leftPos + cardWidth > window.innerWidth - 20) {
+    leftPos = Math.max(10, window.innerWidth - cardWidth - 20);
+  }
+  let topPos = rect.bottom + window.scrollY + 8;
+
+  popover.style.left = `${leftPos}px`;
+  popover.style.top = `${topPos}px`;
+
+  /* Fetch dictionary data */
+  const dict = await loadStrongsDictionary(isNT);
+  const entry = dict ? (dict[paddedNum] || dict[`${prefix}${number.padStart(4, '0')}`]) : null;
+
+  if (entry) {
+    const lemma = entry.lemma ? `<span style="font-size: 1.3rem; font-weight: bold; color: var(--accent-primary, #2563eb); margin-right: 0.4rem;">${entry.lemma}</span>` : '';
+    const translit = (entry.translit || entry.xlit) ? `<span style="font-style: italic; color: var(--text-secondary); font-size: 0.9rem;">(${entry.translit || entry.xlit})</span>` : '';
+    const pron = entry.pron ? `<span style="font-size: 0.8rem; background: var(--bg-secondary, rgba(0,0,0,0.06)); padding: 0.1rem 0.35rem; border-radius: 4px;">🗣️ ${entry.pron}</span>` : '';
+    const strongsDef = entry.strongs_def ? `<div style="margin-top: 0.5rem; font-size: 0.875rem;"><strong>Definition:</strong> ${entry.strongs_def}</div>` : '';
+    const kjvDef = entry.kjv_def ? `<div style="margin-top: 0.4rem; font-size: 0.825rem; color: var(--text-secondary);"><strong>KJV:</strong> ${entry.kjv_def}</div>` : '';
+
+    popover.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; border-bottom: 1px solid var(--border-default, rgba(0,0,0,0.1)); padding-bottom: 0.4rem;">
+        <div>
+          <span style="font-weight: 700; font-size: 0.85rem; color: var(--accent-primary, #2563eb); text-transform: uppercase;">Strong's ${type} #${number}</span>
+          <div style="margin-top: 0.15rem;">${lemma} ${translit} ${pron}</div>
+        </div>
+        <button onclick="closeStrongsPopover()" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-secondary); line-height: 1; padding: 0 0 0 0.5rem;">&times;</button>
+      </div>
+      ${strongsDef}
+      ${kjvDef}
+    `;
+  } else {
+    popover.innerHTML = `
+      <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
+        <span style="font-weight: 700; color: var(--accent-primary);">Strong's ${type.toUpperCase()} #${number}</span>
+        <button onclick="closeStrongsPopover()" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary);">&times;</button>
+      </div>
+      <p style="font-size: 0.85rem; margin: 0.4rem 0;">Definition lookup available on Blue Letter Bible.</p>
+      <a href="https://www.blueletterbible.org/lexicon/${type === 'hebrew' ? 'h' : 'g'}${number}/kjv/wlc/1-1/" target="_blank" class="msg-btn msg-btn-pdf" style="font-size: 0.8rem; padding: 0.25rem 0.6rem; display: inline-block;">🔍 Open Blue Letter Bible Lexicon</a>
+    `;
+  }
+}
+
+/* Auto-close popover on outside click */
+document.addEventListener('click', (e) => {
+  if (currentStrongsPopover && !currentStrongsPopover.contains(e.target) && !e.target.classList.contains('msg-strongs-tag')) {
+    closeStrongsPopover();
+  }
+});
 
 async function fetchStrongsDefinition(number, isNT) {
   const container = document.getElementById('strongs-def-container');
@@ -2428,7 +2541,7 @@ async function loadBollsBibleChapter() {
       const rawText = v.text || '';
       const parsedText = rawText.replace(/<S>(\d+)<\/S>/g, (match, number) => {
         const type = isNT ? 'greek' : 'hebrew';
-        return ` <span class="msg-strongs-tag" onclick="fetchStrongsDefinition('${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} dictionary definition">${isNT ? 'G' : 'H'}${number}</span>`;
+        return ` <span class="msg-strongs-tag" onclick="showStrongsPopover(event, '${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} Interlinear Card">${isNT ? 'G' : 'H'}${number}</span>`;
       });
       return `
         <div style="margin-bottom: 1.1rem; display: flex; gap: 0.75rem; align-items: baseline;">
