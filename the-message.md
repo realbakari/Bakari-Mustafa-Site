@@ -1781,12 +1781,26 @@ function playAudio(title, id, lang, url) {
   audioEl.ontimeupdate = function() {
     if (!audioEl.duration || audioEl.paused) return;
     const progress = audioEl.currentTime / audioEl.duration;
-    const paraItems = document.querySelectorAll('#reader-content-area .msg-paragraph-item');
+    const paraItems = Array.from(document.querySelectorAll('#reader-content-area .msg-paragraph-item'));
     if (paraItems.length === 0) return;
 
-    const totalProgress = progress * paraItems.length;
-    const activeIndex = Math.min(paraItems.length - 1, Math.floor(totalProgress));
-    const activeEl = paraItems[activeIndex];
+    /* Calculate weighted character offset across all paragraphs for speech timing */
+    let totalTextChars = 0;
+    const paraCharOffsets = paraItems.map(item => {
+      const textEl = item.querySelector('.msg-para-text');
+      const len = textEl ? (textEl.textContent || '').length : 1;
+      const start = totalTextChars;
+      totalTextChars += len;
+      return { item, start, len, end: totalTextChars };
+    });
+
+    if (totalTextChars === 0) return;
+    const targetCharOffset = progress * totalTextChars;
+
+    let activeParaObj = paraCharOffsets.find(p => targetCharOffset >= p.start && targetCharOffset <= p.end);
+    if (!activeParaObj) activeParaObj = paraCharOffsets[paraCharOffsets.length - 1];
+
+    const activeEl = activeParaObj.item;
 
     if (activeEl) {
       if (!activeEl.classList.contains('msg-para-active-reading')) {
@@ -1809,13 +1823,23 @@ function playAudio(title, id, lang, url) {
         activeEl.scrollIntoView({ behavior: 'smooth', block: 'center' });
       }
 
-      /* Highlight active sentence / line of text inside paragraph */
-      const sentences = activeEl.querySelectorAll('.msg-sentence');
+      /* Highlight active sentence inside active paragraph */
+      const sentences = Array.from(activeEl.querySelectorAll('.msg-sentence'));
       if (sentences.length > 0) {
-        const paraFraction = totalProgress - Math.floor(totalProgress);
-        const activeSentenceIdx = Math.min(sentences.length - 1, Math.floor(paraFraction * sentences.length));
-        const activeSentenceEl = sentences[activeSentenceIdx];
+        const paraProgress = (targetCharOffset - activeParaObj.start) / Math.max(1, activeParaObj.len);
+        let totalSentChars = 0;
+        const sentCharOffsets = sentences.map(s => {
+          const sLen = (s.textContent || '').length;
+          const sStart = totalSentChars;
+          totalSentChars += sLen;
+          return { s, sStart, sEnd: totalSentChars };
+        });
 
+        const targetSentOffset = paraProgress * totalSentChars;
+        let activeSentObj = sentCharOffsets.find(so => targetSentOffset >= so.sStart && targetSentOffset <= so.sEnd);
+        if (!activeSentObj) activeSentObj = sentCharOffsets[sentCharOffsets.length - 1];
+
+        const activeSentenceEl = activeSentObj ? activeSentObj.s : null;
         if (activeSentenceEl && !activeSentenceEl.classList.contains('active-sentence')) {
           document.querySelectorAll('.msg-sentence.active-sentence').forEach(s => s.classList.remove('active-sentence'));
           activeSentenceEl.classList.add('active-sentence');
