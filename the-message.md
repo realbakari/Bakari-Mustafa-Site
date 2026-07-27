@@ -1072,8 +1072,8 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
       <div class="msg-stats-bar">
         <span class="msg-stat-chip">📖 Sermons: <strong id="stat-total">1,200+</strong></span>
-        <span class="msg-stat-chip">🌍 Languages: <strong id="stat-langs">72</strong></span>
-        <span class="msg-stat-chip" style="cursor: pointer; border-color: var(--accent-primary); color: var(--accent-primary); font-weight: 700;" onclick="playLwbRadio('gospel_music')" title="Listen to Living Word Broadcast 24/7 End Time Gospel Music">📻 24/7 Gospel Radio</span>
+        <span class="msg-stat-chip" style="cursor: pointer; border-color: var(--accent-primary); color: var(--accent-primary); font-weight: 700;" onclick="playLwbRadio('gospel_music')" title="Listen to 24/7 Sermon Broadcast">📻 24/7 Broadcast</span>
+        <a href="https://www.lwbcast.org/OtherTabs/Music.php" target="_blank" rel="noopener" class="msg-stat-chip" style="text-decoration: none;" title="Visit Living Word Broadcast web player page">🔗 LWB Site</a>
         <span class="msg-stat-chip">⚡ Public REST API</span>
       </div>
     </div>
@@ -1591,17 +1591,9 @@ function setQuickYear(year) {
   applyFilters();
 }
 
-function playLwbRadio(type = 'gospel_music') {
-  /* High-quality HTTPS stream fallback for mobile & modern browsers */
-  const fallbackSermon = allSermons && allSermons.length > 0 ? allSermons[0] : null;
-  const streamUrl = (fallbackSermon && (fallbackSermon.m4a_url || fallbackSermon.m4aUrl)) 
-    ? (fallbackSermon.m4a_url || fallbackSermon.m4aUrl) 
-    : 'https://branham.org/azure/branham/65-1212.m4a';
-
-  const title = fallbackSermon ? `24/7 Broadcast: ${fallbackSermon.title}` : '24/7 Featured Sermon Broadcast';
-  const sermonId = fallbackSermon ? fallbackSermon.id : 'Radio';
-
-  playAudio(title, sermonId, 'EN', streamUrl);
+function playLwbRadio(type = 'music') {
+  const radioStreamUrl = `/api/radio-stream?type=${encodeURIComponent(type)}`;
+  playAudio('24/7 End Time Gospel Music & Broadcast', 'LWB 24/7 Radio', 'EN', radioStreamUrl);
 }
 
 function playAudio(title, id, lang, url) {
