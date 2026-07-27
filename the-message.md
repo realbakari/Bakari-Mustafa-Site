@@ -1133,6 +1133,11 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
 
   <!-- Full Immersion Sermon Reader View (Hidden by default) -->
   <div id="full-reader-section" class="msg-full-reader" style="display: none;">
+    <!-- Fixed Floating Quick-Close Button for Instant Exit at Any Scroll Position -->
+    <button id="fixed-reader-close-btn" onclick="closeFullReader()" title="Exit reader & return to library" style="position: fixed; top: 18px; right: 20px; z-index: 100001; background: var(--accent-primary, #2563eb); color: #ffffff; border: none; box-shadow: 0 4px 14px rgba(0,0,0,0.3); font-weight: 700; padding: 0.5rem 1rem; border-radius: 999px; cursor: pointer; display: flex; align-items: center; gap: 0.35rem;">
+      ✕ Close Reader
+    </button>
+
     <div class="msg-reader-toolbar" style="position: relative;">
       <div id="reading-progress-bar" class="msg-reading-progress"></div>
 
@@ -1342,7 +1347,7 @@ description: Public catalogue and API for William Branham sermons in audio (M4A)
   </div>
 
   <!-- KJV Scripture & Strong's Concordance Study Modal -->
-  <div id="bible-modal-backdrop" class="msg-bible-backdrop" style="display: none;">
+  <div id="bible-modal-backdrop" class="msg-bible-backdrop" style="display: none;" onclick="if(event.target === this) closeBibleModal()">
     <div class="msg-bible-dialog">
       <header class="msg-bible-header">
         <h3 id="bible-modal-title" class="msg-bible-title">📖 Genesis 1:1 — King James Version</h3>
@@ -2431,10 +2436,21 @@ async function showStrongsPopover(evt, number, isNT) {
   }
 }
 
-/* Auto-close popover on outside click */
+/* Auto-close popover & modals on outside click or Esc key */
 document.addEventListener('click', (e) => {
   if (currentStrongsPopover && !currentStrongsPopover.contains(e.target) && !e.target.classList.contains('msg-strongs-tag')) {
     closeStrongsPopover();
+  }
+});
+
+document.addEventListener('keydown', (e) => {
+  if (e.key === 'Escape') {
+    closeStrongsPopover();
+    closeBibleModal();
+    const readerSection = document.getElementById('full-reader-section');
+    if (readerSection && readerSection.style.display !== 'none') {
+      closeFullReader();
+    }
   }
 });
 
