@@ -1570,7 +1570,11 @@ function renderSermons(items) {
   if (paginationBar) {
     if (totalPages > 1) {
       paginationBar.style.display = 'flex';
-      document.getElementById('page-info-text').innerText = `Page ${currentPage} of ${totalPages} (${items.length} Total)`;
+      const langSelect = document.getElementById('msg-lang-select');
+      const selectedOpt = langSelect && langSelect.options[langSelect.selectedIndex];
+      const langLabel = (selectedOpt && langSelect.value) ? `${selectedOpt.text}` : 'Total';
+
+      document.getElementById('page-info-text').innerText = `Page ${currentPage} of ${totalPages} (${items.length} ${langLabel} Sermons)`;
       document.getElementById('btn-prev-page').disabled = (currentPage === 1);
       document.getElementById('btn-next-page').disabled = (currentPage === totalPages);
       
