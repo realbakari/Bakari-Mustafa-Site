@@ -2297,34 +2297,72 @@ async function openBibleModal(bookName, chapter, startVerse, endVerse = null) {
   }
 }
 
+let strongsHebrewDict = null;
+let strongsGreekDict = null;
+
+async function loadStrongsDictionary(isNT) {
+  if (isNT && strongsGreekDict) return strongsGreekDict;
+  if (!isNT && strongsHebrewDict) return strongsHebrewDict;
+
+  const url = isNT 
+    ? 'https://raw.githubusercontent.com/openscriptures/strongs/master/greek/strongs-greek-dictionary.js'
+    : 'https://raw.githubusercontent.com/openscriptures/strongs/master/hebrew/strongs-hebrew-dictionary.js';
+
+  try {
+    const res = await fetch(url);
+    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+    const jsText = await res.text();
+    const match = jsText.match(/var (?:strongsHebrewDictionary|strongsGreekDictionary) = (\{[\s\S]+\});/);
+    if (match) {
+      const data = JSON.parse(match[1]);
+      if (isNT) strongsGreekDict = data;
+      else strongsHebrewDict = data;
+      return data;
+    }
+  } catch (err) {
+    console.warn('Failed to load Strongs dictionary:', err);
+  }
+  return null;
+}
+
 async function fetchStrongsDefinition(number, isNT) {
   const container = document.getElementById('strongs-def-container');
   if (!container) return;
 
   const type = isNT ? 'greek' : 'hebrew';
-  container.innerHTML = `<div class="msg-strongs-def-box">📖 Loading Strong's ${type.toUpperCase()} #${number} definition...</div>`;
+  const prefix = isNT ? 'G' : 'H';
+  const paddedNum = `${prefix}${number}`;
 
-  try {
-    const res = await fetch(`https://bolls.life/get-dictionary/definition/strongs/${type}/${number}/`);
-    if (!res.ok) throw new Error(`HTTP ${res.status}`);
+  container.innerHTML = `<div class="msg-strongs-def-box">📖 Loading Strong's ${type.toUpperCase()} #${number} Interlinear Lexicon...</div>`;
 
-    const data = await res.json();
-    const definition = data.definition || data.entry || 'No definition text available.';
+  const dict = await loadStrongsDictionary(isNT);
+  const entry = dict ? (dict[paddedNum] || dict[`${prefix}${number.padStart(4, '0')}`]) : null;
+
+  if (entry) {
+    const lemma = entry.lemma ? `<span style="font-size: 1.25rem; font-weight: bold; margin-right: 0.5rem; color: var(--accent-primary, #2563eb);">${entry.lemma}</span>` : '';
+    const translit = (entry.translit || entry.xlit) ? `<span style="font-style: italic; color: var(--text-secondary); margin-right: 0.5rem;">(${entry.translit || entry.xlit})</span>` : '';
+    const pron = entry.pron ? `<span style="font-size: 0.85rem; background: var(--bg-secondary, rgba(0,0,0,0.06)); padding: 0.15rem 0.4rem; border-radius: 4px;">🗣️ ${entry.pron}</span>` : '';
+    const strongsDef = entry.strongs_def ? `<div style="margin-top: 0.5rem;"><strong>Definition:</strong> ${entry.strongs_def}</div>` : '';
+    const kjvDef = entry.kjv_def ? `<div style="margin-top: 0.35rem; font-size: 0.9rem; color: var(--text-secondary);"><strong>KJV Translations:</strong> ${entry.kjv_def}</div>` : '';
+    const derivation = entry.derivation ? `<div style="margin-top: 0.35rem; font-size: 0.85rem; font-style: italic;"><strong>Origin:</strong> ${entry.derivation}</div>` : '';
 
     container.innerHTML = `
-      <div class="msg-strongs-def-box">
-        <div style="font-weight: 700; font-size: 1rem; margin-bottom: 0.4rem; color: var(--accent-primary);">
-          Strong's ${type.toUpperCase()} #${number}
+      <div class="msg-strongs-def-box" style="margin-top: 1.25rem; background: var(--bg-secondary, #f8fafc); border: 1px solid var(--accent-primary, #2563eb); border-radius: 10px; padding: 1.1rem 1.25rem;">
+        <div style="display: flex; align-items: center; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 0.5rem;">
+          <span style="font-weight: 700; font-size: 1rem; color: var(--accent-primary, #2563eb);">Strong's ${type.toUpperCase()} #${number}</span>
+          ${lemma} ${translit} ${pron}
         </div>
-        <div style="line-height: 1.6;">${definition}</div>
+        ${strongsDef}
+        ${kjvDef}
+        ${derivation}
       </div>
     `;
-  } catch (err) {
-    console.warn('Strong definition error:', err);
+  } else {
     container.innerHTML = `
-      <div class="msg-strongs-def-box">
-        <strong>Strong's ${type.toUpperCase()} #${number}</strong>
-        <p style="margin-top: 0.25rem;">Definition lookup available on Blue Letter Bible.</p>
+      <div class="msg-strongs-def-box" style="margin-top: 1.25rem; padding: 1rem;">
+        <div style="font-weight: 700; color: var(--accent-primary);">Strong's ${type.toUpperCase()} #${number}</div>
+        <p style="margin-top: 0.35rem;">Definition lookup available on Blue Letter Bible.</p>
+        <a href="https://www.blueletterbible.org/lexicon/${type === 'hebrew' ? 'h' : 'g'}${number}/kjv/wlc/1-1/" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 0.5rem; display: inline-block;">🔍 Open Blue Letter Bible Lexicon</a>
       </div>
     `;
   }
