@@ -2331,9 +2331,16 @@ async function openBibleModal(bookName, chapter, startVerse, endVerse = null) {
       return `<p style="margin-bottom: 0.85rem;"><sup style="font-weight: 700; color: var(--accent-primary); margin-right: 0.35rem;">${vNum}</sup>${parsedText}</p>`;
     }).join('');
 
+    const cleanVerseText = validResults.map(d => `${d.verse}. ${d.text.replace(/<S>\d+<\/S>/g, '')}`).join(' ');
+    const copyPayload = `"${cleanVerseText}" — ${refTitle} (KJV)`;
+
     bodyEl.innerHTML = `
       <div style="font-size: 1.1rem; font-family: serif; line-height: 1.8; color: var(--text-primary);">
         ${versesHtml}
+      </div>
+      <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--border-default, #cbd5e1);">
+        <button class="msg-btn msg-btn-pdf" style="font-size: 0.85rem; padding: 0.35rem 0.75rem;" onclick="navigator.clipboard.writeText('${escapeJs(copyPayload)}'); this.innerText='✓ Copied Verse!'; setTimeout(()=>this.innerText='📋 Copy KJV Verse', 2000)">📋 Copy KJV Verse</button>
+        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(refTitle)}" target="_blank" rel="noopener" class="msg-btn msg-btn-pdf" style="font-size: 0.85rem; padding: 0.35rem 0.75rem; text-decoration: none;">🔗 Open in Blue Letter Bible</a>
       </div>
       <div id="strongs-def-container"></div>
     `;
