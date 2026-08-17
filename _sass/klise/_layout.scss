@@ -1,4 +1,4 @@
-// Navbar
+// Navbar (Kumo UI: Hairline separation, clean surface)
 .navbar {
   height: auto;
   max-width: calc(#{$wide-size} - (#{$spacing-full} * 1.25));
@@ -6,15 +6,13 @@
   position: relative;
   margin-right: auto;
   margin-left: auto;
-  border-bottom: 1px solid var(--border-default);
-  padding: 1rem $spacing-full 0.85rem;
+  border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
+  padding: 0.85rem $spacing-full 0.75rem;
   @extend %clearfix;
 
   @include media-query($on-mobile) {
     backdrop-filter: none;
     background-color: var(--bg-primary);
-    // The inner .menu becomes a fixed 50px bar on mobile; reserve its height
-    // in the document flow so page content starts below it.
     box-sizing: border-box;
     height: 50px;
     padding: 0;
@@ -23,7 +21,6 @@
 
   @media (min-width: 769px) {
     background-color: var(--bg-primary);
-    transition: all 0.2s ease;
   }
 }
 
@@ -45,25 +42,27 @@
     clear: both;
     -webkit-transform: scale(1, 1);
     transform: scale(1, 1);
-    opacity: 0.88;
+    opacity: 0.9;
     z-index: 1;
-    width: 38px;
-    height: 38px;
+    width: 36px;
+    height: 36px;
     display: inline-flex;
     align-items: center;
     justify-content: center;
-    border-radius: 999px;
-    border: 1px solid var(--border-default);
+    border-radius: var(--kumo-radius-full, 9999px);
+    border: 1px solid var(--kumo-line, var(--border-default));
     background: transparent;
 
     &:hover {
       cursor: pointer;
       opacity: 1;
+      background: var(--kumo-tint, rgba(23, 107, 91, 0.08));
+      border-color: var(--accent-primary);
     }
 
     &:active {
-      -webkit-transform: scale(0.9, 0.9);
-      transform: scale(0.9, 0.9);
+      -webkit-transform: scale(0.92, 0.92);
+      transform: scale(0.92, 0.92);
     }
 
     .mode-moon {
@@ -106,7 +105,7 @@
     align-items: center;
     flex-wrap: wrap;
     justify-content: flex-end;
-    gap: 1rem;
+    gap: 0.85rem;
     min-width: 0;
 
     @include media-query($on-mobile) {
@@ -124,31 +123,29 @@
 
   .menu-link {
     color: var(--text-primary);
-    line-height: $base-line-height + 0.4;
+    font-size: $base-font-size;
+    line-height: $base-line-height;
     text-decoration: none;
-    padding: 0.4rem 0.1rem 0.55rem;
-    opacity: 0.82;
-    letter-spacing: 0.02em;
+    padding: 0.35rem 0.15rem 0.45rem;
+    opacity: 0.85;
     border-radius: 0;
-    transition: color 0.18s ease, opacity 0.18s ease, border-color 0.18s ease;
-    font-weight: 500;
+    font-weight: $medium-weight;
     border: none;
     border-bottom: 1px solid transparent;
 
     &:hover {
       opacity: 1;
       color: var(--accent-primary);
-      border-bottom-color: rgba(var(--accent-primary-rgb), 0.45);
+      border-bottom-color: var(--accent-primary);
     }
   }
 
   .menu-brand {
     font-family: $sans-family;
-    font-size: 1.1rem;
-    font-weight: $bold-weight;
+    font-size: 1.05rem;
+    font-weight: $semibold-weight;
     color: var(--text-primary);
     text-decoration: none;
-    letter-spacing: 0;
     margin-right: auto;
     margin-left: 0.15rem;
 
@@ -165,12 +162,12 @@
     position: relative;
     bottom: -3px;
     outline: none;
-    padding: 0.5rem;
+    padding: 0.4rem;
   }
 
 .menu-link.active {
   opacity: 1;
-  font-weight: 600;
+  font-weight: $semibold-weight;
   color: var(--accent-primary);
   border-bottom-color: var(--accent-primary);
 }

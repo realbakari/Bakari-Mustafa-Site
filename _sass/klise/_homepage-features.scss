@@ -46,30 +46,30 @@
 .home-links {
   display: flex;
   flex-wrap: wrap;
-  gap: 8px 24px;
+  gap: 8px 20px;
 
   a {
     font-size: $small-font-size;
     font-weight: $medium-weight;
-    letter-spacing: 0.02em;
     color: var(--accent-primary);
     text-decoration: none;
     border-bottom: 1px solid transparent;
 
     &:hover {
       border-bottom-color: var(--accent-primary);
+      color: var(--accent-secondary);
     }
   }
 }
 
-// Shared section shell
+// Shared section shell (Kumo UI: Hairline border separation)
 
 .home-section {
-  padding: 40px 0 8px;
-  border-top: 1px solid var(--border-subtle);
+  padding: 36px 0 8px;
+  border-top: 1px solid var(--kumo-hairline, var(--border-subtle));
 
   &:last-child {
-    padding-bottom: 56px;
+    padding-bottom: 48px;
   }
 }
 
@@ -77,11 +77,11 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  margin-bottom: 20px;
+  margin-bottom: 16px;
 
   h2 {
     font-family: $heading-family;
-    font-size: 1.3rem;
+    font-size: 1.25rem;
     font-weight: $semibold-weight;
     margin: 0;
     color: var(--text-primary);
@@ -90,6 +90,7 @@
 
 .home-section-more {
   font-size: $small-font-size;
+  font-weight: $medium-weight;
   color: var(--text-secondary);
   text-decoration: none;
 
@@ -98,7 +99,7 @@
   }
 }
 
-// Writing list
+// Writing list (Kumo UI: 14px content text, tight related text spacing)
 
 .home-post-list,
 .home-project-list {
@@ -119,8 +120,8 @@
   display: flex;
   align-items: baseline;
   justify-content: space-between;
-  gap: 24px;
-  padding: 10px 0;
+  gap: 20px;
+  padding: 8px 0;
 
   @include media-query($on-mobile) {
     flex-direction: column;
@@ -131,6 +132,7 @@
 .home-post-link {
   color: var(--text-primary);
   text-decoration: none;
+  font-size: $base-font-size;
   line-height: 1.5;
 
   &:hover {
@@ -145,14 +147,15 @@
   font-variant-numeric: tabular-nums;
 }
 
-// Projects list
+// Projects list (Kumo UI: tight related-text-spacing)
 
 .home-project {
-  padding: 10px 0;
+  padding: 8px 0;
 }
 
 .home-project-link {
   color: var(--text-primary);
+  font-size: $base-font-size;
   font-weight: $medium-weight;
   text-decoration: none;
 
@@ -162,32 +165,32 @@
 }
 
 .home-project-desc {
-  margin: 4px 0 0;
+  margin: 3px 0 0;
   font-size: $small-font-size;
-  line-height: 1.6;
+  line-height: 1.5;
   color: var(--text-secondary);
   max-width: 40em;
 }
 
-// Site footer
+// Site footer (Kumo UI: Hairline divider, concentric radius, immediate hover)
 
 .site-footer {
-  border-top: 1px solid var(--border-subtle);
-  margin-top: 64px;
+  border-top: 1px solid var(--kumo-hairline, var(--border-subtle));
+  margin-top: 56px;
 }
 
 .site-footer-inner {
   max-width: $narrow-size;
   margin: 0 auto;
-  padding: 40px $spacing-full 48px;
+  padding: 36px $spacing-full 44px;
 }
 
 .site-footer-newsletter {
-  margin-bottom: 32px;
+  margin-bottom: 28px;
 }
 
 .site-footer-newsletter-copy {
-  margin: 0 0 12px;
+  margin: 0 0 10px;
   font-size: $small-font-size;
   color: var(--text-secondary);
 }
@@ -204,17 +207,18 @@
 
 .newsletter-input {
   flex: 1;
-  padding: 10px 14px;
+  padding: 8px 12px;
   font-size: $small-font-size;
   font-family: $sans-family;
   color: var(--text-primary);
-  background: var(--bg-primary);
-  border: 1px solid var(--border-default);
-  border-radius: 6px;
+  background: var(--kumo-canvas, var(--bg-primary));
+  border: 1px solid var(--kumo-line, var(--border-default));
+  border-radius: var(--kumo-radius-sm, 6px);
 
   &:focus {
     outline: none;
     border-color: var(--accent-primary);
+    box-shadow: 0 0 0 2px var(--kumo-focus, rgba(23, 107, 91, 0.25));
   }
 
   &::placeholder {
@@ -223,18 +227,19 @@
 }
 
 .newsletter-submit {
-  padding: 10px 18px;
+  padding: 8px 16px;
   font-size: $small-font-size;
   font-family: $sans-family;
   font-weight: $medium-weight;
-  color: var(--bg-primary);
+  color: #ffffff;
   background: var(--accent-primary);
-  border: none;
-  border-radius: 6px;
+  border: 1px solid var(--accent-primary);
+  border-radius: var(--kumo-radius-sm, 6px);
   cursor: pointer;
 
   &:hover {
     background: var(--accent-secondary);
+    border-color: var(--accent-secondary);
   }
 }
 

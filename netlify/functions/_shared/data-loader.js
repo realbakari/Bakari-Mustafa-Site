@@ -89,18 +89,119 @@ function paginate(items, page = 1, limit = 50) {
   };
 }
 
+const MH_LANG_ALIASES = {
+  fr: 'fra',
+  ny: 'nya',
+  zh: 'zh',
+  ja: 'ja',
+  es: 'es',
+  pt: 'pt',
+  ru: 'ru',
+  nl: 'nl',
+  pl: 'pl',
+  it: 'it',
+  ro: 'ro',
+  af: 'af',
+  sw: 'sw',
+  de: 'de',
+  tl: 'tl',
+  hr: 'hr',
+  rw: 'rw',
+  ar: 'ar',
+  hi: 'hi',
+  vi: 'vi',
+  id: 'id',
+  yo: 'yor',
+  cs: 'cs',
+  bg: 'bg',
+  ko: 'ko',
+  fa: 'fa',
+  ur: 'ur',
+};
+
+function normalizeLangCode(code) {
+  if (!code) return 'en';
+  const clean = code.toLowerCase().trim();
+  return MH_LANG_ALIASES[clean] || clean;
+}
+
+const _langSermonsCache = {};
+
+/**
+ * Fetch list of sermons for any language from MessageHub
+ */
+async function fetchLanguageSermonsFromMessageHub(langCode) {
+  const mhCode = normalizeLangCode(langCode);
+  if (_langSermonsCache[mhCode]) return _langSermonsCache[mhCode];
+
+  const crypto = require('crypto');
+  const now = Math.floor(Date.now() / 1000);
+  const exp = now + 300;
+  const secret = 'MessageHubSecretKey2021';
+  const token = crypto.createHash('md5').update(`${now}${exp}${secret}`).digest('hex');
+
+  const headers = {
+    token: token,
+    timestamp: now.toString(),
+    expirationTime: exp.toString(),
+    'User-Agent': 'Mozilla/5.0 (Macintosh; Intel Mac OS X 10_15_7)',
+    Accept: 'application/json',
+  };
+
+  try {
+    const res = await fetch(`https://search.messagehub.info/api/languages/${mhCode}/sermons`, { headers });
+    if (res.ok) {
+      const data = await res.json();
+      if (Array.isArray(data)) {
+        const mapped = data.map(s => {
+          const rawYear = s.dateCode ? parseInt(s.dateCode.slice(0, 2), 10) : 0;
+          const fullYear = rawYear > 0 ? (rawYear < 100 ? rawYear + 1900 : rawYear) : null;
+          return {
+            id: s.dateCode || String(s.id),
+            title: s.title || 'Untitled Sermon',
+            date: s.date || null,
+            year: fullYear,
+            language: langCode,
+            location: s.location || null,
+            pdf_url: `https://search.messagehub.info/api/languages/${mhCode}/sermons/${encodeURIComponent(s.dateCode || s.id)}/pdf`,
+            m4a_url: null,
+            source: 'messagehub',
+          };
+        });
+        _langSermonsCache[mhCode] = mapped;
+        return mapped;
+      }
+    }
+  } catch (err) {
+    console.warn(`Could not fetch sermons for language ${langCode}:`, err.message);
+  }
+  return [];
+}
+
 /**
  * Get all sermons, optionally filtered.
  */
-function getSermons({ language, year, series, page, limit } = {}) {
+async function getSermons({ language, year, series, page, limit } = {}) {
   let sermons = loadSermons();
 
-  if (language) {
-    sermons = sermons.filter((s) => s.language === language);
+  if (language && language !== 'en') {
+    const localMatches = sermons.filter((s) => s.language === language || normalizeLangCode(s.language) === normalizeLangCode(language));
+    if (localMatches.length > 0) {
+      sermons = localMatches;
+    } else {
+      const remoteSermons = await fetchLanguageSermonsFromMessageHub(language);
+      if (remoteSermons && remoteSermons.length > 0) {
+        sermons = remoteSermons;
+      } else {
+        sermons = [];
+      }
+    }
+  } else if (language === 'en') {
+    sermons = sermons.filter((s) => !s.language || s.language === 'en');
   }
+
   if (year) {
     const yearNum = parseInt(year, 10);
-    /* Support both 2-digit (65) and 4-digit (1965) year input */
     const fullYear = yearNum < 100 ? yearNum + 1900 : yearNum;
     sermons = sermons.filter((s) => s.year === fullYear);
   }
@@ -122,10 +223,9 @@ function getSermonById(id, language = null) {
   const matches = sermons.filter((s) => s.id === id);
 
   if (language) {
-    return matches.find((s) => s.language === language) || null;
+    return matches.find((s) => s.language === language || normalizeLangCode(s.language) === normalizeLangCode(language)) || null;
   }
 
-  /* Return all language variants if no language specified */
   return matches.length === 1 ? matches[0] : matches.length > 0 ? matches : null;
 }
 
@@ -134,7 +234,7 @@ function getSermonById(id, language = null) {
  */
 async function fetchSermonBlocksFromMessageHub(id, language = 'en') {
   const crypto = require('crypto');
-  const mhCode = language === 'ny' ? 'nya' : (language === 'eng' ? 'en' : language);
+  const mhCode = normalizeLangCode(language);
   const now = Math.floor(Date.now() / 1000);
   const exp = now + 300;
   const secret = 'MessageHubSecretKey2021';
@@ -204,7 +304,7 @@ async function getSermonText(id, language = null) {
       title: sermon ? sermon.title : mhData.title,
       language: language || (sermon ? sermon.language : 'en'),
       date: sermon ? sermon.date : mhData.date,
-      pdf_url: sermon ? sermon.pdf_url : null,
+      pdf_url: sermon ? sermon.pdf_url : `https://search.messagehub.info/api/languages/${normalizeLangCode(language)}/sermons/${encodeURIComponent(id)}/pdf`,
       m4a_url: sermon ? sermon.m4a_url : null,
       full_text: mhData.full_text,
       paragraphs: mhData.paragraphs,
@@ -234,13 +334,7 @@ async function getSermonText(id, language = null) {
  */
 function getLanguages() {
   const languages = loadLanguages();
-  const sermons = loadSermons();
-
-  /* Recalculate counts from actual data */
-  return languages.map((lang) => ({
-    ...lang,
-    sermon_count: sermons.filter((s) => s.language === lang.code).length,
-  }));
+  return languages;
 }
 
 /**

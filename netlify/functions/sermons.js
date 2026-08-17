@@ -89,7 +89,7 @@ exports.handler = async (event) => {
   try {
     /* ── GET /api/messages ────────────────────────────────────── */
     if (segments[0] === 'messages' && segments.length === 1) {
-      const result = getSermons({
+      const result = await getSermons({
         language: params.language,
         year: params.year,
         series: params.series,
@@ -138,7 +138,7 @@ exports.handler = async (event) => {
       segments[2] === 'messages'
     ) {
       const code = segments[1];
-      const result = getSermons({
+      const result = await getSermons({
         language: code,
         year: params.year,
         series: params.series,
@@ -161,7 +161,7 @@ exports.handler = async (event) => {
       segments[2] === 'messages'
     ) {
       const year = segments[1];
-      const result = getSermons({
+      const result = await getSermons({
         year,
         language: params.language,
         series: params.series,
