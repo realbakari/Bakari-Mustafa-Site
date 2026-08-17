@@ -24,6 +24,15 @@ description: Discover Bakari Mustafa's portfolio of projects including Mentors O
     <div class="projects-grid">
       <article class="project-item">
         <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem;">
+          <span class="project-role">Creator & maintainer</span>
+          <span class="project-meta">2026–Present</span>
+        </div>
+        <h3><a href="https://github.com/realbakari/capsule">Capsule →</a></h3>
+        <p>An open-source agent control plane in Python for governed, replayable execution. Indexes workspace skills, routes tasks with precision, and enforces deny-by-default policy gates.</p>
+      </article>
+
+      <article class="project-item">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem;">
           <span class="project-role">Founder & host</span>
           <span class="project-meta">2018–2019</span>
         </div>
