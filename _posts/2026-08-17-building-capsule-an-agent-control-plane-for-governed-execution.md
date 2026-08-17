@@ -1,134 +1,133 @@
 ---
-title: "Building Capsule: An agent control plane for governed, replayable execution"
+title: "Why I built Capsule: A control plane for coding agents"
 date: 2026-08-17 00:00:00 +1000
 tags:
-- Artificial Intelligence
-- Autonomous Agents
-- Software Architecture
+- AI Agents
+- Developer Tools
 - Python
 - Open Source
-description: Why I built Capsule, an open-source agent control plane that turns cluttered workspaces into compact run contexts, routes tasks to exactly one verified skill, and enforces deny-by-default governance.
+description: Notes on building Capsule, a lightweight control plane that indexes workspace skills, routes tasks to exactly one skill, and prevents agents from inheriting unrestricted permissions.
 ---
 
-As autonomous coding agents—like Claude Code, Codex, Cursor, Grok, and Antigravity—become standard tools in software engineering, our workspaces are filling up with dozens of instruction files, `SKILL.md` documents, prompt rules, and agent definitions.
+Over the last few months, my repositories have slowly accumulated a small army of instruction files, `SKILL.md` documents, prompt rules, and agent definitions.
 
-Most agent workflows today manage this complexity with one of two flawed approaches:
+If you use tools like Claude Code, Cursor, Codex, or Antigravity, you’ve probably run into the same growing pains. You start with one or two helpful markdown instructions, and before long you have twenty different skills scattered across `.agents/`, `.cursorrules`, and `.claude/`.
 
-1. **Context stuffing**: Shoving every instruction, prompt, and tool definition into the agent's system prompt on every turn, causing context exhaustion, high token costs, and attention drift.
-2. **Ungoverned execution**: Granting broad permissions by default. In fact, across popular agent skill repositories, over half of agent definitions omit an explicit `tools:` key, inadvertently granting the agent full access to read, write, and execute bash commands on the host machine.
+Working with this setup day-to-day exposed three specific problems that kept breaking my workflow:
 
-To solve this, I built [Capsule](https://github.com/realbakari/capsule)—an open-source agent control plane designed for governed, replayable execution.
+### 1. Context exhaustion and prompt bloat
 
-```
-Workspace & Repositories ──► [ Index & Condense ] ──► [ Two-Stage Router ] ──► [ Deny-by-Default Gates ] ──► Governed Execution
-```
+Most agent setups load every single instruction file into the system prompt at the start of every session. If you have 15 skills in a repo, the model is forced to read thousands of tokens of instructions before you even type your first prompt. 
 
-Capsule inspects a workspace, condenses everything readable into a compact run context, routes each task to exactly one skill pack, and enforces strict, license-gated boundaries over what an agent is allowed to touch.
+This wastes token budget, increases latency, and causes attention drift—the model frequently confuses rules meant for database migrations with rules meant for frontend styling.
+
+### 2. The blank-line permission bug
+
+When looking through open-source agent definitions on community registries, I noticed a subtle security issue: **12 out of 24 marketplace agents omit an explicit `tools:` key**. 
+
+In many agent frameworks, omitting the tools field doesn't mean "no tools"—it means the agent inherits every tool the host allows, including unrestricted bash execution, file writing, and deletion. Because the omission looks like a blank line in markdown, it easily slips past code review.
+
+### 3. Trigger phrase collisions
+
+When multiple skills have overlapping descriptions, models frequently guess which one to use and pick the wrong one. A skill should only activate when its specific criteria are met, with a clear recorded rationale.
 
 ---
 
-## The core philosophy: refuse rather than guess
+## What Capsule does
 
-Capsule operates on a conservative principle: **index everything readable, load as little as possible into the prompt, and refuse rather than guess**.
+I built [Capsule](https://github.com/realbakari/capsule) to give workspaces a lightweight, deterministic control plane. It's a small Python CLI (requiring Python 3.11+ with standard library `tomllib` and zero external dependencies) that runs entirely locally.
 
-Instead of treating instructions as passive documentation, Capsule treats skills and agent definitions as an active, governed surface with four core stages:
+Its job is simple: **index everything in the workspace, route a task to exactly one skill, and refuse rather than guess**.
 
-### 1. Discovery and compact indexing
+Here is how the workflow looks in practice:
 
-Running `capsule index` walks the workspace and condenses all instruction files, tools, and docs into a structured `capsule-index.json`. 
+### Single-pass indexing
 
-By indexing metadata, description clauses, and capabilities without loading full file bodies into memory, Capsule turns a noisy multi-megabyte repository into a compact, auditable summary.
-
-### 2. Two-stage precision task routing
-
-When an agent receives a prompt, dumping twenty skills into its context causes hallucinations and trigger phrase collisions. Capsule solves this with a two-stage routing engine:
-
-- **Stage 1 (Shortlisting)**: Fast semantic matching against the condensed index to shortlist candidates.
-- **Stage 2 (Reranking & Rationale)**: Deep inspection of shortlisted `SKILL.md` bodies, selecting exactly one skill pack and recording an explicit rationale.
+Running `capsule index` scans the repository and condenses every instruction file, prompt, and skill into `capsule-index.json`:
 
 ```bash
-capsule route --task "clean up this sales spreadsheet and validate schema"
+capsule index
 ```
 
-### 3. Automated brief injection per turn
+This extracts descriptions, trigger clauses, and tool requirements into a compact structured file. The agent reads this lightweight index instead of parsing dozens of full markdown files on every turn.
 
-To ensure the agent receives the correct skill without human micro-management, `capsule harness --route-prompts` generates a native `UserPromptSubmit` hook. 
+### Two-stage task routing
 
-Every prompt submitted in the host terminal is automatically evaluated against the index, injecting an activation brief:
+When you have a specific task, `capsule route` handles selection in two distinct steps:
+
+1. **Shortlisting**: Fast matching against the condensed index to find potential matches.
+2. **Reranking & Rationale**: Reads only the candidate `SKILL.md` bodies in full, selects exactly one, and records why it was chosen.
+
+```bash
+capsule route --task "clean up the sales spreadsheet and check column types"
+```
+
+Output:
+```
+Selected: xlsx-cleaner
+Rationale: Task specifies tabular data normalization on Excel files.
+Candidates evaluated: [xlsx-cleaner, csv-parser, schema-validator]
+```
+
+### Injecting prompts automatically with hooks
+
+To avoid manually picking skills, `capsule harness --route-prompts` generates a native `UserPromptSubmit` hook. When you submit a prompt in your terminal, Capsule routes the prompt against the index and injects an activation block directly into the turn:
 
 ```xml
 <capsule-activation>
 Selected Skill: xlsx-cleaner
-Rationale: Task requests data normalization and schema validation on tabular Excel files.
-Policy: Read/Write restricted to ./data/*
+Policy: Read/write restricted to ./data/*
 </capsule-activation>
 ```
 
-### 4. Deny-by-default policy gates
+### Checking diffs against skill contracts
 
-Capsule enforces two strict gates before any code or skill is rebuilt or executed:
+One common failure mode with coding agents is rule drift: a skill might instruct the agent never to edit vendor files or remove docstrings, but five steps into a complex refactor, the agent edits them anyway.
 
-- **License Gate**: Decides what may be rebuilt or packaged. Restricted or proprietary licenses are indexed for metadata only and cannot be exported into portable packages without explicit operator override.
-- **Trust Gate**: Multi-provider security verification against skills from public registries (`skills.sh`). If any security scanner flags a risk, Capsule takes the worst verdict—it refuses to run rather than taking an average score.
-
----
-
-## Contract extraction and diff verification
-
-One of the biggest risks with autonomous agents is prompt drift during execution. A skill might state: *"Never edit vendor files and never remove docstrings."* Yet during multi-step execution, the model might modify those exact files.
-
-Capsule introduces deterministic contract verification:
+Capsule lets you extract verifiable obligations from a skill and test git patches against them:
 
 ```bash
-# 1. Extract checkable obligations from the skill
+# Extract rules from the skill
 capsule contract --skill refactor-engine
 
-# 2. Verify git diff against the extracted contract before commit
+# Verify your staged diff against the contract
 capsule verify --diff changes.patch
 ```
 
-If a patch violates the extracted rules (such as touching forbidden paths or violating formatting contracts), Capsule halts with exit code 5, preventing regressions before code is merged.
+If the diff modifies a restricted path or violates a formatting rule, Capsule exits with code `5`, allowing you to catch regressions in CI or pre-commit hooks before committing.
 
 ---
 
-## Multi-host plugin generation
+## Multi-editor plugin export
 
-Different teams use different AI coding environments. Instead of maintaining separate configuration formats for each platform, Capsule includes native multi-host manifest generation:
+If you work across different tools (e.g. Claude Code in terminal, Cursor in the editor), keeping configuration files in sync is tedious. 
+
+Capsule generates native manifests with a single command:
 
 ```bash
 capsule emit-plugins --repo realbakari/capsule --out .
 ```
 
-This single command generates valid, tailored plugin manifests for:
-- **Claude Code** (`.claude/`)
-- **Codex / OpenAI**
-- **Cursor** (`.cursorrules`)
-- **Grok**
+This writes the appropriate configurations for Claude Code (`.claude/`), Cursor (`.cursorrules`), Codex, and Grok automatically.
 
 ---
 
-## Getting started
+## Trying it out
 
-Capsule requires Python 3.11+ and works completely offline without network calls, accounts, or telemetry.
-
-### Installation via Pip
+Capsule is open source under the MIT license. You can install it via pip:
 
 ```bash
 pip3 install capsule-ctrl
 capsule --help
 ```
 
-### Installation as an Agent Skill
-
-If you use an agent environment supporting the open skills standard:
+If you use an agent environment supporting the skills standard:
 
 ```bash
 npx skills add realbakari/capsule
 ```
 
-### Pre-commit hook integration
-
-You can add Capsule to your project's CI or pre-commit workflow to ensure all instruction files and skills remain calibrated and compliant:
+You can also run it as a pre-commit hook in any repository:
 
 ```yaml
 # .pre-commit-config.yaml
@@ -140,12 +139,4 @@ repos:
       - id: capsule-doctor
 ```
 
----
-
-## Looking ahead
-
-Autonomous agents are transitioning from conversational novelty to infrastructure that executes code directly in production repositories. Giving agents unconstrained reach without structured routing or governance is a recipe for silent failures.
-
-Capsule provides the minimal, reliable control plane needed to keep agent execution focused, transparent, and safe.
-
-Explore the source code, open issues, and contribute on GitHub: [github.com/realbakari/capsule](https://github.com/realbakari/capsule).
+The code and full documentation are on GitHub: [github.com/realbakari/capsule](https://github.com/realbakari/capsule).
