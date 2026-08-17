@@ -182,7 +182,7 @@ async function fetchSermonBlocksFromMessageHub(id, language = 'en') {
 async function getSermonText(id, language = null) {
   const sermon = getSermonById(id, language);
 
-  if (sermon && (sermon.pdf_text || (sermon.paragraphs && sermon.paragraphs.length > 0))) {
+  if (sermon && (sermon.full_text || sermon.pdf_text || (sermon.paragraphs && sermon.paragraphs.length > 0))) {
     return {
       id: sermon.id,
       title: sermon.title,
@@ -190,9 +190,9 @@ async function getSermonText(id, language = null) {
       date: sermon.date,
       pdf_url: sermon.pdf_url,
       m4a_url: sermon.m4a_url,
-      full_text: sermon.pdf_text || null,
+      full_text: sermon.full_text || sermon.pdf_text || null,
       paragraphs: sermon.paragraphs || [],
-      source: 'local'
+      source: sermon.source || 'local'
     };
   }
 
@@ -220,9 +220,9 @@ async function getSermonText(id, language = null) {
       date: sermon.date,
       pdf_url: sermon.pdf_url,
       m4a_url: sermon.m4a_url,
-      full_text: sermon.pdf_text || null,
+      full_text: sermon.full_text || sermon.pdf_text || null,
       paragraphs: sermon.paragraphs || [],
-      source: 'local'
+      source: sermon.source || 'local'
     };
   }
 
@@ -347,7 +347,7 @@ function getStats() {
       : null,
     sermons_with_pdf: sermons.filter((s) => s.pdf_url).length,
     sermons_with_audio: sermons.filter((s) => s.m4a_url).length,
-    sermons_with_text: sermons.filter((s) => s.pdf_text || (s.paragraphs && s.paragraphs.length > 0) || s.pdf_url).length,
+    sermons_with_text: sermons.filter((s) => s.full_text || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0) || s.pdf_url).length,
   };
 }
 

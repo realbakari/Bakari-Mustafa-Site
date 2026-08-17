@@ -113,15 +113,16 @@ function buildSearchIndex(sermons) {
     /* Also include the sermon ID as a searchable token */
     words.push(sermon.id.toLowerCase());
 
-    /* Add PDF text words if available */
-    if (sermon.pdf_text) {
-      const pdfWords = sermon.pdf_text
+    /* Add full text / PDF text words if available */
+    const textContent = sermon.full_text || sermon.pdf_text;
+    if (textContent) {
+      const pdfWords = textContent
         .toLowerCase()
         .replace(/[^a-z0-9\s]/g, ' ')
         .split(/\s+/)
         .filter((w) => w.length >= 3);
 
-      /* Limit PDF words to prevent huge index — take unique, most frequent */
+      /* Limit words to prevent huge index — take unique, most frequent */
       const wordCounts = {};
       for (const w of pdfWords) {
         wordCounts[w] = (wordCounts[w] || 0) + 1;
@@ -172,13 +173,15 @@ async function main() {
     /* No existing data — starting fresh */
   }
 
-  /* Create a set of existing sermon keys to avoid duplicates */
-  const existingKeys = new Set(
-    existingSermons.map((s) => `${s.language}:${s.id}`)
-  );
+  /* Map of existing sermons by case-insensitive key: language:ID */
+  const sermonMap = new Map();
+  for (const s of existingSermons) {
+    const key = `${s.language || 'en'}:${(s.id || '').toUpperCase().trim()}`;
+    sermonMap.set(key, s);
+  }
 
-  const allSermons = [...existingSermons];
   let newCount = 0;
+  let updatedCount = 0;
   let errorCount = 0;
 
   const totalTasks = opts.languages.length * opts.years.length;
@@ -196,33 +199,55 @@ async function main() {
         const sermons = parseSermons(html, lang);
 
         let added = 0;
-        for (const sermon of sermons) {
-          const key = `${sermon.language}:${sermon.id}`;
-          if (!existingKeys.has(key)) {
-            /* Optionally extract PDF text & structured paragraphs */
-            if (opts.extractPdf && sermon.pdf_url) {
-              process.stdout.write(` [extracting PDF]`);
-              const pdfResult = await pdfExtractor.extractText(sermon.pdf_url);
-              if (pdfResult) {
-                sermon.pdf_text = pdfResult.full_text;
-                sermon.paragraphs = pdfResult.paragraphs;
-              }
-            }
+        let updated = 0;
 
-            allSermons.push(sermon);
-            existingKeys.add(key);
+        for (const sermon of sermons) {
+          const key = `${sermon.language}:${sermon.id.toUpperCase().trim()}`;
+          const existing = sermonMap.get(key);
+
+          /* Optionally extract PDF text & structured paragraphs */
+          if (opts.extractPdf && sermon.pdf_url) {
+            process.stdout.write(` [extracting PDF]`);
+            const pdfResult = await pdfExtractor.extractText(sermon.pdf_url);
+            if (pdfResult) {
+              sermon.pdf_text = pdfResult.full_text;
+              sermon.paragraphs = pdfResult.paragraphs;
+            }
+          }
+
+          if (!existing) {
+            sermonMap.set(key, sermon);
             added++;
             newCount++;
+          } else {
+            /* Enrich existing record without duplicating */
+            sermonMap.set(key, {
+              ...existing,
+              ...sermon,
+              /* Preserve any richer full_text / paragraphs if already present */
+              full_text: (existing.full_text && existing.full_text.length > (sermon.pdf_text?.length || 0))
+                ? existing.full_text
+                : (sermon.pdf_text || existing.full_text),
+              pdf_text: sermon.pdf_text || existing.pdf_text,
+              paragraphs: sermon.paragraphs || existing.paragraphs,
+              pdf_url: sermon.pdf_url || existing.pdf_url,
+              m4a_url: sermon.m4a_url || existing.m4a_url,
+            });
+            updated++;
+            updatedCount++;
           }
         }
 
-        console.log(` ${sermons.length} found, ${added} new.`);
+        console.log(` ${sermons.length} found (${added} new, ${updated} enriched).`);
       } catch (err) {
         console.log(` ERROR: ${err.message}`);
         errorCount++;
       }
     }
   }
+
+  /* Convert deduplicated map back to array */
+  const allSermons = Array.from(sermonMap.values());
 
   /* ── Write Output ──────────────────────────────────────────── */
 
@@ -231,10 +256,11 @@ async function main() {
     fs.mkdirSync(OUTPUT_DIR, { recursive: true });
   }
 
-  /* Sort by language, then by number */
+  /* Sort by language, then by date / ID */
   allSermons.sort((a, b) => {
-    if (a.language !== b.language) return a.language.localeCompare(b.language);
-    return (a.number || 0) - (b.number || 0);
+    if (a.language !== b.language) return (a.language || '').localeCompare(b.language || '');
+    if (a.date && b.date && a.date !== b.date) return a.date.localeCompare(b.date);
+    return (a.id || '').localeCompare(b.id || '');
   });
 
   /* Write sermons.json */

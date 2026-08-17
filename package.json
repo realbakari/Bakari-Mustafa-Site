@@ -8,7 +8,9 @@
     "scrape": "node scraper/index.js",
     "scrape:en": "node scraper/index.js --language=en",
     "scrape:ny": "node scraper/index.js --language=ny",
-    "scrape:pdf": "node scraper/index.js --language=en --extract-pdf"
+    "scrape:pdf": "node scraper/index.js --language=en --extract-pdf",
+    "sync:branham-ru": "node scraper/branham-ru.js --write",
+    "sync:all": "node scraper/index.js --language=en && node scraper/branham-ru.js --write"
   },
   "dependencies": {
     "resend": "^3.0.0"
