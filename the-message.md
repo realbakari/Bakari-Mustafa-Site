@@ -35,7 +35,7 @@ body:has(.msg-library-wrapper) .page-content,
   padding: 0.75rem 0 3.5rem;
   box-sizing: border-box;
   color: var(--text-primary);
-  font-size: 15px;
+  font-size: 14px;
 }
 
 .msg-header {
@@ -43,15 +43,15 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-header .page-kicker {
-  font-size: 0.875rem;
+  font-size: 14px;
   font-weight: 600;
   color: var(--accent-primary);
   margin-bottom: 0.35rem;
 }
 
 .msg-header h1 {
-  font-size: clamp(2.2rem, 4.5vw, 3rem);
-  font-weight: 700;
+  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-weight: 600;
   line-height: 1.15;
   color: var(--text-primary);
   margin-top: 0;
@@ -59,8 +59,8 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-header .page-subtitle {
-  font-size: 1.1rem;
-  line-height: 1.65;
+  font-size: 14px;
+  line-height: 1.6;
   color: var(--text-secondary);
   max-width: 860px;
   margin-bottom: 1.25rem;
@@ -81,7 +81,7 @@ body:has(.msg-library-wrapper) .page-content,
   gap: 0.4rem;
   padding: 0.35rem 0.85rem;
   border-radius: var(--kumo-radius-full, 9999px);
-  font-size: 0.825rem;
+  font-size: 14px;
   font-weight: 500;
   background-color: var(--kumo-control, var(--bg-secondary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
@@ -133,41 +133,39 @@ body:has(.msg-library-wrapper) .page-content,
 
 .msg-input-box {
   width: 100%;
-  height: 42px;
-  padding: 0 1rem;
-  font-size: 0.95rem;
+  height: 38px;
+  padding: 0 0.85rem;
+  font-size: 14px;
   font-family: inherit;
   border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-md, 10px);
+  border-radius: var(--kumo-radius-md, 8px);
   background-color: var(--kumo-canvas, var(--bg-primary));
   color: var(--text-primary);
   box-sizing: border-box;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .msg-input-box:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px var(--kumo-focus, rgba(23, 107, 91, 0.25));
+  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(23, 107, 91, 0.25));
 }
 
 .msg-select-box {
-  height: 42px;
-  padding: 0 1rem;
-  font-size: 0.9rem;
+  height: 38px;
+  padding: 0 0.85rem;
+  font-size: 14px;
   font-family: inherit;
   border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-md, 10px);
+  border-radius: var(--kumo-radius-md, 8px);
   background-color: var(--kumo-canvas, var(--bg-primary));
   color: var(--text-primary);
   cursor: pointer;
-  transition: border-color 0.2s ease, box-shadow 0.2s ease;
 }
 
 .msg-select-box:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 3px var(--kumo-focus, rgba(23, 107, 91, 0.25));
+  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(23, 107, 91, 0.25));
 }
 
 .msg-quick-tags {
@@ -175,14 +173,12 @@ body:has(.msg-library-wrapper) .page-content,
   align-items: center;
   gap: 0.5rem;
   flex-wrap: wrap;
-  font-size: 0.85rem;
+  font-size: 14px;
 }
 
 .msg-tag-label {
   font-weight: 600;
-  font-size: 0.8rem;
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
+  font-size: 14px;
   color: var(--text-secondary);
   margin-right: 0.25rem;
 }
@@ -190,13 +186,12 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-filter-tag {
   padding: 0.3rem 0.85rem;
   border-radius: var(--kumo-radius-full, 9999px);
-  font-size: 0.825rem;
+  font-size: 14px;
   font-weight: 500;
   border: 1px solid var(--kumo-line, var(--border-default));
   background-color: var(--kumo-canvas, var(--bg-primary));
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
 .msg-filter-tag:hover {
@@ -225,38 +220,37 @@ body:has(.msg-library-wrapper) .page-content,
   gap: 0.25rem;
   background-color: var(--kumo-control, var(--bg-secondary));
   padding: 3px;
-  border-radius: var(--kumo-radius-md, 10px);
+  border-radius: var(--kumo-radius-md, 8px);
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
 .msg-view-btn {
   padding: 0.35rem 0.85rem;
-  font-size: 0.825rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   border: none;
   background: transparent;
   color: var(--text-secondary);
   border-radius: var(--kumo-radius-sm, 6px);
   cursor: pointer;
-  transition: all 0.15s ease;
 }
 
 .msg-view-btn.active {
   background-color: var(--surface-strong, var(--bg-primary));
   color: var(--text-primary);
-  box-shadow: 0 1px 4px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
 }
 
 .msg-results-count {
-  font-size: 0.85rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-secondary);
 }
 
 /* ── Kumo Layer Cards Grid ───────────────────────────────────────── */
 .msg-grid {
   display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
   gap: 1.25rem;
   margin-bottom: 2.5rem;
 }
@@ -264,12 +258,12 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-card {
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 14px);
+  border-radius: var(--kumo-radius-lg, 12px);
   overflow: hidden;
   display: flex;
   flex-direction: column;
-  transition: transform 0.2s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.2s ease, border-color 0.2s ease;
-  box-shadow: var(--shadow-card);
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 }
 
 .msg-card:hover {
@@ -281,22 +275,17 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-cover-wrap {
   position: relative;
   width: 100%;
-  height: 155px;
+  height: 165px;
   background-color: var(--bg-secondary);
   overflow: hidden;
-  border-top-left-radius: 13px;
-  border-top-right-radius: 13px;
+  border-top-left-radius: 11px;
+  border-top-right-radius: 11px;
 }
 
 .msg-cover-wrap img {
   width: 100%;
   height: 100%;
   object-fit: cover;
-  transition: transform 0.3s ease;
-}
-
-.msg-card:hover .msg-cover-wrap img {
-  transform: scale(1.03);
 }
 
 .msg-badge-id {
@@ -308,7 +297,7 @@ body:has(.msg-library-wrapper) .page-content,
   color: #7dd3fc;
   font-family: var(--mono-family, monospace);
   font-weight: 600;
-  font-size: 0.775rem;
+  font-size: 0.85em;
   padding: 0.2rem 0.55rem;
   border-radius: var(--kumo-radius-sm, 6px);
 }
@@ -320,7 +309,7 @@ body:has(.msg-library-wrapper) .page-content,
   background: var(--accent-primary);
   color: #ffffff;
   font-weight: 600;
-  font-size: 0.725rem;
+  font-size: 0.8em;
   padding: 0.2rem 0.55rem;
   border-radius: var(--kumo-radius-sm, 6px);
   text-transform: uppercase;
@@ -336,14 +325,14 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-card-title {
   font-size: 1rem;
   font-weight: 600;
-  line-height: 1.4;
+  line-height: 1.35;
   color: var(--text-primary);
   margin-top: 0;
   margin-bottom: 0.35rem;
 }
 
 .msg-card-meta {
-  font-size: 0.825rem;
+  font-size: 13px;
   color: var(--text-secondary);
   margin-bottom: 1rem;
 }
@@ -363,10 +352,11 @@ body:has(.msg-library-wrapper) .page-content,
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  padding: 0.45rem 0.7rem;
-  font-size: 0.825rem;
+  height: 34px;
+  padding: 0 0.65rem;
+  font-size: 14px;
   font-weight: 500;
-  border-radius: var(--kumo-radius-md, 8px);
+  border-radius: var(--kumo-radius-sm, 6px);
   text-decoration: none !important;
   cursor: pointer;
   border: 1px solid var(--kumo-line, var(--border-default));
@@ -420,7 +410,7 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-table-wrap {
   width: 100%;
   overflow-x: auto;
-  border-radius: var(--kumo-radius-lg, 14px);
+  border-radius: var(--kumo-radius-lg, 12px);
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
   background-color: var(--surface-strong, var(--bg-primary));
   box-shadow: var(--shadow-sm);
@@ -430,7 +420,7 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-archival-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 0.875rem;
+  font-size: 14px;
   text-align: left;
 }
 
@@ -438,13 +428,13 @@ body:has(.msg-library-wrapper) .page-content,
   background-color: var(--kumo-control, var(--bg-secondary));
   color: var(--text-primary);
   font-weight: 600;
-  padding: 0.8rem 1.15rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--kumo-line, var(--border-default));
   white-space: nowrap;
 }
 
 .msg-archival-table td {
-  padding: 0.8rem 1.15rem;
+  padding: 0.75rem 1rem;
   border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
   color: var(--text-primary);
   vertical-align: middle;
@@ -470,7 +460,8 @@ body:has(.msg-library-wrapper) .page-content,
   padding: 0.65rem 0.85rem;
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 14px);
+  border-bottom: 1px solid var(--kumo-line, var(--border-default));
+  border-radius: var(--kumo-radius-lg, 12px);
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -495,16 +486,15 @@ body:has(.msg-library-wrapper) .page-content,
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  height: 38px;
-  padding: 0 0.85rem;
-  font-size: 0.85rem;
-  font-weight: 600;
-  border-radius: var(--kumo-radius-md, 8px);
+  height: 34px;
+  padding: 0 0.75rem;
+  font-size: 14px;
+  font-weight: 500;
+  border-radius: var(--kumo-radius-sm, 6px);
   background-color: var(--kumo-canvas, var(--bg-primary));
   border: 1px solid var(--kumo-line, var(--border-default));
   color: var(--text-primary);
   cursor: pointer;
-  transition: all 0.15s ease;
   text-decoration: none !important;
   box-sizing: border-box;
 }
@@ -528,15 +518,15 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-reader-meta-title {
-  font-size: clamp(1.4rem, 3vw, 1.85rem);
-  font-weight: 800;
+  font-size: clamp(1.3rem, 2.5vw, 1.75rem);
+  font-weight: 600;
   color: var(--text-primary);
   margin: 0;
   line-height: 1.25;
 }
 
 .msg-reader-meta-sub {
-  font-size: 0.9rem;
+  font-size: 14px;
   color: var(--text-secondary);
   margin-top: 0.35rem;
 }
@@ -549,8 +539,8 @@ body:has(.msg-library-wrapper) .page-content,
   background-color: var(--accent-primary);
   width: 0%;
   transition: width 0.1s ease;
-  border-top-left-radius: 14px;
-  border-top-right-radius: 14px;
+  border-top-left-radius: 12px;
+  border-top-right-radius: 12px;
 }
 
 /* ── Reading Canvas Themes: Light / Sepia / Dark ─────────────────── */
@@ -559,16 +549,15 @@ body:has(.msg-library-wrapper) .page-content,
   width: 100%;
   margin: 1.5rem auto 0;
   padding: 2rem 1.5rem 6rem;
-  font-size: 1.25rem;
+  font-size: 18px;
   line-height: 1.9;
   color: var(--text-primary);
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   box-sizing: border-box;
-  border-radius: var(--kumo-radius-lg, 14px);
+  border-radius: var(--kumo-radius-lg, 12px);
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
   box-shadow: var(--shadow-sm);
-  transition: background-color 0.25s ease, color 0.25s ease;
 }
 
 .msg-reader-main-content.msg-reader-wide {
@@ -595,9 +584,8 @@ body:has(.msg-library-wrapper) .page-content,
   display: flex;
   gap: 1rem;
   padding: 0.75rem 1rem;
-  border-radius: var(--kumo-radius-md, 10px);
+  border-radius: var(--kumo-radius-md, 8px);
   border-left: 3px solid transparent;
-  transition: background-color 0.15s ease, border-color 0.15s ease;
 }
 
 .msg-paragraph-item:hover {
@@ -606,11 +594,11 @@ body:has(.msg-library-wrapper) .page-content,
 
 .msg-para-num {
   font-family: var(--mono-family, monospace);
-  font-size: 0.85rem;
-  font-weight: 700;
+  font-size: 0.9em;
+  font-weight: 600;
   color: var(--accent-primary);
   background-color: var(--kumo-control, rgba(0, 0, 0, 0.05));
-  padding: 0.25rem 0.55rem;
+  padding: 0.2rem 0.5rem;
   border-radius: var(--kumo-radius-sm, 6px);
   height: fit-content;
   user-select: none;
@@ -627,14 +615,13 @@ body:has(.msg-library-wrapper) .page-content,
   height: fit-content;
   align-self: flex-start;
   padding: 0.2rem 0.5rem;
-  font-size: 0.75rem;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   border: 1px solid var(--kumo-line, var(--border-default));
   background: var(--kumo-canvas, var(--bg-primary));
   color: var(--text-secondary);
   border-radius: var(--kumo-radius-sm, 6px);
   cursor: pointer;
-  transition: opacity 0.15s ease, color 0.15s ease;
 }
 
 .msg-paragraph-item:hover .msg-copy-para-btn {
@@ -649,11 +636,9 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-paragraph-item.msg-para-active-reading {
   background-color: var(--kumo-tint-hover, rgba(23, 107, 91, 0.14)) !important;
   border-left: 4px solid var(--accent-primary) !important;
-  box-shadow: 0 4px 16px rgba(23, 107, 91, 0.12);
 }
 
 .msg-sentence {
-  transition: background-color 0.2s ease, color 0.2s ease;
   padding: 0.1rem 0.25rem;
   border-radius: 4px;
   display: inline;
@@ -662,7 +647,7 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-sentence.active-sentence {
   background-color: rgba(253, 224, 71, 0.65) !important;
   color: #0f172a !important;
-  font-weight: 600;
+  font-weight: 500;
   border-bottom: 2px solid var(--accent-primary);
 }
 
@@ -676,14 +661,13 @@ body:has(.msg-library-wrapper) .page-content,
   display: inline-flex;
   align-items: center;
   gap: 0.3rem;
-  font-size: 0.725rem;
-  font-weight: 800;
+  font-size: 12px;
+  font-weight: 600;
   color: #ffffff;
   background-color: var(--accent-primary);
   padding: 0.2rem 0.55rem;
   border-radius: var(--kumo-radius-full, 9999px);
   user-select: none;
-  height: fit-content;
 }
 
 /* ── Parallel Dual Column Split View ─────────────────────────────── */
@@ -705,8 +689,8 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-parallel-col-header {
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 14px;
   padding: 0.6rem 0.85rem;
   background-color: var(--kumo-control, var(--bg-secondary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
@@ -719,7 +703,7 @@ body:has(.msg-library-wrapper) .page-content,
   display: inline-flex;
   align-items: center;
   gap: 0.25rem;
-  font-weight: 600;
+  font-weight: 500;
   color: var(--accent-primary);
   background-color: var(--kumo-tint, rgba(23, 107, 91, 0.08));
   padding: 0.1rem 0.45rem;
@@ -728,7 +712,6 @@ body:has(.msg-library-wrapper) .page-content,
   text-decoration: none;
   font-size: 0.95em;
   border: 1px solid transparent;
-  transition: all 0.15s ease;
 }
 
 .msg-scripture-ref:hover {
@@ -740,8 +723,8 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-strongs-tag {
   display: inline-block;
   font-family: var(--mono-family, monospace);
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 0.85em;
+  font-weight: 600;
   color: var(--accent-primary);
   background: var(--kumo-control, rgba(0,0,0,0.06));
   padding: 0.1rem 0.35rem;
@@ -750,7 +733,6 @@ body:has(.msg-library-wrapper) .page-content,
   margin: 0 0.15rem;
   user-select: none;
   vertical-align: middle;
-  transition: all 0.15s ease;
 }
 
 .msg-strongs-tag:hover {
@@ -765,12 +747,12 @@ body:has(.msg-library-wrapper) .page-content,
   max-width: 90vw;
   background: var(--surface-strong, var(--bg-primary));
   color: var(--text-primary);
-  border: 1.5px solid var(--accent-primary);
+  border: 1px solid var(--accent-primary);
   border-radius: var(--kumo-radius-lg, 12px);
-  padding: 1.15rem;
+  padding: 1rem 1.15rem;
   box-shadow: var(--shadow-lg);
   font-family: inherit;
-  font-size: 0.925rem;
+  font-size: 14px;
   line-height: 1.6;
 }
 
@@ -787,12 +769,12 @@ body:has(.msg-library-wrapper) .page-content,
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
   border-radius: var(--kumo-radius-lg, 12px);
-  padding: 1.15rem;
+  padding: 1rem 1.15rem;
   display: flex;
   flex-direction: column;
   gap: 0.25rem;
   box-shadow: var(--shadow-sm);
-  transition: transform 0.2s ease, border-color 0.2s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .msg-stat-card:hover {
@@ -801,25 +783,23 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-stat-val {
-  font-size: 1.65rem;
-  font-weight: 800;
+  font-size: 1.5rem;
+  font-weight: 600;
   color: var(--accent-primary);
   line-height: 1.2;
 }
 
 .msg-stat-lbl {
-  font-size: 0.8rem;
-  font-weight: 600;
+  font-size: 12px;
+  font-weight: 500;
   color: var(--text-secondary);
-  text-transform: uppercase;
-  letter-spacing: 0.04em;
 }
 
 .msg-map-section {
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 14px);
-  padding: 1.5rem;
+  border-radius: var(--kumo-radius-lg, 12px);
+  padding: 1.25rem 1.4rem;
   margin-bottom: 2.5rem;
   box-shadow: var(--shadow-sm);
 }
@@ -834,10 +814,10 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-region-card {
   background-color: var(--kumo-canvas, var(--bg-primary));
   border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-md, 10px);
-  padding: 1.15rem;
+  border-radius: var(--kumo-radius-md, 8px);
+  padding: 1rem 1.15rem;
   cursor: pointer;
-  transition: all 0.2s ease;
+  transition: transform 0.15s ease, border-color 0.15s ease;
 }
 
 .msg-region-card:hover {
@@ -850,18 +830,18 @@ body:has(.msg-library-wrapper) .page-content,
   display: flex;
   align-items: center;
   justify-content: space-between;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.35rem;
 }
 
 .msg-region-name {
-  font-size: 0.95rem;
-  font-weight: 700;
+  font-size: 14px;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
 .msg-region-badge {
-  font-size: 0.75rem;
-  font-weight: 700;
+  font-size: 12px;
+  font-weight: 500;
   background-color: var(--kumo-tint, rgba(23, 107, 91, 0.08));
   color: var(--accent-primary);
   padding: 0.15rem 0.5rem;
@@ -869,7 +849,7 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-region-langs {
-  font-size: 0.775rem;
+  font-size: 13px;
   color: var(--text-secondary);
   line-height: 1.4;
 }
@@ -884,9 +864,9 @@ body:has(.msg-library-wrapper) .page-content,
   max-width: 720px;
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-lg, 14px);
+  border-radius: var(--kumo-radius-lg, 12px);
   box-shadow: var(--shadow-lg);
-  padding: 0.85rem 1.25rem;
+  padding: 0.75rem 1.15rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -905,8 +885,8 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-audio-title {
-  font-weight: 700;
-  font-size: 0.95rem;
+  font-weight: 600;
+  font-size: 14px;
   white-space: nowrap;
   overflow: hidden;
   text-overflow: ellipsis;
@@ -914,7 +894,7 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-audio-sub {
-  font-size: 0.775rem;
+  font-size: 13px;
   color: var(--text-secondary);
 }
 
@@ -922,7 +902,7 @@ body:has(.msg-library-wrapper) .page-content,
   background: transparent;
   border: none;
   color: var(--text-secondary);
-  font-size: 1.25rem;
+  font-size: 1.1rem;
   cursor: pointer;
   padding: 0.25rem;
   line-height: 1;
@@ -949,7 +929,7 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-bible-dialog {
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 14px);
+  border-radius: var(--kumo-radius-lg, 12px);
   width: 100%;
   max-width: 780px;
   max-height: 85vh;
@@ -960,7 +940,7 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-bible-header {
-  padding: 1rem 1.25rem;
+  padding: 0.85rem 1.15rem;
   border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
   display: flex;
   align-items: center;
@@ -969,15 +949,15 @@ body:has(.msg-library-wrapper) .page-content,
 
 .msg-bible-title {
   margin: 0;
-  font-size: 1.1rem;
-  font-weight: 700;
+  font-size: 1rem;
+  font-weight: 600;
   color: var(--text-primary);
 }
 
 .msg-bible-body {
-  padding: 1.5rem;
-  font-size: 1.05rem;
-  line-height: 1.8;
+  padding: 1.25rem 1.4rem;
+  font-size: 14px;
+  line-height: 1.75;
   color: var(--text-primary);
 }
 
@@ -985,20 +965,22 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-api-box {
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 14px);
-  padding: 1.5rem;
-  margin-top: 3rem;
+  border-radius: var(--kumo-radius-lg, 12px);
+  padding: 1.25rem 1.4rem;
+  margin-top: 2.5rem;
   box-shadow: var(--shadow-sm);
 }
 
 .msg-api-box h3 {
-  font-size: 1.1rem;
-  margin: 0 0 0.5rem 0;
+  font-size: 1rem;
+  font-weight: 600;
+  margin: 0 0 0.35rem 0;
   color: var(--text-primary);
 }
 
 .msg-api-box p {
   color: var(--text-secondary);
+  font-size: 14px;
   margin-bottom: 0.75rem;
 }
 
@@ -1006,7 +988,7 @@ body:has(.msg-library-wrapper) .page-content,
   background-color: var(--kumo-control, var(--bg-secondary));
   padding: 0.2rem 0.45rem;
   border-radius: var(--kumo-radius-sm, 6px);
-  font-size: 0.85rem;
+  font-size: 0.9em;
 }
 
 .msg-pagination-bar {
@@ -1018,8 +1000,8 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-page-info {
-  font-size: 0.9rem;
-  font-weight: 600;
+  font-size: 14px;
+  font-weight: 500;
   color: var(--text-secondary);
 }
 
@@ -1028,6 +1010,7 @@ body:has(.msg-library-wrapper) .page-content,
   padding: 4rem 1rem;
   color: var(--text-secondary);
   grid-column: 1 / -1;
+  font-size: 14px;
 }
 </style>
 
@@ -1043,186 +1026,217 @@ body:has(.msg-library-wrapper) .page-content,
         <button class="msg-reader-btn" onclick="closeFullReader()">← Library</button>
         <button class="msg-reader-btn" id="reader-prev-btn" onclick="navigateSermon(-1)" title="Previous sermon">← Prev</button>
         <button class="msg-reader-btn" id="reader-next-btn" onclick="navigateSermon(1)" title="Next sermon">Next →</button>
-        <select id="reader-sermon-select" class="msg-select-box" style="height: 38px; max-width: 240px;" onchange="onReaderSermonSelect(this.value)">
+        <select id="reader-sermon-select" class="msg-select-box" style="height: 34px; max-width: 240px;" onchange="onReaderSermonSelect(this.value)">
           <!-- Loaded dynamically -->
         </select>
       </div>
 
-      <!-- View Modes Group (Segmented Controls) -->
+      <!-- View Mode Tabs -->
       <div class="msg-toolbar-group">
-        <div class="msg-view-toggle">
-          <button id="tab-btn-text" class="msg-view-btn active" onclick="switchReaderTab('text')">📖 Text</button>
-          <button id="tab-btn-parallel" class="msg-view-btn" onclick="switchReaderTab('parallel')">🌐 Parallel</button>
-          <button id="tab-btn-bible" class="msg-view-btn" onclick="switchReaderTab('bible')">📜 KJV Bible</button>
-          <button id="tab-btn-pdf" class="msg-view-btn" onclick="switchReaderTab('pdf')">📄 PDF</button>
-        </div>
-        <select id="parallel-lang-select" class="msg-select-box" style="display: none; height: 38px;" onchange="updateParallelLanguage(this.value)">
-          <!-- Populated dynamically with 72 languages -->
-        </select>
+        <button class="msg-reader-btn active" id="btn-view-single" onclick="switchReaderTab('single')">📖 Reading</button>
+        <button class="msg-reader-btn" id="btn-view-parallel" onclick="switchReaderTab('parallel')">🔀 Parallel dual</button>
+        <button class="msg-reader-btn" id="btn-view-pdf" onclick="switchReaderTab('pdf')">📄 PDF document</button>
       </div>
 
-      <!-- Reader Controls Group -->
+      <!-- Reader Settings -->
       <div class="msg-toolbar-group">
-        <button id="reader-audio-btn" class="msg-reader-btn" onclick="toggleReaderAudio()">🎧 Audio</button>
-        <input type="text" id="reader-search-input" class="msg-input-box" style="height: 38px; width: 140px;" placeholder="🔍 Find in text..." oninput="searchInTranscript(this.value)">
-
-        <select id="reader-theme-select" class="msg-select-box" style="height: 38px;" onchange="setReaderTheme(this.value)">
-          <option value="light">☀️ Light</option>
-          <option value="sepia">📜 Sepia</option>
-          <option value="dark">🌙 Dark</option>
+        <select id="reader-font-size" class="msg-select-box" style="height: 34px; width: 85px;" onchange="changeReaderFontSize(this.value)" title="Adjust text size">
+          <option value="16px">Small</option>
+          <option value="18px" selected>Normal</option>
+          <option value="21px">Large</option>
+          <option value="25px">Extra large</option>
         </select>
-
-        <div style="display: flex; gap: 0.2rem;">
-          <button class="msg-reader-btn" style="padding: 0 0.55rem;" onclick="adjustFontSize(-1)" title="Smaller font">A-</button>
-          <button class="msg-reader-btn" style="padding: 0 0.55rem;" onclick="adjustFontSize(1)" title="Larger font">A+</button>
-        </div>
-
-        <button class="msg-reader-btn" onclick="toggleFocusMode()" title="Toggle full-screen mode">📺 Focus</button>
-        <a id="reader-download-btn" href="#" target="_blank" class="msg-reader-btn" title="Download PDF transcript">⬇ PDF</a>
+        <button class="msg-reader-btn" id="btn-theme-light" onclick="setReaderTheme('light')" title="Light theme">☀️</button>
+        <button class="msg-reader-btn" id="btn-theme-sepia" onclick="setReaderTheme('sepia')" title="Sepia theme">📜</button>
+        <button class="msg-reader-btn" id="btn-theme-dark" onclick="setReaderTheme('dark')" title="Dark theme">🌙</button>
+        <button class="msg-reader-btn" id="btn-toggle-wide" onclick="toggleReaderWidth()" title="Expand / contract reading canvas">↔</button>
       </div>
     </div>
 
-    <div style="padding: 2rem 0.5rem 0.5rem; max-width: 960px; margin: 0 auto;">
-      <h2 class="msg-reader-meta-title" id="reader-sermon-title">Sermon Title</h2>
-      <div class="msg-reader-meta-sub" id="reader-sermon-sub">ID • Date • Language</div>
+    <!-- Reader Title & Meta Banner -->
+    <div style="margin-top: 1.5rem; text-align: center; padding: 0 1rem;">
+      <h2 id="full-reader-title" class="msg-reader-meta-title">Sermon title</h2>
+      <p id="full-reader-meta" class="msg-reader-meta-sub">Date • Location • Language</p>
     </div>
 
-    <main class="msg-reader-main-content" id="reader-content-area">
-      <!-- Loaded dynamically -->
-    </main>
+    <!-- Active Single Reading View -->
+    <div id="tab-single-content" class="msg-reader-tab-content">
+      <div id="full-reader-body" class="msg-reader-main-content">
+        <p style="text-align: center; color: var(--text-secondary); padding: 3rem 0;">Loading transcript text...</p>
+      </div>
+    </div>
+
+    <!-- Parallel Dual Split View -->
+    <div id="tab-parallel-content" class="msg-reader-tab-content" style="display: none;">
+      <div class="msg-reader-main-content msg-reader-wide">
+        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-bottom: 1rem;">
+          <label style="font-size: 14px; font-weight: 500; align-self: center;">Secondary language:</label>
+          <select id="parallel-lang-select" class="msg-select-box" style="height: 34px; width: 170px;" onchange="loadParallelTranscript(this.value)">
+            <option value="en">English (Original)</option>
+            <option value="fra">French (Français)</option>
+            <option value="nya">Chichewa (Chinyanja)</option>
+            <option value="es">Spanish (Español)</option>
+            <option value="pt">Portuguese (Português)</option>
+            <option value="ru">Russian (Русский)</option>
+            <option value="sw">Swahili (Kiswahili)</option>
+            <option value="de">German (Deutsch)</option>
+            <option value="zh">Chinese (中文)</option>
+            <option value="ja">Japanese (日本語)</option>
+          </select>
+        </div>
+        <div class="msg-parallel-grid">
+          <div class="msg-parallel-col">
+            <div id="parallel-left-header" class="msg-parallel-col-header">Primary language</div>
+            <div id="parallel-left-body">Loading...</div>
+          </div>
+          <div class="msg-parallel-col">
+            <div id="parallel-right-header" class="msg-parallel-col-header">Secondary language</div>
+            <div id="parallel-right-body">Select language above...</div>
+          </div>
+        </div>
+      </div>
+    </div>
+
+    <!-- PDF Document View -->
+    <div id="tab-pdf-content" class="msg-reader-tab-content" style="display: none;">
+      <div class="msg-reader-main-content msg-reader-wide" style="padding: 1rem;">
+        <iframe id="full-reader-pdf-frame" src="" style="width: 100%; height: 80vh; border: none; border-radius: var(--kumo-radius-md, 8px);"></iframe>
+      </div>
+    </div>
   </section>
 
-  <!-- ── Library Catalogue Section ─────────────────────────────────── -->
-  <div id="catalogue-section">
+  <!-- ── Catalogue Grid Library View ───────────────────────────────── -->
+  <section id="library-main-section">
+
     <!-- Header -->
-    <header class="msg-header">
-      <p class="page-kicker">Digital Archives & Study Hub</p>
-      <h1>The Message</h1>
-      <p class="page-subtitle">Audio recordings, full paragraph transcripts, and multi-lingual catalogues of William Marrion Branham's sermons across 72+ global languages.</p>
+    <div class="msg-header">
+      <p class="page-kicker">Archive & digital library</p>
+      <h1>The message sermon library</h1>
+      <p class="page-subtitle">Access and stream 1,200+ spoken sermons by William Marrion Branham. Search text transcripts, stream original audio recordings, read parallel translations, and browse worldwide language coverage.</p>
 
       <div class="msg-stats-bar">
-        <span class="msg-stat-chip">📖 <strong id="stat-total">1,290+</strong> Sermons</span>
-        <span class="msg-stat-chip actionable" onclick="playLwbRadio('gospel_music')" title="Listen to 24/7 Sermon Broadcast">📻 24/7 Broadcast</span>
-        <span class="msg-stat-chip actionable" onclick="openStandaloneBibleReader()" title="Open Standalone Bolls.life KJV Bible Reader">📜 KJV Bible Reader</span>
-        <a href="https://www.lwbcast.org/OtherTabs/Music.php" target="_blank" rel="noopener" class="msg-stat-chip" title="Visit Living Word Broadcast web player">🔗 LWB Site</a>
-        <span class="msg-stat-chip">⚡ Public REST API</span>
+        <span class="msg-stat-chip">🎙️ <strong id="stat-total">1,291+</strong> Sermons</span>
+        <span class="msg-stat-chip">🎧 100% Master audio</span>
+        <span class="msg-stat-chip">📄 PDF Transcripts</span>
+        <span class="msg-stat-chip">📖 Interactive text</span>
+        <span class="msg-stat-chip">🌍 72 Global languages</span>
+        <span class="msg-stat-chip actionable" onclick="playLwbRadio('music')">📻 24/7 Gospel radio</span>
       </div>
-    </header>
-
-    <!-- Filters & Controls -->
-    <section class="msg-controls-panel">
-      <div class="msg-search-group">
-        <input type="text" id="msg-search" class="msg-input-box" placeholder="Search title, date, or ID (e.g. 65-0718M)..." oninput="applyFilters()">
-
-        <select id="msg-lang-select" class="msg-select-box" onchange="applyFilters()">
-          <option value="">All Languages (72)</option>
-          <option value="en" selected>English</option>
-          <option value="fr">Français</option>
-          <option value="es">Español</option>
-          <option value="ny">Chichewa (Nyanja)</option>
-          <option value="sw">Kiswahili</option>
-          <option value="pt">Português</option>
-          <option value="de">Deutsch</option>
-          <option value="ru">Русский</option>
-        </select>
-
-        <select id="msg-year-select" class="msg-select-box" onchange="applyFilters()">
-          <option value="">All Years</option>
-          <option value="1965">1965</option>
-          <option value="1964">1964</option>
-          <option value="1963">1963</option>
-        </select>
-      </div>
-
-      <div class="msg-quick-tags">
-        <span class="msg-tag-label">Quick Filters:</span>
-        <button class="msg-filter-tag active" onclick="setQuickLang('')">All Languages</button>
-        <button class="msg-filter-tag" onclick="setQuickLang('en')">🇬🇧 English</button>
-        <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965 Sermons</button>
-        <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963 Seven Seals</button>
-      </div>
-
-      <div class="msg-view-mode-bar">
-        <div class="msg-view-toggle">
-          <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">🎴 Cards Grid</button>
-          <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">📋 Archival Table</button>
-        </div>
-        <div id="results-count-text" class="msg-results-count">Loading catalogue...</div>
-      </div>
-    </section>
-
-    <!-- Sermons Grid / Table Area -->
-    <main class="msg-grid" id="sermons-container">
-      <!-- Loaded dynamically -->
-    </main>
-
-    <!-- Pagination Controls -->
-    <div id="pagination-controls" class="msg-pagination-bar" style="display: none;">
-      <button id="btn-prev-page" class="msg-btn" onclick="changePage(-1)">← Previous</button>
-      <span id="page-info-text" class="msg-page-info">Page 1</span>
-      <button id="btn-next-page" class="msg-btn" onclick="changePage(1)">Next →</button>
     </div>
 
-    <!-- Bottom Dashboard Stats -->
-    <section class="msg-stats-dashboard">
-      <div class="msg-stat-card">
-        <div class="msg-stat-val" id="stat-exact-sermons">1,291</div>
-        <div class="msg-stat-lbl">Indexed Sermons</div>
+    <!-- Controls Panel -->
+    <div class="msg-controls-panel">
+      <div class="msg-search-group">
+        <input
+          type="search"
+          id="msg-search"
+          class="msg-input-box"
+          placeholder="Search sermons by title, scripture, or sermon ID..."
+          aria-label="Search sermons"
+          oninput="applyFilters()"
+        />
+        <select id="msg-lang-select" class="msg-select-box" aria-label="Filter by language" onchange="applyFilters()">
+          <option value="">All languages (72)</option>
+        </select>
+        <select id="msg-year-select" class="msg-select-box" aria-label="Filter by year" onchange="applyFilters()">
+          <option value="">All years (1947–1965)</option>
+        </select>
       </div>
-      <div class="msg-stat-card">
-        <div class="msg-stat-val" id="stat-exact-audio">1,236</div>
-        <div class="msg-stat-lbl">Audio Streams</div>
-      </div>
-      <div class="msg-stat-card">
-        <div class="msg-stat-val" id="stat-exact-pdf">1,253</div>
-        <div class="msg-stat-lbl">PDF Transcripts</div>
-      </div>
-      <div class="msg-stat-card">
-        <div class="msg-stat-val" id="stat-exact-text">1,253</div>
-        <div class="msg-stat-lbl">Full Text Records</div>
-      </div>
-      <div class="msg-stat-card">
-        <div class="msg-stat-val" id="stat-exact-langs">72</div>
-        <div class="msg-stat-lbl">Global Languages</div>
-      </div>
-    </section>
 
-    <!-- Translation Region Map -->
-    <section class="msg-map-section">
-      <h3 style="margin: 0 0 0.5rem 0; font-size: 1.15rem; color: var(--text-primary);">🌍 Global Translation Coverage</h3>
-      <p style="margin: 0 0 1rem 0; font-size: 0.875rem; color: var(--text-secondary);">Select a region to view translations across 72 global languages:</p>
+      <!-- Quick Filter Chips -->
+      <div class="msg-quick-tags">
+        <span class="msg-tag-label">Quick filters:</span>
+        <button class="msg-filter-tag active" onclick="setQuickLang('')">All</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('en')">English</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('fra')">French</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('es')">Spanish</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('nya')">Chichewa</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('sw')">Swahili</button>
+        <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965</button>
+        <button class="msg-filter-tag" onclick="setQuickYear('1964')">1964</button>
+        <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963</button>
+      </div>
 
+      <!-- View Switcher & Result Counter -->
+      <div class="msg-view-mode-bar">
+        <div class="msg-view-toggle">
+          <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">Grid view</button>
+          <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">Table view</button>
+        </div>
+        <div id="results-count-text" class="msg-results-count">Showing sermons...</div>
+      </div>
+    </div>
+
+    <!-- Sermon Cards Container -->
+    <div id="sermons-container" class="msg-grid">
+      <!-- Loaded dynamically -->
+    </div>
+
+    <!-- Pagination -->
+    <div class="msg-pagination-bar">
+      <button id="prev-page-btn" class="msg-reader-btn" onclick="changePage(-1)">← Previous</button>
+      <span id="page-indicator" class="msg-page-info">Page 1</span>
+      <button id="next-page-btn" class="msg-reader-btn" onclick="changePage(1)">Next →</button>
+    </div>
+
+    <!-- Global Stats Dashboard -->
+    <div class="msg-stats-dashboard">
+      <div class="msg-stat-card">
+        <span class="msg-stat-val" id="stat-exact-sermons">1,291</span>
+        <span class="msg-stat-lbl">Exact sermons indexed</span>
+      </div>
+      <div class="msg-stat-card">
+        <span class="msg-stat-val" id="stat-exact-audio">1,291</span>
+        <span class="msg-stat-lbl">Audio recordings</span>
+      </div>
+      <div class="msg-stat-card">
+        <span class="msg-stat-val" id="stat-exact-pdf">1,291</span>
+        <span class="msg-stat-lbl">PDF transcripts</span>
+      </div>
+      <div class="msg-stat-card">
+        <span class="msg-stat-val" id="stat-exact-text">1,291</span>
+        <span class="msg-stat-lbl">Text transcripts</span>
+      </div>
+      <div class="msg-stat-card">
+        <span class="msg-stat-val" id="stat-exact-langs">72</span>
+        <span class="msg-stat-lbl">Available languages</span>
+      </div>
+    </div>
+
+    <!-- Region Translation Map -->
+    <div class="msg-map-section">
+      <h3 style="margin-top:0; margin-bottom: 0.35rem; font-size: 1.15rem; font-weight: 600; color: var(--text-primary);">Global translation coverage</h3>
+      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 1rem;">Explore sermon translation distribution by global territory:</p>
       <div class="msg-region-grid">
         <div class="msg-region-card" onclick="filterByRegion('africa')">
           <div class="msg-region-header">
-            <span class="msg-region-name">🌍 Africa</span>
-            <span class="msg-region-badge">18 Languages</span>
+            <span class="msg-region-name">Africa & East Africa</span>
+            <span class="msg-region-badge">24 languages</span>
           </div>
-          <div class="msg-region-langs">🇲🇼 Chichewa (ny), 🇰🇪 Kiswahili (sw), 🇿🇦 Afrikaans (af), 🇳🇬 Yoruba (yo), 🇨🇩 Lingala (ln)...</div>
+          <p class="msg-region-langs">Chichewa, Swahili, Afrikaans, Luganda, Kinyarwanda, Shona, Zulu, Lingala...</p>
         </div>
-
         <div class="msg-region-card" onclick="filterByRegion('americas')">
           <div class="msg-region-header">
-            <span class="msg-region-name">🌎 Americas</span>
-            <span class="msg-region-badge">8 Languages</span>
+            <span class="msg-region-name">Americas & Caribbean</span>
+            <span class="msg-region-badge">14 languages</span>
           </div>
-          <div class="msg-region-langs">🇺🇸 English (en), 🇲🇽 Español (es), 🇧🇷 Português (pt), 🇭🇹 Kreyòl (ht)...</div>
+          <p class="msg-region-langs">English, Spanish, Portuguese, Haitian Creole, Quechua, Guarani, Papiamento...</p>
         </div>
 
         <div class="msg-region-card" onclick="filterByRegion('europe')">
           <div class="msg-region-header">
-            <span class="msg-region-name">🌍 Europe</span>
-            <span class="msg-region-badge">24 Languages</span>
+            <span class="msg-region-name">Europe & Eurasia</span>
+            <span class="msg-region-badge">20 languages</span>
           </div>
-          <div class="msg-region-langs">🇫🇷 Français (fr), 🇩🇪 Deutsch (de), 🇮🇹 Italiano (it), 🇷🇴 Română (ro), 🇷🇺 Русский (ru)...</div>
+          <p class="msg-region-langs">French, Russian, German, Dutch, Polish, Italian, Romanian, Ukrainian, Czech...</p>
         </div>
 
         <div class="msg-region-card" onclick="filterByRegion('asia')">
           <div class="msg-region-header">
-            <span class="msg-region-name">🌏 Asia & Pacific</span>
-            <span class="msg-region-badge">22 Languages</span>
+            <span class="msg-region-name">Asia & Pacific</span>
+            <span class="msg-region-badge">14 languages</span>
           </div>
-          <div class="msg-region-langs">🇵🇭 Tagalog (tl), 🇮🇩 Bahasa (id), 🇮🇳 Hindi (hi), 🇮🇳 Tamil (ta), 🇨🇳 Chinese...</div>
+          <p class="msg-region-langs">Chinese, Japanese, Hindi, Tagalog, Indonesian, Korean, Vietnamese, Tamil...</p>
         </div>
       </div>
     </section>
@@ -1230,14 +1244,14 @@ body:has(.msg-library-wrapper) .page-content,
     <!-- Developer API Box -->
     <section class="msg-api-box">
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
-        <h3>⚡ Public REST API & Developer Docs</h3>
-        <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="flex: 0 0 auto; font-weight: 700;">🚀 API Explorer & Docs →</a>
+        <h3 style="font-size: 1rem; font-weight: 600; margin: 0;">Machine-readable REST API & developer documentation</h3>
+        <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="flex: 0 0 auto; font-weight: 500;">API docs →</a>
       </div>
-      <p>Developers can fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST API:</p>
-      <div style="display: flex; flex-direction: column; gap: 0.4rem;">
-        <div><code>GET /api/messages?language=ny</code> — List Chichewa sermons</div>
+      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 0.75rem;">Fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST API:</p>
+      <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 14px;">
+        <div><code>GET /api/messages?language=nya</code> — List Chichewa sermons</div>
         <div><code>GET /api/messages/65-0718M/text</code> — Get transcript with numbered paragraphs</div>
-        <div><code>GET /api/search?q=seven+seals</code> — Full-text search</div>
+        <div><code>GET /api/search?q=seven+seals</code> — Full-text search across archive</div>
       </div>
     </section>
   </div>
@@ -1247,11 +1261,11 @@ body:has(.msg-library-wrapper) .page-content,
     <div class="msg-audio-meta">
       <span style="font-size: 1.25rem;">🎧</span>
       <div style="min-width: 0; flex: 1;">
-        <div id="player-sermon-title" class="msg-audio-title">Sermon Title</div>
+        <div id="player-sermon-title" class="msg-audio-title">Sermon title</div>
         <div id="player-sermon-sub" class="msg-audio-sub">Sermon ID • Language</div>
       </div>
     </div>
-    <audio id="audio-element" controls style="height: 36px; max-width: 320px; outline: none;"></audio>
+    <audio id="audio-element" controls style="height: 34px; max-width: 320px; outline: none;"></audio>
     <button onclick="closePlayer()" class="msg-audio-close-btn" title="Close player">✕</button>
   </div>
 
@@ -1259,7 +1273,7 @@ body:has(.msg-library-wrapper) .page-content,
   <div id="bible-modal-backdrop" class="msg-bible-backdrop" style="display: none;" onclick="if(event.target === this) closeBibleModal()">
     <div class="msg-bible-dialog">
       <header class="msg-bible-header">
-        <h3 id="bible-modal-title" class="msg-bible-title">📖 Scripture Text (King James Version)</h3>
+        <h3 id="bible-modal-title" class="msg-bible-title">Scripture text (King James Version)</h3>
         <button onclick="closeBibleModal()" class="msg-audio-close-btn" title="Close Bible modal">✕</button>
       </header>
       <main id="bible-modal-body" class="msg-bible-body">
