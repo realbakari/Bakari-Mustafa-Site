@@ -59,7 +59,7 @@ pre.highlight, pre {
 .highlight .err {
   color: #fb4934;
   // background-color: #1a1b21;
-  font-weight: bold;
+  font-weight: $semibold-weight;
 }
 
 .highlight .c,
@@ -101,7 +101,7 @@ pre.highlight, pre {
 
 .highlight .gh {
   color: #b8bb26;
-  font-weight: bold;
+  font-weight: $semibold-weight;
 }
 
 .highlight .k,

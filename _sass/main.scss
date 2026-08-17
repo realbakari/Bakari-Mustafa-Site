@@ -1,19 +1,20 @@
-// Editorial Design System
-// Typography
+// Kumo Design System & Cloudflare Product Standards
+
+// Typography (Kumo UI: 14px for content text, Inter / Manrope sans-serif)
 $sans-family: 'Inter', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 $mono-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
 $heading-family: 'Fraunces', Georgia, serif;
-$base-font-size: 16px;
-$medium-font-size: 15px;
-$small-font-size: 13.5px;
-$base-line-height: 1.7;
+$base-font-size: 14px;
+$medium-font-size: 14px;
+$small-font-size: 13px;
+$base-line-height: 1.6;
 
-// Font weight
+// Font weight (Kumo UI: font-semibold 600 for headings, font-medium 500 for inline emphasis, never 700)
 $normal-weight: 400;
 $medium-weight: 500;
 $semibold-weight: 600;
-$bold-weight: 700;
-$extrabold-weight: 800;
+$bold-weight: 600;
+$extrabold-weight: 600;
 
 // Color palette
 $color-ink: #18181b;
