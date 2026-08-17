@@ -1,13 +1,14 @@
 // Navbar (Kumo UI: Hairline separation, clean surface)
 .navbar {
   height: auto;
-  max-width: calc(#{$wide-size} - (#{$spacing-full} * 1.25));
-  max-width: -webkit-calc(#{$wide-size} - (#{$spacing-full} * 1.25));
+  max-width: $wide-size;
+  width: 100%;
+  box-sizing: border-box;
   position: relative;
   margin-right: auto;
   margin-left: auto;
   border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
-  padding: 0.85rem $spacing-full 0.75rem;
+  padding: 0.85rem clamp(1rem, 3vw, $spacing-full) 0.75rem;
   @extend %clearfix;
 
   @include media-query($on-mobile) {
@@ -15,7 +16,7 @@
     background-color: var(--bg-primary);
     box-sizing: border-box;
     height: 50px;
-    padding: 0;
+    padding: 0 1.25rem;
     border-bottom: none;
   }
 

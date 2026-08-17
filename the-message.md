@@ -15,10 +15,10 @@ description: Public catalogue and API for William Branham sermons in audio (M4A/
 body:has(.msg-library-wrapper) .wrapper,
 .wrapper.full-width,
 .wrapper:has(.msg-library-wrapper) {
-  max-width: min(1400px, calc(100vw - 32px)) !important;
+  max-width: 1120px !important;
   width: 100% !important;
-  padding-left: clamp(1rem, 2.5vw, 2.5rem) !important;
-  padding-right: clamp(1rem, 2.5vw, 2.5rem) !important;
+  padding-left: clamp(1rem, 3vw, 32px) !important;
+  padding-right: clamp(1rem, 3vw, 32px) !important;
   box-sizing: border-box !important;
 }
 
@@ -36,7 +36,7 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-library-wrapper {
-  max-width: 1400px !important;
+  max-width: 1120px !important;
   width: 100% !important;
   margin: 0 auto;
   padding: 0.75rem 0 3.5rem;

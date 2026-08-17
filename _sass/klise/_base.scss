@@ -271,22 +271,21 @@ blockquote {
   }
 }
 
-// Wrapper
+// Wrapper (Kumo Layout & Canvas Proportions)
 .wrapper {
-  max-width: -webkit-calc(#{$narrow-size} - (#{$spacing-full} * 2));
-  max-width: calc(#{$narrow-size} - (#{$spacing-full} * 2));
+  max-width: $narrow-size;
+  width: 100%;
   position: relative;
   margin-right: auto;
   margin-left: auto;
-  padding-right: $spacing-full;
-  padding-left: $spacing-full;
+  padding-right: clamp(1rem, 3vw, $spacing-full);
+  padding-left: clamp(1rem, 3vw, $spacing-full);
+  box-sizing: border-box;
   @extend %clearfix;
 
   @include media-query($on-mobile) {
-    max-width: -webkit-calc(#{$narrow-size} - (#{$spacing-full}));
-    max-width: calc(#{$narrow-size} - (#{$spacing-full}));
-    padding-right: $spacing-full - 10;
-    padding-left: $spacing-full - 10;
+    padding-right: 1.25rem;
+    padding-left: 1.25rem;
 
     &.blurry {
       animation: 0.2s ease-in forwards blur;
@@ -296,19 +295,26 @@ blockquote {
 }
 
 .wrapper.full-width,
+.wrapper.wide-layout,
 body:has(.msg-library-wrapper) .wrapper,
 body:has(.api-doc-container) .wrapper,
+body:has(.projects-page) .wrapper,
+body:has(.reading-page) .wrapper,
 .wrapper:has(.msg-library-wrapper),
-.wrapper:has(.api-doc-container) {
-  max-width: min(1380px, calc(100vw - 32px)) !important;
+.wrapper:has(.api-doc-container),
+.wrapper:has(.projects-page),
+.wrapper:has(.reading-page) {
+  max-width: $wide-size !important;
   width: 100% !important;
-  padding-right: clamp(1rem, 2.5vw, 2.5rem);
-  padding-left: clamp(1rem, 2.5vw, 2.5rem);
+  padding-right: clamp(1rem, 3vw, $spacing-full);
+  padding-left: clamp(1rem, 3vw, $spacing-full);
+  box-sizing: border-box;
 }
 
 .wrapper-home {
-  max-width: -webkit-calc(#{$wide-size} - (#{$spacing-full} * 2));
-  max-width: calc(#{$wide-size} - (#{$spacing-full} * 2));
+  max-width: $wide-size;
+  width: 100%;
+  box-sizing: border-box;
 }
 
 // Underline

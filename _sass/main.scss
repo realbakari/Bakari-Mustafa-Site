@@ -59,13 +59,13 @@ $dark-light: #1b231d;
 $dark-smoke: #151b17;
 $dark-gray: #b9c8bd;
 
-// Layout
-$wide-size: 1080px;
-$narrow-size: 760px;
+// Layout (Kumo UI & Editorial Canvas Standards)
+$wide-size: 1120px;
+$narrow-size: 840px;
 
-// Spacing (slightly more generous)
+// Spacing
 $spacing-full: 32px;
-$spacing-half: $spacing-full / 2;
+$spacing-half: 16px;
 
 // State of devices
 $on-mobile: 768px;
