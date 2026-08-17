@@ -1,30 +1,29 @@
-// Editorial & Kumo Design System
-
-// Typography (Kumo UI Standard: 14px content text, Inter / Manrope clean sans-serif)
+// Editorial Design System
+// Typography
 $sans-family: 'Inter', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 $mono-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
 $heading-family: 'Fraunces', Georgia, serif;
-$base-font-size: 14px;
-$medium-font-size: 14px;
-$small-font-size: 13px;
-$base-line-height: 1.6;
+$base-font-size: 16px;
+$medium-font-size: 15px;
+$small-font-size: 13.5px;
+$base-line-height: 1.7;
 
-// Font weight (Kumo UI: font-semibold 600 for headings, font-medium 500 for emphasized text)
+// Font weight
 $normal-weight: 400;
 $medium-weight: 500;
 $semibold-weight: 600;
-$bold-weight: 600;
-$extrabold-weight: 700;
+$bold-weight: 700;
+$extrabold-weight: 800;
 
 // Color palette
-$color-ink: #1e2320;
-$color-graphite: #4f5a54;
-$color-line: #d9e1dc;
-$color-paper: #f8faf7;
-$color-mist: #eef4f0;
-$color-forest: #176b5b;
-$color-fern: #2f8a6e;
-$color-sage: #dbe8df;
+$color-ink: #18181b;
+$color-graphite: #52525b;
+$color-line: #e4e4e7;
+$color-paper: #ffffff;
+$color-mist: #f8fafc;
+$color-forest: #1e3a2f;
+$color-fern: #2d5a47;
+$color-sage: #e2e8f0;
 
 // Legacy palette aliases used by older dashboard and form partials.
 $color-deep-teal: $color-forest;
@@ -89,81 +88,81 @@ $on-widescreen: 1152px;
 
 // Semantic CSS Variables for Theming
 :root {
-  --text-primary: #{$text-base-color};
-  --text-secondary: #{$gray};
-  --bg-primary: #{$white};
-  --bg-secondary: #eef4f0;
-  --bg-tertiary: #dfe9e3;
-  --bg-surface: #{$white};
-  --surface-strong: #{$white};
-  --surface-soft: #f2f6f3;
+  --text-primary: #18181b;
+  --text-secondary: #64748b;
+  --bg-primary: #ffffff;
+  --bg-secondary: #f8fafc;
+  --bg-tertiary: #f1f5f9;
+  --bg-surface: #ffffff;
+  --surface-strong: #ffffff;
+  --surface-soft: #f8fafc;
 
-  --link-color: #{$text-base-color};
-  --link-hover: #{$color-forest};
-  --accent-primary: #{$color-forest};
-  --accent-secondary: #{$color-fern};
-  --accent-primary-rgb: 23, 107, 91;
-  --accent-secondary-rgb: 47, 138, 110;
-  --hero-wash: rgba(23, 107, 91, 0.06);
-  --hero-mist: rgba(47, 138, 110, 0.05);
+  --link-color: #18181b;
+  --link-hover: #1e3a2f;
+  --accent-primary: #1e3a2f;
+  --accent-secondary: #2d5a47;
+  --accent-primary-rgb: 30, 58, 47;
+  --accent-secondary-rgb: 45, 90, 71;
+  --hero-wash: rgba(30, 58, 47, 0.04);
+  --hero-mist: rgba(45, 90, 71, 0.03);
 
-  --border-subtle: rgba(30, 35, 32, 0.08);
-  --border-default: rgba(30, 35, 32, 0.14);
-  --border-strong: rgba(30, 35, 32, 0.24);
+  --border-subtle: rgba(15, 23, 42, 0.06);
+  --border-default: rgba(15, 23, 42, 0.11);
+  --border-strong: rgba(15, 23, 42, 0.2);
 
   // Kumo UI Design Tokens
   --kumo-canvas: var(--bg-primary);
   --kumo-control: var(--bg-secondary);
   --kumo-hairline: var(--border-subtle);
   --kumo-line: var(--border-default);
-  --kumo-tint: rgba(23, 107, 91, 0.06);
-  --kumo-tint-hover: rgba(23, 107, 91, 0.12);
-  --kumo-focus: rgba(23, 107, 91, 0.25);
+  --kumo-tint: rgba(30, 58, 47, 0.04);
+  --kumo-tint-hover: rgba(30, 58, 47, 0.08);
+  --kumo-focus: rgba(30, 58, 47, 0.2);
   --kumo-radius-sm: 6px;
-  --kumo-radius-md: 10px;
-  --kumo-radius-lg: 14px;
+  --kumo-radius-md: 8px;
+  --kumo-radius-lg: 12px;
   --kumo-radius-full: 9999px;
 
-  --shadow-sm: 0 4px 12px rgba(30, 35, 32, 0.04);
-  --shadow-md: 0 10px 28px rgba(30, 35, 32, 0.06);
-  --shadow-lg: 0 18px 48px rgba(30, 35, 32, 0.08);
-  --shadow-card: 0 8px 24px rgba(30, 35, 32, 0.05);
+  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.05);
+  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.07);
+  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04);
 }
 
 [data-theme="dark"] {
-  --text-primary: #{$dark-text-base-color};
-  --text-secondary: #{$dark-gray};
-  --bg-primary: #{$dark-black};
-  --bg-secondary: #{$dark-light};
-  --bg-tertiary: #243027;
-  --bg-surface: rgba(17, 22, 18, 0.86);
-  --surface-strong: #151b17;
-  --surface-soft: rgba(27, 35, 29, 0.74);
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --bg-primary: #0b0f14;
+  --bg-secondary: #121820;
+  --bg-tertiary: #1a222d;
+  --bg-surface: #121820;
+  --surface-strong: #121820;
+  --surface-soft: #0e1319;
 
-  --link-color: #{$dark-text-base-color};
-  --link-hover: #{$dark-text-link-blue};
-  --accent-primary: #{$dark-text-link-blue};
-  --accent-secondary: #90bdb2;
-  --accent-primary-rgb: 94, 224, 194;
-  --accent-secondary-rgb: 144, 189, 178;
-  --hero-wash: rgba(94, 224, 194, 0.12);
-  --hero-mist: rgba(144, 189, 178, 0.1);
+  --link-color: #f8fafc;
+  --link-hover: #5eead4;
+  --accent-primary: #34d399;
+  --accent-secondary: #6ee7b7;
+  --accent-primary-rgb: 52, 211, 153;
+  --accent-secondary-rgb: 110, 231, 183;
+  --hero-wash: rgba(52, 211, 153, 0.06);
+  --hero-mist: rgba(110, 231, 183, 0.04);
 
-  --border-subtle: rgba(255, 255, 255, 0.08);
-  --border-default: rgba(255, 255, 255, 0.14);
-  --border-strong: rgba(255, 255, 255, 0.24);
+  --border-subtle: rgba(255, 255, 255, 0.07);
+  --border-default: rgba(255, 255, 255, 0.12);
+  --border-strong: rgba(255, 255, 255, 0.22);
 
   // Kumo UI Design Tokens (Dark Mode)
   --kumo-canvas: var(--bg-primary);
   --kumo-control: var(--bg-secondary);
   --kumo-hairline: var(--border-subtle);
   --kumo-line: var(--border-default);
-  --kumo-tint: rgba(94, 224, 194, 0.08);
-  --kumo-tint-hover: rgba(94, 224, 194, 0.16);
-  --kumo-focus: rgba(94, 224, 194, 0.3);
+  --kumo-tint: rgba(255, 255, 255, 0.05);
+  --kumo-tint-hover: rgba(255, 255, 255, 0.09);
+  --kumo-focus: rgba(52, 211, 153, 0.25);
 
-  --shadow-sm: 0 8px 20px rgba(0, 0, 0, 0.28);
-  --shadow-md: 0 16px 36px rgba(0, 0, 0, 0.38);
-  --shadow-lg: 0 24px 60px rgba(0, 0, 0, 0.48);
-  --shadow-card: 0 14px 34px rgba(0, 0, 0, 0.36);
+  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
+  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.5);
+  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3);
 }

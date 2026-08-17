@@ -78,51 +78,34 @@ body:has(.msg-library-wrapper) .page-content,
   margin-bottom: 1.25rem;
 }
 
-/* ── Kumo Stats Chip Bar ────────────────────────────────────────── */
-.msg-stats-bar {
+/* ── Editorial Header Summary & Badge ────────────────────────────── */
+.msg-header-meta-row {
   display: flex;
   flex-wrap: wrap;
   align-items: center;
-  gap: 0.5rem;
-  margin-top: 0.85rem;
+  gap: 0.75rem;
+  margin-top: 0.75rem;
+  font-size: 13px;
+  color: var(--text-secondary);
 }
 
-.msg-stat-chip {
+.msg-header-tag {
   display: inline-flex;
   align-items: center;
-  gap: 0.4rem;
-  padding: 0.35rem 0.85rem;
-  border-radius: var(--kumo-radius-full, 9999px);
-  font-size: 14px;
-  font-weight: 500;
+  gap: 0.35rem;
+  padding: 0.25rem 0.65rem;
+  border-radius: var(--kumo-radius-sm, 6px);
   background-color: var(--kumo-control, var(--bg-secondary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  color: var(--text-primary);
-  text-decoration: none !important;
-}
-
-.msg-stat-chip:hover {
-  background-color: var(--kumo-tint-hover, rgba(23, 107, 91, 0.12));
-  border-color: var(--accent-primary);
-}
-
-.msg-stat-chip strong {
-  color: var(--accent-primary);
-  font-weight: 600;
-}
-
-.msg-stat-chip.actionable {
-  cursor: pointer;
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
   font-weight: 500;
+  color: var(--text-primary);
 }
 
 /* ── Kumo Control Panel (Search & Filters) ───────────────────────── */
 .msg-controls-panel {
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 14px);
+  border-radius: var(--kumo-radius-lg, 12px);
   padding: 1.15rem;
   margin-bottom: 1.75rem;
   box-shadow: var(--shadow-sm);
@@ -159,7 +142,7 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-input-box:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(23, 107, 91, 0.25));
+  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(30, 58, 47, 0.2));
 }
 
 .msg-select-box {
@@ -177,37 +160,38 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-select-box:focus {
   outline: none;
   border-color: var(--accent-primary);
-  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(23, 107, 91, 0.25));
+  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(30, 58, 47, 0.2));
 }
 
 .msg-quick-tags {
   display: flex;
   align-items: center;
-  gap: 0.5rem;
+  gap: 0.4rem;
   flex-wrap: wrap;
-  font-size: 14px;
+  font-size: 13px;
 }
 
 .msg-tag-label {
-  font-weight: 600;
-  font-size: 14px;
+  font-weight: 500;
+  font-size: 13px;
   color: var(--text-secondary);
   margin-right: 0.25rem;
 }
 
 .msg-filter-tag {
-  padding: 0.3rem 0.85rem;
-  border-radius: var(--kumo-radius-full, 9999px);
-  font-size: 14px;
+  padding: 0.25rem 0.7rem;
+  border-radius: var(--kumo-radius-sm, 6px);
+  font-size: 13px;
   font-weight: 500;
   border: 1px solid var(--kumo-line, var(--border-default));
   background-color: var(--kumo-canvas, var(--bg-primary));
-  color: var(--text-primary);
+  color: var(--text-secondary);
   cursor: pointer;
 }
 
 .msg-filter-tag:hover {
   background-color: var(--kumo-control, var(--bg-secondary));
+  color: var(--text-primary);
   border-color: var(--accent-primary);
 }
 
@@ -231,14 +215,14 @@ body:has(.msg-library-wrapper) .page-content,
   display: inline-flex;
   gap: 0.25rem;
   background-color: var(--kumo-control, var(--bg-secondary));
-  padding: 3px;
+  padding: 2px;
   border-radius: var(--kumo-radius-md, 8px);
   border: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
 .msg-view-btn {
-  padding: 0.35rem 0.85rem;
-  font-size: 14px;
+  padding: 0.3rem 0.75rem;
+  font-size: 13px;
   font-weight: 500;
   border: none;
   background: transparent;
@@ -250,11 +234,11 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-view-btn.active {
   background-color: var(--surface-strong, var(--bg-primary));
   color: var(--text-primary);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.08);
+  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
 }
 
 .msg-results-count {
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   color: var(--text-secondary);
 }
@@ -287,8 +271,8 @@ body:has(.msg-library-wrapper) .page-content,
 .msg-cover-wrap {
   position: relative;
   width: 100%;
-  height: 165px;
-  background-color: var(--bg-secondary);
+  height: 155px;
+  background-color: var(--kumo-control, var(--bg-secondary));
   overflow: hidden;
   border-top-left-radius: 11px;
   border-top-right-radius: 11px;
@@ -300,41 +284,29 @@ body:has(.msg-library-wrapper) .page-content,
   object-fit: cover;
 }
 
-.msg-badge-id {
-  position: absolute;
-  top: 0.65rem;
-  left: 0.65rem;
-  background: rgba(15, 23, 42, 0.85);
-  backdrop-filter: blur(8px);
-  color: #7dd3fc;
-  font-family: var(--mono-family, monospace);
-  font-weight: 600;
-  font-size: 0.85em;
-  padding: 0.2rem 0.55rem;
-  border-radius: var(--kumo-radius-sm, 6px);
-}
-
 .msg-badge-lang {
   position: absolute;
   top: 0.65rem;
   right: 0.65rem;
-  background: var(--accent-primary);
-  color: #ffffff;
+  background: var(--bg-surface);
+  color: var(--text-primary);
+  border: 1px solid var(--kumo-line);
   font-weight: 600;
-  font-size: 0.8em;
-  padding: 0.2rem 0.55rem;
+  font-size: 11px;
+  padding: 0.15rem 0.5rem;
   border-radius: var(--kumo-radius-sm, 6px);
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
 }
 
 .msg-card-content {
-  padding: 1.15rem;
+  padding: 1rem 1.15rem 1.15rem;
   display: flex;
   flex-direction: column;
   flex: 1;
 }
 
 .msg-card-title {
-  font-size: 1rem;
+  font-size: 0.95rem;
   font-weight: 600;
   line-height: 1.35;
   color: var(--text-primary);
@@ -343,16 +315,16 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-card-meta {
-  font-size: 13px;
+  font-size: 12px;
   color: var(--text-secondary);
-  margin-bottom: 1rem;
+  margin-bottom: 0.85rem;
 }
 
 .msg-card-actions {
   margin-top: auto;
   display: flex;
   gap: 0.45rem;
-  padding-top: 0.85rem;
+  padding-top: 0.75rem;
   border-top: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
@@ -362,50 +334,35 @@ body:has(.msg-library-wrapper) .page-content,
   display: inline-flex;
   align-items: center;
   justify-content: center;
-  gap: 0.35rem;
-  height: 34px;
+  height: 32px;
   padding: 0 0.65rem;
-  font-size: 14px;
+  font-size: 13px;
   font-weight: 500;
   border-radius: var(--kumo-radius-sm, 6px);
   text-decoration: none !important;
   cursor: pointer;
   border: 1px solid var(--kumo-line, var(--border-default));
+  background-color: var(--kumo-canvas, var(--bg-primary));
+  color: var(--text-primary);
   box-sizing: border-box;
 }
 
-.msg-btn-text {
+.msg-btn:hover {
   background-color: var(--kumo-control, var(--bg-secondary));
-  color: var(--text-primary);
-}
-
-.msg-btn-text:hover {
-  background-color: var(--accent-primary);
-  color: #ffffff;
   border-color: var(--accent-primary);
-}
-
-.msg-btn-pdf {
-  background-color: var(--kumo-tint, rgba(23, 107, 91, 0.06));
   color: var(--accent-primary);
-  border-color: var(--kumo-hairline, var(--border-subtle));
 }
 
-.msg-btn-pdf:hover {
+.msg-btn-primary {
   background-color: var(--accent-primary);
   color: #ffffff;
   border-color: var(--accent-primary);
 }
 
-.msg-btn-audio {
-  background-color: #059669;
+.msg-btn-primary:hover {
+  background-color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
   color: #ffffff;
-  border-color: #059669;
-}
-
-.msg-btn-audio:hover {
-  background-color: #047857;
-  border-color: #047857;
 }
 
 .msg-btn-disabled {
@@ -1070,12 +1027,12 @@ body:has(.msg-library-wrapper) .page-content,
           <option value="zh">Chinese (中文)</option>
           <option value="ja">Japanese (日本語)</option>
         </select>
-        <button class="msg-reader-btn" id="btn-theme-light" onclick="setReaderTheme('light')" title="Light theme">☀️</button>
-        <button class="msg-reader-btn" id="btn-theme-sepia" onclick="setReaderTheme('sepia')" title="Sepia theme">📜</button>
-        <button class="msg-reader-btn" id="btn-theme-dark" onclick="setReaderTheme('dark')" title="Dark theme">🌙</button>
-        <button class="msg-reader-btn" id="btn-toggle-wide" onclick="toggleReaderWidth()" title="Expand / contract reading canvas">↔</button>
-        <button class="msg-reader-btn" id="reader-audio-btn" onclick="toggleReaderAudio()" title="Play / pause sermon audio">🎧 Audio</button>
-        <a id="reader-download-btn" class="msg-reader-btn" href="#" target="_blank" title="Download PDF transcript" rel="noopener">⬇️ PDF</a>
+        <button class="msg-reader-btn" id="btn-theme-light" onclick="setReaderTheme('light')" title="Light theme">Light</button>
+        <button class="msg-reader-btn" id="btn-theme-sepia" onclick="setReaderTheme('sepia')" title="Sepia theme">Sepia</button>
+        <button class="msg-reader-btn" id="btn-theme-dark" onclick="setReaderTheme('dark')" title="Dark theme">Dark</button>
+        <button class="msg-reader-btn" id="btn-toggle-wide" onclick="toggleReaderWidth()" title="Toggle wide reading canvas">Wide</button>
+        <button class="msg-reader-btn" id="reader-audio-btn" onclick="toggleReaderAudio()" title="Play audio recording">Audio</button>
+        <a id="reader-download-btn" class="msg-reader-btn" href="#" target="_blank" title="Download PDF transcript" rel="noopener">PDF</a>
       </div>
     </div>
 
@@ -1086,8 +1043,8 @@ body:has(.msg-library-wrapper) .page-content,
     </div>
 
     <!-- Search in Transcript Bar -->
-    <div style="max-width: 500px; margin: 1rem auto 0; padding: 0 1rem;">
-      <input type="search" id="reader-search-input" class="msg-input-box" placeholder="Search within transcript text..." oninput="searchInTranscript(this.value)">
+    <div style="max-width: 480px; margin: 1rem auto 0; padding: 0 1rem;">
+      <input type="search" id="reader-search-input" class="msg-input-box" placeholder="Search within transcript..." oninput="searchInTranscript(this.value)">
     </div>
 
     <!-- Active Reading Content Area -->
@@ -1101,17 +1058,15 @@ body:has(.msg-library-wrapper) .page-content,
 
     <!-- Header -->
     <div class="msg-header">
-      <p class="page-kicker">Archive & digital library</p>
+      <p class="page-kicker">Sermon archive</p>
       <h1>The message sermon library</h1>
-      <p class="page-subtitle">Access and stream 1,200+ spoken sermons by William Marrion Branham. Search text transcripts, stream original audio recordings, read parallel translations, and browse worldwide language coverage.</p>
+      <p class="page-subtitle">A digital library of sermons preached by William Marrion Branham between 1947 and 1965, with original audio recordings, text transcripts, and translations across 72 languages.</p>
 
-      <div class="msg-stats-bar">
-        <span class="msg-stat-chip">🎙️ <strong id="stat-total">1,291+</strong> Sermons</span>
-        <span class="msg-stat-chip">🎧 100% Master audio</span>
-        <span class="msg-stat-chip">📄 PDF Transcripts</span>
-        <span class="msg-stat-chip">📖 Interactive text</span>
-        <span class="msg-stat-chip">🌍 72 Global languages</span>
-        <span class="msg-stat-chip actionable" onclick="playLwbRadio('music')">📻 24/7 Gospel radio</span>
+      <div class="msg-header-meta-row">
+        <span class="msg-header-tag"><strong id="stat-total">1,291</strong> sermons</span>
+        <span class="msg-header-tag">72 languages</span>
+        <span class="msg-header-tag">Audio & text</span>
+        <a href="{{ '/api-docs/' | relative_url }}" style="color: var(--accent-primary); text-decoration: none; margin-left: auto; font-size: 13px;">REST API →</a>
       </div>
     </div>
 
@@ -1136,23 +1091,22 @@ body:has(.msg-library-wrapper) .page-content,
 
       <!-- Quick Filter Chips -->
       <div class="msg-quick-tags">
-        <span class="msg-tag-label">Quick filters:</span>
+        <span class="msg-tag-label">Languages:</span>
         <button class="msg-filter-tag active" onclick="setQuickLang('')">All</button>
         <button class="msg-filter-tag" onclick="setQuickLang('en')">English</button>
         <button class="msg-filter-tag" onclick="setQuickLang('fra')">French</button>
         <button class="msg-filter-tag" onclick="setQuickLang('es')">Spanish</button>
         <button class="msg-filter-tag" onclick="setQuickLang('nya')">Chichewa</button>
         <button class="msg-filter-tag" onclick="setQuickLang('sw')">Swahili</button>
-        <button class="msg-filter-tag" onclick="setQuickYear('1965')">1965</button>
-        <button class="msg-filter-tag" onclick="setQuickYear('1964')">1964</button>
-        <button class="msg-filter-tag" onclick="setQuickYear('1963')">1963</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('pt')">Portuguese</button>
+        <button class="msg-filter-tag" onclick="setQuickLang('ru')">Russian</button>
       </div>
 
       <!-- View Switcher & Result Counter -->
       <div class="msg-view-mode-bar">
         <div class="msg-view-toggle">
-          <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">Grid view</button>
-          <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">Table view</button>
+          <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">Grid</button>
+          <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">Table</button>
         </div>
         <div id="results-count-text" class="msg-results-count">Showing sermons...</div>
       </div>
@@ -1170,34 +1124,10 @@ body:has(.msg-library-wrapper) .page-content,
       <button id="btn-next-page" class="msg-reader-btn" onclick="changePage(1)">Next →</button>
     </div>
 
-    <!-- Global Stats Dashboard -->
-    <div class="msg-stats-dashboard">
-      <div class="msg-stat-card">
-        <span class="msg-stat-val" id="stat-exact-sermons">1,291</span>
-        <span class="msg-stat-lbl">Exact sermons indexed</span>
-      </div>
-      <div class="msg-stat-card">
-        <span class="msg-stat-val" id="stat-exact-audio">1,291</span>
-        <span class="msg-stat-lbl">Audio recordings</span>
-      </div>
-      <div class="msg-stat-card">
-        <span class="msg-stat-val" id="stat-exact-pdf">1,291</span>
-        <span class="msg-stat-lbl">PDF transcripts</span>
-      </div>
-      <div class="msg-stat-card">
-        <span class="msg-stat-val" id="stat-exact-text">1,291</span>
-        <span class="msg-stat-lbl">Text transcripts</span>
-      </div>
-      <div class="msg-stat-card">
-        <span class="msg-stat-val" id="stat-exact-langs">72</span>
-        <span class="msg-stat-lbl">Available languages</span>
-      </div>
-    </div>
-
-    <!-- Region Translation Map -->
+    <!-- Region Translation Overview -->
     <div class="msg-map-section">
-      <h3 style="margin-top:0; margin-bottom: 0.35rem; font-size: 1.15rem; font-weight: 600; color: var(--text-primary);">Global translation coverage</h3>
-      <p style="color: var(--text-secondary); font-size: 14px; margin-bottom: 1rem;">Explore sermon translation distribution by global territory:</p>
+      <h3 style="margin-top:0; margin-bottom: 0.35rem; font-size: 1rem; font-weight: 600; color: var(--text-primary);">Translations by territory</h3>
+      <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 1rem;">Filter available recordings and translations by geographical region:</p>
       <div class="msg-region-grid">
         <div class="msg-region-card" onclick="filterByRegion('africa')">
           <div class="msg-region-header">
@@ -1233,16 +1163,16 @@ body:has(.msg-library-wrapper) .page-content,
     </div>
 
     <!-- Developer API Box -->
-    <section class="msg-api-box">
+    <section class="msg-api-box" style="margin-top: 2rem;">
       <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
-        <h3 style="font-size: 1rem; font-weight: 600; margin: 0;">Machine-readable REST API & developer documentation</h3>
-        <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="flex: 0 0 auto; font-weight: 500;">API docs →</a>
+        <h3 style="font-size: 0.95rem; font-weight: 600; margin: 0;">Machine-readable REST API</h3>
+        <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="flex: 0 0 auto; font-size: 12px; height: 28px;">API docs →</a>
       </div>
-      <p style="font-size: 14px; color: var(--text-secondary); margin-bottom: 0.75rem;">Fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST API:</p>
-      <div style="display: flex; flex-direction: column; gap: 0.4rem; font-size: 14px;">
-        <div><code>GET /api/messages?language=nya</code> — List Chichewa sermons</div>
-        <div><code>GET /api/messages/65-0718M/text</code> — Get transcript with numbered paragraphs</div>
-        <div><code>GET /api/search?q=seven+seals</code> — Full-text search across archive</div>
+      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 0.75rem;">Fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST endpoints:</p>
+      <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 13px; font-family: var(--mono-family, monospace);">
+        <div>GET /api/messages?language=nya</div>
+        <div>GET /api/messages/65-0718M/text</div>
+        <div>GET /api/search?q=seven+seals</div>
       </div>
     </section>
   </div>
@@ -1250,13 +1180,12 @@ body:has(.msg-library-wrapper) .page-content,
   <!-- ── Floating Audio Dock Player ───────────────────────────────── -->
   <div id="audio-player-bar" class="msg-audio-dock" style="display: none;">
     <div class="msg-audio-meta">
-      <span style="font-size: 1.25rem;">🎧</span>
       <div style="min-width: 0; flex: 1;">
         <div id="player-sermon-title" class="msg-audio-title">Sermon title</div>
         <div id="player-sermon-sub" class="msg-audio-sub">Sermon ID • Language</div>
       </div>
     </div>
-    <audio id="audio-element" controls style="height: 34px; max-width: 320px; outline: none;"></audio>
+    <audio id="audio-element" controls style="height: 32px; max-width: 300px; outline: none;"></audio>
     <button onclick="closePlayer()" class="msg-audio-close-btn" title="Close player">✕</button>
   </div>
 
@@ -1265,9 +1194,13 @@ body:has(.msg-library-wrapper) .page-content,
     <div class="msg-bible-dialog">
       <header class="msg-bible-header">
         <h3 id="bible-modal-title" class="msg-bible-title">Scripture text (King James Version)</h3>
-        <button onclick="closeBibleModal()" class="msg-audio-close-btn" title="Close Bible modal">✕</button>
+        <button onclick="closeBibleModal()" class="msg-audio-close-btn" title="Close modal">✕</button>
       </header>
       <main id="bible-modal-body" class="msg-bible-body">
+        <div>Loading scripture verse & Strong's Concordance lexicon...</div>
+      </main>
+    </div>
+  </div>
         <div>Loading scripture verse & Strong's Concordance lexicon...</div>
       </main>
     </div>
@@ -1503,19 +1436,19 @@ function renderSermons(items) {
             ${pageItems.map(s => {
               const langCode = (s.language || 'en').toUpperCase();
               const textBtn = (s.full_text || s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
-                ? `<button class="msg-btn msg-btn-text" style="padding: 0.25rem 0.5rem;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
+                ? `<button class="msg-btn msg-btn-primary" style="padding: 0.2rem 0.55rem; height: 28px; font-size: 12px;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">Read</button>`
                 : '';
               const pdfBtn = s.pdf_url 
-                ? `<button class="msg-btn msg-btn-pdf" style="padding: 0.25rem 0.5rem;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
+                ? `<button class="msg-btn" style="padding: 0.2rem 0.55rem; height: 28px; font-size: 12px;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">PDF</button>`
                 : '';
               const audioBtn = s.m4a_url
-                ? `<button class="msg-btn msg-btn-audio" style="padding: 0.25rem 0.5rem;" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Audio</button>`
+                ? `<button class="msg-btn" style="padding: 0.2rem 0.55rem; height: 28px; font-size: 12px;" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">Audio</button>`
                 : '';
               return `
                 <tr>
                   <td><code>${escapeHtml(s.id)}</code></td>
                   <td><strong>${escapeHtml(s.title)}</strong></td>
-                  <td>${s.date || s.year || 'Unknown'}</td>
+                  <td>${s.date || s.year || ''}</td>
                   <td><span class="msg-badge-lang" style="position:static; display:inline-block;">${langCode}</span></td>
                   <td style="text-align: right;">
                     <div style="display:inline-flex; gap:0.35rem;">
@@ -1534,33 +1467,32 @@ function renderSermons(items) {
 
   container.className = 'msg-grid';
   container.innerHTML = pageItems.map(s => {
-    const coverUrl = s.cover_image || DEFAULT_COVER;
     const langCode = (s.language || 'en').toUpperCase();
+    const sermonDate = s.date || (s.year ? `Year ${s.year}` : '');
     
     const textBtn = (s.full_text || s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
-      ? `<button class="msg-btn msg-btn-text" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">📖 Text</button>`
-      : `<span class="msg-btn msg-btn-text msg-btn-disabled">📖 Text</span>`;
+      ? `<button class="msg-btn msg-btn-primary" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">Read</button>`
+      : `<span class="msg-btn msg-btn-disabled">Read</span>`;
 
     const pdfBtn = s.pdf_url 
-      ? `<button class="msg-btn msg-btn-pdf" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">📄 PDF</button>`
-      : `<span class="msg-btn msg-btn-pdf msg-btn-disabled">📄 PDF</span>`;
+      ? `<button class="msg-btn" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">PDF</button>`
+      : `<span class="msg-btn msg-btn-disabled">PDF</span>`;
       
     const audioBtn = s.m4a_url
-      ? `<button class="msg-btn msg-btn-audio" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">🎧 Audio</button>`
-      : `<span class="msg-btn msg-btn-audio msg-btn-disabled">🎧 Audio</span>`;
+      ? `<button class="msg-btn" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">Audio</button>`
+      : `<span class="msg-btn msg-btn-disabled">Audio</span>`;
 
     return `
       <article class="msg-card">
-        <div class="msg-cover-wrap">
-          <img src="${coverUrl}" alt="${escapeHtml(s.title)}" loading="lazy" />
-          <span class="msg-badge-id">${escapeHtml(s.id)}</span>
-          <span class="msg-badge-lang">${langCode}</span>
-        </div>
         <div class="msg-card-content">
+          <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.4rem;">
+            <code style="font-size: 12px; color: var(--accent-primary); font-weight: 600;">${escapeHtml(s.id)}</code>
+            <span style="font-size: 11px; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 4px; background: var(--kumo-control, var(--bg-secondary)); border: 1px solid var(--kumo-line); color: var(--text-secondary);">${langCode}</span>
+          </div>
           <h3 class="msg-card-title">${escapeHtml(s.title)}</h3>
           <div class="msg-card-meta">
-            <span>📅 ${s.date || s.year || 'Unknown Date'}</span>
-            ${s.number ? `<span>• #${s.number}</span>` : ''}
+            ${sermonDate ? `<span>${escapeHtml(sermonDate)}</span>` : ''}
+            ${s.number ? `<span style="margin-left: 0.35rem; opacity: 0.7;">• #${s.number}</span>` : ''}
           </div>
           <div class="msg-card-actions">
             ${textBtn}
@@ -2018,7 +1950,7 @@ async function switchReaderTab(tab, customParallelLang = null) {
     return;
   }
 
-  contentArea.innerHTML = '<div style="text-align:center; padding: 4rem; color: var(--text-secondary);">📖 Loading transcript text...</div>';
+  contentArea.innerHTML = '<div style="text-align:center; padding: 4rem; color: var(--text-secondary);">Loading transcript...</div>';
 
   /* Dual Parallel View */
   if (tab === 'parallel') {
@@ -2039,7 +1971,7 @@ async function switchReaderTab(tab, customParallelLang = null) {
       const maxLen = Math.max(paras1.length, paras2.length);
       if (maxLen > 0 || paras1.length > 0) {
         if (subEl) {
-          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Parallel Dual Reader: ${currentReaderSermon.language.toUpperCase()} ↔ ${selectedParallelLang.toUpperCase()} (${paras1.length} Paragraphs)`;
+          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Parallel translation: ${currentReaderSermon.language.toUpperCase()} / ${selectedParallelLang.toUpperCase()} (${paras1.length} paragraphs)`;
         }
 
         const secColumnHtml = paras2.length > 0 
@@ -2050,16 +1982,16 @@ async function switchReaderTab(tab, customParallelLang = null) {
               </div>
             `).join('')
           : `
-            <div style="padding: 2.5rem 1.5rem; background-color: var(--kumo-control, var(--bg-secondary)); border: 1px dashed var(--kumo-line, var(--border-default)); border-radius: 12px; text-align: center; color: var(--text-secondary);">
-              <p style="font-size: 1.05rem; font-weight: 700; margin-bottom: 0.5rem; color: var(--text-primary);">ℹ️ Translation Not Available</p>
-              <p style="font-size: 0.9rem; line-height: 1.6; margin: 0;">The <strong>${selectedParallelLang.toUpperCase()}</strong> text transcript is not available for this sermon. Choose another language from the dropdown above.</p>
+            <div style="padding: 2rem 1.25rem; background-color: var(--kumo-control, var(--bg-secondary)); border: 1px dashed var(--kumo-line, var(--border-default)); border-radius: 8px; text-align: center; color: var(--text-secondary);">
+              <p style="font-size: 0.95rem; font-weight: 600; margin-bottom: 0.35rem; color: var(--text-primary);">Translation not available</p>
+              <p style="font-size: 13px; line-height: 1.6; margin: 0;">The <strong>${selectedParallelLang.toUpperCase()}</strong> text transcript is not available for this sermon.</p>
             </div>
           `;
 
         let html = `
           <div class="msg-parallel-grid">
             <div class="msg-parallel-col">
-              <div class="msg-parallel-col-header">Primary Transcript (${currentReaderSermon.language.toUpperCase()})</div>
+              <div class="msg-parallel-col-header">Primary (${currentReaderSermon.language.toUpperCase()})</div>
               ${paras1.map(p => `
                 <div class="msg-paragraph-item" id="p${p.number}">
                   <span class="msg-para-num" onclick="toggleHighlight('${currentReaderSermon.id}', ${p.number})">¶${p.number}</span>
@@ -2068,7 +2000,7 @@ async function switchReaderTab(tab, customParallelLang = null) {
               `).join('')}
             </div>
             <div class="msg-parallel-col">
-              <div class="msg-parallel-col-header">Parallel Translation (${selectedParallelLang.toUpperCase()})</div>
+              <div class="msg-parallel-col-header">Translation (${selectedParallelLang.toUpperCase()})</div>
               ${secColumnHtml}
             </div>
           </div>
@@ -2092,7 +2024,7 @@ async function switchReaderTab(tab, customParallelLang = null) {
         const estMinutes = Math.ceil(totalWords / 200);
 
         if (subEl) {
-          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • Date: ${currentReaderSermon.date || 'Archive'} • Language: ${currentReaderSermon.language.toUpperCase()} • ⏱ ~${estMinutes} min read (${item.paragraphs.length} Paragraphs)`;
+          subEl.innerText = `Sermon ID: ${currentReaderSermon.id} • ${currentReaderSermon.date || 'Archive'} • ${currentReaderSermon.language.toUpperCase()} • ~${estMinutes} min read (${item.paragraphs.length} paragraphs)`;
         }
 
         contentArea.innerHTML = item.paragraphs.map(p => {
@@ -2102,7 +2034,7 @@ async function switchReaderTab(tab, customParallelLang = null) {
             <div class="msg-paragraph-item ${hlClass}" id="p${p.number}">
               <span class="msg-para-num" style="cursor:pointer;" onclick="toggleHighlight('${currentReaderSermon.id}', ${p.number})" title="Click to highlight paragraph">¶${p.number}</span>
               <div class="msg-para-text">${formatKaraokeSentences(p.number, p.text)}</div>
-              <button id="copy-btn-${p.number}" class="msg-copy-para-btn" onclick="copyQuote(${p.number}, '${escapeJs(p.text)}')">📋 Copy</button>
+              <button id="copy-btn-${p.number}" class="msg-copy-para-btn" onclick="copyQuote(${p.number}, '${escapeJs(p.text)}')">Copy</button>
             </div>
           `;
         }).join('');
@@ -2117,9 +2049,9 @@ async function switchReaderTab(tab, customParallelLang = null) {
   }
 
   contentArea.innerHTML = `
-    <div style="text-align:center; padding: 4rem 1rem;">
-      <p style="color: var(--text-secondary); margin-bottom: 1.5rem;">Transcript is ready in PDF document view:</p>
-      <button class="msg-btn msg-btn-pdf" onclick="switchReaderTab('pdf')">📄 Open PDF Document View</button>
+    <div style="text-align:center; padding: 3rem 1rem;">
+      <p style="color: var(--text-secondary); margin-bottom: 1rem;">Transcript available in PDF view:</p>
+      <button class="msg-btn msg-btn-primary" onclick="switchReaderTab('pdf')">Open PDF document</button>
     </div>
   `;
 }
@@ -2135,14 +2067,14 @@ function parseScripturePills(text) {
     const cleanBook = bookRaw.trim();
     const verseLabel = endVerse ? `${startVerse}-${endVerse}` : startVerse;
     const safeBookEscaped = cleanBook.replace(/'/g, "\\'");
-    return `<span class="msg-scripture-ref" onclick="openBibleModal('${safeBookEscaped}', ${chap}, ${startVerse}${endVerse ? `, ${endVerse}` : ''})" title="Click to view KJV Text & Strong's Concordance">📖 [${cleanBook} ${chap}:${verseLabel}]</span>`;
+    return `<span class="msg-scripture-ref" onclick="openBibleModal('${safeBookEscaped}', ${chap}, ${startVerse}${endVerse ? `, ${endVerse}` : ''})" title="Click to view scripture text">[${cleanBook} ${chap}:${verseLabel}]</span>`;
   });
 
   formatted = formatted.replace(/\b((?:St\.\s*)?(?:[123]|I{1,3})?\s*(?:Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalms?|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Lamentations|Ezekiel|Daniel|Hosea|Joel|Amos|Obadiah|Jonah|Micah|Nahum|Habakkuk|Zephaniah|Haggai|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Jude|Revelation))\s+(\d+):(\d+)(?:-(\d+))?\b/gi, (match, bookRaw, chap, startVerse, endVerse) => {
     const cleanBook = bookRaw.trim();
     const verseLabel = endVerse ? `${startVerse}-${endVerse}` : startVerse;
     const safeBookEscaped = cleanBook.replace(/'/g, "\\'");
-    return `<span class="msg-scripture-ref" onclick="openBibleModal('${safeBookEscaped}', ${chap}, ${startVerse}${endVerse ? `, ${endVerse}` : ''})" title="Click to view KJV Text & Strong's Concordance">📖 ${cleanBook} ${chap}:${verseLabel}</span>`;
+    return `<span class="msg-scripture-ref" onclick="openBibleModal('${safeBookEscaped}', ${chap}, ${startVerse}${endVerse ? `, ${endVerse}` : ''})" title="Click to view scripture text">${cleanBook} ${chap}:${verseLabel}</span>`;
   });
 
   return formatted;
@@ -2303,10 +2235,10 @@ async function showStrongsPopover(evt, number, isNT) {
   popover.id = 'strongs-popover-card';
   popover.innerHTML = `
     <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-      <span style="font-weight: 700; font-size: 0.95rem; color: var(--accent-primary);">Strong's ${type.toUpperCase()} #${number}</span>
+      <span style="font-weight: 600; font-size: 0.9rem; color: var(--accent-primary);">Strong's ${type} #${number}</span>
       <button onclick="closeStrongsPopover()" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary); line-height: 1;">&times;</button>
     </div>
-    <div style="font-size: 0.85rem; color: var(--text-secondary);">📖 Fetching Interlinear Lexicon Card...</div>
+    <div style="font-size: 0.85rem; color: var(--text-secondary);">Loading lexicon...</div>
   `;
 
   document.body.appendChild(popover);
@@ -2327,16 +2259,16 @@ async function showStrongsPopover(evt, number, isNT) {
   const entry = dict ? (dict[paddedNum] || dict[`${prefix}${number.padStart(4, '0')}`]) : null;
 
   if (entry) {
-    const lemma = entry.lemma ? `<span style="font-size: 1.3rem; font-weight: bold; color: var(--accent-primary); margin-right: 0.4rem;">${entry.lemma}</span>` : '';
+    const lemma = entry.lemma ? `<span style="font-size: 1.2rem; font-weight: 600; color: var(--accent-primary); margin-right: 0.4rem;">${entry.lemma}</span>` : '';
     const translit = (entry.translit || entry.xlit) ? `<span style="font-style: italic; color: var(--text-secondary); font-size: 0.9rem;">(${entry.translit || entry.xlit})</span>` : '';
-    const pron = entry.pron ? `<span style="font-size: 0.8rem; background: var(--kumo-control, var(--bg-secondary)); padding: 0.1rem 0.35rem; border-radius: 4px;">🗣️ ${entry.pron}</span>` : '';
+    const pron = entry.pron ? `<span style="font-size: 0.8rem; background: var(--kumo-control, var(--bg-secondary)); padding: 0.1rem 0.35rem; border-radius: 4px;">${entry.pron}</span>` : '';
     const strongsDef = entry.strongs_def ? `<div style="margin-top: 0.5rem; font-size: 0.875rem;"><strong>Definition:</strong> ${entry.strongs_def}</div>` : '';
     const kjvDef = entry.kjv_def ? `<div style="margin-top: 0.4rem; font-size: 0.825rem; color: var(--text-secondary);"><strong>KJV:</strong> ${entry.kjv_def}</div>` : '';
 
     popover.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 0.4rem; border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle)); padding-bottom: 0.4rem;">
         <div>
-          <span style="font-weight: 700; font-size: 0.85rem; color: var(--accent-primary); text-transform: uppercase;">Strong's ${type} #${number}</span>
+          <span style="font-weight: 600; font-size: 0.85rem; color: var(--accent-primary);">Strong's ${type} #${number}</span>
           <div style="margin-top: 0.15rem;">${lemma} ${translit} ${pron}</div>
         </div>
         <button onclick="closeStrongsPopover()" style="background: none; border: none; font-size: 1.3rem; cursor: pointer; color: var(--text-secondary); line-height: 1; padding: 0 0 0 0.5rem;">&times;</button>
@@ -2347,11 +2279,11 @@ async function showStrongsPopover(evt, number, isNT) {
   } else {
     popover.innerHTML = `
       <div style="display: flex; justify-content: space-between; align-items: center; margin-bottom: 0.5rem;">
-        <span style="font-weight: 700; color: var(--accent-primary);">Strong's ${type.toUpperCase()} #${number}</span>
+        <span style="font-weight: 600; color: var(--accent-primary);">Strong's ${type} #${number}</span>
         <button onclick="closeStrongsPopover()" style="background: none; border: none; font-size: 1.2rem; cursor: pointer; color: var(--text-secondary);">&times;</button>
       </div>
       <p style="font-size: 0.85rem; margin: 0.4rem 0;">Definition lookup available on Blue Letter Bible.</p>
-      <a href="https://www.blueletterbible.org/lexicon/${type === 'hebrew' ? 'h' : 'g'}${number}/kjv/wlc/1-1/" target="_blank" class="msg-btn msg-btn-pdf" style="font-size: 0.8rem; padding: 0.25rem 0.6rem; display: inline-block;">🔍 Open Blue Letter Bible Lexicon</a>
+      <a href="https://www.blueletterbible.org/lexicon/${type === 'hebrew' ? 'h' : 'g'}${number}/kjv/wlc/1-1/" target="_blank" class="msg-btn" style="font-size: 0.8rem; padding: 0.25rem 0.6rem; display: inline-block;">Blue Letter Bible Lexicon →</a>
     `;
   }
 }
@@ -2387,19 +2319,19 @@ function renderBollsBibleReader() {
     .map(b => `<option value="${b}">${b}</option>`).join('');
 
   contentArea.innerHTML = `
-    <div style="max-width: 900px; margin: 0 auto; padding: 1rem 0;">
-      <div style="display: flex; gap: 0.75rem; align-items: center; justify-content: center; flex-wrap: wrap; background: var(--kumo-control, var(--bg-secondary)); padding: 1rem 1.25rem; border-radius: var(--kumo-radius-lg, 12px); border: 1px solid var(--kumo-hairline, var(--border-subtle)); margin-bottom: 2rem;">
-        <label style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">📖 Bible Book:</label>
-        <select id="standalone-book-select" class="msg-select-box" style="height: 38px; font-size: 0.95rem;" onchange="loadBollsBibleChapter()">
+    <div style="max-width: 860px; margin: 0 auto; padding: 1rem 0;">
+      <div style="display: flex; gap: 0.75rem; align-items: center; justify-content: center; flex-wrap: wrap; background: var(--kumo-control, var(--bg-secondary)); padding: 0.85rem 1.25rem; border-radius: 8px; border: 1px solid var(--kumo-hairline, var(--border-subtle)); margin-bottom: 2rem;">
+        <label style="font-weight: 600; font-size: 13px; color: var(--text-primary);">Book:</label>
+        <select id="standalone-book-select" class="msg-select-box" style="height: 34px; font-size: 13px;" onchange="loadBollsBibleChapter()">
           ${bookOptions}
         </select>
-        <label style="font-weight: 700; font-size: 0.95rem; color: var(--text-primary);">Chapter:</label>
-        <input type="number" id="standalone-chapter-input" class="msg-input-box" style="height: 38px; width: 80px; text-align: center;" value="1" min="1" max="150" onchange="loadBollsBibleChapter()">
-        <button class="msg-reader-btn active" style="height: 38px; padding: 0 1.25rem;" onclick="loadBollsBibleChapter()">📖 Load Chapter</button>
+        <label style="font-weight: 600; font-size: 13px; color: var(--text-primary);">Chapter:</label>
+        <input type="number" id="standalone-chapter-input" class="msg-input-box" style="height: 34px; width: 70px; text-align: center;" value="1" min="1" max="150" onchange="loadBollsBibleChapter()">
+        <button class="msg-btn msg-btn-primary" style="height: 34px; padding: 0 1rem;" onclick="loadBollsBibleChapter()">Load chapter</button>
       </div>
 
-      <div id="standalone-bible-text-area" style="font-size: 1.2rem; font-family: serif; line-height: 1.9; color: var(--text-primary);">
-        Loading Genesis Chapter 1...
+      <div id="standalone-bible-text-area" style="font-size: 1.15rem; font-family: Georgia, serif; line-height: 1.85; color: var(--text-primary);">
+        Loading Genesis chapter 1...
       </div>
     </div>
   `;
@@ -2419,7 +2351,7 @@ async function loadBollsBibleChapter() {
   const bookId = BIBLE_BOOKS[bookName] || 1;
   const isNT = bookId >= 40;
 
-  textArea.innerHTML = `<div style="text-align:center; padding: 3rem; color: var(--text-secondary);">📖 Fetching ${bookName} Chapter ${chapter} (KJV & Strong's Interlinear)...</div>`;
+  textArea.innerHTML = `<div style="text-align:center; padding: 3rem; color: var(--text-secondary);">Loading ${bookName} chapter ${chapter}...</div>`;
 
   try {
     const res = await fetch(`https://bolls.life/get-text/KJV/${bookId}/${chapter}/`);
@@ -2433,20 +2365,20 @@ async function loadBollsBibleChapter() {
       const rawText = v.text || '';
       const parsedText = rawText.replace(/<S>(\d+)<\/S>/g, (match, number) => {
         const type = isNT ? 'greek' : 'hebrew';
-        return ` <span class="msg-strongs-tag" onclick="showStrongsPopover(event, '${number}', ${isNT})" title="Click to view Strong's ${type.toUpperCase()} #${number} Interlinear Card">${isNT ? 'G' : 'H'}${number}</span>`;
+        return ` <span class="msg-strongs-tag" onclick="showStrongsPopover(event, '${number}', ${isNT})" title="Strong's ${type} #${number}">${isNT ? 'G' : 'H'}${number}</span>`;
       });
       return `
-        <div style="margin-bottom: 1.1rem; display: flex; gap: 0.75rem; align-items: baseline;">
-          <span style="font-family: var(--mono-family, monospace); font-size: 0.9rem; font-weight: 700; color: var(--accent-primary); background: var(--kumo-control, var(--bg-secondary)); padding: 0.2rem 0.5rem; border-radius: 6px;">v${vNum}</span>
+        <div style="margin-bottom: 1rem; display: flex; gap: 0.75rem; align-items: baseline;">
+          <span style="font-family: var(--mono-family, monospace); font-size: 0.85rem; font-weight: 600; color: var(--accent-primary); background: var(--kumo-control, var(--bg-secondary)); padding: 0.15rem 0.45rem; border-radius: 4px;">v${vNum}</span>
           <div style="flex: 1;">${parsedText}</div>
         </div>
       `;
     }).join('');
 
     textArea.innerHTML = `
-      <div style="border-bottom: 2px solid var(--accent-primary); padding-bottom: 0.75rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
-        <h2 style="margin: 0; font-size: 1.4rem; font-weight: 700; color: var(--text-primary);">📖 ${bookName} Chapter ${chapter}</h2>
-        <span style="font-size: 0.85rem; font-weight: 600; color: var(--accent-primary);">King James Version • Strong's Interlinear</span>
+      <div style="border-bottom: 1px solid var(--kumo-line); padding-bottom: 0.75rem; margin-bottom: 1.5rem; display: flex; align-items: center; justify-content: space-between;">
+        <h2 style="margin: 0; font-size: 1.3rem; font-weight: 600; color: var(--text-primary);">${bookName} ${chapter}</h2>
+        <span style="font-size: 12px; color: var(--text-secondary);">King James Version • Strong's Lexicon</span>
       </div>
       <div>${html}</div>
     `;
@@ -2454,8 +2386,7 @@ async function loadBollsBibleChapter() {
     console.warn('Bolls.life chapter fetch error:', err);
     textArea.innerHTML = `
       <div style="text-align:center; padding: 3rem;">
-        <p style="color: var(--text-secondary);">Unable to load KJV chapter text for <strong>${escapeHtml(bookName)} ${chapter}</strong>.</p>
-        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(bookName + ' ' + chapter)}" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 1rem; display: inline-block;">🔍 Read on Blue Letter Bible</a>
+        <p style="color: var(--text-secondary);">Unable to load text for <strong>${escapeHtml(bookName)} ${chapter}</strong>.</p>
       </div>
     `;
   }
