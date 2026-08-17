@@ -605,31 +605,34 @@
 
     a {
       display: block;
-      padding: 1.25rem;
-      background: transparent;
-      border: 1px solid var(--border-default);
-      border-radius: 8px;
+      padding: 1rem 1.15rem;
+      background: var(--surface-strong, var(--bg-primary));
+      border: 1px solid var(--kumo-hairline, var(--border-subtle));
+      border-radius: var(--kumo-radius-md, 10px);
       color: var(--text-primary);
       text-decoration: none;
-      transition: all 0.3s ease;
+      box-shadow: var(--shadow-sm);
+      transition: transform 0.15s ease, border-color 0.15s ease;
 
       &:hover {
         border-color: var(--accent-primary);
-        transform: none;
-        box-shadow: none;
+        transform: translateY(-2px);
+        box-shadow: var(--shadow-md);
       }
 
       strong {
         display: block;
         color: var(--text-primary);
-        margin-bottom: 0.25rem;
-        font-size: 1.05rem;
+        margin-bottom: 0.2rem;
+        font-size: 0.95rem;
+        font-weight: $semibold-weight;
       }
 
       span {
         display: block;
         color: var(--text-secondary);
-        font-size: 0.9rem;
+        font-size: 0.85rem;
+        line-height: 1.4;
       }
     }
   }
@@ -665,29 +668,30 @@
 }
 
 .project-item {
-  background: transparent;
-  border: 1px solid var(--border-default);
-  border-radius: 8px;
-  padding: 1.6rem 1.5rem;
-  transition: border-color 0.2s ease;
+  background: var(--surface-strong, var(--bg-primary));
+  border: 1px solid var(--kumo-hairline, var(--border-subtle));
+  border-radius: var(--kumo-radius-lg, 14px);
+  padding: 1.35rem 1.4rem;
+  box-shadow: var(--shadow-sm);
+  transition: transform 0.15s ease, border-color 0.15s ease, box-shadow 0.15s ease;
 
   &:hover {
-    transform: none;
-    box-shadow: none;
-    border-color: var(--border-strong);
+    transform: translateY(-2px);
+    box-shadow: var(--shadow-md);
+    border-color: var(--accent-primary);
   }
 
   h3 {
     margin: 0;
     font-family: $heading-family;
-    font-size: 1.55rem;
-    line-height: 1.08;
-    letter-spacing: 0;
+    font-size: 1.35rem;
+    font-weight: $semibold-weight;
+    line-height: 1.15;
+    color: var(--text-primary);
 
     a {
       color: var(--text-primary);
       text-decoration: none;
-      transition: color 0.2s ease;
 
       &:hover {
         color: var(--accent-primary);
@@ -696,18 +700,16 @@
   }
 
   .project-role {
-    margin: 0.8rem 0 0;
-    font-size: 0.82rem;
-    font-weight: $bold-weight;
-    letter-spacing: 0.12em;
-    text-transform: uppercase;
-    color: var(--text-secondary);
+    margin: 0.6rem 0 0;
+    font-size: 0.8rem;
+    font-weight: $semibold-weight;
+    color: var(--accent-primary);
   }
 
   .project-meta {
-    font-size: 0.85rem;
+    font-size: 0.825rem;
     color: var(--text-secondary);
-    margin: 0.45rem 0 1rem;
+    margin: 0.35rem 0 0.85rem;
     font-style: normal;
   }
 

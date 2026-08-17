@@ -13,7 +13,7 @@
   margin-top: 2.25rem;
   margin-bottom: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-default);
+  border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
 
   .tags {
     margin-left: 0;
@@ -270,13 +270,13 @@
 .post-nav {
   display: flex;
   position: relative;
-  margin-top: 4rem;
-  border-top: 1px solid var(--border-default);
+  margin-top: 3.5rem;
+  border-top: 1px solid var(--kumo-hairline, var(--border-subtle));
   line-height: 1.4;
 
   .post-nav-item {
     border-bottom: 0;
-    font-weight: $bold-weight;
+    font-weight: $semibold-weight;
     padding-bottom: 10px;
 
     .post-title {

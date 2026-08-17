@@ -20,19 +20,19 @@
     select,
     textarea {
       width: 100%;
-      padding: 0.75rem;
-      border: 1px solid var(--border-default);
-      border-radius: 8px;
-      font-size: 1em;
+      padding: 0.65rem 0.85rem;
+      border: 1px solid var(--kumo-line, var(--border-default));
+      border-radius: var(--kumo-radius-sm, 6px);
+      font-size: $base-font-size;
       font-family: $sans-family;
       color: var(--text-primary);
-      background: var(--bg-surface);
-      transition: border-color 0.2s ease, box-shadow 0.2s ease;
+      background: var(--kumo-canvas, var(--bg-surface));
+      box-sizing: border-box;
 
       &:focus {
         outline: none;
-        border-color: rgba(var(--accent-primary-rgb), 0.55);
-        box-shadow: 0 0 0 3px rgba(var(--accent-primary-rgb), 0.1);
+        border-color: var(--accent-primary);
+        box-shadow: 0 0 0 2px var(--kumo-focus, rgba(23, 107, 91, 0.25));
       }
 
       &::placeholder {
@@ -53,20 +53,19 @@
   }
 
   .submit-btn {
-    padding: 0.875rem 2rem;
-    background: var(--text-primary);
-    color: var(--surface-strong);
-    border: 1px solid var(--text-primary);
-    border-radius: 8px;
-    font-size: 1em;
+    padding: 0.75rem 1.75rem;
+    background: var(--accent-primary);
+    color: #ffffff;
+    border: 1px solid var(--accent-primary);
+    border-radius: var(--kumo-radius-sm, 6px);
+    font-size: $base-font-size;
     font-weight: $semibold-weight;
     font-family: $sans-family;
     cursor: pointer;
-    transition: background-color 0.2s ease, border-color 0.2s ease;
 
     &:hover {
-      background: var(--accent-primary);
-      border-color: var(--accent-primary);
+      background: var(--accent-secondary);
+      border-color: var(--accent-secondary);
     }
 
     @include media-query($on-mobile) {

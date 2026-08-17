@@ -10,10 +10,11 @@ description: Complete developer documentation and REST API specification for Wil
 ---
 
 <style>
-/* API Documentation Page Styling using Site Design Tokens */
+/* API Documentation Page Styling using Kumo Design Tokens */
 .api-doc-container {
   margin-top: 1.5rem;
   font-family: inherit;
+  font-size: 14px;
 }
 
 .api-doc-header {
@@ -23,8 +24,8 @@ description: Complete developer documentation and REST API specification for Wil
 .api-badge-list {
   display: flex;
   flex-wrap: wrap;
-  gap: 0.75rem;
-  margin-top: 1.25rem;
+  gap: 0.5rem;
+  margin-top: 1rem;
 }
 
 .api-chip {
@@ -32,29 +33,33 @@ description: Complete developer documentation and REST API specification for Wil
   align-items: center;
   gap: 0.4rem;
   padding: 0.35rem 0.85rem;
-  border-radius: 999px;
+  border-radius: var(--kumo-radius-full, 9999px);
   font-size: 0.825rem;
   font-weight: 500;
-  background-color: var(--bg-secondary, #f8fafc);
-  border: 1px solid var(--border-default, #e2e8f0);
+  background-color: var(--kumo-control, var(--bg-secondary));
+  border: 1px solid var(--kumo-hairline, var(--border-subtle));
   color: var(--text-primary);
+  text-decoration: none !important;
 }
 
 .api-chip strong {
-  color: var(--accent-primary, #2563eb);
+  color: var(--accent-primary);
+  font-weight: 600;
 }
 
 /* Quick Nav Table of Contents */
 .api-toc {
-  background-color: var(--bg-secondary, #f8fafc);
-  border: 1px solid var(--border-default, #e2e8f0);
-  border-radius: 12px;
+  background-color: var(--surface-strong, var(--bg-primary));
+  border: 1px solid var(--kumo-hairline, var(--border-subtle));
+  border-radius: var(--kumo-radius-lg, 14px);
   padding: 1.25rem;
   margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .api-toc h3 {
-  font-size: 1.05rem;
+  font-size: 1rem;
+  font-weight: 600;
   margin-top: 0;
   margin-bottom: 0.75rem;
 }
@@ -66,7 +71,7 @@ description: Complete developer documentation and REST API specification for Wil
 }
 
 .api-toc-link {
-  font-size: 0.9rem;
+  font-size: 0.875rem;
   color: var(--text-primary);
   text-decoration: none;
   display: inline-flex;
@@ -75,53 +80,49 @@ description: Complete developer documentation and REST API specification for Wil
 }
 
 .api-toc-link:hover {
-  color: var(--accent-primary, #2563eb);
+  color: var(--accent-primary);
 }
 
 .method-tag {
   display: inline-block;
   padding: 0.15rem 0.45rem;
-  border-radius: 4px;
-  font-family: monospace;
+  border-radius: var(--kumo-radius-sm, 6px);
+  font-family: var(--mono-family, monospace);
   font-size: 0.75rem;
-  font-weight: 700;
+  font-weight: 600;
   text-transform: uppercase;
 }
 
 .method-get {
-  background-color: #dcfce7;
-  color: #15803d;
-}
-
-body[data-theme="dark"] .method-get {
-  background-color: rgba(22, 101, 52, 0.3);
-  color: #4ade80;
+  background-color: var(--kumo-tint, rgba(23, 107, 91, 0.1));
+  color: var(--accent-primary);
+  border: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
 /* Endpoint Card Blocks */
 .endpoint-section {
-  margin-bottom: 3rem;
+  margin-bottom: 2.5rem;
   padding-bottom: 2rem;
-  border-bottom: 1px solid var(--border-default, #e2e8f0);
+  border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
 .endpoint-title {
   display: flex;
   align-items: center;
   gap: 0.75rem;
-  font-size: 1.35rem;
-  font-weight: 700;
+  font-size: 1.2rem;
+  font-weight: 600;
   color: var(--text-primary);
   margin-bottom: 0.5rem;
 }
 
 .endpoint-url {
-  font-family: monospace;
-  font-size: 0.95rem;
-  background-color: var(--bg-secondary, #f1f5f9);
-  border: 1px solid var(--border-default, #cbd5e1);
-  padding: 0.4rem 0.75rem;
-  border-radius: 6px;
+  font-family: var(--mono-family, monospace);
+  font-size: 0.9em;
+  background-color: var(--kumo-control, var(--bg-secondary));
+  border: 1px solid var(--kumo-hairline, var(--border-subtle));
+  padding: 0.35rem 0.75rem;
+  border-radius: var(--kumo-radius-sm, 6px);
   color: var(--text-primary);
   display: inline-block;
   margin-bottom: 1rem;
@@ -131,30 +132,34 @@ body[data-theme="dark"] .method-get {
   width: 100%;
   border-collapse: collapse;
   margin: 1rem 0 1.5rem;
-  font-size: 0.9rem;
+  font-size: 0.875rem;
+  border-radius: var(--kumo-radius-md, 8px);
+  overflow: hidden;
+  border: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
 .param-table th, .param-table td {
   padding: 0.65rem 0.85rem;
   text-align: left;
-  border: 1px solid var(--border-default, #e2e8f0);
+  border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
 .param-table th {
-  background-color: var(--bg-secondary, #f8fafc);
+  background-color: var(--kumo-control, var(--bg-secondary));
   font-weight: 600;
+  color: var(--text-primary);
 }
 
 .code-snippet {
   background-color: #0f172a;
   color: #e2e8f0;
-  border-radius: 10px;
+  border-radius: var(--kumo-radius-md, 10px);
   padding: 1.15rem;
-  font-family: monospace;
-  font-size: 0.875rem;
+  font-family: var(--mono-family, monospace);
+  font-size: 0.85rem;
   overflow-x: auto;
   margin-top: 0.75rem;
-  border: 1px solid #334155;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 
 .code-snippet pre {
@@ -165,12 +170,13 @@ body[data-theme="dark"] .method-get {
 
 /* Interactive API Playground */
 .playground-box {
-  background-color: var(--bg-secondary, #f8fafc);
-  border: 1px solid var(--border-default, #e2e8f0);
-  border-radius: 14px;
+  background-color: var(--surface-strong, var(--bg-primary));
+  border: 1px solid var(--kumo-hairline, var(--border-subtle));
+  border-radius: var(--kumo-radius-lg, 14px);
   padding: 1.5rem;
-  margin-top: 3rem;
-  margin-bottom: 3rem;
+  margin-top: 2.5rem;
+  margin-bottom: 2.5rem;
+  box-shadow: var(--shadow-sm);
 }
 
 .playground-controls {
@@ -183,40 +189,40 @@ body[data-theme="dark"] .method-get {
 .playground-select {
   flex: 1;
   min-width: 260px;
-  padding: 0.65rem 1rem;
-  font-size: 0.95rem;
-  border: 1px solid var(--border-default, #cbd5e1);
-  border-radius: 8px;
-  background-color: var(--bg-primary, #ffffff);
+  padding: 0.55rem 0.85rem;
+  font-size: 0.875rem;
+  border: 1px solid var(--kumo-line, var(--border-default));
+  border-radius: var(--kumo-radius-md, 8px);
+  background-color: var(--kumo-canvas, var(--bg-primary));
   color: var(--text-primary);
 }
 
 .playground-btn {
-  padding: 0.65rem 1.25rem;
-  font-size: 0.9rem;
-  font-weight: 600;
-  border-radius: 8px;
-  background-color: var(--accent-primary, #2563eb);
+  padding: 0.55rem 1.25rem;
+  font-size: 0.875rem;
+  font-weight: 500;
+  border-radius: var(--kumo-radius-md, 8px);
+  background-color: var(--accent-primary);
   color: #ffffff;
-  border: none;
+  border: 1px solid var(--accent-primary);
   cursor: pointer;
-  transition: opacity 0.2s ease;
 }
 
 .playground-btn:hover {
-  opacity: 0.9;
+  background-color: var(--accent-secondary);
+  border-color: var(--accent-secondary);
 }
 
 .playground-response {
   background-color: #0f172a;
   color: #38bdf8;
-  border-radius: 10px;
+  border-radius: var(--kumo-radius-md, 10px);
   padding: 1.25rem;
-  font-family: monospace;
+  font-family: var(--mono-family, monospace);
   font-size: 0.85rem;
   max-height: 400px;
   overflow-y: auto;
-  border: 1px solid #334155;
+  border: 1px solid rgba(255, 255, 255, 0.1);
 }
 </style>
 
