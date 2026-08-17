@@ -27,6 +27,15 @@ description: Discover Bakari Mustafa's portfolio of projects including Mentors O
           <span class="project-role">Creator & maintainer</span>
           <span class="project-meta">2026–Present</span>
         </div>
+        <h3><a href="https://github.com/realbakari/ATO-Lens">ATO Lens →</a></h3>
+        <p>A local-first desktop and web app for exploring Australian tax history, Superannuation Guarantee compliance, and HECS repayments with zero telemetry and private offline processing.</p>
+      </article>
+
+      <article class="project-item">
+        <div style="display: flex; justify-content: space-between; align-items: baseline; gap: 0.5rem; margin-bottom: 0.35rem;">
+          <span class="project-role">Creator & maintainer</span>
+          <span class="project-meta">2026–Present</span>
+        </div>
         <h3><a href="https://github.com/realbakari/capsule">Capsule →</a></h3>
         <p>An open-source agent control plane in Python for governed, replayable execution. Indexes workspace skills, routes tasks with precision, and enforces deny-by-default policy gates.</p>
       </article>
