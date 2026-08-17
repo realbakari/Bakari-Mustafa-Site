@@ -68,13 +68,8 @@ For quick questionsâ€”like *"How much did I spend on self-education in 2023?"*â€
 
 ---
 
-## Download and releases
+## Try it out
 
-ATO Lens is open source under the MIT license:
+The app is open source and runs as a desktop app on macOS, Windows, and Linux, or locally in your browser. 
 
-- **macOS Desktop**: Signed with a Developer ID and notarized by Apple (`arm64` Apple Silicon & `x64` Intel `.dmg`).
-- **Windows**: Standalone `.exe` installer with SHA-256 checksums.
-- **Linux**: Portable `.AppImage` package.
-- **Web App**: Run locally with `npm run dev` in your browser.
-
-Download releases or view the code on GitHub: [github.com/realbakari/ATO-Lens/releases](https://github.com/realbakari/ATO-Lens/releases).
+You can grab the latest builds or explore the code on [GitHub](https://github.com/realbakari/ATO-Lens).

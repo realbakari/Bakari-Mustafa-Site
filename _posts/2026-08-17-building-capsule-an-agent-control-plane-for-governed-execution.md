@@ -112,31 +112,6 @@ This writes the appropriate configurations for Claude Code (`.claude/`), Cursor 
 
 ---
 
-## Trying it out
+## Try it out
 
-Capsule is open source under the MIT license. You can install it via pip:
-
-```bash
-pip3 install capsule-ctrl
-capsule --help
-```
-
-If you use an agent environment supporting the skills standard:
-
-```bash
-npx skills add realbakari/capsule
-```
-
-You can also run it as a pre-commit hook in any repository:
-
-```yaml
-# .pre-commit-config.yaml
-repos:
-  - repo: https://github.com/realbakari/capsule
-    rev: main
-    hooks:
-      - id: capsule-validate
-      - id: capsule-doctor
-```
-
-The code and full documentation are on GitHub: [github.com/realbakari/capsule](https://github.com/realbakari/capsule).
+Capsule is open source on [GitHub](https://github.com/realbakari/capsule). You can install the CLI with `pip3 install capsule-ctrl` or add it to a skills-compatible agent via `npx skills add realbakari/capsule`.
