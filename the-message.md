@@ -23,19 +23,31 @@ body:has(.msg-library-wrapper) .wrapper,
 }
 
 body:has(.msg-library-wrapper) .page-content,
-.wrapper:has(.msg-library-wrapper) .page-content {
+.wrapper:has(.msg-library-wrapper) .page-content,
+.page-content:has(.msg-library-wrapper) {
   max-width: 100% !important;
   width: 100% !important;
 }
 
+.msg-library-wrapper,
+.msg-library-wrapper p,
+.msg-library-wrapper > * {
+  max-width: 100% !important;
+}
+
 .msg-library-wrapper {
-  max-width: 1400px;
-  width: 100%;
+  max-width: 1400px !important;
+  width: 100% !important;
   margin: 0 auto;
   padding: 0.75rem 0 3.5rem;
   box-sizing: border-box;
   color: var(--text-primary);
   font-size: 14px;
+}
+
+.msg-library-wrapper p {
+  padding-top: 0 !important;
+  padding-bottom: 0 !important;
 }
 
 .msg-header {
@@ -312,7 +324,6 @@ body:has(.msg-library-wrapper) .page-content,
   font-size: 0.8em;
   padding: 0.2rem 0.55rem;
   border-radius: var(--kumo-radius-sm, 6px);
-  text-transform: uppercase;
 }
 
 .msg-card-content {
