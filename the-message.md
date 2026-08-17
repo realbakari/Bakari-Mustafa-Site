@@ -1044,80 +1044,60 @@ body:has(.msg-library-wrapper) .page-content,
 
       <!-- View Mode Tabs -->
       <div class="msg-toolbar-group">
-        <button class="msg-reader-btn active" id="btn-view-single" onclick="switchReaderTab('single')">📖 Reading</button>
-        <button class="msg-reader-btn" id="btn-view-parallel" onclick="switchReaderTab('parallel')">🔀 Parallel dual</button>
-        <button class="msg-reader-btn" id="btn-view-pdf" onclick="switchReaderTab('pdf')">📄 PDF document</button>
+        <button class="msg-reader-btn active" id="tab-btn-text" onclick="switchReaderTab('text')">📖 Reading</button>
+        <button class="msg-reader-btn" id="tab-btn-parallel" onclick="switchReaderTab('parallel')">🔀 Parallel dual</button>
+        <button class="msg-reader-btn" id="tab-btn-bible" onclick="switchReaderTab('bible')">📜 KJV Bible</button>
+        <button class="msg-reader-btn" id="tab-btn-pdf" onclick="switchReaderTab('pdf')">📄 PDF document</button>
       </div>
 
       <!-- Reader Settings -->
       <div class="msg-toolbar-group">
-        <select id="reader-font-size" class="msg-select-box" style="height: 34px; width: 85px;" onchange="changeReaderFontSize(this.value)" title="Adjust text size">
+        <select id="reader-font-size" class="msg-select-box" style="height: 34px; width: 90px;" onchange="changeReaderFontSize(this.value)" title="Adjust text size">
           <option value="16px">Small</option>
           <option value="18px" selected>Normal</option>
           <option value="21px">Large</option>
           <option value="25px">Extra large</option>
         </select>
+        <select id="parallel-lang-select" class="msg-select-box" style="height: 34px; width: 160px; display: none;" onchange="updateParallelLanguage(this.value)">
+          <option value="en">English (Original)</option>
+          <option value="fra">French (Français)</option>
+          <option value="nya">Chichewa (Chinyanja)</option>
+          <option value="es">Spanish (Español)</option>
+          <option value="pt">Portuguese (Português)</option>
+          <option value="ru">Russian (Русский)</option>
+          <option value="sw">Swahili (Kiswahili)</option>
+          <option value="de">German (Deutsch)</option>
+          <option value="zh">Chinese (中文)</option>
+          <option value="ja">Japanese (日本語)</option>
+        </select>
         <button class="msg-reader-btn" id="btn-theme-light" onclick="setReaderTheme('light')" title="Light theme">☀️</button>
         <button class="msg-reader-btn" id="btn-theme-sepia" onclick="setReaderTheme('sepia')" title="Sepia theme">📜</button>
         <button class="msg-reader-btn" id="btn-theme-dark" onclick="setReaderTheme('dark')" title="Dark theme">🌙</button>
         <button class="msg-reader-btn" id="btn-toggle-wide" onclick="toggleReaderWidth()" title="Expand / contract reading canvas">↔</button>
+        <button class="msg-reader-btn" id="reader-audio-btn" onclick="toggleReaderAudio()" title="Play / pause sermon audio">🎧 Audio</button>
+        <a id="reader-download-btn" class="msg-reader-btn" href="#" target="_blank" title="Download PDF transcript" rel="noopener">⬇️ PDF</a>
       </div>
     </div>
 
     <!-- Reader Title & Meta Banner -->
     <div style="margin-top: 1.5rem; text-align: center; padding: 0 1rem;">
-      <h2 id="full-reader-title" class="msg-reader-meta-title">Sermon title</h2>
-      <p id="full-reader-meta" class="msg-reader-meta-sub">Date • Location • Language</p>
+      <h2 id="reader-sermon-title" class="msg-reader-meta-title">Sermon title</h2>
+      <p id="reader-sermon-sub" class="msg-reader-meta-sub">Date • Location • Language</p>
     </div>
 
-    <!-- Active Single Reading View -->
-    <div id="tab-single-content" class="msg-reader-tab-content">
-      <div id="full-reader-body" class="msg-reader-main-content">
-        <p style="text-align: center; color: var(--text-secondary); padding: 3rem 0;">Loading transcript text...</p>
-      </div>
+    <!-- Search in Transcript Bar -->
+    <div style="max-width: 500px; margin: 1rem auto 0; padding: 0 1rem;">
+      <input type="search" id="reader-search-input" class="msg-input-box" placeholder="Search within transcript text..." oninput="searchInTranscript(this.value)">
     </div>
 
-    <!-- Parallel Dual Split View -->
-    <div id="tab-parallel-content" class="msg-reader-tab-content" style="display: none;">
-      <div class="msg-reader-main-content msg-reader-wide">
-        <div style="display: flex; gap: 0.75rem; justify-content: flex-end; margin-bottom: 1rem;">
-          <label style="font-size: 14px; font-weight: 500; align-self: center;">Secondary language:</label>
-          <select id="parallel-lang-select" class="msg-select-box" style="height: 34px; width: 170px;" onchange="loadParallelTranscript(this.value)">
-            <option value="en">English (Original)</option>
-            <option value="fra">French (Français)</option>
-            <option value="nya">Chichewa (Chinyanja)</option>
-            <option value="es">Spanish (Español)</option>
-            <option value="pt">Portuguese (Português)</option>
-            <option value="ru">Russian (Русский)</option>
-            <option value="sw">Swahili (Kiswahili)</option>
-            <option value="de">German (Deutsch)</option>
-            <option value="zh">Chinese (中文)</option>
-            <option value="ja">Japanese (日本語)</option>
-          </select>
-        </div>
-        <div class="msg-parallel-grid">
-          <div class="msg-parallel-col">
-            <div id="parallel-left-header" class="msg-parallel-col-header">Primary language</div>
-            <div id="parallel-left-body">Loading...</div>
-          </div>
-          <div class="msg-parallel-col">
-            <div id="parallel-right-header" class="msg-parallel-col-header">Secondary language</div>
-            <div id="parallel-right-body">Select language above...</div>
-          </div>
-        </div>
-      </div>
-    </div>
-
-    <!-- PDF Document View -->
-    <div id="tab-pdf-content" class="msg-reader-tab-content" style="display: none;">
-      <div class="msg-reader-main-content msg-reader-wide" style="padding: 1rem;">
-        <iframe id="full-reader-pdf-frame" src="" style="width: 100%; height: 80vh; border: none; border-radius: var(--kumo-radius-md, 8px);"></iframe>
-      </div>
+    <!-- Active Reading Content Area -->
+    <div id="reader-content-area" class="msg-reader-main-content">
+      <p style="text-align: center; color: var(--text-secondary); padding: 3rem 0;">Loading transcript text...</p>
     </div>
   </section>
 
   <!-- ── Catalogue Grid Library View ───────────────────────────────── -->
-  <section id="library-main-section">
+  <section id="catalogue-section">
 
     <!-- Header -->
     <div class="msg-header">
@@ -1184,10 +1164,10 @@ body:has(.msg-library-wrapper) .page-content,
     </div>
 
     <!-- Pagination -->
-    <div class="msg-pagination-bar">
-      <button id="prev-page-btn" class="msg-reader-btn" onclick="changePage(-1)">← Previous</button>
-      <span id="page-indicator" class="msg-page-info">Page 1</span>
-      <button id="next-page-btn" class="msg-reader-btn" onclick="changePage(1)">Next →</button>
+    <div id="pagination-controls" class="msg-pagination-bar" style="display: none;">
+      <button id="btn-prev-page" class="msg-reader-btn" onclick="changePage(-1)">← Previous</button>
+      <span id="page-info-text" class="msg-page-info">Page 1</span>
+      <button id="btn-next-page" class="msg-reader-btn" onclick="changePage(1)">Next →</button>
     </div>
 
     <!-- Global Stats Dashboard -->
@@ -1250,7 +1230,7 @@ body:has(.msg-library-wrapper) .page-content,
           <p class="msg-region-langs">Chinese, Japanese, Hindi, Tagalog, Indonesian, Korean, Vietnamese, Tamil...</p>
         </div>
       </div>
-    </section>
+    </div>
 
     <!-- Developer API Box -->
     <section class="msg-api-box">
@@ -1848,6 +1828,16 @@ function toggleReaderAudio() {
     playAudio(currentReaderSermon.title, currentReaderSermon.id, currentReaderSermon.language, audioUrl);
     if (btn) btn.innerText = '⏸ Pause Audio';
   }
+}
+
+function changeReaderFontSize(val) {
+  const contentArea = document.getElementById('reader-content-area');
+  if (contentArea) contentArea.style.fontSize = val;
+}
+
+function toggleReaderWidth() {
+  const contentArea = document.getElementById('reader-content-area');
+  if (contentArea) contentArea.classList.toggle('msg-reader-wide');
 }
 
 function adjustFontSize(delta) {
