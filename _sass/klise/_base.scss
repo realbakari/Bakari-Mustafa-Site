@@ -295,6 +295,17 @@ blockquote {
   }
 }
 
+.wrapper.full-width,
+body:has(.msg-library-wrapper) .wrapper,
+body:has(.api-doc-container) .wrapper,
+.wrapper:has(.msg-library-wrapper),
+.wrapper:has(.api-doc-container) {
+  max-width: min(1380px, calc(100vw - 32px)) !important;
+  width: 100% !important;
+  padding-right: clamp(1rem, 2.5vw, 2.5rem);
+  padding-left: clamp(1rem, 2.5vw, 2.5rem);
+}
+
 .wrapper-home {
   max-width: -webkit-calc(#{$wide-size} - (#{$spacing-full} * 2));
   max-width: calc(#{$wide-size} - (#{$spacing-full} * 2));

@@ -3,6 +3,7 @@ title: The Message Sermon Library
 permalink: "/the-message/"
 layout: page
 hide_title: true
+full_width: true
 excerpt: Access and search over 1,200 sermons by William Marrion Branham in audio, PDF, and multiple languages including Chichewa.
 comments: false
 image: "https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg"
@@ -11,41 +12,58 @@ description: Public catalogue and API for William Branham sermons in audio (M4A/
 
 <style>
 /* ── Kumo UI Design System Tokens & Base Layout ──────────────────── */
+body:has(.msg-library-wrapper) .wrapper,
+.wrapper.full-width,
+.wrapper:has(.msg-library-wrapper) {
+  max-width: min(1400px, calc(100vw - 32px)) !important;
+  width: 100% !important;
+  padding-left: clamp(1rem, 2.5vw, 2.5rem) !important;
+  padding-right: clamp(1rem, 2.5vw, 2.5rem) !important;
+  box-sizing: border-box !important;
+}
+
+body:has(.msg-library-wrapper) .page-content,
+.wrapper:has(.msg-library-wrapper) .page-content {
+  max-width: 100% !important;
+  width: 100% !important;
+}
+
 .msg-library-wrapper {
-  max-width: 1380px;
+  max-width: 1400px;
+  width: 100%;
   margin: 0 auto;
-  padding: 0.5rem 0 3rem;
+  padding: 0.75rem 0 3.5rem;
   box-sizing: border-box;
   color: var(--text-primary);
-  font-size: 14px;
+  font-size: 15px;
 }
 
 .msg-header {
-  margin-bottom: 1.5rem;
+  margin-bottom: 2rem;
 }
 
 .msg-header .page-kicker {
-  font-size: 0.85rem;
+  font-size: 0.875rem;
   font-weight: 600;
   color: var(--accent-primary);
-  margin-bottom: 0.25rem;
+  margin-bottom: 0.35rem;
 }
 
 .msg-header h1 {
-  font-size: clamp(1.85rem, 3.5vw, 2.5rem);
-  font-weight: 600;
-  line-height: 1.2;
+  font-size: clamp(2.2rem, 4.5vw, 3rem);
+  font-weight: 700;
+  line-height: 1.15;
   color: var(--text-primary);
   margin-top: 0;
-  margin-bottom: 0.4rem;
+  margin-bottom: 0.5rem;
 }
 
 .msg-header .page-subtitle {
-  font-size: 1rem;
-  line-height: 1.6;
+  font-size: 1.1rem;
+  line-height: 1.65;
   color: var(--text-secondary);
-  max-width: 820px;
-  margin-bottom: 1.15rem;
+  max-width: 860px;
+  margin-bottom: 1.25rem;
 }
 
 /* ── Kumo Stats Chip Bar ────────────────────────────────────────── */

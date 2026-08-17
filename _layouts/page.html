@@ -30,7 +30,7 @@ layout: compress
   </script>
 
   {% include navbar.html %}
-  <div class="wrapper">
+  <div class="wrapper{% if page.full_width %} full-width{% endif %}">
     {% unless page.hide_title %}
     <header class="header">
       <h1 class="header-title center" itemprop="headline">{{ page.title | escape }}</h1>
