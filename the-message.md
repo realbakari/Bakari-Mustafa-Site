@@ -950,7 +950,8 @@ async function loadStatsData() {
     } catch (e) {}
 
     if (stats) {
-      const totalCount = stats.total_sermons || allSermons.length || 1291;
+      /* Count what the list shows; the API total includes placeholder records. */
+      const totalCount = allSermons.length || stats.total_sermons || 1291;
       const audioCount = stats.sermons_with_audio || totalCount;
       const pdfCount = stats.sermons_with_pdf || totalCount;
       const textCount = stats.sermons_with_text || totalCount;
