@@ -25,19 +25,19 @@ Bakari Mustafa is a Burundi-born entrepreneur, technologist, and former refugee 
 
 Today, Bakari serves on the leadership team at [Networking African-Australians](https://networkingafricanaustralians.com.au/), a Melbourne-based community organization supporting African-Australian youth. Through programs including homework clubs, leadership camps, and mentorship initiatives, the organization provides students with the skills and experiences needed to succeed in education and build meaningful careers.
 
-He is the founder of [Mentors Outreach](https://mentorsoutreach.org), a community platform connecting young professionals and students with mentors, investors, and founders. Through this platform, Bakari has helped build a network of peers and innovators dedicated to inspiring the next generation.
+He is the founder of [Mentors Outreach](https://mentorsoutreach.org), mentoring program management software that organisations use to run applications, matching, sessions, safeguarding, and reporting. Networking African-Australians uses it to run its Homework Club.
 
-Bakari has also created community-focused initiatives including **Dzaleka Connect** (an online directory connecting Dzaleka refugee camp residents and supporters), **Hungry Innovators** (a non-profit STEM education organization founded in 2016), and the **Transition Phase Podcast** (interviewing entrepreneurs and creatives in Brisbane from 2018-2019).
+Bakari has also created community-focused initiatives including **Hungry Innovators** (a non-profit STEM education organization founded in 2016), and the **Transition Phase Podcast** (interviewing entrepreneurs and creatives in Brisbane from 2018-2019).
 
 ---
 
 ## Biography Variations
 
 ### 100-Word Bio
-Bakari Mustafa is an African-born Australian entrepreneur, technologist, and former refugee. Born in Burundi and raised in Malawi, he migrated to Australia in 2015. Bakari serves on the leadership team at Networking African-Australians in Melbourne, supporting African-Australian youth through education and leadership programs. He founded Mentors Outreach, a platform connecting young professionals with mentors and investors. His initiatives include Dzaleka Connect (supporting Dzaleka refugee camp residents), Hungry Innovators (a non-profit STEM education organization), and the Transition Phase Podcast (2018-2019). Bakari uses technology and entrepreneurship to support community-focused work.
+Bakari Mustafa is an African-born Australian entrepreneur, technologist, and former refugee. Born in Burundi and raised in Malawi, he migrated to Australia in 2015. Bakari serves on the leadership team at Networking African-Australians in Melbourne, supporting African-Australian youth through education and leadership programs. He founded Mentors Outreach, mentoring program management software for organisations. His initiatives include Hungry Innovators (a non-profit STEM education organization), and the Transition Phase Podcast (2018-2019). Bakari uses technology and entrepreneurship to support community-focused work.
 
 ### 50-Word Bio
-Bakari Mustafa is an African-born Australian entrepreneur and former refugee. He serves on the leadership team at Networking African-Australians and founded Mentors Outreach, a platform connecting young professionals with mentors. Passionate about technology and social impact, Bakari empowers youth through education, leadership development, and community engagement.
+Bakari Mustafa is an African-born Australian entrepreneur and former refugee. He serves on the leadership team at Networking African-Australians and founded Mentors Outreach, mentoring program management software for organisations. Passionate about technology and social impact, Bakari empowers youth through education, leadership development, and community engagement.
 
 ### One-Liner
 African-born Australian entrepreneur and community leader supporting youth through technology, education, and mentorship.
@@ -81,9 +81,10 @@ Bakari is available for speaking engagements on topics including:
 
 ## Recent Highlights
 
+- **September 2026**: Appointed by Ipswich City Council as an external advisor to its Multicultural Advisory Committee
 - **April 2025**: Successfully hosted transformative three-day leadership camp at Mount Eliza for 34 African-Australian students
 - **Leadership Role**: Serving on the leadership team at Networking African-Australians
-- **Platform Growth**: Expanded Mentors Outreach to connect hundreds of young professionals with mentors
+- **Mentors Outreach**: Now mentoring program management software, used by Networking African-Australians to run its Homework Club
 
 ---
 
@@ -127,10 +128,12 @@ Australia
 
 ## Press Mentions
 
+- [External advisors strengthen work of Multicultural Advisory Committee](https://www.ipswich.qld.gov.au/News-Articles-Folder/2026/External-advisors-to-strengthen-work-of-Multicultural-Advisory-Committee), Ipswich City Council, 4 September 2026
+
 For story or interview requests, contact [media@bakarimustafa.com](mailto:media@bakarimustafa.com) with details about your publication, audience, and story angle.
 
 ---
 
-*Last Updated: November 2025*
+*Last Updated: October 2026*
 
 *For additional materials not listed here, contact [media@bakarimustafa.com](mailto:media@bakarimustafa.com).*

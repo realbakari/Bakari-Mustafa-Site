@@ -40,11 +40,7 @@ I'm serving on the leadership team at [Networking African-Australians](https://n
 
 ### Mentors Outreach
 
-I'm the founder of [Mentors Outreach](https://mentorsoutreach.org), a non-profit organization I founded in August 2019 in Brisbane, Queensland. Our mission is to advance education, professional development, and community empowerment through mentorship programs and collaborative initiatives. Currently working on:
-- Expanding our mentor network in tech, entrepreneurship, and creative industries
-- Building our community platform for knowledge sharing and networking
-- Developing learning resources including webinars, online courses, and workshops
-- Creating more career-boosting mentorship opportunities for young professionals
+I founded [Mentors Outreach](https://mentorsoutreach.org) in August 2019 in Brisbane, Queensland. It is now mentoring program management software that organisations use to run applications, matching, sessions, safeguarding, and reporting. Networking African-Australians runs its Homework Club on it, keeping the register, attendance, tutor coverage, and funder reporting in one place.
 
 ---
 

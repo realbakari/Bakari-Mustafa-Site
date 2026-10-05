@@ -10,7 +10,6 @@ comments: false
 ---
 
 <div class="page-header">
-  <p class="page-kicker">Books and notes</p>
   <h1>Reading list</h1>
   <blockquote>"A reader lives a thousand lives before he dies. The man who never reads lives only one." — George R.R. Martin</blockquote>
   <p class="page-subtitle">Books I've read, summaries I've written, and recommendations across business, personal development, science, fiction, and philosophy.</p>

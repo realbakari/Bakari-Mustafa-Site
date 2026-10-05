@@ -298,12 +298,8 @@ blockquote {
 .wrapper.wide-layout,
 body:has(.msg-library-wrapper) .wrapper,
 body:has(.api-doc-container) .wrapper,
-body:has(.projects-page) .wrapper,
-body:has(.reading-page) .wrapper,
 .wrapper:has(.msg-library-wrapper),
-.wrapper:has(.api-doc-container),
-.wrapper:has(.projects-page),
-.wrapper:has(.reading-page) {
+.wrapper:has(.api-doc-container) {
   max-width: $wide-size !important;
   width: 100% !important;
   padding-right: clamp(1rem, 3vw, $spacing-full);

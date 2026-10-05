@@ -1,13 +1,13 @@
 // Kumo Design System & Cloudflare Product Standards
 
-// Typography (Kumo UI: 14px for content text, Inter / Manrope sans-serif)
-$sans-family: 'Inter', 'Manrope', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+// Typography: one family everywhere. Headings differ by weight, not typeface.
+$sans-family: 'Inter', -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
 $mono-family: 'SF Mono', 'Monaco', 'Inconsolata', 'Fira Code', monospace;
-$heading-family: 'Fraunces', Georgia, serif;
-$base-font-size: 14px;
-$medium-font-size: 14px;
+$heading-family: $sans-family;
+$base-font-size: 15px;
+$medium-font-size: 15px;
 $small-font-size: 13px;
-$base-line-height: 1.6;
+$base-line-height: 1.65;
 
 // Font weight (Kumo UI: font-semibold 600 for headings, font-medium 500 for inline emphasis, never 700)
 $normal-weight: 400;
@@ -18,13 +18,13 @@ $extrabold-weight: 600;
 
 // Color palette
 $color-ink: #18181b;
-$color-graphite: #52525b;
-$color-line: #e4e4e7;
+$color-graphite: #6b6b6b;
+$color-line: #ebebeb;
 $color-paper: #ffffff;
-$color-mist: #f8fafc;
+$color-mist: #f7f7f7;
 $color-forest: #1e3a2f;
 $color-fern: #2d5a47;
-$color-sage: #e2e8f0;
+$color-sage: #ebebeb;
 
 // Legacy palette aliases used by older dashboard and form partials.
 $color-deep-teal: $color-forest;
@@ -49,19 +49,19 @@ $gray: $color-graphite;
 $white: $color-paper;
 
 // Dark Mode Colors
-$dark-text-base-color: #eff7f1;
-$dark-text-link-blue: #5ee0c2;
-$dark-text-link-blue-active: #9af2dd;
+$dark-text-base-color: #e6e6e6;
+$dark-text-link-blue: #8fc4a8;
+$dark-text-link-blue-active: #b5dcc6;
 
-$dark-black: #111612;
-$dark-white: #f5fbf6;
-$dark-light: #1b231d;
-$dark-smoke: #151b17;
-$dark-gray: #b9c8bd;
+$dark-black: #111111;
+$dark-white: #ededed;
+$dark-light: #222222;
+$dark-smoke: #181818;
+$dark-gray: #8f8f8f;
 
 // Layout (Kumo UI & Editorial Canvas Standards)
 $wide-size: 1120px;
-$narrow-size: 840px;
+$narrow-size: 704px; // 640px column + gutters
 
 // Spacing
 $spacing-full: 32px;
@@ -85,18 +85,19 @@ $on-widescreen: 1152px;
 
 // Import sass files
 @import "klise/base", "klise/layout", "klise/post",
-"klise/miscellaneous", "klise/syntax", "klise/dark", "klise/homepage-features", "klise/booking-forms";
+"klise/miscellaneous", "klise/syntax", "klise/dark", "klise/homepage-features", "klise/booking-forms", "klise/system";
 
 // Semantic CSS Variables for Theming
 :root {
   --text-primary: #18181b;
-  --text-secondary: #64748b;
+  --text-secondary: #6b6b6b;
+  --text-tertiary: #9a9a9a;
   --bg-primary: #ffffff;
-  --bg-secondary: #f8fafc;
-  --bg-tertiary: #f1f5f9;
+  --bg-secondary: #f7f7f7;
+  --bg-tertiary: #f0f0f0;
   --bg-surface: #ffffff;
   --surface-strong: #ffffff;
-  --surface-soft: #f8fafc;
+  --surface-soft: #f7f7f7;
 
   --link-color: #18181b;
   --link-hover: #1e3a2f;
@@ -107,9 +108,9 @@ $on-widescreen: 1152px;
   --hero-wash: rgba(30, 58, 47, 0.04);
   --hero-mist: rgba(45, 90, 71, 0.03);
 
-  --border-subtle: rgba(15, 23, 42, 0.06);
-  --border-default: rgba(15, 23, 42, 0.11);
-  --border-strong: rgba(15, 23, 42, 0.2);
+  --border-subtle: rgba(0, 0, 0, 0.06);
+  --border-default: rgba(0, 0, 0, 0.1);
+  --border-strong: rgba(0, 0, 0, 0.2);
 
   // Kumo UI Design Tokens
   --kumo-canvas: var(--bg-primary);
@@ -124,30 +125,31 @@ $on-widescreen: 1152px;
   --kumo-radius-lg: 12px;
   --kumo-radius-full: 9999px;
 
-  --shadow-sm: 0 1px 3px rgba(15, 23, 42, 0.04);
-  --shadow-md: 0 4px 12px rgba(15, 23, 42, 0.05);
-  --shadow-lg: 0 12px 28px rgba(15, 23, 42, 0.07);
-  --shadow-card: 0 1px 3px rgba(15, 23, 42, 0.04);
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-card: none;
 }
 
 [data-theme="dark"] {
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --bg-primary: #0b0f14;
-  --bg-secondary: #121820;
-  --bg-tertiary: #1a222d;
-  --bg-surface: #121820;
-  --surface-strong: #121820;
-  --surface-soft: #0e1319;
+  --text-primary: #ededed;
+  --text-secondary: #a0a0a0;
+  --text-tertiary: #6e6e6e;
+  --bg-primary: #111111;
+  --bg-secondary: #181818;
+  --bg-tertiary: #202020;
+  --bg-surface: #181818;
+  --surface-strong: #181818;
+  --surface-soft: #151515;
 
-  --link-color: #f8fafc;
-  --link-hover: #5eead4;
-  --accent-primary: #34d399;
-  --accent-secondary: #6ee7b7;
-  --accent-primary-rgb: 52, 211, 153;
-  --accent-secondary-rgb: 110, 231, 183;
-  --hero-wash: rgba(52, 211, 153, 0.06);
-  --hero-mist: rgba(110, 231, 183, 0.04);
+  --link-color: #ededed;
+  --link-hover: #8fc4a8;
+  --accent-primary: #8fc4a8;
+  --accent-secondary: #b5dcc6;
+  --accent-primary-rgb: 143, 196, 168;
+  --accent-secondary-rgb: 181, 220, 198;
+  --hero-wash: transparent;
+  --hero-mist: transparent;
 
   --border-subtle: rgba(255, 255, 255, 0.07);
   --border-default: rgba(255, 255, 255, 0.12);
@@ -160,10 +162,10 @@ $on-widescreen: 1152px;
   --kumo-line: var(--border-default);
   --kumo-tint: rgba(255, 255, 255, 0.05);
   --kumo-tint-hover: rgba(255, 255, 255, 0.09);
-  --kumo-focus: rgba(52, 211, 153, 0.25);
+  --kumo-focus: rgba(143, 196, 168, 0.3);
 
-  --shadow-sm: 0 1px 3px rgba(0, 0, 0, 0.3);
-  --shadow-md: 0 4px 12px rgba(0, 0, 0, 0.4);
-  --shadow-lg: 0 12px 28px rgba(0, 0, 0, 0.5);
-  --shadow-card: 0 1px 3px rgba(0, 0, 0, 0.3);
+  --shadow-sm: none;
+  --shadow-md: none;
+  --shadow-lg: none;
+  --shadow-card: none;
 }

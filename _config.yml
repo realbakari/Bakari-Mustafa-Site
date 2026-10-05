@@ -1,7 +1,7 @@
 # Site settings
 title: Bakari Mustafa # site title
 description: >- # site description
-  Bakari Mustafa is an African-born Australian Entrepreneur. He is the chief executive officer of Mentors Outreach, a social platform that helps develop the entrepreneurial skills of students and young entrepreneurs.
+  Bakari Mustafa is a Brisbane-based founder and technologist. He founded Mentors Outreach, mentoring program management software, and builds digital tools for Dzaleka Refugee Camp and African-Australian communities.
 lang: en-US # default lang
 timezone: Asia/Jakarta # set your timezone
 image: uploads/bakari_mustafa.jpg # This image used for Open Graph more info https://ogp.me/
@@ -82,6 +82,14 @@ exclude:
   - lighthouse.png
   - klise-*.gem
   - klise.gemspec
+  # Tooling: Netlify reads these from the repo, so they don't belong in the site.
+  - scripts
+  - scraper
+  - netlify
+  - netlify.toml
+  - package.json
+  - package-lock.json
+  - skills-lock.json
 
 # Plugins
 plugins:

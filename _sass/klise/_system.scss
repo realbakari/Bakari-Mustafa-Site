@@ -1,0 +1,588 @@
+// Site-wide type and surface system.
+//
+// Loaded last so it settles the conflicts between the older partials.
+// Rules are scoped to `$any` (body in either theme) so they tie on
+// specificity with the `body[data-theme="dark"] …` overrides in _dark.scss
+// and win on source order. Colours come from the CSS variables in main.scss,
+// so one rule covers both themes.
+
+$any: 'body:is([data-theme], :not([data-theme]))';
+
+// Type scale: one family, hierarchy from size and weight only.
+$title-size: 1.75rem;   // page and post titles
+$h2-size: 1.25rem;      // headings inside long-form content
+$h3-size: 1.0625rem;
+$section-size: 0.9375rem; // section labels on index pages
+$tracking-tight: -0.02em;
+
+#{$any} {
+  font-family: $sans-family;
+  font-optical-sizing: auto;
+  font-feature-settings: "kern" 1, "cv11" 1, "ss01" 1;
+
+  h1, h2, h3, h4, h5, h6 {
+    font-family: $sans-family;
+    font-weight: $semibold-weight;
+    color: var(--text-primary);
+  }
+
+  strong, b {
+    color: inherit;
+  }
+
+  ::selection {
+    background: rgba(var(--accent-primary-rgb), 0.18);
+  }
+}
+
+// ---------------------------------------------------------------
+// Navbar: aligned to the content column, no chrome around controls.
+
+#{$any} .navbar {
+  max-width: $narrow-size;
+  border-bottom: none;
+  padding-top: 1.5rem;
+  padding-bottom: 0;
+
+  @include media-query($on-mobile) {
+    max-width: none;
+    padding-top: 0;
+    border-bottom: 1px solid var(--border-subtle);
+    background-color: var(--bg-primary);
+  }
+}
+
+#{$any} .menu {
+  .menu-brand {
+    font-size: $section-size;
+    font-weight: $semibold-weight;
+    letter-spacing: -0.01em;
+    white-space: nowrap;
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+
+  @media (min-width: $on-tablet) {
+    .trigger-container {
+      flex-wrap: nowrap;
+      gap: 1.1rem;
+    }
+
+    // RSS lives in the footer; the header keeps to page links.
+    .menu-link.rss {
+      display: none;
+    }
+  }
+
+  a#mode {
+    width: 28px;
+    height: 28px;
+    border: none;
+    border-radius: 6px;
+    opacity: 0.6;
+
+    svg {
+      width: 16px;
+      height: 16px;
+    }
+
+    &:hover {
+      opacity: 1;
+      background: var(--bg-tertiary);
+    }
+  }
+
+  .menu-link {
+    color: var(--text-secondary);
+    font-size: 0.875rem;
+    font-weight: $normal-weight;
+    white-space: nowrap;
+    opacity: 1;
+    border-bottom: none;
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+
+  .menu-link.active {
+    color: var(--text-primary);
+    font-weight: $medium-weight;
+  }
+}
+
+// ---------------------------------------------------------------
+// Page headers: title, one line of context, then content. No eyebrows.
+
+#{$any} .page-kicker,
+#{$any} .section-kicker {
+  display: none;
+}
+
+#{$any} .page-header,
+#{$any} .archive-header,
+#{$any} .header {
+  text-align: left;
+  margin: 3.5rem 0 2.5rem;
+  padding: 0;
+  border-bottom: none;
+
+  @include media-query($on-mobile) {
+    margin-top: 2.5rem;
+  }
+}
+
+#{$any} .page-header h1,
+#{$any} .archive-header .archive-title,
+#{$any} .header .header-title,
+#{$any} .home-name {
+  font-size: $title-size;
+  font-weight: $semibold-weight;
+  line-height: 1.2;
+  letter-spacing: $tracking-tight;
+  margin: 0 0 0.5rem;
+  text-align: left;
+}
+
+// The opening line states what the page is, so it reads as text, not a caption.
+#{$any} .page-header .page-subtitle,
+#{$any} .archive-header .archive-lede {
+  font-size: 1.0625rem;
+  font-weight: $medium-weight;
+  line-height: 1.55;
+  letter-spacing: -0.01em;
+  color: var(--text-primary);
+  max-width: 34em;
+}
+
+#{$any} .page-header blockquote {
+  margin: 1rem 0;
+  padding-left: 1rem;
+  border-left: 2px solid var(--border-default);
+  font-style: normal;
+  color: var(--text-secondary);
+  max-width: 34em;
+}
+
+// Posts: tags and meta in one quiet line under the title.
+#{$any} .header {
+  .tags .tag {
+    font-size: 0.8125rem;
+    font-weight: $normal-weight;
+    text-transform: none;
+    text-decoration: none;
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+
+  .header-title {
+    margin-top: 0.5rem;
+  }
+
+  .post-meta {
+    font-size: 0.875rem;
+    gap: 0.4rem;
+
+    span[itemprop="author"] {
+      color: var(--text-secondary);
+    }
+
+    .post-reading-time {
+      font-weight: $normal-weight;
+    }
+  }
+}
+
+#{$any} .wrapper.post {
+  max-width: $narrow-size;
+}
+
+// ---------------------------------------------------------------
+// Long-form content.
+
+#{$any} .page-content {
+  font-size: 1rem;
+  line-height: 1.7;
+
+  > p {
+    max-width: none;
+    padding-top: 0.6rem;
+    padding-bottom: 0.6rem;
+  }
+
+  h1 { font-size: 1.5rem; letter-spacing: $tracking-tight; line-height: 1.25; }
+  h2 { font-size: $h2-size; letter-spacing: -0.015em; line-height: 1.3; margin-top: 2.5rem; }
+  h3 { font-size: $h3-size; letter-spacing: -0.01em; line-height: 1.35; margin-top: 2rem; }
+  h4, h5, h6 { font-size: 1rem; line-height: 1.4; margin-top: 1.75rem; }
+
+  a {
+    text-decoration-color: var(--border-strong);
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.2em;
+
+    &:hover,
+    &:focus {
+      color: var(--text-primary);
+      text-decoration-color: currentColor;
+    }
+  }
+
+  blockquote {
+    border-left: 2px solid var(--border-default);
+    padding-left: 1rem;
+    font-style: normal;
+    color: var(--text-secondary);
+    background: none;
+  }
+
+  img {
+    border-radius: 4px;
+  }
+
+  hr {
+    border-color: var(--border-subtle);
+    margin: 2.5rem 0;
+  }
+}
+
+// About page leads with a portrait; keep it to a sensible size.
+body.page-basic .page-content > p:first-child > img:only-child {
+  display: block;
+  width: 160px;
+  height: 160px;
+  object-fit: cover;
+  border-radius: 6px;
+  margin: 0;
+}
+
+// Opening line of a page (kramdown `{: .lead}`).
+#{$any} .page-content > p.lead {
+  font-size: 1.125rem;
+  line-height: 1.55;
+  font-weight: $medium-weight;
+  letter-spacing: -0.01em;
+  padding-top: 1.25rem;
+}
+
+// ---------------------------------------------------------------
+// Index lists (home, writing, projects, reading, summaries).
+// Rows of text; no cards, no borders between items.
+
+#{$any} .home-section,
+#{$any} .archive-year {
+  border-top: none;
+  padding: 2rem 0 0;
+}
+
+#{$any} .home-section-head h2,
+#{$any} .archive-year h2,
+#{$any} .projects-section > h2,
+#{$any} .book-summary-list .year-section h2,
+#{$any} .category-section h3 {
+  font-size: $section-size;
+  font-weight: $semibold-weight;
+  line-height: 1.4;
+  letter-spacing: 0;
+  margin: 0 0 0.75rem;
+  padding: 0;
+  border: none;
+  display: block;
+}
+
+#{$any} .category-section h3 {
+  color: var(--text-secondary);
+  font-weight: $medium-weight;
+}
+
+#{$any} .home-post-link,
+#{$any} .archive-item-link,
+#{$any} .page-content .archive-list .archive-item-link {
+  font-size: 1rem;
+  color: var(--text-primary);
+
+  &:hover {
+    color: var(--text-secondary);
+  }
+}
+
+#{$any} .home-post,
+#{$any} .archive-item {
+  padding: 0.4rem 0;
+}
+
+#{$any} .home-post-date,
+#{$any} .archive-item-date {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+#{$any} .home-section-more {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+
+  &:hover {
+    color: var(--text-primary);
+  }
+}
+
+// Home: the wrapper already provides the side gutters.
+#{$any} .home {
+  max-width: 640px;
+  padding: 0;
+}
+
+#{$any} .home-intro {
+  padding: 3.5rem 0 1rem;
+
+  @include media-query($on-mobile) {
+    padding-top: 2.5rem;
+  }
+}
+
+#{$any} .home-portrait {
+  width: 56px;
+  height: 56px;
+  margin-bottom: 1.25rem;
+}
+
+#{$any} .home-lede {
+  font-size: 1rem;
+  line-height: 1.65;
+  max-width: 34em;
+  margin-bottom: 1.25rem;
+}
+
+#{$any} .home-links {
+  gap: 0.25rem 1.25rem;
+
+  a {
+    font-size: 0.9375rem;
+    font-weight: $normal-weight;
+    color: var(--text-primary);
+    text-decoration: underline;
+    text-decoration-color: var(--border-strong);
+    text-underline-offset: 0.2em;
+    border-bottom: none;
+
+    &:hover {
+      color: var(--text-primary);
+      text-decoration-color: currentColor;
+    }
+  }
+}
+
+#{$any} .home-project {
+  padding: 0.4rem 0;
+}
+
+#{$any} .home-project-link {
+  font-size: 1rem;
+  color: var(--text-primary);
+}
+
+#{$any} .home-project-desc {
+  color: var(--text-secondary);
+}
+
+// Projects
+#{$any} .projects-page {
+  gap: 1rem;
+}
+
+#{$any} .projects-section {
+  gap: 0;
+  padding-top: 1rem;
+}
+
+#{$any} .project-list {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li::before {
+    content: none;
+  }
+}
+
+#{$any} .project-row {
+  padding: 0.75rem 0;
+
+  h3 {
+    font-size: 1rem;
+    font-weight: $medium-weight;
+    letter-spacing: 0;
+    line-height: 1.5;
+    margin: 0;
+
+    a {
+      color: var(--text-primary);
+      text-decoration: none;
+
+      &::after { content: none; }
+
+      &:hover {
+        color: var(--text-secondary);
+      }
+    }
+  }
+
+  p {
+    margin: 0.15rem 0 0;
+    padding: 0;
+    font-size: 0.9375rem;
+    line-height: 1.6;
+    color: var(--text-secondary);
+  }
+
+  .project-row-meta {
+    margin-top: 0.25rem;
+    font-size: 0.8125rem;
+    color: var(--text-tertiary);
+  }
+}
+
+// Reading: category groups of title + author rows.
+#{$any} .category-section {
+  margin: 2rem 0 0;
+
+  .book-links {
+    display: block;
+
+    a {
+      display: block;
+      padding: 0.4rem 0;
+      background: none;
+      border: none;
+      border-radius: 0;
+      box-shadow: none;
+      text-decoration: none;
+
+      &::after { content: none; }
+
+      &:hover {
+        background: none;
+        box-shadow: none;
+
+        strong {
+          color: var(--text-secondary);
+        }
+      }
+
+      strong {
+        display: block;
+        font-size: 1rem;
+        font-weight: $normal-weight;
+        color: var(--text-primary);
+        margin: 0;
+      }
+
+      span {
+        display: block;
+        font-size: 0.875rem;
+        color: var(--text-tertiary);
+        line-height: 1.5;
+      }
+    }
+  }
+}
+
+// Journey: year label above each entry.
+#{$any} .timeline {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+
+  li {
+    padding: 0 0 1.75rem;
+
+    &::before { content: none; }
+  }
+
+  .timeline-year {
+    display: block;
+    font-size: 0.8125rem;
+    font-weight: $medium-weight;
+    color: var(--text-tertiary);
+    font-variant-numeric: tabular-nums;
+    margin-bottom: 0.25rem;
+  }
+
+  p {
+    margin: 0;
+    padding: 0;
+    font-size: 1rem;
+    line-height: 1.7;
+  }
+}
+
+// Book summaries index
+#{$any} .books-page {
+  gap: 0;
+}
+
+#{$any} .book-summary-list .year-section {
+  margin: 0;
+  padding-top: 2rem;
+}
+
+#{$any} .book-list li {
+  border-top: none;
+  padding: 0.4rem 0;
+
+  a {
+    font-weight: $normal-weight;
+    text-decoration: none;
+
+    &::after { content: none; }
+
+    &:hover {
+      color: var(--text-secondary);
+    }
+  }
+}
+
+// ---------------------------------------------------------------
+// Forms and footer.
+
+#{$any} .archive-search input[type="search"],
+#{$any} .newsletter-input {
+  font-size: 0.875rem;
+  background: var(--bg-primary);
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  box-shadow: none;
+
+  &:focus {
+    outline: none;
+    border-color: var(--border-strong);
+  }
+}
+
+#{$any} .newsletter-submit {
+  color: var(--bg-primary);
+  background: var(--text-primary);
+  border-color: var(--text-primary);
+
+  &:hover {
+    background: var(--text-secondary);
+    border-color: var(--text-secondary);
+  }
+}
+
+#{$any} .site-footer {
+  border-top: none;
+  margin-top: 3rem;
+
+  a {
+    color: var(--text-secondary);
+
+    &:hover {
+      color: var(--text-primary);
+    }
+  }
+}

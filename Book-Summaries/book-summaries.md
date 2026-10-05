@@ -11,7 +11,6 @@ description: This page shares a full list of book summaries I have compiled duri
 ---
 
 <div class="page-header books-page-header">
-  <p class="page-kicker">Reading Notes</p>
   <h1>Book Summaries</h1>
   <p class="page-subtitle">A running archive of summaries and notes from books that have shaped how I think about leadership, business, psychology, and creative work.</p>
 </div>

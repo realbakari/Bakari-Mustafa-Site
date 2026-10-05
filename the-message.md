@@ -3,7 +3,6 @@ title: The Message Sermon Library
 permalink: "/the-message/"
 layout: page
 hide_title: true
-full_width: true
 excerpt: Access and search over 1,200 sermons by William Marrion Branham in audio, PDF, and multiple languages including Chichewa.
 comments: false
 image: "https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg"
@@ -11,38 +10,15 @@ description: Public catalogue and API for William Branham sermons in audio (M4A/
 ---
 
 <style>
-/* ── Kumo UI Design System Tokens & Base Layout ──────────────────── */
-body:has(.msg-library-wrapper) .wrapper,
-.wrapper.full-width,
-.wrapper:has(.msg-library-wrapper) {
+/* ── Catalogue: same column and type as the rest of the site ───── */
+/* The reader gets more room while it is open (body.msg-reading). */
+body.msg-reading .wrapper {
   max-width: 1120px !important;
-  width: 100% !important;
-  padding-left: clamp(1rem, 3vw, 32px) !important;
-  padding-right: clamp(1rem, 3vw, 32px) !important;
-  box-sizing: border-box !important;
-}
-
-body:has(.msg-library-wrapper) .page-content,
-.wrapper:has(.msg-library-wrapper) .page-content,
-.page-content:has(.msg-library-wrapper) {
-  max-width: 100% !important;
-  width: 100% !important;
-}
-
-.msg-library-wrapper,
-.msg-library-wrapper p,
-.msg-library-wrapper > * {
-  max-width: 100% !important;
 }
 
 .msg-library-wrapper {
-  max-width: 1120px !important;
-  width: 100% !important;
-  margin: 0 auto;
-  padding: 0.75rem 0 3.5rem;
-  box-sizing: border-box;
+  padding: 0 0 3.5rem;
   color: var(--text-primary);
-  font-size: 14px;
 }
 
 .msg-library-wrapper p {
@@ -51,73 +27,50 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-header {
-  margin-bottom: 2rem;
+  margin: 3.5rem 0 2rem;
 }
 
-.msg-header .page-kicker {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--accent-primary);
-  margin-bottom: 0.35rem;
+@media (max-width: 768px) {
+  .msg-header {
+    margin-top: 2.5rem;
+  }
 }
 
 .msg-header h1 {
-  font-size: clamp(2rem, 4vw, 2.75rem);
+  font-size: 1.75rem;
   font-weight: 600;
-  line-height: 1.15;
-  color: var(--text-primary);
-  margin-top: 0;
-  margin-bottom: 0.5rem;
+  letter-spacing: -0.02em;
+  line-height: 1.2;
+  margin: 0 0 0.5rem;
 }
 
 .msg-header .page-subtitle {
-  font-size: 14px;
-  line-height: 1.6;
-  color: var(--text-secondary);
-  max-width: 860px;
-  margin-bottom: 1.25rem;
-}
-
-/* ── Editorial Header Summary & Badge ────────────────────────────── */
-.msg-header-meta-row {
-  display: flex;
-  flex-wrap: wrap;
-  align-items: center;
-  gap: 0.75rem;
-  margin-top: 0.75rem;
-  font-size: 13px;
-  color: var(--text-secondary);
-}
-
-.msg-header-tag {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.35rem;
-  padding: 0.25rem 0.65rem;
-  border-radius: var(--kumo-radius-sm, 6px);
-  background-color: var(--kumo-control, var(--bg-secondary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
+  font-size: 1.0625rem;
   font-weight: 500;
+  letter-spacing: -0.01em;
+  line-height: 1.55;
   color: var(--text-primary);
+  margin: 0 0 0.5rem;
 }
 
-/* ── Kumo Control Panel (Search & Filters) ───────────────────────── */
-.msg-controls-panel {
-  background-color: var(--surface-strong, var(--bg-primary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 12px);
-  padding: 1.15rem;
-  margin-bottom: 1.75rem;
-  box-shadow: var(--shadow-sm);
+.msg-header-note {
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin: 0;
+}
+
+/* ── Search and filters ──────────────────────────────────────────── */
+.msg-controls {
   display: flex;
   flex-direction: column;
-  gap: 0.85rem;
+  gap: 0.75rem;
+  margin-bottom: 1.5rem;
 }
 
 .msg-search-group {
   display: grid;
   grid-template-columns: 1fr auto auto;
-  gap: 0.75rem;
+  gap: 0.5rem;
 }
 
 @media (max-width: 768px) {
@@ -126,292 +79,201 @@ body:has(.msg-library-wrapper) .page-content,
   }
 }
 
-.msg-input-box {
-  width: 100%;
-  height: 38px;
-  padding: 0 0.85rem;
-  font-size: 14px;
-  font-family: inherit;
-  border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-md, 8px);
-  background-color: var(--kumo-canvas, var(--bg-primary));
+.msg-input-box,
+.msg-select-box {
+  height: 36px;
+  padding: 0 0.75rem;
+  font: inherit;
+  font-size: 0.875rem;
+  border: 1px solid var(--border-default);
+  border-radius: 6px;
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   box-sizing: border-box;
 }
 
-.msg-input-box:focus {
-  outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(30, 58, 47, 0.2));
+.msg-input-box {
+  width: 100%;
 }
 
 .msg-select-box {
-  height: 38px;
-  padding: 0 0.85rem;
-  font-size: 14px;
-  font-family: inherit;
-  border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-md, 8px);
-  background-color: var(--kumo-canvas, var(--bg-primary));
-  color: var(--text-primary);
   cursor: pointer;
 }
 
+.msg-input-box:focus,
 .msg-select-box:focus {
   outline: none;
-  border-color: var(--accent-primary);
-  box-shadow: 0 0 0 2px var(--kumo-focus, rgba(30, 58, 47, 0.2));
+  border-color: var(--border-strong);
 }
 
-.msg-quick-tags {
-  display: flex;
-  align-items: center;
-  gap: 0.4rem;
-  flex-wrap: wrap;
-  font-size: 13px;
-}
-
-.msg-tag-label {
-  font-weight: 500;
-  font-size: 13px;
-  color: var(--text-secondary);
-  margin-right: 0.25rem;
-}
-
-.msg-filter-tag {
-  padding: 0.25rem 0.7rem;
-  border-radius: var(--kumo-radius-sm, 6px);
-  font-size: 13px;
-  font-weight: 500;
-  border: 1px solid var(--kumo-line, var(--border-default));
-  background-color: var(--kumo-canvas, var(--bg-primary));
-  color: var(--text-secondary);
-  cursor: pointer;
-}
-
-.msg-filter-tag:hover {
-  background-color: var(--kumo-control, var(--bg-secondary));
-  color: var(--text-primary);
-  border-color: var(--accent-primary);
-}
-
-.msg-filter-tag.active {
-  background-color: var(--accent-primary);
-  color: #ffffff !important;
-  border-color: var(--accent-primary);
-}
-
-/* ── Kumo Segmented View Switcher ────────────────────────────────── */
+/* Language shortcuts and the list/table switch are text, not chips. */
+.msg-quick-tags,
 .msg-view-mode-bar {
   display: flex;
-  align-items: center;
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.25rem 1rem;
+  font-size: 0.875rem;
+}
+
+.msg-view-mode-bar {
   justify-content: space-between;
-  gap: 1rem;
-  padding-top: 0.85rem;
-  border-top: 1px solid var(--kumo-hairline, var(--border-subtle));
 }
 
 .msg-view-toggle {
   display: inline-flex;
-  gap: 0.25rem;
-  background-color: var(--kumo-control, var(--bg-secondary));
-  padding: 2px;
-  border-radius: var(--kumo-radius-md, 8px);
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
+  gap: 1rem;
 }
 
-.msg-view-btn {
-  padding: 0.3rem 0.75rem;
-  font-size: 13px;
-  font-weight: 500;
+.msg-tag-label,
+.msg-results-count {
+  color: var(--text-tertiary);
+}
+
+.msg-filter-tag,
+.msg-view-btn,
+.msg-link {
+  background: none;
   border: none;
-  background: transparent;
+  padding: 0;
+  font: inherit;
   color: var(--text-secondary);
-  border-radius: var(--kumo-radius-sm, 6px);
   cursor: pointer;
 }
 
+.msg-filter-tag:hover,
+.msg-view-btn:hover {
+  color: var(--text-primary);
+}
+
+.msg-filter-tag.active,
 .msg-view-btn.active {
-  background-color: var(--surface-strong, var(--bg-primary));
   color: var(--text-primary);
-  box-shadow: 0 1px 2px rgba(0, 0, 0, 0.06);
-}
-
-.msg-results-count {
-  font-size: 13px;
   font-weight: 500;
-  color: var(--text-secondary);
 }
 
-/* ── Kumo Layer Cards Grid ───────────────────────────────────────── */
-.msg-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fill, minmax(285px, 1fr));
-  gap: 1.25rem;
-  margin-bottom: 2.5rem;
+/* ── Sermon rows ─────────────────────────────────────────────────── */
+.msg-list {
+  margin-bottom: 2rem;
 }
 
-.msg-card {
-  background-color: var(--surface-strong, var(--bg-primary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 12px);
-  overflow: hidden;
+.msg-row {
+  padding: 0.6rem 0;
+}
+
+.msg-row-title {
+  font-size: 1rem !important;
+  font-weight: 400 !important;
+  letter-spacing: 0 !important;
+  line-height: 1.5;
+  margin: 0 !important;
+}
+
+.msg-row-meta {
   display: flex;
-  flex-direction: column;
-  box-shadow: var(--shadow-sm);
+  flex-wrap: wrap;
+  align-items: baseline;
+  gap: 0.15rem 1rem;
+  margin-top: 0.15rem;
+  font-size: 0.8125rem;
+  color: var(--text-tertiary);
 }
 
-.msg-card:hover {
-  box-shadow: var(--shadow-md);
-  border-color: var(--accent-primary);
+.msg-row-actions {
+  display: inline-flex;
+  gap: 0.85rem;
 }
 
-.msg-cover-wrap {
-  position: relative;
-  width: 100%;
-  height: 155px;
-  background-color: var(--kumo-control, var(--bg-secondary));
-  overflow: hidden;
-  border-top-left-radius: 11px;
-  border-top-right-radius: 11px;
+.msg-link {
+  font-size: 0.8125rem;
+  text-decoration: underline;
+  text-decoration-color: var(--border-strong);
+  text-underline-offset: 0.2em;
 }
 
-.msg-cover-wrap img {
-  width: 100%;
-  height: 100%;
-  object-fit: cover;
-}
-
-.msg-badge-lang {
-  position: absolute;
-  top: 0.65rem;
-  right: 0.65rem;
-  background: var(--bg-surface);
+.msg-link:hover {
   color: var(--text-primary);
-  border: 1px solid var(--kumo-line);
-  font-weight: 600;
-  font-size: 11px;
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--kumo-radius-sm, 6px);
-  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.1);
+  text-decoration-color: currentColor;
 }
 
-.msg-card-content {
-  padding: 1rem 1.15rem 1.15rem;
-  display: flex;
-  flex-direction: column;
-  flex: 1;
-}
-
-.msg-card-title {
-  font-size: 0.95rem;
-  font-weight: 600;
-  line-height: 1.35;
-  color: var(--text-primary);
-  margin-top: 0;
-  margin-bottom: 0.35rem;
-}
-
-.msg-card-meta {
-  font-size: 12px;
-  color: var(--text-secondary);
-  margin-bottom: 0.85rem;
-}
-
-.msg-card-actions {
-  margin-top: auto;
-  display: flex;
-  gap: 0.45rem;
-  padding-top: 0.75rem;
-  border-top: 1px solid var(--kumo-hairline, var(--border-subtle));
-}
-
-/* ── Kumo Buttons ────────────────────────────────────────────────── */
+/* Buttons used inside the reader and Bible dialog. */
 .msg-btn {
-  flex: 1;
   display: inline-flex;
   align-items: center;
   justify-content: center;
   height: 32px;
-  padding: 0 0.65rem;
-  font-size: 13px;
-  font-weight: 500;
-  border-radius: var(--kumo-radius-sm, 6px);
+  padding: 0 0.75rem;
+  font: inherit;
+  font-size: 0.875rem;
+  border-radius: 6px;
   text-decoration: none !important;
   cursor: pointer;
-  border: 1px solid var(--kumo-line, var(--border-default));
-  background-color: var(--kumo-canvas, var(--bg-primary));
+  border: 1px solid var(--border-default);
+  background-color: var(--bg-primary);
   color: var(--text-primary);
   box-sizing: border-box;
 }
 
 .msg-btn:hover {
-  background-color: var(--kumo-control, var(--bg-secondary));
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
+  background-color: var(--bg-tertiary);
 }
 
 .msg-btn-primary {
-  background-color: var(--accent-primary);
-  color: #ffffff;
-  border-color: var(--accent-primary);
+  background-color: var(--text-primary);
+  border-color: var(--text-primary);
+  color: var(--bg-primary);
 }
 
 .msg-btn-primary:hover {
-  background-color: var(--accent-secondary);
-  border-color: var(--accent-secondary);
-  color: #ffffff;
+  background-color: var(--text-secondary);
+  border-color: var(--text-secondary);
 }
 
 .msg-btn-disabled {
-  opacity: 0.35;
+  opacity: 0.4;
   cursor: not-allowed;
   pointer-events: none;
-  background-color: var(--kumo-control, var(--bg-secondary)) !important;
-  color: var(--text-secondary) !important;
-  border-color: var(--kumo-hairline, var(--border-subtle)) !important;
 }
 
-/* ── Kumo Archival Table ─────────────────────────────────────────── */
+/* ── Table view ──────────────────────────────────────────────────── */
 .msg-table-wrap {
   width: 100%;
   overflow-x: auto;
-  border-radius: var(--kumo-radius-lg, 12px);
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  background-color: var(--surface-strong, var(--bg-primary));
-  box-shadow: var(--shadow-sm);
-  margin-bottom: 2.5rem;
+  margin-bottom: 2rem;
 }
 
 .msg-archival-table {
   width: 100%;
   border-collapse: collapse;
-  font-size: 14px;
+  font-size: 0.875rem;
   text-align: left;
 }
 
 .msg-archival-table th {
-  background-color: var(--kumo-control, var(--bg-secondary));
-  color: var(--text-primary);
-  font-weight: 600;
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--kumo-line, var(--border-default));
+  font-weight: 500;
+  color: var(--text-tertiary);
+  padding: 0.5rem 0.75rem 0.5rem 0;
+  border-bottom: 1px solid var(--border-default);
   white-space: nowrap;
 }
 
 .msg-archival-table td {
-  padding: 0.75rem 1rem;
-  border-bottom: 1px solid var(--kumo-hairline, var(--border-subtle));
-  color: var(--text-primary);
-  vertical-align: middle;
+  padding: 0.5rem 0.75rem 0.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  vertical-align: baseline;
 }
 
-.msg-archival-table tr:hover {
-  background-color: var(--kumo-tint, rgba(23, 107, 91, 0.04));
+.msg-archival-table th,
+.msg-archival-table td {
+  border-left: none;
+  border-right: none;
+  border-top: none;
 }
 
-.msg-archival-table tr:last-child td {
-  border-bottom: none;
+.msg-archival-table td:first-child,
+.msg-archival-table td:nth-child(3) {
+  color: var(--text-tertiary);
+  white-space: nowrap;
 }
 
 /* ── Kumo Full Immersion Sermon Reader ───────────────────────────── */
@@ -423,21 +285,23 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 .msg-reader-toolbar {
-  padding: 0.65rem 0.85rem;
-  background-color: var(--surface-strong, var(--bg-primary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-bottom: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-lg, 12px);
+  padding: 0.5rem 0;
+  background-color: var(--bg-primary);
+  border-bottom: 1px solid var(--border-subtle);
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 0.75rem;
   flex-wrap: wrap;
   position: sticky;
-  top: 0.75rem;
+  top: 0;
   z-index: 100;
-  box-shadow: var(--shadow-md);
-  backdrop-filter: blur(16px);
+}
+
+@media (max-width: 768px) {
+  .msg-reader-toolbar {
+    top: 50px; /* below the fixed mobile navbar */
+  }
 }
 
 .msg-toolbar-group {
@@ -452,29 +316,27 @@ body:has(.msg-library-wrapper) .page-content,
   align-items: center;
   justify-content: center;
   gap: 0.35rem;
-  height: 34px;
-  padding: 0 0.75rem;
-  font-size: 14px;
-  font-weight: 500;
-  border-radius: var(--kumo-radius-sm, 6px);
-  background-color: var(--kumo-canvas, var(--bg-primary));
-  border: 1px solid var(--kumo-line, var(--border-default));
-  color: var(--text-primary);
+  height: 32px;
+  padding: 0 0.65rem;
+  font: inherit;
+  font-size: 0.875rem;
+  border-radius: 6px;
+  background-color: transparent;
+  border: 1px solid transparent;
+  color: var(--text-secondary);
   cursor: pointer;
   text-decoration: none !important;
   box-sizing: border-box;
 }
 
 .msg-reader-btn:hover {
-  border-color: var(--accent-primary);
-  color: var(--accent-primary);
-  background-color: var(--kumo-tint, rgba(23, 107, 91, 0.06));
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
 }
 
 .msg-reader-btn.active {
-  background-color: var(--accent-primary);
-  color: #ffffff !important;
-  border-color: var(--accent-primary);
+  color: var(--text-primary);
+  background-color: var(--bg-tertiary);
 }
 
 .msg-reader-btn:disabled {
@@ -505,25 +367,21 @@ body:has(.msg-library-wrapper) .page-content,
   background-color: var(--accent-primary);
   width: 0%;
   transition: width 0.1s ease;
-  border-top-left-radius: 12px;
-  border-top-right-radius: 12px;
 }
 
 /* ── Reading Canvas Themes: Light / Sepia / Dark ─────────────────── */
 .msg-reader-main-content {
-  max-width: 960px;
+  max-width: 680px;
   width: 100%;
   margin: 1.5rem auto 0;
-  padding: 2rem 1.5rem 6rem;
+  padding: 1.5rem 1.25rem 6rem;
   font-size: 18px;
   line-height: 1.9;
   color: var(--text-primary);
   font-family: Georgia, Cambria, "Times New Roman", Times, serif;
   box-sizing: border-box;
-  border-radius: var(--kumo-radius-lg, 12px);
-  background-color: var(--surface-strong, var(--bg-primary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  box-shadow: var(--shadow-sm);
+  border-radius: 6px;
+  background-color: var(--bg-primary);
 }
 
 .msg-reader-main-content.msg-reader-wide {
@@ -722,105 +580,6 @@ body:has(.msg-library-wrapper) .page-content,
   line-height: 1.6;
 }
 
-/* ── Kumo Bottom Stats Dashboard & Region Map ────────────────────── */
-.msg-stats-dashboard {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(190px, 1fr));
-  gap: 1rem;
-  margin-top: 2rem;
-  margin-bottom: 2rem;
-}
-
-.msg-stat-card {
-  background-color: var(--surface-strong, var(--bg-primary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 12px);
-  padding: 1rem 1.15rem;
-  display: flex;
-  flex-direction: column;
-  gap: 0.25rem;
-  box-shadow: var(--shadow-sm);
-  transition: transform 0.15s ease, border-color 0.15s ease;
-}
-
-.msg-stat-card:hover {
-  transform: translateY(-2px);
-  border-color: var(--accent-primary);
-}
-
-.msg-stat-val {
-  font-size: 1.5rem;
-  font-weight: 600;
-  color: var(--accent-primary);
-  line-height: 1.2;
-}
-
-.msg-stat-lbl {
-  font-size: 12px;
-  font-weight: 500;
-  color: var(--text-secondary);
-}
-
-.msg-map-section {
-  background-color: var(--surface-strong, var(--bg-primary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 12px);
-  padding: 1.25rem 1.4rem;
-  margin-bottom: 2.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.msg-region-grid {
-  display: grid;
-  grid-template-columns: repeat(auto-fit, minmax(220px, 1fr));
-  gap: 1rem;
-  margin-top: 1rem;
-}
-
-.msg-region-card {
-  background-color: var(--kumo-canvas, var(--bg-primary));
-  border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-md, 8px);
-  padding: 1rem 1.15rem;
-  cursor: pointer;
-  transition: transform 0.15s ease, border-color 0.15s ease;
-}
-
-.msg-region-card:hover {
-  border-color: var(--accent-primary);
-  box-shadow: var(--shadow-sm);
-  transform: translateY(-2px);
-}
-
-.msg-region-header {
-  display: flex;
-  align-items: center;
-  justify-content: space-between;
-  margin-bottom: 0.35rem;
-}
-
-.msg-region-name {
-  font-size: 14px;
-  font-weight: 600;
-  color: var(--text-primary);
-}
-
-.msg-region-badge {
-  font-size: 12px;
-  font-weight: 500;
-  background-color: var(--kumo-tint, rgba(23, 107, 91, 0.08));
-  color: var(--accent-primary);
-  padding: 0.15rem 0.5rem;
-  border-radius: var(--kumo-radius-full, 9999px);
-}
-
-.msg-region-langs {
-  font-size: 13px;
-  color: var(--text-secondary);
-  line-height: 1.4;
-}
-
-/* ── Kumo Audio Dock Floating Player ─────────────────────────────── */
 .msg-audio-dock {
   position: fixed;
   bottom: 1.25rem;
@@ -830,16 +589,31 @@ body:has(.msg-library-wrapper) .page-content,
   max-width: 720px;
   background-color: var(--surface-strong, var(--bg-primary));
   border: 1px solid var(--kumo-line, var(--border-default));
-  border-radius: var(--kumo-radius-lg, 12px);
-  box-shadow: var(--shadow-lg);
-  padding: 0.75rem 1.15rem;
+  border-radius: 8px;
+  padding: 0.6rem 1rem;
   display: flex;
   align-items: center;
   justify-content: space-between;
   gap: 1rem;
   z-index: 10000;
-  backdrop-filter: blur(16px);
   box-sizing: border-box;
+}
+
+@media (max-width: 768px) {
+  .msg-audio-dock {
+    flex-wrap: wrap;
+    gap: 0.5rem;
+  }
+
+  .msg-audio-dock .msg-audio-meta {
+    flex: 1 1 calc(100% - 2rem);
+  }
+
+  .msg-audio-dock audio {
+    order: 3;
+    width: 100%;
+    max-width: none !important;
+  }
 }
 
 .msg-audio-meta {
@@ -928,35 +702,6 @@ body:has(.msg-library-wrapper) .page-content,
 }
 
 /* ── API Box ─────────────────────────────────────────────────────── */
-.msg-api-box {
-  background-color: var(--surface-strong, var(--bg-primary));
-  border: 1px solid var(--kumo-hairline, var(--border-subtle));
-  border-radius: var(--kumo-radius-lg, 12px);
-  padding: 1.25rem 1.4rem;
-  margin-top: 2.5rem;
-  box-shadow: var(--shadow-sm);
-}
-
-.msg-api-box h3 {
-  font-size: 1rem;
-  font-weight: 600;
-  margin: 0 0 0.35rem 0;
-  color: var(--text-primary);
-}
-
-.msg-api-box p {
-  color: var(--text-secondary);
-  font-size: 14px;
-  margin-bottom: 0.75rem;
-}
-
-.msg-api-box code {
-  background-color: var(--kumo-control, var(--bg-secondary));
-  padding: 0.2rem 0.45rem;
-  border-radius: var(--kumo-radius-sm, 6px);
-  font-size: 0.9em;
-}
-
 .msg-pagination-bar {
   display: flex;
   align-items: center;
@@ -999,10 +744,10 @@ body:has(.msg-library-wrapper) .page-content,
 
       <!-- View Mode Tabs -->
       <div class="msg-toolbar-group">
-        <button class="msg-reader-btn active" id="tab-btn-text" onclick="switchReaderTab('text')">📖 Reading</button>
-        <button class="msg-reader-btn" id="tab-btn-parallel" onclick="switchReaderTab('parallel')">🔀 Parallel dual</button>
-        <button class="msg-reader-btn" id="tab-btn-bible" onclick="switchReaderTab('bible')">📜 KJV Bible</button>
-        <button class="msg-reader-btn" id="tab-btn-pdf" onclick="switchReaderTab('pdf')">📄 PDF document</button>
+        <button class="msg-reader-btn active" id="tab-btn-text" onclick="switchReaderTab('text')">Reading</button>
+        <button class="msg-reader-btn" id="tab-btn-parallel" onclick="switchReaderTab('parallel')">Parallel</button>
+        <button class="msg-reader-btn" id="tab-btn-bible" onclick="switchReaderTab('bible')">KJV Bible</button>
+        <button class="msg-reader-btn" id="tab-btn-pdf" onclick="switchReaderTab('pdf')">PDF</button>
       </div>
 
       <!-- Reader Settings -->
@@ -1028,9 +773,8 @@ body:has(.msg-library-wrapper) .page-content,
         <button class="msg-reader-btn" id="btn-theme-light" onclick="setReaderTheme('light')" title="Light theme">Light</button>
         <button class="msg-reader-btn" id="btn-theme-sepia" onclick="setReaderTheme('sepia')" title="Sepia theme">Sepia</button>
         <button class="msg-reader-btn" id="btn-theme-dark" onclick="setReaderTheme('dark')" title="Dark theme">Dark</button>
-        <button class="msg-reader-btn" id="btn-toggle-wide" onclick="toggleReaderWidth()" title="Toggle wide reading canvas">Wide</button>
         <button class="msg-reader-btn" id="reader-audio-btn" onclick="toggleReaderAudio()" title="Play audio recording">Audio</button>
-        <a id="reader-download-btn" class="msg-reader-btn" href="#" target="_blank" title="Download PDF transcript" rel="noopener">PDF</a>
+        <a id="reader-download-btn" class="msg-reader-btn" href="#" target="_blank" title="Download PDF transcript" rel="noopener">Download</a>
       </div>
     </div>
 
@@ -1056,26 +800,19 @@ body:has(.msg-library-wrapper) .page-content,
 
     <!-- Header -->
     <div class="msg-header">
-      <p class="page-kicker">Sermon archive</p>
-      <h1>The message sermon library</h1>
-      <p class="page-subtitle">A digital library of sermons preached by William Marrion Branham between 1947 and 1965, with original audio recordings, text transcripts, and translations across 72 languages.</p>
-
-      <div class="msg-header-meta-row">
-        <span class="msg-header-tag"><strong id="stat-total">1,291</strong> sermons</span>
-        <span class="msg-header-tag">72 languages</span>
-        <span class="msg-header-tag">Audio & text</span>
-        <a href="{{ '/api-docs/' | relative_url }}" style="color: var(--accent-primary); text-decoration: none; margin-left: auto; font-size: 13px;">REST API →</a>
-      </div>
+      <h1>The Message sermon library</h1>
+      <p class="page-subtitle">Sermons preached by William Marrion Branham between 1947 and 1965, with audio, transcripts, and translations in 72 languages.</p>
+      <p class="msg-header-note"><span id="stat-total">1,291</span> sermons. The catalogue is also available through a <a href="{{ '/api-docs/' | relative_url }}">REST API</a>.</p>
     </div>
 
     <!-- Controls Panel -->
-    <div class="msg-controls-panel">
+    <div class="msg-controls">
       <div class="msg-search-group">
         <input
           type="search"
           id="msg-search"
           class="msg-input-box"
-          placeholder="Search sermons by title, scripture, or sermon ID..."
+          placeholder="Search by title or sermon ID"
           aria-label="Search sermons"
           oninput="applyFilters()"
         />
@@ -1103,7 +840,7 @@ body:has(.msg-library-wrapper) .page-content,
       <!-- View Switcher & Result Counter -->
       <div class="msg-view-mode-bar">
         <div class="msg-view-toggle">
-          <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">Grid</button>
+          <button id="view-btn-grid" class="msg-view-btn active" onclick="setViewMode('grid')">List</button>
           <button id="view-btn-table" class="msg-view-btn" onclick="setViewMode('table')">Table</button>
         </div>
         <div id="results-count-text" class="msg-results-count">Showing sermons...</div>
@@ -1111,69 +848,17 @@ body:has(.msg-library-wrapper) .page-content,
     </div>
 
     <!-- Sermon Cards Container -->
-    <div id="sermons-container" class="msg-grid">
+    <div id="sermons-container" class="msg-list">
       <!-- Loaded dynamically -->
     </div>
 
     <!-- Pagination -->
     <div id="pagination-controls" class="msg-pagination-bar" style="display: none;">
-      <button id="btn-prev-page" class="msg-reader-btn" onclick="changePage(-1)">← Previous</button>
+      <button id="btn-prev-page" class="msg-reader-btn" onclick="changePage(-1)">Previous</button>
       <span id="page-info-text" class="msg-page-info">Page 1</span>
-      <button id="btn-next-page" class="msg-reader-btn" onclick="changePage(1)">Next →</button>
+      <button id="btn-next-page" class="msg-reader-btn" onclick="changePage(1)">Next</button>
     </div>
-
-    <!-- Region Translation Overview -->
-    <div class="msg-map-section">
-      <h3 style="margin-top:0; margin-bottom: 0.35rem; font-size: 1rem; font-weight: 600; color: var(--text-primary);">Translations by territory</h3>
-      <p style="color: var(--text-secondary); font-size: 13px; margin-bottom: 1rem;">Filter available recordings and translations by geographical region:</p>
-      <div class="msg-region-grid">
-        <div class="msg-region-card" onclick="filterByRegion('africa')">
-          <div class="msg-region-header">
-            <span class="msg-region-name">Africa & East Africa</span>
-            <span class="msg-region-badge">24 languages</span>
-          </div>
-          <p class="msg-region-langs">Chichewa, Swahili, Afrikaans, Luganda, Kinyarwanda, Shona, Zulu, Lingala...</p>
-        </div>
-        <div class="msg-region-card" onclick="filterByRegion('americas')">
-          <div class="msg-region-header">
-            <span class="msg-region-name">Americas & Caribbean</span>
-            <span class="msg-region-badge">14 languages</span>
-          </div>
-          <p class="msg-region-langs">English, Spanish, Portuguese, Haitian Creole, Quechua, Guarani, Papiamento...</p>
-        </div>
-
-        <div class="msg-region-card" onclick="filterByRegion('europe')">
-          <div class="msg-region-header">
-            <span class="msg-region-name">Europe & Eurasia</span>
-            <span class="msg-region-badge">20 languages</span>
-          </div>
-          <p class="msg-region-langs">French, Russian, German, Dutch, Polish, Italian, Romanian, Ukrainian, Czech...</p>
-        </div>
-
-        <div class="msg-region-card" onclick="filterByRegion('asia')">
-          <div class="msg-region-header">
-            <span class="msg-region-name">Asia & Pacific</span>
-            <span class="msg-region-badge">14 languages</span>
-          </div>
-          <p class="msg-region-langs">Chinese, Japanese, Hindi, Tagalog, Indonesian, Korean, Vietnamese, Tamil...</p>
-        </div>
-      </div>
-    </div>
-
-    <!-- Developer API Box -->
-    <section class="msg-api-box" style="margin-top: 2rem;">
-      <div style="display: flex; align-items: center; justify-content: space-between; flex-wrap: wrap; gap: 1rem; margin-bottom: 0.75rem;">
-        <h3 style="font-size: 0.95rem; font-weight: 600; margin: 0;">Machine-readable REST API</h3>
-        <a href="{{ '/api-docs/' | relative_url }}" class="msg-btn msg-btn-text" style="flex: 0 0 auto; font-size: 12px; height: 28px;">API docs →</a>
-      </div>
-      <p style="font-size: 13px; color: var(--text-secondary); margin-bottom: 0.75rem;">Fetch structured sermon metadata, full paragraph transcripts, PDF links, and audio stream URLs directly via REST endpoints:</p>
-      <div style="display: flex; flex-direction: column; gap: 0.35rem; font-size: 13px; font-family: var(--mono-family, monospace);">
-        <div>GET /api/messages?language=nya</div>
-        <div>GET /api/messages/65-0718M/text</div>
-        <div>GET /api/search?q=seven+seals</div>
-      </div>
-    </section>
-  </div>
+  </section>
 
   <!-- ── Floating Audio Dock Player ───────────────────────────────── -->
   <div id="audio-player-bar" class="msg-audio-dock" style="display: none;">
@@ -1194,13 +879,9 @@ body:has(.msg-library-wrapper) .page-content,
         <h3 id="bible-modal-title" class="msg-bible-title">Scripture text (King James Version)</h3>
         <button onclick="closeBibleModal()" class="msg-audio-close-btn" title="Close modal">✕</button>
       </header>
-      <main id="bible-modal-body" class="msg-bible-body">
+      <div id="bible-modal-body" class="msg-bible-body">
         <div>Loading scripture verse & Strong's Concordance lexicon...</div>
-      </main>
-    </div>
-  </div>
-        <div>Loading scripture verse & Strong's Concordance lexicon...</div>
-      </main>
+      </div>
     </div>
   </div>
 
@@ -1212,6 +893,14 @@ let allSermons = [];
 let filteredSermons = [];
 let currentPage = 1;
 const pageSize = 24;
+
+function hasReadable(s) {
+  return Boolean(s.full_text || s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0));
+}
+
+function hasMedia(s) {
+  return hasReadable(s) || Boolean(s.m4a_url);
+}
 
 async function loadLanguagesData() {
   try {
@@ -1241,7 +930,7 @@ async function loadLanguagesData() {
 
       const parSelect = document.getElementById('parallel-lang-select');
       if (parSelect) {
-        parSelect.innerHTML = languages.map(l => `<option value="${l.code}" ${l.code === 'ny' ? 'selected' : ''}>🌐 ${l.name} (${l.code.toUpperCase()})</option>`).join('');
+        parSelect.innerHTML = languages.map(l => `<option value="${l.code}" ${l.code === 'ny' ? 'selected' : ''}>${l.name} (${l.code.toUpperCase()})</option>`).join('');
       }
     }
   } catch (e) {
@@ -1268,7 +957,7 @@ async function loadStatsData() {
       const langCount = stats.available_languages || stats.total_languages || 72;
 
       const statEl = document.getElementById('stat-total');
-      if (statEl) statEl.innerText = `${totalCount.toLocaleString()}+`;
+      if (statEl) statEl.innerText = totalCount.toLocaleString();
 
       const elSermons = document.getElementById('stat-exact-sermons');
       if (elSermons) elSermons.innerText = `${totalCount.toLocaleString()}`;
@@ -1311,13 +1000,16 @@ async function loadSermonsData() {
     console.error('Failed to load sermon data:', err);
   }
 
+  /* Some catalogue entries are placeholders with no transcript, PDF, or audio. */
+  allSermons = allSermons.filter(hasMedia);
+
   const totalCount = allSermons.length || 1291;
   const audioCount = allSermons.filter(s => s.m4a_url).length || totalCount;
   const pdfCount = allSermons.filter(s => s.pdf_url).length || totalCount;
   const textCount = allSermons.filter(s => s.full_text || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0)).length || totalCount;
 
   const statEl = document.getElementById('stat-total');
-  if (statEl) statEl.innerText = `${totalCount.toLocaleString()}+`;
+  if (statEl) statEl.innerText = totalCount.toLocaleString();
 
   const elSermons = document.getElementById('stat-exact-sermons');
   if (elSermons) elSermons.innerText = `${totalCount.toLocaleString()}`;
@@ -1342,22 +1034,6 @@ async function loadSermonsData() {
   applyFilters();
 }
 
-function filterByRegion(region) {
-  const select = document.getElementById('msg-lang-select');
-  if (!select) return;
-
-  const regionLangs = {
-    africa: 'ny',
-    americas: 'en',
-    europe: 'fr',
-    asia: 'tl'
-  };
-
-  select.value = regionLangs[region] || '';
-  applyFilters();
-  document.getElementById('sermons-container').scrollIntoView({ behavior: 'smooth', block: 'start' });
-}
-
 let currentViewMode = 'grid';
 
 function setViewMode(mode) {
@@ -1377,11 +1053,11 @@ function renderSermons(items) {
   const countText = document.getElementById('results-count-text');
 
   if (countText) {
-    countText.innerText = `Showing ${items ? items.length.toLocaleString() : 0} sermons`;
+    countText.innerText = `${items ? items.length.toLocaleString() : 0} sermons`;
   }
 
   if (!items || items.length === 0) {
-    container.className = 'msg-grid';
+    container.className = 'msg-list';
     container.innerHTML = `
       <div class="msg-empty">
         <h3>No sermons found</h3>
@@ -1401,11 +1077,7 @@ function renderSermons(items) {
   if (paginationBar) {
     if (totalPages > 1) {
       paginationBar.style.display = 'flex';
-      const langSelect = document.getElementById('msg-lang-select');
-      const selectedOpt = langSelect && langSelect.options[langSelect.selectedIndex];
-      const langLabel = (selectedOpt && langSelect.value) ? `${selectedOpt.text}` : 'Total';
-
-      document.getElementById('page-info-text').innerText = `Page ${currentPage} of ${totalPages} (${items.length} ${langLabel} Sermons)`;
+      document.getElementById('page-info-text').innerText = `Page ${currentPage} of ${totalPages}`;
       document.getElementById('btn-prev-page').disabled = (currentPage === 1);
       document.getElementById('btn-next-page').disabled = (currentPage === totalPages);
       
@@ -1423,39 +1095,23 @@ function renderSermons(items) {
         <table class="msg-archival-table">
           <thead>
             <tr>
-              <th>Reference #</th>
-              <th>Sermon Title</th>
+              <th>ID</th>
+              <th>Title</th>
               <th>Date</th>
-              <th>Lang</th>
-              <th style="text-align: right;">Formats</th>
+              <th>Language</th>
+              <th></th>
             </tr>
           </thead>
           <tbody>
-            ${pageItems.map(s => {
-              const langCode = (s.language || 'en').toUpperCase();
-              const textBtn = (s.full_text || s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
-                ? `<button class="msg-btn msg-btn-primary" style="padding: 0.2rem 0.55rem; height: 28px; font-size: 12px;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">Read</button>`
-                : '';
-              const pdfBtn = s.pdf_url 
-                ? `<button class="msg-btn" style="padding: 0.2rem 0.55rem; height: 28px; font-size: 12px;" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">PDF</button>`
-                : '';
-              const audioBtn = s.m4a_url
-                ? `<button class="msg-btn" style="padding: 0.2rem 0.55rem; height: 28px; font-size: 12px;" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">Audio</button>`
-                : '';
-              return `
+            ${pageItems.map(s => `
                 <tr>
-                  <td><code>${escapeHtml(s.id)}</code></td>
-                  <td><strong>${escapeHtml(s.title)}</strong></td>
-                  <td>${s.date || s.year || ''}</td>
-                  <td><span class="msg-badge-lang" style="position:static; display:inline-block;">${langCode}</span></td>
-                  <td style="text-align: right;">
-                    <div style="display:inline-flex; gap:0.35rem;">
-                      ${textBtn} ${pdfBtn} ${audioBtn}
-                    </div>
-                  </td>
+                  <td>${escapeHtml(s.id)}</td>
+                  <td>${escapeHtml(s.title)}</td>
+                  <td>${escapeHtml(String(s.date || s.year || ''))}</td>
+                  <td>${(s.language || 'en').toUpperCase()}</td>
+                  <td><span class="msg-row-actions">${sermonActions(s)}</span></td>
                 </tr>
-              `;
-            }).join('')}
+            `).join('')}
           </tbody>
         </table>
       </div>
@@ -1463,44 +1119,30 @@ function renderSermons(items) {
     return;
   }
 
-  container.className = 'msg-grid';
+  container.className = 'msg-list';
   container.innerHTML = pageItems.map(s => {
-    const langCode = (s.language || 'en').toUpperCase();
-    const sermonDate = s.date || (s.year ? `Year ${s.year}` : '');
-    
-    const textBtn = (s.full_text || s.pdf_url || s.pdf_text || (s.paragraphs && s.paragraphs.length > 0))
-      ? `<button class="msg-btn msg-btn-primary" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'text')">Read</button>`
-      : `<span class="msg-btn msg-btn-disabled">Read</span>`;
-
-    const pdfBtn = s.pdf_url 
-      ? `<button class="msg-btn" onclick="openFullReader('${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}', 'pdf')">PDF</button>`
-      : `<span class="msg-btn msg-btn-disabled">PDF</span>`;
-      
-    const audioBtn = s.m4a_url
-      ? `<button class="msg-btn" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">Audio</button>`
-      : `<span class="msg-btn msg-btn-disabled">Audio</span>`;
-
+    const meta = [s.date || (s.year ? String(s.year) : ''), s.id, (s.language || 'en').toUpperCase()]
+      .filter(Boolean).map(escapeHtml).join(' · ');
     return `
-      <article class="msg-card">
-        <div class="msg-card-content">
-          <div style="display: flex; align-items: center; justify-content: space-between; gap: 0.5rem; margin-bottom: 0.4rem;">
-            <code style="font-size: 12px; color: var(--accent-primary); font-weight: 600;">${escapeHtml(s.id)}</code>
-            <span style="font-size: 11px; font-weight: 600; padding: 0.1rem 0.45rem; border-radius: 4px; background: var(--kumo-control, var(--bg-secondary)); border: 1px solid var(--kumo-line); color: var(--text-secondary);">${langCode}</span>
-          </div>
-          <h3 class="msg-card-title">${escapeHtml(s.title)}</h3>
-          <div class="msg-card-meta">
-            ${sermonDate ? `<span>${escapeHtml(sermonDate)}</span>` : ''}
-            ${s.number ? `<span style="margin-left: 0.35rem; opacity: 0.7;">• #${s.number}</span>` : ''}
-          </div>
-          <div class="msg-card-actions">
-            ${textBtn}
-            ${pdfBtn}
-            ${audioBtn}
-          </div>
+      <article class="msg-row">
+        <h3 class="msg-row-title">${escapeHtml(s.title)}</h3>
+        <div class="msg-row-meta">
+          <span>${meta}</span>
+          <span class="msg-row-actions">${sermonActions(s)}</span>
         </div>
       </article>
     `;
   }).join('');
+}
+
+/* Only the formats a sermon actually has. */
+function sermonActions(s) {
+  const args = `'${escapeJs(s.title)}', '${s.id}', '${s.date || s.year || ''}', '${s.pdf_url}', '${s.language}'`;
+  return [
+    hasReadable(s) ? `<button class="msg-link" onclick="openFullReader(${args}, 'text')">Read</button>` : '',
+    s.pdf_url ? `<button class="msg-link" onclick="openFullReader(${args}, 'pdf')">PDF</button>` : '',
+    s.m4a_url ? `<button class="msg-link" onclick="playAudio('${escapeJs(s.title)}', '${s.id}', '${s.language}', '${s.m4a_url}')">Listen</button>` : ''
+  ].join('');
 }
 
 const _langCatalogCache = {};
@@ -1525,7 +1167,7 @@ async function applyFilters() {
           const res = await fetch(`/api/languages/${encodeURIComponent(selectedLang)}/messages?limit=200`);
           if (res.ok) {
             const json = await res.json();
-            _langCatalogCache[selectedLang] = json.data || [];
+            _langCatalogCache[selectedLang] = (json.data || []).filter(hasMedia);
           }
         } catch (e) {
           console.warn(`Could not load ${selectedLang} sermons:`, e);
@@ -1593,7 +1235,7 @@ function playAudio(title, id, lang, url) {
 
   audioEl.onerror = function() {
     console.warn('Audio stream unavailable or blocked:', secureUrl);
-    subEl.innerText = `Sermon ${id} • Live Radio Stream Connecting...`;
+    subEl.innerText = `Sermon ${id} • Audio unavailable`;
   };
 
   const playPromise = audioEl.play();
@@ -1641,7 +1283,7 @@ function playAudio(title, id, lang, url) {
         if (numEl && !activeEl.querySelector('.msg-karaoke-badge')) {
           const badge = document.createElement('span');
           badge.className = 'msg-karaoke-badge';
-          badge.innerHTML = '🎙️ READING';
+          badge.innerHTML = 'Reading';
           numEl.after(badge);
         }
 
@@ -1753,10 +1395,10 @@ function toggleReaderAudio() {
 
   if (audioEl && audioEl.src && !audioEl.paused) {
     audioEl.pause();
-    if (btn) btn.innerText = '🎧 Play Audio';
+    if (btn) btn.innerText = 'Audio';
   } else {
     playAudio(currentReaderSermon.title, currentReaderSermon.id, currentReaderSermon.language, audioUrl);
-    if (btn) btn.innerText = '⏸ Pause Audio';
+    if (btn) btn.innerText = 'Pause';
   }
 }
 
@@ -1785,8 +1427,7 @@ async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultT
   const searchInput = document.getElementById('reader-search-input');
   const audioBtn = document.getElementById('reader-audio-btn');
 
-  const siteHeader = document.querySelector('.site-header, header.site-header, header');
-  if (siteHeader) siteHeader.style.display = 'none';
+  document.body.classList.add('msg-reading');
 
   currentReaderSermon = { title, id, date, pdfUrl, language };
 
@@ -1798,9 +1439,9 @@ async function openFullReader(title, id, date, pdfUrl, language = 'en', defaultT
   const audioEl = document.getElementById('audio-element');
   if (audioBtn) {
     if (audioEl && audioEl.src && !audioEl.paused) {
-      audioBtn.innerText = '⏸ Pause Audio';
+      audioBtn.innerText = 'Pause';
     } else {
-      audioBtn.innerText = '🎧 Audio';
+      audioBtn.innerText = 'Audio';
     }
   }
 
@@ -1828,8 +1469,7 @@ function closeFullReader() {
   const readerSection = document.getElementById('full-reader-section');
   const contentArea = document.getElementById('reader-content-area');
 
-  const siteHeader = document.querySelector('.site-header, header.site-header, header');
-  if (siteHeader) siteHeader.style.display = '';
+  document.body.classList.remove('msg-reading');
 
   if (contentArea) contentArea.innerHTML = '';
   if (readerSection) readerSection.style.display = 'none';
@@ -1870,8 +1510,8 @@ function copyQuote(number, text) {
   navigator.clipboard.writeText(quoteText).then(() => {
     const btn = document.getElementById(`copy-btn-${number}`);
     if (btn) {
-      btn.innerText = '✓ Copied';
-      setTimeout(() => btn.innerText = '📋 Copy', 2000);
+      btn.innerText = 'Copied';
+      setTimeout(() => btn.innerText = 'Copy', 2000);
     }
   }).catch(err => {
     console.error('Copy failed:', err);
@@ -2123,8 +1763,8 @@ async function openBibleModal(bookName, chapter, startVerse, endVerse = null) {
 
   const refTitle = endVerse ? `${bookName} ${chapter}:${startVerse}-${endVerse}` : `${bookName} ${chapter}:${startVerse}`;
 
-  if (titleEl) titleEl.innerText = `📖 ${refTitle} — King James Version (Strong's Concordance)`;
-  bodyEl.innerHTML = '<div style="text-align:center; padding: 2rem; color: var(--text-secondary);">📖 Fetching KJV Verse & Strong\'s Interlinear...</div>';
+  if (titleEl) titleEl.innerText = `${refTitle} — King James Version (Strong's Concordance)`;
+  bodyEl.innerHTML = '<div style="text-align:center; padding: 2rem; color: var(--text-secondary);">Loading verse and Strong\'s concordance…</div>';
   modal.style.display = 'flex';
 
   try {
@@ -2161,8 +1801,8 @@ async function openBibleModal(bookName, chapter, startVerse, endVerse = null) {
         ${versesHtml}
       </div>
       <div style="display: flex; gap: 0.5rem; flex-wrap: wrap; margin-top: 1.25rem; padding-top: 1rem; border-top: 1px dashed var(--kumo-line, var(--border-default));">
-        <button class="msg-btn msg-btn-pdf" style="font-size: 0.85rem; padding: 0.35rem 0.75rem;" onclick="navigator.clipboard.writeText('${escapeJs(copyPayload)}'); this.innerText='✓ Copied Verse!'; setTimeout(()=>this.innerText='📋 Copy KJV Verse', 2000)">📋 Copy KJV Verse</button>
-        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(refTitle)}" target="_blank" rel="noopener" class="msg-btn msg-btn-pdf" style="font-size: 0.85rem; padding: 0.35rem 0.75rem; text-decoration: none;">🔗 Open in Blue Letter Bible</a>
+        <button class="msg-btn msg-btn-pdf" style="font-size: 0.85rem; padding: 0.35rem 0.75rem;" onclick="navigator.clipboard.writeText('${escapeJs(copyPayload)}'); this.innerText='Copied'; setTimeout(()=>this.innerText='Copy verse', 2000)">Copy verse</button>
+        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(refTitle)}" target="_blank" rel="noopener" class="msg-btn msg-btn-pdf" style="font-size: 0.85rem; padding: 0.35rem 0.75rem; text-decoration: none;">Open in Blue Letter Bible</a>
       </div>
     `;
   } catch (err) {
@@ -2170,7 +1810,7 @@ async function openBibleModal(bookName, chapter, startVerse, endVerse = null) {
     bodyEl.innerHTML = `
       <div style="text-align:center; padding: 2rem;">
         <p style="color: var(--text-secondary);">Unable to load KJV text for <strong>${escapeHtml(refTitle)}</strong>.</p>
-        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(refTitle)}" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 1rem; display: inline-block;">🔍 Search on Blue Letter Bible</a>
+        <a href="https://www.blueletterbible.org/search/search.cfm?Criteria=${encodeURIComponent(refTitle)}" target="_blank" class="msg-btn msg-btn-pdf" style="margin-top: 1rem; display: inline-block;">Search on Blue Letter Bible</a>
       </div>
     `;
   }
