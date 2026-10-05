@@ -250,6 +250,21 @@ $tracking-tight: -0.02em;
   }
 }
 
+// A post that opens with an image uses it as a cover, wider than the text.
+$cover-width: 960px;
+
+body.page-post [itemprop="articleBody"] > p:first-child > img:only-child {
+  display: block;
+  width: min(#{$cover-width}, calc(100vw - 2rem));
+  max-width: none;
+  height: auto;
+  position: relative;
+  left: 50%;
+  transform: translateX(-50%);
+  border-radius: 6px;
+  margin: 0.5rem 0 1rem;
+}
+
 // About page leads with a portrait; keep it to a sensible size.
 body.page-basic .page-content > p:first-child > img:only-child {
   display: block;
