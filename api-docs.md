@@ -333,13 +333,19 @@ description: Complete developer documentation and REST API specification for Wil
           <td><code>language</code></td>
           <td>string</td>
           <td><code>null</code></td>
-          <td>Language code filter (e.g. <code>en</code>, <code>ny</code> for Chichewa, <code>fr</code>, <code>es</code>).</td>
+          <td>Language code filter (e.g. <code>en</code>, <code>nya</code> for Chichewa, <code>fra</code>, <code>es</code>). <code>ny</code> is also supported as an alias.</td>
         </tr>
         <tr>
           <td><code>year</code></td>
           <td>string / int</td>
           <td><code>null</code></td>
           <td>Year filter (e.g. <code>1965</code> or 2-digit <code>65</code>).</td>
+        </tr>
+        <tr>
+          <td><code>date</code></td>
+          <td>string</td>
+          <td><code>null</code></td>
+          <td>Preaching date filter (e.g. <code>1965-07-18</code> or <code>65-0718</code>).</td>
         </tr>
       </tbody>
     </table>
@@ -469,14 +475,26 @@ description: Complete developer documentation and REST API specification for Wil
         <tr>
           <td><code>q</code></td>
           <td>string</td>
-          <td><strong>Yes</strong></td>
-          <td>Search term or phrase (e.g. <code>seven seals</code>, <code>deity</code>).</td>
+          <td>No*</td>
+          <td>Search term, exact phrase, sermon ID, or date (e.g. <code>seven seals</code>, <code>"seven seals"</code>, <code>1965-07-18</code>, <code>65-0718M</code>). *Required unless <code>date</code> or <code>year</code> is specified.</td>
+        </tr>
+        <tr>
+          <td><code>date</code></td>
+          <td>string</td>
+          <td>No</td>
+          <td>Filter by preaching date (e.g. <code>1965-07-18</code> or <code>65-0718</code>).</td>
+        </tr>
+        <tr>
+          <td><code>year</code></td>
+          <td>string / int</td>
+          <td>No</td>
+          <td>Filter by 4-digit or 2-digit year (e.g. <code>1965</code> or <code>65</code>).</td>
         </tr>
         <tr>
           <td><code>language</code></td>
           <td>string</td>
           <td>No</td>
-          <td>Filter search results to a specific language code.</td>
+          <td>Filter search results to a specific language code (e.g. <code>nya</code> for Chichewa, <code>en</code> for English). <code>ny</code> is also accepted as an alias.</td>
         </tr>
       </tbody>
     </table>

@@ -27,7 +27,7 @@ const {
 
 /* ── Response Helpers ──────────────────────────────────────────── */
 
-function json(statusCode, body) {
+function json(statusCode, body, customHeaders = {}) {
   return {
     statusCode,
     headers: {
@@ -36,6 +36,7 @@ function json(statusCode, body) {
       'Access-Control-Allow-Methods': 'GET, OPTIONS',
       'Access-Control-Allow-Headers': 'Content-Type',
       'Cache-Control': 'public, max-age=3600, s-maxage=86400',
+      ...customHeaders,
     },
     body: JSON.stringify(body),
   };
@@ -92,6 +93,7 @@ exports.handler = async (event) => {
       const result = await getSermons({
         language: params.language,
         year: params.year,
+        date: params.date,
         series: params.series,
         page: params.page,
         limit: params.limit,
@@ -111,7 +113,9 @@ exports.handler = async (event) => {
       if (!result) {
         return notFound(`Sermon '${id}' text transcript not found`);
       }
-      return json(200, { data: result });
+      return json(200, { data: result }, {
+        'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400'
+      });
     }
 
     /* ── GET /api/messages/:id ────────────────────────────────── */
@@ -141,6 +145,7 @@ exports.handler = async (event) => {
       const result = await getSermons({
         language: code,
         year: params.year,
+        date: params.date,
         series: params.series,
         page: params.page,
         limit: params.limit,
@@ -163,6 +168,7 @@ exports.handler = async (event) => {
       const year = segments[1];
       const result = await getSermons({
         year,
+        date: params.date,
         language: params.language,
         series: params.series,
         page: params.page,
@@ -173,14 +179,16 @@ exports.handler = async (event) => {
 
     /* ── GET /api/search?q=... ────────────────────────────────── */
     if (segments[0] === 'search') {
-      if (!params.q) {
+      if (!params.q && !params.date && !params.year) {
         return json(400, {
-          error: 'Missing required query parameter: q',
-          example: '/api/search?q=seven+seals',
+          error: 'Missing required query parameter: q, date, or year',
+          example: '/api/search?q=seven+seals or /api/search?date=1965-07-18',
         });
       }
       const result = searchSermons(params.q, {
         language: params.language,
+        date: params.date,
+        year: params.year,
         page: params.page,
         limit: params.limit,
       });

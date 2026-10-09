@@ -43,15 +43,34 @@ exports.handler = async (event, context) => {
       },
       "/api/messages": {
         get: {
-          summary: "List and search sermons catalogue",
+          summary: "List sermons catalogue with pagination and filters",
           operationId: "getMessages",
           parameters: [
-            { name: "language", in: "query", schema: { type: "string", default: "en" } },
-            { name: "year", in: "query", schema: { type: "string" } },
-            { name: "limit", in: "query", schema: { type: "integer", default: 50 } }
+            { name: "language", in: "query", schema: { type: "string", default: "en", example: "nya" } },
+            { name: "year", in: "query", schema: { type: "string", example: "1965" } },
+            { name: "date", in: "query", schema: { type: "string", example: "1965-07-18" } },
+            { name: "limit", in: "query", schema: { type: "integer", default: 50 } },
+            { name: "page", in: "query", schema: { type: "integer", default: 1 } }
           ],
           responses: {
-            "200": { description: "List of sermon records" }
+            "200": { description: "List of sermon summary records" }
+          }
+        }
+      },
+      "/api/search": {
+        get: {
+          summary: "Full-text phrase and date search across sermons",
+          operationId: "searchSermons",
+          parameters: [
+            { name: "q", in: "query", schema: { type: "string", example: "seven seals" } },
+            { name: "date", in: "query", schema: { type: "string", example: "1965-07-18" } },
+            { name: "year", in: "query", schema: { type: "string", example: "1965" } },
+            { name: "language", in: "query", schema: { type: "string", example: "nya" } },
+            { name: "limit", in: "query", schema: { type: "integer", default: 50 } },
+            { name: "page", in: "query", schema: { type: "integer", default: 1 } }
+          ],
+          responses: {
+            "200": { description: "Search results with relevance scoring and match snippets" }
           }
         }
       },
@@ -60,7 +79,7 @@ exports.handler = async (event, context) => {
           summary: "Get full paragraph transcript for a sermon",
           operationId: "getSermonText",
           parameters: [
-            { name: "id", in: "path", required: true, schema: { type: "string", example: "64-0112" } },
+            { name: "id", in: "path", required: true, schema: { type: "string", example: "65-0718M" } },
             { name: "language", in: "query", schema: { type: "string", default: "en" } }
           ],
           responses: {
