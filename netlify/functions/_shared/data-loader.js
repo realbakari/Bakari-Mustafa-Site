@@ -670,8 +670,10 @@ async function fetchSermonBlocksFromMessageHub(id, language = 'en') {
         source: 'messagehub',
       };
 
-      _transcriptCache.set(cacheKey, result);
-      saveDiskCachedTranscript(id, language, result);
+      if (paragraphs && paragraphs.length > 0) {
+        _transcriptCache.set(cacheKey, result);
+        saveDiskCachedTranscript(id, language, result);
+      }
       return result;
     }
   } catch (err) {
@@ -689,13 +691,17 @@ async function getSermonText(id, language = null) {
 
   // Check in-memory transcript cache
   if (_transcriptCache.has(cacheKey)) {
-    return _transcriptCache.get(cacheKey);
+    const cached = _transcriptCache.get(cacheKey);
+    if (cached && Array.isArray(cached.paragraphs) && cached.paragraphs.length > 0) {
+      return cached;
+    }
+    _transcriptCache.delete(cacheKey);
   }
 
   // Check disk cache
   const diskCached = getDiskCachedTranscript(id, language);
   if (diskCached) {
-    if (diskCached.paragraphs && Array.isArray(diskCached.paragraphs)) {
+    if (diskCached.paragraphs && Array.isArray(diskCached.paragraphs) && diskCached.paragraphs.length > 0) {
       diskCached.paragraphs = diskCached.paragraphs.map((p) => {
         const cleanText = cleanParagraphText(p.text);
         return {
@@ -704,9 +710,9 @@ async function getSermonText(id, language = null) {
           sentences: p.sentences || parseSentences(cleanText, p.number),
         };
       });
+      _transcriptCache.set(cacheKey, diskCached);
+      return diskCached;
     }
-    _transcriptCache.set(cacheKey, diskCached);
-    return diskCached;
   }
 
   const sermons = loadSermons();
@@ -739,7 +745,9 @@ async function getSermonText(id, language = null) {
       paragraphs: structuredParagraphs,
       source: sermon.source || 'local',
     };
-    _transcriptCache.set(cacheKey, result);
+    if (structuredParagraphs && structuredParagraphs.length > 0) {
+      _transcriptCache.set(cacheKey, result);
+    }
     return result;
   }
 
@@ -758,18 +766,23 @@ async function getSermonText(id, language = null) {
       paragraphs: mhData.paragraphs,
       source: 'messagehub',
     };
-    _transcriptCache.set(cacheKey, result);
+    if (mhData.paragraphs && mhData.paragraphs.length > 0) {
+      _transcriptCache.set(cacheKey, result);
+    }
     return result;
   }
 
   if (sermon) {
     const validPdf = sermon.pdf_url && !sermon.pdf_url.includes('messagehub.info') ? sermon.pdf_url : null;
-    const structuredParagraphs = (sermon.paragraphs || []).map((p) => ({
-      number: p.number,
-      text: p.text,
-      sentences: p.sentences || parseSentences(p.text, p.number),
-    }));
-    return {
+    const structuredParagraphs = (sermon.paragraphs || []).map((p) => {
+      const cleanText = cleanParagraphText(p.text);
+      return {
+        number: p.number,
+        text: cleanText,
+        sentences: parseSentences(cleanText, p.number),
+      };
+    });
+    const result = {
       id: sermon.id,
       title: sermon.title,
       language: sermon.language === 'ny' ? 'nya' : sermon.language,
@@ -780,6 +793,10 @@ async function getSermonText(id, language = null) {
       paragraphs: structuredParagraphs,
       source: sermon.source || 'local',
     };
+    if (structuredParagraphs && structuredParagraphs.length > 0) {
+      _transcriptCache.set(cacheKey, result);
+    }
+    return result;
   }
 
   return null;

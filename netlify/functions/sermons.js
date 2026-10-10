@@ -31,6 +31,12 @@ const {
 
 /* ── Response Helpers ──────────────────────────────────────────── */
 
+const NO_STORE_HEADERS = {
+  'Cache-Control': 'no-store, no-cache, must-revalidate, max-age=0',
+  'CDN-Cache-Control': 'no-store',
+  'Netlify-CDN-Cache-Control': 'no-store',
+};
+
 function json(statusCode, body, customHeaders = {}) {
   return {
     statusCode,
@@ -47,7 +53,7 @@ function json(statusCode, body, customHeaders = {}) {
 }
 
 function notFound(message = 'Not found') {
-  return json(404, { error: message });
+  return json(404, { error: message }, NO_STORE_HEADERS);
 }
 
 /* ── Route Parsing ─────────────────────────────────────────────── */
@@ -117,9 +123,19 @@ exports.handler = async (event) => {
       const id = decodeURIComponent(segments[1]);
       const result = await getSermonText(id, params.language);
 
-      if (!result) {
-        return notFound(`Sermon '${id}' text transcript not found`);
+      const hasParagraphs = Boolean(
+        result &&
+        Array.isArray(result.paragraphs) &&
+        result.paragraphs.length > 0
+      );
+
+      if (!result || !hasParagraphs) {
+        if (!result) {
+          return notFound(`Sermon '${id}' text transcript not found`);
+        }
+        return json(200, { data: result }, NO_STORE_HEADERS);
       }
+
       return json(200, { data: result }, {
         'Cache-Control': 'public, max-age=86400, s-maxage=604800, stale-while-revalidate=86400'
       });
@@ -349,6 +365,6 @@ exports.handler = async (event) => {
     return notFound(`Unknown endpoint: /api/${segments.join('/')}`);
   } catch (err) {
     console.error('API Error:', err);
-    return json(500, { error: 'Internal server error' });
+    return json(500, { error: 'Internal server error' }, NO_STORE_HEADERS);
   }
 };
