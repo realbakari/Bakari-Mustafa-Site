@@ -264,6 +264,8 @@ description: Complete developer documentation and REST API specification for Wil
       <a href="#messages-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/messages</a>
       <a href="#messages-single" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/messages/:id</a>
       <a href="#messages-text" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/messages/:id/text</a>
+      <a href="#series-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/series</a>
+      <a href="#places-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/places</a>
       <a href="#languages-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/languages</a>
       <a href="#languages-messages" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/languages/:code/messages</a>
       <a href="#search" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/search</a>
@@ -283,7 +285,12 @@ description: Complete developer documentation and REST API specification for Wil
         <option value="/api/messages?limit=3">GET /api/messages?limit=3 (List sermons)</option>
         <option value="/api/messages?language=ny&limit=3">GET /api/messages?language=ny (Chichewa sermons)</option>
         <option value="/api/messages/65-0718M">GET /api/messages/65-0718M (Get sermon by ID)</option>
-        <option value="/api/messages/50-0100/text?language=ny">GET /api/messages/50-0100/text?language=ny (Sermon text transcript)</option>
+        <option value="/api/messages/65-0718M/text?language=ny">GET /api/messages/65-0718M/text?language=ny (Structured text & sentences)</option>
+        <option value="/api/series">GET /api/series (List 16 official series)</option>
+        <option value="/api/series/seven-seals">GET /api/series/seven-seals (Get series details)</option>
+        <option value="/api/places">GET /api/places (List preaching locations)</option>
+        <option value="/api/messages?place=Jeffersonville&limit=3">GET /api/messages?place=Jeffersonville</option>
+        <option value="/api/messages?length=long&limit=3">GET /api/messages?length=long</option>
         <option value="/api/search?q=seven+seals">GET /api/search?q=seven+seals (Full-text search)</option>
         <option value="/api/languages">GET /api/languages (List all 72 languages)</option>
         <option value="/api/years">GET /api/years (List sermon years)</option>
@@ -347,6 +354,24 @@ description: Complete developer documentation and REST API specification for Wil
           <td><code>null</code></td>
           <td>Preaching date filter (e.g. <code>1965-07-18</code> or <code>65-0718</code>).</td>
         </tr>
+        <tr>
+          <td><code>series</code></td>
+          <td>string</td>
+          <td><code>null</code></td>
+          <td>Official series name or slug (e.g. <code>adoption</code>, <code>hebrews</code>, <code>seven-seals</code>).</td>
+        </tr>
+        <tr>
+          <td><code>place</code> / <code>location</code></td>
+          <td>string</td>
+          <td><code>null</code></td>
+          <td>Preaching location or city (e.g. <code>Jeffersonville</code>, <code>Chicago</code>, <code>Phoenix</code>).</td>
+        </tr>
+        <tr>
+          <td><code>length</code></td>
+          <td>string</td>
+          <td><code>null</code></td>
+          <td>Sermon length category: <code>short</code> (&lt;60m), <code>medium</code> (60–120m), <code>long</code> (&gt;120m).</td>
+        </tr>
       </tbody>
     </table>
 
@@ -384,7 +409,7 @@ description: Complete developer documentation and REST API specification for Wil
       <span class="method-tag method-get">GET</span> Get Sermon by ID
     </div>
     <div class="endpoint-url">https://bakarimustafa.com/api/messages/:id</div>
-    <p>Fetches metadata, cover image, PDF transcript URL, and audio stream for a specific sermon ID (date code like <code>65-0718M</code>).</p>
+    <p>Fetches metadata, cover image, PDF transcript URL, audio stream, preaching location, length category, and official series for a specific sermon ID (date code like <code>65-0718M</code>).</p>
 
     <h4>URL Parameters</h4>
     <table class="param-table">
@@ -403,13 +428,20 @@ description: Complete developer documentation and REST API specification for Wil
         </tr>
       </tbody>
     </table>
+  </section>
+
   <!-- Endpoint 2b: Get Sermon Text Transcript -->
   <section id="messages-text" class="endpoint-section">
     <div class="endpoint-title">
-      <span class="method-tag method-get">GET</span> Get Sermon Transcript & Paragraphs
+      <span class="method-tag method-get">GET</span> Get Sermon Transcript, Paragraphs & Sentence Tags
     </div>
     <div class="endpoint-url">https://bakarimustafa.com/api/messages/:id/text</div>
-    <p>Fetches full transcript text and structured paragraph objects for a specific sermon ID (date code like <code>50-0100</code>).</p>
+    <p>Fetches structured transcript text organized into numbered paragraphs and sentence-level tokens. Every sentence has an individual tag (e.g. <code>p1-s1</code>), and editor's notes (e.g. <code>[...—Ed.]</code> or <code>[..._Mkonzi.]</code>) are cleanly isolated.</p>
+
+    <div style="background-color: var(--kumo-control, var(--bg-secondary)); border-left: 4px solid var(--accent-primary); padding: 0.85rem 1.15rem; margin: 1rem 0; border-radius: 4px;">
+      <strong style="color: var(--accent-primary);">💡 Why Structured Sentences & Paragraphs?</strong>
+      <p style="margin: 0.35rem 0 0; font-size: 0.875rem;">Direct PDF text extraction frequently suffers from fused words (missing whitespace), OCR errors, running headers, and page breaks. Structured text with sentence-level tags allows <strong>exact sentence highlighting</strong>, <strong>word-level quoting</strong>, <strong>audio sync</strong>, and separates the speaker's voice from translator notes.</p>
+    </div>
 
     <h4>URL & Query Parameters</h4>
     <table class="param-table">
@@ -424,12 +456,12 @@ description: Complete developer documentation and REST API specification for Wil
         <tr>
           <td><code>id</code></td>
           <td>string (path)</td>
-          <td>Sermon date code identifier (e.g. <code>50-0100</code>, <code>65-0718M</code>).</td>
+          <td>Sermon date code identifier (e.g. <code>65-0718M</code>, <code>50-0100</code>).</td>
         </tr>
         <tr>
           <td><code>language</code></td>
           <td>string (query)</td>
-          <td>Language code filter (e.g. <code>ny</code> for Chichewa, <code>en</code> for English).</td>
+          <td>Language code filter (e.g. <code>ny</code> or <code>nya</code> for Chichewa, <code>en</code> for English). Default: <code>en</code>.</td>
         </tr>
       </tbody>
     </table>
@@ -438,17 +470,108 @@ description: Complete developer documentation and REST API specification for Wil
     <div class="code-snippet">
 <pre>{
   "data": {
-    "id": "50-0100",
-    "title": "Matenda Ndi Zosautsa",
-    "language": "ny",
-    "date": "1950-01-00",
+    "id": "65-0718M",
+    "title": "Kuyesera Kuchitira Mulungu Utumiki...",
+    "language": "nya",
+    "date": "1965-07-18",
+    "location": "Jeffersonville, IN",
     "pdf_url": "https://d2w09gj4mqt5u.cloudfront.net/repo/...",
-    "full_text": "MATENDANDIZOSAUTSA...",
     "paragraphs": [
-      { "number": 1, "text": "Inendikufunakufotokozachinachake..." },
-      { "number": 2, "text": "Chinthu chimodzi chiri chokhudza..." }
+      {
+        "number": 1,
+        "text": "Mulungu akudalitseni m'bale. [Msonkhano ukuti, \"Amen.\"—Mkonzi.]...",
+        "sentences": [
+          {
+            "id": "p1-s1",
+            "text": "Mulungu akudalitseni m'bale.",
+            "is_editor_note": false
+          },
+          {
+            "id": "p1-s2",
+            "text": "[Msonkhano ukuti, \"Amen.\"—Mkonzi.]",
+            "is_editor_note": true
+          }
+        ]
+      }
     ]
   }
+}</pre>
+    </div>
+  </section>
+
+  <!-- Endpoint 2c: Official Series -->
+  <section id="series-list" class="endpoint-section">
+    <div class="endpoint-title">
+      <span class="method-tag method-get">GET</span> The 16 Official Sermon Series
+    </div>
+    <div class="endpoint-url">https://bakarimustafa.com/api/series</div>
+    <p>Retrieves the 16 official sermon series (Adoption, Hebrews, Seventy Weeks, The Revelation of the Seven Seals, The Seven Church Ages, The Easter Revival, Conduct Order and Doctrine, etc.) with sermon IDs and counts.</p>
+
+    <h4>Sub-Endpoints</h4>
+    <ul>
+      <li><code>GET /api/series</code> — Returns all 16 series with summaries and counts.</li>
+      <li><code>GET /api/series/:slug</code> — Returns metadata and sermon date codes for a specific series (e.g. <code>adoption</code>, <code>seven-seals</code>, <code>hebrews</code>).</li>
+      <li><code>GET /api/series/:slug/messages</code> — Directly lists the sermon objects belonging to that series.</li>
+    </ul>
+
+    <h4>Example Response (200 OK)</h4>
+    <div class="code-snippet">
+<pre>{
+  "total_series": 16,
+  "data": [
+    {
+      "id": "seven-seals",
+      "slug": "seven-seals",
+      "title": "The Revelation of the Seven Seals",
+      "year": 1963,
+      "sermon_count": 8,
+      "sermons": ["63-0317M", "63-0317E", "63-0318", "63-0319", "63-0320", "63-0321", "63-0322", "63-0324M", "63-0324E"]
+    },
+    {
+      "id": "adoption",
+      "slug": "adoption",
+      "title": "Adoption",
+      "year": 1960,
+      "sermon_count": 4,
+      "sermons": ["60-0515E", "60-0518", "60-0522", "60-0522E"]
+    }
+  ]
+}</pre>
+    </div>
+  </section>
+
+  <!-- Endpoint 2d: Browsing by Place and Length -->
+  <section id="places-list" class="endpoint-section">
+    <div class="endpoint-title">
+      <span class="method-tag method-get">GET</span> Browse by Place & Sermon Length
+    </div>
+    <div class="endpoint-url">https://bakarimustafa.com/api/places</div>
+    <p>Browse preaching locations across 170+ venues (Jeffersonville, Chicago, Phoenix, Los Angeles, Shreveport, etc.) and filter sermons by length.</p>
+
+    <h4>Sub-Endpoints & Query Filters</h4>
+    <ul>
+      <li><code>GET /api/places</code> — Returns preaching venues sorted by frequency with sermon counts.</li>
+      <li><code>GET /api/places/:place/messages</code> — Returns sermons preached in a specific city/venue (e.g. <code>/api/places/Jeffersonville/messages</code>).</li>
+      <li><code>GET /api/messages?place={place}</code> — Filter sermons by city or venue.</li>
+      <li><code>GET /api/messages?length={short|medium|long}</code> — Filter by sermon duration:
+        <ul>
+          <li><code>short</code>: Under 60 minutes.</li>
+          <li><code>medium</code>: 60 to 120 minutes.</li>
+          <li><code>long</code>: Over 120 minutes.</li>
+        </ul>
+      </li>
+    </ul>
+
+    <h4>Example Response (200 OK)</h4>
+    <div class="code-snippet">
+<pre>{
+  "total_places": 170,
+  "data": [
+    { "place": "Jeffersonville, IN", "sermon_count": 526 },
+    { "place": "Chicago, IL", "sermon_count": 67 },
+    { "place": "Phoenix, AZ", "sermon_count": 59 },
+    { "place": "Los Angeles, CA", "sermon_count": 34 }
+  ]
 }</pre>
     </div>
   </section>

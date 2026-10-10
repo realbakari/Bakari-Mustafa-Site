@@ -21,6 +21,9 @@ const {
   getSermonText,
   getLanguages,
   getYears,
+  getSeries,
+  getSeriesBySlug,
+  getPlaces,
   searchSermons,
   getStats,
 } = require('./_shared/data-loader');
@@ -95,6 +98,8 @@ exports.handler = async (event) => {
         year: params.year,
         date: params.date,
         series: params.series,
+        place: params.place || params.location,
+        length: params.length,
         page: params.page,
         limit: params.limit,
       });
@@ -129,6 +134,63 @@ exports.handler = async (event) => {
       return json(200, { data: result });
     }
 
+    /* ── GET /api/series ──────────────────────────────────────── */
+    if (segments[0] === 'series' && segments.length === 1) {
+      const seriesList = getSeries();
+      return json(200, { total_series: seriesList.length, data: seriesList });
+    }
+
+    /* ── GET /api/series/:slug/messages ───────────────────────── */
+    if (
+      segments[0] === 'series' &&
+      segments.length === 3 &&
+      segments[2] === 'messages'
+    ) {
+      const slug = segments[1];
+      const seriesObj = getSeriesBySlug(slug);
+      const result = await getSermons({
+        series: seriesObj ? seriesObj.title : slug,
+        language: params.language,
+        year: params.year,
+        page: params.page,
+        limit: params.limit,
+      });
+      return json(200, result);
+    }
+
+    /* ── GET /api/series/:slug ────────────────────────────────── */
+    if (segments[0] === 'series' && segments.length === 2) {
+      const slug = segments[1];
+      const seriesObj = getSeriesBySlug(slug);
+      if (!seriesObj) {
+        return notFound(`Series '${slug}' not found`);
+      }
+      return json(200, { data: seriesObj });
+    }
+
+    /* ── GET /api/places or /api/locations ────────────────────── */
+    if ((segments[0] === 'places' || segments[0] === 'locations') && segments.length === 1) {
+      const places = getPlaces();
+      return json(200, { total_places: places.length, data: places });
+    }
+
+    /* ── GET /api/places/:place/messages ──────────────────────── */
+    if (
+      (segments[0] === 'places' || segments[0] === 'locations') &&
+      segments.length === 3 &&
+      segments[2] === 'messages'
+    ) {
+      const place = decodeURIComponent(segments[1]);
+      const result = await getSermons({
+        place,
+        language: params.language,
+        year: params.year,
+        page: params.page,
+        limit: params.limit,
+      });
+      return json(200, result);
+    }
+
     /* ── GET /api/languages ───────────────────────────────────── */
     if (segments[0] === 'languages' && segments.length === 1) {
       const languages = getLanguages();
@@ -147,6 +209,8 @@ exports.handler = async (event) => {
         year: params.year,
         date: params.date,
         series: params.series,
+        place: params.place || params.location,
+        length: params.length,
         page: params.page,
         limit: params.limit,
       });
@@ -171,6 +235,8 @@ exports.handler = async (event) => {
         date: params.date,
         language: params.language,
         series: params.series,
+        place: params.place || params.location,
+        length: params.length,
         page: params.page,
         limit: params.limit,
       });
@@ -243,8 +309,18 @@ exports.handler = async (event) => {
         documentation_url: 'https://bakarimustafa.com/api-docs/',
         endpoints: {
           messages: {
-            list: 'GET /api/messages?page=1&limit=50&language=ny&year=65',
-            get: 'GET /api/messages/:id?language=ny',
+            list: 'GET /api/messages?page=1&limit=50&language=nya&year=65&series=adoption&place=Jeffersonville&length=medium',
+            get: 'GET /api/messages/:id?language=nya',
+            transcript: 'GET /api/messages/:id/text?language=nya',
+          },
+          series: {
+            list: 'GET /api/series',
+            get: 'GET /api/series/:slug',
+            messages: 'GET /api/series/:slug/messages',
+          },
+          places: {
+            list: 'GET /api/places',
+            messages: 'GET /api/places/:place/messages',
           },
           languages: {
             list: 'GET /api/languages',
@@ -254,7 +330,7 @@ exports.handler = async (event) => {
             list: 'GET /api/years',
             messages: 'GET /api/years/:year/messages',
           },
-          search: 'GET /api/search?q=keyword&language=ny',
+          search: 'GET /api/search?q=keyword&language=nya',
           stats: 'GET /api/stats',
         },
         source: 'https://themessage.com + https://search.messagehub.info',

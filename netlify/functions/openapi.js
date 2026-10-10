@@ -49,11 +49,44 @@ exports.handler = async (event, context) => {
             { name: "language", in: "query", schema: { type: "string", default: "en", example: "nya" } },
             { name: "year", in: "query", schema: { type: "string", example: "1965" } },
             { name: "date", in: "query", schema: { type: "string", example: "1965-07-18" } },
+            { name: "series", in: "query", schema: { type: "string", example: "adoption" } },
+            { name: "place", in: "query", schema: { type: "string", example: "Jeffersonville" } },
+            { name: "length", in: "query", schema: { type: "string", enum: ["short", "medium", "long"], example: "medium" } },
             { name: "limit", in: "query", schema: { type: "integer", default: 50 } },
             { name: "page", in: "query", schema: { type: "integer", default: 1 } }
           ],
           responses: {
             "200": { description: "List of sermon summary records" }
+          }
+        }
+      },
+      "/api/series": {
+        get: {
+          summary: "List all 16 official sermon series with metadata and counts",
+          operationId: "getSeries",
+          responses: {
+            "200": { description: "List of official series" }
+          }
+        }
+      },
+      "/api/series/{slug}": {
+        get: {
+          summary: "Get specific series metadata and sermon IDs",
+          operationId: "getSeriesBySlug",
+          parameters: [
+            { name: "slug", in: "path", required: true, schema: { type: "string", example: "adoption" } }
+          ],
+          responses: {
+            "200": { description: "Series detail" }
+          }
+        }
+      },
+      "/api/places": {
+        get: {
+          summary: "List all preaching locations with sermon counts",
+          operationId: "getPlaces",
+          responses: {
+            "200": { description: "List of preaching locations" }
           }
         }
       },

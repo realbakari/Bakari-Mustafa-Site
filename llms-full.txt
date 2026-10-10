@@ -39,14 +39,17 @@ Returns list of sermon records.
       "language": "en",
       "pdf_url": "https://branham.org/.../64-0112%20Shalom%20VGR.pdf",
       "m4a_url": "https://branham.org/.../64-0112%20Shalom.m4a",
-      "cover_image": "https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg"
+      "cover_image": "https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg",
+      "location": "Phoenix, AZ",
+      "series": "easter-messages",
+      "length": "medium"
     }
   ]
 }
 ```
 
 ### 3. GET /api/messages/{id}/text?language=en
-Returns full sermon transcript broken into numbered paragraph blocks.
+Returns full sermon transcript broken into numbered paragraph blocks with sentence-level tagging and editor's notes tags.
 
 ```json
 {
@@ -58,14 +61,45 @@ Returns full sermon transcript broken into numbered paragraph blocks.
     "paragraphs": [
       {
         "number": 1,
-        "text": "SHALOM... Thank you, very much, Brother Isaacson..."
-      },
-      {
-        "number": 2,
-        "text": "Good morning, friends, you may sit down..."
+        "text": "SHALOM... Thank you, very much, Brother Isaacson...",
+        "sentences": [
+          { "id": "p1-s1", "text": "SHALOM... Thank you, very much, Brother Isaacson.", "is_editor_note": false }
+        ]
       }
     ]
   }
+}
+```
+
+### 4. GET /api/series
+Returns 16 official sermon series (Adoption, Hebrews, Seventy Weeks, Seven Seals, Church Ages, etc.).
+
+```json
+{
+  "total_series": 16,
+  "data": [
+    {
+      "id": "seven-seals",
+      "slug": "seven-seals",
+      "title": "The Revelation of the Seven Seals",
+      "year": 1963,
+      "sermon_count": 8,
+      "sermons": ["63-0317M", "63-0317E", "63-0318", "63-0319", "63-0320", "63-0321", "63-0322", "63-0324M", "63-0324E"]
+    }
+  ]
+}
+```
+
+### 5. GET /api/places
+Returns preaching locations with sermon counts.
+
+```json
+{
+  "total_places": 170,
+  "data": [
+    { "place": "Jeffersonville, IN", "sermon_count": 526 },
+    { "place": "Chicago, IL", "sermon_count": 67 }
+  ]
 }
 ```
 

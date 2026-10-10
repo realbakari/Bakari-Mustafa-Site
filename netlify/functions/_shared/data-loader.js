@@ -58,6 +58,21 @@ function loadLanguages() {
   return _languages;
 }
 
+let _series = null;
+
+function loadSeries() {
+  if (!_series) {
+    try {
+      _series = JSON.parse(
+        fs.readFileSync(getDataPath('series.json'), 'utf8')
+      );
+    } catch {
+      _series = [];
+    }
+  }
+  return _series;
+}
+
 function loadSearchIndex() {
   if (!_searchIndex) {
     try {
@@ -69,6 +84,62 @@ function loadSearchIndex() {
     }
   }
   return _searchIndex;
+}
+
+/* ── Sentence & Editor Note Parser ─────────────────────────────── */
+
+/**
+ * Tokenize a paragraph into sentences with distinct IDs and flag editor's notes.
+ * Editor notes (e.g. "[...—Ed.]", "[..._Mkonzi.]") are preserved intact.
+ */
+function parseSentences(paragraphText, paragraphNumber = 1) {
+  if (!paragraphText) return [];
+
+  const tokens = [];
+  const bracketRegex = /\[[^\]]+\]/g;
+  let lastIndex = 0;
+  let match;
+
+  while ((match = bracketRegex.exec(paragraphText)) !== null) {
+    if (match.index > lastIndex) {
+      tokens.push({ text: paragraphText.slice(lastIndex, match.index), is_editor_note: false });
+    }
+    tokens.push({ text: match[0], is_editor_note: true });
+    lastIndex = match.index + match[0].length;
+  }
+  if (lastIndex < paragraphText.length) {
+    tokens.push({ text: paragraphText.slice(lastIndex), is_editor_note: false });
+  }
+
+  const sentences = [];
+  let sIndex = 1;
+
+  for (const token of tokens) {
+    if (token.is_editor_note) {
+      const clean = token.text.trim();
+      if (clean) {
+        sentences.push({
+          id: `p${paragraphNumber}-s${sIndex++}`,
+          text: clean,
+          is_editor_note: true,
+        });
+      }
+    } else {
+      const rawSentences = token.text.split(/(?<=[.!?])\s+(?=[A-Z0-9"'\u201C\u2018\[])/);
+      for (const s of rawSentences) {
+        const clean = s.trim();
+        if (clean) {
+          sentences.push({
+            id: `p${paragraphNumber}-s${sIndex++}`,
+            text: clean,
+            is_editor_note: false,
+          });
+        }
+      }
+    }
+  }
+
+  return sentences;
 }
 
 /* ── Language Normalization ────────────────────────────────────── */
@@ -140,6 +211,7 @@ function formatSermonSummary(s, matchSnippet = null) {
     m4a_url: validAudio,
     series: s.series || null,
     location: s.location || null,
+    length: s.length_category || 'medium',
     source: s.source || (validPdf ? 'themessage' : 'messagehub'),
   };
 
@@ -235,6 +307,7 @@ async function fetchLanguageSermonsFromMessageHub(langCode) {
             pdf_url: null,
             m4a_url: null,
             series: null,
+            length_category: 'medium',
             source: 'messagehub',
           };
         });
@@ -251,7 +324,7 @@ async function fetchLanguageSermonsFromMessageHub(langCode) {
 /**
  * Get all sermons, optionally filtered.
  */
-async function getSermons({ language, year, date, series, page, limit } = {}) {
+async function getSermons({ language, year, date, series, place, location, length, page, limit } = {}) {
   let sermons = loadSermons();
 
   if (language && language !== 'en') {
@@ -289,6 +362,20 @@ async function getSermons({ language, year, date, series, page, limit } = {}) {
     const seriesLower = series.toLowerCase();
     sermons = sermons.filter(
       (s) => s.series && s.series.toLowerCase().includes(seriesLower)
+    );
+  }
+
+  if (place || location) {
+    const locFilter = (place || location).toLowerCase();
+    sermons = sermons.filter(
+      (s) => s.location && s.location.toLowerCase().includes(locFilter)
+    );
+  }
+
+  if (length) {
+    const lenFilter = length.toLowerCase();
+    sermons = sermons.filter(
+      (s) => (s.length_category && s.length_category.toLowerCase() === lenFilter) || (lenFilter === 'medium' && !s.length_category)
     );
   }
 
@@ -403,13 +490,17 @@ async function fetchSermonBlocksFromMessageHub(id, language = 'en') {
     const data = await res.json();
 
     if (data && data.blocks && Array.isArray(data.blocks)) {
-      const paragraphs = data.blocks.map((b) => ({
-        number: b.blockNumber,
-        text: (b.blockText || '')
+      const paragraphs = data.blocks.map((b) => {
+        const cleanText = (b.blockText || '')
           .replace(/[\x00-\x1F\x7F-\x9F]/g, ' ')
           .replace(/\s+/g, ' ')
-          .trim(),
-      }));
+          .trim();
+        return {
+          number: b.blockNumber,
+          text: cleanText,
+          sentences: parseSentences(cleanText, b.blockNumber),
+        };
+      });
       const fullText = paragraphs.map((p) => `¶${p.number} ${p.text}`).join('\n\n');
 
       const result = {
@@ -450,6 +541,13 @@ async function getSermonText(id, language = null) {
   // Check disk cache
   const diskCached = getDiskCachedTranscript(id, language);
   if (diskCached) {
+    if (diskCached.paragraphs && Array.isArray(diskCached.paragraphs)) {
+      diskCached.paragraphs = diskCached.paragraphs.map((p) => ({
+        number: p.number,
+        text: p.text,
+        sentences: p.sentences || parseSentences(p.text, p.number),
+      }));
+    }
     _transcriptCache.set(cacheKey, diskCached);
     return diskCached;
   }
@@ -464,6 +562,12 @@ async function getSermonText(id, language = null) {
 
   if (sermon && (sermon.full_text || sermon.pdf_text || (sermon.paragraphs && sermon.paragraphs.length > 0))) {
     const validPdf = sermon.pdf_url && !sermon.pdf_url.includes('messagehub.info') ? sermon.pdf_url : null;
+    const structuredParagraphs = (sermon.paragraphs || []).map((p) => ({
+      number: p.number,
+      text: p.text,
+      sentences: p.sentences || parseSentences(p.text, p.number),
+    }));
+
     const result = {
       id: sermon.id,
       title: sermon.title,
@@ -472,7 +576,7 @@ async function getSermonText(id, language = null) {
       pdf_url: validPdf,
       m4a_url: sermon.m4a_url || null,
       full_text: sermon.full_text || sermon.pdf_text || null,
-      paragraphs: sermon.paragraphs || [],
+      paragraphs: structuredParagraphs,
       source: sermon.source || 'local',
     };
     _transcriptCache.set(cacheKey, result);
@@ -500,6 +604,11 @@ async function getSermonText(id, language = null) {
 
   if (sermon) {
     const validPdf = sermon.pdf_url && !sermon.pdf_url.includes('messagehub.info') ? sermon.pdf_url : null;
+    const structuredParagraphs = (sermon.paragraphs || []).map((p) => ({
+      number: p.number,
+      text: p.text,
+      sentences: p.sentences || parseSentences(p.text, p.number),
+    }));
     return {
       id: sermon.id,
       title: sermon.title,
@@ -508,7 +617,7 @@ async function getSermonText(id, language = null) {
       pdf_url: validPdf,
       m4a_url: sermon.m4a_url || null,
       full_text: sermon.full_text || sermon.pdf_text || null,
-      paragraphs: sermon.paragraphs || [],
+      paragraphs: structuredParagraphs,
       source: sermon.source || 'local',
     };
   }
@@ -824,12 +933,53 @@ function getStats() {
   };
 }
 
+/**
+ * Get all 16 official sermon series with metadata and counts.
+ */
+function getSeries() {
+  return loadSeries();
+}
+
+/**
+ * Get specific series by slug or title.
+ */
+function getSeriesBySlug(slug) {
+  const allSeries = loadSeries();
+  const clean = (slug || '').toLowerCase().trim();
+  return (
+    allSeries.find(
+      (s) => s.slug.toLowerCase() === clean || s.title.toLowerCase() === clean
+    ) || null
+  );
+}
+
+/**
+ * Get all preaching locations/places with sermon counts.
+ */
+function getPlaces() {
+  const sermons = loadSermons();
+  const placeCounts = {};
+  for (const s of sermons) {
+    if (s.location) {
+      const trimmed = s.location.trim();
+      placeCounts[trimmed] = (placeCounts[trimmed] || 0) + 1;
+    }
+  }
+  return Object.entries(placeCounts)
+    .map(([place, count]) => ({ place, count }))
+    .sort((a, b) => b.count - a.count);
+}
+
 module.exports = {
   getSermons,
   getSermonById,
   getSermonText,
   getLanguages,
   getYears,
+  getSeries,
+  getSeriesBySlug,
+  getPlaces,
+  parseSentences,
   searchSermons,
   getStats,
   normalizeLangCode,

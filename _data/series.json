@@ -1,0 +1,233 @@
+[
+  {
+    "slug": "adoption",
+    "title": "Adoption",
+    "year": 1960,
+    "description": "Preached at the Branham Tabernacle in Jeffersonville, Indiana, May 15–22, 1960. A foundational series exploring the believer’s position and spiritual placement in Christ according to Ephesians.",
+    "sermon_ids": [
+      "60-0515E",
+      "60-0518",
+      "60-0522M",
+      "60-0522E"
+    ],
+    "sermon_count": 4
+  },
+  {
+    "slug": "hebrews",
+    "title": "Hebrews",
+    "year": 1957,
+    "description": "Extensive verse-by-verse expository study on the Epistle to the Hebrews, preached in Jeffersonville between August and October 1957.",
+    "sermon_ids": [
+      "57-0821",
+      "57-0825M",
+      "57-0825E",
+      "57-0901M",
+      "57-0901E",
+      "57-0908M",
+      "57-0908E",
+      "57-0915M",
+      "57-0915E",
+      "57-0922",
+      "57-0925",
+      "57-1002",
+      "57-1006"
+    ],
+    "sermon_count": 13
+  },
+  {
+    "slug": "seventy-weeks",
+    "title": "The Seventy Weeks of Daniel",
+    "year": 1961,
+    "description": "Prophetic study delivered in July–August 1961 detailing Daniel’s timeline of the seventy weeks, the Gentile dispensation, and the closing of the church age.",
+    "sermon_ids": [
+      "61-0730M",
+      "61-0730E",
+      "61-0806"
+    ],
+    "sermon_count": 3
+  },
+  {
+    "slug": "seven-seals",
+    "title": "The Revelation of the Seven Seals",
+    "year": 1963,
+    "description": "Delivered March 17–24, 1963, at the Branham Tabernacle following the heavenly cloud appearance in Arizona, opening the Seven Seals of the Book of Revelation.",
+    "sermon_ids": [
+      "63-0317M",
+      "63-0317E",
+      "63-0318",
+      "63-0319",
+      "63-0320",
+      "63-0321",
+      "63-0322",
+      "63-0323",
+      "63-0324M",
+      "63-0324E"
+    ],
+    "sermon_count": 9
+  },
+  {
+    "slug": "church-ages",
+    "title": "The Seven Church Ages",
+    "year": 1960,
+    "description": "Preached December 4–11, 1960, revealing the seven distinct church dispensations from Ephesus to Laodicea and their respective messengers.",
+    "sermon_ids": [
+      "60-1204M",
+      "60-1205",
+      "60-1206",
+      "60-1207",
+      "60-1208",
+      "60-1209",
+      "60-1210",
+      "60-1211M",
+      "60-1211E"
+    ],
+    "sermon_count": 8
+  },
+  {
+    "slug": "easter-revival",
+    "title": "The Easter Revival",
+    "year": 1957,
+    "description": "Delivered during the April 1957 revival campaign in Phoenix, Arizona and Oakland, California, focusing on the resurrected Christ.",
+    "sermon_ids": [
+      "57-0417",
+      "57-0418",
+      "57-0419",
+      "57-0420",
+      "57-0421S",
+      "57-0421E"
+    ],
+    "sermon_count": 6
+  },
+  {
+    "slug": "conduct-order-doctrine",
+    "title": "Conduct, Order, and Doctrine (COD)",
+    "year": "1953–1964",
+    "description": "Comprehensive Questions and Answers services addressing church order, Christian walk, theology, and spiritual questions.",
+    "sermon_ids": [
+      "53-0729",
+      "54-0103M",
+      "54-0103E",
+      "54-0515",
+      "59-0628E",
+      "59-1223",
+      "61-0112",
+      "61-1015M",
+      "62-0527",
+      "64-0823M",
+      "64-0823E",
+      "64-0830M"
+    ],
+    "sermon_count": 12
+  },
+  {
+    "slug": "demonology",
+    "title": "Demonology",
+    "year": "1953–1955",
+    "description": "Biblical discourse on spiritual discernment, demonic powers, and the authority of the believer through Jesus Christ.",
+    "sermon_ids": [
+      "53-0608",
+      "53-0609A",
+      "53-0609E",
+      "55-0620",
+      "55-0621",
+      "55-0622",
+      "55-0623",
+      "55-0624"
+    ],
+    "sermon_count": 5
+  },
+  {
+    "slug": "israel-and-the-church",
+    "title": "Israel and the Church",
+    "year": 1953,
+    "description": "Five-part exposition delivered in March 1953 tracing God’s covenant with Israel as a biblical type of the New Testament Church.",
+    "sermon_ids": [
+      "53-0325",
+      "53-0326",
+      "53-0327",
+      "53-0328",
+      "53-0329"
+    ],
+    "sermon_count": 5
+  },
+  {
+    "slug": "revelation-of-jesus-christ",
+    "title": "The Revelation of Jesus Christ",
+    "year": 1960,
+    "description": "Introductory messages to the Revelation series delivered December 4, 1960, identifying the Supreme Deity of Jesus Christ.",
+    "sermon_ids": [
+      "60-1204M",
+      "60-1204E"
+    ],
+    "sermon_count": 2
+  },
+  {
+    "slug": "original-seed",
+    "title": "The Spoken Word Is The Original Seed",
+    "year": 1962,
+    "description": "Twin landmark messages preached March 18, 1962, in Jeffersonville contrasting the unadulterated Seed Word against modern denomination.",
+    "sermon_ids": [
+      "62-0318M",
+      "62-0318E"
+    ],
+    "sermon_count": 2
+  },
+  {
+    "slug": "stature-of-a-perfect-man",
+    "title": "The Stature of a Perfect Man",
+    "year": 1962,
+    "description": "Preached in late 1962, charting the seven virtues of 2 Peter 1 that build a believer into the stature of Christ.",
+    "sermon_ids": [
+      "62-1014M",
+      "62-1104M",
+      "62-1230M"
+    ],
+    "sermon_count": 3
+  },
+  {
+    "slug": "god-in-simplicity",
+    "title": "God in Simplicity",
+    "year": 1963,
+    "description": "Messages illustrating how God consistently bypasses grandeur to reveal His truth to the humble in simple ways.",
+    "sermon_ids": [
+      "63-0317M",
+      "63-0408",
+      "63-0412"
+    ],
+    "sermon_count": 1
+  },
+  {
+    "slug": "mystery-of-god",
+    "title": "Christ Is The Mystery Of God Revealed",
+    "year": 1963,
+    "description": "Delivered July 28, 1963, explaining the eternal purpose of God to express Himself fully in Christ and through His Bride.",
+    "sermon_ids": [
+      "63-0728"
+    ],
+    "sermon_count": 1
+  },
+  {
+    "slug": "future-home",
+    "title": "The Future Home of the Heavenly Bridegroom and Earthly Bride",
+    "year": 1964,
+    "description": "Preached August 2, 1964, painting a vivid biblical portrait of the New Jerusalem, the renewed earth, and the eternal age.",
+    "sermon_ids": [
+      "64-0802"
+    ],
+    "sermon_count": 1
+  },
+  {
+    "slug": "easter-messages",
+    "title": "The Easter Messages",
+    "year": "1959–1965",
+    "description": "Resurrection sermons focusing on the Living Savior, the quickening of the mortal body, and eternal life in Christ.",
+    "sermon_ids": [
+      "59-0329M",
+      "60-0417M",
+      "61-0402",
+      "64-0329",
+      "65-0418M"
+    ],
+    "sermon_count": 4
+  }
+]
