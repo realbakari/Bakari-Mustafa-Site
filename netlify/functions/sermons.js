@@ -95,7 +95,7 @@ exports.handler = async (event) => {
     /* ── GET /api/messages ────────────────────────────────────── */
     if (segments[0] === 'messages' && segments.length === 1) {
       const result = await getSermons({
-        language: params.language,
+        language: params.language || 'en',
         year: params.year,
         date: params.date,
         series: params.series,
@@ -128,7 +128,7 @@ exports.handler = async (event) => {
     /* ── GET /api/messages/:id ────────────────────────────────── */
     if (segments[0] === 'messages' && segments.length === 2) {
       const id = decodeURIComponent(segments[1]);
-      const result = getSermonById(id, params.language);
+      const result = await getSermonById(id, params.language);
 
       if (!result) {
         return notFound(`Sermon '${id}' not found`);
@@ -152,7 +152,7 @@ exports.handler = async (event) => {
       const seriesObj = getSeriesBySlug(slug);
       const result = await getSermons({
         series: seriesObj ? seriesObj.title : slug,
-        language: params.language,
+        language: params.language || 'en',
         year: params.year,
         page: params.page,
         limit: params.limit,
@@ -185,7 +185,7 @@ exports.handler = async (event) => {
       const place = decodeURIComponent(segments[1]);
       const result = await getSermons({
         place,
-        language: params.language,
+        language: params.language || 'en',
         year: params.year,
         page: params.page,
         limit: params.limit,
@@ -241,7 +241,7 @@ exports.handler = async (event) => {
       const result = await getSermons({
         year,
         date: params.date,
-        language: params.language,
+        language: params.language || 'en',
         series: params.series,
         place: params.place || params.location,
         length: params.length,

@@ -126,7 +126,13 @@ async function main() {
   // 1. Build the 16 Official Series JSON
   const officialSeriesList = rawSeries.map(ser => {
     const slug = getSeriesSlug(ser.n);
-    const codes = ser.s.map(id => tableSermonById[id] ? tableSermonById[id].p : null).filter(Boolean);
+    let codes = ser.s.map(id => tableSermonById[id] ? tableSermonById[id].p : null).filter(Boolean);
+    if (slug === 'church-ages') {
+      codes = [
+        '60-1204M', '60-1204E', '60-1205', '60-1206', '60-1207',
+        '60-1208', '60-1209', '60-1210', '60-1211M', '60-1211E'
+      ];
+    }
     return {
       id: slug,
       slug: slug,

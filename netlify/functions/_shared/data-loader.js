@@ -86,7 +86,56 @@ function loadSearchIndex() {
   return _searchIndex;
 }
 
+let _sermonLanguages = null;
+
+function loadSermonLanguages() {
+  if (!_sermonLanguages) {
+    try {
+      _sermonLanguages = JSON.parse(
+        fs.readFileSync(getDataPath('sermon-languages.json'), 'utf8')
+      );
+    } catch {
+      _sermonLanguages = {};
+    }
+  }
+  return _sermonLanguages;
+}
+
+function getLanguagesForSermon(sermonId) {
+  const cleanId = (sermonId || '').toUpperCase().trim();
+  const map = loadSermonLanguages();
+  if (map && map[cleanId] && Array.isArray(map[cleanId]) && map[cleanId].length > 0) {
+    return map[cleanId];
+  }
+  // Fallback to local sermons in sermons.json
+  const sermons = loadSermons();
+  const matchedLangs = [];
+  for (const s of sermons) {
+    if ((s.id || '').toUpperCase().trim() === cleanId) {
+      const l = s.language === 'ny' ? 'nya' : (s.language || 'en');
+      if (!matchedLangs.includes(l)) matchedLangs.push(l);
+    }
+  }
+  if (!matchedLangs.includes('en')) matchedLangs.unshift('en');
+  return matchedLangs;
+}
+
 /* ── Sentence & Editor Note Parser ─────────────────────────────── */
+
+function cleanParagraphText(text) {
+  if (!text) return '';
+  return text
+    .replace(/[\uE000-\uF8FF]/g, '')
+    .replace(/\b\d+\s*THE\s*SPOKEN\s*WORD\b/gi, ' ')
+    .replace(/\bTHE\s*SPOKEN\s*WORD\b/gi, ' ')
+    .replace(/\r?\n/g, ' ')
+    .replace(/(:)([A-Za-z\u201C\u2018"])/g, '$1 $2')
+    .replace(/([,;])([A-Za-z\u201C\u2018"])/g, '$1 $2')
+    .replace(/((?<!\.)[.!?]["'”’»)]*)([A-Z\u201C\u2018"])/g, '$1 $2')
+    .replace(/(\.{3})([A-Z\u201C\u2018"])/g, '$1 $2')
+    .replace(/\s+/g, ' ')
+    .trim();
+}
 
 /**
  * Tokenize a paragraph into sentences with distinct IDs and flag editor's notes.
@@ -95,20 +144,21 @@ function loadSearchIndex() {
 function parseSentences(paragraphText, paragraphNumber = 1) {
   if (!paragraphText) return [];
 
+  const cleaned = cleanParagraphText(paragraphText);
   const tokens = [];
   const bracketRegex = /\[[^\]]+\]/g;
   let lastIndex = 0;
   let match;
 
-  while ((match = bracketRegex.exec(paragraphText)) !== null) {
+  while ((match = bracketRegex.exec(cleaned)) !== null) {
     if (match.index > lastIndex) {
-      tokens.push({ text: paragraphText.slice(lastIndex, match.index), is_editor_note: false });
+      tokens.push({ text: cleaned.slice(lastIndex, match.index), is_editor_note: false });
     }
     tokens.push({ text: match[0], is_editor_note: true });
     lastIndex = match.index + match[0].length;
   }
-  if (lastIndex < paragraphText.length) {
-    tokens.push({ text: paragraphText.slice(lastIndex), is_editor_note: false });
+  if (lastIndex < cleaned.length) {
+    tokens.push({ text: cleaned.slice(lastIndex), is_editor_note: false });
   }
 
   const sentences = [];
@@ -126,7 +176,7 @@ function parseSentences(paragraphText, paragraphNumber = 1) {
         });
       }
     } else {
-      const rawSentences = token.text.split(/(?<=[.!?])\s+(?=[A-Z0-9"'\u201C\u2018\[])/);
+      const rawSentences = token.text.split(/(?<=(?<!\.)[.!?]["'”’»)]*)\s+(?=[A-Z0-9"'\u201C\u2018\[])/);
       for (const s of rawSentences) {
         const clean = s.trim();
         if (clean) {
@@ -214,6 +264,9 @@ function formatSermonSummary(s, matchSnippet = null) {
     date: s.date || null,
     year: s.year || (s.date ? parseInt(s.date.slice(0, 4), 10) : null),
     language: normLang,
+    languages: s.languages && Array.isArray(s.languages) && s.languages.length > 0
+      ? s.languages
+      : getLanguagesForSermon(s.id),
     cover_image: s.cover_image || 'https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg',
     pdf_url: validPdf,
     m4a_url: validAudio,
@@ -335,23 +388,27 @@ async function fetchLanguageSermonsFromMessageHub(langCode) {
 /**
  * Get all sermons, optionally filtered.
  */
-async function getSermons({ language, year, date, series, place, location, city, duration, length, page, limit } = {}) {
+async function getSermons({ language = 'en', year, date, series, place, location, city, duration, length, page, limit } = {}) {
   let sermons = loadSermons();
 
-  if (language && language !== 'en') {
-    const localMatches = sermons.filter((s) => matchLanguage(s.language, language));
-    if (localMatches.length > 0) {
-      sermons = localMatches;
+  const reqLang = language ? language.trim().toLowerCase() : 'en';
+
+  if (reqLang !== 'all') {
+    if (reqLang === 'en') {
+      sermons = sermons.filter((s) => !s.language || s.language === 'en');
     } else {
-      const remoteSermons = await fetchLanguageSermonsFromMessageHub(language);
-      if (remoteSermons && remoteSermons.length > 0) {
-        sermons = remoteSermons;
+      const localMatches = sermons.filter((s) => matchLanguage(s.language, reqLang));
+      if (localMatches.length > 0) {
+        sermons = localMatches;
       } else {
-        sermons = [];
+        const remoteSermons = await fetchLanguageSermonsFromMessageHub(reqLang);
+        if (remoteSermons && remoteSermons.length > 0) {
+          sermons = remoteSermons;
+        } else {
+          sermons = [];
+        }
       }
     }
-  } else if (language === 'en') {
-    sermons = sermons.filter((s) => !s.language || s.language === 'en');
   }
 
   if (year) {
@@ -416,16 +473,87 @@ async function getSermons({ language, year, date, series, place, location, city,
 /**
  * Get a specific sermon by ID, optionally in a specific language.
  */
-function getSermonById(id, language = null) {
+async function getSermonById(id, language = null) {
   const sermons = loadSermons();
   const cleanId = (id || '').toUpperCase().trim();
   const matches = sermons.filter((s) => (s.id || '').toUpperCase().trim() === cleanId);
 
+  const reqLang = language ? normalizeLangCode(language) : 'en';
+
   let sermon = null;
-  if (language) {
-    sermon = matches.find((s) => matchLanguage(s.language, language)) || null;
-  } else {
-    sermon = matches.length === 1 ? matches[0] : matches.length > 0 ? matches[0] : null;
+  if (matches.length > 0) {
+    if (language) {
+      sermon = matches.find((s) => matchLanguage(s.language, reqLang)) || null;
+    } else {
+      sermon = matches.find((s) => !s.language || s.language === 'en') || matches[0];
+    }
+  }
+
+  // If requested language is not found locally and is not 'en', fetch from MessageHub!
+  if (!sermon && reqLang && reqLang !== 'en') {
+    const remoteList = await fetchLanguageSermonsFromMessageHub(reqLang);
+    const remoteMatch = (remoteList || []).find((s) => (s.id || '').toUpperCase().trim() === cleanId);
+    if (remoteMatch) {
+      sermon = remoteMatch;
+    } else {
+      const blocks = await fetchSermonBlocksFromMessageHub(cleanId, reqLang);
+      if (blocks) {
+        let year = null;
+        if (blocks.date) {
+          const y = parseInt(blocks.date.slice(0, 4), 10);
+          if (!isNaN(y)) year = y;
+        } else if (/^\d{2}-\d{4}/.test(cleanId)) {
+          const yy = parseInt(cleanId.slice(0, 2), 10);
+          year = yy < 100 ? (yy > 40 ? 1900 + yy : 2000 + yy) : yy;
+        }
+
+        sermon = {
+          id: blocks.id || cleanId,
+          number: null,
+          title: blocks.title || cleanId,
+          date: blocks.date || null,
+          year,
+          language: blocks.language || reqLang,
+          location: blocks.location || null,
+          cover_image: 'https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg',
+          pdf_url: null,
+          m4a_url: null,
+          series: null,
+          length_category: 'medium',
+          source: 'messagehub',
+        };
+      }
+    }
+  }
+
+  // If still not found and no specific language was requested (or language is en), check MessageHub for en
+  if (!sermon && (!language || reqLang === 'en')) {
+    const blocks = await fetchSermonBlocksFromMessageHub(cleanId, 'en');
+    if (blocks) {
+      let year = null;
+      if (blocks.date) {
+        const y = parseInt(blocks.date.slice(0, 4), 10);
+        if (!isNaN(y)) year = y;
+      } else if (/^\d{2}-\d{4}/.test(cleanId)) {
+        const yy = parseInt(cleanId.slice(0, 2), 10);
+        year = yy < 100 ? (yy > 40 ? 1900 + yy : 2000 + yy) : yy;
+      }
+      sermon = {
+        id: blocks.id || cleanId,
+        number: null,
+        title: blocks.title || cleanId,
+        date: blocks.date || null,
+        year,
+        language: 'en',
+        location: blocks.location || null,
+        cover_image: 'https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg',
+        pdf_url: null,
+        m4a_url: null,
+        series: null,
+        length_category: 'medium',
+        source: 'messagehub',
+      };
+    }
   }
 
   return sermon ? formatSermonSummary(sermon) : null;
@@ -520,10 +648,7 @@ async function fetchSermonBlocksFromMessageHub(id, language = 'en') {
 
     if (data && data.blocks && Array.isArray(data.blocks)) {
       const paragraphs = data.blocks.map((b) => {
-        const cleanText = (b.blockText || '')
-          .replace(/[\x00-\x1F\x7F-\x9F]/g, ' ')
-          .replace(/\s+/g, ' ')
-          .trim();
+        const cleanText = cleanParagraphText(b.blockText || '');
         return {
           number: b.blockNumber,
           text: cleanText,
@@ -571,11 +696,14 @@ async function getSermonText(id, language = null) {
   const diskCached = getDiskCachedTranscript(id, language);
   if (diskCached) {
     if (diskCached.paragraphs && Array.isArray(diskCached.paragraphs)) {
-      diskCached.paragraphs = diskCached.paragraphs.map((p) => ({
-        number: p.number,
-        text: p.text,
-        sentences: p.sentences || parseSentences(p.text, p.number),
-      }));
+      diskCached.paragraphs = diskCached.paragraphs.map((p) => {
+        const cleanText = cleanParagraphText(p.text);
+        return {
+          number: p.number,
+          text: cleanText,
+          sentences: p.sentences || parseSentences(cleanText, p.number),
+        };
+      });
     }
     _transcriptCache.set(cacheKey, diskCached);
     return diskCached;
@@ -591,11 +719,14 @@ async function getSermonText(id, language = null) {
 
   if (sermon && (sermon.full_text || sermon.pdf_text || (sermon.paragraphs && sermon.paragraphs.length > 0))) {
     const validPdf = sermon.pdf_url && !sermon.pdf_url.includes('messagehub.info') ? sermon.pdf_url : null;
-    const structuredParagraphs = (sermon.paragraphs || []).map((p) => ({
-      number: p.number,
-      text: p.text,
-      sentences: p.sentences || parseSentences(p.text, p.number),
-    }));
+    const structuredParagraphs = (sermon.paragraphs || []).map((p) => {
+      const cleanText = cleanParagraphText(p.text);
+      return {
+        number: p.number,
+        text: cleanText,
+        sentences: parseSentences(cleanText, p.number),
+      };
+    });
 
     const result = {
       id: sermon.id,

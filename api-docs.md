@@ -422,7 +422,7 @@ description: Complete developer documentation and REST API specification for Wil
       <span class="method-tag method-get">GET</span> Get Sermon by ID
     </div>
     <div class="endpoint-url">https://bakarimustafa.com/api/messages/:id</div>
-    <p>Fetches metadata, cover image, PDF transcript URL, audio stream, preaching location, length category, and official series for a specific sermon ID (date code like <code>65-0718M</code>).</p>
+    <p>Fetches metadata, cover image, PDF transcript URL, audio stream, preaching location, length category, official series, and available translation editions (<code>languages</code>) for a specific sermon ID (date code like <code>65-0718M</code>).</p>
 
     <h4>URL Parameters</h4>
     <table class="param-table">
@@ -438,6 +438,11 @@ description: Complete developer documentation and REST API specification for Wil
           <td><code>id</code></td>
           <td>string</td>
           <td>Sermon date code identifier (e.g. <code>65-0718M</code>, <code>63-0317M</code>).</td>
+        </tr>
+        <tr>
+          <td><code>language</code></td>
+          <td>string</td>
+          <td>Optional language code (e.g. <code>fra</code>, <code>nya</code>, <code>es</code>). Defaults to <code>en</code>.</td>
         </tr>
       </tbody>
     </table>
