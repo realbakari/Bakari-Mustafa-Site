@@ -1,271 +1,183 @@
 const fs = require('fs');
 const path = require('path');
-const crypto = require('crypto');
+const https = require('https');
 
 const ROOT_DIR = path.resolve(__dirname, '..');
 const SERMONS_PATH = path.join(ROOT_DIR, '_data', 'sermons.json');
 const SERIES_PATH = path.join(ROOT_DIR, '_data', 'series.json');
-const TRANSCRIPTS_DIR = path.join(ROOT_DIR, '_data', 'transcripts');
 
-const OFFICIAL_16_SERIES = [
-  {
-    slug: 'adoption',
-    title: 'Adoption',
-    year: 1960,
-    description: 'Preached at the Branham Tabernacle in Jeffersonville, Indiana, May 15–22, 1960. A foundational series exploring the believer’s position and spiritual placement in Christ according to Ephesians.',
-    sermon_ids: ['60-0515E', '60-0518', '60-0522M', '60-0522E']
-  },
-  {
-    slug: 'hebrews',
-    title: 'Hebrews',
-    year: 1957,
-    description: 'Extensive verse-by-verse expository study on the Epistle to the Hebrews, preached in Jeffersonville between August and October 1957.',
-    sermon_ids: ['57-0821', '57-0825M', '57-0825E', '57-0901M', '57-0901E', '57-0908M', '57-0908E', '57-0915M', '57-0915E', '57-0922', '57-0925', '57-1002', '57-1006']
-  },
-  {
-    slug: 'seventy-weeks',
-    title: 'The Seventy Weeks of Daniel',
-    year: 1961,
-    description: 'Prophetic study delivered in July–August 1961 detailing Daniel’s timeline of the seventy weeks, the Gentile dispensation, and the closing of the church age.',
-    sermon_ids: ['61-0730M', '61-0730E', '61-0806']
-  },
-  {
-    slug: 'seven-seals',
-    title: 'The Revelation of the Seven Seals',
-    year: 1963,
-    description: 'Delivered March 17–24, 1963, at the Branham Tabernacle following the heavenly cloud appearance in Arizona, opening the Seven Seals of the Book of Revelation.',
-    sermon_ids: ['63-0317M', '63-0317E', '63-0318', '63-0319', '63-0320', '63-0321', '63-0322', '63-0323', '63-0324M', '63-0324E']
-  },
-  {
-    slug: 'church-ages',
-    title: 'The Seven Church Ages',
-    year: 1960,
-    description: 'Preached December 4–11, 1960, revealing the seven distinct church dispensations from Ephesus to Laodicea and their respective messengers.',
-    sermon_ids: ['60-1204M', '60-1205', '60-1206', '60-1207', '60-1208', '60-1209', '60-1210', '60-1211M', '60-1211E']
-  },
-  {
-    slug: 'easter-revival',
-    title: 'The Easter Revival',
-    year: 1957,
-    description: 'Delivered during the April 1957 revival campaign in Phoenix, Arizona and Oakland, California, focusing on the resurrected Christ.',
-    sermon_ids: ['57-0417', '57-0418', '57-0419', '57-0420', '57-0421S', '57-0421E']
-  },
-  {
-    slug: 'conduct-order-doctrine',
-    title: 'Conduct, Order, and Doctrine (COD)',
-    year: '1953–1964',
-    description: 'Comprehensive Questions and Answers services addressing church order, Christian walk, theology, and spiritual questions.',
-    sermon_ids: ['53-0729', '54-0103M', '54-0103E', '54-0515', '59-0628E', '59-1223', '61-0112', '61-1015M', '62-0527', '64-0823M', '64-0823E', '64-0830M']
-  },
-  {
-    slug: 'demonology',
-    title: 'Demonology',
-    year: '1953–1955',
-    description: 'Biblical discourse on spiritual discernment, demonic powers, and the authority of the believer through Jesus Christ.',
-    sermon_ids: ['53-0608', '53-0609A', '53-0609E', '55-0620', '55-0621', '55-0622', '55-0623', '55-0624']
-  },
-  {
-    slug: 'israel-and-the-church',
-    title: 'Israel and the Church',
-    year: 1953,
-    description: 'Five-part exposition delivered in March 1953 tracing God’s covenant with Israel as a biblical type of the New Testament Church.',
-    sermon_ids: ['53-0325', '53-0326', '53-0327', '53-0328', '53-0329']
-  },
-  {
-    slug: 'revelation-of-jesus-christ',
-    title: 'The Revelation of Jesus Christ',
-    year: 1960,
-    description: 'Introductory messages to the Revelation series delivered December 4, 1960, identifying the Supreme Deity of Jesus Christ.',
-    sermon_ids: ['60-1204M', '60-1204E']
-  },
-  {
-    slug: 'original-seed',
-    title: 'The Spoken Word Is The Original Seed',
-    year: 1962,
-    description: 'Twin landmark messages preached March 18, 1962, in Jeffersonville contrasting the unadulterated Seed Word against modern denomination.',
-    sermon_ids: ['62-0318M', '62-0318E']
-  },
-  {
-    slug: 'stature-of-a-perfect-man',
-    title: 'The Stature of a Perfect Man',
-    year: 1962,
-    description: 'Preached in late 1962, charting the seven virtues of 2 Peter 1 that build a believer into the stature of Christ.',
-    sermon_ids: ['62-1014M', '62-1104M', '62-1230M']
-  },
-  {
-    slug: 'god-in-simplicity',
-    title: 'God in Simplicity',
-    year: 1963,
-    description: 'Messages illustrating how God consistently bypasses grandeur to reveal His truth to the humble in simple ways.',
-    sermon_ids: ['63-0317M', '63-0408', '63-0412']
-  },
-  {
-    slug: 'mystery-of-god',
-    title: 'Christ Is The Mystery Of God Revealed',
-    year: 1963,
-    description: 'Delivered July 28, 1963, explaining the eternal purpose of God to express Himself fully in Christ and through His Bride.',
-    sermon_ids: ['63-0728']
-  },
-  {
-    slug: 'future-home',
-    title: 'The Future Home of the Heavenly Bridegroom and Earthly Bride',
-    year: 1964,
-    description: 'Preached August 2, 1964, painting a vivid biblical portrait of the New Jerusalem, the renewed earth, and the eternal age.',
-    sermon_ids: ['64-0802']
-  },
-  {
-    slug: 'easter-messages',
-    title: 'The Easter Messages',
-    year: '1959–1965',
-    description: 'Resurrection sermons focusing on the Living Savior, the quickening of the mortal body, and eternal life in Christ.',
-    sermon_ids: ['59-0329M', '60-0417M', '61-0402', '64-0329', '65-0418M']
-  }
-];
-
-function parseSentences(paragraphText) {
-  if (!paragraphText) return [];
-  
-  const tokens = [];
-  const bracketRegex = /\[[^\]]+\]/g;
-  let lastIndex = 0;
-  let match;
-  
-  while ((match = bracketRegex.exec(paragraphText)) !== null) {
-    if (match.index > lastIndex) {
-      tokens.push({ text: paragraphText.slice(lastIndex, match.index), is_editor_note: false });
-    }
-    tokens.push({ text: match[0], is_editor_note: true });
-    lastIndex = match.index + match[0].length;
-  }
-  if (lastIndex < paragraphText.length) {
-    tokens.push({ text: paragraphText.slice(lastIndex), is_editor_note: false });
-  }
-
-  const sentences = [];
-  let sIndex = 1;
-
-  for (const token of tokens) {
-    if (token.is_editor_note) {
-      const clean = token.text.trim();
-      if (clean) {
-        sentences.push({
-          id: `s-${sIndex++}`,
-          text: clean,
-          is_editor_note: true
-        });
+function post(apiPath, body) {
+  return new Promise((resolve, reject) => {
+    const data = JSON.stringify(body);
+    const req = https.request({
+      hostname: 'table.branham.org',
+      path: apiPath,
+      method: 'POST',
+      headers: {
+        'Content-Type': 'application/json;charset=UTF-8',
+        'Content-Length': Buffer.byteLength(data),
+        'X-Requested-With': 'j:Dm_eDEoMw9jxIU@=A2B8^Lz/Uh_fSrWW5ai7oAr6l@TiX7=wB0s`=;fC<9eT;^',
+        'Csrf-Token': 'csrf-key-value'
       }
-    } else {
-      const rawSentences = token.text.split(/(?<=[.!?])\s+(?=[A-Z0-9"\x27\[])/);
-      for (const s of rawSentences) {
-        const clean = s.trim();
-        if (clean) {
-          sentences.push({
-            id: `s-${sIndex++}`,
-            text: clean,
-            is_editor_note: false
-          });
-        }
-      }
-    }
-  }
-
-  return sentences;
+    }, res => {
+      let buf = '';
+      res.on('data', c => buf += c);
+      res.on('end', () => {
+        try { resolve(JSON.parse(buf)); } catch(e) { reject(e); }
+      });
+    });
+    req.on('error', reject);
+    req.write(data);
+    req.end();
+  });
 }
 
-function calculateLengthCategory(sermon) {
-  // If tract/booklet
-  if (sermon.id.startsWith('TR-') || sermon.id.startsWith('BK-') || !sermon.date) {
-    return 'short';
-  }
-  // Major extensive study series
-  const longSeries = ['seven-seals', 'church-ages', 'hebrews', 'conduct-order-doctrine'];
-  if (sermon.series && longSeries.some(ls => sermon.series.toLowerCase().includes(ls))) {
-    return 'long';
-  }
-  return 'medium';
+function getSeriesSlug(name) {
+  const map = {
+    'Adoption': 'adoption',
+    'An Exposition Of The Seven Church Ages': 'church-ages',
+    'Branham Tabernacle': 'branham-tabernacle',
+    'Brother Branham': 'brother-branham',
+    'Conduct, Order, And Doctrine Of The Church': 'conduct-order-doctrine',
+    'Demonology': 'demonology',
+    'Easter Revival': 'easter-revival',
+    'Israel And The Church': 'israel-and-the-church',
+    'Jehovah-Jireh': 'jehovah-jireh',
+    'The Book Of Hebrews': 'hebrews',
+    'The Church': 'the-church',
+    'The Easter Message': 'the-easter-message',
+    'The Holy Ghost': 'the-holy-ghost',
+    'The Revelation Of Jesus Christ': 'revelation-of-jesus-christ',
+    'The Revelation Of The Seven Seals': 'seven-seals',
+    'The Seventy Weeks Of Daniel': 'seventy-weeks'
+  };
+  return map[name] || name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '');
 }
+
+function getDurationGroup(m) {
+  if (!m || m <= 0) return null;
+  if (m <= 60) return '1 - 60';
+  if (m <= 90) return '61 - 90';
+  if (m <= 120) return '91 - 120';
+  if (m <= 150) return '121 - 150';
+  if (m <= 180) return '151 - 180';
+  return '181+';
+}
+
+function getLengthCategory(m) {
+  if (!m || m <= 0) return null;
+  if (m <= 60) return 'short';
+  if (m <= 120) return 'medium';
+  return 'long';
+}
+
+function formatCity(cName) {
+  if (!cName || cName === 'Unknown') return null;
+  const m = cName.match(/^(.*)\s+([A-Z]{2})$/);
+  if (m) {
+    return `${m[1]}, ${m[2]}`;
+  }
+  return cName;
+}
+
+const SERIES_DESCRIPTIONS = {
+  'adoption': 'Preached at the Branham Tabernacle in Jeffersonville, Indiana, May 15–22, 1960. A foundational series exploring the believer’s position and spiritual placement in Christ according to Ephesians.',
+  'church-ages': 'An Exposition Of The Seven Church Ages. Delivered December 1960 at the Branham Tabernacle, detailing the church dispensations from Ephesus to Laodicea and their respective messengers.',
+  'branham-tabernacle': 'Sermons preached at the home pulpit of the Branham Tabernacle in Jeffersonville, Indiana, spanning 1949 through 1965.',
+  'brother-branham': 'Personal testimonies, life stories, and ministry background messages recounting Brother Branham’s life and divine commission.',
+  'conduct-order-doctrine': 'Conduct, Order, and Doctrine (COD). Questions and Answers services addressing church order, Christian walk, theology, and spiritual questions (1953–1964).',
+  'demonology': 'Expository series examining demon power, spiritual warfare, realms of darkness, and the authority of the believer (1953–1955).',
+  'easter-revival': 'Preached during the April 1957 revival campaign in Phoenix, Arizona and Oakland, California, focusing on the resurrected Christ.',
+  'israel-and-the-church': 'Five-part foundational series delivered in March 1953 tracing Israel’s prophetic journey and its typology for the New Testament church.',
+  'jehovah-jireh': 'Five-part campaign delivered in July 1962 in Grass Valley, California, exploring the Lord our Provider.',
+  'hebrews': 'Extensive verse-by-verse expository study on the Epistle to the Hebrews, preached in Jeffersonville between August and October 1957.',
+  'the-church': 'Special sermons exploring the mystery, purpose, and spiritual foundation of the True Church of the Living God.',
+  'the-easter-message': 'Annual Easter weekend messages focusing on the resurrection, triumph over death, and the living Christ.',
+  'the-holy-ghost': 'Deep two-part study delivered December 1959 examining what the Holy Ghost is, why it was given, and how to receive it.',
+  'revelation-of-jesus-christ': 'Detailed verse-by-verse study on the Revelation of Jesus Christ preached at the Branham Tabernacle in December 1960 and June 1961.',
+  'seven-seals': 'Delivered March 17–24, 1963, at the Branham Tabernacle following the heavenly cloud appearance in Arizona, opening the Seven Seals of the Book of Revelation.',
+  'seventy-weeks': 'Prophetic study delivered in July–August 1961 detailing Daniel’s timeline of the seventy weeks, the Gentile dispensation, and the closing of the church age.'
+};
 
 async function main() {
-  console.log('1. Loading sermons.json...');
-  const sermons = JSON.parse(fs.readFileSync(SERMONS_PATH, 'utf8'));
+  console.log('Fetching live index data from table.branham.org...');
+  const [seriesRes, sermonsRes, citiesRes] = await Promise.all([
+    post('/rest/index/allSeries', { Language: 'en' }),
+    post('/rest/index/allSermons', { Language: 'en' }),
+    post('/rest/index/allCities', { Language: 'en' }),
+  ]);
 
-  console.log('2. Fetching locations from MessageHub...');
-  const now = Math.floor(Date.now() / 1000);
-  const exp = now + 300;
-  const secret = 'MessageHubSecretKey2021';
-  const token = crypto.createHash('md5').update(`${now}${exp}${secret}`).digest('hex');
+  const rawSermons = sermonsRes.Result.Sermons;
+  const rawSeries = seriesRes.Result.Series;
+  const rawCities = citiesRes.Result.Cities;
 
-  const headers = {
-    token,
-    timestamp: now.toString(),
-    expirationTime: exp.toString(),
-    'User-Agent': 'Mozilla/5.0',
-  };
+  const tableSermonById = {};
+  const tableSermonByProduct = {};
+  for (const s of rawSermons) {
+    tableSermonById[s.i] = s;
+    tableSermonByProduct[s.p] = s;
+  }
 
-  const res = await fetch('https://search.messagehub.info/api/languages/en/sermons', { headers });
-  const mhEn = await res.json();
-  const locMap = new Map();
-  mhEn.forEach(s => {
-    if (s.dateCode && s.location) {
-      locMap.set(s.dateCode.toUpperCase(), s.location);
-    }
+  const tableCityById = {};
+  for (const c of rawCities) {
+    tableCityById[c.i] = formatCity(c.n);
+  }
+
+  // 1. Build the 16 Official Series JSON
+  const officialSeriesList = rawSeries.map(ser => {
+    const slug = getSeriesSlug(ser.n);
+    const codes = ser.s.map(id => tableSermonById[id] ? tableSermonById[id].p : null).filter(Boolean);
+    return {
+      id: slug,
+      slug: slug,
+      title: ser.n,
+      sermon_count: codes.length,
+      sermon_ids: codes,
+      description: SERIES_DESCRIPTIONS[slug] || `Official series: ${ser.n}.`
+    };
   });
 
-  console.log('3. Mapping 16 official series and locations...');
-  const seriesLookup = new Map();
-  for (const ser of OFFICIAL_16_SERIES) {
-    for (const sid of ser.sermon_ids) {
-      seriesLookup.set(sid.toUpperCase(), ser.title);
+  fs.writeFileSync(SERIES_PATH, JSON.stringify(officialSeriesList, null, 2), 'utf8');
+  console.log(`Saved ${officialSeriesList.length} official series to _data/series.json`);
+
+  // Build a map of sermon product ID -> series list
+  const sermonSeriesMap = {};
+  for (const ser of officialSeriesList) {
+    for (const code of ser.sermon_ids) {
+      if (!sermonSeriesMap[code]) sermonSeriesMap[code] = [];
+      sermonSeriesMap[code].push({ title: ser.title, slug: ser.slug });
     }
   }
 
-  for (const s of sermons) {
-    const idUpper = (s.id || '').toUpperCase().trim();
-    // Set location if missing
-    if (!s.location && locMap.has(idUpper)) {
-      s.location = locMap.get(idUpper);
-    }
-    // Set series if matching
-    if (seriesLookup.has(idUpper)) {
-      s.series = seriesLookup.get(idUpper);
-    }
-    // Set length category
-    s.length_category = calculateLengthCategory(s);
-  }
+  // 2. Enrich _data/sermons.json
+  const localSermons = JSON.parse(fs.readFileSync(SERMONS_PATH, 'utf8'));
 
-  // Count sermons per series
-  for (const ser of OFFICIAL_16_SERIES) {
-    ser.sermon_count = sermons.filter(s => s.series === ser.title && s.language === 'en').length;
-  }
-
-  console.log('Writing series.json...');
-  fs.writeFileSync(SERIES_PATH, JSON.stringify(OFFICIAL_16_SERIES, null, 2), 'utf8');
-
-  console.log('Writing updated sermons.json...');
-  fs.writeFileSync(SERMONS_PATH, JSON.stringify(sermons, null, 2), 'utf8');
-
-  console.log('4. Updating pre-cached transcripts with sentence tagging...');
-  if (fs.existsSync(TRANSCRIPTS_DIR)) {
-    const files = fs.readdirSync(TRANSCRIPTS_DIR).filter(f => f.endsWith('.json'));
-    for (const f of files) {
-      const p = path.join(TRANSCRIPTS_DIR, f);
-      const data = JSON.parse(fs.readFileSync(p, 'utf8'));
-      if (data.paragraphs && Array.isArray(data.paragraphs)) {
-        data.paragraphs = data.paragraphs.map(para => ({
-          number: para.number,
-          text: para.text,
-          sentences: parseSentences(para.text)
-        }));
-        fs.writeFileSync(p, JSON.stringify(data, null, 2), 'utf8');
-        console.log(`Updated sentence tagging in ${f}`);
+  let enrichedCount = 0;
+  for (const s of localSermons) {
+    const tableS = tableSermonByProduct[s.id];
+    if (tableS) {
+      enrichedCount++;
+      if (tableS.m && tableS.m > 0) {
+        s.duration_minutes = tableS.m;
+        s.duration_group = getDurationGroup(tableS.m);
+        s.length_category = getLengthCategory(tableS.m);
+      }
+      if (tableS.c && tableCityById[tableS.c]) {
+        s.location = tableCityById[tableS.c];
+        s.city = tableCityById[tableS.c];
       }
     }
+
+    const matchedSeries = sermonSeriesMap[s.id];
+    if (matchedSeries && matchedSeries.length > 0) {
+      s.series = matchedSeries[0].title;
+      s.series_slug = matchedSeries[0].slug;
+      s.series_list = matchedSeries;
+    }
   }
 
-  console.log('Done!');
+  fs.writeFileSync(SERMONS_PATH, JSON.stringify(localSermons, null, 2), 'utf8');
+  console.log(`Enriched ${enrichedCount} sermons in _data/sermons.json with exact Table data!`);
 }
 
-main().catch(err => {
-  console.error('Error:', err);
-  process.exit(1);
-});
+main().catch(console.error);

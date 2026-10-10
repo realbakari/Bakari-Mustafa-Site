@@ -266,6 +266,7 @@ description: Complete developer documentation and REST API specification for Wil
       <a href="#messages-text" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/messages/:id/text</a>
       <a href="#series-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/series</a>
       <a href="#places-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/places</a>
+      <a href="#durations-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/durations</a>
       <a href="#languages-list" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/languages</a>
       <a href="#languages-messages" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/languages/:code/messages</a>
       <a href="#search" class="api-toc-link"><span class="method-tag method-get">GET</span> /api/search</a>
@@ -287,8 +288,10 @@ description: Complete developer documentation and REST API specification for Wil
         <option value="/api/messages/65-0718M">GET /api/messages/65-0718M (Get sermon by ID)</option>
         <option value="/api/messages/65-0718M/text?language=ny">GET /api/messages/65-0718M/text?language=ny (Structured text & sentences)</option>
         <option value="/api/series">GET /api/series (List 16 official series)</option>
-        <option value="/api/series/seven-seals">GET /api/series/seven-seals (Get series details)</option>
-        <option value="/api/places">GET /api/places (List preaching locations)</option>
+        <option value="/api/series/seven-seals">GET /api/series/seven-seals (Get Seven Seals series)</option>
+        <option value="/api/places">GET /api/places (List 120+ preaching cities)</option>
+        <option value="/api/durations">GET /api/durations (List 6 duration categories)</option>
+        <option value="/api/messages?duration=121-150&limit=3">GET /api/messages?duration=121-150 (2–2.5 hrs)</option>
         <option value="/api/messages?place=Jeffersonville&limit=3">GET /api/messages?place=Jeffersonville</option>
         <option value="/api/messages?length=long&limit=3">GET /api/messages?length=long</option>
         <option value="/api/search?q=seven+seals">GET /api/search?q=seven+seals (Full-text search)</option>
@@ -311,7 +314,7 @@ description: Complete developer documentation and REST API specification for Wil
       <span class="method-tag method-get">GET</span> List Sermons
     </div>
     <div class="endpoint-url">https://bakarimustafa.com/api/messages</div>
-    <p>Retrieves a paginated list of sermon records. Supports filtering by language, year, or series.</p>
+    <p>Retrieves a paginated list of sermon records. Supports filtering by language, year, series, place, duration range, or length.</p>
 
     <h4>Query Parameters</h4>
     <table class="param-table">
@@ -358,13 +361,19 @@ description: Complete developer documentation and REST API specification for Wil
           <td><code>series</code></td>
           <td>string</td>
           <td><code>null</code></td>
-          <td>Official series name or slug (e.g. <code>adoption</code>, <code>hebrews</code>, <code>seven-seals</code>).</td>
+          <td>Official series name or slug (e.g. <code>adoption</code>, <code>seven-seals</code>, <code>hebrews</code>, <code>conduct-order-doctrine</code>).</td>
         </tr>
         <tr>
-          <td><code>place</code> / <code>location</code></td>
+          <td><code>place</code> / <code>location</code> / <code>city</code></td>
           <td>string</td>
           <td><code>null</code></td>
           <td>Preaching location or city (e.g. <code>Jeffersonville</code>, <code>Chicago</code>, <code>Phoenix</code>).</td>
+        </tr>
+        <tr>
+          <td><code>duration</code></td>
+          <td>string</td>
+          <td><code>null</code></td>
+          <td>Duration group matching The Table: <code>1-60</code>, <code>61-90</code>, <code>91-120</code>, <code>121-150</code>, <code>151-180</code>, <code>181+</code>.</td>
         </tr>
         <tr>
           <td><code>length</code></td>
@@ -386,6 +395,10 @@ description: Complete developer documentation and REST API specification for Wil
       "date": "1965-07-18",
       "year": 1965,
       "language": "en",
+      "location": "Jeffersonville, IN",
+      "duration_minutes": 127,
+      "duration_group": "121 - 150",
+      "length": "long",
       "cover_image": "https://branham.org/azure/branham/073884ef-dd28-41d1-a7b8-33accbc478b2.jpg",
       "pdf_url": "https://themessage.com/...",
       "m4a_url": "https://themessage.com/..."
@@ -484,12 +497,14 @@ description: Complete developer documentation and REST API specification for Wil
           {
             "id": "p1-s1",
             "text": "Mulungu akudalitseni m'bale.",
-            "is_editor_note": false
+            "is_editor_note": false,
+            "type": "speech"
           },
           {
             "id": "p1-s2",
             "text": "[Msonkhano ukuti, \"Amen.\"—Mkonzi.]",
-            "is_editor_note": true
+            "is_editor_note": true,
+            "type": "editor_note"
           }
         ]
       }
@@ -505,14 +520,43 @@ description: Complete developer documentation and REST API specification for Wil
       <span class="method-tag method-get">GET</span> The 16 Official Sermon Series
     </div>
     <div class="endpoint-url">https://bakarimustafa.com/api/series</div>
-    <p>Retrieves the 16 official sermon series (Adoption, Hebrews, Seventy Weeks, The Revelation of the Seven Seals, The Seven Church Ages, The Easter Revival, Conduct Order and Doctrine, etc.) with sermon IDs and counts.</p>
+    <p>Retrieves the 16 official sermon series defined in Voice of God Recordings’ catalogue on The Table (<code>table.branham.org</code>).</p>
 
     <h4>Sub-Endpoints</h4>
     <ul>
-      <li><code>GET /api/series</code> — Returns all 16 series with summaries and counts.</li>
-      <li><code>GET /api/series/:slug</code> — Returns metadata and sermon date codes for a specific series (e.g. <code>adoption</code>, <code>seven-seals</code>, <code>hebrews</code>).</li>
-      <li><code>GET /api/series/:slug/messages</code> — Directly lists the sermon objects belonging to that series.</li>
+      <li><code>GET /api/series</code> — Returns all 16 official series with sermon counts and product IDs.</li>
+      <li><code>GET /api/series/:slug</code> — Returns metadata and sermon date codes for a specific series (e.g. <code>adoption</code>, <code>seven-seals</code>, <code>hebrews</code>, <code>church-ages</code>).</li>
+      <li><code>GET /api/series/:slug/messages</code> — Directly lists the sermon records belonging to that series.</li>
     </ul>
+
+    <h4>The 16 Official Series Overview</h4>
+    <table class="param-table">
+      <thead>
+        <tr>
+          <th>Slug</th>
+          <th>Official Series Title</th>
+          <th>Sermons</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr><td><code>adoption</code></td><td>Adoption</td><td>4</td></tr>
+        <tr><td><code>church-ages</code></td><td>An Exposition Of The Seven Church Ages</td><td>11</td></tr>
+        <tr><td><code>branham-tabernacle</code></td><td>Branham Tabernacle</td><td>295</td></tr>
+        <tr><td><code>brother-branham</code></td><td>Brother Branham</td><td>2</td></tr>
+        <tr><td><code>conduct-order-doctrine</code></td><td>Conduct, Order, And Doctrine Of The Church</td><td>23</td></tr>
+        <tr><td><code>demonology</code></td><td>Demonology</td><td>3</td></tr>
+        <tr><td><code>easter-revival</code></td><td>Easter Revival</td><td>6</td></tr>
+        <tr><td><code>israel-and-the-church</code></td><td>Israel And The Church</td><td>5</td></tr>
+        <tr><td><code>jehovah-jireh</code></td><td>Jehovah-Jireh</td><td>5</td></tr>
+        <tr><td><code>hebrews</code></td><td>The Book Of Hebrews</td><td>11</td></tr>
+        <tr><td><code>the-church</code></td><td>The Church</td><td>3</td></tr>
+        <tr><td><code>the-easter-message</code></td><td>The Easter Message</td><td>5</td></tr>
+        <tr><td><code>the-holy-ghost</code></td><td>The Holy Ghost</td><td>2</td></tr>
+        <tr><td><code>revelation-of-jesus-christ</code></td><td>The Revelation Of Jesus Christ</td><td>15</td></tr>
+        <tr><td><code>seven-seals</code></td><td>The Revelation Of The Seven Seals</td><td>10</td></tr>
+        <tr><td><code>seventy-weeks</code></td><td>The Seventy Weeks Of Daniel</td><td>3</td></tr>
+      </tbody>
+    </table>
 
     <h4>Example Response (200 OK)</h4>
     <div class="code-snippet">
@@ -522,55 +566,78 @@ description: Complete developer documentation and REST API specification for Wil
     {
       "id": "seven-seals",
       "slug": "seven-seals",
-      "title": "The Revelation of the Seven Seals",
-      "year": 1963,
-      "sermon_count": 8,
-      "sermons": ["63-0317M", "63-0317E", "63-0318", "63-0319", "63-0320", "63-0321", "63-0322", "63-0324M", "63-0324E"]
-    },
-    {
-      "id": "adoption",
-      "slug": "adoption",
-      "title": "Adoption",
-      "year": 1960,
-      "sermon_count": 4,
-      "sermons": ["60-0515E", "60-0518", "60-0522", "60-0522E"]
+      "title": "The Revelation Of The Seven Seals",
+      "sermon_count": 10,
+      "sermon_ids": ["63-0317M", "63-0317E", "63-0318", "63-0319", "63-0320", "63-0321", "63-0322", "63-0323", "63-0324M", "63-0324E"]
     }
   ]
 }</pre>
     </div>
   </section>
 
-  <!-- Endpoint 2d: Browsing by Place and Length -->
+  <!-- Endpoint 2d: Browsing by Place -->
   <section id="places-list" class="endpoint-section">
     <div class="endpoint-title">
-      <span class="method-tag method-get">GET</span> Browse by Place & Sermon Length
+      <span class="method-tag method-get">GET</span> Browse by Preaching Place / City
     </div>
     <div class="endpoint-url">https://bakarimustafa.com/api/places</div>
-    <p>Browse preaching locations across 170+ venues (Jeffersonville, Chicago, Phoenix, Los Angeles, Shreveport, etc.) and filter sermons by length.</p>
+    <p>Browse preaching locations across 120+ cities (Jeffersonville, Phoenix, Chicago, Los Angeles, Oakland, Shreveport, etc.) mapped directly from The Table taxonomy.</p>
 
     <h4>Sub-Endpoints & Query Filters</h4>
     <ul>
-      <li><code>GET /api/places</code> — Returns preaching venues sorted by frequency with sermon counts.</li>
+      <li><code>GET /api/places</code> (or <code>/api/cities</code>) — Returns preaching venues sorted by frequency with sermon counts.</li>
       <li><code>GET /api/places/:place/messages</code> — Returns sermons preached in a specific city/venue (e.g. <code>/api/places/Jeffersonville/messages</code>).</li>
       <li><code>GET /api/messages?place={place}</code> — Filter sermons by city or venue.</li>
-      <li><code>GET /api/messages?length={short|medium|long}</code> — Filter by sermon duration:
-        <ul>
-          <li><code>short</code>: Under 60 minutes.</li>
-          <li><code>medium</code>: 60 to 120 minutes.</li>
-          <li><code>long</code>: Over 120 minutes.</li>
-        </ul>
-      </li>
     </ul>
 
     <h4>Example Response (200 OK)</h4>
     <div class="code-snippet">
 <pre>{
-  "total_places": 170,
+  "total_places": 124,
   "data": [
-    { "place": "Jeffersonville, IN", "sermon_count": 526 },
-    { "place": "Chicago, IL", "sermon_count": 67 },
-    { "place": "Phoenix, AZ", "sermon_count": 59 },
-    { "place": "Los Angeles, CA", "sermon_count": 34 }
+    { "place": "Jeffersonville, IN", "count": 418 },
+    { "place": "Phoenix, AZ", "count": 113 },
+    { "place": "Chicago, IL", "count": 110 },
+    { "place": "Los Angeles, CA", "count": 56 }
+  ]
+}</pre>
+    </div>
+  </section>
+
+  <!-- Endpoint 2e: Duration Categories -->
+  <section id="durations-list" class="endpoint-section">
+    <div class="endpoint-title">
+      <span class="method-tag method-get">GET</span> Sermon Duration Categories
+    </div>
+    <div class="endpoint-url">https://bakarimustafa.com/api/durations</div>
+    <p>Lists the 6 official duration brackets utilized by The Table (<code>table.branham.org</code>) along with active sermon counts.</p>
+
+    <h4>Query Filtering</h4>
+    <ul>
+      <li><code>GET /api/messages?duration={bracket}</code> — Filter by duration bracket:
+        <ul>
+          <li><code>1-60</code>: Under 1 hour.</li>
+          <li><code>61-90</code>: 1 hour to 1.5 hours.</li>
+          <li><code>91-120</code>: 1.5 hours to 2 hours.</li>
+          <li><code>121-150</code>: 2 hours to 2.5 hours.</li>
+          <li><code>151-180</code>: 2.5 hours to 3 hours.</li>
+          <li><code>181+</code>: 3+ hours (Extended revival services).</li>
+        </ul>
+      </li>
+      <li><code>GET /api/messages?length={short|medium|long}</code> — Simplified duration filter.</li>
+    </ul>
+
+    <h4>Example Response (200 OK)</h4>
+    <div class="code-snippet">
+<pre>{
+  "total_groups": 6,
+  "data": [
+    { "id": "1-60", "group": "1 - 60", "label": "Under 1 hour", "min": 0, "max": 60, "count": 178 },
+    { "id": "61-90", "group": "61 - 90", "label": "1 hr – 1.5 hrs", "min": 61, "max": 90, "count": 424 },
+    { "id": "91-120", "group": "91 - 120", "label": "1.5 hrs – 2 hrs", "min": 91, "max": 120, "count": 520 },
+    { "id": "121-150", "group": "121 - 150", "label": "2 hrs – 2.5 hrs", "min": 121, "max": 150, "count": 161 },
+    { "id": "151-180", "group": "151 - 180", "label": "2.5 hrs – 3 hrs", "min": 151, "max": 180, "count": 55 },
+    { "id": "181+", "group": "181+", "label": "3+ hours (Extended)", "min": 181, "max": 9999, "count": 22 }
   ]
 }</pre>
     </div>

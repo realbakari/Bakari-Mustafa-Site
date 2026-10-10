@@ -49,8 +49,9 @@ exports.handler = async (event, context) => {
             { name: "language", in: "query", schema: { type: "string", default: "en", example: "nya" } },
             { name: "year", in: "query", schema: { type: "string", example: "1965" } },
             { name: "date", in: "query", schema: { type: "string", example: "1965-07-18" } },
-            { name: "series", in: "query", schema: { type: "string", example: "adoption" } },
+            { name: "series", in: "query", schema: { type: "string", example: "seven-seals" } },
             { name: "place", in: "query", schema: { type: "string", example: "Jeffersonville" } },
+            { name: "duration", in: "query", schema: { type: "string", enum: ["1-60", "61-90", "91-120", "121-150", "151-180", "181+"], example: "121-150" } },
             { name: "length", in: "query", schema: { type: "string", enum: ["short", "medium", "long"], example: "medium" } },
             { name: "limit", in: "query", schema: { type: "integer", default: 50 } },
             { name: "page", in: "query", schema: { type: "integer", default: 1 } }
@@ -74,7 +75,7 @@ exports.handler = async (event, context) => {
           summary: "Get specific series metadata and sermon IDs",
           operationId: "getSeriesBySlug",
           parameters: [
-            { name: "slug", in: "path", required: true, schema: { type: "string", example: "adoption" } }
+            { name: "slug", in: "path", required: true, schema: { type: "string", example: "seven-seals" } }
           ],
           responses: {
             "200": { description: "Series detail" }
@@ -83,10 +84,19 @@ exports.handler = async (event, context) => {
       },
       "/api/places": {
         get: {
-          summary: "List all preaching locations with sermon counts",
+          summary: "List all preaching locations and cities with sermon counts",
           operationId: "getPlaces",
           responses: {
             "200": { description: "List of preaching locations" }
+          }
+        }
+      },
+      "/api/durations": {
+        get: {
+          summary: "List all 6 official duration categories with sermon counts",
+          operationId: "getDurations",
+          responses: {
+            "200": { description: "List of duration groups matching The Table" }
           }
         }
       },

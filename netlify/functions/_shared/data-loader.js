@@ -122,6 +122,7 @@ function parseSentences(paragraphText, paragraphNumber = 1) {
           id: `p${paragraphNumber}-s${sIndex++}`,
           text: clean,
           is_editor_note: true,
+          type: 'editor_note',
         });
       }
     } else {
@@ -129,10 +130,17 @@ function parseSentences(paragraphText, paragraphNumber = 1) {
       for (const s of rawSentences) {
         const clean = s.trim();
         if (clean) {
+          let type = 'speech';
+          if (/^(Amen|Hallelujah|Praise the Lord|Glory)[\.!]?$/i.test(clean)) {
+            type = 'congregation';
+          } else if (/(Genesis|Exodus|Leviticus|Numbers|Deuteronomy|Joshua|Judges|Ruth|Samuel|Kings|Chronicles|Ezra|Nehemiah|Esther|Job|Psalms|Proverbs|Ecclesiastes|Isaiah|Jeremiah|Ezekiel|Daniel|Hosea|Joel|Amos|Micah|Habakkuk|Zechariah|Malachi|Matthew|Mark|Luke|John|Acts|Romans|Corinthians|Galatians|Ephesians|Philippians|Colossians|Thessalonians|Timothy|Titus|Philemon|Hebrews|James|Peter|Revelation)\s+\d+:\d+/i.test(clean)) {
+            type = 'scripture';
+          }
           sentences.push({
             id: `p${paragraphNumber}-s${sIndex++}`,
             text: clean,
             is_editor_note: false,
+            type,
           });
         }
       }
@@ -210,7 +218,10 @@ function formatSermonSummary(s, matchSnippet = null) {
     pdf_url: validPdf,
     m4a_url: validAudio,
     series: s.series || null,
+    series_slug: s.series_slug || null,
     location: s.location || null,
+    duration_minutes: s.duration_minutes || null,
+    duration_group: s.duration_group || null,
     length: s.length_category || 'medium',
     source: s.source || (validPdf ? 'themessage' : 'messagehub'),
   };
@@ -324,7 +335,7 @@ async function fetchLanguageSermonsFromMessageHub(langCode) {
 /**
  * Get all sermons, optionally filtered.
  */
-async function getSermons({ language, year, date, series, place, location, length, page, limit } = {}) {
+async function getSermons({ language, year, date, series, place, location, city, duration, length, page, limit } = {}) {
   let sermons = loadSermons();
 
   if (language && language !== 'en') {
@@ -359,17 +370,35 @@ async function getSermons({ language, year, date, series, place, location, lengt
   }
 
   if (series) {
-    const seriesLower = series.toLowerCase();
+    const seriesLower = series.toLowerCase().trim();
     sermons = sermons.filter(
-      (s) => s.series && s.series.toLowerCase().includes(seriesLower)
+      (s) =>
+        (s.series && s.series.toLowerCase().includes(seriesLower)) ||
+        (s.series_slug && s.series_slug.toLowerCase() === seriesLower) ||
+        (Array.isArray(s.series_list) && s.series_list.some(sl => sl.slug === seriesLower || sl.title.toLowerCase().includes(seriesLower)))
     );
   }
 
-  if (place || location) {
-    const locFilter = (place || location).toLowerCase();
+  if (place || location || city) {
+    const locFilter = (place || location || city).toLowerCase();
     sermons = sermons.filter(
       (s) => s.location && s.location.toLowerCase().includes(locFilter)
     );
+  }
+
+  if (duration) {
+    const durClean = duration.replace(/\s+/g, '');
+    sermons = sermons.filter((s) => {
+      if (!s.duration_minutes) return false;
+      const m = s.duration_minutes;
+      if (durClean === '1-60' || durClean === '0-60' || durClean === '60') return m <= 60;
+      if (durClean === '61-90') return m >= 61 && m <= 90;
+      if (durClean === '91-120') return m >= 91 && m <= 120;
+      if (durClean === '121-150') return m >= 121 && m <= 150;
+      if (durClean === '151-180') return m >= 151 && m <= 180;
+      if (durClean === '181+' || durClean === '181') return m >= 181;
+      return s.duration_group && s.duration_group.replace(/\s+/g, '') === durClean;
+    });
   }
 
   if (length) {
@@ -970,6 +999,35 @@ function getPlaces() {
     .sort((a, b) => b.count - a.count);
 }
 
+/**
+ * Get official duration groups with sermon counts matching The Table's categories.
+ */
+function getDurations() {
+  const sermons = loadSermons();
+  const groups = [
+    { id: '1-60', group: '1 - 60', label: 'Under 1 hour', min: 0, max: 60, count: 0 },
+    { id: '61-90', group: '61 - 90', label: '1 hr – 1.5 hrs', min: 61, max: 90, count: 0 },
+    { id: '91-120', group: '91 - 120', label: '1.5 hrs – 2 hrs', min: 91, max: 120, count: 0 },
+    { id: '121-150', group: '121 - 150', label: '2 hrs – 2.5 hrs', min: 121, max: 150, count: 0 },
+    { id: '151-180', group: '151 - 180', label: '2.5 hrs – 3 hrs', min: 151, max: 180, count: 0 },
+    { id: '181+', group: '181+', label: '3+ hours (Extended)', min: 181, max: 9999, count: 0 },
+  ];
+
+  for (const s of sermons) {
+    if (s.duration_minutes) {
+      const m = s.duration_minutes;
+      for (const g of groups) {
+        if (m >= g.min && m <= g.max) {
+          g.count++;
+          break;
+        }
+      }
+    }
+  }
+
+  return groups;
+}
+
 module.exports = {
   getSermons,
   getSermonById,
@@ -979,6 +1037,7 @@ module.exports = {
   getSeries,
   getSeriesBySlug,
   getPlaces,
+  getDurations,
   parseSentences,
   searchSermons,
   getStats,

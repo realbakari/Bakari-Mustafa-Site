@@ -24,6 +24,7 @@ const {
   getSeries,
   getSeriesBySlug,
   getPlaces,
+  getDurations,
   searchSermons,
   getStats,
 } = require('./_shared/data-loader');
@@ -98,7 +99,8 @@ exports.handler = async (event) => {
         year: params.year,
         date: params.date,
         series: params.series,
-        place: params.place || params.location,
+        place: params.place || params.location || params.city,
+        duration: params.duration,
         length: params.length,
         page: params.page,
         limit: params.limit,
@@ -168,15 +170,15 @@ exports.handler = async (event) => {
       return json(200, { data: seriesObj });
     }
 
-    /* ── GET /api/places or /api/locations ────────────────────── */
-    if ((segments[0] === 'places' || segments[0] === 'locations') && segments.length === 1) {
+    /* ── GET /api/places or /api/locations or /api/cities ─────── */
+    if ((segments[0] === 'places' || segments[0] === 'locations' || segments[0] === 'cities') && segments.length === 1) {
       const places = getPlaces();
       return json(200, { total_places: places.length, data: places });
     }
 
     /* ── GET /api/places/:place/messages ──────────────────────── */
     if (
-      (segments[0] === 'places' || segments[0] === 'locations') &&
+      (segments[0] === 'places' || segments[0] === 'locations' || segments[0] === 'cities') &&
       segments.length === 3 &&
       segments[2] === 'messages'
     ) {
@@ -189,6 +191,12 @@ exports.handler = async (event) => {
         limit: params.limit,
       });
       return json(200, result);
+    }
+
+    /* ── GET /api/durations ───────────────────────────────────── */
+    if (segments[0] === 'durations' && segments.length === 1) {
+      const durations = getDurations();
+      return json(200, { total_groups: durations.length, data: durations });
     }
 
     /* ── GET /api/languages ───────────────────────────────────── */

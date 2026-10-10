@@ -91,14 +91,32 @@ Returns 16 official sermon series (Adoption, Hebrews, Seventy Weeks, Seven Seals
 ```
 
 ### 5. GET /api/places
-Returns preaching locations with sermon counts.
+Returns preaching locations and cities with sermon counts.
 
 ```json
 {
-  "total_places": 170,
+  "total_places": 124,
   "data": [
-    { "place": "Jeffersonville, IN", "sermon_count": 526 },
-    { "place": "Chicago, IL", "sermon_count": 67 }
+    { "place": "Jeffersonville, IN", "count": 418 },
+    { "place": "Phoenix, AZ", "count": 113 },
+    { "place": "Chicago, IL", "count": 110 }
+  ]
+}
+```
+
+### 6. GET /api/durations
+Returns 6 duration brackets matching The Table with sermon counts.
+
+```json
+{
+  "total_groups": 6,
+  "data": [
+    { "id": "1-60", "group": "1 - 60", "label": "Under 1 hour", "count": 178 },
+    { "id": "61-90", "group": "61 - 90", "label": "1 hr – 1.5 hrs", "count": 424 },
+    { "id": "91-120", "group": "91 - 120", "label": "1.5 hrs – 2 hrs", "count": 520 },
+    { "id": "121-150", "group": "121 - 150", "label": "2 hrs – 2.5 hrs", "count": 161 },
+    { "id": "151-180", "group": "151 - 180", "label": "2.5 hrs – 3 hrs", "count": 55 },
+    { "id": "181+", "group": "181+", "label": "3+ hours (Extended)", "count": 22 }
   ]
 }
 ```

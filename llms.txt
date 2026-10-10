@@ -18,11 +18,13 @@ The Message REST API requires zero authentication tokens (100% open public acces
     - `year` (string, optional) : Filter by sermon year (e.g. `1965`, `1964`, `1963`).
     - `series` (string, optional) : Filter by official series slug (e.g. `adoption`, `seven-seals`, `hebrews`).
     - `place` (string, optional) : Filter by preaching venue or city (e.g. `Jeffersonville`, `Chicago`, `Phoenix`).
+    - `duration` (string, optional) : Filter by duration group (`1-60`, `61-90`, `91-120`, `121-150`, `151-180`, `181+`).
     - `length` (string, optional) : Filter by duration category (`short`, `medium`, `long`).
     - `limit` (number, optional, default: 50) : Page size limit.
 - `GET /api/series` : Lists all 16 official sermon series with sermon counts and IDs.
 - `GET /api/series/{slug}` : Get metadata and sermon list for a specific series.
-- `GET /api/places` : Lists all preaching locations/venues with sermon counts.
+- `GET /api/places` : Lists all preaching locations/cities with sermon counts.
+- `GET /api/durations` : Lists all 6 official duration groups with sermon counts matching The Table.
 - `GET /api/messages/{id}/text` : Fetch full sermon transcript broken into clean paragraph blocks (`¶1`, `¶2`...) with structured sentence-level tags (`p1-s1`) and isolated editor's notes (`is_editor_note: true`).
   - Path Parameter: `id` (string, required) : Date-based sermon reference code (e.g. `64-0112`, `65-0718M`, `63-0317M`).
   - Query Parameter: `language` (string, optional, default: 'en').
