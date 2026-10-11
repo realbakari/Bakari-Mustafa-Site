@@ -28,7 +28,7 @@ In *Library*: *Prayer* at the top, then *Notes* and *My Images*. Long-press a no
 In *Library › Prayer*, tap *More › Daily Reminder*. For a reading plan, open the plan and choose *Plan Settings › Reminder*.
 
 **Do tips unlock anything?**
-No. Everything in the app is free. Tips are optional and handled by Apple. To cancel the monthly supporter subscription, open *Settings › Apple Account › Subscriptions* on your iPhone. For refunds, use [reportaproblem.apple.com](https://reportaproblem.apple.com).
+No. Everything in the app is free. Tips are optional and handled by Apple. For refunds, use [reportaproblem.apple.com](https://reportaproblem.apple.com).
 
 ### Privacy
 
