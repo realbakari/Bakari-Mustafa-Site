@@ -54,7 +54,7 @@ The app asks for a permission only when you use the feature that needs it, and w
 
 ### Tips and purchases
 
-Tips and the optional monthly supporter subscription are processed by Apple through the App Store. The app receives only a confirmation that a purchase succeeded; it never sees your name, payment details or Apple Account. Tips unlock nothing, and every feature is free. In the United States the app can also link to Buy Me a Coffee, which opens in Safari and is governed by that site's own privacy policy.
+Tips are processed by Apple through the App Store. The app receives only a confirmation that a purchase succeeded; it never sees your name, payment details or Apple Account. Tips unlock nothing, and every feature is free. In the United States the app can also link to Buy Me a Coffee, which opens in Safari and is governed by that site's own privacy policy.
 
 ### Children
 
