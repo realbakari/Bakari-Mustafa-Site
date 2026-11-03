@@ -92,12 +92,7 @@ image: "/assets/img/the-message/sermon-light.jpg"
   color: var(--bg-primary) !important;
 }
 .page-content .tm .tm-button.is-primary:hover { background: var(--accent-secondary); border-color: var(--accent-secondary); }
-.page-content .tm .tm-button.is-soon {
-  cursor: default;
-  color: var(--text-secondary) !important;
-  background: var(--bg-secondary);
-  border-style: dashed;
-}
+.page-content .tm .tm-meta a { color: inherit; border-bottom: 1px solid var(--border-strong); }
 .page-content .tm .tm-meta {
   font-size: 0.875rem;
   color: var(--text-tertiary);
@@ -301,10 +296,10 @@ image: "/assets/img/the-message/sermon-light.jpg"
   <h1>The Message</h1>
   <p class="tm-lede">William Branham’s sermons and the Bible, side by side. Read them, hear them, study them, and put the words on the screen on Sunday.</p>
   <div class="tm-actions">
-    <span class="tm-button is-soon" aria-disabled="true">Coming soon to the Mac</span>
+    <a class="tm-button is-primary" href="https://github.com/realbakari/the-message-mac/releases/latest/download/The-Message.zip">Download for Mac</a>
     <a class="tm-button" href="/the-message/">Browse the sermons on the web</a>
   </div>
-  <p class="tm-meta">Requires macOS 26 · No account · No tracking</p>
+  <p class="tm-meta">Version 1.0 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
 </div>
 
 <div class="tm-shot tm-hero-shot">
