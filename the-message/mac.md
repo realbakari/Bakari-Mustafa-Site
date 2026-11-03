@@ -11,10 +11,13 @@ image: "/assets/img/the-message/sermon-light.jpg"
 ---
 
 <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link rel="stylesheet" href="/assets/js/the-message/stages.css">
+<script src="/assets/js/the-message/stages.js" defer></script>
 <link href="https://fonts.googleapis.com/css2?family=Literata:ital,opsz,wght@0,7..72,400;0,7..72,600;1,7..72,400&display=swap" rel="stylesheet">
 
 <style>
 .page-content .tm {
+  container: tm / inline-size;
   --tm-serif: 'Literata', Georgia, 'Times New Roman', serif;
   --tm-sepia: #f6efdf;
   color: var(--text-primary);
@@ -97,7 +100,12 @@ image: "/assets/img/the-message/sermon-light.jpg"
   font-size: 0.875rem;
   color: var(--text-tertiary);
 }
-.page-content .tm .tm-hero-shot { margin: 0 auto 5rem; }
+.page-content .tm .tm-stage { position: relative; margin: 0 auto 5rem; }
+/* The slots hold the scenes' shapes before the script runs, so nothing shifts. */
+.page-content .tm .tm-hero-stage { aspect-ratio: 1000 / 540; max-width: 1000px; }
+.page-content .tm .tm-sunday-stage { aspect-ratio: 1000 / 470; max-width: 1000px; margin-bottom: 1.5rem; }
+.page-content .tm .tm-stage-fallback { width: 100%; height: 100%; object-fit: cover; object-position: top left; border-radius: 12px; }
+.page-content .tm .tm-stage .ss-fit .tm-stage-fallback { display: none; }
 
 /* ── Feature rows: text beside a screenshot, alternating sides ── */
 .page-content .tm .tm-row {
@@ -174,25 +182,6 @@ image: "/assets/img/the-message/sermon-light.jpg"
   line-height: 1.6;
   color: var(--text-secondary);
 }
-.page-content .tm .tm-pair {
-  display: grid;
-  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
-  gap: 1.25rem;
-  margin-bottom: 1.5rem;
-}
-.page-content .tm .tm-pair figure { margin: 0; }
-/* Both windows at one shape, cropped from the top, so the pair lines up. */
-.page-content .tm .tm-pair .tm-shot { aspect-ratio: 2200 / 1280; }
-.page-content .tm .tm-pair .tm-shot img { width: 100%; height: 100%; object-fit: cover; object-position: top center; }
-.page-content .tm .tm-pair figcaption {
-  font-style: normal;
-  text-align: left;
-  font-size: 0.9375rem;
-  line-height: 1.55;
-  color: var(--text-secondary);
-  margin-top: 0.875rem;
-}
-.page-content .tm .tm-pair figcaption strong { color: var(--text-primary); font-weight: 600; }
 .page-content .tm .tm-sunday { margin-bottom: 5.5rem; }
 .page-content .tm .tm-sunday-notes {
   display: grid;
@@ -277,14 +266,19 @@ image: "/assets/img/the-message/sermon-light.jpg"
 @media (max-width: 860px) {
 .page-content .tm .tm-row, .page-content .tm .tm-row.is-flipped { grid-template-columns: minmax(0, 1fr); margin-bottom: 4rem; }
 .page-content .tm .tm-row.is-flipped .tm-copy { order: 0; }
-.page-content .tm .tm-pair, .page-content .tm .tm-closing, .page-content .tm .tm-sunday-notes { grid-template-columns: minmax(0, 1fr); }
+.page-content .tm .tm-closing, .page-content .tm .tm-sunday-notes { grid-template-columns: minmax(0, 1fr); }
 .page-content .tm .tm-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+/* The scenes switch to their phone design below an 820px column; the slots follow. */
+@container tm (max-width: 819px) {
+.page-content .tm .tm-hero-stage { aspect-ratio: 358 / 340; max-width: 358px; }
+.page-content .tm .tm-sunday-stage { aspect-ratio: 1 / 1; max-width: 358px; }
 }
 @media (max-width: 560px) {
 .page-content .tm .tm-hero { margin-top: 2.5rem; }
 .page-content .tm .tm-grid { grid-template-columns: minmax(0, 1fr); }
 .page-content .tm .tm-grid div { padding-right: 0; }
-.page-content .tm .tm-hero-shot { margin-bottom: 3.5rem; }
+.page-content .tm .tm-stage { margin-bottom: 3.5rem; }
 }
 </style>
 
@@ -302,8 +296,8 @@ image: "/assets/img/the-message/sermon-light.jpg"
   <p class="tm-meta">Version 1.0 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
 </div>
 
-<div class="tm-shot tm-hero-shot">
-  <img src="/assets/img/the-message/sermon-light.jpg" width="2000" height="1270" alt="The First Seal open in The Message: the sermon library on the left, the transcript set in Literata in the middle, and Revelation 5:1 in the scripture panel on the right.">
+<div class="tm-stage tm-hero-stage" id="tm-hero-stage" role="img" aria-label="A sermon open in The Message: clicking the reading Revelation 10:1-7 opens the passage in a panel beside the transcript.">
+  <img class="tm-stage-fallback" src="/assets/img/the-message/sermon-light.jpg" width="2000" height="1270" alt="">
 </div>
 
 <section class="tm-row">
@@ -343,28 +337,21 @@ image: "/assets/img/the-message/sermon-light.jpg"
     <h2>Ready for Sunday</h2>
     <p>Plan the service, then present it. Passages, quotes from the sermons and headings go in order, and the projector steps through them a verse or a paragraph at a time.</p>
   </div>
-  <div class="tm-pair">
-    <figure>
-      <div class="tm-shot"><img src="/assets/img/the-message/service.jpg" width="1600" height="1138" loading="lazy" alt="An Order of Service for Sunday 8 November: Opening Prayer, Revelation 5:1–3 in the KJV, a quote from The First Seal, and a heading."></div>
-      <figcaption><strong>Order of Service.</strong> Right-click verses, sermon words or a highlight and choose Add to Service.</figcaption>
-    </figure>
-    <figure>
-      <div class="tm-shot"><img src="/assets/img/the-message/speaker.jpg" width="2000" height="1164" loading="lazy" alt="The Speaker View: the time, how long you’ve been presenting, Revelation 5:1 on screen now and verse 2 next, with Previous, Next, Blank Screen and Stop Presenting."></div>
-      <figcaption><strong>Speaker View.</strong> What the room sees, what comes next, the time, and a countdown that turns orange near the end.</figcaption>
-    </figure>
+  <div class="tm-stage tm-sunday-stage" id="tm-sunday-stage" role="img" aria-label="An order of service beside the projector: the right arrow key steps from Opening Prayer through Revelation 10:1 and 10:2 to a quote from The First Seal.">
+    <img class="tm-stage-fallback" src="/assets/img/the-message/service.jpg" width="1600" height="1138" alt="" loading="lazy">
   </div>
   <div class="tm-sunday-notes">
     <div class="tm-note">
-      <h3>On the projector</h3>
-      <p>The words fill a second display. Arrow keys move on, B blanks the screen.</p>
+      <h3>Add from anywhere</h3>
+      <p>Right-click verses, sermon words or a highlight and choose Add to Service.</p>
+    </div>
+    <div class="tm-note">
+      <h3>Speaker View</h3>
+      <p>What the room sees, what comes next, the time, and a countdown that turns orange near the end.</p>
     </div>
     <div class="tm-note">
       <h3>On the livestream</h3>
       <p>A lower third over green or transparency, for OBS and other streaming software.</p>
-    </div>
-    <div class="tm-note">
-      <h3>In print and in a link</h3>
-      <p>Print a chapter or sermon, or share a link that opens at the paragraph.</p>
     </div>
   </div>
 </section>
