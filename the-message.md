@@ -802,7 +802,7 @@ body.msg-reading .wrapper {
     <div class="msg-header">
       <h1>The Message sermon library</h1>
       <p class="page-subtitle">Sermons preached by William Marrion Branham between 1947 and 1965, with audio, transcripts, and translations in 72 languages.</p>
-      <p class="msg-header-note"><span id="stat-total">1,291</span> sermons. The catalogue is also available through a <a href="{{ '/api-docs/' | relative_url }}">REST API</a>.</p>
+      <p class="msg-header-note"><span id="stat-total">1,291</span> sermons. The catalogue is also available through a <a href="{{ '/api-docs/' | relative_url }}">REST API</a>, and in <a href="{{ '/the-message/mac/' | relative_url }}">The Message for Mac</a>.</p>
     </div>
 
     <!-- Controls Panel -->
