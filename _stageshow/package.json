@@ -2,9 +2,11 @@
   "name": "the-message-mac-stages",
   "private": true,
   "type": "module",
-  "description": "Animated scenes for /the-message/mac/, built with the Stageshow kit (MIT, see LICENSE-stageshow).",
+  "description": "Animated scenes for /the-message/mac/ and /gatherkit/, built with the Stageshow kit (MIT, see LICENSE-stageshow).",
   "scripts": {
-    "build": "vite build"
+    "build": "vite build && vite build -c vite.gatherkit.config.ts",
+    "build:the-message": "vite build",
+    "build:gatherkit": "vite build -c vite.gatherkit.config.ts"
   },
   "dependencies": {
     "lucide-react": "0.468.0",
