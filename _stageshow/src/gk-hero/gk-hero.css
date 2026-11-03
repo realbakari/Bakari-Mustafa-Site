@@ -1,0 +1,301 @@
+/* GatherKit check-in. The page is the ground: no plate. Wide: the window is
+   inset a gutter from the top and right, runs off the bottom, and the ticket
+   straddles its left edge. Compact: the main pane fills the stage. System
+   face throughout, as in the app. */
+.gkh {
+  & .ss-stage {
+    --gutter: 24px;
+    --gkh-ticket-w: 240px;
+    --gkh-green: #34a853;
+    --gkh-green-wash: #e3f4e6;
+    --gkh-amber-wash: #fcefd6;
+    --gkh-amber-ink: #8a5a00;
+    --gkh-teal: #22708f;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .gkh-window {
+    position: absolute;
+    top: var(--gutter);
+    left: calc(var(--gutter) + var(--gkh-ticket-w) - 90px);
+    right: var(--gutter);
+    height: 600px;
+    box-shadow: var(--ss-shadow-hero);
+  }
+
+  /* Toolbar: the station name, the Stations menu, the camera */
+  .gkh-tools { display: flex; align-items: center; gap: 8px; }
+  .gkh-station {
+    display: flex;
+    align-items: center;
+    width: 128px;
+    height: 26px;
+    padding: 0 12px;
+    border-radius: 13px;
+    border: 1px solid var(--ss-line);
+    background: var(--ss-surface);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ss-text-strong);
+  }
+  .gkh-tool {
+    display: grid;
+    place-items: center;
+    flex: none;
+    width: 30px;
+    height: 26px;
+    border-radius: 13px;
+    border: 1px solid var(--ss-line);
+    background: var(--ss-surface);
+    color: var(--ss-icon);
+  }
+  .gkh-tool--menu { display: flex; gap: 2px; width: 42px; justify-content: center; }
+
+  .gkh-body {
+    display: flex;
+    height: 100%;
+    background: var(--ss-surface);
+  }
+  .gkh-main {
+    display: flex;
+    flex-direction: column;
+    flex: 1;
+    min-width: 0;
+  }
+
+  /* Header: the event, and the count with its bar */
+  .gkh-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 16px;
+    padding: 14px 20px;
+    border-bottom: 1px solid var(--ss-line);
+  }
+  .gkh-event { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .gkh-event-name { font-size: 17px; font-weight: 600; line-height: 1.25; color: var(--ss-text-strong); white-space: nowrap; }
+  .gkh-event-date { font-size: 12.5px; line-height: 1.3; color: var(--ss-text-faint); white-space: nowrap; }
+  .gkh-progress { display: flex; flex-direction: column; align-items: flex-end; gap: 7px; flex: none; }
+  .gkh-progress-label {
+    font-size: 13px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ss-text-strong);
+    font-variant-numeric: tabular-nums;
+    white-space: nowrap;
+  }
+  .gkh-progress-track {
+    position: relative;
+    width: 168px;
+    height: 6px;
+    border-radius: 3px;
+    background: rgba(0, 0, 0, 0.07);
+    overflow: hidden;
+  }
+  .gkh-progress-fill {
+    position: absolute;
+    inset: 0 auto 0 0;
+    border-radius: 3px;
+    background: var(--gkh-green);
+    transition: width 0.7s cubic-bezier(0.45, 0, 0.1, 1);
+  }
+
+  /* The outcome: Ready and Welcome share one cell and cross-fade */
+  .gkh-outcome {
+    flex: 1;
+    display: grid;
+    place-items: center;
+    padding: 0 24px;
+  }
+  .gkh-state {
+    grid-area: 1 / 1;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    width: 360px;
+    text-align: center;
+    opacity: 0;
+    /* The leaving state is gone before the new one arrives: two headlines never
+       overlap. Opacity only, as the app's own transition: centred text never moves. */
+    transition: opacity 0.16s ease;
+    pointer-events: none;
+  }
+  .gkh-state[data-on] { opacity: 1; transition: opacity 0.32s ease 0.14s; }
+  .gkh-ready-icon { color: var(--ss-icon-faint); margin-bottom: 14px; }
+  .gkh-headline { font-size: 26px; font-weight: 600; line-height: 1.2; letter-spacing: -0.01em; color: var(--ss-text-strong); }
+  .gkh-ready-text { max-width: 300px; margin-top: 8px; font-size: 13px; line-height: 1.45; color: var(--ss-text-faint); }
+  .gkh-welcome-icon {
+    display: grid;
+    place-items: center;
+    width: 64px;
+    height: 64px;
+    margin-bottom: 16px;
+    border-radius: 50%;
+    background: var(--gkh-green-wash);
+    color: var(--gkh-green);
+  }
+  .gkh-detail { margin-top: 6px; font-size: 15px; line-height: 1.35; color: var(--ss-text-faint); }
+  .gkh-alert {
+    display: inline-flex;
+    align-items: center;
+    gap: 8px;
+    margin-top: 16px;
+    padding: 9px 14px;
+    border-radius: 10px;
+    background: var(--gkh-amber-wash);
+    font-size: 13.5px;
+    font-weight: 500;
+    line-height: 18px;
+    color: var(--ss-text-strong);
+    & svg { flex: none; color: var(--gkh-amber-ink); }
+  }
+  .gkh-undo-button {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    margin-top: 16px;
+    height: 28px;
+    padding: 0 14px;
+    border-radius: 14px;
+    background: rgba(0, 0, 0, 0.06);
+    font-size: 12.5px;
+    font-weight: 500;
+    color: var(--ss-text-strong);
+    transition: background 0.15s ease;
+  }
+  .gkh-undo-button[data-pressed] { background: rgba(0, 0, 0, 0.12); }
+
+  /* The scan field: under the stage edge in the wide design */
+  .gkh-scan {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    flex: none;
+    height: 60px;
+    padding: 0 20px;
+    border-top: 1px solid var(--ss-line);
+    color: var(--ss-icon-faint);
+  }
+  .gkh-scan-text {
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 15px;
+    color: var(--ss-text-faint);
+    white-space: nowrap;
+  }
+
+  /* The lookup column: find, then Recently Checked In */
+  .gkh-lookup {
+    flex: none;
+    width: 280px;
+    padding: 12px 12px 0;
+    border-left: 1px solid var(--ss-line);
+  }
+  .gkh-find {
+    display: flex;
+    align-items: center;
+    height: 28px;
+    padding: 0 10px;
+    border-radius: 7px;
+    border: 1px solid var(--ss-line);
+    font-size: 12.5px;
+    color: var(--ss-text-faint);
+  }
+  .gkh-section {
+    padding: 16px 10px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ss-text-faint);
+    border-bottom: 1px solid var(--ss-line);
+    margin-bottom: 4px;
+  }
+  .gkh-row-undo {
+    font-size: 12.5px;
+    color: var(--ss-text-faint);
+    padding: 2px 4px;
+    border-radius: 5px;
+    transition: background 0.15s ease, color 0.15s ease;
+  }
+  .gkh-row-undo[data-hover] { color: var(--ss-accent); }
+  .gkh-row-undo[data-pressed] { background: rgba(47, 123, 245, 0.12); }
+
+  /* The ticket: the app's printed ticket, small */
+  .gkh-ticket-slot {
+    position: absolute;
+    left: var(--gutter);
+    bottom: var(--gutter);
+    width: var(--gkh-ticket-w);
+    transition: transform 0.38s cubic-bezier(0.45, 0, 0.1, 1);
+    will-change: transform;
+  }
+  .gkh-ticket-slot[data-lifted] { transform: translate(8px, -6px); }
+  .gkh-ticket {
+    overflow: hidden;
+    border-radius: 12px;
+    background: #fff;
+    border-top: 6px solid var(--gkh-teal);
+    box-shadow: var(--ss-shadow-satellite);
+    transition: box-shadow 0.38s ease;
+  }
+  .gkh-ticket-slot[data-lifted] .gkh-ticket { box-shadow: var(--ss-shadow-lift, var(--ss-shadow-satellite)); }
+  .gkh-ticket-top {
+    display: flex;
+    justify-content: space-between;
+    gap: 12px;
+    padding: 14px 14px 12px;
+  }
+  .gkh-ticket-event { display: flex; flex-direction: column; gap: 6px; min-width: 0; }
+  .gkh-ticket-eyebrow {
+    font-size: 9.5px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    line-height: 1.3;
+    color: var(--gkh-teal);
+  }
+  .gkh-ticket-eyebrow--ink { color: var(--ss-text-faint); }
+  .gkh-ticket-title { font-size: 15px; font-weight: 700; line-height: 1.2; letter-spacing: -0.01em; color: #111; }
+  .gkh-ticket-code {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 5px;
+    flex: none;
+    font-family: ui-monospace, 'SF Mono', Menlo, monospace;
+    font-size: 9px;
+    color: #111;
+  }
+  .gkh-qr { display: block; width: 76px; height: 76px; fill: #111; }
+  .gkh-ticket-admit {
+    display: flex;
+    flex-direction: column;
+    gap: 3px;
+    margin: 0 14px;
+    padding: 10px 0 14px;
+    border-top: 1px solid rgba(0, 0, 0, 0.08);
+  }
+  .gkh-ticket-name { font-size: 17px; font-weight: 700; line-height: 1.25; color: #111; }
+  .gkh-ticket-type { font-size: 12px; font-weight: 600; line-height: 1.3; color: var(--gkh-teal); }
+
+  .gkh-rest { position: absolute; width: 1px; height: 1px; }
+
+  /* Phone column: the main pane alone, whole, with the scan field */
+  .ss-stage[data-layout="compact"] {
+    --gutter: 0px;
+    & .gkh-window { left: 0; right: 0; top: 0; height: 392px; }
+    & .gkh-header { padding: 12px 14px; }
+    & .gkh-event-name { font-size: 15px; }
+    & .gkh-event-date { display: none; }
+    & .gkh-progress-track { width: 104px; }
+    & .gkh-headline { font-size: 22px; }
+    & .gkh-welcome-icon { width: 48px; height: 48px; margin-bottom: 10px; }
+    & .gkh-ready-icon { width: 48px; height: 48px; margin-bottom: 10px; }
+    & .gkh-detail { font-size: 13.5px; margin-top: 4px; }
+    & .gkh-state { width: 310px; }
+    & .gkh-alert { margin-top: 10px; font-size: 12.5px; max-width: 300px; text-align: left; }
+    & .gkh-ready-text { font-size: 12.5px; }
+    & .gkh-undo-button { margin-top: 10px; }
+    & .gkh-scan { height: 52px; padding: 0 14px; }
+    & .gkh-scan-text { font-size: 13.5px; }
+  }
+}

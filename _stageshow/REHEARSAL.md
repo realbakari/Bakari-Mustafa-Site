@@ -29,3 +29,27 @@ Two scenes for `/the-message/mac/`, filmed with Stageshow's `film.mjs` on the lo
 - Touch devices and Safari; filmed in headless Chrome only.
 - The page's dark theme with the scenes running (the scenes keep their light theme by design).
 - `film.mjs` reports `kit override` lines for the kit's own phone styles, because the bundle puts the kit's CSS and the scenes' in one file. No scene draws a phone.
+
+## GatherKit hero (`src/gk-hero`)
+
+Filmed with `film.mjs` on a local page that loads the bundle, and on the Jekyll page.
+
+- **Gold copied:** `hero-demo` for the beats and named targets, `static-card` for the satellite straddling the window's edge, framed like the Message hero on the page's white ground.
+- **Story:** the check-in window for the Spring Fundraising Gala shows Ready to Check In. Amara Okafor's printed ticket is held up to the scanner. The window says Welcome, Amara, with the organiser's note that she's speaking at 8 pm. The count goes from 41 to 42 of 120, and she tops Recently Checked In. It holds, then the cursor presses Undo on her row. In the app, Undo also clears the welcome, so the reset has a cause. About 10 seconds.
+- **Poster:** Welcome, Amara, with her row in the list and 42 of 120.
+- **Real strings:** the window title, the event and its date, the count, the outcome, the alert, three names in the list, and the ticket's name, type and code. The other list rows and the ticket's date are bars. The QR code is real: it encodes `GK1:7QFM3K9TBW2H`, the payload a GatherKit ticket carries.
+- **Compact (358):** the main pane alone, off the bottom. Undo Check-In under the welcome resets it, and there's no ticket.
+
+### Checked
+
+- Both widths, full loop, on the local page and at 1280 and 390 on `/gatherkit/`.
+- `tsc --noEmit` over `src/gatherkit.tsx`.
+
+### Not checked
+
+- Touch devices and Safari; filmed in headless Chrome only.
+- `film.mjs` reports these lines on purpose:
+  - **`framing:` (window off centre).** The window sits right of centre to leave a wider left column for the ticket, which straddles its edge, as `framing.md` describes for a satellite.
+  - **`lopsided:` on "Front Desk".** It's a text field, so its value is left-aligned, as in the app.
+  - **`kit override`.** These lines come from the bundled kit CSS, as with The Message's scenes.
+- The scan field is below the wide crop. The ticket being held up is what shows the scan.

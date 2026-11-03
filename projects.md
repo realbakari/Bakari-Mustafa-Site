@@ -37,6 +37,12 @@ description: Bakari Mustafa's projects, including Mentors Outreach, Dzaleka Onli
       </li>
 
       <li class="project-row">
+        <h3><a href="/gatherkit/">GatherKit</a></h3>
+        <p>A Mac app for running events without an events team: registrations, imports from Eventbrite, Humanitix, Luma and Tito, QR tickets and name badges, offline check-in at the door, and attendance reports. Everything stays on the Mac.</p>
+        <p class="project-row-meta">Builder · 2026</p>
+      </li>
+
+      <li class="project-row">
         <h3><a href="https://github.com/realbakari/ATO-Lens">ATO Lens</a></h3>
         <p>A local-first desktop and web app for exploring Australian tax history, Superannuation Guarantee compliance, and HECS repayments with zero telemetry and private offline processing.</p>
         <p class="project-row-meta">Open source · 2026–Present</p>
