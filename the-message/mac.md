@@ -104,6 +104,7 @@ image: "/assets/img/the-message/sermon-light.jpg"
 /* The slots hold the scenes' shapes before the script runs, so nothing shifts. */
 .page-content .tm .tm-hero-stage { aspect-ratio: 1000 / 540; max-width: 1000px; }
 .page-content .tm .tm-sunday-stage { aspect-ratio: 1000 / 470; max-width: 1000px; margin-bottom: 1.5rem; }
+.page-content .tm .tm-live-stage { aspect-ratio: 1000 / 470; max-width: 1000px; margin-bottom: 1.5rem; }
 .page-content .tm .tm-stage-fallback { width: 100%; height: 100%; object-fit: cover; object-position: top left; border-radius: 12px; }
 .page-content .tm .tm-stage .ss-fit .tm-stage-fallback { display: none; }
 
@@ -273,6 +274,7 @@ image: "/assets/img/the-message/sermon-light.jpg"
 @container tm (max-width: 819px) {
 .page-content .tm .tm-hero-stage { aspect-ratio: 358 / 340; max-width: 358px; }
 .page-content .tm .tm-sunday-stage { aspect-ratio: 1 / 1; max-width: 358px; }
+.page-content .tm .tm-live-stage { aspect-ratio: 358 / 304; max-width: 358px; }
 }
 @media (max-width: 560px) {
 .page-content .tm .tm-hero { margin-top: 2.5rem; }
@@ -293,7 +295,7 @@ image: "/assets/img/the-message/sermon-light.jpg"
     <a class="tm-button is-primary" href="https://github.com/realbakari/the-message-mac/releases/latest/download/The-Message.zip">Download for Mac</a>
     <a class="tm-button" href="/the-message/">Browse the sermons on the web</a>
   </div>
-  <p class="tm-meta">Version 1.0 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
+  <p class="tm-meta">Version 1.1 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
 </div>
 
 <div class="tm-stage tm-hero-stage" id="tm-hero-stage" role="img" aria-label="A sermon open in The Message: clicking the reading Revelation 10:1-7 opens the passage in a panel beside the transcript.">
@@ -352,6 +354,30 @@ image: "/assets/img/the-message/sermon-light.jpg"
     <div class="tm-note">
       <h3>On the livestream</h3>
       <p>A lower third over green or transparency, for OBS and other streaming software.</p>
+    </div>
+  </div>
+</section>
+
+<section class="tm-sunday">
+  <div class="tm-section-head">
+    <h2>Go live from the same Mac</h2>
+    <p>Stream the service to YouTube or Vimeo with the verse on screen. Count down to the start, go live, and cut to the words you present, in your church’s own look.</p>
+  </div>
+  <div class="tm-stage tm-live-stage" id="tm-live-stage" role="img" aria-label="The Go Live studio: Starting Soon counts down, Go Live turns the tally red, a cut to the Words scene fills the picture with Revelation 5:1, and Next steps it to Revelation 5:2.">
+    <img class="tm-stage-fallback" src="/assets/img/the-message/go-live.jpg" width="1600" height="608" alt="" loading="lazy">
+  </div>
+  <div class="tm-sunday-notes">
+    <div class="tm-note">
+      <h3>Your church’s look</h3>
+      <p>Your logo, typeface and colours, from six presets. The stream, the lower third and the projector all follow it.</p>
+    </div>
+    <div class="tm-note">
+      <h3>Works with OBS</h3>
+      <p>Switch OBS’s scenes, start its stream and recording, and send it the verse, from the same window.</p>
+    </div>
+    <div class="tm-note">
+      <h3>Record the service</h3>
+      <p>Keep what goes out, then trim it and take out the long silences in the Recording Studio.</p>
     </div>
   </div>
 </section>
