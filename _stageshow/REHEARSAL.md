@@ -17,9 +17,17 @@ Two scenes for `/the-message/mac/`, filmed with Stageshow's `film.mjs` on the lo
 - **Poster:** Revelation 10:1 on the projector beside the plan.
 - **Compact (358):** the window off the bottom, the projector under the first item.
 
+## Go Live (`src/tm-live`)
+
+- **Gold copied:** `dark-hero` for a dark window on a light page (depth from surface steps, one lit colour: the live red) and the status that changes on its own control; `hero-demo` for the cursor's beats and named targets. Framed like `tm-sunday`: inset by one gutter, running off the bottom.
+- **Story:** Starting Soon counts down; Go Live turns the button to End, starts the LIVE clock and turns the tally red; as the countdown reaches 0:00 a cut to Words fills the monitor with Revelation 5:1; Next steps it to 5:2. The reset is the operator's: End, Starting Soon, and ‹ back to the first verse. About 15 seconds.
+- **Poster:** live at 12:34 with Revelation 5:1 on the monitor and Words on air.
+- **Real strings:** the six scene names, the slate (Branham Tabernacle, We’ll begin shortly), Revelation 5:1–3 (KJV), the toolbar's Go Live, Record and This Mac / OBS. The settings column is lines, cut by the window's foot.
+- **Compact (358):** the monitor alone under Go Live, with three scenes in a row beneath it; no words strip, so the cut is the payoff and Next is left out.
+
 ## Checked
 
-- Both scenes at 1280 and 390, full loop, on the real page (`--select #tm-hero-stage`, `#tm-sunday-stage`).
+- All three scenes at 1280 and 390, full loop, on the real page (`--select #tm-hero-stage`, `#tm-sunday-stage`, `#tm-live-stage`).
 - Reduced motion at 1280: both posters.
 - `tsc --noEmit` over `src/main.tsx`.
 - Literata: the scenes mount once it loads (at most 1.5 s), which removed a reflow jump at 0.2 s.
@@ -53,3 +61,5 @@ Filmed with `film.mjs` on a local page that loads the bundle, and on the Jekyll 
   - **`lopsided:` on "Front Desk".** It's a text field, so its value is left-aligned, as in the app.
   - **`kit override`.** These lines come from the bundled kit CSS, as with The Message's scenes.
 - The scan field is below the wide crop. The ticket being held up is what shows the scan.
+- Go Live: `film.mjs` reports `vanishes with no exit` for the kit's `Swap`, which re-keys its incoming copy while a separate copy fades the old words out; nothing vanishes on screen.
+- Go Live shows features first released in The Message 1.1.0.

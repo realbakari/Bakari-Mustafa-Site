@@ -1,0 +1,302 @@
+/* The Message for Mac, Go Live. The page is the ground; the studio window is
+   inset by one gutter on the top and both sides and runs off the bottom, where
+   only the foot of the settings column and the empty window are cut. One colour is lit: the live red, on the
+   button, the tally, the badge and the scene on air. */
+.tml {
+  & .ss-stage {
+    --gutter: 22px;
+    --tml-serif: 'Literata', 'Iowan Old Style', Georgia, serif;
+    --tml-red: #e5484d;
+    --tml-gold: #c9a45c;
+    --tml-paper: #1a1714;
+    --tml-ink: #ede8de;
+    overflow: hidden;
+    background: transparent;
+  }
+
+  .tml-window {
+    position: absolute;
+    top: var(--gutter);
+    left: var(--gutter);
+    width: calc(100% - 2 * var(--gutter));
+    height: 600px;
+    box-shadow: var(--ss-shadow-hero);
+  }
+
+  /* Toolbar */
+  .tml-engine {
+    display: inline-flex;
+    padding: 2px;
+    border-radius: 7px;
+    background: var(--ss-raised, rgba(255, 255, 255, 0.06));
+    font-size: 12px;
+    color: var(--ss-text-faint);
+  }
+  .tml-engine span { padding: 3px 10px; border-radius: 5px; line-height: 1.3; }
+  .tml-engine span[data-on] { background: rgba(255, 255, 255, 0.12); color: var(--ss-text-strong); }
+
+  .tml-tools { display: flex; align-items: center; gap: 8px; }
+  .tml-record, .tml-face {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12.5px;
+    font-weight: 600;
+    line-height: 1;
+    white-space: nowrap;
+  }
+  /* Both faces share one even width, so the button never resizes and its icon sits on whole pixels. */
+  .tml-face { justify-content: center; min-width: 66px; height: 14px; }
+  .tml-record {
+    height: 28px;
+    padding: 0 12px;
+    border-radius: 14px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--ss-text);
+  }
+  .tml-golive {
+    display: inline-flex;
+    align-items: center;
+    justify-content: center;
+    height: 28px;
+    padding: 0 13px;
+    border-radius: 14px;
+    background: var(--tml-red);
+    color: #fff;
+    transition: background 0.25s ease, transform 0.15s ease;
+    will-change: transform;
+  }
+  .tml-golive[data-live] { background: rgba(255, 255, 255, 0.1); color: var(--ss-text-strong); }
+  .tml-golive[data-live] .tml-face svg { color: var(--tml-red); }
+  .tml-golive[data-pressed] { transform: scale(0.97); }
+
+  /* Body: scenes | monitor and words | settings */
+  .tml-body {
+    display: grid;
+    grid-template-columns: 210px minmax(0, 1fr) 214px;
+    height: 100%;
+    background: #1b1b1d;
+  }
+
+  .tml-label {
+    font-size: 10px;
+    font-weight: 700;
+    letter-spacing: 0.06em;
+    text-transform: uppercase;
+    color: var(--ss-text-faint);
+    line-height: 1.3;
+  }
+
+  .tml-rail {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    padding: 16px 12px;
+    border-right: 1px solid var(--ss-line);
+  }
+  .tml-rail > .tml-label { padding: 0 6px 6px; }
+  .tml-scene {
+    display: grid;
+    grid-template-columns: 40px minmax(0, 1fr) auto;
+    align-items: center;
+    gap: 10px;
+    padding: 6px 18px 6px 6px;
+    border-radius: 8px;
+    box-shadow: inset 0 0 0 1.5px transparent;
+    transition: box-shadow 0.3s ease, background 0.3s ease;
+  }
+  .tml-scene[data-on] { background: rgba(255, 255, 255, 0.05); box-shadow: inset 0 0 0 1.5px rgba(255, 255, 255, 0.35); }
+  .tml-scene[data-live] { box-shadow: inset 0 0 0 1.5px var(--tml-red); }
+  .tml-scene[data-hover]:not([data-on]) { background: rgba(255, 255, 255, 0.04); }
+  .tml-thumb {
+    display: grid;
+    place-items: center;
+    width: 40px;
+    height: 24px;
+    border-radius: 4px;
+    background: #0e0e0f;
+    color: var(--ss-icon);
+  }
+  .tml-scene[data-on] .tml-thumb { color: var(--ss-text-strong); }
+  .tml-scene-title { font-size: 12.5px; color: var(--ss-text); line-height: 1.3; white-space: nowrap; }
+  .tml-scene[data-on] .tml-scene-title { color: var(--ss-text-strong); font-weight: 600; }
+  .tml-key { font-size: 10.5px; color: var(--ss-text-faint); font-variant-numeric: tabular-nums; }
+
+  .tml-center { display: flex; flex-direction: column; gap: 12px; padding: 16px; min-width: 0; }
+
+  /* The programme monitor: the Sanctuary look, the tally red while live. */
+  .tml-monitor {
+    position: relative;
+    aspect-ratio: 16 / 9;
+    border-radius: 6px;
+    overflow: hidden;
+    background: #000;
+    box-shadow: inset 0 0 0 1px rgba(255, 255, 255, 0.1);
+  }
+  .tml-monitor::after {
+    content: '';
+    position: absolute;
+    inset: 0;
+    border-radius: 6px;
+    box-shadow: inset 0 0 0 3px var(--tml-red);
+    opacity: 0;
+    transition: opacity 0.3s ease;
+    pointer-events: none;
+  }
+  .tml-monitor[data-live]::after { opacity: 1; }
+
+  .tml-card {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    background: linear-gradient(to bottom, #3a2e20, var(--tml-paper) 55%);
+    color: var(--tml-ink);
+    opacity: 0;
+    transition: opacity 0.35s ease;
+  }
+  .tml-card[data-on] { opacity: 1; }
+  .tml-church { font-size: 10px; font-weight: 600; letter-spacing: 0.24em; text-transform: uppercase; color: var(--tml-gold); }
+  .tml-slate-title { margin-top: 12px; font-family: var(--tml-serif); font-size: 30px; font-weight: 600; line-height: 1.2; }
+  .tml-countdown { margin-top: 14px; font-size: 40px; font-weight: 300; font-variant-numeric: tabular-nums; line-height: 1; }
+  .tml-rule { margin-top: 18px; width: 30px; height: 2px; border-radius: 1px; background: var(--tml-gold); }
+
+  .tml-verse {
+    position: absolute;
+    inset: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: center;
+    gap: 14px;
+    padding: 0 52px;
+    text-align: center;
+    opacity: 0;
+    transform: translateY(8px);
+    transition: opacity 0.18s ease, transform 0.18s ease;
+    will-change: transform, opacity;
+  }
+  .tml-verse[data-on] {
+    opacity: 1;
+    transform: translateY(0);
+    transition: opacity 0.4s ease 0.18s, transform 0.5s cubic-bezier(0.25, 0.8, 0.25, 1) 0.18s;
+  }
+  .tml-verse-text { margin: 0; font-family: var(--tml-serif); font-size: 21px; line-height: 1.5; }
+  .tml-verse-ref { font-size: 11px; font-weight: 600; color: var(--tml-gold); }
+
+  .tml-badge {
+    position: absolute;
+    top: 12px;
+    display: inline-flex;
+    gap: 5px;
+    align-items: center;
+    height: 20px;
+    padding: 0 7px;
+    border-radius: 4px;
+    font-size: 10px;
+    font-weight: 800;
+    letter-spacing: 0.03em;
+    line-height: 1;
+    color: #fff;
+    font-variant-numeric: tabular-nums;
+  }
+  .tml-badge--program { left: 12px; background: rgba(0, 0, 0, 0.55); }
+  .tml-badge--live {
+    right: 12px;
+    background: var(--tml-red);
+    opacity: 0;
+    transform: scale(0.92);
+    transition: opacity 0.25s ease, transform 0.25s ease;
+    will-change: transform, opacity;
+  }
+  .tml-monitor[data-live] .tml-badge--live { opacity: 1; transform: none; }
+  .tml-scene-chip {
+    position: absolute;
+    left: 12px;
+    bottom: 12px;
+    padding: 4px 9px;
+    border-radius: 11px;
+    background: rgba(0, 0, 0, 0.5);
+    font-size: 10.5px;
+    font-weight: 600;
+    color: rgba(255, 255, 255, 0.82);
+    line-height: 1.3;
+  }
+
+  /* The words, now and next */
+  .tml-strip {
+    display: grid;
+    grid-template-columns: minmax(0, 1fr) minmax(0, 1fr) auto;
+    gap: 16px;
+    align-items: center;
+    padding: 12px 14px;
+    border-radius: 8px;
+    background: rgba(255, 255, 255, 0.04);
+  }
+  .tml-col { display: flex; flex-direction: column; gap: 3px; min-width: 0; }
+  .tml-col--next { padding-left: 16px; border-left: 1px solid var(--ss-line); }
+  .tml-col--next .tml-strip-text { color: var(--ss-text); }
+  .tml-swap { display: block; min-width: 0; }
+  .tml-strip-text {
+    display: block;
+    font-family: var(--tml-serif);
+    font-size: 12.5px;
+    line-height: 1.35;
+    color: var(--ss-text-strong);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .tml-strip-ref { display: block; font-size: 10.5px; color: var(--ss-text-faint); line-height: 1.3; }
+  .tml-step { display: flex; gap: 6px; }
+  .tml-btn {
+    display: grid;
+    place-items: center;
+    width: 30px;
+    height: 28px;
+    border-radius: 7px;
+    background: rgba(255, 255, 255, 0.08);
+    color: var(--ss-text);
+    transition: transform 0.15s ease, background 0.15s ease;
+  }
+  .tml-btn[data-pressed] { transform: scale(0.94); background: rgba(255, 255, 255, 0.14); }
+
+  /* Settings, as lines; the stage crops this column. */
+  .tml-inspector { display: flex; flex-direction: column; gap: 14px; padding: 16px 14px; border-left: 1px solid var(--ss-line); }
+  .tml-tabs { display: inline-flex; gap: 2px; padding: 2px; border-radius: 7px; background: rgba(255, 255, 255, 0.06); font-size: 11.5px; color: var(--ss-text-faint); align-self: flex-start; }
+  .tml-tabs span { padding: 3px 9px; border-radius: 5px; line-height: 1.3; }
+  .tml-tabs span[data-on] { background: rgba(255, 255, 255, 0.12); color: var(--ss-text-strong); }
+  .tml-group { display: flex; flex-direction: column; border-radius: 8px; background: rgba(255, 255, 255, 0.04); }
+  .tml-field { display: flex; justify-content: space-between; align-items: center; padding: 12px; }
+  .tml-field + .tml-field { border-top: 1px solid var(--ss-line); }
+
+  .tml-rest { position: absolute; width: 1px; height: 1px; }
+
+  /* Phone column: the monitor leads, Go Live above it, and the scene list turns
+     into a row of three under it. The words strip stays on the wide stage. */
+  .ss-stage[data-layout='compact'] {
+    & .tml-window { top: 0; left: 0; width: 100%; height: 340px; }
+    & .tml-strip { display: none; }
+    & .tml-body { grid-template-columns: minmax(0, 1fr); grid-template-rows: auto 1fr; }
+    & .tml-rail { order: 2; flex-direction: row; flex-wrap: nowrap; align-items: flex-start; gap: 6px; padding: 0 12px 12px; border-right: 0; overflow: hidden; }
+    & .tml-rail > .tml-label { display: none; }
+    & .tml-scene { grid-template-columns: auto; padding: 6px 10px; flex: none; }
+    & .tml-scene:not([data-scene='soon']):not([data-scene='words']):not([data-scene='camera']) { display: none; }
+    & .tml-key, .tml-thumb { display: none; }
+    & .tml-center { order: 1; padding: 12px; }
+    & .tml-slate-title { font-size: 19px; margin-top: 8px; }
+    & .tml-countdown { font-size: 26px; margin-top: 8px; }
+    & .tml-church { font-size: 10px; letter-spacing: 0.16em; }
+    & .tml-rule { margin-top: 10px; width: 22px; }
+    & .tml-verse { padding: 0 24px; gap: 8px; }
+    & .tml-verse-text { font-size: 13px; }
+    & .tml-verse-ref { font-size: 10px; }
+    & .tml-badge { top: 8px; height: 18px; font-size: 10px; }
+    & .tml-badge--program { left: 8px; }
+    & .tml-badge--live { right: 8px; }
+    & .tml-scene-chip { display: none; }
+    & .tml-record span { display: none; }
+  }
+}

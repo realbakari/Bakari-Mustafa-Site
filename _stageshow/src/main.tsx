@@ -1,10 +1,11 @@
 import { createRoot } from 'react-dom/client'
 import MessageHero from './tm-hero'
 import MessageSunday from './tm-sunday'
+import MessageLive from './tm-live'
 
 // Mounts each scene into its slot on /the-message/mac/, replacing the
 // screenshot left there for browsers without JavaScript.
-const scenes = { 'tm-hero-stage': MessageHero, 'tm-sunday-stage': MessageSunday }
+const scenes = { 'tm-hero-stage': MessageHero, 'tm-sunday-stage': MessageSunday, 'tm-live-stage': MessageLive }
 
 function mount() {
   for (const [id, Scene] of Object.entries(scenes)) {
