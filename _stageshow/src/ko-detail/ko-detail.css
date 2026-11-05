@@ -1,0 +1,99 @@
+/* Kora's inspector as one panel on a quiet well: one gutter at the top and
+   sides, running off the bottom. */
+.kod {
+  & .ss-stage {
+    overflow: hidden;
+    border-radius: 14px;
+    background: var(--ss-well);
+  }
+
+  .kod-card {
+    position: absolute;
+    top: 48px;
+    left: 48px;
+    right: 48px;
+    display: grid;
+    gap: 0;
+    padding: 6px 18px 16px;
+    border-radius: 12px;
+    background: var(--ss-surface);
+    box-shadow: var(--ss-shadow-card);
+    font-size: 13px;
+    color: var(--ss-text-strong);
+  }
+  & .ss-stage[data-layout="compact"] .kod-card { top: 16px; left: 16px; right: 16px; padding-left: 14px; padding-right: 14px; }
+
+  /* The item: its preview and title */
+  .kod-item {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    padding: 10px 0 12px;
+    border-bottom: 1px solid var(--ss-line);
+  }
+  .kod-thumb {
+    display: block;
+    flex: none;
+    width: 40px;
+    height: 50px;
+    border-radius: 4px;
+    object-fit: cover;
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.16);
+  }
+  .kod-who { display: grid; gap: 7px; }
+  .kod-title { font-size: 14px; font-weight: 600; }
+
+  /* Label and value, as a Form row in the inspector */
+  .kod-field {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 12px;
+    min-height: 40px;
+  }
+  .kod-field + .kod-field { border-top: 1px solid var(--ss-line); }
+  .kod-label { color: var(--ss-text-strong); }
+  .kod-value { display: flex; align-items: center; gap: 10px; }
+  .kod-unknown { color: var(--ss-text); }
+  .kod-link { color: var(--ss-accent); }
+
+  /* A pop-up button: the value and the up-down chevrons */
+  .kod-popup {
+    display: inline-flex;
+    align-items: center;
+    justify-content: space-between;
+    gap: 6px;
+    width: 128px;
+    height: 24px;
+    padding: 0 7px 0 10px;
+    border-radius: 6px;
+    background: var(--ss-surface);
+    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.08);
+    font-size: 12.5px;
+    transition: background-color 0.12s ease;
+  }
+  .kod-popup[data-hover],
+  .kod-popup[data-open] { background: var(--ss-ink-1); }
+  .kod-chev { flex: none; color: var(--ss-icon); }
+
+  .kod-menu { position: absolute; padding: 5px; z-index: 5; }
+
+  /* History: the newest change first */
+  .kod-history { display: grid; margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--ss-line); }
+  .kod-heading { font-size: 12px; font-weight: 600; color: var(--ss-text); margin-bottom: 4px; }
+  .kod-change {
+    display: flex;
+    align-items: flex-start;
+    gap: 12px;
+    padding: 10px 0;
+    border-top: 1px solid var(--ss-line);
+  }
+  .kod-history > .ss-collapse:nth-child(2) .kod-change { border-top: 0; }
+  .kod-change__icon { display: grid; place-items: center; flex: none; width: 16px; height: 16px; margin-top: 1px; color: var(--ss-icon); }
+  .kod-change__text { display: grid; flex: 1; gap: 5px; min-width: 0; line-height: 1.35; }
+  .kod-meta { font-size: 12px; color: var(--ss-text); }
+  /* Placeholder lines keep the real row's air between them */
+  .kod-change__text--bars { gap: 12px; padding: 6px 0 4px; }
+
+  .kod-rest { position: absolute; right: 36px; top: 100px; width: 1px; height: 1px; }
+}
