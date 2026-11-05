@@ -248,7 +248,6 @@ image: "/assets/img/kora/hero.jpg"
   <p class="kp-lede">A home for your community’s photos, videos, recordings, flyers and newsletters. Bring years of scattered files together, describe them as you go, and look after them for the long run. Everything stays on your Mac.</p>
   <div class="kp-actions">
     <a class="kp-button is-primary" href="#features">See what it does</a>
-    <a class="kp-button" href="https://github.com/realbakari/Kora">Follow on GitHub</a>
   </div>
   <p class="kp-meta">Not yet available to download · For macOS 15 or later</p>
 </div>
@@ -322,7 +321,7 @@ image: "/assets/img/kora/hero.jpg"
   <section class="kp-panel">
     <h2>What’s next</h2>
     <p>Kora is in development. Next come search inside documents and scanned flyers, events, people and organisations, and a timeline; after that, stories and exhibitions to share what you’ve kept. Any AI features will be optional and off until you turn them on, and every suggestion will be yours to accept or reject.</p>
-    <p>Follow along <a href="https://github.com/realbakari/Kora">on GitHub</a>, or email <a href="mailto:bakari@bakarimustafa.com">bakari@bakarimustafa.com</a>.</p>
+    <p>Questions or ideas? Email <a href="mailto:bakari@bakarimustafa.com">bakari@bakarimustafa.com</a>.</p>
   </section>
 </div>
 
