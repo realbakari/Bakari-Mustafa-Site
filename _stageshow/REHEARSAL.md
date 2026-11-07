@@ -63,3 +63,68 @@ Filmed with `film.mjs` on a local page that loads the bundle, and on the Jekyll 
 - The scan field is below the wide crop. The ticket being held up is what shows the scan.
 - Go Live: `film.mjs` reports `vanishes with no exit` for the kit's `Swap`, which re-keys its incoming copy while a separate copy fades the old words out; nothing vanishes on screen.
 - Go Live shows features first released in The Message 1.1.0.
+
+## Kora (`src/ko-hero`, `src/ko-detail`, `src/ko-dupes`)
+
+Filmed with `film.mjs` on a local page that loads the bundle, and on the Jekyll page.
+Every string a scene shows is checked against Kora's source: the sidebar's All Assets, the
+status bar's count and import summary (`ImportSummaryText`), the consent values
+(`ConsentStatus+Presentation`), the history sentence (`ChangeDescription`) and the duplicate
+sheet's title and explanation (`DuplicateCompareView`). The drop outline (3px accent, radius
+10, inset 6), the placeholder tiles, the 8px thumbnail inset and the duration badge follow
+Kora's AppKit grid. Photos are Unsplash crops; the names are made up.
+
+### Hero (`src/ko-hero`)
+
+- **Gold copied:** `upload` (a file dragged in, the list lighting up, the drag image and its
+  hand-off), `finder` for the macOS window and sidebar, framed like the GatherKit hero: a
+  satellite straddling the window's left edge over the sidebar's filler, the window running
+  off the right.
+- **Story:** a Finder window called Events holds a folder, Harmony Day 2026. It is dragged onto
+  All Assets, which outlines itself as Kora's drop target. On the drop the activity button
+  becomes a progress ring, two batches arrive at the top of the grid (newest imported first)
+  as placeholders that fill in as their previews are made, the count rolls from 1,184 to
+  1,220 items, and the status bar reads Imported 36 items · 2 duplicates skipped (Kora skips
+  duplicates by default). The folder is still in Finder at the end. About 6 seconds, then it
+  holds.
+- **Plays once.** An import can't be undone with ⌘Z in Kora, so a loop would need a reset
+  with no cause; the scene holds its payoff instead.
+- **Poster:** the finished import, with the summary in the status bar.
+- **Compact (358):** the library window alone in three columns; the import arrives without the
+  drag, and the window keeps a landscape shape.
+
+### Inspector (`src/ko-detail`)
+
+- **Gold copied:** `stacked-cards` for the card on a quiet well, laid out as one panel pinned
+  with one gutter and bled off the bottom (Kora's inspector is one panel), with a `Popover` and
+  `Menu` for the pop-up button.
+- **Story:** the item's date is unknown and shows as a dash. The cursor opens Consent and
+  chooses Obtained; the value changes in place (the pop-up keeps one width), and a beat later
+  the change lands at the top of History. Plays once and holds.
+- **Real strings:** the title, Date Created and its dash, Consent and its six values, History
+  and the new entry. Older history is bars, running past the stage.
+
+### Duplicates (`src/ko-dupes`)
+
+- **Gold copied:** `static-card` for a still with real words only on the decision.
+- **A still:** Compare Possible Duplicates, the same photo twice at the thumbnail size Kora
+  uses, and the two real choices. Cancel is left out so they carry the sheet.
+
+### Checked
+
+- All three scenes, full play, at 1280 and 390 on a local page that loads the bundle:
+  `--gate` ends `rehearsal passed` for each.
+- Reduced motion: each poster, which is also the page's fallback still
+  (`assets/img/kora/hero.jpg`, `detail.jpg`, `duplicates.jpg`).
+- The Jekyll page at 1280, 768 and 375 in light and dark site themes, with no horizontal
+  scroll and no failed requests; the GatherKit and The Message scenes still mount and play
+  with the kit at 1.1.1.
+- `tsc --noEmit` over `src/kora.tsx`.
+
+### Not checked
+
+- Touch devices and Safari; filmed in headless Chrome only.
+- `film.mjs` reports `settle snap` on the kit's `Count` strip after each roll: the strip
+  re-seats inside its one-line window, which clips it, so nothing moves on screen.
+- `film.mjs` marks the runs `inconclusive` for sampling gaps in headless Chrome, not for a
+  finding.
