@@ -295,7 +295,7 @@ image: "/assets/img/the-message/sermon-light.jpg"
     <a class="tm-button is-primary" href="https://github.com/realbakari/the-message-mac/releases/latest/download/The-Message.zip">Download for Mac</a>
     <a class="tm-button" href="/the-message/">Browse the sermons on the web</a>
   </div>
-  <p class="tm-meta">Version 1.1 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
+  <p class="tm-meta">Version 1.2 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
 </div>
 
 <div class="tm-stage tm-hero-stage" id="tm-hero-stage" role="img" aria-label="A sermon open in The Message: clicking the reading Revelation 10:1-7 opens the passage in a panel beside the transcript.">
