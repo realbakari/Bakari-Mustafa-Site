@@ -292,7 +292,7 @@ image: "/assets/img/the-message/sermon-light.jpg"
   <h1>The Message</h1>
   <p class="tm-lede">William Branham’s sermons and the Bible, side by side. Read them, hear them, study them, and put the words on the screen on Sunday.</p>
   <div class="tm-actions">
-    <a class="tm-button is-primary" href="https://github.com/realbakari/the-message-mac/releases/latest/download/The-Message.zip">Download for Mac</a>
+    <a class="tm-button is-primary" href="https://github.com/realbakari/the-message-mac/releases/latest/download/The-Message.dmg">Download for Mac</a>
     <a class="tm-button" href="/the-message/">Browse the sermons on the web</a>
   </div>
   <p class="tm-meta">Version 1.2 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
