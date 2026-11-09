@@ -1,0 +1,73 @@
+---
+layout: page
+---
+{%- comment -%}
+  Takumi's docs: a sidebar from _data/takumi_docs.yml, the page, and the pages
+  before and after it in reading order. Styles are in /assets/css/takumi.css.
+{%- endcomment -%}
+{%- assign here = page.url -%}
+{%- assign flat = "" | split: "" -%}
+{%- for s in site.data.takumi_docs -%}{%- for p in s.pages -%}{%- assign flat = flat | push: p -%}{%- endfor -%}{%- endfor -%}
+{%- assign prev = nil -%}{%- assign next = nil -%}{%- assign current_title = page.title -%}
+{%- for p in flat -%}
+  {%- if p.slug == "" -%}{%- assign u = "/takumi/docs/" -%}{%- else -%}{%- assign u = "/takumi/docs/" | append: p.slug | append: "/" -%}{%- endif -%}
+  {%- if u == here -%}
+    {%- assign before = forloop.index0 | minus: 1 -%}
+    {%- if before >= 0 -%}{%- assign prev = flat[before] -%}{%- endif -%}
+    {%- assign after = forloop.index -%}
+    {%- assign next = flat[after] -%}
+  {%- endif -%}
+{%- endfor -%}
+<link rel="stylesheet" href="/assets/css/takumi.css">
+
+<div class="td">
+  <aside class="td-side" aria-label="Takumi documentation">
+    <a class="td-brand" href="/takumi/"><span class="tk-emblem" aria-hidden="true">匠</span><span>Takumi</span></a>
+    <details class="td-menu" id="td-menu">
+      <summary><span>Contents</span><span class="td-menu-here">{{ current_title }}</span></summary>
+      <nav>
+        {%- for s in site.data.takumi_docs %}
+        <p class="td-section">{{ s.section }}</p>
+        <ul>
+          {%- for p in s.pages -%}
+          {%- if p.slug == "" -%}{%- assign u = "/takumi/docs/" -%}{%- else -%}{%- assign u = "/takumi/docs/" | append: p.slug | append: "/" -%}{%- endif %}
+          <li><a href="{{ u }}"{% if u == here %} aria-current="page"{% endif %}>{{ p.title }}</a></li>
+          {%- endfor %}
+        </ul>
+        {%- endfor %}
+      </nav>
+    </details>
+  </aside>
+
+  <article class="td-main">
+    <p class="td-crumb"><a href="/takumi/">Takumi</a> <span aria-hidden="true">/</span> <a href="/takumi/docs/">Docs</a></p>
+    <h1 class="td-title">{{ page.title }}</h1>
+    <div class="td-body">
+      {{ content }}
+    </div>
+
+    <nav class="td-pager" aria-label="Previous and next page">
+      {%- if prev -%}
+      {%- if prev.slug == "" -%}{%- assign u = "/takumi/docs/" -%}{%- else -%}{%- assign u = "/takumi/docs/" | append: prev.slug | append: "/" -%}{%- endif %}
+      <a class="td-prev" href="{{ u }}"><span>Previous</span>{{ prev.title }}</a>
+      {%- else %}<span></span>{%- endif %}
+      {%- if next -%}
+      {%- if next.slug == "" -%}{%- assign u = "/takumi/docs/" -%}{%- else -%}{%- assign u = "/takumi/docs/" | append: next.slug | append: "/" -%}{%- endif %}
+      <a class="td-next" href="{{ u }}"><span>Next</span>{{ next.title }}</a>
+      {%- endif %}
+    </nav>
+    <p class="td-foot">Takumi OS 0.1.0, pre-alpha. These pages describe what Takumi does today; plans are marked as plans.</p>
+  </article>
+</div>
+
+<script>
+  /* The contents stay open beside the page on wide screens and fold into a menu on narrow ones.
+     Block comments only: the compress layout joins these lines into one. */
+  (function () {
+    var menu = document.getElementById("td-menu");
+    var wide = window.matchMedia("(min-width: 900px)");
+    function sync() { if (wide.matches) menu.setAttribute("open", ""); else menu.removeAttribute("open"); }
+    sync();
+    wide.addEventListener("change", sync);
+  })();
+</script>

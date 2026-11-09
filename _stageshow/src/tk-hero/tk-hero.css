@@ -1,0 +1,310 @@
+/* Takumi hero. Sizes follow shell/Look/Style.qml at the default text size:
+   the Core 46 high at rest, 640 wide open, a 52 field, 44 rows, radii 23, 22,
+   13 and 11, a 10 gap. Every colour comes from the theme on screen. */
+
+.tkh .ss-stage {
+  background: transparent;
+  font-family: Inter, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif;
+}
+
+.tkh .tkh-screen {
+  --tk-retint: 420ms;
+  position: absolute;
+  inset: 0;
+  overflow: hidden;
+  border-radius: 14px;
+  background: var(--tk-bg);
+  transition: background-color var(--tk-retint) ease;
+  isolation: isolate;
+}
+
+.tkh .tkh-sky {
+  position: absolute;
+  inset: 0;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  object-position: 70% 50%;
+  opacity: 0;
+}
+/* The new sky fades in over the old one, which stays whole underneath until
+   it is covered, so the screen never dims through the change. */
+.tkh .tkh-sky { z-index: 0; transition: opacity 0s linear var(--tk-retint); }
+.tkh .tkh-sky[data-on] { opacity: 1; z-index: 1; transition: opacity var(--tk-retint) ease; }
+.tkh .ss-stage[data-layout="compact"] .tkh-sky { object-position: 88% 50%; }
+
+/* ── The strip: the column before runs off the left edge ─────── */
+.tkh .tkh-strip {
+  position: absolute;
+  z-index: 2;
+  left: 0;
+  top: -64px; /* the crop takes the windows' title bars: the strip runs off the top */
+  bottom: 66px; /* the Core's 46 and a gap above and below it */
+  width: 100%;
+}
+.tkh .tkh-win {
+  position: absolute;
+  top: 0;
+  bottom: 0;
+  border-radius: 12px;
+  overflow: hidden;
+  background: var(--tk-bg);
+  color: var(--tk-fg);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--tk-fg) 10%, transparent), 0 18px 40px rgb(0 0 0 / 0.28);
+  transition: background-color var(--tk-retint) ease, color var(--tk-retint) ease, box-shadow var(--tk-retint) ease;
+}
+.tkh .tkh-win--editor { left: -48px; width: 690px; } /* the column before is off the left edge */
+.tkh .tkh-win[data-focus] {
+  box-shadow: 0 0 0 2px var(--tk-accent), 0 18px 40px rgb(0 0 0 / 0.3);
+}
+.tkh .tkh-win__bar {
+  height: 44px;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  background: var(--tk-surface);
+  border-bottom: 1px solid color-mix(in srgb, var(--tk-fg) 8%, transparent);
+  transition: background-color var(--tk-retint) ease, border-color var(--tk-retint) ease;
+}
+.tkh .tkh-win__title--real {
+  font-size: 13px;
+  font-weight: 600;
+  line-height: 1.3;
+  color: var(--tk-fg);
+  transition: color var(--tk-retint) ease;
+}
+.tkh .tkh-line {
+  display: block;
+  background: color-mix(in srgb, var(--tk-fg) 16%, transparent) !important;
+  transition: background-color var(--tk-retint) ease;
+}
+
+.tkh .tkh-files { display: grid; grid-template-columns: 150px 1fr; height: calc(100% - 44px); }
+.tkh .tkh-files__side {
+  display: flex;
+  flex-direction: column;
+  gap: 4px;
+  padding: 12px 10px;
+  background: var(--tk-surface);
+  transition: background-color var(--tk-retint) ease;
+}
+.tkh .tkh-files__item { display: flex; align-items: center; height: 30px; padding: 0 10px; border-radius: 8px; }
+.tkh .tkh-files__item[data-on] { background: color-mix(in srgb, var(--tk-fg) 9%, transparent); }
+.tkh .tkh-files__grid {
+  display: grid;
+  grid-template-columns: repeat(3, 1fr);
+  align-content: start;
+  gap: 18px 8px;
+  padding: 22px 16px;
+}
+.tkh .tkh-files__cell { display: flex; flex-direction: column; align-items: center; gap: 8px; color: var(--tk-accent); transition: color var(--tk-retint) ease; }
+.tkh .tkh-files__cell svg { fill: color-mix(in srgb, var(--tk-accent) 22%, transparent); transition: fill var(--tk-retint) ease; }
+
+.tkh .tkh-doc {
+  display: flex;
+  flex-direction: column;
+  gap: 22px;
+  padding: 30px 48px 30px 96px; /* 48 of it is past the left edge */
+}
+.tkh .tkh-doc__para { display: flex; flex-direction: column; gap: 9px; }
+
+/* ── The Core ───────────────────────────────────────────────── */
+.tkh .tkh-core {
+  --w: 500px;
+  --h: 46px;
+  position: absolute;
+  z-index: 3;
+  left: 50%;
+  bottom: 10px;
+  width: var(--w);
+  height: var(--h);
+  transform: translateX(-50%);
+  border-radius: 23px;
+  overflow: hidden;
+  color: var(--tk-fg);
+  background: color-mix(in srgb, var(--tk-surface) 94%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--tk-fg) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--tk-fg) 9%, transparent),
+    0 16px 40px rgb(0 0 0 / 0.35);
+  transition:
+    width 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    height 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    border-radius 360ms cubic-bezier(0.2, 0.8, 0.2, 1),
+    background-color var(--tk-retint) ease,
+    color var(--tk-retint) ease,
+    box-shadow var(--tk-retint) ease;
+}
+.tkh .tkh-core[data-open] {
+  /* 10 of padding, the rows (44 and a 2 gap each), 6 above the field, the field's 52 */
+  --w: 640px;
+  --h: calc(10px + var(--rows) * 46px + 6px + 52px + 10px);
+  border-radius: 22px;
+  background: color-mix(in srgb, var(--tk-surface) 98.5%, transparent);
+  box-shadow:
+    inset 0 1px 0 color-mix(in srgb, var(--tk-fg) 12%, transparent),
+    0 0 0 1px color-mix(in srgb, var(--tk-fg) 9%, transparent),
+    0 0 46px color-mix(in srgb, var(--tk-accent) 22%, transparent),
+    0 22px 50px rgb(0 0 0 / 0.4);
+}
+.tkh .tkh-core[data-open][data-rows="0"] { --h: 72px; }
+
+.tkh .tkh-emblem {
+  display: inline-grid;
+  place-items: center;
+  flex: none;
+  background: var(--tk-accent);
+  color: var(--tk-ink);
+  font-family: "Hiragino Sans", "Noto Sans CJK JP", "Yu Gothic", sans-serif;
+  font-weight: 900;
+  line-height: 1;
+  will-change: transform;
+  transition: background-color var(--tk-retint) ease, color var(--tk-retint) ease;
+}
+
+.tkh .tkh-rest {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  height: 46px;
+  width: 500px;
+  display: flex;
+  align-items: center;
+  gap: 16px;
+  padding: 0 18px 0 10px;
+  box-sizing: border-box;
+  font-size: 14px;
+  white-space: nowrap;
+  transition: opacity 180ms ease;
+}
+.tkh .tkh-core[data-open] .tkh-rest { opacity: 0; transition-duration: 120ms; }
+.tkh .tkh-rest__app { display: flex; align-items: center; gap: 8px; min-width: 0; flex: 1; }
+.tkh .tkh-rest__app svg { flex: none; color: var(--tk-accent); transition: color var(--tk-retint) ease; }
+.tkh .tkh-rest__name { font-weight: 600; }
+.tkh .tkh-rest__title { color: color-mix(in srgb, var(--tk-fg) 72%, transparent); overflow: hidden; text-overflow: ellipsis; }
+.tkh .tkh-map { display: flex; gap: 3px; flex: none; }
+.tkh .tkh-map span { width: 20px; height: 12px; border-radius: 3px; background: color-mix(in srgb, var(--tk-fg) 22%, transparent); transition: background-color var(--tk-retint) ease; }
+.tkh .tkh-map span[data-on] { background: var(--tk-accent); }
+.tkh .tkh-rest__time { display: flex; gap: 8px; align-items: baseline; font-variant-numeric: tabular-nums; flex: none; }
+.tkh .tkh-rest__time > span:last-child { font-size: 15px; font-weight: 600; }
+.tkh .tkh-rest__date { color: color-mix(in srgb, var(--tk-fg) 72%, transparent); }
+.tkh .tkh-rest__marks { display: flex; gap: 10px; flex: none; color: var(--tk-fg); }
+.tkh .tkh-rest__marks svg { opacity: 0.8; }
+
+.tkh .tkh-open {
+  position: absolute;
+  left: 0;
+  bottom: 0;
+  width: 640px;
+  padding: 10px;
+  box-sizing: border-box;
+  opacity: 0;
+  pointer-events: none;
+  transition: opacity 140ms ease;
+}
+.tkh .tkh-core[data-open] .tkh-open { opacity: 1; transition: opacity 200ms ease 250ms; }
+
+.tkh .tkh-rows { display: flex; flex-direction: column; gap: 2px; margin-bottom: 6px; }
+.tkh .tkh-row {
+  position: relative;
+  display: none;
+  align-items: center;
+  gap: 12px;
+  height: 44px;
+  padding: 0 14px 0 10px;
+  border-radius: 11px;
+  opacity: 0;
+  transform: translateY(10px);
+}
+.tkh .tkh-core[data-open] .tkh-row[data-shown] {
+  display: flex;
+  animation: tkh-rise 300ms cubic-bezier(0.2, 0.8, 0.2, 1) forwards;
+  animation-delay: calc(var(--i) * 45ms);
+}
+@keyframes tkh-rise { to { opacity: 1; transform: none; } }
+.tkh .tkh-row[data-sel] { background: color-mix(in srgb, var(--tk-fg) 9%, transparent); }
+.tkh .tkh-row__rail {
+  position: absolute;
+  left: 0;
+  top: 11px;
+  bottom: 11px;
+  width: 3px;
+  border-radius: 2px;
+  background: var(--tk-accent);
+  opacity: 0;
+  transition: opacity 160ms ease, background-color var(--tk-retint) ease;
+}
+.tkh .tkh-row[data-sel] .tkh-row__rail { opacity: 1; }
+.tkh .tkh-row__slot {
+  flex: none;
+  width: 50px;
+  height: 30px;
+  border-radius: 8px;
+  overflow: hidden;
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--tk-fg) 12%, transparent);
+}
+.tkh .tkh-row__slot img { display: block; width: 100%; height: 100%; object-fit: cover; }
+.tkh .tkh-row__text { display: flex; flex-direction: column; gap: 2px; min-width: 0; flex: 1; }
+.tkh .tkh-row__title { font-size: 15px; font-weight: 500; line-height: 1.3; }
+.tkh .tkh-row__sub {
+  font-size: 12px;
+  line-height: 1.3;
+  color: color-mix(in srgb, var(--tk-fg) 72%, transparent);
+  white-space: nowrap;
+  overflow: hidden;
+  text-overflow: ellipsis;
+}
+.tkh .tkh-row__kind {
+  flex: none;
+  font-size: 12px;
+  font-weight: 600;
+  color: color-mix(in srgb, var(--tk-fg) 62%, transparent);
+}
+
+.tkh .tkh-field {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+  height: 52px;
+  padding: 0 14px 0 18px;
+  border-radius: 13px;
+  background: color-mix(in srgb, var(--tk-fg) 6%, transparent);
+  transition: background-color var(--tk-retint) ease;
+}
+.tkh .tkh-field__text { flex: 1; display: flex; align-items: center; font-size: 18px; font-weight: 500; line-height: 1; }
+.tkh .tkh-caret {
+  display: inline-block;
+  width: 2px;
+  height: 22px;
+  margin-left: 2px;
+  border-radius: 1px;
+  background: var(--tk-accent);
+  animation: tkh-blink 1.06s steps(1) infinite;
+  transition: background-color var(--tk-retint) ease;
+}
+.tkh .tkh-caret[data-typing] { animation: none; }
+@keyframes tkh-blink { 50% { opacity: 0; } }
+.tkh .tkh-field__esc {
+  flex: none;
+  font-size: 12px;
+  font-weight: 600;
+  padding: 3px 7px;
+  border-radius: 6px;
+  color: color-mix(in srgb, var(--tk-fg) 62%, transparent);
+  box-shadow: 0 0 0 1px color-mix(in srgb, var(--tk-fg) 16%, transparent);
+}
+
+/* ── Compact: the sky and the Core, at the column's width ───── */
+.tkh .ss-stage[data-layout="compact"] .tkh-core { --w: 300px; }
+.tkh .ss-stage[data-layout="compact"] .tkh-rest { width: 300px; gap: 12px; }
+.tkh .ss-stage[data-layout="compact"] .tkh-core[data-open] { --w: 338px; }
+.tkh .ss-stage[data-layout="compact"] .tkh-open { width: 338px; padding: 8px; }
+.tkh .ss-stage[data-layout="compact"] .tkh-core[data-open] { --h: calc(8px + var(--rows) * 46px + 6px + 52px + 8px); }
+.tkh .ss-stage[data-layout="compact"] .tkh-row__kind { display: none; }
+.tkh .ss-stage[data-layout="compact"] .tkh-row { padding-right: 10px; }
+
+@media (prefers-reduced-motion: reduce) {
+  .tkh .tkh-screen { --tk-retint: 0ms; }
+  .tkh .tkh-core, .tkh .tkh-open, .tkh .tkh-rest { transition: none; }
+  .tkh .tkh-core[data-open] .tkh-row[data-shown] { animation: none; opacity: 1; transform: none; }
+}

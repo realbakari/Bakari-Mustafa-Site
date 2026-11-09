@@ -1,0 +1,38 @@
+# The Takumi docs' sidebar, in reading order. Each page lives at
+# /takumi/docs/<slug>/ and its source is takumi/docs/<slug>.md.
+- section: Start
+  pages:
+    - { slug: "", title: "What Takumi is" }
+    - { slug: install, title: "Installing" }
+    - { slug: first-hour, title: "Your first hour" }
+- section: Using it
+  pages:
+    - { slug: core, title: "The Core and the Palette" }
+    - { slug: quick-settings, title: "Quick settings, Today and notices" }
+    - { slug: strip, title: "Windows on the strip" }
+    - { slug: keys, title: "Keys" }
+    - { slug: capture, title: "Screenshots and recording" }
+    - { slug: themes, title: "Themes and the Sky" }
+    - { slug: apps, title: "Apps, the Shelf and defaults" }
+    - { slug: language-and-time, title: "Language, time and Today" }
+    - { slug: accessibility, title: "Accessibility" }
+- section: Connections and hardware
+  pages:
+    - { slug: wifi, title: "Wi-Fi" }
+    - { slug: bluetooth, title: "Bluetooth" }
+    - { slug: sound, title: "Sound" }
+    - { slug: displays, title: "Displays" }
+    - { slug: printers, title: "Printers and scanners" }
+    - { slug: drives, title: "Drives and memory cards" }
+    - { slug: power, title: "Power and battery" }
+    - { slug: phone-and-vpn, title: "Your phone and VPNs" }
+- section: Keeping it safe
+  pages:
+    - { slug: updates, title: "Updates, rooms and rollback" }
+    - { slug: backups, title: "Backups and sharing" }
+    - { slug: security, title: "Security" }
+- section: More
+  pages:
+    - { slug: intent, title: "The assistant (Intent)" }
+    - { slug: troubleshooting, title: "When something is wrong" }
+    - { slug: commands, title: "The takumi command" }
