@@ -128,3 +128,34 @@ Kora's AppKit grid. Photos are Unsplash crops; the names are made up.
   re-seats inside its one-line window, which clips it, so nothing moves on screen.
 - `film.mjs` marks the runs `inconclusive` for sampling gaps in headless Chrome, not for a
   finding.
+
+## Takumi (`src/tk-hero`)
+
+Filmed with `film.mjs` on the Jekyll page.
+
+- **Gold copied:** `dark-hero` for a dark product on a light page (depth from surface steps, one lit
+  colour per theme) and `hero-demo` for keys as the beats. No cursor: the story is the keyboard's.
+- **Story:** the desktop in Ion, one window on the strip and the sky beside it. Super+Space grows the
+  Core into the Palette, "theme" is typed and four themes rise from the field, the one in use
+  nearest it. Up makes Sakura current and, after the shell's 350 ms dwell, Sakura takes the whole
+  desktop: sky, window, Core and emblem. Up again: Ember. Super+Space closes the Palette, and
+  closing puts the theme in use back, which is the loop's reset with its cause. About 12 seconds.
+- **Poster:** Ember on the desktop with its row current.
+- **Real strings:** Text Editor, notes.md, the clock, what is typed, each theme's title and line as
+  `commands/palette/index` words them. The skies and row previews are the themes' own files
+  (`themes/<name>/skies/default.jpg` and `sample.png`). Sizes follow `shell/Look/Style.qml`.
+- **Compact (358):** the sky and the Core alone; no window, no kind label on the rows.
+
+### Checked
+
+- Both widths, full loop, `--gate` ends `rehearsal passed` at 1280 and 390.
+- The theme change frame by frame: the new sky fades in over the old one, which stays whole.
+- `tsc --noEmit` over `src/takumi.tsx`.
+
+### Not checked
+
+- Touch devices and Safari; filmed in headless Chrome only.
+- Between a dark and a light theme the window and the Core pass through grey for about 0.4 s, as
+  the shell's own colour animation does.
+- `film.mjs` reports `steps in its box` on the Core as it grows by its width and height (it is
+  sized by layout, as the shell sizes it), and a `manual` line for the typed field.
