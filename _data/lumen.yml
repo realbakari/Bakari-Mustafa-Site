@@ -1,0 +1,11 @@
+# Lumen for iPhone: one place for the details the three Lumen pages share.
+
+# Shown on the landing, support and privacy pages (confirmed by the owner).
+support_email: bakari@bakarimustafa.com
+
+# Leave empty until the app is live. When it is set, the landing page shows Apple's
+# "Download on the App Store" badge linking here instead of the "Coming soon" placeholder.
+# Use the official badge artwork from https://developer.apple.com/app-store/marketing/guidelines/
+app_store_url: ""
+
+minimum_ios: "18"

@@ -1,0 +1,463 @@
+/* Lumen for iPhone: landing, support and privacy pages.
+   Built on the site's tokens (--text-*, --bg-*, --border-*) so light and dark follow the site. */
+
+.page-content .lu {
+  --lu-accent: #f2a516;
+  color: var(--text-primary);
+  padding-bottom: 4rem;
+}
+.page-content .lu p { padding: 0 !important; }
+.page-content .lu img { display: block; max-width: 100%; height: auto; }
+.page-content .lu .lu-link,
+.page-content .lu .lu-prose a,
+.page-content .lu .lu-panel a,
+.page-content .lu .lu-meta a,
+.page-content .lu .lu-credits a {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-strong);
+}
+.page-content .lu .lu-prose a:hover,
+.page-content .lu .lu-panel a:hover,
+.page-content .lu .lu-meta a:hover,
+.page-content .lu .lu-credits a:hover { border-color: var(--text-primary); }
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+.page-content .lu .lu-hero {
+  text-align: center;
+  margin: 4rem auto 4.5rem;
+  max-width: 720px;
+}
+.page-content .lu .lu-icon {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 1.5rem;
+  border-radius: 23px;
+}
+.page-content .lu .lu-eyebrow {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem !important;
+}
+.page-content .lu .lu-hero h1 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(2.75rem, 6.5vw, 4rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.05;
+  margin: 0 0 0.75rem;
+}
+.page-content .lu .lu-tagline {
+  font-size: clamp(1.25rem, 2.6vw, 1.5rem);
+  font-weight: 600;
+  letter-spacing: -0.01em;
+  margin: 0 0 1rem !important;
+}
+.page-content .lu .lu-lede {
+  font-size: clamp(1.0625rem, 2.2vw, 1.25rem);
+  line-height: 1.55;
+  color: var(--text-secondary);
+  margin: 0 auto 2rem !important;
+  max-width: 34em;
+}
+.page-content .lu .lu-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  justify-content: center;
+  align-items: center;
+  margin-bottom: 1rem;
+}
+.page-content .lu .lu-button {
+  display: inline-flex;
+  align-items: center;
+  gap: 0.5rem;
+  padding: 0.75rem 1.25rem;
+  border-radius: 9999px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  text-decoration: none;
+  border: 1px solid var(--border-default);
+  color: var(--text-primary) !important;
+  background: var(--bg-primary);
+}
+.page-content .lu .lu-button:hover { border-color: var(--border-strong); }
+
+/* Stand-in for Apple's badge until the app is live: black, rounded, never a link. */
+.page-content .lu .lu-badge-soon {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 48px;
+  padding: 0 1.1rem;
+  border-radius: 10px;
+  background: #000;
+  color: #fff;
+  border: 1px solid #a6a6a6;
+  line-height: 1.1;
+  cursor: default;
+  user-select: none;
+}
+.page-content .lu .lu-badge-soon small { font-size: 0.6875rem; font-weight: 500; opacity: 0.85; }
+.page-content .lu .lu-badge-soon strong { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
+.page-content .lu .lu-badge img { height: 48px; width: auto; }
+.page-content .lu .lu-meta {
+  font-size: 0.875rem;
+  color: var(--text-tertiary);
+}
+
+/* ── Feature rows: copy beside a phone screenshot, alternating ── */
+.page-content .lu .lu-row {
+  display: grid;
+  grid-template-columns: minmax(0, 3fr) minmax(0, 2fr);
+  gap: clamp(1.5rem, 5vw, 4rem);
+  align-items: center;
+  margin: 0 0 5.5rem;
+}
+.page-content .lu .lu-row.is-flipped { grid-template-columns: minmax(0, 2fr) minmax(0, 3fr); }
+.page-content .lu .lu-row.is-flipped .lu-copy { order: 2; }
+.page-content .lu .lu-row.is-text { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); align-items: start; }
+.page-content .lu .lu-copy h2 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(1.625rem, 3vw, 2.125rem);
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.15;
+  margin: 0 0 1rem;
+}
+.page-content .lu .lu-copy > p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 1.25rem !important;
+}
+.page-content .lu .lu-points { list-style: none; margin: 0; padding: 0; }
+.page-content .lu .lu-points li {
+  position: relative;
+  padding: 0.375rem 0 0.375rem 1.25rem;
+  font-size: 0.9875rem;
+  line-height: 1.5;
+}
+.page-content .lu .lu-points li::before {
+  content: "";
+  position: absolute;
+  left: 0;
+  top: 0.95em;
+  width: 6px;
+  height: 6px;
+  border-radius: 50%;
+  background: var(--lu-accent);
+}
+.page-content .lu .lu-shot {
+  margin: 0 auto;
+  max-width: 300px;
+}
+.page-content .lu .lu-shot img {
+  width: 100%;
+  border-radius: 28px;
+  border: 1px solid var(--border-subtle);
+  background: #000;
+}
+.page-content .lu .lu-shot figcaption {
+  font-size: 0.8125rem;
+  line-height: 1.45;
+  color: var(--text-tertiary);
+  text-align: center;
+  margin-top: 0.75rem;
+}
+
+/* Look families, as a compact list */
+.page-content .lu .lu-families {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 0 1.5rem;
+  margin: 0 0 1.25rem;
+  padding: 0;
+  list-style: none;
+  border-top: 1px solid var(--border-subtle);
+}
+.page-content .lu .lu-families li {
+  padding: 0.625rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+  font-size: 0.9375rem;
+  line-height: 1.45;
+}
+.page-content .lu .lu-families strong { display: block; font-weight: 600; }
+.page-content .lu .lu-families span { color: var(--text-secondary); font-size: 0.875rem; }
+
+/* ── Everything else, in a compact grid ───────────────────────── */
+.page-content .lu .lu-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  border-top: 1px solid var(--border-subtle);
+  margin-bottom: 5rem;
+}
+.page-content .lu .lu-grid > div {
+  padding: 1.5rem 1.5rem 1.5rem 0;
+  border-bottom: 1px solid var(--border-subtle);
+}
+.page-content .lu .lu-grid h3 { font-size: 1rem; font-weight: 600; margin: 0 0 0.375rem; }
+.page-content .lu .lu-grid p { font-size: 0.9375rem; line-height: 1.55; color: var(--text-secondary); }
+
+/* ── Closing panels ───────────────────────────────────────────── */
+.page-content .lu .lu-closing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 3rem;
+}
+.page-content .lu .lu-panel {
+  padding: 1.75rem;
+  border-radius: 12px;
+  border: 1px solid var(--border-subtle);
+  background: var(--bg-secondary);
+}
+.page-content .lu .lu-panel h2 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: 1.375rem;
+  font-weight: 700;
+  margin: 0 0 0.625rem;
+}
+.page-content .lu .lu-panel p { font-size: 0.9875rem; line-height: 1.6; color: var(--text-secondary); }
+.page-content .lu .lu-panel p + p { margin-top: 0.75rem !important; }
+.page-content .lu .lu-credits {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-tertiary);
+  max-width: 720px;
+}
+
+/* ── Support and privacy: a reading column with a contents list ── */
+.page-content .lu.lu-doc { max-width: 720px; margin: 0 auto; }
+.page-content .lu .lu-doc-head { margin: 3.5rem 0 2rem; }
+.page-content .lu .lu-doc-head .lu-crumb {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem !important;
+}
+.page-content .lu .lu-doc-head .lu-crumb a { color: var(--text-secondary); text-decoration: none; }
+.page-content .lu .lu-doc-head .lu-crumb a:hover { color: var(--text-primary); }
+.page-content .lu .lu-doc-head h1 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+}
+.page-content .lu .lu-doc-head .lu-lede {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 !important;
+  max-width: none;
+}
+.page-content .lu .lu-toc {
+  margin: 0 0 2.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+.page-content .lu .lu-toc h2 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+}
+.page-content .lu .lu-toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: 1.5rem;
+}
+.page-content .lu .lu-toc li { padding: 0.25rem 0; font-size: 0.9375rem; break-inside: avoid; }
+.page-content .lu .lu-toc a { color: var(--text-primary); text-decoration: none; }
+.page-content .lu .lu-toc a:hover { text-decoration: underline; }
+.page-content .lu .lu-prose h2 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 3rem 0 0.875rem;
+  scroll-margin-top: 1.5rem;
+}
+.page-content .lu .lu-prose h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+}
+.page-content .lu .lu-prose p,
+.page-content .lu .lu-prose li {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.page-content .lu .lu-prose p { margin: 0 0 1rem !important; }
+.page-content .lu .lu-prose ul,
+.page-content .lu .lu-prose ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+.page-content .lu .lu-prose li { margin-bottom: 0.375rem; }
+.page-content .lu .lu-prose .lu-note {
+  padding: 0.875rem 1rem;
+  border-left: 3px solid var(--lu-accent);
+  background: var(--bg-secondary);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9375rem;
+}
+.page-content .lu .lu-prose details {
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.875rem 0;
+}
+.page-content .lu .lu-prose details:first-of-type { border-top: 1px solid var(--border-subtle); }
+.page-content .lu .lu-prose summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.page-content .lu .lu-prose details > p:first-of-type { margin-top: 0.625rem !important; }
+.page-content .lu .lu-prose details > p:last-child { margin-bottom: 0 !important; }
+.page-content .lu .lu-prose table { width: 100%; border-collapse: collapse; margin: 0 0 1.25rem; font-size: 0.9375rem; }
+.page-content .lu .lu-prose th,
+.page-content .lu .lu-prose td { text-align: left; vertical-align: top; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--border-subtle); line-height: 1.5; }
+.page-content .lu .lu-prose th { font-weight: 600; }
+.page-content .lu .lu-doc-foot {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+.page-content .lu .lu-doc-foot a { color: var(--text-primary); }
+
+
+/* ── Landing: a dark stage for the hero and its screenshots ───── */
+.page-content .lu .lu-stage {
+  margin: 1.5rem 0 0;
+  padding: clamp(2.5rem, 6vw, 4.5rem) clamp(1rem, 4vw, 3rem) 0;
+  border-radius: 28px;
+  background: radial-gradient(120% 80% at 50% 0%, #2a2116 0%, #0d0d0f 55%, #000 100%);
+  color: #f5f5f7;
+  overflow: hidden;
+}
+.page-content .lu .lu-stage .lu-hero { margin: 0 auto 3rem; }
+.page-content .lu .lu-stage .lu-eyebrow { color: #f2a516; }
+.page-content .lu .lu-stage h1 { color: #fff; }
+.page-content .lu .lu-stage .lu-lede { color: #b8b8bd; }
+.page-content .lu .lu-stage .lu-meta { color: #8e8e93; }
+.page-content .lu .lu-stage .lu-badge-soon { border-color: #6e6e73; }
+.page-content .lu .lu-phones {
+  display: flex;
+  justify-content: center;
+  align-items: flex-end;
+  gap: clamp(0.75rem, 2.5vw, 2rem);
+  max-width: 860px;
+  margin: 0 auto;
+  height: clamp(300px, 46vw, 520px);
+}
+.page-content .lu .lu-phones img {
+  width: clamp(130px, 24vw, 250px);
+  border-radius: clamp(18px, 3vw, 34px) clamp(18px, 3vw, 34px) 0 0;
+  border: 1px solid #3a3a3c;
+  border-bottom: 0;
+  align-self: flex-end;
+  object-fit: cover;
+  object-position: top;
+  height: 88%;
+}
+.page-content .lu .lu-phones img:nth-child(2) { height: 100%; }
+
+.page-content .lu .lu-facts {
+  list-style: none;
+  margin: 0 0 5rem;
+  padding: 1.5rem 0;
+  display: grid;
+  grid-template-columns: repeat(4, minmax(0, 1fr));
+  gap: 1rem;
+  border-bottom: 1px solid var(--border-subtle);
+  text-align: center;
+}
+.page-content .lu .lu-facts strong { display: block; font-size: 1rem; font-weight: 600; }
+.page-content .lu .lu-facts span { font-size: 0.875rem; color: var(--text-secondary); }
+
+.page-content .lu .lu-section { margin: 0 0 5rem; }
+.page-content .lu .lu-intro { max-width: 640px; margin: 0 0 2rem; }
+.page-content .lu .lu-intro h2,
+.page-content .lu .lu-copy h2 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(1.75rem, 3.6vw, 2.5rem);
+  font-weight: 700;
+  letter-spacing: -0.015em;
+  line-height: 1.1;
+  margin: 0 0 1rem;
+}
+.page-content .lu .lu-intro > p:not(.lu-kicker) {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.page-content .lu .lu-kicker {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: #c27f00;
+  margin: 0 0 0.5rem !important;
+}
+.page-content .lu .lu-small { font-size: 0.9375rem !important; color: var(--text-secondary); }
+.page-content .lu .lu-section .lu-grid { margin-bottom: 0; }
+
+@media (max-width: 860px) {
+  .page-content .lu .lu-facts { grid-template-columns: repeat(2, minmax(0, 1fr)); row-gap: 1.25rem; }
+}
+@media (max-width: 560px) {
+  .page-content .lu .lu-stage { border-radius: 20px; margin-top: 1rem; }
+  .page-content .lu .lu-stage .lu-hero { margin-top: 0; }
+  .page-content .lu .lu-phones { height: 300px; }
+  .page-content .lu .lu-phones img { width: 31%; }
+}
+
+@media (max-width: 860px) {
+  .page-content .lu .lu-row,
+  .page-content .lu .lu-row.is-flipped,
+  .page-content .lu .lu-row.is-text { grid-template-columns: minmax(0, 1fr); margin-bottom: 4rem; }
+  .page-content .lu .lu-row.is-flipped .lu-copy { order: 0; }
+  .page-content .lu .lu-shot { max-width: 260px; }
+  .page-content .lu .lu-closing { grid-template-columns: minmax(0, 1fr); }
+  .page-content .lu .lu-grid { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .page-content .lu .lu-hero { margin-top: 2.5rem; }
+  .page-content .lu .lu-doc-head { margin-top: 2.5rem; }
+  .page-content .lu .lu-grid { grid-template-columns: minmax(0, 1fr); }
+  .page-content .lu .lu-grid > div { padding-right: 0; }
+  .page-content .lu .lu-families { grid-template-columns: minmax(0, 1fr); }
+  .page-content .lu .lu-toc ol { columns: 1; }
+  .page-content .lu .lu-prose table,
+  .page-content .lu .lu-prose tbody,
+  .page-content .lu .lu-prose tr,
+  .page-content .lu .lu-prose td,
+  .page-content .lu .lu-prose th { display: block; width: 100%; }
+  .page-content .lu .lu-prose thead { display: none; }
+  .page-content .lu .lu-prose tr { border-bottom: 1px solid var(--border-subtle); padding: 0.5rem 0; }
+  .page-content .lu .lu-prose td { border: 0; padding: 0.125rem 0; }
+  .page-content .lu .lu-prose td:first-child { font-weight: 600; }
+}
+
+/* The site gives every list a 672px measure and a dash marker; these lists are layouts. */
+.page-content .lu .lu-facts,
+.page-content .lu .lu-families,
+.page-content .lu .lu-points { max-width: none; }
+.page-content .lu .lu-facts li,
+.page-content .lu .lu-families li { margin: 0; }
+.page-content .lu .lu-facts li::before,
+.page-content .lu .lu-families li::before { content: none; display: none; }
+.page-content .lu .lu-toc li::before { content: none; display: none; }
+.page-content .lu .lu-toc ol { max-width: none; }
