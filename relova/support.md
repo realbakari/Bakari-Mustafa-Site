@@ -92,7 +92,7 @@ No. Relova has no account and no sign-in. Most of Relova works offline. You need
 <details markdown="1">
 <summary>Where is my data stored? Can you see it?</summary>
 
-On your iPhone, inside Relova. We can't see it: Relova has no servers, analytics or tracking. Condition reports, documents and box labels are read with Apple's on-device text recognition. Listing previews come from the listing's website, and maps and travel times come from Apple Maps.
+On your iPhone, inside Relova, and in your private iCloud if you turn on iCloud sync. We can't see it: Relova has no servers, analytics or tracking. Condition reports, documents and box labels are read with Apple's on-device text recognition. Listing previews come from the listing's website, maps and travel times come from Apple Maps, and the moving-day forecast comes from Apple Weather.
 
 </details>
 
@@ -106,7 +106,7 @@ Open Settings in Relova and, under *Backup*, tap *Back up this move*. Save the f
 <details markdown="1">
 <summary>Can I use Relova on two iPhones, or share a move with my household?</summary>
 
-A move lives on one iPhone and doesn't sync. To move it to another iPhone, back it up and restore the file there. To plan together, add the people moving with you on that iPhone, assign them tasks and split costs.
+Turn on *Sync with iCloud* in Relova's Settings to keep your move up to date on your devices signed in to the same Apple Account. It's off until you turn it on. Sync uses your own iCloud, so people moving with you on their own Apple Account won't see it. To plan together, add them to your household on your iPhone, assign them tasks and split costs. You can also move a move to another iPhone with a backup file.
 
 </details>
 
