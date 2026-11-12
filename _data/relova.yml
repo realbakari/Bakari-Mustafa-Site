@@ -1,0 +1,18 @@
+# Relova for iPhone: one place for the details the Relova pages share.
+
+# Shown on the landing, support, privacy and terms pages.
+# This is the site's public address (also used for Lumen). Change it here if Relova
+# should have its own support address.
+support_email: bakari@bakarimustafa.com
+
+# Leave empty until the app is live. When it is set, the landing page shows Apple's
+# "Download on the App Store" badge linking here instead of the placeholder.
+# Use the official badge artwork from https://developer.apple.com/app-store/marketing/guidelines/
+# and save it as /assets/img/relova/app-store-badge.svg.
+app_store_url: ""
+
+minimum_ios: "26"
+
+# Dates shown on the policy pages.
+privacy_updated: "12 November 2026 (revised)"
+terms_updated: "12 November 2026"

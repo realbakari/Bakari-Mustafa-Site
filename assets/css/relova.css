@@ -1,0 +1,384 @@
+/* Relova for iPhone: landing, support, privacy, terms and press pages.
+   Built on the site's tokens (--text-*, --bg-*, --border-*) so light and dark follow the site.
+   Brand roles: Deep Teal is structure. Sunrise marks the moment (moving day) and nothing else.
+   One weight for headings (semibold), no tracked capitals, no gradients, no glows. */
+
+.page-content .rv {
+  --rv-teal: #0a4e49;          /* Deep Teal: the hero card and structure, same in both themes */
+  --rv-teal-ink: #0a4e49;      /* teal text and icons on the page */
+  --rv-teal-well: #e3efed;     /* soft well behind teal icons */
+  --rv-sunrise: #f28a3c;       /* the moment: fills only */
+  --rv-sunrise-ink: #a35c00;   /* Sunrise as text (Sunrise itself is 2.5:1 on white) */
+  --rv-sunrise-well: #fdeedf;
+  --rv-cream: #fff6e8;
+  --rv-cream-2: rgba(255, 246, 232, 0.78);
+  --rv-ring: 0 0 0 1px rgba(10, 30, 28, 0.08), 0 1px 2px 0 rgba(10, 30, 28, 0.1);
+  --rv-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  font-family: var(--rv-sans);
+  color: var(--text-primary);
+  padding-bottom: 4rem;
+}
+[data-theme="dark"] .page-content .rv {
+  --rv-teal-ink: #129c90;
+  --rv-teal-well: rgba(18, 156, 144, 0.14);
+  --rv-sunrise-ink: #f7a55c;
+  --rv-sunrise-well: rgba(242, 138, 60, 0.16);
+  --rv-ring: 0 0 0 0.5px rgba(255, 255, 255, 0.12), 0 1px 2px 0 rgba(0, 0, 0, 0.5);
+}
+
+.page-content .rv p { padding: 0 !important; }
+.page-content .rv img { display: block; max-width: 100%; height: auto; }
+.page-content .rv h1,
+.page-content .rv h2,
+.page-content .rv h3 { font-family: var(--rv-sans); font-weight: 600; color: var(--text-primary); }
+
+.page-content .rv .rv-prose a,
+.page-content .rv .rv-panel a,
+.page-content .rv .rv-meta a,
+.page-content .rv .rv-credits a,
+.page-content .rv .rv-link {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--rv-teal-ink);
+}
+.page-content .rv .rv-prose a:hover,
+.page-content .rv .rv-panel a:hover,
+.page-content .rv .rv-credits a:hover,
+.page-content .rv .rv-link:hover { color: var(--rv-teal-ink); }
+.page-content .rv a:focus-visible { outline: 2px solid var(--rv-teal-ink); outline-offset: 3px; border-radius: 4px; }
+
+/* ── Hero: a flat Deep Teal card, like the app's Home hero ───────── */
+.page-content .rv .rv-hero {
+  margin: 1.5rem 0 0;
+  padding: clamp(2.5rem, 7vw, 5rem) clamp(1.25rem, 5vw, 3.5rem);
+  border-radius: 32px;
+  background: var(--rv-teal);
+  color: var(--rv-cream);
+  text-align: center;
+}
+[data-theme="dark"] .page-content .rv .rv-hero { box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.1); }
+.page-content .rv .rv-mark { width: 96px; height: 96px; margin: 0 auto 1.75rem; }
+.page-content .rv .rv-name {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--rv-cream-2);
+  margin: 0 0 0.75rem !important;
+}
+.page-content .rv .rv-hero h1 {
+  color: var(--rv-cream);
+  font-size: clamp(2.375rem, 6.4vw, 4rem);
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin: 0 auto 1.25rem;
+  max-width: 12em;
+}
+.page-content .rv .rv-hero .rv-lede {
+  color: var(--rv-cream-2);
+  font-size: clamp(1.0625rem, 2.3vw, 1.3125rem);
+  line-height: 1.5;
+  max-width: 30em;
+  margin: 0 auto 2.25rem !important;
+}
+.page-content .rv .rv-actions { display: flex; justify-content: center; margin-bottom: 1rem; }
+.page-content .rv .rv-meta { font-size: 0.9375rem; color: var(--rv-cream-2); }
+
+/* Stand-in for Apple's badge until the app is live: black, rounded, never a link. */
+.page-content .rv .rv-badge-soon {
+  display: inline-flex;
+  flex-direction: column;
+  align-items: flex-start;
+  justify-content: center;
+  height: 52px;
+  padding: 0 1.25rem;
+  border-radius: 12px;
+  background: #000;
+  color: #fff;
+  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.28);
+  line-height: 1.1;
+  cursor: default;
+  user-select: none;
+}
+.page-content .rv .rv-badge-soon small { font-size: 0.6875rem; font-weight: 500; opacity: 0.85; }
+.page-content .rv .rv-badge-soon strong { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
+.page-content .rv .rv-badge img { height: 52px; width: auto; }
+
+/* ── Sections ───────────────────────────────────────────────────── */
+.page-content .rv .rv-section { margin: 0 0 5.5rem; }
+.page-content .rv .rv-section.rv-first { margin-top: 5rem; }
+.page-content .rv .rv-intro { max-width: 640px; margin: 0 0 2.25rem; }
+.page-content .rv .rv-intro h2 {
+  font-size: clamp(1.75rem, 3.8vw, 2.5rem);
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.875rem;
+}
+.page-content .rv .rv-intro > p {
+  font-size: 1.125rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+
+/* The handover: the hero feature, given a wide two-column block */
+.page-content .rv .rv-feature-lead {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem;
+  margin-bottom: 1.25rem;
+}
+
+/* Feature cards: white raised by a fine ring and a 1px drop (light); one step up with a 0.5px outline (dark) */
+.page-content .rv .rv-cards {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.25rem;
+}
+.page-content .rv .rv-card {
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: var(--bg-primary);
+  box-shadow: var(--rv-ring);
+}
+[data-theme="dark"] .page-content .rv .rv-card { background: var(--bg-secondary); }
+.page-content .rv .rv-card.is-lead { padding: 1.75rem; }
+.page-content .rv .rv-icon {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  width: 44px;
+  height: 44px;
+  border-radius: 12px;
+  background: var(--rv-teal-well);
+  color: var(--rv-teal-ink);
+  margin-bottom: 1rem;
+}
+.page-content .rv .rv-icon.is-moment { background: var(--rv-sunrise-well); color: var(--rv-sunrise-ink); }
+.page-content .rv .rv-card h3 { font-size: 1.125rem; letter-spacing: -0.01em; margin: 0 0 0.5rem; }
+.page-content .rv .rv-card.is-lead h3 { font-size: 1.3125rem; }
+.page-content .rv .rv-card > p { font-size: 0.9875rem; line-height: 1.6; color: var(--text-secondary); }
+.page-content .rv .rv-card > p + p { margin-top: 0.625rem !important; }
+.page-content .rv .rv-points { list-style: none; margin: 1rem 0 0; padding: 0; max-width: none; }
+.page-content .rv .rv-points li {
+  position: relative;
+  margin: 0;
+  padding: 0.5rem 0 0.5rem 1.75rem;
+  font-size: 0.9375rem;
+  line-height: 1.5;
+  border-top: 0.5px solid var(--border-default);
+}
+.page-content .rv .rv-points li::before { content: none; display: none; }
+.page-content .rv .rv-points svg {
+  position: absolute;
+  left: 0;
+  top: 0.55rem;
+  width: 18px;
+  height: 18px;
+  color: var(--rv-teal-ink);
+}
+.page-content .rv .rv-tag {
+  display: inline-block;
+  margin-left: 0.375rem;
+  padding: 0.0625rem 0.5rem;
+  border-radius: 9999px;
+  font-size: 0.75rem;
+  font-weight: 600;
+  line-height: 1.5;
+  vertical-align: 0.125em;
+  color: var(--rv-teal-ink);
+  background: var(--rv-teal-well);
+}
+
+/* ── Privacy band: cream in light, a quiet teal-tinted surface in dark ── */
+.page-content .rv .rv-band {
+  padding: clamp(2rem, 5vw, 3.5rem);
+  border-radius: 32px;
+  background: var(--rv-cream);
+  margin: 0 0 5.5rem;
+}
+[data-theme="dark"] .page-content .rv .rv-band {
+  background: #10201e;
+  box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.08);
+}
+.page-content .rv .rv-band .rv-intro { margin-bottom: 2rem; }
+.page-content .rv .rv-band .rv-intro > p { color: var(--text-secondary); }
+[data-theme="dark"] .page-content .rv .rv-band .rv-intro > p { color: #b4bfbd; }
+.page-content .rv .rv-pillars {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 1.75rem;
+  max-width: none;
+}
+.page-content .rv .rv-pillars li { margin: 0; padding-top: 1rem; border-top: 0.5px solid rgba(10, 78, 73, 0.25); }
+[data-theme="dark"] .page-content .rv .rv-pillars li { border-top-color: rgba(255, 255, 255, 0.14); }
+.page-content .rv .rv-pillars li::before { content: none; display: none; }
+.page-content .rv .rv-pillars strong { display: block; font-size: 1.125rem; font-weight: 600; margin-bottom: 0.375rem; }
+.page-content .rv .rv-pillars span { display: block; font-size: 0.9875rem; line-height: 1.6; color: var(--text-secondary); }
+[data-theme="dark"] .page-content .rv .rv-pillars span { color: #b4bfbd; }
+.page-content .rv .rv-band-foot { margin-top: 2rem !important; font-size: 0.9375rem; color: var(--text-secondary); }
+[data-theme="dark"] .page-content .rv .rv-band-foot { color: #b4bfbd; }
+.page-content .rv .rv-band-foot a { color: var(--text-primary); text-decoration: none; border-bottom: 1px solid var(--rv-teal-ink); }
+
+/* ── Free and Plus ──────────────────────────────────────────────── */
+.page-content .rv .rv-plans {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 1.25rem;
+}
+.page-content .rv .rv-plans .rv-card h3 { font-size: 1.25rem; }
+.page-content .rv .rv-plans .rv-points { margin-top: 0.75rem; }
+
+/* ── Closing panels ─────────────────────────────────────────────── */
+.page-content .rv .rv-closing {
+  display: grid;
+  grid-template-columns: repeat(2, minmax(0, 1fr));
+  gap: 1.25rem;
+  margin-bottom: 2.5rem;
+}
+.page-content .rv .rv-panel {
+  padding: 1.5rem;
+  border-radius: 20px;
+  background: var(--bg-secondary);
+}
+[data-theme="dark"] .page-content .rv .rv-panel { box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.08); }
+.page-content .rv .rv-panel h2 { font-size: 1.125rem; margin: 0 0 0.5rem; }
+.page-content .rv .rv-panel p { font-size: 0.9375rem; line-height: 1.6; color: var(--text-secondary); }
+.page-content .rv .rv-credits {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  max-width: 720px;
+}
+
+/* ── Documents: support, privacy, terms and press ───────────────── */
+.page-content .rv.rv-doc { max-width: 720px; margin: 0 auto; }
+.page-content .rv .rv-doc-head { margin: 3.5rem 0 2rem; }
+.page-content .rv .rv-doc-head .rv-crumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem !important;
+}
+.page-content .rv .rv-doc-head .rv-crumb img { width: 28px; height: 28px; border-radius: 7px; margin: 0; }
+.page-content .rv .rv-doc-head .rv-crumb a { color: var(--text-secondary); text-decoration: none; }
+.page-content .rv .rv-doc-head .rv-crumb a:hover { color: var(--text-primary); }
+.page-content .rv .rv-doc-head h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0 0 0.875rem;
+}
+.page-content .rv .rv-doc-head .rv-lede {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 !important;
+}
+.page-content .rv .rv-updated { font-size: 0.9375rem; color: var(--text-secondary); margin-top: 0.75rem !important; }
+.page-content .rv .rv-toc {
+  margin: 0 0 2.5rem;
+  padding: 1.25rem 1.5rem;
+  border-radius: 20px;
+  background: var(--bg-secondary);
+}
+[data-theme="dark"] .page-content .rv .rv-toc { box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.08); }
+.page-content .rv .rv-toc h2 { font-size: 0.9375rem; color: var(--text-secondary); margin: 0 0 0.5rem; }
+.page-content .rv .rv-toc ol { margin: 0; padding: 0; list-style: none; columns: 2; column-gap: 1.5rem; max-width: none; }
+.page-content .rv .rv-toc li { padding: 0.3125rem 0; margin: 0; font-size: 0.9875rem; break-inside: avoid; }
+.page-content .rv .rv-toc li::before { content: none; display: none; }
+.page-content .rv .rv-toc a { color: var(--text-primary); text-decoration: none; }
+.page-content .rv .rv-toc a:hover { color: var(--rv-teal-ink); }
+
+.page-content .rv .rv-prose h2 {
+  font-size: 1.5rem;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 2.75rem 0 0.875rem;
+  scroll-margin-top: 1.5rem;
+}
+.page-content .rv .rv-prose h3 { font-size: 1.0625rem; margin: 1.75rem 0 0.5rem; }
+.page-content .rv .rv-prose p,
+.page-content .rv .rv-prose li { font-size: 1rem; line-height: 1.65; }
+.page-content .rv .rv-prose p { margin: 0 0 1rem !important; }
+.page-content .rv .rv-prose ul,
+.page-content .rv .rv-prose ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+.page-content .rv .rv-prose li { margin-bottom: 0.375rem; }
+.page-content .rv .rv-prose .rv-note {
+  padding: 1rem 1.125rem;
+  border-radius: 14px;
+  background: var(--rv-teal-well);
+  font-size: 0.9875rem;
+}
+.page-content .rv .rv-prose details { border-bottom: 0.5px solid var(--border-default); padding: 0.875rem 0; }
+.page-content .rv .rv-prose details:first-of-type { border-top: 0.5px solid var(--border-default); }
+.page-content .rv .rv-prose summary { cursor: pointer; font-weight: 600; font-size: 1rem; line-height: 1.5; min-height: 28px; }
+.page-content .rv .rv-prose summary::marker { color: var(--rv-teal-ink); }
+.page-content .rv .rv-prose details > p:first-of-type { margin-top: 0.625rem !important; }
+.page-content .rv .rv-prose details > :last-child { margin-bottom: 0 !important; }
+.page-content .rv .rv-doc-foot {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--border-default);
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+.page-content .rv .rv-doc-foot a { color: var(--text-primary); text-decoration: none; }
+.page-content .rv .rv-doc-foot a:hover { color: var(--rv-teal-ink); }
+.page-content .rv .rv-doc-foot a[aria-current="page"] { color: var(--rv-teal-ink); }
+
+/* Press kit */
+.page-content .rv .rv-assets { display: grid; grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); gap: 1.25rem; margin: 0 0 1.5rem; }
+.page-content .rv .rv-asset { border-radius: 20px; box-shadow: var(--rv-ring); overflow: hidden; background: var(--bg-primary); }
+[data-theme="dark"] .page-content .rv .rv-asset { background: var(--bg-secondary); }
+.page-content .rv .rv-asset-art { display: flex; align-items: center; justify-content: center; height: 200px; }
+.page-content .rv .rv-asset-art.is-teal { background: var(--rv-teal); }
+.page-content .rv .rv-asset-art.is-cream { background: var(--rv-cream); }
+.page-content .rv .rv-asset-art img { width: 120px; height: 120px; }
+.page-content .rv .rv-asset-art img.is-icon { border-radius: 27px; }
+.page-content .rv .rv-asset { margin: 0; }
+.page-content .rv .rv-asset-body { padding: 1rem 1.25rem 1.25rem; margin: 0; text-align: left; font-style: normal; font-size: 0.9375rem; color: var(--text-primary); }
+.page-content .rv .rv-asset-body p { font-size: 0.9375rem !important; line-height: 1.5; margin: 0 0 0.5rem !important; }
+.page-content .rv .rv-asset-body p.rv-asset-sub { color: var(--text-secondary); }
+.page-content .rv .rv-swatches { list-style: none; margin: 0 0 1.5rem; padding: 0; display: grid; grid-template-columns: repeat(3, minmax(0, 1fr)); gap: 1rem; max-width: none; }
+.page-content .rv .rv-swatches li { margin: 0 !important; border-radius: 16px; box-shadow: var(--rv-ring); overflow: hidden; background: var(--bg-primary); }
+.page-content .rv .rv-swatches li::before { content: none; display: none; }
+[data-theme="dark"] .page-content .rv .rv-swatches li { background: var(--bg-secondary); }
+.page-content .rv .rv-chip { height: 84px; }
+.page-content .rv .rv-swatches div:not(.rv-chip) { padding: 0.75rem 1rem 0.875rem; }
+.page-content .rv .rv-swatches strong { display: block; font-size: 0.9875rem; font-weight: 600; }
+.page-content .rv .rv-swatches code { font-size: 0.875rem; color: var(--text-secondary); background: none; padding: 0; }
+.page-content .rv .rv-swatches span { display: block; font-size: 0.875rem; line-height: 1.45; color: var(--text-secondary); margin-top: 0.25rem; }
+
+/* ── Phone and tablet ───────────────────────────────────────────── */
+@media (max-width: 900px) {
+  .page-content .rv .rv-cards { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+  .page-content .rv .rv-closing { grid-template-columns: minmax(0, 1fr); }
+}
+@media (max-width: 767px) {
+  .page-content .rv .rv-hero { border-radius: 24px; margin-top: 1rem; }
+  .page-content .rv .rv-mark { width: 80px; height: 80px; }
+  .page-content .rv .rv-pillars { grid-template-columns: minmax(0, 1fr); gap: 1.25rem; }
+  .page-content .rv .rv-section.rv-first { margin-top: 3rem; }
+  .page-content .rv .rv-feature-lead,
+  .page-content .rv .rv-plans,
+  .page-content .rv .rv-assets { grid-template-columns: minmax(0, 1fr); }
+  .page-content .rv .rv-band { border-radius: 24px; }
+  .page-content .rv .rv-doc-head { margin-top: 2.5rem; }
+  .page-content .rv .rv-toc ol { columns: 1; }
+  .page-content .rv .rv-toc li a { display: inline-block; padding: 0.3125rem 0; }
+  .page-content .rv .rv-swatches { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+}
+@media (max-width: 560px) {
+  .page-content .rv .rv-cards { grid-template-columns: minmax(0, 1fr); }
+  .page-content .rv .rv-card,
+  .page-content .rv .rv-card.is-lead { padding: 1.25rem; }
+  .page-content .rv .rv-card > p,
+  .page-content .rv .rv-points li,
+  .page-content .rv .rv-panel p { font-size: 0.9375rem; }
+}
