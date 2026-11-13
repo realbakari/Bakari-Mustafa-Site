@@ -32,9 +32,9 @@ image: "/assets/img/lumen/icon.png"
     <p class="lu-meta">iPhone · iOS {{ site.data.lumen.minimum_ios }} or later</p>
   </div>
   <div class="lu-phones" aria-hidden="true">
-    <img src="/assets/img/lumen/editor-white-balance.jpg" width="552" height="1200" alt="">
-    <img src="/assets/img/lumen/editor-looks.jpg" width="552" height="1200" alt="">
-    <img src="/assets/img/lumen/editor-perspective.jpg" width="552" height="1200" alt="">
+    <img src="/assets/img/lumen/screen-masks.jpg" width="660" height="1434" alt="">
+    <img src="/assets/img/lumen/screen-camera-night.jpg" width="660" height="1434" alt="">
+    <img src="/assets/img/lumen/screen-develop-raw.jpg" width="660" height="1434" alt="">
   </div>
 </section>
 
@@ -69,7 +69,7 @@ image: "/assets/img/lumen/icon.png"
     <p>Then the full editor: curves, eight-band HSL, colour grading, perspective, heal and clone, and masks for the sky, a person or the subject. Edits are saved in Photos and the original is never touched.</p>
   </div>
   <figure class="lu-shot">
-    <img src="/assets/img/lumen/editor-perspective.jpg" width="552" height="1200" alt="Lumen's editor straightening the perspective of a rainy night street with Vertical and Horizontal sliders." loading="lazy">
+    <img src="/assets/img/lumen/screen-curves.jpg" width="660" height="1434" alt="Lumen's editor with the Curves tool open on a warmly lit café interior, a tone curve drawn over its histogram." loading="lazy">
   </figure>
 </section>
 
@@ -91,7 +91,7 @@ image: "/assets/img/lumen/icon.png"
     <p class="lu-small">Make your own from any edit, or bring your own <code>.cube</code> LUTs.</p>
   </div>
   <figure class="lu-shot">
-    <img src="/assets/img/lumen/editor-looks.jpg" width="552" height="1200" alt="Lumen's Looks panel: tiles for Natural, Soft, Airy and Crisp, each previewing the Look on the photo being edited." loading="lazy">
+    <img src="/assets/img/lumen/screen-before-after.jpg" width="660" height="1434" alt="Lumen comparing a photo of treetops before and after the Golden Look, split down the middle, with the Look tiles below." loading="lazy">
   </figure>
 </section>
 
@@ -137,6 +137,6 @@ image: "/assets/img/lumen/icon.png"
   </section>
 </div>
 
-<p class="lu-credits">Screenshots are of Lumen in the iOS Simulator. Rainy street photo by <a href="https://unsplash.com/photos/people-walking-on-street-in-rainy-day-FhR46F3l9KQ">Gil Ribeiro on Unsplash</a>. Some features depend on your iPhone model. Lumen is made by Bakari Mustafa.</p>
+<p class="lu-credits">Screenshots are of Lumen in the iOS Simulator. Photos on Unsplash by <a href="https://unsplash.com/photos/people-walking-on-street-in-rainy-day-FhR46F3l9KQ">Gil Ribeiro</a> (rainy street), <a href="https://unsplash.com/photos/looking-up-at-the-tops-of-tall-trees-cT1GiVS6D3U">CHUTTERSNAP</a> (treetops), <a href="https://unsplash.com/photos/ibikgDapcp4">Sven Pieren</a> (mountain ridges), <a href="https://unsplash.com/photos/d3pTF3r_hwY">Erol Ahmed</a> (snow peaks) and <a href="https://unsplash.com/photos/k6w8miMpfUI">Janosch Lino</a> (café). Some features depend on your iPhone model. Lumen is made by Bakari Mustafa.</p>
 
 </div>

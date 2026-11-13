@@ -357,26 +357,30 @@
 .page-content .lu .lu-stage .lu-lede { color: #b8b8bd; }
 .page-content .lu .lu-stage .lu-meta { color: #8e8e93; }
 .page-content .lu .lu-stage .lu-badge-soon { border-color: #6e6e73; }
+/* Three screenshots rising out of the bottom of the stage. Each keeps its own 660 × 1434 shape and the
+   row clips them at the bottom; forcing a height with object-fit: cover zoomed narrow phones in and cut
+   off their sides (buttons and labels) on small screens. */
 .page-content .lu .lu-phones {
   display: flex;
   justify-content: center;
-  align-items: flex-end;
+  align-items: flex-start;
   gap: clamp(0.75rem, 2.5vw, 2rem);
   max-width: 860px;
   margin: 0 auto;
   height: clamp(300px, 46vw, 520px);
+  overflow: hidden;
 }
 .page-content .lu .lu-phones img {
+  flex: none;
   width: clamp(130px, 24vw, 250px);
+  height: auto;
+  aspect-ratio: 660 / 1434;
+  margin-top: clamp(36px, 5.5vw, 62px);
   border-radius: clamp(18px, 3vw, 34px) clamp(18px, 3vw, 34px) 0 0;
   border: 1px solid #3a3a3c;
   border-bottom: 0;
-  align-self: flex-end;
-  object-fit: cover;
-  object-position: top;
-  height: 88%;
 }
-.page-content .lu .lu-phones img:nth-child(2) { height: 100%; }
+.page-content .lu .lu-phones img:nth-child(2) { margin-top: 0; }
 
 .page-content .lu .lu-facts {
   list-style: none;
@@ -424,8 +428,11 @@
 @media (max-width: 560px) {
   .page-content .lu .lu-stage { border-radius: 20px; margin-top: 1rem; }
   .page-content .lu .lu-stage .lu-hero { margin-top: 0; }
-  .page-content .lu .lu-phones { height: 300px; }
-  .page-content .lu .lu-phones img { width: 31%; }
+  /* Three phones side by side with clear space between them, the middle one a little larger and higher.
+     Sized from the row's width (percent margins are of the width too), so they keep their shape on any phone. */
+  .page-content .lu .lu-phones { height: auto; aspect-ratio: 1 / 0.74; gap: 3%; }
+  .page-content .lu .lu-phones img { width: 29%; margin-top: 9%; border-radius: 14px 14px 0 0; }
+  .page-content .lu .lu-phones img:nth-child(2) { width: 34%; border-radius: 16px 16px 0 0; }
 }
 
 @media (max-width: 860px) {
