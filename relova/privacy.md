@@ -28,14 +28,18 @@ Nothing. Relova has no account, no sign-in, no analytics, no advertising and no 
 
 ## What stays on your iPhone {#on-device}
 
-Everything you enter or capture is stored only on your iPhone, inside Relova:
+Everything you enter or capture is stored on your iPhone, inside Relova:
 
 - your move, tasks, addresses, budget, boxes and letters
 - photos, meter readings and condition records
 - documents you add, including an agent's condition report
 - the people in your household
 
-If you use iCloud backup for your iPhone, Apple includes this data in your device backup under Apple's terms. Relova itself does not upload it.
+If you use iCloud backup for your iPhone, Apple includes this data in your device backup under Apple's terms.
+
+## iCloud sync {#icloud}
+
+iCloud sync is off unless you turn it on in Relova's Settings. When it's on, your moves, photos and documents are also stored in your private iCloud database under your Apple Account, so they stay up to date on devices signed in to that account. This is Apple's service under Apple's terms. Relova has no access to your iCloud data, and turning sync off keeps your data on your iPhone.
 
 ## Permissions Relova asks for {#permissions}
 
@@ -54,6 +58,7 @@ Relova only connects to the internet when you ask it to:
 
 - **Saving a listing.** When you paste a link to a property listing, Relova fetches that page's preview (its title and main image) from the website, the same way Messages shows a link preview. The website sees an ordinary request from your iPhone.
 - **Maps and travel times.** Addresses you enter for saved listings and places that matter are looked up with Apple Maps, under Apple's privacy policy, to show a map and travel times.
+- **Moving-day forecast.** In the ten days before moving day, the location of your old home (from its address, via Apple Maps) is sent to Apple Weather to get the forecast. Nothing else about your move is sent.
 - **Official links.** Links to government and official pages open in your browser.
 
 ## Purchases {#purchases}
@@ -82,7 +87,7 @@ If this policy changes, we will update the date at the top and the in-app copy.
 
 ## Contact {#contact}
 
-Questions about this policy or about Relova: [{{ site.data.relova.support_email }}](mailto:{{ site.data.relova.support_email }}).
+Questions about this policy or about Relova: [{{ site.data.relova.support_email }}](mailto:{{ site.data.relova.support_email }}), or [Relova Support](/relova/support/).
 
 </div>
 
