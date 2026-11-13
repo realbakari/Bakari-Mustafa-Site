@@ -51,7 +51,7 @@ description: Bakari Mustafa's projects, including Mentors Outreach, Dzaleka Onli
       <li class="project-row">
         <h3><a href="/lumen/">Lumen</a></h3>
         <p>A camera, RAW developer and photo editor for iPhone: manual control, RAW development with Apple's RAW decoder, and 48 original Looks that work live in the viewfinder. No account and no tracking, and photos stay in Apple Photos.</p>
-        <p class="project-row-meta">Builder · Coming soon</p>
+        <p class="project-row-meta">Builder · <a href="https://apps.apple.com/us/app/lumen-raw-camera-looks/id6833008535">On the App Store</a></p>
       </li>
 
       <li class="project-row">

@@ -105,6 +105,10 @@
 .page-content .lu .lu-badge-soon small { font-size: 0.6875rem; font-weight: 500; opacity: 0.85; }
 .page-content .lu .lu-badge-soon strong { font-size: 1.125rem; font-weight: 600; letter-spacing: -0.01em; }
 .page-content .lu .lu-badge img { height: 48px; width: auto; }
+/* The same pill as a live link, until the official badge artwork is added. */
+.page-content .lu a.lu-store-link { cursor: pointer; user-select: auto; text-decoration: none; color: #fff; transition: background 0.15s ease; }
+.page-content .lu a.lu-store-link:hover { background: #1d1d1f; }
+.page-content .lu a.lu-store-link:focus-visible { outline: 2px solid #0a84ff; outline-offset: 3px; }
 .page-content .lu .lu-meta {
   font-size: 0.875rem;
   color: var(--text-tertiary);
