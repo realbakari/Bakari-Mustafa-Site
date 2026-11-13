@@ -17,12 +17,14 @@ image: "/assets/img/lumen/icon.png"
 <section class="lu-stage">
   <div class="lu-hero">
     <img class="lu-icon" src="/assets/img/lumen/icon.png" alt="" width="104" height="104">
-    <p class="lu-eyebrow">Lumen for iPhone · Coming soon</p>
+    <p class="lu-eyebrow">Lumen for iPhone{% if site.data.lumen.app_store_url == "" %} · Coming soon{% else %} · On the App Store{% endif %}</p>
     <h1>Shoot. Develop. Create.</h1>
     <p class="lu-lede">A manual camera, a RAW developer and a photo editor in one app, with 48 original Looks you can see in the viewfinder before you shoot.</p>
     <div class="lu-actions">
-      {% if site.data.lumen.app_store_url != "" %}
+      {% if site.data.lumen.app_store_url != "" and site.data.lumen.app_store_badge %}
       <a class="lu-badge" href="{{ site.data.lumen.app_store_url }}"><img src="/assets/img/lumen/app-store-badge.svg" alt="Download on the App Store" height="48"></a>
+      {% elsif site.data.lumen.app_store_url != "" %}
+      <a class="lu-badge-soon lu-store-link" href="{{ site.data.lumen.app_store_url }}" aria-label="Download Lumen on the App Store"><small>Download on the</small><strong>App Store</strong></a>
       {% else %}
       <span class="lu-badge-soon" role="img" aria-label="Coming soon to the App Store"><small>Coming soon to the</small><strong>App Store</strong></span>
       {% endif %}
