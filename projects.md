@@ -57,7 +57,7 @@ description: Bakari Mustafa's projects, including Mentors Outreach, Dzaleka Onli
       <li class="project-row">
         <h3><a href="/relova/">Relova</a></h3>
         <p>An iPhone app for moving home in Australia: a plan for your state, legal deadlines for updating your address, and a dated, room-by-room record of the property for your bond. No account and no referral fees, and records stay on the iPhone.</p>
-        <p class="project-row-meta">Builder · Coming soon</p>
+        <p class="project-row-meta">Builder · On the App Store</p>
       </li>
 
       <li class="project-row">

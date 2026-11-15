@@ -8,9 +8,10 @@ comments: false
 excerpt: "A fresh start, made easier. Relova plans your move for your state, tracks the legal deadlines for updating your address and keeps a dated, room-by-room record for your bond. No account and no referral fees."
 description: "Relova for iPhone helps Australian renters move home: a plan for your state, an Address Hub with legal deadlines, room-by-room condition records and an evidence pack, the bond timeline, letters, budget, boxes and household. No account, no referral fees, and your records are kept on your iPhone."
 image: "/assets/img/relova/relova-app-icon-1024.png"
+app_store_id: "6833876086"
 ---
 
-<link rel="stylesheet" href="/assets/css/relova.css?v=2">
+<link rel="stylesheet" href="/assets/css/relova.css?v=3">
 
 <div class="rv">
 
@@ -20,8 +21,10 @@ image: "/assets/img/relova/relova-app-icon-1024.png"
   <h1>A fresh start, made easier.</h1>
   <p class="rv-lede">Know what needs to happen, when it needs to happen and where everything stands.</p>
   <div class="rv-actions">
-    {% if site.data.relova.app_store_url != "" %}
+    {% if site.data.relova.app_store_url != "" and site.data.relova.app_store_badge %}
     <a class="rv-badge" href="{{ site.data.relova.app_store_url }}"><img src="/assets/img/relova/app-store-badge.svg" alt="Download on the App Store" height="52"></a>
+    {% elsif site.data.relova.app_store_url != "" %}
+    <a class="rv-badge-soon rv-store-link" href="{{ site.data.relova.app_store_url }}" aria-label="Download Relova on the App Store"><small>Download on the</small><strong>App Store</strong></a>
     {% else %}
     <span class="rv-badge-soon" role="img" aria-label="Coming soon to the App Store"><small>Coming soon to the</small><strong>App Store</strong></span>
     {% endif %}

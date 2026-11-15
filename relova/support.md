@@ -7,9 +7,10 @@ comments: false
 excerpt: "Help for Relova for iPhone: getting started, your data, Relova Plus and restoring a purchase, deleting a move, and common questions."
 description: "Support for Relova, an iPhone app for moving home in Australia. Getting started, where your data is kept, restoring Relova Plus, deleting your data, and how to contact us."
 image: "/assets/img/relova/relova-app-icon-1024.png"
+app_store_id: "6833876086"
 ---
 
-<link rel="stylesheet" href="/assets/css/relova.css?v=2">
+<link rel="stylesheet" href="/assets/css/relova.css?v=3">
 
 <div class="rv rv-doc">
 
@@ -34,7 +35,7 @@ image: "/assets/img/relova/relova-app-icon-1024.png"
 
 ## Getting started {#getting-started}
 
-Relova needs an iPhone with iOS {{ site.data.relova.minimum_ios }} or later. There's no account to create.
+Download Relova from the [App Store]({{ site.data.relova.app_store_url }}). It needs an iPhone with iOS {{ site.data.relova.minimum_ios }} or later, and there's no account to create.
 
 1. **Create your move.** Choose your moving date, the state you're leaving and the one you're moving to, whether you rent at each end, and how you're moving. Relova builds a plan with only the tasks that apply.
 2. **Turn on reminders if you want them.** Relova asks for notifications only when you tap *Turn on reminders* in Settings. Task reminders arrive at 9am on the day a task is due. Legal deadlines, such as returning the entry report, get a reminder the day before.

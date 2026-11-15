@@ -9,7 +9,7 @@ description: "Press kit for Relova, an iPhone app for moving home in Australia: 
 image: "/assets/img/relova/relova-app-icon-1024.png"
 ---
 
-<link rel="stylesheet" href="/assets/css/relova.css?v=2">
+<link rel="stylesheet" href="/assets/css/relova.css?v=3">
 
 <div class="rv rv-doc">
 
@@ -30,6 +30,8 @@ image: "/assets/img/relova/relova-app-icon-1024.png"
 **Name:** Relova, written with a capital R. "Relova Plus" for the purchase.
 
 **Made by:** Bakari Mustafa, in Australia. Relova is for iPhone with iOS {{ site.data.relova.minimum_ios }} or later.
+
+**App Store:** [Relova: Moving Home]({{ site.data.relova.app_store_url }})
 
 ## Artwork {#artwork}
 
