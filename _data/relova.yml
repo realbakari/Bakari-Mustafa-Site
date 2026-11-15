@@ -5,11 +5,14 @@
 # should have its own support address.
 support_email: bakari@bakarimustafa.com
 
-# Leave empty until the app is live. When it is set, the landing page shows Apple's
-# "Download on the App Store" badge linking here instead of the placeholder.
-# Use the official badge artwork from https://developer.apple.com/app-store/marketing/guidelines/
-# and save it as /assets/img/relova/app-store-badge.svg.
-app_store_url: ""
+# The live App Store listing. Without a country code, the link opens the visitor's own
+# storefront. The landing page links here with Apple's badge when `app_store_badge` is true,
+# or as a "Download on the App Store" button otherwise. The badge must be the official
+# artwork, saved as /assets/img/relova/app-store-badge.svg, from
+# https://developer.apple.com/app-store/marketing/guidelines/
+# Leave app_store_url empty to show the "Coming soon" placeholder.
+app_store_url: "https://apps.apple.com/app/relova-moving-home/id6833876086"
+app_store_badge: false
 
 minimum_ios: "26"
 

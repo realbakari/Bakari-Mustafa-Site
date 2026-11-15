@@ -9,7 +9,7 @@ description: "Privacy policy for Relova, an iPhone app for moving home in Austra
 image: "/assets/img/relova/relova-app-icon-1024.png"
 ---
 
-<link rel="stylesheet" href="/assets/css/relova.css?v=2">
+<link rel="stylesheet" href="/assets/css/relova.css?v=3">
 
 <div class="rv rv-doc">
 

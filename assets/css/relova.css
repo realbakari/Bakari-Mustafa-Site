@@ -82,7 +82,7 @@
 .page-content .rv .rv-actions { display: flex; justify-content: center; margin-bottom: 1rem; }
 .page-content .rv .rv-meta { font-size: 0.9375rem; color: var(--rv-cream-2); }
 
-/* Stand-in for Apple's badge until the app is live: black, rounded, never a link. */
+/* Stand-in for Apple's badge: black and rounded. A placeholder before launch, then a link. */
 .page-content .rv .rv-badge-soon {
   display: inline-flex;
   flex-direction: column;
@@ -100,6 +100,9 @@
 }
 .page-content .rv .rv-badge-soon small { font-size: 0.6875rem; font-weight: 500; opacity: 0.85; }
 .page-content .rv .rv-badge-soon strong { font-size: 1.25rem; font-weight: 600; letter-spacing: -0.01em; }
+.page-content .rv a.rv-store-link { cursor: pointer; user-select: auto; text-decoration: none; color: #fff; transition: background 0.15s ease; }
+.page-content .rv a.rv-store-link:hover { background: #1d1d1f; }
+.page-content .rv a.rv-store-link:focus-visible { outline: 2px solid #fff6e8; outline-offset: 3px; }
 .page-content .rv .rv-badge img { height: 52px; width: auto; }
 
 /* ── Sections ───────────────────────────────────────────────────── */

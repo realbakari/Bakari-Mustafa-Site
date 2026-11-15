@@ -133,4 +133,7 @@
     <link href="https://fonts.googleapis.com/css2?family=Inter:opsz,wght@14..32,400..600&display=swap" rel="stylesheet">
   </noscript>
   <link rel="stylesheet" href="/assets/css/style.css" />
+  {% if page.app_store_id %}
+  <meta name="apple-itunes-app" content="app-id={{ page.app_store_id }}" />
+  {% endif %}
 </head>
