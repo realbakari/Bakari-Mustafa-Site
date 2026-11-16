@@ -1,5 +1,7 @@
 /* Kora's inspector as one panel on a quiet well: one gutter at the top and
-   sides, running off the bottom. */
+   sides, running off the bottom. Inside, Kora's grouped form: each group a
+   quiet fill with its label above it, whitespace between groups, hairlines
+   only between the rows of one group. */
 .kod {
   & .ss-stage {
     overflow: hidden;
@@ -9,91 +11,92 @@
 
   .kod-card {
     position: absolute;
-    top: 48px;
+    top: 36px;
     left: 48px;
     right: 48px;
-    display: grid;
-    gap: 0;
-    padding: 6px 18px 16px;
+    display: flex;
+    flex-direction: column;
+    padding: 12px 12px 16px;
     border-radius: 12px;
     background: var(--ss-surface);
-    box-shadow: var(--ss-shadow-card);
+    box-shadow: var(--ss-shadow-card), 0 0 0 0.5px rgba(0, 0, 0, 0.06);
     font-size: 13px;
     color: var(--ss-text-strong);
   }
-  & .ss-stage[data-layout="compact"] .kod-card { top: 16px; left: 16px; right: 16px; padding-left: 14px; padding-right: 14px; }
+  & .ss-stage[data-layout="compact"] .kod-card { top: 16px; left: 16px; right: 16px; }
 
-  /* The item: its preview and title */
-  .kod-item {
+  .kod-group {
+    border-radius: 10px;
+    background: var(--ss-ink-1);
+  }
+  .kod-heading {
+    margin: 14px 10px 6px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ss-text);
+  }
+
+  /* The preview: the picture fitted in its group, the file's facts beneath */
+  .kod-preview {
     display: flex;
+    flex-direction: column;
     align-items: center;
-    gap: 12px;
-    padding: 10px 0 12px;
-    border-bottom: 1px solid var(--ss-line);
+    gap: 9px;
+    padding: 12px 0 11px;
   }
   .kod-thumb {
     display: block;
-    flex: none;
-    width: 40px;
-    height: 50px;
+    width: 64px;
+    height: 80px;
     border-radius: 4px;
     object-fit: cover;
     box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.16);
   }
-  .kod-who { display: grid; gap: 7px; }
-  .kod-title { font-size: 14px; font-weight: 600; }
 
-  /* Label and value, as a Form row in the inspector */
+  /* Label and value, as a row in the grouped form */
   .kod-field {
     display: flex;
     align-items: center;
     justify-content: space-between;
     gap: 12px;
-    min-height: 40px;
+    min-height: 34px;
+    margin: 0 10px;
   }
-  .kod-field + .kod-field { border-top: 1px solid var(--ss-line); }
+  .kod-field + .kod-field { border-top: 0.5px solid var(--ss-ink-4); }
   .kod-label { color: var(--ss-text-strong); }
-  .kod-value { display: flex; align-items: center; gap: 10px; }
+  .kod-value { display: flex; align-items: center; gap: 10px; color: var(--ss-text-strong); }
   .kod-unknown { color: var(--ss-text); }
-  .kod-link { color: var(--ss-accent); }
 
-  /* A pop-up button: the value and the up-down chevrons */
+  /* A pop-up button in a form: the value, then AppKit's chevrons */
   .kod-popup {
     display: inline-flex;
     align-items: center;
-    justify-content: space-between;
+    justify-content: flex-end;
     gap: 6px;
-    width: 128px;
-    height: 24px;
-    padding: 0 7px 0 10px;
-    border-radius: 6px;
-    background: var(--ss-surface);
-    box-shadow: 0 0 0 0.5px rgba(0, 0, 0, 0.18), 0 1px 2px rgba(0, 0, 0, 0.08);
-    font-size: 12.5px;
+    height: 22px;
+    padding: 0 6px;
+    border-radius: 5px;
     transition: background-color 0.12s ease;
   }
-  .kod-popup[data-hover],
-  .kod-popup[data-open] { background: var(--ss-ink-1); }
-  .kod-chev { flex: none; color: var(--ss-icon); }
+  .kod-popup[data-open] { background: var(--ss-ink-3); }
+  .kod-chev { flex: none; color: var(--ss-text); }
 
   .kod-menu { position: absolute; padding: 5px; z-index: 5; }
 
   /* History: the newest change first */
-  .kod-history { display: grid; margin-top: 6px; padding-top: 14px; border-top: 1px solid var(--ss-line); }
-  .kod-heading { font-size: 12px; font-weight: 600; color: var(--ss-text); margin-bottom: 4px; }
+  .kod-history { padding: 0 10px; }
   .kod-change {
     display: flex;
     align-items: flex-start;
-    gap: 12px;
-    padding: 10px 0;
-    border-top: 1px solid var(--ss-line);
+    gap: 10px;
+    padding: 9px 0;
+    border-bottom: 0.5px solid var(--ss-ink-4);
   }
-  .kod-history > .ss-collapse:nth-child(2) .kod-change { border-top: 0; }
-  .kod-change__icon { display: grid; place-items: center; flex: none; width: 16px; height: 16px; margin-top: 1px; color: var(--ss-icon); }
-  .kod-change__text { display: grid; flex: 1; gap: 5px; min-width: 0; line-height: 1.35; }
-  .kod-meta { font-size: 12px; color: var(--ss-text); }
+  .kod-change__icon { display: grid; place-items: center; flex: none; width: 16px; height: 18px; color: var(--ss-text); }
+  .kod-change__text { display: grid; flex: 1; gap: 3px; min-width: 0; line-height: 1.35; }
+  .kod-meta { font-size: 11px; color: var(--ss-text); }
   /* Placeholder lines keep the real row's air between them */
-  .kod-change__text--bars { gap: 12px; padding: 6px 0 4px; }
+  .kod-change__text--bars { gap: 10px; padding: 6px 0 3px; }
 
   .kod-rest { position: absolute; right: 36px; top: 100px; width: 1px; height: 1px; }
 }

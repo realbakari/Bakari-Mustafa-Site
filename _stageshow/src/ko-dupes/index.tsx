@@ -6,7 +6,8 @@ import './ko-dupes.css'
 // flagged as a copy of one already in the library. The same photo twice, the
 // new one marked This item, and three choices, none of them made for you. A
 // still: nothing happens until a person decides. Cancel is left out, so the
-// two real choices carry the sheet.
+// two real choices carry the sheet; Keep Both is the sheet's default button,
+// so it takes the accent, the view's one prominent action.
 //
 // Real strings: the title and its explanation as Kora words them, the two
 // column labels and names, the buttons. Each item's path and date is a bar.
@@ -27,7 +28,7 @@ export default function KoraDupes() {
             </div>
             <div className="kdu-actions">
               <Button>Move This Item to Trash</Button>
-              <Button>Keep Both</Button>
+              <Button variant="primary">Keep Both</Button>
             </div>
           </section>
         )
@@ -39,7 +40,7 @@ export default function KoraDupes() {
 function Side({ label, name, current }: { label: string; name: string; current?: boolean }) {
   return (
     <div className="kdu-side">
-      <Text className="kdu-label" data-current={current || undefined}>{label}</Text>
+      <Text className="kdu-label">{label}</Text>
       <img className="kdu-thumb" src={PHOTO('friends')} alt="" draggable={false} />
       <Text className="kdu-name">{name}</Text>
       <Bar w={current ? 128 : 112} h={6} tone={2} />

@@ -1,11 +1,25 @@
-import { useLayoutEffect, useRef, type ReactNode } from 'react'
+import { createElement, useLayoutEffect, useRef, type ReactNode } from 'react'
 import type { Point } from './ko-kit'
+import { HUGEICONS, type IconName } from './ko-icons'
 
-// Pieces shared by Kora's scenes: grid thumbnails as Kora draws them, the
-// first page of a document, and the drag image for a folder from the desktop.
+// Pieces shared by Kora's scenes: Kora's icons, grid thumbnails as Kora draws
+// them, the first page of a document, and the drag image for a folder from
+// the desktop.
 
 /** Photos from Unsplash, cropped small. Served from the site's assets. */
 export const PHOTO = (name: string) => `/assets/img/kora/scene/${name}.jpg`
+
+/**
+ * One of Kora's icons: the Hugeicons stroke drawing Kora compiles into its
+ * own symbols, at the size given, in the current text colour.
+ */
+export function Icon({ name, size = 16, className }: { name: IconName; size?: number; className?: string }) {
+  return (
+    <svg className={className} width={size} height={size} viewBox="0 0 24 24" fill="none" aria-hidden>
+      {HUGEICONS[name].map(([tag, attrs], i) => createElement(tag, { key: i, ...attrs }))}
+    </svg>
+  )
+}
 
 export type Item =
   | { kind: 'photo'; src: string; w: number; h: number; duration?: string }

@@ -129,6 +129,46 @@ Kora's AppKit grid. Photos are Unsplash crops; the names are made up.
 - `film.mjs` marks the runs `inconclusive` for sampling gaps in headless Chrome, not for a
   finding.
 
+### Redrawn for Kora's quiet design (16 November 2026)
+
+Kora dropped SF Symbols and its serif titles for Hugeicons and one system-font scale, with
+"quiet chrome" (whitespace instead of boxes and rules). The three scenes follow, checked
+against Kora's rendered screens and source:
+
+- **Icons:** the Hugeicons Kora draws, from `src/ko-icons.ts` (see the README), monochrome,
+  secondary in the sidebar. No lucide in Kora's scenes. The Finder folder is drawn as
+  Finder's own blue folder, since it isn't Kora's.
+- **Hero:** the sidebar in real words, in Kora's order (Library, Organise, Discover; Create is
+  below the window's foot), with quiet count badges that roll with the import; the toolbar
+  is macOS 26's taller bar with the title over its count (`LibraryView`), then view switch,
+  sort, filter, and activity, import and inspector; the status bar's notice is Kora's green
+  check, the summary and Details… (`ImportNoticeView`). Compact keeps the view switch and the
+  activity ring in the toolbar and only the notice in the status bar, so nothing is sliced.
+- **Inspector:** Kora's grouped form: the preview, then Description, Source & Rights and
+  History, each a quiet fill with its label above (`AssetInspectorView`); Date Created's
+  dash and Set… (`DateCreatedField`); the consent pop-up with AppKit's chevrons.
+- **Duplicates:** the title at Kora's title size in the system font; Keep Both is the sheet's
+  default button (`DuplicateCompareView`), so it takes the accent.
+- The fallback stills (`assets/img/kora/hero.jpg`, `detail.jpg`, `duplicates.jpg`) were
+  re-filmed from the posters with `--still --reduced --pad 0`.
+- The Consent menu opens below its pop-up where there's room and otherwise shifts up to stay
+  a gutter clear of the stage's foot, as AppKit shifts a pop-up's menu to fit the screen.
+
+#### Checked
+
+- `--gate` at 1280 and 390 on the Jekyll page: `rehearsal passed` for the hero and the
+  inspector at both widths, and the duplicates still at 1280. The hero still reports the
+  kit's `Count` strip settling (as above) and `settle snap` of 1.8px on a document
+  thumbnail as its row opens; neither fails the gate.
+- Posters at both widths, and the page at 1280, 768 and 375 in light and dark site themes,
+  with no horizontal scroll.
+- `tsc --noEmit` over `src/kora.tsx`.
+
+#### Not checked
+
+- Touch devices and Safari; filmed in headless Chrome only.
+- The scenes keep their light theme on the page's dark theme, as before.
+
 ## Takumi (`src/tk-hero`)
 
 Filmed with `film.mjs` on the Jekyll page.

@@ -7,8 +7,11 @@ check-in hero), `/kora/` (the import hero, the inspector and duplicates) and `/t
 without its brand artwork. The scenes are in `src/`: `tm-*` for The Message, `gk-*` for
 GatherKit, `ko-*` for Kora, `tk-*` for Takumi. Kora's scenes import the kit file by file through
 `src/ko-kit.ts`, so their stylesheet carries only the parts they use; their photos are
-Unsplash crops in `assets/img/kora/scene/`. Takumi's scene uses the themes' own skies and
-previews, copied to `assets/img/takumi/`.
+Unsplash crops in `assets/img/kora/scene/`. Their icons are the Hugeicons Kora draws
+(free stroke-rounded set, [MIT](LICENSE-hugeicons)), in `src/ko-icons.ts`, which
+`node scripts/hugeicons.mjs <unpacked @hugeicons/core-free-icons package>` writes from the
+list at the top of that script. Takumi's scene uses the themes' own skies and previews,
+copied to `assets/img/takumi/`.
 
 ```bash
 npm install
