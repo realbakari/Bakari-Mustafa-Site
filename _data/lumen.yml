@@ -1,0 +1,13 @@
+# Lumen for iPhone: one place for the details the three Lumen pages share.
+
+# Shown on the landing, support and privacy pages (confirmed by the owner).
+support_email: bakari@bakarimustafa.com
+
+# The live App Store listing. When set, the landing page links here instead of the "Coming soon"
+# placeholder: with Apple's badge when `app_store_badge` is true, as a "Download on the App Store"
+# button otherwise. The badge must be the official artwork, saved as
+# /assets/img/lumen/app-store-badge.svg, from https://developer.apple.com/app-store/marketing/guidelines/
+app_store_url: "https://apps.apple.com/us/app/lumen-raw-camera-looks/id6833008535"
+app_store_badge: false
+
+minimum_ios: "18"

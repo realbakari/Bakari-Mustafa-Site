@@ -2,12 +2,13 @@
   "name": "the-message-mac-stages",
   "private": true,
   "type": "module",
-  "description": "Animated scenes for /the-message/mac/, /gatherkit/ and /kora/, built with the Stageshow kit (MIT, see LICENSE-stageshow).",
+  "description": "Animated scenes for /the-message/mac/, /gatherkit/, /kora/ and /takumi/, built with the Stageshow kit (MIT, see LICENSE-stageshow).",
   "scripts": {
-    "build": "vite build && vite build -c vite.gatherkit.config.ts && vite build -c vite.kora.config.ts",
+    "build": "vite build && vite build -c vite.gatherkit.config.ts && vite build -c vite.kora.config.ts && vite build -c vite.takumi.config.ts",
     "build:the-message": "vite build",
     "build:gatherkit": "vite build -c vite.gatherkit.config.ts",
-    "build:kora": "vite build -c vite.kora.config.ts"
+    "build:kora": "vite build -c vite.kora.config.ts",
+    "build:takumi": "vite build -c vite.takumi.config.ts"
   },
   "dependencies": {
     "lucide-react": "0.468.0",

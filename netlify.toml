@@ -20,3 +20,10 @@
   to = "/.netlify/functions/sermons"
   status = 200
   force = true
+
+# Takumi's installer: shown as text in a browser, fetched as-is by curl.
+[[headers]]
+  for = "/takumi/install.sh"
+  [headers.values]
+    Content-Type = "text/plain; charset=utf-8"
+    Cache-Control = "public, max-age=300"

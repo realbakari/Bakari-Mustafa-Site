@@ -1,0 +1,28 @@
+{%- comment -%}
+  Every takumi command, from _data/takumi_commands.yml (made by
+  scripts/takumi-commands.rb from the ABOUT block at the top of each command).
+{%- endcomment -%}
+<div class="td-cmd-index">
+  {%- for g in site.data.takumi_commands %}<a href="#{{ g.group }}">{{ g.group }}</a>{% endfor -%}
+</div>
+{%- for g in site.data.takumi_commands %}
+<section class="td-cmd-group" id="{{ g.group }}">
+  <h2>{{ g.group }}</h2>
+  <p class="td-cmd-about">{{ g.about }}</p>
+  <dl>
+    {%- for c in g.commands %}
+    <dt id="{{ g.group }}-{{ c.name }}"><code>takumi {{ g.group }} {{ c.name }}{% if c.usage %} <span class="td-cmd-usage">{{ c.usage }}</span>{% endif %}</code>
+      {%- if c.risk == "1" %}<span class="td-tag" title="Risk 1: installs or changes a service. The Palette and Intent ask before it runs.">risk 1</span>{% elsif c.risk == "2" %}<span class="td-tag is-strong" title="Risk 2: touches rooms, disks or how the computer starts. The Palette and Intent ask before it runs.">risk 2</span>{% endif -%}
+      {%- if c.sudo == "yes" %}<span class="td-tag" title="Changes the system, so it asks for your password">password</span>{% endif -%}
+    </dt>
+    <dd>
+      <p>{{ c.summary }}</p>
+      {%- if c.examples %}
+      <pre class="td-cmd-ex"><code>{% for e in c.examples %}{{ e | xml_escape }}{% unless forloop.last %}
+{% endunless %}{% endfor %}</code></pre>
+      {%- endif %}
+    </dd>
+    {%- endfor %}
+  </dl>
+</section>
+{%- endfor %}

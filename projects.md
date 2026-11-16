@@ -49,6 +49,18 @@ description: Bakari Mustafa's projects, including Mentors Outreach, Dzaleka Onli
       </li>
 
       <li class="project-row">
+        <h3><a href="/lumen/">Lumen</a></h3>
+        <p>A camera, RAW developer and photo editor for iPhone: manual control, RAW development with Apple's RAW decoder, and 48 original Looks that work live in the viewfinder. No account and no tracking, and photos stay in Apple Photos.</p>
+        <p class="project-row-meta">Builder · <a href="https://apps.apple.com/us/app/lumen-raw-camera-looks/id6833008535">On the App Store</a></p>
+      </li>
+
+      <li class="project-row">
+        <h3><a href="/relova/">Relova</a></h3>
+        <p>An iPhone app for moving home in Australia: a plan for your state, legal deadlines for updating your address, and a dated, room-by-room record of the property for your bond. No account and no referral fees, and records stay on the iPhone.</p>
+        <p class="project-row-meta">Builder · On the App Store</p>
+      </li>
+
+      <li class="project-row">
         <h3><a href="https://github.com/realbakari/ATO-Lens">ATO Lens</a></h3>
         <p>A local-first desktop and web app for exploring Australian tax history, Superannuation Guarantee compliance, and HECS repayments with zero telemetry and private offline processing.</p>
         <p class="project-row-meta">Open source · 2026–Present</p>

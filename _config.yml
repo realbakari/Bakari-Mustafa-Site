@@ -44,6 +44,13 @@ defaults:
     values:
       layout: post
       comments: false
+  - scope:
+      path: "takumi/docs"
+    values:
+      layout: takumi-docs
+      hide_title: true
+      full_width: true
+      comments: false
 
 # Jekyll Compose default front matter
 jekyll_compose:
