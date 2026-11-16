@@ -1,7 +1,6 @@
-import type { ReactNode } from 'react'
-import { Clock, Download, Folder, Heart, History, Images, Layers, LayoutGrid, List, MessageSquareWarning, PanelRight, Trash2 } from 'lucide-react'
 import { Bar, Collapse, Count, Stage, States, Text, Window, type Act, type Layout } from '../ko-kit'
-import { DragImage, NO_GHOST, Thumb, doc, photo, type Ghost, type Item } from '../ko-shared'
+import type { IconName } from '../ko-icons'
+import { DragImage, Icon, NO_GHOST, Thumb, doc, photo, type Ghost, type Item } from '../ko-shared'
 import './ko-hero.css'
 
 // Kora, its hero: a folder of event photos is dragged from a Finder window
@@ -17,22 +16,28 @@ import './ko-hero.css'
 // left edge over the sidebar's filler. The library window keeps one gutter on
 // the top and bottom and runs off the right edge; its search field and the
 // status bar's size slider are left out rather than sliced. Compact: the
-// library window alone, three columns; the import arrives without the drag.
+// library window alone, three columns; the import arrives without the drag;
+// the toolbar keeps the view switch and the import activity, and the status
+// bar the import summary.
 //
-// Real strings: the Finder window's title and the folder's name, All Assets,
-// the item count and the import summary, worded as Kora words them. The
-// sidebar is bars. Icons: lucide at one size and stroke, standing in for SF
-// Symbols. Photos: Unsplash.
+// Real strings: the Finder window's title and the folder's name, the sidebar
+// as Kora lists it (Library, Organise, Discover, Create), the toolbar's title
+// and count, the status bar's count and import summary, worded as Kora words
+// them. Icons: the Hugeicons Kora draws, monochrome, secondary in the sidebar.
+// The library's other counts are made up, like its photos (Unsplash).
 
-type S = { ghost: Ghost; importing: boolean; progress: number; batch: number; ready: number; count: number; notice: boolean }
+type S = { ghost: Ghost; importing: boolean; progress: number; batch: number; ready: number; added: number; notice: boolean }
 
-const BEFORE = 1184
+/** All Assets, Recently Added and Untagged before the import; each gains what it brings */
+const BEFORE = { all: 1184, recent: 112, untagged: 208 }
 const IMPORTED = 36
-const initial: S = { ghost: NO_GHOST, importing: false, progress: 0, batch: 0, ready: 0, count: BEFORE, notice: false }
-const POSTER: S = { ghost: NO_GHOST, importing: false, progress: 1, batch: 2, ready: 2, count: BEFORE + IMPORTED, notice: true }
+const initial: S = { ghost: NO_GHOST, importing: false, progress: 0, batch: 0, ready: 0, added: 0, notice: false }
+const POSTER: S = { ghost: NO_GHOST, importing: false, progress: 1, batch: 2, ready: 2, added: IMPORTED, notice: true }
 
 const FOLDER = 'Harmony Day 2026'
 const SUMMARY = `Imported ${IMPORTED} items · 2 duplicates skipped`
+const items = (n: number) => `${Math.round(n).toLocaleString('en-US')} items`
+const badge = (n: number) => Math.round(n).toLocaleString('en-US')
 
 type Geo = {
   win: { x: number; y: number; w: number; h: number }
@@ -44,7 +49,7 @@ type Geo = {
 }
 
 const GEO: Record<Layout, Geo> = {
-  wide: { win: { x: 170, y: 40, w: 1068, h: 460 }, side: 200, cols: 6, hidden: 245, rest: { x: 122, y: 490 } },
+  wide: { win: { x: 170, y: 40, w: 1068, h: 460 }, side: 196, cols: 6, hidden: 245, rest: { x: 122, y: 490 } },
   // No cursor in compact: it rests off stage
   compact: { win: { x: 16, y: 16, w: 400, h: 340 }, side: 0, cols: 3, hidden: 64, rest: { x: 420, y: 520 } },
 }
@@ -92,12 +97,12 @@ async function script(a: Act<S>) {
 
   // 4. Two batches arrive at the top as placeholders, then fill in
   a.mark('batch-1')
-  await a.set({ batch: 1, progress: 0.5, count: BEFORE + IMPORTED / 2 })
+  await a.set({ batch: 1, progress: 0.5, added: IMPORTED / 2 })
   await a.wait(650)
   await a.set({ ready: 1 })
   await a.wait(900)
   a.mark('batch-2')
-  await a.set({ batch: 2, progress: 1, count: BEFORE + IMPORTED })
+  await a.set({ batch: 2, progress: 1, added: IMPORTED })
   await a.wait(650)
   await a.set({ ready: 2 })
   await a.wait(800)
@@ -133,10 +138,15 @@ export default function KoraHero() {
             <Window
               className="koh-window"
               style={{ left: g.win.x, top: g.win.y, width: g.win.w, height: g.win.h }}
-              title="All Assets"
-              sidebar={wide ? <Sidebar /> : undefined}
+              lead={
+                <span className="koh-heading">
+                  <Text className="koh-heading__title">All Assets</Text>
+                  <Count className="koh-heading__count" value={BEFORE.all + s.added} duration={650} format={items} />
+                </span>
+              }
+              sidebar={wide ? <Sidebar added={s.added} /> : undefined}
               sidebarWidth={wide ? g.side : undefined}
-              toolbar={<Toolbar importing={s.importing} progress={s.progress} hidden={g.hidden} />}
+              toolbar={<Toolbar importing={s.importing} progress={s.progress} hidden={g.hidden} wide={wide} />}
               body={{ className: 'koh-body', 'data-crop': true }}
             >
               <div className="koh-grid" data-target="drop" data-drop data-crop style={{ ['--cols' as string]: g.cols }}>
@@ -154,10 +164,12 @@ export default function KoraHero() {
                 <span className="koh-drop" aria-hidden />
               </div>
               <div className="koh-status">
-                <Count className="koh-count" value={s.count} duration={650} format={(n) => `${Math.round(n).toLocaleString('en-US')} items`} />
+                {wide && <Count className="koh-count" value={BEFORE.all + s.added} duration={650} format={items} />}
                 <span className="koh-notice" data-on={s.notice || undefined}>
-                  <span className="koh-notice__rule" />
+                  {wide && <span className="koh-notice__rule" />}
+                  <Done />
                   <span>{SUMMARY}</span>
+                  {wide && <span className="koh-notice__link">Details…</span>}
                 </span>
               </div>
             </Window>
@@ -206,36 +218,72 @@ function GridRow({ items, ready }: { items: Item[]; ready: boolean }) {
   )
 }
 
-function Toolbar({ importing, progress, hidden }: { importing: boolean; progress: number; hidden: number }) {
-  const ic = { size: 15, strokeWidth: 1.7 }
+function Toolbar({ importing, progress, hidden, wide }: { importing: boolean; progress: number; hidden: number; wide: boolean }) {
+  const activity = (
+    <span className="koh-btn">
+      <States
+        value={importing ? 'ring' : 'idle'}
+        states={{
+          idle: <Icon name="TimeHalfPass" />,
+          ring: <Ring value={progress} />,
+        }}
+      />
+    </span>
+  )
+  const views = (
+    <span className="koh-group">
+      <span className="koh-btn" data-on>
+        <Icon name="GridView" />
+      </span>
+      <span className="koh-btn">
+        <Icon name="LeftToRightListBullet" />
+      </span>
+    </span>
+  )
+  // Compact: the view switch and the import activity, which the story needs
+  if (!wide) {
+    return (
+      <span className="koh-tools" style={{ marginRight: hidden }}>
+        {views}
+        <span className="koh-group">{activity}</span>
+      </span>
+    )
+  }
   return (
     <span className="koh-tools" style={{ marginRight: hidden }}>
+      {views}
       <span className="koh-group">
-        <span className="koh-btn" data-on>
-          <LayoutGrid {...ic} />
-        </span>
-        <span className="koh-btn">
-          <List {...ic} />
+        <span className="koh-btn koh-btn--menu">
+          <Icon name="ArrowUpDown" />
+          <Icon name="ArrowDown01" size={10} />
         </span>
       </span>
       <span className="koh-group">
+        <span className="koh-btn koh-btn--menu">
+          <Icon name="FilterHorizontal" />
+          <Icon name="ArrowDown01" size={10} />
+        </span>
+      </span>
+      <span className="koh-group">
+        {activity}
         <span className="koh-btn">
-          <States
-            value={importing ? 'ring' : 'idle'}
-            states={{
-              idle: <History {...ic} />,
-              ring: <Ring value={progress} />,
-            }}
-          />
+          <Icon name="Download04" />
         </span>
         <span className="koh-btn">
-          <Download {...ic} />
-        </span>
-        <span className="koh-btn">
-          <PanelRight {...ic} />
+          <Icon name="SidebarRight" />
         </span>
       </span>
     </span>
+  )
+}
+
+/** A finished import's mark in the status bar: Kora's filled check, in green. */
+function Done() {
+  return (
+    <svg className="koh-done" width="14" height="14" viewBox="0 0 24 24" aria-hidden>
+      <circle cx="12" cy="12" r="10" fill="currentColor" />
+      <path d="M7.5 12.5L10.5 15.5L16.5 9" fill="none" stroke="#fff" strokeWidth="2" strokeLinecap="round" strokeLinejoin="round" />
+    </svg>
   )
 }
 
@@ -251,31 +299,56 @@ function Ring({ value }: { value: number }) {
   )
 }
 
-function Sidebar() {
-  const ic = { size: 15, strokeWidth: 1.7 }
-  const item = (icon: ReactNode, label: ReactNode, current?: boolean) => (
-    <div className="koh-side__item" data-current={current || undefined}>
-      <span className="koh-side__icon">{icon}</span>
-      {label}
-    </div>
-  )
+type Row = { icon: IconName; label: string; count?: number; current?: boolean }
+
+/** Kora's sidebar: four sections in a fixed order, counts as quiet badges. */
+function Sidebar({ added }: { added: number }) {
+  const sections: [string, Row[]][] = [
+    ['Library', [
+      { icon: 'Images', label: 'All Assets', count: BEFORE.all + added, current: true },
+      { icon: 'Clock01', label: 'Recently Added', count: BEFORE.recent + added },
+      { icon: 'Favourite', label: 'Favorites', count: 64 },
+      { icon: 'Tag02', label: 'Untagged', count: BEFORE.untagged + added },
+      { icon: 'MessageNotification01', label: 'Needs Review', count: 3 },
+      { icon: 'Delete02', label: 'Trash' },
+    ]],
+    ['Organise', [
+      { icon: 'Layers01', label: 'Collections' },
+      { icon: 'Calendar03', label: 'Events' },
+      { icon: 'UserMultiple', label: 'People' },
+      { icon: 'Building03', label: 'Organisations' },
+      { icon: 'Tag01', label: 'Tags' },
+    ]],
+    ['Discover', [{ icon: 'TimelineList', label: 'Timeline' }]],
+  ]
   return (
     <div className="koh-side">
-      <Bar w={40} h={5} tone={3} className="koh-side__label" />
-      {item(<Images {...ic} />, <Text>All Assets</Text>, true)}
-      {item(<Clock {...ic} />, <Bar w={78} h={6} tone={3} />)}
-      {item(<Heart {...ic} />, <Bar w={52} h={6} tone={3} />)}
-      {item(<MessageSquareWarning {...ic} />, <Bar w={70} h={6} tone={3} />)}
-      {item(<Trash2 {...ic} />, <Bar w={34} h={6} tone={3} />)}
-      <Bar w={84} h={5} tone={3} className="koh-side__label" />
-      {item(<Layers {...ic} />, <Bar w={96} h={6} tone={3} />)}
-      {item(<Layers {...ic} />, <Bar w={64} h={6} tone={3} />)}
-      {item(<Layers {...ic} />, <Bar w={82} h={6} tone={3} />)}
+      {sections.map(([title, rows]) => (
+        <div key={title} className="koh-side__section">
+          <Text className="koh-side__label">{title}</Text>
+          {rows.map((row) => (
+            <div key={row.label} className="koh-side__item" data-current={row.current || undefined}>
+              <span className="koh-side__icon">
+                <Icon name={row.icon} />
+              </span>
+              <Text className="koh-side__name">{row.label}</Text>
+              {row.count !== undefined && (
+                <Count className="koh-side__count" value={row.count} duration={650} format={badge} />
+              )}
+            </div>
+          ))}
+        </div>
+      ))}
     </div>
   )
 }
 
-/** A Finder folder icon. */
+/** A Finder folder: macOS's own icon, not Kora's, so it keeps Finder's blue. */
 function FolderIcon() {
-  return <Folder size={52} strokeWidth={0.9} className="ko-folder" />
+  return (
+    <svg className="ko-folder" width="54" height="44" viewBox="0 0 54 44" aria-hidden>
+      <path d="M2 6.5A3.5 3.5 0 0 1 5.5 3H19l4 4h25.5A3.5 3.5 0 0 1 52 10.5V38a3.5 3.5 0 0 1-3.5 3.5h-43A3.5 3.5 0 0 1 2 38z" fill="#4fa3e8" />
+      <path d="M2 13.5A3 3 0 0 1 5 10.5h44a3 3 0 0 1 3 3V38a3.5 3.5 0 0 1-3.5 3.5h-43A3.5 3.5 0 0 1 2 38z" fill="#7cc0f5" />
+    </svg>
+  )
 }

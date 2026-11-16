@@ -44,8 +44,8 @@ description: Bakari Mustafa's projects, including Mentors Outreach, Dzaleka Onli
 
       <li class="project-row">
         <h3><a href="/kora/">Kora</a></h3>
-        <p>A Mac app for community organisations to bring their photos, videos, recordings, flyers and newsletters into one archive, describe them, and record consent. Originals are never changed, and nothing leaves the Mac.</p>
-        <p class="project-row-meta">Builder · In development</p>
+        <p>A Mac app for community organisations to bring their photos, videos, recordings, flyers and newsletters into one archive, describe and search them, record consent, and make stories, exhibitions and reports. Originals are never changed, and there’s no account and no analytics.</p>
+        <p class="project-row-meta">Builder · 2026</p>
       </li>
 
       <li class="project-row">
