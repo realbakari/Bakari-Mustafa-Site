@@ -199,3 +199,57 @@ Filmed with `film.mjs` on the Jekyll page.
   the shell's own colour animation does.
 - `film.mjs` reports `steps in its box` on the Core as it grows by its width and height (it is
   sized by layout, as the shell sizes it), and a `manual` line for the typed field.
+
+## Enishi (`src/en-hero`, `src/en-today`)
+
+Filmed with `film.mjs` (from the installed skill, `.agents/skills/stageshow/scripts/`) on the
+Jekyll page, at 1280 and 390.
+
+### Hero: the quick log
+
+- **Gold copied:** `hero-demo` for keys as the beats and a row arriving that carries the rows below
+  it; framed like the Kora hero (the window one gutter in from the top and left, off the right and
+  bottom, on the page's ground). No cursor: the story is the keyboard's.
+- **Story:** Enishi's Timeline on the Mac. ⌃⌥M opens the quick log low over the window, as macOS
+  puts it; "coffee with Ada yesterday, follow up Friday: send the deck" is typed; Enishi reads it as
+  Ada Lovelace, Yesterday and Friday: send the deck. Return logs it: Coffee with Ada arrives at the
+  top of November with Ada's face and the follow-up, the count rolls from 4 to 5 and November's bar
+  grows. Plays once and holds: a logged conversation isn't taken back. About 9 seconds.
+- **Poster:** the logged row at the top of November, 5 conversations.
+- **Real strings:** the sidebar, Timeline, the count line, the months, the sentence, the three
+  readings, the new row and the two it pushes down. Notes, tags and October are lines.
+- **Compact (358):** the window without its sidebar; the quick log across its foot, two lines tall
+  from the start; no keycaps (no room above the window).
+
+### Today on iPhone
+
+- **Gold copied:** `phone-touch` (a phone pinned from the top, a tap that opens a screen and a loop
+  that folds back), with iOS's push instead of `Expand`, as Enishi navigates.
+- **Story:** Today, Thursday 19 November: three faces, two follow-ups, a reconnect. A tap on Ada's
+  face pushes her page (role, last contact, Log, Email, Plan, her open follow-up); Back pops it,
+  which is the loop's reset. About 8 seconds.
+- **Poster:** Today.
+- **Compact (358):** the same phone at 310 wide, a gutter from the top and both sides.
+
+### Both
+
+- Both follow the site's theme (the body's `data-theme`), through the kit's dark theme and Enishi's
+  own tokens.
+
+### Checked
+
+- Both scenes, both widths, full play, `--states` and `--gate`; fallback stills (`hero.jpg`,
+  `today.jpg`) are the reduced-motion posters at 2x.
+- `tsc --noEmit` over `src/enishi.tsx`.
+- The page's dark theme with the scenes running (in the browser, by eye).
+
+### Not checked
+
+- Touch devices and Safari; filmed in headless Chrome only.
+- `--gate` doesn't end `rehearsal passed`. What it still reports, on purpose:
+  - **`kit override`** on the phone's status bar, island, screen and home indicator: the kit's own
+    phone styles, bundled into one stylesheet with the scenes', as on the Message page.
+  - **`uneven`** on the month bands: they run the column's full width, as Enishi draws them.
+  - **`clipped`** while Today slides out under Ada's page during the push and back.
+  - **`layout`** on the last entry, which runs off the window's foot with it.
+  - **`jump`** on the quick log's text as each character is typed.

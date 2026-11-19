@@ -1,0 +1,303 @@
+/* Enishi's quick log. The page is the ground: no plate. Wide: the Mac
+   window one gutter in from the top and left, off the right and bottom, with
+   the floating sidebar. Compact: the window without its sidebar. The system
+   face, as in the app; Enishi's brick for what it marks. Follows the page's
+   light or dark theme. */
+.enh {
+  & .ss-stage {
+    overflow: hidden;
+    background: transparent;
+    --en-card: #f4f3f2;
+    --en-mark: color-mix(in srgb, var(--ss-accent) 11%, var(--ss-surface));
+    --en-quick: rgba(24, 24, 26, 0.94);
+  }
+  & .ss-stage[data-theme="dark"] {
+    --ss-surface: #19191b;
+    --ss-raised: #232326;
+    --en-card: #232326;
+    --en-mark: color-mix(in srgb, var(--ss-accent) 20%, var(--ss-surface));
+    --en-quick: rgba(44, 44, 48, 0.96);
+  }
+
+  .enh-window {
+    position: absolute;
+    left: 40px;
+    top: 40px;
+    width: 1040px;
+    height: 540px;
+    box-shadow: var(--ss-shadow-hero);
+  }
+  & .ss-stage[data-layout="compact"] .enh-window {
+    left: 16px;
+    top: 16px;
+    width: 400px;
+    height: 460px;
+    border-radius: 16px;
+    background: var(--ss-surface);
+    box-shadow: var(--ss-shadow-ground);
+  }
+
+  /* The bar: no fill or rule, the title quiet, as Enishi draws it */
+  & .enh-window .ss-window__bar {
+    height: 52px;
+    background: var(--ss-surface);
+    border-bottom: 0;
+  }
+  & .enh-window .ss-window__heading,
+  & .enh-window .ss-window__title {
+    font-size: 15px;
+    font-weight: 600;
+    color: var(--ss-text-faint);
+  }
+  & .enh-window .ss-window__main > .ss-window__bar { padding: 0 28px; }
+
+  /* ---- Sidebar ---- */
+  & .enh-window .ss-window__side { background: var(--en-card); }
+  .enh-side {
+    display: flex;
+    flex-direction: column;
+    gap: 2px;
+    padding: 6px 8px;
+  }
+  .enh-nav {
+    display: flex;
+    align-items: center;
+    gap: 10px;
+    height: 30px;
+    padding: 0 10px;
+    border-radius: 9px;
+    font-size: 13px;
+    color: var(--ss-text);
+    & svg { flex: none; color: var(--ss-accent); }
+  }
+  .enh-nav[data-on] {
+    background: var(--ss-ink-3);
+    color: var(--ss-text-strong);
+  }
+  .enh-nav__label { flex: 1; }
+  .enh-nav__count { font-size: 11px; color: var(--ss-text-faint); font-variant-numeric: tabular-nums; }
+  .enh-nav--tag svg { color: color-mix(in srgb, var(--ss-accent) 70%, var(--ss-text-faint)); }
+  .enh-side__head {
+    margin: 14px 10px 4px;
+    font-size: 11px;
+    font-weight: 600;
+    color: var(--ss-text-faint);
+  }
+
+  /* ---- The Timeline ---- */
+  .enh-page {
+    display: flex;
+    flex-direction: column;
+    /* The window runs 80px past the stage's right edge: the page keeps its
+       words a gutter inside the stage */
+    padding: 4px 108px 0 28px;
+    background: var(--ss-surface);
+    font-family: var(--ss-font);
+  }
+  & .ss-stage[data-layout="compact"] .enh-page {
+    padding: 4px 74px 0 16px;
+  }
+
+  .enh-chart {
+    display: grid;
+    gap: 12px;
+    padding: 14px 16px 12px;
+    border-radius: 14px;
+    background: var(--en-card);
+  }
+  .enh-chart__line {
+    display: flex;
+    align-items: baseline;
+    gap: 4px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--ss-text);
+  }
+  .enh-chart__count { color: var(--ss-text-strong); font-weight: 600; }
+  .enh-chart__bars {
+    display: grid;
+    grid-template-columns: repeat(12, minmax(0, 1fr));
+    gap: 6px;
+    align-items: end;
+    height: 52px;
+  }
+  .enh-chart__col {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    justify-content: flex-end;
+    gap: 5px;
+    height: 100%;
+  }
+  .enh-chart__bar {
+    width: 100%;
+    max-width: 26px;
+    border-radius: 3px;
+    background: var(--ss-ink-3);
+    transition: height 700ms cubic-bezier(0.2, 0.8, 0.2, 1) 250ms, background 400ms;
+  }
+  .enh-chart__bar[data-some] { background: color-mix(in srgb, var(--ss-accent) 55%, var(--en-card)); }
+  .enh-chart__month { font-size: 9px; line-height: 1; color: var(--ss-text-faint); }
+
+  .enh-month {
+    margin: 16px -108px 0 -28px;
+    padding: 8px 28px;
+    font-size: 13px;
+    font-weight: 600;
+    color: var(--ss-text-strong);
+    background: var(--en-card);
+  }
+  & .ss-stage[data-layout="compact"] .enh-month { margin: 14px -74px 0 -16px; padding: 8px 16px; }
+
+  /* One conversation: its kind on the rail, then title and date, who, and
+     what's left to do */
+  .enh-entry {
+    display: grid;
+    grid-template-columns: 24px minmax(0, 1fr);
+    gap: 12px;
+    padding: 14px 0 12px;
+  }
+  .enh-entry__kind {
+    display: grid;
+    place-items: center;
+    width: 24px;
+    height: 24px;
+    border-radius: 50%;
+    color: var(--ss-accent);
+    background: var(--en-mark);
+  }
+  .enh-entry--filler .enh-entry__kind { background: var(--ss-ink-2); }
+  .enh-entry__body {
+    display: flex;
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 7px;
+    min-width: 0;
+  }
+  .enh-entry__top {
+    display: flex;
+    align-self: stretch;
+    align-items: baseline;
+    justify-content: space-between;
+    gap: 12px;
+    padding-top: 3px;
+  }
+  .enh-entry__title {
+    font-size: 14px;
+    font-weight: 600;
+    line-height: 1.3;
+    color: var(--ss-text-strong);
+    white-space: nowrap;
+    overflow: hidden;
+    text-overflow: ellipsis;
+  }
+  .enh-entry__date { flex: none; font-size: 12px; color: var(--ss-text-faint); }
+  .enh-entry__who {
+    display: flex;
+    align-items: center;
+    gap: 6px;
+    font-size: 12px;
+    line-height: 1.3;
+    color: var(--ss-text);
+  }
+  .enh-entry__faces { display: flex; }
+  .enh-entry__faces .en-face + .en-face { margin-left: -5px; box-shadow: 0 0 0 1.5px var(--ss-surface); }
+  .enh-note { display: grid; gap: 7px; padding-top: 2px; }
+  .enh-follow {
+    display: inline-flex;
+    align-items: center;
+    gap: 5px;
+    height: 22px;
+    padding: 0 9px 0 8px;
+    border-radius: 11px;
+    font-size: 11.5px;
+    font-weight: 500;
+    color: var(--ss-accent-text);
+    background: var(--en-mark);
+  }
+
+  .en-face {
+    display: block;
+    flex: none;
+    border-radius: 50%;
+    object-fit: cover;
+  }
+
+  /* ---- The quick log: macOS's floating capsule, low and centred ---- */
+  .enh-quick {
+    position: absolute;
+    left: 290px;
+    bottom: 40px;
+    width: 560px;
+    will-change: transform;
+    z-index: 2;
+    padding: 0 20px;
+    border-radius: 26px;
+    color: #f2f2f3;
+    background: var(--en-quick);
+    box-shadow: 0 0 0 0.5px rgba(255, 255, 255, 0.12) inset, 0 20px 44px -14px rgba(0, 0, 0, 0.45), 0 6px 14px -6px rgba(0, 0, 0, 0.3);
+    opacity: 0;
+    transform: translateY(10px) scale(0.97);
+    transform-origin: 50% 100%;
+    transition: opacity 240ms ease, transform 320ms cubic-bezier(0.2, 0.8, 0.2, 1);
+  }
+  .enh-quick[data-open] { opacity: 1; transform: none; }
+  & .ss-stage[data-layout="compact"] .enh-quick {
+    left: 16px;
+    right: 16px;
+    width: auto;
+    bottom: 16px;
+    padding: 0 16px;
+    border-radius: 22px;
+  }
+  .enh-quick__line {
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    min-height: 52px;
+    & svg { flex: none; color: #a1a1a6; }
+  }
+  .enh-quick__text {
+    font-size: 16px;
+    line-height: 1.35;
+    white-space: nowrap;
+  }
+  & .ss-stage[data-layout="compact"] .enh-quick__line { align-items: flex-start; padding: 14px 0; min-height: 0; }
+  & .ss-stage[data-layout="compact"] .enh-quick__line svg { margin-top: 1px; }
+  & .ss-stage[data-layout="compact"] .enh-quick__text { font-size: 14px; white-space: normal; min-height: 2.7em; } /* two lines from the start, so the capsule never grows mid-sentence */
+  .enh-caret {
+    display: inline-block;
+    width: 2px;
+    height: 1.1em;
+    margin-left: 1px;
+    vertical-align: -0.18em;
+    border-radius: 1px;
+    background: var(--ss-accent);
+    animation: enh-blink 1s steps(1) infinite;
+  }
+  .enh-caret[data-typing] { animation: none; }
+  .enh-quick__read {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 8px;
+    padding: 0 0 14px 30px;
+  }
+  & .ss-stage[data-layout="compact"] .enh-quick__read { padding: 0 0 14px 0; gap: 6px; }
+  .enh-chip {
+    display: inline-flex;
+    align-items: center;
+    gap: 6px;
+    height: 26px;
+    padding: 0 10px;
+    border-radius: 13px;
+    font-size: 12px;
+    font-weight: 500;
+    color: #f2f2f3;
+    background: rgba(255, 255, 255, 0.12);
+    & svg { color: #f0a587; }
+  }
+}
+
+@keyframes enh-blink {
+  50% { opacity: 0; }
+}
