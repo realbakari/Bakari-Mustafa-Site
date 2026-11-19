@@ -81,24 +81,13 @@
 }
 .page-content .en .en-button:hover { background: color-mix(in srgb, var(--en-accent), #000 10%); }
 /* The App Store, before and after the listing is live: Apple's black, in the badge's shape */
-.page-content .en .en-store {
-  display: inline-flex;
-  flex-direction: column;
-  align-items: flex-start;
-  justify-content: center;
-  height: 44px;
-  padding: 0 1rem;
-  border-radius: 10px;
-  background: #000;
-  color: #fff !important;
-  box-shadow: 0 0 0 1px rgba(255, 255, 255, 0.24);
-  line-height: 1.1;
-  text-align: left;
+/* Until the App Store listing is live: words, not a look-alike of Apple's badge. */
+.page-content .en .en-soon {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 !important;
 }
-.page-content .en .en-store small { font-size: 0.625rem; font-weight: 500; opacity: 0.85; }
-.page-content .en .en-store strong { font-size: 1.0625rem; font-weight: 600; letter-spacing: -0.01em; }
-.page-content .en span.en-store { cursor: default; user-select: none; }
-.page-content .en a.en-store:hover { background: #1d1d1f; }
 .page-content .en .en-badge img { height: 44px; width: auto; }
 .page-content .en .en-meta span,
 .page-content .en .en-meta a { white-space: nowrap; }
@@ -114,18 +103,27 @@
 .page-content .en .en-hero-stage { aspect-ratio: 1000 / 540; max-width: 1000px; margin-bottom: 5rem; }
 .page-content .en .en-scene { container: ens / inline-size; }
 .page-content .en .en-scene .en-stage { aspect-ratio: 520 / 440; max-width: 520px; }
+/* Faces in the scenes are round: the site gives every page image 4px corners, which would
+   otherwise square them off. */
+.page-content .en .en-stage img.en-face { border-radius: 50%; }
+/* The iPhone runs off the bottom of its frame: let it fade out, like the Mac window above,
+   rather than stop on a hard edge. */
+.page-content .en .en-scene .en-stage {
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+}
 
 /* ── Sections ─────────────────────────────────────────────────── */
 .page-content .en .en-stack,
 .page-content .en .en-row {
   display: grid;
-  grid-template-columns: minmax(0, 5fr) minmax(0, 6fr);
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
   gap: clamp(1.5rem, 4vw, 3.5rem);
   margin: 0 0 6rem;
 }
 .page-content .en .en-stack { align-items: start; }
 .page-content .en .en-row { align-items: center; }
-.page-content .en .en-row.is-flipped { grid-template-columns: minmax(0, 6fr) minmax(0, 5fr); }
+.page-content .en .en-row.is-flipped { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
 .page-content .en .en-row.is-flipped .en-copy { order: 2; }
 /* Two classes deep, to settle over the site's long-form heading sizes */
 .page-content .en .en-copy h2,

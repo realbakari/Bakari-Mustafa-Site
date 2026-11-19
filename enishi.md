@@ -30,9 +30,9 @@ image: "/assets/img/enishi/icon-512.png"
 {% if site.data.enishi.app_store_url != "" and site.data.enishi.app_store_badge %}
     <a class="en-badge" href="{{ site.data.enishi.app_store_url }}"><img src="/assets/img/enishi/app-store-badge.svg" alt="Download on the App Store" height="44"></a>
 {% elsif site.data.enishi.app_store_url != "" %}
-    <a class="en-store" href="{{ site.data.enishi.app_store_url }}" aria-label="Download Enishi on the App Store"><small>Download on the</small><strong>App Store</strong></a>
+    <a class="en-button" href="{{ site.data.enishi.app_store_url }}">Download on the App Store</a>
 {% else %}
-    <span class="en-store" role="img" aria-label="Coming to the App Store"><small>Coming to the</small><strong>App Store</strong></span>
+    <p class="en-soon">Coming to the App Store</p>
 {% endif %}
 {% if page.download_ready %}
     <a class="en-button" href="{{ site.data.enishi.mac_download_url }}">Download for Mac</a>
@@ -75,7 +75,7 @@ image: "/assets/img/enishi/icon-512.png"
   </div>
   <div class="en-scene">
     <div class="en-stage" id="en-today-stage" role="img" aria-label="Enishi’s Today on iPhone, Thursday 19 November: faces for Ada, Sam and Grace, follow-ups Send the deck, Friday, Ada Lovelace and Book the venue, in 3 days, Sam Okafor, and Grace Hopper to reconnect with. A tap on Ada’s face opens her page: Founder at Analytical Engines, last contact yesterday, in touch every month, with Send the deck as her open follow-up.">
-      <img class="en-stage-fallback" src="/assets/img/enishi/today.jpg" width="1040" height="880" alt="">
+      <img class="en-stage-fallback" src="/assets/img/enishi/today.jpg" width="716" height="802" alt="">
     </div>
   </div>
 </section>
