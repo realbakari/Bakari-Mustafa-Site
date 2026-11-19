@@ -1,0 +1,341 @@
+/* Enishi: the landing and privacy pages.
+   Built on the site's tokens (--text-*, --bg-*, --border-*) so light and dark follow the site.
+   The system face, one compact scale, whitespace instead of boxes. Enishi's brick, from its
+   icon, marks the one prominent action and links; nothing else is coloured. */
+
+.page-content .en {
+  --en-accent: #a9472b;       /* the icon's brick: buttons and fills */
+  --en-ink: #9a3f25;          /* brick as text on white */
+  --en-sans: -apple-system, BlinkMacSystemFont, "SF Pro Text", "SF Pro Display", "Helvetica Neue", "Segoe UI", Roboto, Arial, sans-serif;
+  container: en / inline-size;
+  font-family: var(--en-sans);
+  color: var(--text-primary);
+  padding-bottom: 4rem;
+}
+[data-theme="dark"] .page-content .en {
+  --en-accent: #b9532f;
+  --en-ink: #e58f6c;
+}
+.page-content .en h1,
+.page-content .en h2,
+.page-content .en h3 { font-family: var(--en-sans); }
+.page-content .en p { padding: 0 !important; }
+.page-content .en a { text-decoration: none; }
+.page-content .en img { display: block; max-width: 100%; height: auto; }
+.page-content .en a:focus-visible { outline: 2px solid var(--en-ink); outline-offset: 3px; border-radius: 4px; }
+
+/* Light and dark screenshots: the page shows the one that matches the site's theme */
+.page-content .en .is-dark { display: none; }
+[data-theme="dark"] .page-content .en .is-light { display: none; }
+[data-theme="dark"] .page-content .en .is-dark { display: block; }
+
+/* ── Hero ─────────────────────────────────────────────────────── */
+.page-content .en .en-hero {
+  text-align: center;
+  margin: 4rem auto 3rem;
+  max-width: 720px;
+}
+.page-content .en .en-icon {
+  width: 104px;
+  height: 104px;
+  margin: 0 auto 1.5rem;
+}
+.page-content .en .en-eyebrow {
+  font-size: 0.9375rem;
+  font-weight: 500;
+  color: var(--text-secondary);
+  margin-bottom: 0.5rem !important;
+}
+.page-content .en .en-hero h1 {
+  font-size: clamp(2.5rem, 6vw, 3.5rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.05;
+  margin: 0 0 1rem;
+}
+.page-content .en .en-lede {
+  font-size: clamp(1.0625rem, 2vw, 1.25rem);
+  line-height: 1.5;
+  color: var(--text-secondary);
+  margin: 0 auto 2rem !important;
+  max-width: 32em;
+}
+.page-content .en .en-actions {
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.75rem;
+  align-items: center;
+  justify-content: center;
+  margin-bottom: 1rem;
+}
+.page-content .en .en-button {
+  display: inline-flex;
+  align-items: center;
+  height: 44px;
+  padding: 0 1.125rem;
+  border-radius: 10px;
+  font-size: 0.9375rem;
+  font-weight: 600;
+  background: var(--en-accent);
+  color: #fff !important;
+}
+.page-content .en .en-button:hover { background: color-mix(in srgb, var(--en-accent), #000 10%); }
+/* The App Store, before and after the listing is live: Apple's black, in the badge's shape */
+/* Until the App Store listing is live: words, not a look-alike of Apple's badge. */
+.page-content .en .en-soon {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  color: var(--text-primary);
+  margin: 0 !important;
+}
+.page-content .en .en-badge img { height: 44px; width: auto; }
+.page-content .en .en-meta span,
+.page-content .en .en-meta a { white-space: nowrap; }
+.page-content .en .en-meta {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-tertiary);
+}
+
+/* ── Scenes: each slot holds its scene's shape before the script runs ── */
+.page-content .en .en-stage { position: relative; width: 100%; margin: 0 auto; }
+.page-content .en .en-stage-fallback { width: 100%; height: 100%; object-fit: cover; object-position: top left; }
+.page-content .en .en-hero-stage { aspect-ratio: 1000 / 540; max-width: 1000px; margin-bottom: 5rem; }
+.page-content .en .en-scene { container: ens / inline-size; }
+.page-content .en .en-scene .en-stage { aspect-ratio: 520 / 440; max-width: 520px; }
+/* Faces in the scenes are round: the site gives every page image 4px corners, which would
+   otherwise square them off. */
+.page-content .en .en-stage img.en-face { border-radius: 50%; }
+/* The iPhone runs off the bottom of its frame: let it fade out, like the Mac window above,
+   rather than stop on a hard edge. */
+.page-content .en .en-scene .en-stage {
+  -webkit-mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+  mask-image: linear-gradient(to bottom, #000 72%, transparent 100%);
+}
+
+/* ── Sections ─────────────────────────────────────────────────── */
+.page-content .en .en-stack,
+.page-content .en .en-row {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: clamp(1.5rem, 4vw, 3.5rem);
+  margin: 0 0 6rem;
+}
+.page-content .en .en-stack { align-items: start; }
+.page-content .en .en-row { align-items: center; }
+.page-content .en .en-row.is-flipped { grid-template-columns: minmax(0, 1fr) minmax(0, 1fr); }
+.page-content .en .en-row.is-flipped .en-copy { order: 2; }
+/* Two classes deep, to settle over the site's long-form heading sizes */
+.page-content .en .en-copy h2,
+.page-content .en .en-closing h2 {
+  font-size: clamp(1.5rem, 2.6vw, 1.875rem);
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.2;
+  margin: 0 0 0.875rem;
+}
+.page-content .en .en-copy > p {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 0 1.25rem !important;
+}
+.page-content .en .en-copy > p:last-child { margin-bottom: 0 !important; }
+.page-content .en .en-points {
+  list-style: none;
+  margin: 0;
+  padding: 0;
+}
+.page-content .en .en-points li {
+  margin: 0;
+  padding: 0 0 0 1.3em; /* the site's dash hangs 1.3em left: keep it inside the column */
+  font-size: 0.9875rem;
+  line-height: 1.55;
+}
+.page-content .en .en-points li::before { color: var(--text-tertiary); }
+.page-content .en .en-points li + li { margin-top: 0.75rem; }
+.page-content .en .en-kbd {
+  font-family: inherit;
+  font-size: 0.875em;
+  font-weight: 500;
+  padding: 0.05em 0.4em;
+  border-radius: 5px;
+  background: var(--bg-tertiary);
+  white-space: nowrap;
+}
+
+/* People: copy, then two iPhone screens */
+.page-content .en .en-phones {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: clamp(0.75rem, 2.5vw, 1.75rem);
+  max-width: 860px;
+  margin: 0 auto;
+}
+.page-content .en .en-shot {
+  margin: 0;
+  border-radius: 13.7% / 6.3%; /* the iPhone screen's corners */
+  overflow: hidden;
+  box-shadow: 0 0 0 1px var(--border-default);
+  background: var(--bg-secondary);
+}
+.page-content .en .en-shots { margin: 0 0 6rem; }
+.page-content .en .en-shots > .en-copy { max-width: 40em; margin-bottom: 2.25rem; }
+
+/* Memories: copy over the Mac window */
+.page-content .en .en-wide { margin: 0 0 6rem; }
+.page-content .en .en-wide > .en-copy { max-width: 40em; margin-bottom: 2.25rem; }
+.page-content .en .en-window { max-width: 1000px; margin: 0 auto; }
+/* The window's own rounded corners are transparent in the image: the shadow follows them */
+.page-content .en .en-window img { border-radius: 2.1% / 3.2%; box-shadow: 0 0 0 1px var(--border-subtle), 0 18px 40px -12px rgba(40, 30, 20, 0.22); }
+[data-theme="dark"] .page-content .en .en-window img { box-shadow: 0 0 0 1px var(--border-default), 0 18px 40px -12px rgba(0, 0, 0, 0.6); }
+
+/* Two subjects side by side, words only */
+.page-content .en .en-pair {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2.5rem clamp(1.5rem, 4vw, 3.5rem);
+  margin: 0 0 6rem;
+}
+
+/* A heading, then three */
+.page-content .en .en-group { margin: 0 0 6rem; }
+.page-content .en .en-group > .en-copy { max-width: 40em; margin-bottom: 2.25rem; }
+.page-content .en .en-three,
+.page-content .en .en-grid {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 2.25rem clamp(1.5rem, 3vw, 2.5rem);
+}
+.page-content .en .en-three h3,
+.page-content .en .en-grid h3 {
+  font-size: 1rem;
+  font-weight: 600;
+  line-height: 1.35;
+  margin: 0 0 0.375rem;
+}
+.page-content .en .en-three p,
+.page-content .en .en-grid p {
+  font-size: 0.9375rem;
+  line-height: 1.55;
+  color: var(--text-secondary);
+}
+
+/* ── Closing ──────────────────────────────────────────────────── */
+.page-content .en .en-closing {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) minmax(0, 1fr);
+  gap: 2.5rem clamp(1.5rem, 4vw, 3.5rem);
+  margin-bottom: 4rem;
+}
+.page-content .en .en-closing h2 { font-size: 1.375rem; margin-bottom: 0.625rem; }
+.page-content .en .en-closing p {
+  font-size: 0.9875rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+}
+.page-content .en .en-closing p + p { margin-top: 0.75rem !important; }
+.page-content .en .en-closing a,
+.page-content .en .en-credits a,
+.page-content .en .en-meta a,
+.page-content .en .en-prose a { color: var(--text-primary); border-bottom: 1px solid var(--border-strong); }
+.page-content .en .en-closing a:hover,
+.page-content .en .en-credits a:hover,
+.page-content .en .en-meta a:hover,
+.page-content .en .en-prose a:hover { border-color: var(--text-primary); }
+.page-content .en .en-credits {
+  font-size: 0.875rem;
+  line-height: 1.6;
+  color: var(--text-tertiary);
+  max-width: 720px;
+}
+
+/* Enishi's pages, at the foot of each */
+.page-content .en .en-foot {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 0.5px solid var(--border-default);
+  font-size: 0.9375rem;
+  display: flex;
+  flex-wrap: wrap;
+  gap: 0.25rem 1.25rem;
+}
+.page-content .en .en-foot a { color: var(--text-secondary); }
+.page-content .en .en-foot a:hover { color: var(--text-primary); }
+.page-content .en .en-foot a[aria-current="page"] { color: var(--text-primary); }
+
+/* ── Privacy policy ───────────────────────────────────────────── */
+.page-content .en.en-doc { max-width: 720px; margin: 0 auto; }
+.page-content .en .en-doc-head { margin: 3.5rem 0 2rem; }
+.page-content .en .en-crumb {
+  display: flex;
+  align-items: center;
+  gap: 0.5rem;
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+  margin-bottom: 1rem !important;
+}
+.page-content .en .en-crumb img { width: 28px; height: 28px; margin: 0; }
+.page-content .en .en-crumb a { color: var(--text-secondary); }
+.page-content .en .en-crumb a:hover { color: var(--text-primary); }
+.page-content .en .en-doc-head h1 {
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 600;
+  letter-spacing: -0.025em;
+  line-height: 1.1;
+  margin: 0 0 0.875rem;
+}
+.page-content .en .en-doc-head .en-lede {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 !important;
+  max-width: none;
+}
+.page-content .en .en-updated { font-size: 0.9375rem; color: var(--text-secondary); margin-top: 0.75rem !important; }
+.page-content .en .en-prose h2 {
+  font-size: 1.5rem;
+  font-weight: 600;
+  letter-spacing: -0.015em;
+  line-height: 1.25;
+  margin: 2.75rem 0 0.875rem;
+  scroll-margin-top: 1.5rem;
+}
+.page-content .en .en-prose h3 { font-size: 1.0625rem; font-weight: 600; margin: 1.75rem 0 0.5rem; scroll-margin-top: 1.5rem; }
+.page-content .en .en-prose p,
+.page-content .en .en-prose li { font-size: 1rem; line-height: 1.65; }
+.page-content .en .en-prose p { margin: 0 0 1rem !important; }
+.page-content .en .en-prose ul { margin: 0 0 1rem; padding-left: 1.25rem; }
+.page-content .en .en-prose li { margin-bottom: 0.375rem; }
+
+/* ── Narrow ───────────────────────────────────────────────────── */
+@media (max-width: 860px) {
+  .page-content .en .en-stack,
+  .page-content .en .en-row,
+  .page-content .en .en-row.is-flipped { grid-template-columns: minmax(0, 1fr); margin-bottom: 4.5rem; }
+  .page-content .en .en-row.is-flipped .en-copy { order: 0; }
+  .page-content .en .en-pair,
+  .page-content .en .en-closing { grid-template-columns: minmax(0, 1fr); }
+  .page-content .en .en-pair,
+  .page-content .en .en-group,
+  .page-content .en .en-shots,
+  .page-content .en .en-wide { margin-bottom: 4.5rem; }
+}
+@media (max-width: 640px) {
+  .page-content .en .en-three,
+  .page-content .en .en-grid { grid-template-columns: minmax(0, 1fr); gap: 1.75rem; }
+  .page-content .en .en-phones { grid-template-columns: repeat(3, minmax(220px, 1fr)); overflow-x: auto; scroll-snap-type: x mandatory; padding-bottom: 0.5rem; }
+  .page-content .en .en-phones .en-shot { scroll-snap-align: start; }
+}
+/* The scenes switch to their phone designs in narrow columns; the slots follow. */
+@container en (max-width: 819px) {
+  .page-content .en .en-hero-stage { aspect-ratio: 358 / 420; max-width: 358px; }
+}
+@container ens (max-width: 519px) {
+  .page-content .en .en-scene .en-stage { aspect-ratio: 358 / 400; max-width: 358px; }
+}
+@media (max-width: 560px) {
+  .page-content .en .en-hero { margin-top: 2.5rem; }
+  .page-content .en .en-hero-stage { margin-bottom: 3.5rem; }
+  .page-content .en .en-doc-head { margin-top: 2.5rem; }
+}

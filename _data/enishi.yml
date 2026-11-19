@@ -1,0 +1,24 @@
+# Enishi: one place for the details the Enishi pages share.
+
+# Shown on the landing and privacy pages. This is the site's public address.
+support_email: bakari@bakarimustafa.com
+
+# iPhone, iPad and Apple Watch: the live App Store listing. Without a country code,
+# the link opens the visitor's own storefront. The landing page links here with Apple's
+# badge when `app_store_badge` is true, or as a "Download on the App Store" button
+# otherwise. The badge must be the official artwork, saved as
+# /assets/img/enishi/app-store-badge.svg, from
+# https://developer.apple.com/app-store/marketing/guidelines/
+# Leave app_store_url empty to show "Coming to the App Store".
+app_store_url: ""
+app_store_badge: false
+
+# Mac: a direct download, published on github.com/realbakari/enishi-releases. Every
+# release uploads an asset named Enishi.zip, so this link always gets the latest. The
+# button shows when `download_ready` is true in enishi.md's front matter.
+mac_download_url: "https://github.com/realbakari/enishi-releases/releases/latest/download/Enishi.zip"
+mac_releases_url: "https://github.com/realbakari/enishi-releases/releases"
+minimum_macos: "14"
+
+# Dates shown on the policy page.
+privacy_updated: "19 November 2026"
