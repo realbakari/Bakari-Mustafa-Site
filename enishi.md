@@ -8,7 +8,7 @@ comments: false
 # download_ready shows Download for Mac, linked to site.data.enishi.mac_download_url
 # (_data/enishi.yml), with the version beneath it. Update version with each release.
 # The App Store link for iPhone, iPad and Apple Watch is set in _data/enishi.yml.
-download_ready: false
+download_ready: true
 version: "1.0"
 excerpt: "A private notebook about the people in your life: what you talked about, what you promised and the moments you shared, kept as plain files that are yours. For iPhone, iPad, Mac and Apple Watch."
 description: "Enishi is a private notebook about the people in your life, for iPhone, iPad, Mac and Apple Watch. Log a conversation in one sentence, see who today is about, keep your follow-ups and reconnect with people. Your notebook is a folder of plain Markdown files. No account, no analytics and no tracking."
