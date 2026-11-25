@@ -288,12 +288,13 @@ image: "/assets/img/the-message/sermon-light.jpg"
 
 <div class="tm-hero">
   <img class="tm-icon" src="/assets/img/the-message/icon.png" alt="The Message app icon: a white cloud in a blue sky" width="104" height="104">
-  <p class="tm-eyebrow">For Mac</p>
+  <p class="tm-eyebrow">For Mac &amp; iPhone</p>
   <h1>The Message</h1>
   <p class="tm-lede">William Branham’s sermons and the Bible, side by side. Read them, hear them, study them, and put the words on the screen on Sunday.</p>
   <div class="tm-actions">
     <a class="tm-button is-primary" href="https://github.com/realbakari/the-message-mac/releases/latest/download/The-Message.dmg">Download for Mac</a>
-    <a class="tm-button" href="/the-message/">Browse the sermons on the web</a>
+    <a class="tm-button" href="https://apps.apple.com/us/app/the-message-sermons-bible/id6821373129" target="_blank" rel="noopener noreferrer">Download for iPhone</a>
+    <a class="tm-button" href="/the-message/">Browse on the web</a>
   </div>
   <p class="tm-meta">Version 1.2 · Requires macOS 26 · <a href="https://github.com/realbakari/the-message-mac/releases">Release notes</a></p>
 </div>

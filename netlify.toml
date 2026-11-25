@@ -27,3 +27,109 @@
   [headers.values]
     Content-Type = "text/plain; charset=utf-8"
     Cache-Control = "public, max-age=300"
+
+# Consolidated & retired pages (301 redirects)
+[[redirects]]
+  from = "/booking/*"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/booking"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/events/*"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/events"
+  to = "/contact/"
+  status = 301
+
+[[redirects]]
+  from = "/organizations/*"
+  to = "/projects/#community"
+  status = 301
+
+[[redirects]]
+  from = "/organizations"
+  to = "/projects/#community"
+  status = 301
+
+[[redirects]]
+  from = "/podcast/*"
+  to = "/projects/transition-phase-podcast/"
+  status = 301
+
+[[redirects]]
+  from = "/podcast"
+  to = "/projects/transition-phase-podcast/"
+  status = 301
+
+[[redirects]]
+  from = "/tools/*"
+  to = "/uses/"
+  status = 301
+
+[[redirects]]
+  from = "/tools"
+  to = "/uses/"
+  status = 301
+
+[[redirects]]
+  from = "/snapchat-lenses/*"
+  to = "/projects/#earlier"
+  status = 301
+
+[[redirects]]
+  from = "/spark-ar-creator/*"
+  to = "/projects/#earlier"
+  status = 301
+
+[[redirects]]
+  from = "/tiktok-effect-creator/*"
+  to = "/projects/#earlier"
+  status = 301
+
+[[redirects]]
+  from = "/projects/covid19-tracker/*"
+  to = "/projects/#earlier"
+  status = 301
+
+[[redirects]]
+  from = "/article/*"
+  to = "/posts/"
+  status = 301
+
+[[redirects]]
+  from = "/article"
+  to = "/posts/"
+  status = 301
+
+[[redirects]]
+  from = "/anime/*"
+  to = "/posts/"
+  status = 301
+
+[[redirects]]
+  from = "/best-marketing-communities-to-join-in-2021/*"
+  to = "/posts/"
+  status = 301
+
+[[redirects]]
+  from = "/top-product-management-communities/*"
+  to = "/posts/"
+  status = 301
+
+[[redirects]]
+  from = "/resources/*"
+  to = "/posts/"
+  status = 301
+
+[[redirects]]
+  from = "/wattpad-collections/*"
+  to = "/reading/"
+  status = 301

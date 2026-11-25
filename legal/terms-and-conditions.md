@@ -1,35 +1,36 @@
 ---
 title: Terms and Conditions
+permalink: "/legal/terms-and-conditions/"
 layout: page
-excerpt: 'Website usage terms, legal disclaimers, and user obligations for bakarimustafa.com.'
-description: 'Read the Terms and Conditions for bakarimustafa.com to understand your rights, responsibilities, and the legal usage of this personal website. Includes user conduct, intellectual property, privacy, and limitation of liability.'
+hide_title: true
+excerpt: Website usage terms, disclaimers, and obligations for bakarimustafa.com.
+description: Read the Terms and Conditions for bakarimustafa.com, covering use of content, intellectual property, external links, and governing law.
 image: ''
 comments: false
-
 ---
+{::nomarkdown}
+<div class="page-header">
+  <h1>Terms and Conditions</h1>
+  <p class="page-subtitle">Usage terms for bakarimustafa.com, a personal website maintained by Bakari Mustafa.</p>
+</div>
+{:/nomarkdown}
 
-This website (bakarimustafa.com) is a personal website maintained by Bakari Mustafa. The opinions and content shared here are personal, do not represent any organization, and are for informational and educational purposes only.
+The opinions and content shared on bakarimustafa.com are personal, do not represent any organisation, and are for informational and educational purposes only. By using this site, you agree to the following terms:
 
-By visiting and using bakarimustafa.com, you agree to be bound by the following terms and conditions:
+1. **Use of the website**: The site and its contents are provided "as is" for informational and educational purposes. I make no warranties—express or implied—about the completeness, accuracy, or reliability of the content, and exclude liability for errors or omissions to the fullest extent permitted by law.
 
-1. **Use of the Website**: The website and its contents are for informational and educational purposes only. The website and its contents are provided "as is" and we make no representations or warranties of any kind, express or implied, about the completeness, accuracy, reliability, suitability, or availability with respect to the website or the information, products, services, or related graphics contained on the website for any purpose. You acknowledge that such information and materials may contain inaccuracies or errors and we expressly exclude liability for any such inaccuracies or errors to the fullest extent permitted by law.
+2. **Intellectual property**: Original writing, code examples, and media on this site are protected by copyright. Please ask for permission before republishing substantial content.
 
-2. **Intellectual Property**: The website and its contents are protected by copyright and trademark laws. You may not use any content from the website without our express permission.
+3. **Changes to these terms**: These terms may be updated from time to time. Changes take effect once posted on this page.
 
-3. **Changes to the Terms and Conditions**: We reserve the right to make changes to these terms and conditions at any time. We will notify you of any changes by posting the new terms and conditions on the website.
+4. **Governing law**: These terms are governed by the laws of Australia.
 
-4. **Governing Law**: These terms and conditions shall be governed by and construed in accordance with the laws of Australia, without giving effect to any principles of conflicts of law.
+5. **User conduct**: Do not use this site for unlawful purposes or in any way that harms, disrupts, or attempts unauthorised access to the site or its services.
 
-5. **User Conduct**: You agree not to use the website for any unlawful purpose or one that might harm, disable, or impair the website. Prohibited activities include spamming, hacking, impersonation, or any attempt to access the website’s data or systems without authorization.
+6. **External links**: This site links to third-party websites and services. I do not control and am not responsible for their content, privacy policies, or practices.
 
-6. **External Links**: This website may contain links to third-party websites or services. We do not control and are not responsible for the content, privacy policies, or practices of any third parties. Access to these sites is at your own risk.
+7. **Limitation of liability**: To the maximum extent permitted by law, Bakari Mustafa is not liable for any direct, indirect, incidental, or consequential damages arising from your use of this site.
 
-7. **Limitation of Liability**: To the maximum extent permitted by law, Bakari Mustafa and affiliates are not liable for any direct, indirect, incidental, special, or consequential damages arising out of or in connection with your use of the website.
+8. **Privacy**: See the [Privacy Policy](/legal/privacy/) for how personal information submitted through forms or the newsletter is handled.
 
-8. **Privacy**: Please review our [Privacy Policy](/legal/privacy/) for information about how we collect, use, and protect your data.
-
-9. **Contact Information**: If you have any questions about these terms and conditions, please contact us at bakari@bakarimustafa.com.
-
----
-
-Thank you for visiting my official website. We hope you find the information provided on our website useful and informative.
+9. **Contact**: If you have questions about these terms, email [bakari@bakarimustafa.com](mailto:bakari@bakarimustafa.com).

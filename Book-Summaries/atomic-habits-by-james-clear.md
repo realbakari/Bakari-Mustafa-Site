@@ -17,14 +17,14 @@ Everyone has bad habits that they want to get rid of, this book teaches you the 
 
 Here are the 4 lessons that you can apply right now to start forming good habits and break bad ones and the importance of tiny changes.
 
-1. Make time for new habits(even when life get crazy)
+1. Make time for new habits (even when life gets crazy)
 2. Overcome a lack of motivation and willpower
 3. Design your environment to make success easier
 4. Get back on track when you fall off course
 
-# Strive To Be 1% Better Everyday
+## Strive To Be 1% Better Every Day
 
-> if you can get 1 percent better each day for one year, you’ll end up thirty-seven times better by time you’re done. Conversely, if you get 1 percent worse each day for for one year, you’ll decline nearly to zero.
+> If you can get 1 percent better each day for one year, you’ll end up thirty-seven times better by the time you’re done. Conversely, if you get 1 percent worse each day for one year, you’ll decline nearly to zero.
 >
 > \- Page 15
 
@@ -34,35 +34,35 @@ Remember, becoming 1% better today may not seem like much, but with time, it can
 
 ![Atomic Habits: An Easy & Proven Way to Build Good Habits & Break Bad Ones](/uploads/tiny-gains-graph-700x700.jpg)
 
-How much of a difference does 1% make? if you can get just 1% better each day, you’ll end up with results that are nearly 37 times better after just one year.
+How much of a difference does 1% make? If you can get just 1% better each day, you’ll end up with results that are nearly 37 times better after just one year.
 
-# Focus on Your Systems, Not Your Goals
+## Focus on Your Systems, Not Your Goals
 
 Here are a few problems that arise when people focus on goals:
 
-### **#1: Winners and losers have the same goals.**
+### #1: Winners and losers have the same goals.
 
 Every athlete that goes to the Olympics has the goal of winning a gold medal, but only one will finish in the first place. It isn’t the goal of winning that propels the athlete to the top of the sport, the goal had always been there.
 
 It’s only when they implement a system of continuous small improvements that they create a competitive edge over the competition and win gold.
 
-### **#2: Achieving a goal is only a momentary change.**
+### #2: Achieving a goal is only a momentary change.
 
 Imagine you have a messy room and you set a goal of cleaning it. If you can summon the energy to tidy up, you’ll have a clean room and achieve your goal, but if you continue following your old habits, the room will be messy in no time.
 
 What you really need is to create a system of habits that keep your room consistently clean. Fix the inputs and the outputs will fix themselves.
 
-### **#3: Goals are at odds with long-term progress.**
+### #3: Goals are at odds with long-term progress.
 
-Having a goal-oriented mindset and create a “yo-yo” effect. Many people set to the goal of running a marathon and work hard for months, but after finishing the race, they stop running because they already achieved their goal.
+Having a goal-oriented mindset can create a “yo-yo” effect. Many people set the goal of running a marathon and work hard for months, but after finishing the race, they stop running because they already achieved their goal.
 
-You do not arise to the level of your goal. You fall to the level of your system (pg 27)
+> You do not rise to the level of your goals. You fall to the level of your systems. (p. 27)
 
 By creating a system of good habits, you’ll be able to achieve better results and create a stable long-term solution instead of focusing on reaching short-term goals that only provide a temporary solution.
 
-The system continues to provide results, While the goal is hit-or-miss.
+The system continues to provide results, while the goal is hit-or-miss.
 
-# Design Your Environment for success
+## Design Your Environment for Success
 
 Here are a few ways people can redesign their environment for success:
 
@@ -75,4 +75,4 @@ And for bad habits, you want to do the opposite and make things harder to do:
 * If you have trouble staying off your phone, leave it in the other room and turn off notifications.
 * If you are wasting too much time watching television, move it to a room that you rarely go into, or better yet, sell it.
 
-“Self-control is a short-term strategy, not a long-term one,” writes James Clears.
+“Self-control is a short-term strategy, not a long-term one,” writes James Clear.

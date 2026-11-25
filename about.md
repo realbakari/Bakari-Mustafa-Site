@@ -8,13 +8,14 @@ image: "/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg"
 description: Bakari Mustafa is a Brisbane-based founder and technologist working on education, mentorship, and digital tools for refugee and African-Australian communities.
 ---
 
-![Bakari Mustafa](/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg)
+![Bakari Mustafa](/uploads/1_v-uxvos8ck61inhhsoq6rw.jpeg){: .about-portrait}
 
 Founder and technologist in Brisbane, working on education, mentorship, and digital tools for refugee and African-Australian communities.
 {: .lead}
 
 ## Roles
 
+- Founder, [Mavuno](https://mavuno.au/)
 - External advisor, Multicultural Advisory Committee, Ipswich City Council
 - Leadership team, [Networking African-Australians](https://networkingafricanaustralians.com.au/)
 - Founder, [Mentors Outreach](https://mentorsoutreach.org)
@@ -30,7 +31,7 @@ I've been starting things since 2016, when I founded Hungry Innovators, a non-pr
 
 Much of my recent work points back to Dzaleka Refugee Camp in Malawi. [Dzaleka Online](https://services.dzaleka.com/) publishes news, stories, and service information from the camp; it recorded 17,952 active users in 2025, and in July 2026 I released its iPhone app. Visit Dzaleka runs guided tours led by residents trained as certified guides. Dzaleka Digital Heritage archives the camp's cultural history. I'm also building [DzalekaPay](https://pay.dzaleka.com/), which lets businesses and organisations in the camp take mobile money and card payments through payment links, tickets, storefronts, and fundraising pages.
 
-I write software, too. I maintain four open-source projects: [ATO Lens](https://github.com/realbakari/ATO-Lens), a local-first tool for making sense of Australian tax records; [Capsule](https://github.com/realbakari/capsule), a control plane for running coding agents under explicit policy; [Capsule App](https://github.com/realbakari/Capsule-App), a desktop workspace where those agents' diffs, approvals, and checkpoints live on your own machine; and [UpDeck](https://github.com/realbakari/UpDeck), an unofficial dashboard for Up bank that works out payday, subscriptions, and spending on your device.
+I write software, too. I built [The Message](/the-message/mac/) for Mac and [iPhone](https://apps.apple.com/us/app/the-message-sermons-bible/id6821373129), [Enishi](/enishi/), [Kora](/kora/), [GatherKit](/gatherkit/), [Lumen](/lumen/), and [Relova](/relova/), and I maintain four open-source projects: [ATO Lens](https://github.com/realbakari/ATO-Lens), a local-first tool for making sense of Australian tax records; [Capsule](https://github.com/realbakari/capsule), a control plane for running coding agents under explicit policy; [Capsule App](https://github.com/realbakari/Capsule-App), a desktop workspace where those agents' diffs, approvals, and checkpoints live on your own machine; and [UpDeck](https://github.com/realbakari/UpDeck), an unofficial dashboard for Up bank that works out payday, subscriptions, and spending on your device.
 
 Away from work I read a lot and keep [summaries of the books](/book-summaries/) that stay with me. I also keep an [archive of sermons](/the-message/), and I make generative art with P5.js.
 

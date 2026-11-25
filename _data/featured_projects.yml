@@ -1,14 +1,28 @@
-- title: Networking African-Australians
-  description: A community organization empowering African-Australian youth through education, mentorship, and leadership programs.
-  url: https://networkingafricanaustralians.com.au/
-  image: /uploads/naa-project.jpg
-  tags: [Community, Education, Leadership]
+- title: Mavuno
+  description: Ad-free, real-name social network for African Australians with city spaces, community groups, verified jobs, and peer mentoring.
+  url: https://mavuno.au/
+  tags: [Community, Social, Australia]
+
+- title: The Message
+  description: William Branham's sermons and the Bible side by side on Mac, iPhone, and web—1,200+ sermons in 70+ languages with read-along audio and offline study.
+  url: /the-message/mac/
+  tags: [Mac, iPhone, Bible]
+
+- title: Enishi
+  description: A private notebook about the people in your life for iPhone, iPad, Mac, and Apple Watch, stored as plain Markdown files.
+  url: /enishi/
+  tags: [iPhone, Mac, Privacy]
+
+- title: Kora
+  description: A Mac app for community organisations to archive photos, videos, recordings, and documents with consent tracking and no cloud lock-in.
+  url: /kora/
+  tags: [Mac, Archive, Community]
 
 - title: Mentors Outreach
   description: Mentoring program management software for applications, matching, sessions, safeguarding, and reporting.
   url: https://mentorsoutreach.org
   image: /uploads/mentors-outreach.jpg
-  tags: [Mentorship, Platform, Growth]
+  tags: [Mentorship, Platform, Software]
 
 - title: Dzaleka Online
   description: News, stories, and service information from Dzaleka Refugee Camp, now with an iPhone app.

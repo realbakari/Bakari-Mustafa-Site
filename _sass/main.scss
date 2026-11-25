@@ -89,6 +89,7 @@ $on-widescreen: 1152px;
 
 // Semantic CSS Variables for Theming
 :root {
+  color-scheme: light;
   --text-primary: #18181b;
   --text-secondary: #6b6b6b;
   --text-tertiary: #9a9a9a;
@@ -132,6 +133,7 @@ $on-widescreen: 1152px;
 }
 
 [data-theme="dark"] {
+  color-scheme: dark;
   --text-primary: #ededed;
   --text-secondary: #a0a0a0;
   --text-tertiary: #6e6e6e;

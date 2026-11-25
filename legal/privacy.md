@@ -1,72 +1,62 @@
 ---
 title: Privacy Policy
+permalink: "/legal/privacy/"
 layout: page
-excerpt: 'Details how bakarimustafa.com collects, uses, and protects visitor information. No personal data shared or sold.'
-description: 'Read the privacy policy for bakarimustafa.com, a personal site by Bakari Mustafa. This covers what information is collected, third-party providers (like Supabase and Netlify), your rights under GDPR, and steps to protect your privacy.'
+hide_title: true
+excerpt: How bakarimustafa.com collects, uses, and protects visitor information. No analytics tracking and no data sold.
+description: Privacy policy for bakarimustafa.com, covering forms, newsletter subscriptions, third-party processors (Netlify, Supabase, Resend), and your privacy rights.
 image: ''
-
+comments: false
 ---
-This website, bakarimustafa.com, is the personal website of Bakari Mustafa. Entries to this website represent my personal opinion. This site is not owned, operated, or affiliated with any organization. Entries are copyright (c), Bakari Mustafa, as of the date of posting.
+{::nomarkdown}
+<div class="page-header">
+  <h1>Privacy Policy</h1>
+  <p class="page-subtitle">How bakarimustafa.com handles personal information. No analytics tracking, no tracking cookies, and no data sold.</p>
+</div>
+{:/nomarkdown}
 
-This privacy policy outlines the types of personal information we collect, how it is used, and how we protect it.
+This site (`bakarimustafa.com`) is the personal website of Bakari Mustafa. Entries represent my personal views and are not affiliated with any employer or organisation.
 
-### What background data is collected?
+## Background data
 
-This website does not use analytics services or tracking cookies. We do not track your visits, and we do not collect or store personally identifiable data unless you explicitly provide it through a form (such as the contact form or newsletter signup). One preference — your light/dark theme choice — is stored locally in your own browser and never sent to us.
+This website does not run third-party analytics or tracking cookies. I do not track your visits or collect personal information unless you submit it directly through the contact form or newsletter signup. One preference—your light or dark theme choice—is stored locally in your browser (`localStorage`) and never sent to a server.
 
-### Information Collection
+## Information collected
 
-We collect information from you when you fill out a form (such as our contact form) or subscribe to the newsletter. This information may include your name, email address, and any other information you choose to provide.
+Information is collected only when you submit the [contact form](/contact/) or subscribe to the newsletter. Depending on what you submit, this includes your name, email address, and message.
 
-### Use of Information
+## How it is used
 
-We use the information we collect to:
+Submitted information is used only to:
 
-- Respond to your inquiries submitted through contact forms
-- Send you the newsletter, if you subscribed (you can unsubscribe at any time)
+- Respond to messages sent through the contact form
+- Send newsletter updates if you subscribed (you can unsubscribe at any time)
 
-We will never sell your personal information or use it for purposes other than those listed above.
+I do not sell, rent, or trade personal information.
 
-### Protection of Information
+## Third-party processors
 
-We take appropriate security measures to protect against unauthorized access to or unauthorized alteration, disclosure, or destruction of data. These include internal reviews of our data collection, storage, and processing practices and security measures, as well as physical security measures to guard against unauthorized access to systems where we store personal data.
-
-### Sharing of Information
-
-We do not sell, trade, or otherwise transfer to outside parties your personally identifiable information.
-
-Third-party services we use:
-- **Netlify**: Website hosting (form submissions are processed through Netlify Forms)
+- **Netlify**: Hosts the site and processes contact form submissions through Netlify Forms
 - **Supabase**: Stores newsletter subscriber email addresses and subscription status
 - **Resend**: Delivers newsletter confirmation emails
 
-These service providers have their own privacy policies and data handling practices. We ensure all partners maintain appropriate security standards and confidentiality agreements.
+Each service operates under its own privacy and security policies.
 
-### Third-Party Links
+## External links
 
-We may include or offer third-party products or services on our website. These third-party sites have separate and independent privacy policies. We, therefore, have no responsibility or liability for the content and activities of these linked sites.
+Pages on this site link to external websites and apps. Those services have their own privacy policies, and I am not responsible for their content or data practices.
 
-### Changes to Privacy Policy
+## Your rights
 
-We reserve the right to make changes to this privacy policy at any time. We will notify you of any changes by posting the new privacy policy on our website.
+You can ask at any time to:
 
-### Your Rights
+- Access the personal data held about you
+- Correct or delete your personal data
+- Object to or restrict processing of your data
+- Withdraw consent or unsubscribe from the newsletter
 
-Under GDPR and other privacy regulations, you have the right to:
-- Request access to your personal data
-- Request correction of your personal data
-- Request deletion of your personal data
-- Object to the processing of your personal data
-- Request restriction of processing your personal data
-- Request transfer of your personal data
-- Withdraw consent at any time
+To make a request or raise a privacy concern, email [bakari@bakarimustafa.com](mailto:bakari@bakarimustafa.com).
 
-To exercise any of these rights, please contact me at bakari@bakarimustafa.com.
+---
 
-### Complaints
-
-If you've any reason to complain about the ways I handle your privacy, please contact me (Bakari Mustafa) by email at bakari@bakarimustafa.com.
-
-Thank you for visiting my official website. We take your privacy seriously and will do our best to protect your personal information.
-
-Last updated: July 2026
+*Last updated: November 2026*

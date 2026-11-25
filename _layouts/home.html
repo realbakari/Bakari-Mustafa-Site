@@ -16,7 +16,6 @@ home: true
       <a href="/about/">About</a>
       <a href="/projects/">Projects</a>
       <a href="/reading/">Reading</a>
-      <a href="/book-summaries/">Book Summaries</a>
       <a href="/contact/">Contact</a>
     </nav>
   </section>
@@ -50,4 +49,30 @@ home: true
       {% endfor %}
     </ul>
   </section>
+
+  {%- assign home_books = site.data.books | where: "homepage", true -%}
+  {%- if home_books.size > 0 -%}
+  <section class="home-section" aria-labelledby="home-reading">
+    <div class="home-section-head">
+      <h2 id="home-reading">Books, lately</h2>
+      <a class="home-section-more" href="/reading/">All {{ site.data.books.size }} books</a>
+    </div>
+    <div class="books-shelf books-shelf--home">
+      {% for book in home_books limit: 4 %}
+        {%- assign book_href = book.summary_url -%}
+        {%- assign is_external = false -%}
+        {%- unless book_href -%}
+          {%- assign query = book.title | append: " " | append: book.author | url_encode -%}
+          {%- assign book_href = "https://bookshop.org/search?keywords=" | append: query -%}
+          {%- assign is_external = true -%}
+        {%- endunless -%}
+        <a class="books-shelf-card" href="{{ book_href }}"{% if is_external %} target="_blank" rel="noopener noreferrer"{% endif %}>
+          {% include book-cover.html book=book size="shelf" lazy=true %}
+          <span class="books-shelf-title">{{ book.title }}</span>
+          <span class="books-shelf-author">{{ book.author }}</span>
+        </a>
+      {% endfor %}
+    </div>
+  </section>
+  {%- endif -%}
 </div>

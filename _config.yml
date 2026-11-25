@@ -21,7 +21,7 @@ author:
   avatar: /uploads/bakari_mustafa.jpg # change with your own avatar
 
 # URL settings
-url: "https://bakarimustafa.com/" #
+url: "https://bakarimustafa.com" #
 baseurl:
 permalink: /:title/
 fb_appid:

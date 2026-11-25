@@ -1,5 +1,5 @@
 ---
-title: A Short Guide to a Happy Life by Anna Quindlen by Anna Quindlen
+title: A Short Guide to a Happy Life by Anna Quindlen
 date: 2022-12-04 14:00:00 +0000
 tags: []
 description: The only thing you have that nobody else has is control of your life.

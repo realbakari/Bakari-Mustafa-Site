@@ -1,223 +1,257 @@
 (() => {
-  // Dedicated Search Page JavaScript
-  document.addEventListener('DOMContentLoaded', function() {
-    // Get DOM elements
-    const searchInput = document.getElementById('main-search-input');
-    const clearSearchBtn = document.getElementById('clear-main-search');
-    const searchHints = document.getElementById('search-hints');
-    const searchFilters = document.getElementById('search-filters');
-    const searchStats = document.getElementById('search-stats');
-    const searchStatsText = document.getElementById('search-stats-text');
-    const resultsContainer = document.getElementById('main-search-results-container');
-    const searchResults = document.getElementById('main-search-results');
-    const noResultsMessage = document.getElementById('no-search-results');
-    const searchQueryDisplay = document.getElementById('search-query-display');
-    const welcomeState = document.getElementById('search-welcome');
-    const filterBtns = document.querySelectorAll('.search-filter-btn');
-    const hintBtns = document.querySelectorAll('.search-hint-btn');
+  const root = document.querySelector("[data-site-search]");
+  if (!root) return;
 
-    let currentFilter = 'all';
+  const form = root.querySelector("[data-search-form]");
+  const input = document.getElementById("main-search-input");
+  const clearBtn = document.getElementById("clear-main-search");
+  const hintsEl = document.getElementById("search-hints");
+  const filtersEl = document.getElementById("search-filters");
+  const statsEl = document.getElementById("search-stats");
+  const resultsEl = document.getElementById("main-search-results");
+  const emptyEl = document.getElementById("no-search-results");
+  const queryDisplayEl = document.getElementById("search-query-display");
+  const welcomeEl = document.getElementById("search-welcome");
+  const filterBtns = Array.from(root.querySelectorAll("[data-type]"));
+  const hintBtns = Array.from(root.querySelectorAll("[data-query]"));
 
-    // Initialize SimpleJekyllSearch
-    const searchInstance = SimpleJekyllSearch({
-      searchInput: searchInput,
-      resultsContainer: searchResults,
-      json: '/assets/search.json',
-      searchResultTemplate: '<a href="{url}" class="search-result-item"><div class="result-header"><span class="result-type-badge type-{type}">{type}</span>{date}<span class="result-tags">{tags}</span></div><h3 class="result-title">{title}</h3><p class="result-description">{description}</p><div class="result-footer">Read more <svg xmlns="http://www.w3.org/2000/svg" width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><line x1="5" y1="12" x2="19" y2="12"></line><polyline points="12 5 19 12 12 19"></polyline></svg></div></a>',
-      templateMiddleware: function(prop, value, template) {
-        // Add conditional rendering for date
-        if (prop === 'date') {
-          if (value) {
-            return '<span class="result-date">' + value + '</span>';
-          }
-          return '';
-        }
+  let index = [];
+  let indexLoaded = false;
+  let activeType = "all";
 
-        // Format tags
-        if (prop === 'tags' && value) {
-          return '<span class="result-tags">Tags: ' + value + '</span>';
-        }
+  function scoreItem(item, tokens, fullQuery) {
+    const title = (item.title || "").toLowerCase();
+    const author = (item.author || "").toLowerCase();
+    const tags = (item.tags || "").toLowerCase();
+    const desc = (item.description || "").toLowerCase();
+    const haystack = `${title} ${author} ${tags} ${desc}`;
 
-        return value;
-      },
-      noResultsText: ''
+    for (const tok of tokens) {
+      if (!haystack.includes(tok)) return 0;
+    }
+
+    let score = 1;
+    if (title === fullQuery) score += 100;
+    else if (title.startsWith(fullQuery)) score += 60;
+    else if (title.includes(fullQuery)) score += 40;
+
+    if (author && author.includes(fullQuery)) score += 35;
+    if (tags && tags.includes(fullQuery)) score += 20;
+
+    for (const tok of tokens) {
+      if (title.includes(tok)) score += 12;
+      if (author.includes(tok)) score += 8;
+      if (tags.includes(tok)) score += 5;
+    }
+
+    if (item.type === "book" && item.hasNotes) score += 4;
+    return score;
+  }
+
+  function typeLabel(type) {
+    if (type === "post") return "Writing";
+    if (type === "book") return "Book";
+    return "Page";
+  }
+
+  function buildRow(item) {
+    const li = document.createElement("li");
+    li.className = "site-search-item";
+
+    const a = document.createElement("a");
+    a.className = "site-search-row";
+    a.href = item.url;
+
+    const meta = document.createElement("span");
+    meta.className = "site-search-when";
+    meta.textContent = item.date || typeLabel(item.type);
+
+    const body = document.createElement("div");
+    body.className = "site-search-body";
+
+    const titleLine = document.createElement("div");
+    titleLine.className = "site-search-title-line";
+
+    const title = document.createElement("span");
+    title.className = "site-search-title";
+    title.textContent = item.title;
+    titleLine.appendChild(title);
+
+    const kind = document.createElement("span");
+    kind.className = "site-search-kind";
+    kind.textContent = item.type === "book" && item.hasNotes ? "Book notes" : typeLabel(item.type);
+    titleLine.appendChild(kind);
+
+    body.appendChild(titleLine);
+
+    const subText =
+      item.type === "book" && item.author
+        ? item.description && item.description !== item.author
+          ? `${item.author} — ${item.description}`
+          : item.author
+        : item.description;
+
+    if (subText) {
+      const desc = document.createElement("p");
+      desc.className = "site-search-desc";
+      desc.textContent = subText;
+      body.appendChild(desc);
+    }
+
+    a.appendChild(meta);
+    a.appendChild(body);
+    li.appendChild(a);
+    return li;
+  }
+
+  function render() {
+    const raw = input.value.trim();
+    clearBtn.hidden = raw.length === 0;
+
+    if (!raw) {
+      welcomeEl.hidden = false;
+      hintsEl.hidden = false;
+      filtersEl.hidden = true;
+      statsEl.hidden = true;
+      resultsEl.hidden = true;
+      emptyEl.hidden = true;
+      resultsEl.textContent = "";
+      return;
+    }
+
+    welcomeEl.hidden = true;
+    hintsEl.hidden = true;
+
+    if (!indexLoaded) {
+      statsEl.hidden = false;
+      statsEl.textContent = "Loading index…";
+      return;
+    }
+
+    const fullQuery = raw.toLowerCase();
+    const tokens = fullQuery.split(/\s+/).filter(Boolean);
+
+    const matched = [];
+    for (const item of index) {
+      const s = scoreItem(item, tokens, fullQuery);
+      if (s > 0) matched.push({ item, score: s });
+    }
+    matched.sort((a, b) => b.score - a.score);
+
+    const counts = { all: matched.length, post: 0, book: 0, page: 0 };
+    for (const m of matched) {
+      if (counts[m.item.type] !== undefined) counts[m.item.type] += 1;
+    }
+
+    filterBtns.forEach((btn) => {
+      const t = btn.dataset.type;
+      const countEl = btn.querySelector("[data-type-count]");
+      if (countEl && counts[t] !== undefined) countEl.textContent = String(counts[t]);
     });
 
-    // Clear search button
-    if (searchInput && clearSearchBtn) {
-      searchInput.addEventListener('input', function() {
-        const value = this.value.trim();
+    const filtered =
+      activeType === "all" ? matched : matched.filter((m) => m.item.type === activeType);
 
-        if (value.length > 0) {
-          clearSearchBtn.style.display = 'flex';
+    filtersEl.hidden = matched.length === 0;
+    resultsEl.textContent = "";
 
-          // Hide welcome state and hints
-          if (welcomeState) welcomeState.style.display = 'none';
-          if (searchHints) searchHints.style.display = 'none';
-
-          // Show filters and results container
-          if (searchFilters) searchFilters.style.display = 'block';
-          if (resultsContainer) resultsContainer.style.display = 'block';
-          if (searchStats) searchStats.style.display = 'block';
-
-          // Wait for SimpleJekyllSearch to update results
-          setTimeout(updateSearchResults, 100);
-        } else {
-          clearSearchBtn.style.display = 'none';
-          resetSearch();
-        }
-      });
-
-      clearSearchBtn.addEventListener('click', function() {
-        searchInput.value = '';
-        clearSearchBtn.style.display = 'none';
-        searchInput.focus();
-        resetSearch();
-      });
+    if (filtered.length > 0) {
+      const frag = document.createDocumentFragment();
+      filtered.slice(0, 60).forEach((m) => frag.appendChild(buildRow(m.item)));
+      resultsEl.appendChild(frag);
+      resultsEl.hidden = false;
+      emptyEl.hidden = true;
+      statsEl.hidden = false;
+      const label = filtered.length === 1 ? "result" : "results";
+      statsEl.textContent = `${filtered.length} ${label} for "${raw}"`;
+    } else {
+      resultsEl.hidden = true;
+      statsEl.hidden = true;
+      emptyEl.hidden = false;
+      queryDisplayEl.textContent = raw;
     }
+  }
 
-    // Search hint buttons
-    hintBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        const query = this.dataset.query;
-        searchInput.value = query;
-        searchInput.dispatchEvent(new Event('input'));
-        searchInput.focus();
-      });
+  function syncUrl(q) {
+    const url = new URL(window.location.href);
+    if (q) url.searchParams.set("q", q);
+    else url.searchParams.delete("q");
+    window.history.replaceState({}, "", url);
+  }
+
+  fetch("/assets/search.json")
+    .then((r) => r.json())
+    .then((data) => {
+      index = Array.isArray(data) ? data : [];
+      indexLoaded = true;
+      render();
+    })
+    .catch(() => {
+      indexLoaded = true;
+      statsEl.hidden = false;
+      statsEl.textContent = "Could not load search index.";
     });
 
-    // Filter buttons
-    filterBtns.forEach(btn => {
-      btn.addEventListener('click', function() {
-        // Remove active class from all
-        filterBtns.forEach(b => b.classList.remove('active'));
-        // Add active to clicked
-        this.classList.add('active');
-
-        currentFilter = this.dataset.type;
-        applyFilter();
-      });
+  if (form) {
+    form.addEventListener("submit", (e) => {
+      e.preventDefault();
+      render();
+      syncUrl(input.value.trim());
     });
+  }
 
-    // Update search results display
-    function updateSearchResults() {
-      const resultItems = searchResults.querySelectorAll('.search-result-item');
-      const count = resultItems.length;
-      const query = searchInput.value.trim();
+  input.addEventListener("input", () => {
+    render();
+    syncUrl(input.value.trim());
+  });
 
-      if (count > 0) {
-        // Show results
-        searchResults.style.display = 'grid';
-        noResultsMessage.style.display = 'none';
+  clearBtn.addEventListener("click", () => {
+    input.value = "";
+    activeType = "all";
+    filterBtns.forEach((b) => {
+      const isAll = b.dataset.type === "all";
+      b.classList.toggle("is-active", isAll);
+      b.setAttribute("aria-pressed", isAll ? "true" : "false");
+    });
+    render();
+    syncUrl("");
+    input.focus();
+  });
 
-        // Update stats
-        if (searchStatsText) {
-          searchStatsText.textContent = `Found ${count} result${count !== 1 ? 's' : ''} for "${query}"`;
-        }
-
-        // Apply current filter
-        applyFilter();
-      } else {
-        // No results
-        searchResults.style.display = 'none';
-        noResultsMessage.style.display = 'block';
-        searchStats.style.display = 'none';
-
-        if (searchQueryDisplay) {
-          searchQueryDisplay.textContent = query;
-        }
-      }
-    }
-
-    // Apply type filter
-    function applyFilter() {
-      const resultItems = searchResults.querySelectorAll('.search-result-item');
-      let visibleCount = 0;
-
-      resultItems.forEach(item => {
-        const typeBadge = item.querySelector('.result-type-badge');
-        if (!typeBadge) return;
-
-        const type = typeBadge.classList.contains('type-post') ? 'post' : 'page';
-
-        if (currentFilter === 'all' || currentFilter === type) {
-          item.style.display = 'block';
-          visibleCount++;
-        } else {
-          item.style.display = 'none';
-        }
-      });
-
-      // Update stats with filter
-      if (searchStatsText) {
-        const query = searchInput.value.trim();
-        const filterLabel = currentFilter === 'all' ? 'results' :
-                           currentFilter === 'post' ? 'articles' : 'pages';
-        searchStatsText.textContent = `Found ${visibleCount} ${filterLabel} for "${query}"`;
-      }
-
-      // Show/hide no results based on visible count
-      if (visibleCount === 0 && currentFilter !== 'all') {
-        noResultsMessage.style.display = 'block';
-        searchResults.style.display = 'none';
-        if (searchQueryDisplay) {
-          searchQueryDisplay.textContent = searchInput.value.trim();
-        }
-      } else if (visibleCount > 0) {
-        noResultsMessage.style.display = 'none';
-        searchResults.style.display = 'grid';
-      }
-    }
-
-    // Reset search to welcome state
-    function resetSearch() {
-      // Show welcome state and hints
-      if (welcomeState) welcomeState.style.display = 'block';
-      if (searchHints) searchHints.style.display = 'flex';
-
-      // Hide search results and filters
-      if (resultsContainer) resultsContainer.style.display = 'none';
-      if (searchFilters) searchFilters.style.display = 'none';
-      if (searchStats) searchStats.style.display = 'none';
-      if (noResultsMessage) noResultsMessage.style.display = 'none';
-
-      // Reset filter to all
-      currentFilter = 'all';
-      filterBtns.forEach(btn => {
-        btn.classList.toggle('active', btn.dataset.type === 'all');
-      });
-    }
-
-    // Check for URL parameters (search query from other pages)
-    const urlParams = new URLSearchParams(window.location.search);
-    const queryParam = urlParams.get('q');
-
-    if (queryParam) {
-      searchInput.value = queryParam;
-      searchInput.dispatchEvent(new Event('input'));
-    }
-
-    // Focus search input on page load
-    setTimeout(() => {
-      searchInput.focus();
-    }, 100);
-
-    // Keyboard shortcut: Cmd/Ctrl + K to focus search
-    document.addEventListener('keydown', function(e) {
-      if ((e.metaKey || e.ctrlKey) && e.key === 'k') {
-        e.preventDefault();
-        searchInput.focus();
-        searchInput.select();
-      }
-
-      // Escape to clear search
-      if (e.key === 'Escape' && searchInput === document.activeElement) {
-        if (searchInput.value) {
-          searchInput.value = '';
-          clearSearchBtn.style.display = 'none';
-          resetSearch();
-        }
-      }
+  hintBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      input.value = btn.dataset.query || "";
+      render();
+      syncUrl(input.value.trim());
+      input.focus();
     });
   });
+
+  filterBtns.forEach((btn) => {
+    btn.addEventListener("click", () => {
+      activeType = btn.dataset.type || "all";
+      filterBtns.forEach((b) => {
+        const current = b === btn;
+        b.classList.toggle("is-active", current);
+        b.setAttribute("aria-pressed", current ? "true" : "false");
+      });
+      render();
+    });
+  });
+
+  document.addEventListener("keydown", (e) => {
+    if ((e.metaKey || e.ctrlKey) && e.key.toLowerCase() === "k") {
+      e.preventDefault();
+      input.focus();
+      input.select();
+    } else if (e.key === "Escape" && document.activeElement === input && input.value) {
+      clearBtn.click();
+    }
+  });
+
+  const initialQuery = new URLSearchParams(window.location.search).get("q");
+  if (initialQuery) {
+    input.value = initialQuery;
+    render();
+  }
 })();

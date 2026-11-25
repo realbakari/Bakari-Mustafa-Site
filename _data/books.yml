@@ -1,0 +1,967 @@
+# Master catalog of books read, recommended, and summarized.
+# Used by /reading/, /book-summaries/, /book-repository/, and the homepage.
+
+# --- Currently reading / On the shelf ---
+
+- slug: range
+  title: Range
+  author: David Epstein
+  year: 2025
+  category: Personal Development
+  shelf: true
+  homepage: true
+  blurb: Why generalists triumph in a specialized world
+
+  cover: /assets/img/books/range.jpg
+- slug: at-night-all-blood-is-black
+  title: At Night All Blood Is Black
+  author: David Diop
+  year: 2021
+  category: Fiction & Literature
+  shelf: true
+  homepage: true
+  summary_url: /Book-library/at-night-all-blood-is-black-by-david-diop/
+  blurb: International Booker Prize winner
+
+  cover: /assets/img/books/at-night-all-blood-is-black.jpg
+- slug: the-shadow-king
+  title: The Shadow King
+  author: Maaza Mengiste
+  year: 2021
+  category: Fiction & Literature
+  shelf: true
+  homepage: true
+  summary_url: /Book-library/the-shadow-king-by-maaza-mengiste/
+  blurb: Historical fiction from Ethiopia
+
+  cover: /assets/img/books/the-shadow-king.jpg
+- slug: no-longer-human
+  title: No Longer Human
+  author: Osamu Dazai
+  year: 2021
+  category: Fiction & Literature
+  shelf: true
+  homepage: true
+  summary_url: /Book-library/no-longer-human/
+  blurb: Osamu Dazai's classic of alienation
+
+  cover: /assets/img/books/no-longer-human.jpg
+- slug: seed-to-harvest
+  title: Seed to Harvest
+  author: Octavia E. Butler
+  year: 2020
+  category: Fiction & Literature
+  shelf: true
+  summary_url: /reading/seed-to-harvest/
+  blurb: Octavia E. Butler's Patternist series
+
+# --- 2022 ---
+
+  cover: /assets/img/books/seed-to-harvest.jpg
+- slug: a-short-guide-to-a-happy-life
+  title: A Short Guide to a Happy Life
+  author: Anna Quindlen
+  year: 2022
+  summary_year: 2022
+  category: Personal Development
+  summary_url: /Book-Summaries/a-short-guide-to-a-happy-life-by-anna-quindlen-by-anna-quindlen/
+  blurb: Learning to love the journey rather than chasing the next milestone
+
+# --- 2021 ---
+
+  cover: /assets/img/books/a-short-guide-to-a-happy-life.jpg
+- slug: 1984
+  title: "1984"
+  author: George Orwell
+  year: 2021
+  summary_year: 2021
+  category: Science & Philosophy
+  shelf: true
+  summary_url: /Book-Summaries/1984-by-george-orwell/
+  blurb: A dystopian masterpiece
+
+  cover: /assets/img/books/1984.jpg
+- slug: a-short-history-of-nearly-everything
+  title: A Short History of Nearly Everything
+  author: Bill Bryson
+  year: 2021
+  summary_year: 2021
+  category: Science & Philosophy
+  summary_url: /Book-Summaries/a-short-history-of-nearly-everything-summary-by-bill-bryson/
+  blurb: Understanding our universe
+
+  cover: /assets/img/books/a-short-history-of-nearly-everything.jpg
+- slug: think-and-grow-rich
+  title: Think and Grow Rich
+  author: Napoleon Hill
+  year: 2021
+  summary_year: 2021
+  category: Personal Development
+  summary_url: /Book-Summaries/think-and-grow-rich-napoleon-hill/
+  blurb: The philosophy of achievement
+
+  cover: /assets/img/books/think-and-grow-rich.jpg
+- slug: a-mind-for-numbers
+  title: A Mind for Numbers
+  author: Barbara Oakley
+  year: 2021
+  summary_year: 2021
+  category: Science & Philosophy
+  summary_url: /Book-Summaries/a-mind-for-numbers-summary-barbara-oakley/
+  blurb: Learning mathematics and science effectively
+
+  cover: /assets/img/books/a-mind-for-numbers.jpg
+- slug: two-minutes-from-the-abyss
+  title: Two Minutes from the Abyss
+  author: Vijay Eswaran
+  year: 2021
+  summary_year: 2021
+  category: Fiction & Literature
+  summary_url: /Book-Summaries/two-minutes-from-the-abyss-by-vijay-eswaran/
+  blurb: Philosophy and wisdom
+
+- slug: free-will
+  title: Free Will
+  author: Sam Harris
+  year: 2021
+  summary_year: 2021
+  category: Science & Philosophy
+  summary_url: /Book-Summaries/free-will-by-sam-harris/
+  blurb: Exploring the illusion of free will
+
+  cover: /assets/img/books/free-will.jpg
+- slug: the-art-of-war
+  title: The Art of War
+  author: Sun Tzu
+  year: 2021
+  summary_year: 2021
+  category: Psychology & Strategy
+  summary_url: /Book-Summaries/the-art-of-war-by-sun-tzu/
+  blurb: Ancient wisdom for modern strategy
+
+# --- 2020 ---
+
+  cover: /assets/img/books/the-art-of-war.jpg
+- slug: atomic-habits
+  title: Atomic Habits
+  author: James Clear
+  year: 2020
+  summary_year: 2019
+  category: Personal Development
+  shelf: true
+  summary_url: /Book-Summaries/atomic-habits-by-james-clear/
+  blurb: Tiny changes, remarkable results
+
+  cover: /assets/img/books/atomic-habits.jpg
+- slug: the-simple-path-to-wealth
+  title: The Simple Path to Wealth
+  author: J.L. Collins
+  year: 2020
+  summary_year: 2020
+  category: Personal Finance
+  summary_url: /Book-Summaries/personal-finance/the-simple-path-to-wealth/
+  blurb: Financial independence made simple
+
+  cover: /assets/img/books/the-simple-path-to-wealth.jpg
+- slug: the-obstacle-is-the-way
+  title: The Obstacle Is the Way
+  author: Ryan Holiday
+  year: 2020
+  summary_year: 2019
+  category: Business & Entrepreneurship
+  summary_url: /Book-Summaries/business/the-obstacle-is-the-way-by-ryan-holiday/
+  blurb: Turning trials into triumph
+
+  cover: /assets/img/books/the-obstacle-is-the-way.jpg
+- slug: dark-matter
+  title: Dark Matter
+  author: Blake Crouch
+  year: 2020
+  summary_year: 2020
+  category: Fiction & Literature
+  summary_url: /Book-Summaries/dark-matter-summary/
+  blurb: Mind-bending thriller
+
+  cover: /assets/img/books/dark-matter.jpg
+- slug: the-4-disciplines-of-execution
+  title: The 4 Disciplines of Execution
+  author: Chris McChesney, Sean Covey & Jim Huling
+  year: 2020
+  summary_year: 2020
+  category: Psychology & Strategy
+  summary_url: /Book-Summaries/the-4-disciplines-of-execution/
+  blurb: Achieving your most important goals
+
+  cover: /assets/img/books/the-4-disciplines-of-execution.jpg
+- slug: 59-seconds
+  title: 59 Seconds
+  author: Richard Wiseman
+  year: 2020
+  summary_year: 2020
+  category: Psychology & Strategy
+  summary_url: /Book-Summaries/59-seconds-by-richard-wiseman/
+  blurb: Quick psychology-based life improvements
+
+  cover: /assets/img/books/59-seconds.jpg
+- slug: the-leaders-guide-to-unconscious-bias
+  title: The Leader's Guide to Unconscious Bias
+  author: Pamela Fuller, Mark Murphy & Anne Chow
+  year: 2020
+  summary_year: 2020
+  category: Psychology & Strategy
+  summary_url: /Book-Summaries/the-leader-s-guide-to-unconscious-bias/
+  blurb: Leading with awareness
+
+  cover: /assets/img/books/the-leaders-guide-to-unconscious-bias.jpg
+- slug: superhuman-by-habit
+  title: Superhuman by Habit
+  author: Tynan
+  year: 2020
+  summary_year: 2020
+  category: Personal Development
+  summary_url: /Book-Summaries/superhuman-by-habit-by-tynan/
+  blurb: Becoming superhuman through habits
+
+- slug: superhuman-social-skills
+  title: Superhuman Social Skills
+  author: Tynan
+  year: 2020
+  summary_year: 2020
+  category: Personal Development
+  summary_url: /Book-Summaries/superhuman-social-skills-by-tynan/
+  blurb: Mastering social interactions
+
+  cover: /assets/img/books/superhuman-social-skills.jpg
+- slug: the-art-of-possibility
+  title: The Art of Possibility
+  author: Rosamund Zander & Benjamin Zander
+  year: 2020
+  summary_year: 2020
+  category: Personal Development
+  summary_url: /Book-Summaries/the-art-of-possibility/
+  blurb: Transforming professional and personal life
+
+  cover: /assets/img/books/the-art-of-possibility.jpg
+- slug: become-an-idea-machine
+  title: Become an Idea Machine
+  author: Claudia Azula Altucher
+  year: 2020
+  summary_year: 2020
+  category: Art & Creativity
+  summary_url: /Book-Summaries/become-an-idea-machine-by-claudia-azula-altucher/
+  blurb: Exercising your creativity
+
+  cover: /assets/img/books/become-an-idea-machine.jpg
+- slug: parable-of-the-talents
+  title: Parable of the Talents
+  author: Octavia E. Butler
+  year: 2020
+  category: Fiction & Literature
+
+  cover: /assets/img/books/parable-of-the-talents.jpg
+- slug: parable-of-the-sower
+  title: Parable of the Sower
+  author: Octavia E. Butler
+  year: 2020
+  category: Fiction & Literature
+
+  cover: /assets/img/books/parable-of-the-sower.jpg
+- slug: kindred
+  title: Kindred
+  author: Octavia E. Butler
+  year: 2020
+  category: Fiction & Literature
+
+  cover: /assets/img/books/kindred.jpg
+- slug: essentialism
+  title: Essentialism
+  author: Greg McKeown
+  year: 2020
+  category: Personal Development
+
+  cover: /assets/img/books/essentialism.jpg
+- slug: the-alchemist
+  title: The Alchemist
+  author: Paulo Coelho
+  year: 2020
+  category: Fiction & Literature
+
+  cover: /assets/img/books/the-alchemist.jpg
+- slug: influence
+  title: Influence
+  author: Robert Cialdini
+  year: 2020
+  category: Psychology & Strategy
+
+  cover: /assets/img/books/influence.jpg
+- slug: recursion
+  title: Recursion
+  author: Blake Crouch
+  year: 2020
+  category: Fiction & Literature
+  favorite: true
+
+  cover: /assets/img/books/recursion.jpg
+- slug: hooked
+  title: Hooked
+  author: Nir Eyal
+  year: 2020
+  category: Business & Entrepreneurship
+
+  cover: /assets/img/books/hooked.jpg
+- slug: the-poor-kid-with-rich-dreams
+  title: The Poor Kid With Rich Dreams
+  author: Duku Forè
+  year: 2020
+  category: History & Biography
+
+  cover: /assets/img/books/the-poor-kid-with-rich-dreams.jpg
+- slug: do-i-make-myself-clear
+  title: Do I Make Myself Clear?
+  author: Harold Evans
+  year: 2020
+  category: Art & Creativity
+  favorite: true
+
+  cover: /assets/img/books/do-i-make-myself-clear.jpg
+- slug: genghis-khan-and-the-making-of-the-modern-world
+  title: Genghis Khan and the Making of the Modern World
+  author: Jack Weatherford
+  year: 2020
+  category: History & Biography
+  favorite: true
+
+  cover: /assets/img/books/genghis-khan-and-the-making-of-the-modern-world.jpg
+- slug: the-mythical-man-month
+  title: The Mythical Man-Month
+  author: Frederick P. Brooks Jr.
+  year: 2020
+  category: Leadership & Management
+
+  cover: /assets/img/books/the-mythical-man-month.jpg
+- slug: the-mastermind
+  title: The Mastermind
+  author: Evan Ratliff
+  year: 2020
+  category: History & Biography
+
+# --- 2019 ---
+
+  cover: /assets/img/books/the-mastermind.jpg
+- slug: start-with-why
+  title: Start with Why
+  author: Simon Sinek
+  year: 2019
+  summary_year: 2019
+  category: Leadership & Management
+  recommended_group: Leadership
+  summary_url: /Book-Summaries/business/start-with-why/
+  blurb: Purpose-led leadership
+
+  cover: /assets/img/books/start-with-why.jpg
+- slug: how-to-win-friends-and-influence-people
+  title: How to Win Friends and Influence People
+  author: Dale Carnegie
+  year: 2019
+  summary_year: 2019
+  category: Leadership & Management
+  recommended_group: Leadership
+  summary_url: /Book-Summaries/self-help/how-to-win-friends-and-influence-people/
+  blurb: Dale Carnegie's timeless classic
+
+  cover: /assets/img/books/how-to-win-friends-and-influence-people.jpg
+- slug: rich-dad-poor-dad
+  title: Rich Dad Poor Dad
+  author: Robert Kiyosaki
+  year: 2019
+  summary_year: 2019
+  category: Personal Finance
+  summary_url: /Book-Summaries/personal-finance/rich-dad-poor-dad/
+  blurb: Lessons on money and financial literacy
+
+  cover: /assets/img/books/rich-dad-poor-dad.jpg
+- slug: the-richest-man-in-babylon
+  title: The Richest Man in Babylon
+  author: George S. Clason
+  year: 2019
+  summary_year: 2019
+  category: Personal Finance
+  summary_url: /Book-Summaries/the-richest-man-in-babylon/
+  blurb: Timeless principles of wealth
+
+  cover: /assets/img/books/the-richest-man-in-babylon.jpg
+- slug: choose-yourself
+  title: Choose Yourself
+  author: James Altucher
+  year: 2019
+  summary_year: 2019
+  category: Business & Entrepreneurship
+  summary_url: /Book-Summaries/business/choose-yourself-by-james-altucher/
+  blurb: Taking control of your own success
+
+  cover: /assets/img/books/choose-yourself.jpg
+- slug: positioning
+  title: Positioning
+  author: Al Ries & Jack Trout
+  year: 2019
+  summary_year: 2019
+  category: Business & Entrepreneurship
+  summary_url: /Book-Summaries/business/positioning-by-al-ries-and-jack-trout/
+  blurb: The battle for your mind
+
+  cover: /assets/img/books/positioning.jpg
+- slug: mastermind-dinners
+  title: Mastermind Dinners
+  author: Jayson Gaignard
+  year: 2019
+  summary_year: 2019
+  category: Business & Entrepreneurship
+  summary_url: /Book-Summaries/business/mastermind-dinners-by-jayson-gaignard/
+  blurb: Building meaningful relationships
+
+  cover: /assets/img/books/mastermind-dinners.jpg
+- slug: pro-sumer-power
+  title: Pro-Sumer Power!
+  author: Dr. Bill Quain
+  year: 2019
+  summary_year: 2019
+  category: Business & Entrepreneurship
+  summary_url: /Book-Summaries/business/prosumer-power-by-dr-bill-quain-book/
+  blurb: Creating wealth by buying smarter, not cheaper
+
+  cover: /assets/img/books/pro-sumer-power.jpg
+- slug: dare-to-lead
+  title: Dare to Lead
+  author: Brené Brown
+  year: 2019
+  category: Leadership & Management
+  shelf: true
+
+  cover: /assets/img/books/dare-to-lead.jpg
+- slug: the-square-and-the-tower
+  title: The Square and the Tower
+  author: Niall Ferguson
+  year: 2019
+  category: History & Biography
+
+  cover: /assets/img/books/the-square-and-the-tower.jpg
+- slug: several-short-sentences-about-writing
+  title: Several Short Sentences About Writing
+  author: Verlyn Klinkenborg
+  year: 2019
+  category: Art & Creativity
+
+  cover: /assets/img/books/several-short-sentences-about-writing.jpg
+- slug: high-output-management
+  title: High Output Management
+  author: Andrew S. Grove
+  year: 2019
+  category: Leadership & Management
+  favorite: true
+
+  cover: /assets/img/books/high-output-management.jpg
+- slug: radical-candor
+  title: Radical Candor
+  author: Kim Malone Scott
+  year: 2019
+  category: Leadership & Management
+
+  cover: /assets/img/books/radical-candor.jpg
+- slug: the-art-of-taking-action
+  title: The Art of Taking Action
+  author: Gregg Krech
+  year: 2019
+  category: Personal Development
+
+  cover: /assets/img/books/the-art-of-taking-action.jpg
+- slug: the-goal
+  title: The Goal
+  author: Eliyahu M. Goldratt & Jeff Cox
+  year: 2019
+  category: Leadership & Management
+  recommended_group: Management
+  favorite: true
+
+  cover: /assets/img/books/the-goal.jpg
+- slug: shanzhai
+  title: Shanzhai
+  author: Byung-Chul Han
+  year: 2019
+  category: Science & Philosophy
+
+  cover: /assets/img/books/shanzhai.jpg
+- slug: rocket-men
+  title: Rocket Men
+  author: Robert Kurson
+  year: 2019
+  category: History & Biography
+
+  cover: /assets/img/books/rocket-men.jpg
+- slug: competing-against-luck
+  title: Competing Against Luck
+  author: Clayton M. Christensen
+  year: 2019
+  category: Business & Entrepreneurship
+
+  cover: /assets/img/books/competing-against-luck.jpg
+- slug: children-of-time
+  title: Children of Time
+  author: Adrian Tchaikovsky
+  year: 2019
+  category: Fiction & Literature
+
+  cover: /assets/img/books/children-of-time.jpg
+- slug: articulating-design-decisions
+  title: Articulating Design Decisions
+  author: Tom Greever
+  year: 2019
+  category: Art & Creativity
+
+  cover: /assets/img/books/articulating-design-decisions.jpg
+- slug: org-design-for-design-orgs
+  title: Org Design for Design Orgs
+  author: Peter Merholz & Kristin Skinner
+  year: 2019
+  category: Leadership & Management
+
+  cover: /assets/img/books/org-design-for-design-orgs.jpg
+- slug: pandemic
+  title: Pandemic
+  author: A. G. Riddle
+  year: 2019
+  category: Fiction & Literature
+
+  cover: /assets/img/books/pandemic.jpg
+- slug: how-to-do-nothing
+  title: How to Do Nothing
+  author: Jenny Odell
+  year: 2019
+  category: Science & Philosophy
+
+  cover: /assets/img/books/how-to-do-nothing.jpg
+- slug: thinking-fast-and-slow
+  title: Thinking, Fast and Slow
+  author: Daniel Kahneman
+  year: 2019
+  category: Psychology & Strategy
+  favorite: true
+
+  cover: /assets/img/books/thinking-fast-and-slow.jpg
+- slug: the-black-swan
+  title: The Black Swan
+  author: Nassim Nicholas Taleb
+  year: 2019
+  category: Science & Philosophy
+
+  cover: /assets/img/books/the-black-swan.jpg
+- slug: einstein
+  title: Einstein
+  author: Walter Isaacson
+  year: 2019
+  category: History & Biography
+
+  cover: /assets/img/books/einstein.jpg
+- slug: midnight-in-chernobyl
+  title: Midnight in Chernobyl
+  author: Adam Higginbotham
+  year: 2019
+  category: History & Biography
+
+  cover: /assets/img/books/midnight-in-chernobyl.jpg
+- slug: trillion-dollar-coach
+  title: Trillion Dollar Coach
+  author: Eric Schmidt, Jonathan Rosenberg & Alan Eagle
+  year: 2019
+  category: Leadership & Management
+
+  cover: /assets/img/books/trillion-dollar-coach.jpg
+- slug: exhalation
+  title: Exhalation
+  author: Ted Chiang
+  year: 2019
+  category: Fiction & Literature
+  favorite: true
+
+  cover: /assets/img/books/exhalation.jpg
+- slug: brave-new-work
+  title: Brave New Work
+  author: Aaron Dignan
+  year: 2019
+  category: Leadership & Management
+
+  cover: /assets/img/books/brave-new-work.jpg
+- slug: endurance
+  title: Endurance
+  author: Alfred Lansing
+  year: 2019
+  category: History & Biography
+
+  cover: /assets/img/books/endurance.jpg
+- slug: leviathan-wakes
+  title: Leviathan Wakes
+  author: James S. A. Corey
+  year: 2019
+  category: Fiction & Literature
+
+  cover: /assets/img/books/leviathan-wakes.jpg
+- slug: 21-lessons-for-the-21st-century
+  title: 21 Lessons for the 21st Century
+  author: Yuval Noah Harari
+  year: 2019
+  category: Science & Philosophy
+
+  cover: /assets/img/books/21-lessons-for-the-21st-century.jpg
+- slug: discussing-design
+  title: Discussing Design
+  author: Adam Connor & Aaron Irizarry
+  year: 2019
+  category: Art & Creativity
+
+  cover: /assets/img/books/discussing-design.jpg
+- slug: the-fifth-season
+  title: The Fifth Season
+  author: N. K. Jemisin
+  year: 2019
+  category: Fiction & Literature
+
+# --- 2018 ---
+
+  cover: /assets/img/books/the-fifth-season.jpg
+- slug: predictably-irrational
+  title: Predictably Irrational
+  author: Dan Ariely
+  year: 2018
+  category: Psychology & Strategy
+
+  cover: /assets/img/books/predictably-irrational.jpg
+- slug: ball-lightning
+  title: Ball Lightning
+  author: Cixin Liu
+  year: 2018
+  category: Fiction & Literature
+
+  cover: /assets/img/books/ball-lightning.jpg
+- slug: a-peoples-history-of-the-united-states
+  title: A People's History of the United States
+  author: Howard Zinn
+  year: 2018
+  category: History & Biography
+  favorite: true
+
+  cover: /assets/img/books/a-peoples-history-of-the-united-states.jpg
+- slug: how-to-cook-your-life
+  title: How to Cook Your Life
+  author: Dōgen Zenji & Kōshō Uchiyama
+  year: 2018
+  category: Science & Philosophy
+  favorite: true
+
+  cover: /assets/img/books/how-to-cook-your-life.jpg
+- slug: thinking-in-bets
+  title: Thinking in Bets
+  author: Annie Duke
+  year: 2018
+  category: Psychology & Strategy
+
+  cover: /assets/img/books/thinking-in-bets.jpg
+- slug: the-wizard-and-the-prophet
+  title: The Wizard and the Prophet
+  author: Charles C. Mann
+  year: 2018
+  category: Science & Philosophy
+
+  cover: /assets/img/books/the-wizard-and-the-prophet.jpg
+- slug: the-2020-commission-report
+  title: The 2020 Commission Report on the North Korean Nuclear Attacks Against the United States
+  author: Jeffrey Lewis
+  year: 2018
+  category: Fiction & Literature
+
+  cover: /assets/img/books/the-2020-commission-report.jpg
+- slug: why-we-sleep
+  title: Why We Sleep
+  author: Matthew Walker
+  year: 2018
+  category: Science & Philosophy
+
+  cover: /assets/img/books/why-we-sleep.jpg
+- slug: spqr
+  title: SPQR
+  author: Mary Beard
+  year: 2018
+  category: History & Biography
+
+  cover: /assets/img/books/spqr.jpg
+- slug: good-to-great
+  title: Good to Great
+  author: Jim Collins
+  year: 2018
+  category: Business & Entrepreneurship
+
+  cover: /assets/img/books/good-to-great.jpg
+- slug: the-culture-code
+  title: The Culture Code
+  author: Daniel Coyle
+  year: 2018
+  category: Leadership & Management
+
+  cover: /assets/img/books/the-culture-code.jpg
+- slug: on-grand-strategy
+  title: On Grand Strategy
+  author: John Lewis Gaddis
+  year: 2018
+  category: Psychology & Strategy
+
+  cover: /assets/img/books/on-grand-strategy.jpg
+- slug: bad-blood
+  title: Bad Blood
+  author: John Carreyrou
+  year: 2018
+  category: History & Biography
+
+  cover: /assets/img/books/bad-blood.jpg
+- slug: 1491
+  title: "1491"
+  author: Charles C. Mann
+  year: 2018
+  category: History & Biography
+
+  cover: /assets/img/books/1491.jpg
+- slug: enlightenment-now
+  title: Enlightenment Now
+  author: Steven Pinker
+  year: 2018
+  category: Science & Philosophy
+
+  cover: /assets/img/books/enlightenment-now.jpg
+- slug: the-foundation-trilogy
+  title: The Foundation Trilogy
+  author: Isaac Asimov
+  year: 2018
+  category: Fiction & Literature
+
+  cover: /assets/img/books/the-foundation-trilogy.jpg
+- slug: why-buddhism-is-true
+  title: Why Buddhism Is True
+  author: Robert Wright
+  year: 2018
+  category: Science & Philosophy
+  favorite: true
+
+  cover: /assets/img/books/why-buddhism-is-true.jpg
+- slug: i-am-a-strange-loop
+  title: I Am a Strange Loop
+  author: Douglas R. Hofstadter
+  year: 2018
+  category: Science & Philosophy
+
+  cover: /assets/img/books/i-am-a-strange-loop.jpg
+- slug: dreaming-the-beatles
+  title: Dreaming the Beatles
+  author: Rob Sheffield
+  year: 2018
+  category: History & Biography
+
+# --- Curated Recommendations (Evergreen Repository) ---
+
+  cover: /assets/img/books/dreaming-the-beatles.jpg
+- slug: the-e-myth-revisited
+  title: The E-Myth Revisited
+  author: Michael E. Gerber
+  category: Business & Entrepreneurship
+  recommended_group: Entrepreneurship
+
+  cover: /assets/img/books/the-e-myth-revisited.jpg
+- slug: the-4-hour-workweek
+  title: The 4-Hour Workweek
+  author: Timothy Ferriss
+  category: Business & Entrepreneurship
+  recommended_group: Entrepreneurship
+
+  cover: /assets/img/books/the-4-hour-workweek.jpg
+- slug: the-lean-startup
+  title: The Lean Startup
+  author: Eric Ries
+  category: Business & Entrepreneurship
+  recommended_group: Entrepreneurship
+
+  cover: /assets/img/books/the-lean-startup.jpg
+- slug: the-millionaire-fastlane
+  title: The Millionaire Fastlane
+  author: MJ DeMarco
+  category: Business & Entrepreneurship
+  recommended_group: Entrepreneurship
+
+  cover: /assets/img/books/the-millionaire-fastlane.jpg
+- slug: ignore-everybody
+  title: Ignore Everybody
+  author: Hugh MacLeod
+  category: Art & Creativity
+  recommended_group: Entrepreneurship
+
+  cover: /assets/img/books/ignore-everybody.jpg
+- slug: before-the-exit
+  title: Before the Exit
+  author: Dan Andrews
+  category: Business & Entrepreneurship
+  recommended_group: Entrepreneurship
+
+- slug: the-most-important-thing-illuminated
+  title: The Most Important Thing Illuminated
+  author: Howard Marks
+  category: Personal Finance
+  recommended_group: Finance
+
+  cover: /assets/img/books/the-most-important-thing-illuminated.jpg
+- slug: margin-of-safety
+  title: Margin of Safety
+  author: Seth A. Klarman
+  category: Personal Finance
+  recommended_group: Finance
+
+  cover: /assets/img/books/margin-of-safety.jpg
+- slug: the-art-of-profitability
+  title: The Art of Profitability
+  author: Adrian Slywotzky
+  category: Personal Finance
+  recommended_group: Finance
+
+  cover: /assets/img/books/the-art-of-profitability.jpg
+- slug: simple-numbers-straight-talk-big-profits
+  title: Simple Numbers, Straight Talk, Big Profits!
+  author: Greg Crabtree
+  category: Personal Finance
+  recommended_group: Finance
+
+  cover: /assets/img/books/simple-numbers-straight-talk-big-profits.jpg
+- slug: dream-teams
+  title: Dream Teams
+  author: Shane Snow
+  category: Leadership & Management
+  recommended_group: Leadership
+
+  cover: /assets/img/books/dream-teams.jpg
+- slug: what-got-you-here-wont-get-you-there
+  title: What Got You Here Won't Get You There
+  author: Marshall Goldsmith
+  category: Leadership & Management
+  recommended_group: Leadership
+
+  cover: /assets/img/books/what-got-you-here-wont-get-you-there.jpg
+- slug: switch
+  title: Switch
+  author: Chip Heath & Dan Heath
+  category: Leadership & Management
+  recommended_group: Leadership
+
+  cover: /assets/img/books/switch.jpg
+- slug: wooden-on-leadership
+  title: Wooden on Leadership
+  author: John Wooden
+  category: Leadership & Management
+  recommended_group: Leadership
+
+  cover: /assets/img/books/wooden-on-leadership.jpg
+- slug: tribes
+  title: Tribes
+  author: Seth Godin
+  category: Leadership & Management
+  recommended_group: Leadership
+
+  cover: /assets/img/books/tribes.jpg
+- slug: the-five-dysfunctions-of-a-team
+  title: The Five Dysfunctions of a Team
+  author: Patrick Lencioni
+  category: Leadership & Management
+  recommended_group: Leadership
+
+  cover: /assets/img/books/the-five-dysfunctions-of-a-team.jpg
+- slug: first-break-all-the-rules
+  title: First, Break All the Rules
+  author: Marcus Buckingham & Curt Coffman
+  category: Leadership & Management
+  recommended_group: Management
+
+  cover: /assets/img/books/first-break-all-the-rules.jpg
+- slug: the-essential-drucker
+  title: The Essential Drucker
+  author: Peter F. Drucker
+  category: Leadership & Management
+  recommended_group: Management
+
+  cover: /assets/img/books/the-essential-drucker.jpg
+- slug: impro
+  title: Impro
+  author: Keith Johnstone
+  category: Art & Creativity
+  recommended_group: Art & Creativity
+
+  cover: /assets/img/books/impro.jpg
+- slug: the-war-of-art
+  title: The War of Art
+  author: Steven Pressfield
+  category: Art & Creativity
+  recommended_group: Art & Creativity
+
+  cover: /assets/img/books/the-war-of-art.jpg
+- slug: the-creative-habit
+  title: The Creative Habit
+  author: Twyla Tharp
+  category: Art & Creativity
+  recommended_group: Art & Creativity
+
+  cover: /assets/img/books/the-creative-habit.jpg
+- slug: born-standing-up
+  title: Born Standing Up
+  author: Steve Martin
+  category: History & Biography
+  recommended_group: Artist Biographies
+
+  cover: /assets/img/books/born-standing-up.jpg
+- slug: just-kids
+  title: Just Kids
+  author: Patti Smith
+  category: History & Biography
+  recommended_group: Artist Biographies
+
+  cover: /assets/img/books/just-kids.jpg
+- slug: intimations-of-paradise
+  title: Intimations of Paradise
+  author: Christopher Burkett
+  category: Art & Creativity
+  recommended_group: Photography
+
+  cover: /assets/img/books/intimations-of-paradise.jpg
+- slug: resplendent-light
+  title: Resplendent Light
+  author: Christopher Burkett
+  category: Art & Creativity
+  recommended_group: Photography
+
+- slug: bird-by-bird
+  title: Bird by Bird
+  author: Anne Lamott
+  category: Art & Creativity
+  recommended_group: Art & Creativity
+
+  cover: /assets/img/books/bird-by-bird.jpg
+- slug: the-practicing-mind
+  title: The Practicing Mind
+  author: Thomas M. Sterner
+  category: Art & Creativity
+  recommended_group: Art & Creativity
+
+  cover: /assets/img/books/the-practicing-mind.jpg
+- slug: marcel-duchamp-the-afternoon-interviews
+  title: "Marcel Duchamp: The Afternoon Interviews"
+  author: Calvin Tomkins
+  category: Art & Creativity
+  recommended_group: Art & Creativity
+
+  cover: /assets/img/books/marcel-duchamp-the-afternoon-interviews.jpg
+- slug: daily-rituals
+  title: Daily Rituals
+  author: Mason Currey
+  category: Art & Creativity
+  recommended_group: Art & Creativity
+  cover: /assets/img/books/daily-rituals.jpg

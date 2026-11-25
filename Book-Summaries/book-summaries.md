@@ -3,64 +3,73 @@ title: Book Summaries
 permalink: "/book-summaries/"
 layout: page
 hide_title: true
-excerpt: ''
+excerpt: A running archive of book summaries and notes from books that have shaped how I think about leadership, business, psychology, and creative work.
 comments: false
 image: "/uploads/alfons-morales-ylswjsy7stw-unsplash.jpg"
-description: This page shares a full list of book summaries I have compiled during my reading and research. If a particular book sounds interesting to you, click on the full book summary and you can browse all of my notes on it.
-
+description: This page shares a full list of book summaries I have compiled during my reading and research. Click any book to browse my full notes on it.
 ---
+{%- assign summary_books = site.data.books | where_exp: "b", "b.summary_year" -%}
+{%- assign summary_years = "2022,2021,2020,2019" | split: "," -%}
 
-<div class="page-header books-page-header">
+{::nomarkdown}
+<div class="page-header books-page-header" id="top">
   <h1>Book Summaries</h1>
-  <p class="page-subtitle">A running archive of summaries and notes from books that have shaped how I think about leadership, business, psychology, and creative work.</p>
+  <p class="page-subtitle">A running archive of {{ summary_books.size }} book summaries and notes from books that have shaped how I think about leadership, business, psychology, and creative work.</p>
+  <p class="books-stats-line">
+    <span>{{ summary_books.size }} summaries</span>
+    <a href="/reading/">Full reading log ({{ site.data.books.size }} books)</a>
+    <a href="/book-repository/">Recommended by topic</a>
+  </p>
 </div>
 
-<div class="book-summary-list books-page">
-  <div class="year-section">
-    <h2>2021</h2>
-    <ul class="book-list">
-      <li><a href="https://bakarimustafa.com/book-summaries/1984-by-george-orwell/">1984 by George Orwell</a></li>
-      <li><a href="https://bakarimustafa.com/book-summaries/a-short-history-of-nearly-everything-summary-by-bill-bryson/">A Short History of Nearly Everything by Bill Bryson</a></li>
-      <li><a href="https://bakarimustafa.com/book-summaries/think-and-grow-rich-napoleon-hill">Think and Grow Rich by Napoleon Hill</a></li>
-      <li><a href="https://bakarimustafa.com/book-summaries/a-mind-for-numbers-summary-barbara-oakley">A Mind For Numbers by Barbara Oakley</a></li>
-      <li><a href="https://bakarimustafa.com/book-summaries/two-minutes-from-the-abyss-by-vijay-eswaran/">Two Minutes from the Abyss by Vijay Eswaran</a></li>
-      <li><a href="https://bakarimustafa.com/book-summaries/free-will-by-sam-harris/">Free Will by Sam Harris</a></li>
-      <li><a href="https://bakarimustafa.com/book-summaries/the-art-of-war-by-sun-tzu/">The Art of War by Sun Tzu</a></li>
-    </ul>
-  </div>
+<nav class="books-jump" aria-label="Jump to year">
+  {%- for y in summary_years -%}
+    {%- assign y_num = y | plus: 0 -%}
+    {%- assign y_books = summary_books | where: "summary_year", y_num -%}
+    {%- if y_books.size > 0 -%}
+      <a class="books-jump-link" href="#year-{{ y }}">
+        <span class="books-jump-label">{{ y }}</span>
+        <span class="books-jump-count">{{ y_books.size }}</span>
+      </a>
+    {%- endif -%}
+  {%- endfor -%}
+</nav>
 
-  <div class="year-section">
-    <h2>2020</h2>
-    <ul class="book-list">
-      <li><a href="/book-summaries/dark-matter-summary">Dark Matter by Blake Crouch</a></li>
-      <li><a href="/book-summaries/the-4-disciplines-of-execution/">The 4 Disciplines Of Execution</a></li>
-      <li><a href="/book-summaries/personal-finance/the-simple-path-to-wealth/">The Simple Path to Wealth</a></li>
-      <li><a href="/book-summaries/59-seconds-by-richard-wiseman/">59 Seconds by Richard Wiseman</a></li>
-      <li><a href="/book-summaries/the-leader-s-guide-to-unconscious-bias/">The Leader's Guide to Unconscious Bias</a></li>
-      <li><a href="/book-summaries/superhuman-by-habit-by-tynan/">Superhuman by Habit by Tynan</a></li>
-      <li><a href="/book-summaries/superhuman-social-skills-by-tynan/">Superhuman Social Skills by Tynan</a></li>
-      <li><a href="/book-summaries/the-art-of-possibility/">The Art of Possibility</a></li>
-      <li><a href="/book-summaries/become-an-idea-machine-by-claudia-azula-altucher/">Become an Idea Machine by Claudia Azula Altucher</a></li>
-    </ul>
-  </div>
-
-  <div class="year-section">
-    <h2>2019</h2>
-    <ul class="book-list">
-      <li><a href="/book-summaries/business/prosumer-power-by-dr-bill-quain-book/">Pro-Sumer Power! by Dr. Bill Quain</a></li>
-      <li><a href="/book-summaries/personal-finance/rich-dad-poor-dad/">Rich Dad Poor Dad by Robert Kiyosaki</a></li>
-      <li><a href="/book-summaries/business/start-with-why/">Start with Why by Simon Sinek</a></li>
-      <li><a href="/book-summaries/self-help/how-to-win-friends-and-influence-people/">How to Win Friends and Influence People by Dale Carnegie</a></li>
-      <li><a href="/book-summaries/atomic-habits-by-james-clear/">Atomic Habits by James Clear</a></li>
-      <li><a href="/book-summaries/the-richest-man-in-babylon/">The Richest Man in Babylon by George S. Clason</a></li>
-      <li><a href="/book-summaries/business/choose-yourself-by-james-altucher/">Choose Yourself by James Altucher</a></li>
-      <li><a href="/book-summaries/business/the-obstacle-is-the-way-by-ryan-holiday/">The Obstacle is the Way by Ryan Holiday</a></li>
-      <li><a href="/book-summaries/business/positioning-by-al-ries-and-jack-trout/">Positioning by Al Ries and Jack Trout</a></li>
-      <li><a href="/book-summaries/business/mastermind-dinners-by-jayson-gaignard/">Mastermind Dinners by Jayson Gaignard</a></li>
-    </ul>
-  </div>
+<div class="books-directory">
+  {%- for y in summary_years -%}
+    {%- assign y_num = y | plus: 0 -%}
+    {%- assign y_books = summary_books | where: "summary_year", y_num -%}
+    {%- if y_books.size > 0 -%}
+      <section class="books-year{% if forloop.index > 2 %} books-year--deferred{% endif %}" id="year-{{ y }}">
+        <div class="books-year-head">
+          <h2>{{ y }} <span class="books-year-count">{{ y_books.size }}</span></h2>
+          <a class="books-year-top" href="#top">Top ↑</a>
+        </div>
+        <ul class="books-ledger">
+          {%- for book in y_books -%}
+            <li class="books-ledger-item">
+              <a class="books-row books-row--linked" href="{{ book.summary_url }}">
+                {%- if forloop.parentloop.first and forloop.index <= 2 -%}
+                  {% include book-cover.html book=book size="thumb" priority="high" %}
+                {%- elsif forloop.parentloop.first -%}
+                  {% include book-cover.html book=book size="thumb" %}
+                {%- else -%}
+                  {% include book-cover.html book=book size="thumb" lazy=true %}
+                {%- endif -%}
+                <div class="books-row-body">
+                  <span class="books-row-title"><cite>{{ book.title }}</cite>{% if book.favorite %} <span class="books-fav" title="Favorite" aria-label="Favorite">★</span>{% endif %}</span>
+                  <span class="books-row-author">{{ book.author }}</span>
+                  {%- if book.blurb -%}<span class="books-row-blurb">{{ book.blurb }}</span>{%- endif -%}
+                </div>
+                <span class="books-row-cta">Read notes →</span>
+              </a>
+            </li>
+          {%- endfor -%}
+        </ul>
+      </section>
+    {%- endif -%}
+  {%- endfor -%}
 </div>
 
----
-
-<p class="books-page-footer">Browse the collection above or visit my <a href="/reading/">reading list</a> for broader recommendations and categories.</p>
+<p class="books-page-footer">Browse the summaries above, explore my <a href="/reading/">complete reading log</a>, or view <a href="/book-repository/">recommendations by topic</a>.</p>
+{:/nomarkdown}
