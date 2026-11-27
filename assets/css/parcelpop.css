@@ -1,0 +1,126 @@
+/* Parcel Pop 3D: support and privacy pages.
+   Built on the site's tokens (--text-*, --bg-*, --border-*) so light and dark follow the site. */
+
+.page-content .pp {
+  --pp-accent: #2a73db;
+  color: var(--text-primary);
+  padding-bottom: 4rem;
+}
+.page-content .pp p { padding: 0 !important; }
+.page-content .pp img { display: block; max-width: 100%; height: auto; }
+.page-content .pp .pp-link,
+.page-content .pp .pp-prose a {
+  color: var(--text-primary);
+  text-decoration: none;
+  border-bottom: 1px solid var(--border-strong);
+}
+.page-content .pp .pp-prose a:hover { border-color: var(--text-primary); }
+
+/* ── Support and privacy: a reading column with a contents list ── */
+.page-content .pp.pp-doc { max-width: 720px; margin: 0 auto; }
+.page-content .pp .pp-doc-head { margin: 3.5rem 0 2rem; }
+.page-content .pp .pp-doc-head .pp-crumb {
+  font-size: 0.875rem;
+  color: var(--text-secondary);
+  margin-bottom: 0.75rem !important;
+}
+.page-content .pp .pp-doc-head .pp-crumb a { color: var(--text-secondary); text-decoration: none; }
+.page-content .pp .pp-doc-head .pp-crumb a:hover { color: var(--text-primary); }
+.page-content .pp .pp-doc-head h1 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: clamp(2rem, 5vw, 2.75rem);
+  font-weight: 700;
+  letter-spacing: -0.02em;
+  line-height: 1.1;
+  margin: 0 0 0.75rem;
+}
+.page-content .pp .pp-doc-head .pp-lede {
+  font-size: 1.0625rem;
+  line-height: 1.6;
+  color: var(--text-secondary);
+  margin: 0 !important;
+  max-width: none;
+}
+.page-content .pp .pp-toc {
+  margin: 0 0 2.5rem;
+  padding: 1.25rem 1.5rem;
+  border: 1px solid var(--border-subtle);
+  border-radius: 12px;
+  background: var(--bg-secondary);
+}
+.page-content .pp .pp-toc h2 {
+  font-size: 0.8125rem;
+  font-weight: 600;
+  letter-spacing: 0.08em;
+  text-transform: uppercase;
+  color: var(--text-secondary);
+  margin: 0 0 0.5rem;
+}
+.page-content .pp .pp-toc ol {
+  margin: 0;
+  padding: 0;
+  list-style: none;
+  columns: 2;
+  column-gap: 1.5rem;
+}
+.page-content .pp .pp-toc li { padding: 0.25rem 0; font-size: 0.9375rem; break-inside: avoid; }
+.page-content .pp .pp-toc a { color: var(--text-primary); text-decoration: none; }
+.page-content .pp .pp-toc a:hover { text-decoration: underline; }
+.page-content .pp .pp-prose h2 {
+  font-family: "New York", ui-serif, Georgia, "Times New Roman", serif;
+  font-size: 1.625rem;
+  font-weight: 700;
+  letter-spacing: -0.01em;
+  line-height: 1.2;
+  margin: 3rem 0 0.875rem;
+  scroll-margin-top: 1.5rem;
+}
+.page-content .pp .pp-prose h3 {
+  font-size: 1.0625rem;
+  font-weight: 600;
+  margin: 1.75rem 0 0.5rem;
+}
+.page-content .pp .pp-prose p,
+.page-content .pp .pp-prose li {
+  font-size: 1rem;
+  line-height: 1.65;
+}
+.page-content .pp .pp-prose p { margin: 0 0 1rem !important; }
+.page-content .pp .pp-prose ul,
+.page-content .pp .pp-prose ol { margin: 0 0 1rem; padding-left: 1.25rem; }
+.page-content .pp .pp-prose li { margin-bottom: 0.375rem; }
+.page-content .pp .pp-prose .pp-note {
+  padding: 0.875rem 1rem;
+  border-left: 3px solid var(--pp-accent);
+  background: var(--bg-secondary);
+  border-radius: 0 8px 8px 0;
+  font-size: 0.9375rem;
+}
+.page-content .pp .pp-prose details {
+  border-bottom: 1px solid var(--border-subtle);
+  padding: 0.875rem 0;
+}
+.page-content .pp .pp-prose details:first-of-type { border-top: 1px solid var(--border-subtle); }
+.page-content .pp .pp-prose summary {
+  cursor: pointer;
+  font-weight: 600;
+  font-size: 1rem;
+  line-height: 1.5;
+}
+.page-content .pp .pp-prose details > p:first-of-type { margin-top: 0.625rem !important; }
+.page-content .pp .pp-prose details > p:last-child { margin-bottom: 0 !important; }
+.page-content .pp .pp-prose table { width: 100%; border-collapse: collapse; margin: 0 0 1.25rem; font-size: 0.9375rem; }
+.page-content .pp .pp-prose th,
+.page-content .pp .pp-prose td { text-align: left; vertical-align: top; padding: 0.5rem 0.75rem 0.5rem 0; border-bottom: 1px solid var(--border-subtle); line-height: 1.5; }
+.page-content .pp .pp-prose th { font-weight: 600; }
+.page-content .pp .pp-doc-foot {
+  margin-top: 3rem;
+  padding-top: 1.5rem;
+  border-top: 1px solid var(--border-subtle);
+  font-size: 0.9375rem;
+  color: var(--text-secondary);
+}
+.page-content .pp .pp-doc-foot a { color: var(--text-primary); }
+.page-content .pp .pp-doc-head .pp-crumb { display: flex; align-items: center; gap: 0.5rem; }
+.page-content .pp .pp-doc-head .pp-crumb img { width: 28px; height: 28px; border-radius: 7px; margin: 0; }
+@media (max-width: 560px) { .page-content .pp .pp-toc ol { columns: 1; } }
